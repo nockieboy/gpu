@@ -44,7 +44,7 @@ refer to the applicable agreement for further details.
 	)
 	(drawing
 		(text "Cyclone IV E" (rect 164 152 383 315)(font "Arial" ))
-		(text "inclk0 frequency: 54.000 MHz" (rect 50 59 223 129)(font "Arial" ))
+		(text "inclk0 frequency: 50.000 MHz" (rect 50 59 223 129)(font "Arial" ))
 		(text "Operation Mode: Normal" (rect 50 72 199 155)(font "Arial" ))
 		(text "Clk " (rect 51 93 116 197)(font "Arial" ))
 		(text "Ratio" (rect 72 93 164 197)(font "Arial" ))

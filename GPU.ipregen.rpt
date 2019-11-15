@@ -1,5 +1,5 @@
 IP Upgrade report for GPU
-Wed Nov 13 18:32:50 2019
+Thu Nov 14 15:38:25 2019
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -35,7 +35,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------+
 ; IP Upgrade Summary                                                         ;
 +------------------------------+---------------------------------------------+
-; IP Components Upgrade Status ; Passed - Wed Nov 13 18:32:50 2019           ;
+; IP Components Upgrade Status ; Passed - Thu Nov 14 15:38:25 2019           ;
 ; Quartus Prime Version        ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                ; GPU                                         ;
 ; Top-level Entity Name        ; GPU                                         ;
@@ -61,8 +61,8 @@ Info (11131): Completed upgrading IP component ALTPLL with file "altpll0.v"
 Info (23030): Evaluation of Tcl script g:/altera/18.1/quartus/common/tcl/internal/ip_regen/ip_regen.tcl was successful
 Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 4859 megabytes
-    Info: Processing ended: Wed Nov 13 18:32:50 2019
+    Info: Processing ended: Thu Nov 14 15:38:25 2019
     Info: Elapsed time: 00:00:17
-    Info: Total CPU time (on all processors): 00:00:36
+    Info: Total CPU time (on all processors): 00:00:32
 
 

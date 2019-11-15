@@ -74,7 +74,7 @@ reg [3:0] pc_ena_pipe;
 		altsyncram_component.clock_enable_output_a = "BYPASS",
 		altsyncram_component.clock_enable_output_b = "BYPASS",
 		altsyncram_component.indata_reg_b = "CLOCK1",
-		altsyncram_component.intended_device_family = "Cyclone II",
+		altsyncram_component.intended_device_family = "Cyclone IV",
 		altsyncram_component.lpm_type = "altsyncram",
 		altsyncram_component.numwords_a = NUM_WORDS,
 		altsyncram_component.numwords_b = NUM_WORDS,

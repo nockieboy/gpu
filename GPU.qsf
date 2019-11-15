@@ -57,6 +57,44 @@ set_global_assignment -name SIMULATION_MODE FUNCTIONAL
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE GPU_full_osd.vwf
 set_global_assignment -name DEVICE_FILTER_PACKAGE "ANY QFP"
 set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 8
+set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
+set_global_assignment -name TIMING_ANALYZER_DO_CCPP_REMOVAL ON
+set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
+set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
+set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING OFF
+set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP OFF
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_location_assignment PIN_25 -to rst
+set_location_assignment PIN_23 -to clk54m
+set_location_assignment PIN_66 -to b[0]
+set_location_assignment PIN_67 -to b[1]
+set_location_assignment PIN_68 -to b[2]
+set_location_assignment PIN_69 -to b[3]
+set_location_assignment PIN_70 -to g[0]
+set_location_assignment PIN_71 -to g[1]
+set_location_assignment PIN_72 -to g[2]
+set_location_assignment PIN_73 -to g[3]
+set_location_assignment PIN_74 -to r[0]
+set_location_assignment PIN_75 -to r[1]
+set_location_assignment PIN_76 -to r[2]
+set_location_assignment PIN_77 -to r[3]
+set_location_assignment PIN_85 -to uart_txd
+set_location_assignment PIN_87 -to uart_rxd
+set_location_assignment PIN_80 -to vs
+set_location_assignment PIN_83 -to hs
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name MIF_FILE gpu_16K_RAM.mif
 set_global_assignment -name BDF_FILE GPU.bdf
 set_global_assignment -name VERILOG_FILE vid_out_stencil.v
 set_global_assignment -name VERILOG_FILE sync_gen.v
@@ -66,21 +104,8 @@ set_global_assignment -name VERILOG_FILE vid_osd_generator.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE GPU_full_osd.vwf
 set_global_assignment -name SDC_FILE SDC1.sdc
 set_global_assignment -name QIP_FILE altpll0.qip
-set_global_assignment -name ENABLE_OCT_DONE OFF
-set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
-set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
-set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
-set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
-set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
-set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
-set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
-set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_location_assignment PIN_25 -to rst
-set_location_assignment PIN_23 -to clk54m
-set_location_assignment PIN_101 -to hs
-set_location_assignment PIN_103 -to vs
-set_location_assignment PIN_104 -to b[1]
-set_location_assignment PIN_105 -to g[1]
-set_location_assignment PIN_106 -to r[1]
+set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

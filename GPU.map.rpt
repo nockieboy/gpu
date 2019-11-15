@@ -1,5 +1,5 @@
 Analysis & Synthesis report for GPU
-Wed Nov 13 18:37:14 2019
+Fri Nov 15 18:12:06 2019
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -15,28 +15,41 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
   9. Analysis & Synthesis IP Cores Summary
- 10. Registers Removed During Synthesis
- 11. Removed Registers Triggering Further Register Optimizations
- 12. General Register Statistics
- 13. Registers Packed Into Inferred Megafunctions
- 14. Multiplexer Restructuring Statistics (Restructuring Performed)
- 15. Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated
- 16. Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_05m:auto_generated|altsyncram_6b81:altsyncram2
- 17. Parameter Settings for User Entity Instance: vid_out_stencil:inst
- 18. Parameter Settings for User Entity Instance: altpll0:inst17|altpll:altpll_component
- 19. Parameter Settings for User Entity Instance: vid_osd_generator:inst16
- 20. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM
- 21. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM
- 22. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component
- 23. Parameter Settings for User Entity Instance: sync_generator:inst2
- 24. Parameter Settings for Inferred Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0
- 25. altpll Parameter Settings by Entity Instance
- 26. altsyncram Parameter Settings by Entity Instance
- 27. altshift_taps Parameter Settings by Entity Instance
- 28. Port Connectivity Checks: "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM"
- 29. Post-Synthesis Netlist Statistics for Top Partition
- 30. Elapsed Time Per Partition
- 31. Analysis & Synthesis Messages
+ 10. State Machine - |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull
+ 11. Registers Removed During Synthesis
+ 12. Removed Registers Triggering Further Register Optimizations
+ 13. General Register Statistics
+ 14. Inverted Register Statistics
+ 15. Registers Packed Into Inferred Megafunctions
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated
+ 18. Source assignments for rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|altsyncram_vah1:FIFOram
+ 19. Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated|altsyncram_0b81:altsyncram2
+ 20. Parameter Settings for User Entity Instance: vid_out_stencil:inst
+ 21. Parameter Settings for User Entity Instance: altpll0:inst17|altpll:altpll_component
+ 22. Parameter Settings for User Entity Instance: vid_osd_generator:inst16
+ 23. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM
+ 24. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM
+ 25. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component
+ 26. Parameter Settings for User Entity Instance: sync_generator:inst2
+ 27. Parameter Settings for User Entity Instance: rs232_debugger:inst11
+ 28. Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com
+ 29. Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp
+ 30. Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component
+ 31. Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp
+ 32. Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component
+ 33. Parameter Settings for Inferred Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0
+ 34. altpll Parameter Settings by Entity Instance
+ 35. altsyncram Parameter Settings by Entity Instance
+ 36. scfifo Parameter Settings by Entity Instance
+ 37. altshift_taps Parameter Settings by Entity Instance
+ 38. Port Connectivity Checks: "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp"
+ 39. Port Connectivity Checks: "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp"
+ 40. Port Connectivity Checks: "rs232_debugger:inst11|rs232_io:rs232_com"
+ 41. Port Connectivity Checks: "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM"
+ 42. Post-Synthesis Netlist Statistics for Top Partition
+ 43. Elapsed Time Per Partition
+ 44. Analysis & Synthesis Messages
 
 
 
@@ -62,18 +75,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Nov 13 18:37:14 2019       ;
+; Analysis & Synthesis Status        ; Successful - Fri Nov 15 18:12:06 2019       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GPU                                         ;
 ; Top-level Entity Name              ; GPU                                         ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 217                                         ;
-;     Total combinational functions  ; 113                                         ;
-;     Dedicated logic registers      ; 169                                         ;
-; Total registers                    ; 169                                         ;
-; Total pins                         ; 17                                          ;
+; Total logic elements               ; 670                                         ;
+;     Total combinational functions  ; 417                                         ;
+;     Dedicated logic registers      ; 447                                         ;
+; Total registers                    ; 447                                         ;
+; Total pins                         ; 25                                          ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 65,568                                      ;
+; Total memory bits                  ; 69,648                                      ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
 ; Total PLLs                         ; 1                                           ;
 +------------------------------------+---------------------------------------------+
@@ -90,6 +103,7 @@ refer to the applicable agreement for further details.
 ; VHDL Show LMF Mapping Messages                                   ; Off                ;                    ;
 ; Verilog Show LMF Mapping Messages                                ; Off                ;                    ;
 ; Verilog Version                                                  ; SystemVerilog_2005 ; Verilog_2001       ;
+; Optimization Technique                                           ; Speed              ; Balanced           ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                      ; Off                ; Off                ;
@@ -120,7 +134,6 @@ refer to the applicable agreement for further details.
 ; Ignore LCELL Buffers                                             ; Off                ; Off                ;
 ; Ignore SOFT Buffers                                              ; On                 ; On                 ;
 ; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
-; Optimization Technique                                           ; Balanced           ; Balanced           ;
 ; Carry Chain Length                                               ; 70                 ; 70                 ;
 ; Auto Carry Chains                                                ; On                 ; On                 ;
 ; Auto Open-Drain Pins                                             ; On                 ; On                 ;
@@ -181,49 +194,83 @@ refer to the applicable agreement for further details.
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   0.0%      ;
-;     Processors 3-4         ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                       ;
-+----------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                         ; Library ;
-+----------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------+---------+
-; GPU.bdf                          ; yes             ; User Block Diagram/Schematic File      ; G:/fpga/Quartus Projects/GPU/GPU.bdf                                 ;         ;
-; vid_out_stencil.v                ; yes             ; User Verilog HDL File                  ; G:/fpga/Quartus Projects/GPU/vid_out_stencil.v                       ;         ;
-; sync_gen.v                       ; yes             ; User Verilog HDL File                  ; G:/fpga/Quartus Projects/GPU/sync_gen.v                              ;         ;
-; gpu_dual_port_ram_INTEL.v        ; yes             ; User Verilog HDL File                  ; G:/fpga/Quartus Projects/GPU/gpu_dual_port_ram_INTEL.v               ;         ;
-; multiport_gpu_ram.v              ; yes             ; User Verilog HDL File                  ; G:/fpga/Quartus Projects/GPU/multiport_gpu_ram.v                     ;         ;
-; vid_osd_generator.v              ; yes             ; User Verilog HDL File                  ; G:/fpga/Quartus Projects/GPU/vid_osd_generator.v                     ;         ;
-; altpll0.v                        ; yes             ; User Wizard-Generated File             ; G:/fpga/Quartus Projects/GPU/altpll0.v                               ;         ;
-; altpll.tdf                       ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/altpll.tdf            ;         ;
-; aglobal181.inc                   ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/aglobal181.inc        ;         ;
-; stratix_pll.inc                  ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/stratix_pll.inc       ;         ;
-; stratixii_pll.inc                ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/stratixii_pll.inc     ;         ;
-; cycloneii_pll.inc                ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/cycloneii_pll.inc     ;         ;
-; db/altpll_9ge2.tdf               ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/db/altpll_9ge2.tdf                      ;         ;
-; altsyncram.tdf                   ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
-; lpm_mux.inc                      ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
-; lpm_decode.inc                   ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
-; altrom.inc                       ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/altrom.inc            ;         ;
-; altram.inc                       ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/altram.inc            ;         ;
-; altdpram.inc                     ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/altdpram.inc          ;         ;
-; db/altsyncram_ckb2.tdf           ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/db/altsyncram_ckb2.tdf                  ;         ;
-; gpu_16k_ram.mif                  ; yes             ; Auto-Found Memory Initialization File  ; G:/fpga/Quartus Projects/GPU/gpu_16k_ram.mif                         ;         ;
-; db/decode_jsa.tdf                ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/db/decode_jsa.tdf                       ;         ;
-; db/decode_c8a.tdf                ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/db/decode_c8a.tdf                       ;         ;
-; db/mux_3nb.tdf                   ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/db/mux_3nb.tdf                          ;         ;
-; altshift_taps.tdf                ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/altshift_taps.tdf     ;         ;
-; lpm_counter.inc                  ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_counter.inc       ;         ;
-; lpm_compare.inc                  ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_compare.inc       ;         ;
-; lpm_constant.inc                 ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_constant.inc      ;         ;
-; db/shift_taps_05m.tdf            ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/db/shift_taps_05m.tdf                   ;         ;
-; db/altsyncram_6b81.tdf           ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/db/altsyncram_6b81.tdf                  ;         ;
-; db/cntr_7pf.tdf                  ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/db/cntr_7pf.tdf                         ;         ;
-+----------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                     ;
++----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                           ; Library ;
++----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------+---------+
+; gpu_16K_RAM.mif                  ; yes             ; User Memory Initialization File    ; G:/fpga/Quartus Projects/GPU/gpu_16K_RAM.mif                           ;         ;
+; GPU.bdf                          ; yes             ; User Block Diagram/Schematic File  ; G:/fpga/Quartus Projects/GPU/GPU.bdf                                   ;         ;
+; vid_out_stencil.v                ; yes             ; User Verilog HDL File              ; G:/fpga/Quartus Projects/GPU/vid_out_stencil.v                         ;         ;
+; sync_gen.v                       ; yes             ; User Verilog HDL File              ; G:/fpga/Quartus Projects/GPU/sync_gen.v                                ;         ;
+; gpu_dual_port_ram_INTEL.v        ; yes             ; User Verilog HDL File              ; G:/fpga/Quartus Projects/GPU/gpu_dual_port_ram_INTEL.v                 ;         ;
+; multiport_gpu_ram.v              ; yes             ; User Verilog HDL File              ; G:/fpga/Quartus Projects/GPU/multiport_gpu_ram.v                       ;         ;
+; vid_osd_generator.v              ; yes             ; User Verilog HDL File              ; G:/fpga/Quartus Projects/GPU/vid_osd_generator.v                       ;         ;
+; altpll0.v                        ; yes             ; User Wizard-Generated File         ; G:/fpga/Quartus Projects/GPU/altpll0.v                                 ;         ;
+; rs232_DEBUGGER.v                 ; yes             ; User Verilog HDL File              ; G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v                          ;         ;
+; altpll.tdf                       ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/altpll.tdf              ;         ;
+; aglobal181.inc                   ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/aglobal181.inc          ;         ;
+; stratix_pll.inc                  ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/stratix_pll.inc         ;         ;
+; stratixii_pll.inc                ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/stratixii_pll.inc       ;         ;
+; cycloneii_pll.inc                ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/cycloneii_pll.inc       ;         ;
+; db/altpll_afe2.tdf               ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/altpll_afe2.tdf                        ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/altsyncram.tdf          ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc   ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_mux.inc             ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_rdenreg.inc           ;         ;
+; altrom.inc                       ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/altrom.inc              ;         ;
+; altram.inc                       ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/altram.inc              ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/altdpram.inc            ;         ;
+; db/altsyncram_ckb2.tdf           ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/altsyncram_ckb2.tdf                    ;         ;
+; db/decode_jsa.tdf                ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/decode_jsa.tdf                         ;         ;
+; db/decode_c8a.tdf                ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/decode_c8a.tdf                         ;         ;
+; db/mux_3nb.tdf                   ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/mux_3nb.tdf                            ;         ;
+; scfifo.tdf                       ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/scfifo.tdf              ;         ;
+; a_regfifo.inc                    ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_regfifo.inc           ;         ;
+; a_dpfifo.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_dpfifo.inc            ;         ;
+; a_i2fifo.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_i2fifo.inc            ;         ;
+; a_fffifo.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.inc            ;         ;
+; a_f2fifo.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_f2fifo.inc            ;         ;
+; a_fffifo.tdf                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf            ;         ;
+; lpm_counter.inc                  ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_counter.inc         ;         ;
+; lpm_compare.inc                  ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_compare.inc         ;         ;
+; lpm_ff.inc                       ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_ff.inc              ;         ;
+; a_fefifo.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_fefifo.inc            ;         ;
+; lpm_ff.tdf                       ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_ff.tdf              ;         ;
+; lpm_constant.inc                 ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_constant.inc        ;         ;
+; lpm_mux.tdf                      ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_mux.tdf             ;         ;
+; muxlut.inc                       ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/muxlut.inc              ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/bypassff.inc            ;         ;
+; altshift.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/altshift.inc            ;         ;
+; db/mux_6tc.tdf                   ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/mux_6tc.tdf                            ;         ;
+; lpm_counter.tdf                  ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_counter.tdf         ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_add_sub.inc         ;         ;
+; cmpconst.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/cmpconst.inc            ;         ;
+; dffeea.inc                       ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/dffeea.inc              ;         ;
+; alt_counter_stratix.inc          ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/alt_counter_stratix.inc ;         ;
+; db/cntr_3bf.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/cntr_3bf.tdf                           ;         ;
+; a_fefifo.tdf                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/a_fefifo.tdf            ;         ;
+; lpm_compare.tdf                  ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_compare.tdf         ;         ;
+; comptree.inc                     ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/comptree.inc            ;         ;
+; db/cmpr_9fg.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/cmpr_9fg.tdf                           ;         ;
+; db/scfifo_5b31.tdf               ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/scfifo_5b31.tdf                        ;         ;
+; db/a_dpfifo_o231.tdf             ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/a_dpfifo_o231.tdf                      ;         ;
+; db/altsyncram_vah1.tdf           ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/altsyncram_vah1.tdf                    ;         ;
+; db/cmpr_ms8.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/cmpr_ms8.tdf                           ;         ;
+; db/cntr_1ab.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/cntr_1ab.tdf                           ;         ;
+; db/cntr_ea7.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/cntr_ea7.tdf                           ;         ;
+; db/cntr_2ab.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/cntr_2ab.tdf                           ;         ;
+; altshift_taps.tdf                ; yes             ; Megafunction                       ; g:/altera/18.1/quartus/libraries/megafunctions/altshift_taps.tdf       ;         ;
+; db/shift_taps_u4m.tdf            ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/shift_taps_u4m.tdf                     ;         ;
+; db/altsyncram_0b81.tdf           ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/altsyncram_0b81.tdf                    ;         ;
+; db/cntr_4pf.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Quartus Projects/GPU/db/cntr_4pf.tdf                           ;         ;
++----------------------------------+-----------------+------------------------------------+------------------------------------------------------------------------+---------+
 
 
 +------------------------------------------------------------------------------------------------------------------------+
@@ -231,69 +278,106 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+--------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                    ;
 +---------------------------------------------+--------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 217                                                                      ;
+; Estimated Total logic elements              ; 670                                                                      ;
 ;                                             ;                                                                          ;
-; Total combinational functions               ; 113                                                                      ;
+; Total combinational functions               ; 417                                                                      ;
 ; Logic element usage by number of LUT inputs ;                                                                          ;
-;     -- 4 input functions                    ; 40                                                                       ;
-;     -- 3 input functions                    ; 19                                                                       ;
-;     -- <=2 input functions                  ; 54                                                                       ;
+;     -- 4 input functions                    ; 182                                                                      ;
+;     -- 3 input functions                    ; 51                                                                       ;
+;     -- <=2 input functions                  ; 184                                                                      ;
 ;                                             ;                                                                          ;
 ; Logic elements by mode                      ;                                                                          ;
-;     -- normal mode                          ; 77                                                                       ;
-;     -- arithmetic mode                      ; 36                                                                       ;
+;     -- normal mode                          ; 305                                                                      ;
+;     -- arithmetic mode                      ; 112                                                                      ;
 ;                                             ;                                                                          ;
-; Total registers                             ; 169                                                                      ;
-;     -- Dedicated logic registers            ; 169                                                                      ;
+; Total registers                             ; 447                                                                      ;
+;     -- Dedicated logic registers            ; 447                                                                      ;
 ;     -- I/O registers                        ; 0                                                                        ;
 ;                                             ;                                                                          ;
-; I/O pins                                    ; 17                                                                       ;
-; Total memory bits                           ; 65568                                                                    ;
+; I/O pins                                    ; 25                                                                       ;
+; Total memory bits                           ; 69648                                                                    ;
 ;                                             ;                                                                          ;
 ; Embedded Multiplier 9-bit elements          ; 0                                                                        ;
 ;                                             ;                                                                          ;
 ; Total PLLs                                  ; 1                                                                        ;
 ;     -- PLLs                                 ; 1                                                                        ;
 ;                                             ;                                                                          ;
-; Maximum fan-out node                        ; altpll0:inst17|altpll:altpll_component|altpll_9ge2:auto_generated|clk[0] ;
-; Maximum fan-out                             ; 186                                                                      ;
-; Total fan-out                               ; 1033                                                                     ;
-; Average fan-out                             ; 3.10                                                                     ;
+; Maximum fan-out node                        ; altpll0:inst17|altpll:altpll_component|altpll_afe2:auto_generated|clk[0] ;
+; Maximum fan-out                             ; 472                                                                      ;
+; Total fan-out                               ; 3079                                                                     ;
+; Average fan-out                             ; 3.28                                                                     ;
 +---------------------------------------------+--------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                          ;
-+-------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
-; Compilation Hierarchy Node                      ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                    ; Entity Name             ; Library Name ;
-+-------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
-; |GPU                                            ; 113 (2)             ; 169 (4)                   ; 65568       ; 0            ; 0       ; 0         ; 17   ; 0            ; |GPU                                                                                                                                                   ; GPU                     ; work         ;
-;    |altpll0:inst17|                             ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17                                                                                                                                    ; altpll0                 ; work         ;
-;       |altpll:altpll_component|                 ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17|altpll:altpll_component                                                                                                            ; altpll                  ; work         ;
-;          |altpll_9ge2:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17|altpll:altpll_component|altpll_9ge2:auto_generated                                                                                 ; altpll_9ge2             ; work         ;
-;    |sync_generator:inst2|                       ; 51 (51)             ; 28 (28)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|sync_generator:inst2                                                                                                                              ; sync_generator          ; work         ;
-;    |vid_osd_generator:inst16|                   ; 56 (39)             ; 126 (80)                  ; 65568       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16                                                                                                                          ; vid_osd_generator       ; work         ;
-;       |multiport_gpu_ram:gpu_RAM|               ; 17 (15)             ; 46 (44)                   ; 65568       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM                                                                                                ; multiport_gpu_ram       ; work         ;
-;          |altshift_taps:data_pipe_rtl_0|        ; 2 (0)               ; 2 (0)                     ; 32          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0                                                                  ; altshift_taps           ; work         ;
-;             |shift_taps_05m:auto_generated|     ; 2 (0)               ; 2 (0)                     ; 32          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_05m:auto_generated                                    ; shift_taps_05m          ; work         ;
-;                |altsyncram_6b81:altsyncram2|    ; 0 (0)               ; 0 (0)                     ; 32          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_05m:auto_generated|altsyncram_6b81:altsyncram2        ; altsyncram_6b81         ; work         ;
-;                |cntr_7pf:cntr1|                 ; 2 (2)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_05m:auto_generated|cntr_7pf:cntr1                     ; cntr_7pf                ; work         ;
-;          |gpu_dual_port_ram_INTEL:gpu_RAM|      ; 0 (0)               ; 0 (0)                     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM                                                                ; gpu_dual_port_ram_INTEL ; work         ;
-;             |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component                                ; altsyncram              ; work         ;
-;                |altsyncram_ckb2:auto_generated| ; 0 (0)               ; 0 (0)                     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated ; altsyncram_ckb2         ; work         ;
-;    |vid_out_stencil:inst|                       ; 4 (4)               ; 11 (11)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_out_stencil:inst                                                                                                                              ; vid_out_stencil         ; work         ;
-+-------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                               ;
++---------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
+; Compilation Hierarchy Node                        ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                       ; Entity Name             ; Library Name ;
++---------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
+; |GPU                                              ; 417 (2)             ; 447 (5)                   ; 69648       ; 0            ; 0       ; 0         ; 25   ; 0            ; |GPU                                                                                                                                                                      ; GPU                     ; work         ;
+;    |altpll0:inst17|                               ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17                                                                                                                                                       ; altpll0                 ; work         ;
+;       |altpll:altpll_component|                   ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17|altpll:altpll_component                                                                                                                               ; altpll                  ; work         ;
+;          |altpll_afe2:auto_generated|             ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17|altpll:altpll_component|altpll_afe2:auto_generated                                                                                                    ; altpll_afe2             ; work         ;
+;    |rs232_debugger:inst11|                        ; 304 (31)            ; 258 (18)                  ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11                                                                                                                                                ; rs232_debugger          ; work         ;
+;       |rs232_io:rs232_com|                        ; 273 (0)             ; 240 (0)                   ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com                                                                                                                             ; rs232_io                ; work         ;
+;          |serial_rx:rxd_comp|                     ; 167 (54)            ; 176 (33)                  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp                                                                                                          ; serial_rx               ; work         ;
+;             |scfifo:scfifo_component|             ; 113 (0)             ; 143 (0)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component                                                                                  ; scfifo                  ; work         ;
+;                |a_fffifo:subfifo|                 ; 113 (3)             ; 143 (0)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo                                                                 ; a_fffifo                ; work         ;
+;                   |a_fefifo:fifo_state|           ; 10 (10)             ; 3 (3)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state                                             ; a_fefifo                ; work         ;
+;                   |lpm_counter:rd_ptr|            ; 4 (0)               ; 4 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_counter:rd_ptr                                              ; lpm_counter             ; work         ;
+;                      |cntr_3bf:auto_generated|    ; 4 (4)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_counter:rd_ptr|cntr_3bf:auto_generated                      ; cntr_3bf                ; work         ;
+;                   |lpm_ff:last_data_node[0]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[0]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[10]|     ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[10]                                       ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[11]|     ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[11]                                       ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[12]|     ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[12]                                       ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[13]|     ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[13]                                       ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[14]|     ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[14]                                       ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[15]|     ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[15]                                       ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[1]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[1]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[2]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[2]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[3]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[3]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[4]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[4]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[5]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[5]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[6]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[6]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[7]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[7]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[8]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[8]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:last_data_node[9]|      ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[9]                                        ; lpm_ff                  ; work         ;
+;                   |lpm_ff:output_buffer|          ; 0 (0)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:output_buffer                                            ; lpm_ff                  ; work         ;
+;                   |lpm_mux:last_row_data_out_mux| ; 96 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_mux:last_row_data_out_mux                                   ; lpm_mux                 ; work         ;
+;                      |mux_6tc:auto_generated|     ; 96 (96)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_mux:last_row_data_out_mux|mux_6tc:auto_generated            ; mux_6tc                 ; work         ;
+;          |serial_tx:txd_comp|                     ; 106 (54)            ; 64 (24)                   ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp                                                                                                          ; serial_tx               ; work         ;
+;             |scfifo:scfifo_component|             ; 52 (0)              ; 40 (0)                    ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component                                                                                  ; scfifo                  ; work         ;
+;                |scfifo_5b31:auto_generated|       ; 52 (0)              ; 40 (0)                    ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated                                                       ; scfifo_5b31             ; work         ;
+;                   |a_dpfifo_o231:dpfifo|          ; 52 (26)             ; 40 (14)                   ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo                                  ; a_dpfifo_o231           ; work         ;
+;                      |altsyncram_vah1:FIFOram|    ; 0 (0)               ; 0 (0)                     ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|altsyncram_vah1:FIFOram          ; altsyncram_vah1         ; work         ;
+;                      |cntr_1ab:rd_ptr_msb|        ; 8 (8)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|cntr_1ab:rd_ptr_msb              ; cntr_1ab                ; work         ;
+;                      |cntr_2ab:wr_ptr|            ; 9 (9)               ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|cntr_2ab:wr_ptr                  ; cntr_2ab                ; work         ;
+;                      |cntr_ea7:usedw_counter|     ; 9 (9)               ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|cntr_ea7:usedw_counter           ; cntr_ea7                ; work         ;
+;    |sync_generator:inst2|                         ; 51 (51)             ; 28 (28)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|sync_generator:inst2                                                                                                                                                 ; sync_generator          ; work         ;
+;    |vid_osd_generator:inst16|                     ; 54 (39)             ; 141 (80)                  ; 65552       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16                                                                                                                                             ; vid_osd_generator       ; work         ;
+;       |multiport_gpu_ram:gpu_RAM|                 ; 15 (13)             ; 61 (60)                   ; 65552       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM                                                                                                                   ; multiport_gpu_ram       ; work         ;
+;          |altshift_taps:data_pipe_rtl_0|          ; 1 (0)               ; 1 (0)                     ; 16          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0                                                                                     ; altshift_taps           ; work         ;
+;             |shift_taps_u4m:auto_generated|       ; 1 (0)               ; 1 (0)                     ; 16          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated                                                       ; shift_taps_u4m          ; work         ;
+;                |altsyncram_0b81:altsyncram2|      ; 0 (0)               ; 0 (0)                     ; 16          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated|altsyncram_0b81:altsyncram2                           ; altsyncram_0b81         ; work         ;
+;                |cntr_4pf:cntr1|                   ; 1 (1)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated|cntr_4pf:cntr1                                        ; cntr_4pf                ; work         ;
+;          |gpu_dual_port_ram_INTEL:gpu_RAM|        ; 1 (0)               ; 0 (0)                     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM                                                                                   ; gpu_dual_port_ram_INTEL ; work         ;
+;             |altsyncram:altsyncram_component|     ; 1 (0)               ; 0 (0)                     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component                                                   ; altsyncram              ; work         ;
+;                |altsyncram_ckb2:auto_generated|   ; 1 (0)               ; 0 (0)                     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated                    ; altsyncram_ckb2         ; work         ;
+;                   |decode_jsa:decode3|            ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated|decode_jsa:decode3 ; decode_jsa              ; work         ;
+;    |vid_out_stencil:inst|                         ; 6 (6)               ; 15 (15)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_out_stencil:inst                                                                                                                                                 ; vid_out_stencil         ; work         ;
++---------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                                                                                              ;
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
-; Name                                                                                                                                                         ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF             ;
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
-; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_05m:auto_generated|altsyncram_6b81:altsyncram2|ALTSYNCRAM        ; AUTO ; Simple Dual Port ; 4            ; 8            ; 4            ; 8            ; 32     ; None            ;
-; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated|ALTSYNCRAM ; AUTO ; True Dual Port   ; 16384        ; 8            ; 16384        ; 8            ; 131072 ; gpu_16K_RAM.mif ;
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                                                                        ;
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
+; Name                                                                                                                                                                   ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF             ;
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
+; rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|altsyncram_vah1:FIFOram|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 512          ; 8            ; 512          ; 8            ; 4096   ; None            ;
+; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated|altsyncram_0b81:altsyncram2|ALTSYNCRAM                  ; AUTO ; Simple Dual Port ; 2            ; 8            ; 2            ; 8            ; 16     ; None            ;
+; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated|ALTSYNCRAM           ; AUTO ; True Dual Port   ; 16384        ; 8            ; 16384        ; 8            ; 131072 ; gpu_16K_RAM.mif ;
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
 
 
 +-------------------------------------------------------------------------------------------------------+
@@ -303,6 +387,18 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------+--------------+---------+--------------+--------------+---------------------+-----------------+
 ; Altera ; ALTPLL       ; 18.1    ; N/A          ; N/A          ; |GPU|altpll0:inst17 ; altpll0.v       ;
 +--------+--------------+---------+--------------+--------------+---------------------+-----------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull ;
++--------------+--------------+------------+-----------------------------------------------------------------------------------------------------------------+
+; Name         ; state_middle ; state_full ; state_empty                                                                                                     ;
++--------------+--------------+------------+-----------------------------------------------------------------------------------------------------------------+
+; state_empty  ; 0            ; 0          ; 0                                                                                                               ;
+; state_middle ; 1            ; 0          ; 1                                                                                                               ;
+; state_full   ; 0            ; 1          ; 1                                                                                                               ;
++--------------+--------------+------------+-----------------------------------------------------------------------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -316,11 +412,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_lat_1[10]                                                                                                      ; Stuck at GND due to stuck port data_in                                         ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_lat_1[11]                                                                                                      ; Stuck at VCC due to stuck port data_in                                         ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_lat_1[12,13]                                                                                                   ; Stuck at GND due to stuck port data_in                                         ;
+; vid_out_stencil:inst|r_out[0,1]                                                                                                                                        ; Stuck at GND due to stuck port data_in                                         ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[13]                                                                                                     ; Merged with vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[10] ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[10]                                                                                                     ; Stuck at GND due to stuck port data_in                                         ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated|address_reg_a[0]     ; Stuck at GND due to stuck port data_in                                         ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated|out_address_reg_a[0] ; Stuck at GND due to stuck port data_in                                         ;
-; Total Number of Removed Registers = 50                                                                                                                                 ;                                                                                ;
+; rs232_debugger:inst11|host_addr_reg[14..19]                                                                                                                            ; Lost fanout                                                                    ;
+; Total Number of Removed Registers = 58                                                                                                                                 ;                                                                                ;
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------+
 
 
@@ -329,6 +427,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------+---------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Register name                                                     ; Reason for Removal        ; Registers Removed due to This Register                                                                                                                                 ;
 +-------------------------------------------------------------------+---------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; rs232_debugger:inst11|host_addr_reg[19]                           ; Lost Fanouts              ; rs232_debugger:inst11|host_addr_reg[18], rs232_debugger:inst11|host_addr_reg[17],                                                                                      ;
+;                                                                   ;                           ; rs232_debugger:inst11|host_addr_reg[16], rs232_debugger:inst11|host_addr_reg[15],                                                                                      ;
+;                                                                   ;                           ; rs232_debugger:inst11|host_addr_reg[14]                                                                                                                                ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_lat_4[10] ; Stuck at GND              ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[10],                                                                                                    ;
 ;                                                                   ; due to stuck port data_in ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated|address_reg_a[0],    ;
 ;                                                                   ;                           ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated|out_address_reg_a[0] ;
@@ -340,14 +441,24 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 169   ;
-; Number of registers using Synchronous Clear  ; 3     ;
-; Number of registers using Synchronous Load   ; 29    ;
+; Total registers                              ; 447   ;
+; Number of registers using Synchronous Clear  ; 24    ;
+; Number of registers using Synchronous Load   ; 54    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 148   ;
+; Number of registers using Clock Enable       ; 349   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; rs232_debugger:inst11|host_addr_reg[12] ; 2       ;
+; Total number of inverted registers = 1  ;         ;
++-----------------------------------------+---------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -355,22 +466,24 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------------------------------------+--------------------------------------------------------------------+------------+
 ; Register Name                                                       ; Megafunction                                                       ; Type       ;
 +---------------------------------------------------------------------+--------------------------------------------------------------------+------------+
-; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|data_pipe[0..47] ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|data_pipe_rtl_0 ; SHIFT_TAPS ;
+; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|data_pipe[8..39] ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|data_pipe_rtl_0 ; SHIFT_TAPS ;
 +---------------------------------------------------------------------+--------------------------------------------------------------------+------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------+
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst16|disp_y[8]                                 ;
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst16|disp_x[4]                                 ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|sync_generator:inst2|h_count[8]                                    ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|sync_generator:inst2|v_count[1]                                    ;
-; 16:1               ; 3 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[12] ;
-; 16:1               ; 9 bits    ; 90 LEs        ; 18 LEs               ; 72 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[0]  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------+
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|position[4]  ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst16|disp_y[1]                                       ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst16|disp_x[4]                                       ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |GPU|rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|p_counter[9] ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|sync_generator:inst2|h_count[0]                                          ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|sync_generator:inst2|v_count[2]                                          ;
+; 16:1               ; 3 bits    ; 30 LEs        ; 6 LEs                ; 24 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[10]       ;
+; 16:1               ; 9 bits    ; 90 LEs        ; 18 LEs               ; 72 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[0]        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -382,8 +495,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------------+
 
 
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|altsyncram_vah1:FIFOram ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                                                                   ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                                                    ;
++---------------------------------+--------------------+------+----------------------------------------------------------------------------------------------------------------------+
+
+
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_05m:auto_generated|altsyncram_6b81:altsyncram2 ;
+; Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated|altsyncram_0b81:altsyncram2 ;
 +---------------------------------+--------------------+------+-----------------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                                                                                  ;
 +---------------------------------+--------------------+------+-----------------------------------------------------------------------------------------------------+
@@ -396,9 +518,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+-------+------------------------------------------+
 ; Parameter Name ; Value ; Type                                     ;
 +----------------+-------+------------------------------------------+
-; RGB_hbit       ; 1     ; Signed Integer                           ;
-; HS_invert      ; 0     ; Signed Integer                           ;
-; VS_invert      ; 0     ; Signed Integer                           ;
+; RGB_hbit       ; 3     ; Signed Integer                           ;
+; HS_invert      ; 1     ; Signed Integer                           ;
+; VS_invert      ; 1     ; Signed Integer                           ;
 +----------------+-------+------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -415,7 +537,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; COMPENSATE_CLOCK              ; CLK0              ; Untyped                         ;
 ; SCAN_CHAIN                    ; LONG              ; Untyped                         ;
 ; PRIMARY_CLOCK                 ; INCLK0            ; Untyped                         ;
-; INCLK0_INPUT_FREQUENCY        ; 18518             ; Signed Integer                  ;
+; INCLK0_INPUT_FREQUENCY        ; 20000             ; Signed Integer                  ;
 ; INCLK1_INPUT_FREQUENCY        ; 0                 ; Untyped                         ;
 ; GATE_LOCK_SIGNAL              ; NO                ; Untyped                         ;
 ; GATE_LOCK_COUNTER             ; 0                 ; Untyped                         ;
@@ -464,7 +586,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; CLK4_PHASE_SHIFT              ; 0                 ; Untyped                         ;
 ; CLK3_PHASE_SHIFT              ; 0                 ; Untyped                         ;
 ; CLK2_PHASE_SHIFT              ; 0                 ; Untyped                         ;
-; CLK1_PHASE_SHIFT              ; 3704              ; Untyped                         ;
+; CLK1_PHASE_SHIFT              ; 4000              ; Untyped                         ;
 ; CLK0_PHASE_SHIFT              ; 0                 ; Untyped                         ;
 ; CLK5_TIME_DELAY               ; 0                 ; Untyped                         ;
 ; CLK4_TIME_DELAY               ; 0                 ; Untyped                         ;
@@ -760,7 +882,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; C7_TEST_SOURCE                ; 5                 ; Untyped                         ;
 ; C8_TEST_SOURCE                ; 5                 ; Untyped                         ;
 ; C9_TEST_SOURCE                ; 5                 ; Untyped                         ;
-; CBXI_PARAMETER                ; altpll_9ge2       ; Untyped                         ;
+; CBXI_PARAMETER                ; altpll_afe2       ; Untyped                         ;
 ; VCO_FREQUENCY_CONTROL         ; AUTO              ; Untyped                         ;
 ; VCO_PHASE_SHIFT_STEP          ; 0                 ; Untyped                         ;
 ; WIDTH_CLOCK                   ; 5                 ; Signed Integer                  ;
@@ -889,6 +1011,111 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232_debugger:inst11 ;
++----------------+-------+-------------------------------------------+
+; Parameter Name ; Value ; Type                                      ;
++----------------+-------+-------------------------------------------+
+; UART_BAUD      ; 1090  ; Signed Integer                            ;
+; UART_RX_FIFO   ; 16    ; Signed Integer                            ;
+; UART_TX_FIFO   ; 512   ; Signed Integer                            ;
+; DEBUG_RST_ADR  ; 4096  ; Signed Integer                            ;
++----------------+-------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; UART_BAUD      ; 1090  ; Signed Integer                                               ;
+; UART_RX_FIFO   ; 16    ; Signed Integer                                               ;
+; UART_TX_FIFO   ; 512   ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp ;
++----------------+-------+---------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                            ;
++----------------+-------+---------------------------------------------------------------------------------+
+; RX_FIFO_SIZE   ; 16    ; Signed Integer                                                                  ;
+; RX_BAUD        ; 1090  ; Signed Integer                                                                  ;
++----------------+-------+---------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component ;
++-------------------------+--------------+-----------------------------------------------------------------------------------------+
+; Parameter Name          ; Value        ; Type                                                                                    ;
++-------------------------+--------------+-----------------------------------------------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON           ; AUTO_CARRY                                                                              ;
+; IGNORE_CARRY_BUFFERS    ; OFF          ; IGNORE_CARRY                                                                            ;
+; AUTO_CASCADE_CHAINS     ; ON           ; AUTO_CASCADE                                                                            ;
+; IGNORE_CASCADE_BUFFERS  ; OFF          ; IGNORE_CASCADE                                                                          ;
+; lpm_width               ; 8            ; Signed Integer                                                                          ;
+; LPM_NUMWORDS            ; 16           ; Signed Integer                                                                          ;
+; LPM_WIDTHU              ; 4            ; Untyped                                                                                 ;
+; LPM_SHOWAHEAD           ; OFF          ; Untyped                                                                                 ;
+; UNDERFLOW_CHECKING      ; ON           ; Untyped                                                                                 ;
+; OVERFLOW_CHECKING       ; ON           ; Untyped                                                                                 ;
+; ALLOW_RWCYCLE_WHEN_FULL ; OFF          ; Untyped                                                                                 ;
+; ADD_RAM_OUTPUT_REGISTER ; ON           ; Untyped                                                                                 ;
+; ALMOST_FULL_VALUE       ; 0            ; Untyped                                                                                 ;
+; ALMOST_EMPTY_VALUE      ; 0            ; Untyped                                                                                 ;
+; ENABLE_ECC              ; FALSE        ; Untyped                                                                                 ;
+; USE_EAB                 ; OFF          ; Untyped                                                                                 ;
+; MAXIMIZE_SPEED          ; 5            ; Untyped                                                                                 ;
+; DEVICE_FAMILY           ; Cyclone IV E ; Untyped                                                                                 ;
+; OPTIMIZE_FOR_SPEED      ; 5            ; Untyped                                                                                 ;
+; CBXI_PARAMETER          ; NOTHING      ; Untyped                                                                                 ;
++-------------------------+--------------+-----------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp ;
++----------------+-------+---------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                            ;
++----------------+-------+---------------------------------------------------------------------------------+
+; TX_FIFO_SIZE   ; 512   ; Signed Integer                                                                  ;
+; TX_BAUD        ; 1090  ; Signed Integer                                                                  ;
++----------------+-------+---------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component ;
++-------------------------+--------------+-----------------------------------------------------------------------------------------+
+; Parameter Name          ; Value        ; Type                                                                                    ;
++-------------------------+--------------+-----------------------------------------------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON           ; AUTO_CARRY                                                                              ;
+; IGNORE_CARRY_BUFFERS    ; OFF          ; IGNORE_CARRY                                                                            ;
+; AUTO_CASCADE_CHAINS     ; ON           ; AUTO_CASCADE                                                                            ;
+; IGNORE_CASCADE_BUFFERS  ; OFF          ; IGNORE_CASCADE                                                                          ;
+; lpm_width               ; 8            ; Signed Integer                                                                          ;
+; LPM_NUMWORDS            ; 512          ; Signed Integer                                                                          ;
+; LPM_WIDTHU              ; 9            ; Untyped                                                                                 ;
+; LPM_SHOWAHEAD           ; OFF          ; Untyped                                                                                 ;
+; UNDERFLOW_CHECKING      ; ON           ; Untyped                                                                                 ;
+; OVERFLOW_CHECKING       ; ON           ; Untyped                                                                                 ;
+; ALLOW_RWCYCLE_WHEN_FULL ; OFF          ; Untyped                                                                                 ;
+; ADD_RAM_OUTPUT_REGISTER ; ON           ; Untyped                                                                                 ;
+; ALMOST_FULL_VALUE       ; 0            ; Untyped                                                                                 ;
+; ALMOST_EMPTY_VALUE      ; 0            ; Untyped                                                                                 ;
+; ENABLE_ECC              ; FALSE        ; Untyped                                                                                 ;
+; USE_EAB                 ; ON           ; Untyped                                                                                 ;
+; MAXIMIZE_SPEED          ; 5            ; Untyped                                                                                 ;
+; DEVICE_FAMILY           ; Cyclone IV E ; Untyped                                                                                 ;
+; OPTIMIZE_FOR_SPEED      ; 5            ; Untyped                                                                                 ;
+; CBXI_PARAMETER          ; scfifo_5b31  ; Untyped                                                                                 ;
++-------------------------+--------------+-----------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-----------------------------------------------------------------------------------------------------------------------------------+
 ; Parameter Settings for Inferred Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0 ;
 +----------------+----------------+-------------------------------------------------------------------------------------------------+
@@ -896,10 +1123,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+----------------+-------------------------------------------------------------------------------------------------+
 ; WIDTH_BYTEENA  ; 1              ; Untyped                                                                                         ;
 ; NUMBER_OF_TAPS ; 1              ; Untyped                                                                                         ;
-; TAP_DISTANCE   ; 6              ; Untyped                                                                                         ;
+; TAP_DISTANCE   ; 4              ; Untyped                                                                                         ;
 ; WIDTH          ; 8              ; Untyped                                                                                         ;
 ; POWER_UP_STATE ; CLEARED        ; Untyped                                                                                         ;
-; CBXI_PARAMETER ; shift_taps_05m ; Untyped                                                                                         ;
+; CBXI_PARAMETER ; shift_taps_u4m ; Untyped                                                                                         ;
 +----------------+----------------+-------------------------------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -914,7 +1141,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- OPERATION_MODE         ; NORMAL                                 ;
 ;     -- PLL_TYPE               ; AUTO                                   ;
 ;     -- PRIMARY_CLOCK          ; INCLK0                                 ;
-;     -- INCLK0_INPUT_FREQUENCY ; 18518                                  ;
+;     -- INCLK0_INPUT_FREQUENCY ; 20000                                  ;
 ;     -- INCLK1_INPUT_FREQUENCY ; 0                                      ;
 ;     -- VCO_MULTIPLY_BY        ; 0                                      ;
 ;     -- VCO_DIVIDE_BY          ; 0                                      ;
@@ -941,6 +1168,27 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
 
 
++------------------------------------------------------------------------------------------------------------------+
+; scfifo Parameter Settings by Entity Instance                                                                     ;
++----------------------------+-------------------------------------------------------------------------------------+
+; Name                       ; Value                                                                               ;
++----------------------------+-------------------------------------------------------------------------------------+
+; Number of entity instances ; 2                                                                                   ;
+; Entity Instance            ; rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component ;
+;     -- FIFO Type           ; Single Clock                                                                        ;
+;     -- lpm_width           ; 8                                                                                   ;
+;     -- LPM_NUMWORDS        ; 16                                                                                  ;
+;     -- LPM_SHOWAHEAD       ; OFF                                                                                 ;
+;     -- USE_EAB             ; OFF                                                                                 ;
+; Entity Instance            ; rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component ;
+;     -- FIFO Type           ; Single Clock                                                                        ;
+;     -- lpm_width           ; 8                                                                                   ;
+;     -- LPM_NUMWORDS        ; 512                                                                                 ;
+;     -- LPM_SHOWAHEAD       ; OFF                                                                                 ;
+;     -- USE_EAB             ; ON                                                                                  ;
++----------------------------+-------------------------------------------------------------------------------------+
+
+
 +---------------------------------------------------------------------------------------------------------------+
 ; altshift_taps Parameter Settings by Entity Instance                                                           ;
 +----------------------------+----------------------------------------------------------------------------------+
@@ -949,9 +1197,42 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Number of entity instances ; 1                                                                                ;
 ; Entity Instance            ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0 ;
 ;     -- NUMBER_OF_TAPS      ; 1                                                                                ;
-;     -- TAP_DISTANCE        ; 6                                                                                ;
+;     -- TAP_DISTANCE        ; 4                                                                                ;
 ;     -- WIDTH               ; 8                                                                                ;
 +----------------------------+----------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp"                                                                                     ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                                                      ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; rx_frame ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; tick     ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
+; active   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp"                                                 ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; tx_sync  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                      ;
+; rx_start ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; tick     ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; active   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "rs232_debugger:inst11|rs232_io:rs232_com"                                                                                                       ;
++---------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                                                                                      ;
++---------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; tx_full ; Output ; Info     ; Explicitly unconnected                                                                                                                       ;
+; rst     ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
++---------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------+
@@ -995,27 +1276,29 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 17                          ;
-; cycloneiii_ff         ; 169                         ;
-;     ENA               ; 117                         ;
-;     ENA SCLR          ; 2                           ;
-;     ENA SLD           ; 29                          ;
+; boundary_port         ; 25                          ;
+; cycloneiii_ff         ; 447                         ;
+;     ENA               ; 281                         ;
+;     ENA SCLR          ; 14                          ;
+;     ENA SCLR SLD      ; 9                           ;
+;     ENA SLD           ; 45                          ;
 ;     SCLR              ; 1                           ;
-;     plain             ; 20                          ;
-; cycloneiii_lcell_comb ; 113                         ;
-;     arith             ; 36                          ;
-;         2 data inputs ; 36                          ;
-;     normal            ; 77                          ;
+;     plain             ; 97                          ;
+; cycloneiii_lcell_comb ; 417                         ;
+;     arith             ; 112                         ;
+;         2 data inputs ; 100                         ;
+;         3 data inputs ; 12                          ;
+;     normal            ; 305                         ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 6                           ;
-;         2 data inputs ; 11                          ;
-;         3 data inputs ; 19                          ;
-;         4 data inputs ; 40                          ;
+;         1 data inputs ; 20                          ;
+;         2 data inputs ; 63                          ;
+;         3 data inputs ; 39                          ;
+;         4 data inputs ; 182                         ;
 ; cycloneiii_pll        ; 1                           ;
-; cycloneiii_ram_block  ; 16                          ;
+; cycloneiii_ram_block  ; 24                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 5.00                        ;
-; Average LUT depth     ; 1.52                        ;
+; Average LUT depth     ; 2.32                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1024,7 +1307,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:03     ;
 +----------------+--------------+
 
 
@@ -1034,7 +1317,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed Nov 13 18:36:54 2019
+    Info: Processing started: Fri Nov 15 18:11:41 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off GPU -c GPU
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -1052,6 +1335,13 @@ Info (12021): Found 1 design units, including 1 entities, in source file vid_osd
     Info (12023): Found entity 1: vid_osd_generator File: G:/fpga/Quartus Projects/GPU/vid_osd_generator.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file altpll0.v
     Info (12023): Found entity 1: altpll0 File: G:/fpga/Quartus Projects/GPU/altpll0.v Line: 39
+Info (12021): Found 4 design units, including 4 entities, in source file rs232_debugger.v
+    Info (12023): Found entity 1: rs232_debugger File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 1
+    Info (12023): Found entity 2: rs232_io File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 66
+    Info (12023): Found entity 3: serial_rx File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 118
+    Info (12023): Found entity 4: serial_tx File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 256
+Warning (10236): Verilog HDL Implicit Net warning at rs232_DEBUGGER.v(158): created implicit net for "rst" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 158
+Warning (10236): Verilog HDL Implicit Net warning at rs232_DEBUGGER.v(290): created implicit net for "rst" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 290
 Info (12127): Elaborating entity "GPU" for the top level hierarchy
 Info (12128): Elaborating entity "vid_out_stencil" for hierarchy "vid_out_stencil:inst"
 Warning (10230): Verilog HDL assignment warning at vid_out_stencil.v(54): truncated value with size 32 to match size of target (1) File: G:/fpga/Quartus Projects/GPU/vid_out_stencil.v Line: 54
@@ -1068,9 +1358,9 @@ Info (12133): Instantiated megafunction "altpll0:inst17|altpll:altpll_component"
     Info (12134): Parameter "clk1_divide_by" = "2"
     Info (12134): Parameter "clk1_duty_cycle" = "50"
     Info (12134): Parameter "clk1_multiply_by" = "5"
-    Info (12134): Parameter "clk1_phase_shift" = "3704"
+    Info (12134): Parameter "clk1_phase_shift" = "4000"
     Info (12134): Parameter "compensate_clock" = "CLK0"
-    Info (12134): Parameter "inclk0_input_frequency" = "18518"
+    Info (12134): Parameter "inclk0_input_frequency" = "20000"
     Info (12134): Parameter "intended_device_family" = "Cyclone IV E"
     Info (12134): Parameter "lpm_type" = "altpll"
     Info (12134): Parameter "operation_mode" = "NORMAL"
@@ -1117,9 +1407,9 @@ Info (12133): Instantiated megafunction "altpll0:inst17|altpll:altpll_component"
     Info (12134): Parameter "port_extclk2" = "PORT_UNUSED"
     Info (12134): Parameter "port_extclk3" = "PORT_UNUSED"
     Info (12134): Parameter "width_clock" = "5"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altpll_9ge2.tdf
-    Info (12023): Found entity 1: altpll_9ge2 File: G:/fpga/Quartus Projects/GPU/db/altpll_9ge2.tdf Line: 25
-Info (12128): Elaborating entity "altpll_9ge2" for hierarchy "altpll0:inst17|altpll:altpll_component|altpll_9ge2:auto_generated" File: g:/altera/18.1/quartus/libraries/megafunctions/altpll.tdf Line: 897
+Info (12021): Found 1 design units, including 1 entities, in source file db/altpll_afe2.tdf
+    Info (12023): Found entity 1: altpll_afe2 File: G:/fpga/Quartus Projects/GPU/db/altpll_afe2.tdf Line: 25
+Info (12128): Elaborating entity "altpll_afe2" for hierarchy "altpll0:inst17|altpll:altpll_component|altpll_afe2:auto_generated" File: g:/altera/18.1/quartus/libraries/megafunctions/altpll.tdf Line: 897
 Info (12128): Elaborating entity "vid_osd_generator" for hierarchy "vid_osd_generator:inst16"
 Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(20): object "dly8_disp_x" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/vid_osd_generator.v Line: 20
 Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(21): object "dly4_disp_y" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/vid_osd_generator.v Line: 21
@@ -1136,7 +1426,7 @@ Info (12133): Instantiated megafunction "vid_osd_generator:inst16|multiport_gpu_
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_b" = "BYPASS"
     Info (12134): Parameter "indata_reg_b" = "CLOCK1"
-    Info (12134): Parameter "intended_device_family" = "Cyclone II"
+    Info (12134): Parameter "intended_device_family" = "Cyclone IV"
     Info (12134): Parameter "lpm_type" = "altsyncram"
     Info (12134): Parameter "numwords_a" = "16384"
     Info (12134): Parameter "numwords_b" = "16384"
@@ -1172,8 +1462,92 @@ Info (12128): Elaborating entity "sync_generator" for hierarchy "sync_generator:
 Warning (10230): Verilog HDL assignment warning at sync_gen.v(50): truncated value with size 32 to match size of target (4) File: G:/fpga/Quartus Projects/GPU/sync_gen.v Line: 50
 Warning (10230): Verilog HDL assignment warning at sync_gen.v(57): truncated value with size 32 to match size of target (10) File: G:/fpga/Quartus Projects/GPU/sync_gen.v Line: 57
 Warning (10230): Verilog HDL assignment warning at sync_gen.v(58): truncated value with size 32 to match size of target (10) File: G:/fpga/Quartus Projects/GPU/sync_gen.v Line: 58
+Info (12128): Elaborating entity "rs232_debugger" for hierarchy "rs232_debugger:inst11"
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(20): truncated value with size 32 to match size of target (20) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 20
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(47): truncated value with size 32 to match size of target (20) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 47
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(56): truncated value with size 32 to match size of target (20) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 56
+Info (12128): Elaborating entity "rs232_io" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 34
+Info (12128): Elaborating entity "serial_rx" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 95
+Warning (10036): Verilog HDL or VHDL warning at rs232_DEBUGGER.v(154): object "full" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 154
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(202): truncated value with size 32 to match size of target (16) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 202
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(203): truncated value with size 32 to match size of target (5) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 203
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(238): truncated value with size 32 to match size of target (16) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 238
+Info (12128): Elaborating entity "scfifo" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 172
+Info (12130): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 172
+Info (12133): Instantiated megafunction "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" with the following parameter: File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 172
+    Info (12134): Parameter "add_ram_output_register" = "ON"
+    Info (12134): Parameter "intended_device_family" = "Cyclone IV"
+    Info (12134): Parameter "lpm_numwords" = "16"
+    Info (12134): Parameter "lpm_showahead" = "OFF"
+    Info (12134): Parameter "lpm_type" = "scfifo"
+    Info (12134): Parameter "lpm_width" = "8"
+    Info (12134): Parameter "overflow_checking" = "ON"
+    Info (12134): Parameter "underflow_checking" = "ON"
+    Info (12134): Parameter "use_eab" = "OFF"
+Info (12128): Elaborating entity "a_fffifo" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo" File: g:/altera/18.1/quartus/libraries/megafunctions/scfifo.tdf Line: 278
+Info (12131): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo", which is child of megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: g:/altera/18.1/quartus/libraries/megafunctions/scfifo.tdf Line: 278
+Info (12128): Elaborating entity "lpm_ff" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[15]" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf Line: 101
+Info (12131): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_ff:last_data_node[15]", which is child of megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf Line: 101
+Info (12128): Elaborating entity "lpm_mux" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_mux:last_row_data_out_mux" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf Line: 102
+Info (12131): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_mux:last_row_data_out_mux", which is child of megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf Line: 102
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_6tc.tdf
+    Info (12023): Found entity 1: mux_6tc File: G:/fpga/Quartus Projects/GPU/db/mux_6tc.tdf Line: 22
+Info (12128): Elaborating entity "mux_6tc" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_mux:last_row_data_out_mux|mux_6tc:auto_generated" File: g:/altera/18.1/quartus/libraries/megafunctions/lpm_mux.tdf Line: 86
+Info (12128): Elaborating entity "lpm_counter" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_counter:rd_ptr" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf Line: 104
+Info (12131): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_counter:rd_ptr", which is child of megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf Line: 104
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_3bf.tdf
+    Info (12023): Found entity 1: cntr_3bf File: G:/fpga/Quartus Projects/GPU/db/cntr_3bf.tdf Line: 25
+Info (12128): Elaborating entity "cntr_3bf" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|lpm_counter:rd_ptr|cntr_3bf:auto_generated" File: g:/altera/18.1/quartus/libraries/megafunctions/lpm_counter.tdf Line: 258
+Info (12128): Elaborating entity "a_fefifo" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf Line: 111
+Info (12131): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state", which is child of megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fffifo.tdf Line: 111
+Info (12128): Elaborating entity "lpm_compare" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state|lpm_compare:is_almost_empty_compare" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fefifo.tdf Line: 76
+Info (12131): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state|lpm_compare:is_almost_empty_compare", which is child of megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fefifo.tdf Line: 76
+Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_9fg.tdf
+    Info (12023): Found entity 1: cmpr_9fg File: G:/fpga/Quartus Projects/GPU/db/cmpr_9fg.tdf Line: 22
+Info (12128): Elaborating entity "cmpr_9fg" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state|lpm_compare:is_almost_empty_compare|cmpr_9fg:auto_generated" File: g:/altera/18.1/quartus/libraries/megafunctions/lpm_compare.tdf Line: 280
+Info (12128): Elaborating entity "lpm_compare" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state|lpm_compare:is_almost_full_compare" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fefifo.tdf Line: 81
+Info (12131): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component|a_fffifo:subfifo|a_fefifo:fifo_state|lpm_compare:is_almost_full_compare", which is child of megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_rx:rxd_comp|scfifo:scfifo_component" File: g:/altera/18.1/quartus/libraries/megafunctions/a_fefifo.tdf Line: 81
+Info (12128): Elaborating entity "serial_tx" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 108
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(322): truncated value with size 32 to match size of target (16) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 322
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(330): truncated value with size 32 to match size of target (5) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 330
+Warning (10230): Verilog HDL assignment warning at rs232_DEBUGGER.v(363): truncated value with size 32 to match size of target (16) File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 363
+Info (12128): Elaborating entity "scfifo" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 303
+Info (12130): Elaborated megafunction instantiation "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component" File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 303
+Info (12133): Instantiated megafunction "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component" with the following parameter: File: G:/fpga/Quartus Projects/GPU/rs232_DEBUGGER.v Line: 303
+    Info (12134): Parameter "add_ram_output_register" = "ON"
+    Info (12134): Parameter "intended_device_family" = "Cyclone II"
+    Info (12134): Parameter "lpm_numwords" = "512"
+    Info (12134): Parameter "lpm_showahead" = "OFF"
+    Info (12134): Parameter "lpm_type" = "scfifo"
+    Info (12134): Parameter "lpm_width" = "8"
+    Info (12134): Parameter "overflow_checking" = "ON"
+    Info (12134): Parameter "underflow_checking" = "ON"
+    Info (12134): Parameter "use_eab" = "ON"
+Info (12021): Found 1 design units, including 1 entities, in source file db/scfifo_5b31.tdf
+    Info (12023): Found entity 1: scfifo_5b31 File: G:/fpga/Quartus Projects/GPU/db/scfifo_5b31.tdf Line: 24
+Info (12128): Elaborating entity "scfifo_5b31" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated" File: g:/altera/18.1/quartus/libraries/megafunctions/scfifo.tdf Line: 299
+Info (12021): Found 1 design units, including 1 entities, in source file db/a_dpfifo_o231.tdf
+    Info (12023): Found entity 1: a_dpfifo_o231 File: G:/fpga/Quartus Projects/GPU/db/a_dpfifo_o231.tdf Line: 32
+Info (12128): Elaborating entity "a_dpfifo_o231" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo" File: G:/fpga/Quartus Projects/GPU/db/scfifo_5b31.tdf Line: 36
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_vah1.tdf
+    Info (12023): Found entity 1: altsyncram_vah1 File: G:/fpga/Quartus Projects/GPU/db/altsyncram_vah1.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_vah1" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|altsyncram_vah1:FIFOram" File: G:/fpga/Quartus Projects/GPU/db/a_dpfifo_o231.tdf Line: 44
+Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_ms8.tdf
+    Info (12023): Found entity 1: cmpr_ms8 File: G:/fpga/Quartus Projects/GPU/db/cmpr_ms8.tdf Line: 22
+Info (12128): Elaborating entity "cmpr_ms8" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|cmpr_ms8:almost_full_comparer" File: G:/fpga/Quartus Projects/GPU/db/a_dpfifo_o231.tdf Line: 52
+Info (12128): Elaborating entity "cmpr_ms8" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|cmpr_ms8:two_comparison" File: G:/fpga/Quartus Projects/GPU/db/a_dpfifo_o231.tdf Line: 53
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_1ab.tdf
+    Info (12023): Found entity 1: cntr_1ab File: G:/fpga/Quartus Projects/GPU/db/cntr_1ab.tdf Line: 25
+Info (12128): Elaborating entity "cntr_1ab" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|cntr_1ab:rd_ptr_msb" File: G:/fpga/Quartus Projects/GPU/db/a_dpfifo_o231.tdf Line: 54
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_ea7.tdf
+    Info (12023): Found entity 1: cntr_ea7 File: G:/fpga/Quartus Projects/GPU/db/cntr_ea7.tdf Line: 25
+Info (12128): Elaborating entity "cntr_ea7" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|cntr_ea7:usedw_counter" File: G:/fpga/Quartus Projects/GPU/db/a_dpfifo_o231.tdf Line: 55
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_2ab.tdf
+    Info (12023): Found entity 1: cntr_2ab File: G:/fpga/Quartus Projects/GPU/db/cntr_2ab.tdf Line: 25
+Info (12128): Elaborating entity "cntr_2ab" for hierarchy "rs232_debugger:inst11|rs232_io:rs232_com|serial_tx:txd_comp|scfifo:scfifo_component|scfifo_5b31:auto_generated|a_dpfifo_o231:dpfifo|cntr_2ab:wr_ptr" File: G:/fpga/Quartus Projects/GPU/db/a_dpfifo_o231.tdf Line: 56
 Info (13014): Ignored 1 buffer(s)
     Info (13018): Ignored 1 EXPANDER buffer(s)
+Info (286030): Timing-Driven Synthesis is running
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following RAM node(s):
         Warning (14320): Synthesized away node "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_ckb2:auto_generated|ram_block1a8" File: G:/fpga/Quartus Projects/GPU/db/altsyncram_ckb2.tdf Line: 384
@@ -1187,33 +1561,37 @@ Warning (14284): Synthesized away the following node(s):
 Info (19000): Inferred 1 megafunctions from design logic
     Info (276034): Inferred altshift_taps megafunction from the following design logic: "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|data_pipe_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
-        Info (286033): Parameter TAP_DISTANCE set to 6
+        Info (286033): Parameter TAP_DISTANCE set to 4
         Info (286033): Parameter WIDTH set to 8
 Info (12130): Elaborated megafunction instantiation "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0"
 Info (12133): Instantiated megafunction "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
-    Info (12134): Parameter "TAP_DISTANCE" = "6"
+    Info (12134): Parameter "TAP_DISTANCE" = "4"
     Info (12134): Parameter "WIDTH" = "8"
-Info (12021): Found 1 design units, including 1 entities, in source file db/shift_taps_05m.tdf
-    Info (12023): Found entity 1: shift_taps_05m File: G:/fpga/Quartus Projects/GPU/db/shift_taps_05m.tdf Line: 26
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_6b81.tdf
-    Info (12023): Found entity 1: altsyncram_6b81 File: G:/fpga/Quartus Projects/GPU/db/altsyncram_6b81.tdf Line: 27
-Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_7pf.tdf
-    Info (12023): Found entity 1: cntr_7pf File: G:/fpga/Quartus Projects/GPU/db/cntr_7pf.tdf Line: 25
-Info (286030): Timing-Driven Synthesis is running
+Info (12021): Found 1 design units, including 1 entities, in source file db/shift_taps_u4m.tdf
+    Info (12023): Found entity 1: shift_taps_u4m File: G:/fpga/Quartus Projects/GPU/db/shift_taps_u4m.tdf Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_0b81.tdf
+    Info (12023): Found entity 1: altsyncram_0b81 File: G:/fpga/Quartus Projects/GPU/db/altsyncram_0b81.tdf Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_4pf.tdf
+    Info (12023): Found entity 1: cntr_4pf File: G:/fpga/Quartus Projects/GPU/db/cntr_4pf.tdf Line: 25
+Warning (12241): 3 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "r[1]" is stuck at GND
+    Warning (13410): Pin "r[0]" is stuck at GND
+Info (17049): 6 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Warning (15899): PLL "altpll0:inst17|altpll:altpll_component|altpll_9ge2:auto_generated|pll1" has parameters clk1_multiply_by and clk1_divide_by specified but port CLK[1] is not connected File: G:/fpga/Quartus Projects/GPU/db/altpll_9ge2.tdf Line: 27
-Info (21057): Implemented 253 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 15 output pins
-    Info (21061): Implemented 219 logic cells
-    Info (21064): Implemented 16 RAM segments
+Warning (15899): PLL "altpll0:inst17|altpll:altpll_component|altpll_afe2:auto_generated|pll1" has parameters clk1_multiply_by and clk1_divide_by specified but port CLK[1] is not connected File: G:/fpga/Quartus Projects/GPU/db/altpll_afe2.tdf Line: 27
+Info (21057): Implemented 734 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 22 output pins
+    Info (21061): Implemented 684 logic cells
+    Info (21064): Implemented 24 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 21 warnings
-    Info: Peak virtual memory: 4796 megabytes
-    Info: Processing ended: Wed Nov 13 18:37:14 2019
-    Info: Elapsed time: 00:00:20
-    Info: Total CPU time (on all processors): 00:00:41
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 37 warnings
+    Info: Peak virtual memory: 4820 megabytes
+    Info: Processing ended: Fri Nov 15 18:12:06 2019
+    Info: Elapsed time: 00:00:25
+    Info: Total CPU time (on all processors): 00:00:43
 
 
