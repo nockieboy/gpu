@@ -1,5 +1,0 @@
-PLL_Name	altpll0:inst17|altpll:altpll_component|altpll_qha2:auto_generated|pll1
-PLLJITTER	32
-PLLSPEmax	84
-PLLSPEmin	-53
-
