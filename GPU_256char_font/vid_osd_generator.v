@@ -1,32 +1,21 @@
-module vid_osd_generator (
-	input clk,
-	input [3:0] pc_ena,
-	input hde_in,
-	input vde_in,
-	input hs_in,
-	input vs_in,
-	
-	output reg osd_ena_out,
-	output [2:0] osd_image,
-	output reg hde_out,
-	output reg vde_out,
-	output reg hs_out,
-	output reg vs_out,
-	
-	// host connections
-	input wire host_clk,
-	input wire host_wr_ena,
-	input wire [19:0] host_addr,
-	input wire [7:0] host_wr_data,
-	
-	output wire [7:0] host_rd_data
-);
+module vid_osd_generator ( clk, pc_ena, hde_in, vde_in, hs_in, vs_in, osd_ena_out, osd_image, hde_out, vde_out, hs_out, vs_out,
+			host_clk, host_wr_ena, host_addr, host_wr_data, host_rd_data );
 
 // To write contents into the display and font memories, the wr_addr[15:0] selects the address
 // the wr_data[7:0] contains a byte which will be written
 // the wren_disp is the write enable for the ascii text ram.  Only the wr_addr[8:0] are used as the character display is 32x16.
 // the wren_font is the write enable for the font memory.  Only 2 bits are used of the wr_data[1:0] and wr_addr[12:0] are used.
 // tie these ports to GND for now disabling them
+
+input clk;
+input [3:0] pc_ena;
+input hde_in, vde_in, hs_in, vs_in;
+
+output 	osd_ena_out;
+reg    	osd_ena_out;
+output 	osd_image;
+output 	hde_out, vde_out, hs_out, vs_out;
+reg 		hde_out, vde_out, hs_out, vs_out;
 
 reg  [9:0] disp_x,dly1_disp_x,dly2_disp_x,dly3_disp_x,dly4_disp_x,dly5_disp_x,dly6_disp_x,dly7_disp_x,dly8_disp_x;
 reg  [8:0] disp_y,dly1_disp_y,dly2_disp_y,dly3_disp_y,dly4_disp_y;
@@ -36,17 +25,22 @@ reg  [7:0] dly1_letter, dly2_letter, dly3_letter, dly4_letter;
 
 reg  [9:0] hde_pipe, vde_pipe, hs_pipe, vs_pipe;
 
-parameter PIPE_DELAY =  6;   // This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
-parameter MEM_ADDR_BITS = 20;
-parameter MEM_WORDS = 2 ** MEM_ADDR_BITS;
+input wire         host_clk;
+input wire         host_wr_ena;
+input wire  [19:0] host_addr;
+input wire  [7:0]  host_wr_data;
+output wire [7:0]  host_rd_data;
+
+parameter   PIPE_DELAY =  6;   // This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
+parameter   FONT_8x16  =  0;   // 0 = 8 pixel tall font, 1 = 16 pixel tall font.
 
 wire [12:0] font_pos;
-wire [8:0] disp_pos;
-wire [2:0] osd_image;
+wire [10:0]  disp_pos;
+wire         osd_image;
 wire [19:0] read_text_adr;
 wire [19:0] read_font_adr;
-wire [7:0] letter;
-wire [7:0] char_line;
+wire [7:0]  letter;
+wire [7:0]  char_line;
 
 
 // ****************************************************************************************************************************
@@ -57,8 +51,8 @@ multiport_gpu_ram gpu_RAM(
 	.clk(clk),
 	.pc_ena_in(pc_ena[3:0]),
 	
-	.addr_in_0(read_text_adr[MEM_ADDR_BITS - 1:0]),
-	.addr_in_1(read_font_adr[MEM_ADDR_BITS - 1:0]),
+	.addr_in_0(read_text_adr[19:0]),
+	.addr_in_1(read_font_adr[19:0]),
 	.addr_in_2(20'b0),
 	.addr_in_3(20'b0),
 	.addr_in_4(20'b0),
@@ -91,43 +85,38 @@ multiport_gpu_ram gpu_RAM(
 	
 	.clk_b(host_clk),			// Host (Z80) clock input
 	.write_ena_b(host_wr_ena),	// Host (Z80) clock enable
-	.addr_host_in(host_addr[MEM_ADDR_BITS - 1:0]),
-   .data_host_in(host_wr_data[7:0]),
+	.addr_host_in(host_addr[19:0]),
+    .data_host_in(host_wr_data[7:0]),
 	.data_host_out(host_rd_data[7:0])
 
 );
-defparam gpu_RAM.MEM_ADDR_BITS,
-			gpu_RAM.MEM_WORDS,
-			gpu_RAM.ADDR_SIZE = 14,	// pass ADDR_SIZE into the gpu_RAM instance
+defparam gpu_RAM.ADDR_SIZE = 14,	// pass ADDR_SIZE into the gpu_RAM instance
          gpu_RAM.PIXEL_PIPE = 3;    // set the length of the pixel pipe to offset multi-read port sequencing
 
 //  The disp_x is the X coordinate counter.  It runs from 0 to 512 and stops there
 //  The disp_y is the Y coordinate counter.  It runs from 0 to 256 and stops there
 
 // Get the character at the current x, y position
-assign disp_pos[4:0]  = disp_x[8:4] ;  // The disp_pos[4:0] is the lower address for the 32 characters for the ascii text.
-assign disp_pos[8:5]  = disp_y[7:4] ;  // the disp_pos[8:5] is the upper address for the 16 lines of text
+assign disp_pos[5:0]  = disp_x[8:3] ;  // The disp_pos[5:0] is the lower address for the 64 characters for the ascii text.
+assign disp_pos[10:6] = disp_y[7+FONT_8x16:3+FONT_8x16] ;  // the disp_pos[10:6] is the upper address for the 32 lines of text
 
 //  The result from the ascii memory component 'altsyncram_component_osd_mem'  is called letter[7:0]
 //  Since disp_pos[8:0] has entered the read address, it takes 2 pixel clock cycles for the resulting letter[7:0] to come out.
 
 //  Now, font_pos[12:0] is the read address for the memory block containing the character specified in letter[]
 
-assign font_pos[9:3]    = letter[6:0] ;       // Select the upper font address with the 7 bit letter, note the atari font has only 128 characters.
-assign font_pos[2:0]	= dly3_disp_y[3:1] ;  // select the font x coordinate with a 2 pixel clock DELAYED disp_x address.  [3:1] is used so that every 2 x lines are repeats
+assign font_pos[10+FONT_8x16:3+FONT_8x16]    = letter[7:0] ;       // Select the upper font address with the 7 bit letter, note the atari font has only 128 characters.
+assign font_pos[2+FONT_8x16:0]				= dly3_disp_y[2+FONT_8x16:0] ;  // select the font x coordinate with a 2 pixel clock DELAYED disp_x address.  [3:1] is used so that every 2 x lines are repeats
 
 //  The resulting 2-bit font image at x is assigned to the OSD[1:0] output
 //  Also, since there is an 8th bit in the ascii text memory, I use that as a third OSD output color bit
-assign osd_image[0] = 0;
-assign osd_image[1] = char_line[(~dly6_disp_x[3:1])];
-assign osd_image[2] = dly3_letter[7];  // Remember, it takes 2 pixel clocks for osd_img[1:0] data to be valid from read address letter[6:0]
+assign osd_image          = char_line[(~dly6_disp_x[2:0])];
 
-assign read_text_adr[8:0] = disp_pos[8:0];
-assign read_text_adr[9] =  1'b0;
-assign read_text_adr[MEM_ADDR_BITS - 1:10] = 10'h4;        // my mistake, I has 1bit instead of 10bits
+assign read_text_adr[10:0] = disp_pos[10:0];
+assign read_text_adr[19:11] = 9'h2;        // my mistake, I has 1bit instead of 10bits
 
-assign read_font_adr[9:0] = font_pos[9:0];
-assign read_font_adr[MEM_ADDR_BITS - 1:10] = 10'h2;        // my mistake, I has 1bit instead of 10bits
+assign read_font_adr[10+FONT_8x16:0] = font_pos[10+FONT_8x16:0];
+assign read_font_adr[19:11+FONT_8x16] = 0;        // my mistake, I has 1bit instead of 10bits
 
 always @ ( posedge clk ) begin
 

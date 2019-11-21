@@ -15,17 +15,15 @@ module sync_generator(
 	output reg hde,							// Horizontal Display Enable - high when in display area (valid drawing area)
 	output reg vde,							// Vertical Display Enable - high when in display area (valid drawing area)
 	output reg hsync,							// horizontal sync
-	output reg vsync							// vertical sync
+	output reg vsync,							// vertical sync
+	
+	output reg [15:0] frame_ctr
 	);
 
 	// default resolution if no parameters are passed
 	parameter H_RES = 640;					// horizontal display resolution
 	parameter V_RES = 480;					// vertical display resolution
 
-	// image offset parameters
-	parameter IMAGE_OFFSET_X = 16;
-	parameter IMAGE_OFFSET_Y = 16;
-	
 	// no-draw area definitions
 	// defined as parameters so you can edit these on Quartus' block diagram editor
 	parameter H_FRONT_PORCH = 16;
@@ -41,10 +39,10 @@ module sync_generator(
 	localparam SCANLINES	= V_RES + V_FRONT_PORCH + VSYNC_HEIGHT + V_BACK_PORCH;	// total scan lines (inc. vertical blanking area)
 	
 	// useful trigger points
-	localparam HS_STA = IMAGE_OFFSET_X + H_RES + H_FRONT_PORCH - 1;						// horizontal sync ON (the minus 1 is because hsync is a REG, and thus one clock behind)
-	localparam HS_END = IMAGE_OFFSET_X + H_RES + H_FRONT_PORCH + HSYNC_WIDTH - 1;	// horizontal sync OFF (the minus 1 is because hsync is a REG, and thus one clock behind)
-	localparam VS_STA = IMAGE_OFFSET_Y + V_RES + V_FRONT_PORCH;							// vertical sync ON
-	localparam VS_END = IMAGE_OFFSET_Y + V_RES + V_FRONT_PORCH + VSYNC_HEIGHT;		// vertical sync OFF
+	localparam HS_STA = H_RES + H_FRONT_PORCH - 1;						// horizontal sync ON (the minus 1 is because hsync is a REG, and thus one clock behind)
+	localparam HS_END = H_RES + H_FRONT_PORCH + HSYNC_WIDTH - 1;	// horizontal sync OFF (the minus 1 is because hsync is a REG, and thus one clock behind)
+	localparam VS_STA = V_RES + V_FRONT_PORCH;							// vertical sync ON
+	localparam VS_END = V_RES + V_FRONT_PORCH + VSYNC_HEIGHT;		// vertical sync OFF
 
 	reg [9:0] h_count;				// current pixel x position
 	reg [9:0] v_count;				// current line y position
@@ -65,6 +63,7 @@ else pc_ena <= pc_ena +1;
 			vsync   <= 1'b0;
 			vde     <= 1'b0;
 			hde     <= 1'b0;
+			frame_ctr <= 16'h0000;
 		end
 		else
 		begin
@@ -72,7 +71,7 @@ else pc_ena <= pc_ena +1;
 			begin
 
 				// Horizontal blanking area - set HDE LOW
-				if (h_count == IMAGE_OFFSET_X + H_RES - 1)
+				if (h_count == H_RES - 1)
 				begin
 					hde <= 1'b0;
 				end
@@ -104,6 +103,7 @@ else pc_ena <= pc_ena +1;
 					begin
 						v_count	<= 1'b0;
 						vde		<= 1'b1;		// Turn on vertical video data enable
+						frame_ctr <= frame_ctr + 1'b1; // Increment the frame counter
 					end
 					else
 					begin	// If v_count isn't being cleared, increment v_count

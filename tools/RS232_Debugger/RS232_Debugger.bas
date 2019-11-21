@@ -1,16 +1,21 @@
-' **************************************************
+' ***********************************************************************
+' *****
+' ***** RS232_Debugger PC - Bridge to - RS232_Debugger.v FPGA Verilog
+' *****
 ' ***** Designed to be compiled with FREEBASIC
 ' ***** https://www.freebasic.net/
 ' *****
-' ***** Written By Brian H. G.
-' **************************************************
+' ***** Written By Brian Guralnick. November 2019
+' ***********************************************************************
+
 const  MAX_MEM          = 16384
 const  COM_CACHE        = 1   : REM number of allowed sequential commands
 const  COM_PRE_TIMEOUT  = 2   : REM time in ms to wait for flush to take effect
 const  COM_POST_TIMEOUT = 20  : REM time in ms to wait for GPU to respond before considering an error
 const  COM_FLUSH        = 0   : REM 1 = send 272 null characters before every command  0 = high speed
 const  COM_WAIT         = 0   : REM 1 = wait and flush an characters in the PC's RDX before beginning to transmit
-const  COM_VERBOSE      = 0   : REM 1= print all com transaction debug information
+const  COM_VERBOSE      = 0   : REM 1= print all com transaction debug information, 2 = print mouse coordinates and keypresses
+const  SLEEP_TIME       = 1   : REM The amount of time to sleep in ms between screen refresh and COM access.  Use at least 1 for good multitasking
 
 const  TXT_BOX_x        = 20
 const  TXT_BOX_y        = 25
@@ -29,11 +34,15 @@ Declare Sub inc_cursor(xofs as byte, yofs as byte)
 Declare Sub put_undo()
 Declare Sub get_undo()
 Declare Sub do_commands()
+Declare Sub print_ports()
+Declare sub click_binary(xp as integer, yp as integer, eb as Ubyte)
+
 
 Declare Sub read_gpu(mbase as integer, msize as integer)
 Declare Sub write_gpu(mbase as integer, msize as integer)
 Declare Sub read_gpu_all(mbase as integer, msize as integer)
 Declare Sub write_gpu_all(mbase as integer, msize as integer)
+Declare Sub com_setport()
 
 Declare Sub save_file(fname as string, start as integer, size as integer)
 Declare Sub load_file(fname as string, start as integer, size as integer)
@@ -44,9 +53,11 @@ Declare Sub file_dialog( i as string, fn as string )
 Declare Sub edit16( i as integer )
 Declare Sub enter16( i as integer )
 Declare Sub box( i as integer )
+declare sub show_errors(i as integer)
 
 Declare Sub inputhex (i as string)
 Declare Sub inputdec (i as string)
+
 
 function phex24(byval i As Integer) As String
  dim as string d
@@ -68,8 +79,75 @@ function phex16(byval i As Integer) As String
  function = d
 end function
 
+function p099(byval i As Integer) As String
+ dim as string d
+ d = str(i)
+  if i<10 then d = " " + d
+ function = d
+end function
 
-dim Shared as string   ink, stemp, cmd_write, cmd_saddr, cmd_read, cmd_reset, cmd_null16,com_num
+function px99(byval i As Integer) As String
+ dim as string d
+ d = str(i)
+  if i<10 then d = "0" + d
+ function = d
+end function
+
+function p999(byval i As Integer) As String
+ dim as string d
+ d = str(i)
+  if i<100 then d = "0" + d
+  if i<10 then d = "0" + d
+ function = d
+end function
+
+function px999(byval i As Integer) As String
+ dim as string d
+ d = str(i)
+  if i<100 then d = " " + d
+  if i<10 then d = " " + d
+ function = d
+end function
+
+function p9999(byval i As Integer) As String
+ dim as string d
+ d = str(i)
+  if i<1000 then d = "0" + d
+  if i<100 then d = "0" + d
+  if i<10 then d = "0" + d
+ function = d
+end function
+
+function px9999(byval i As Integer) As String
+ dim as string d
+ d = str(i)
+  if i<1000 then d = " " + d
+  if i<100 then d = " " + d
+  if i<10 then d = " " + d
+ function = d
+end function
+
+function p99999(byval i As Integer) As String
+ dim as string d
+ d = str(i)
+  if i<10000 then d = "0" + d
+  if i<1000 then d = "0" + d
+  if i<100 then d = "0" + d
+  if i<10 then d = "0" + d
+ function = d
+end function
+
+function px99999(byval i As Integer) As String
+ dim as string d
+ d = str(i)
+  if i<10000 then d = " " + d
+  if i<1000 then d = " " + d
+  if i<100 then d = " " + d
+  if i<10 then d = " " + d
+ function = d
+end function
+
+dim Shared as string   ink, stemp, cmd_write, cmd_saddr, cmd_read, cmd_reset, cmd_null16, cmd_prefix, com_num, cmd_setp
 dim Shared as ubyte    ser_byte
 dim Shared as integer  gpu_addr, gpu_addr_now, ser_rxbuf, x, y, z, c, hp, undobase
 dim shared as integer  mx,my,mb,mw,mwl,mbl,mwd,mcx1,mcy1,mcz,mcx2,mcy2,mcx,mcy, edit_mode, edit_pos
@@ -78,23 +156,28 @@ Dim Shared read_buffer  (0 To MAX_MEM) As Ubyte
 Dim Shared undo_buffer  (0 To 256) As Ubyte
 Dim Shared verify_buffer  (0 To 256) As Ubyte
 Dim Shared write_buffer (0 To 256) As Ubyte
-Dim Shared phex8      (0 To 255) As string
+Dim Shared phex8        (0 To 255) As string
 Dim Shared asc_str      (0 To 255) As string
 Dim Shared bin_str      (0 To 255) As string
+Dim Shared in_port      (0 to 3)   As Ubyte
+Dim Shared out_port     (0 to 3)   As Ubyte
+
 dim Shared as integer   mstart,mstop,mpos
 
 Dim Shared com_buffer   (0 To 16) As Ubyte
-dim shared as integer   com_addr, com_bytepos, com_command, com_timer, com_txp, com_rxp
+dim shared as integer   com_addr, com_bytepos, com_command, com_timer, com_txp, com_rxp, com_sxp
 
 dim shared as string    d_filename
 dim shared as integer   d_membase, d_memsize
 
-ScreenRes 720,480,16,0,0
-cmd_null16 = chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
+ScreenRes 720,560,16,0,0
+cmd_null16 = chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
+cmd_prefix = chr(128) + chr(128) + chr(255) + chr(255) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
 cmd_write  = "Writ"     :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to write
 cmd_read   = "Read"     :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to read
+cmd_setp   = "SetP"     :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to read
 cmd_reset  = "ResetNow"
-cmd_reset  = cmd_null16 + cmd_null16 + cmd_null16 + cmd_reset + cmd_reset + cmd_reset: Rem this is the full reset sequence
+cmd_reset  = cmd_null16 + cmd_prefix + cmd_reset + cmd_reset: Rem this is the full reset sequence
 
 asc_str(0) = " 0 0 0 0"
 asc_str(1) = " 0 0 0 1"
@@ -136,10 +219,11 @@ next x
 
 
 ?:? "Enter Com# ";:input com_num
-'ink="COM"+com_num+":115200,N,8,1,CS,DS,BIN,DT"   :REM With 50Mhz, use 433.
-ink="COM"+com_num+":921600,N,8,1,CS,DS,BIN,DT"  :REM With 50Mhz, or 54.
-'ink="COM"+com_num+":9600,N,8,1,CS,DS,BIN,DT"  :REM with 50Mhz, use 108.
+'ink="COM"+com_num+":115200,N,8,1,CS,DS,BIN,DT"
+ink="COM"+com_num+":921600,N,8,1,CS,DS,BIN,DT"
+'ink="COM"+com_num+":19200,N,8,1,CS,DS,BIN,DT"
 cls
+
 
 if com_num="" then color_rg(2,60,1):? "  Com disabled!  ";
 if com_num<>"" then
@@ -185,15 +269,22 @@ locate 52,1:
 ? "      [CTRL-z] To undo changes. Hit ENTER/RMB/ESC to exit editing memory.";
 
 
-locate 39,62:?"SHIFT-S Save GPU_quick_file1"
-locate 40,62:?"SHIFT-L Load GPU_quick_file1"
-locate 41,62:?"CTRL -S Save GPU_quick_file2"
-locate 42,62:?"CTRL -L Load GPU_quick_file2"
-locate 43,62:?"[l] Load Binary"
-locate 44,62:?"[s] Save Binary"
-locate 46,62:?"[m] Save Quartus .mif file"
+locate 39,60:?"SHIFT-S Save Debug_quick_file1"
+locate 40,60:?"SHIFT-L Load Debug_quick_file1"
+locate 41,60:?"CTRL -S Save Debug_quick_file2"
+locate 42,60:?"CTRL -L Load Debug_quick_file2"
+locate 43,60:?"[l] Load Binary"
+locate 44,60:?"[s] Save Binary"
+locate 46,60:?"[m] Save Quartus .mif file"
 
-locate 48,62:?"CTRL -R to RESET GPU"
+locate 48,60:?"CTRL -R to RESET GPU"
+
+
+for y=0 to 8
+color_rg(1,y+62,1 ):? ,,,"  ";
+color_rg(2,y+62,45):? ,,,"      ";
+next y
+
 
 color rgb(224,224,224),rgb(0,0,0)
 end sub
@@ -203,17 +294,18 @@ end sub
 sub do_commands()
 	if ink="" and edit_mode=0 then read_gpu(gpu_addr,256)
 	if ink="" and edit_mode=1 then write_gpu(gpu_addr,256)
+	if ink=""		  then com_setport()
 
-	if len(ink)<>0 then locate 60,32:? len(ink),asc(ink),asc(mid(ink,2,1)),,
+	if len(ink)<>0 and COM_VERBOSE=2 then locate 60,32:? len(ink),asc(ink),asc(mid(ink,2,1)),,
 
-	sleep 2,0:                           'allow system multitasking
+	if SLEEP_TIME<>0 then sleep SLEEP_TIME,0:  REM helps allow allow system multitasking
 
 if edit_mode = 0 then
         z= asc(mid(ink,1,1))
-	if ink="L" then load_file("GPU_quick_file1.bin",0,MAX_MEM)
-	if ink="S" then save_file("GPU_quick_file1.bin",0,MAX_MEM)
-	if z  = 12 then load_file("GPU_quick_file2.bin",0,MAX_MEM)
-	if z  = 19 then save_file("GPU_quick_file2.bin",0,MAX_MEM)
+	if ink="L" then load_file("Debug_quick_file1.bin",0,MAX_MEM)
+	if ink="S" then save_file("Debug_quick_file1.bin",0,MAX_MEM)
+	if z  = 12 then load_file("Debug_quick_file2.bin",0,MAX_MEM)
+	if z  = 19 then save_file("Debug_quick_file2.bin",0,MAX_MEM)
 
 	if ink="l" then put_undo():load_dialog()
 	if ink="s" then            save_dialog()
@@ -269,20 +361,43 @@ if mb=-1  then mbl=mb
 if mb<>-1 and mbl=-1 then mwl=mw:mbl=0
 if mb<>-1 then mwd=mwl-mw:mwl=mw
 if mb=-1  then mwd=0
-rem:locate 49,1:? mx,my,mw,mb
-if edit_mode=0 then gpu_addr=gpu_addr + (mwd*16) : rem mouse wheel scroll
+if COM_VERBOSE=2 then locate 49,1:? mx,my,mw,mb;
+if edit_mode=0 and my<400 then gpu_addr=gpu_addr + (mwd*16) : rem mouse wheel scroll
 
 	if gpu_addr<0 then gpu_addr=0
 	if gpu_addr>(MAX_MEM-256) then gpu_addr=(MAX_MEM-256)
 
 
-if edit_mode=1 then read_buffer(mcz) = read_buffer(mcz) + mwd : REM Mouse wheel edit
+if edit_mode=1 and my<400 then read_buffer(mcz) = read_buffer(mcz) + mwd : REM Mouse wheel edit
 
 	print_hex()
 	print_mouse()
+	print_ports()
+
+end sub
+
+
+sub print_ports()
+
+for y=0 to 3
+dim as string d
+
+d = " In" + str(y) + "[7:0]=8'b" + bin_str(in_port(y)) + "=8'h" + phex8(in_port(y)) + "=8'd" + p999(in_port(y)) + ". "
+color_rg(1,y*2+63,1):? d;
+
+d = " Out" + str(y) + "[7:0]=8'b" + bin_str(out_port(y)) + "=8'h" + phex8(out_port(y)) + "=8'd" + p999(out_port(y)) + ". "
+color_rg(2,y*2+63,45):? d;
+
+click_binary(60, y*2+63, y)
+
+
+next y
+
 
 
 end sub
+
+
 
 
 Sub edit16( i as integer )
@@ -502,19 +617,19 @@ if com_num<>"" then
 
 y=45:if COM_VERBOSE=1 then for x=0 to 3:color_rg(0,x+y,1):? "                ",,:next x
 com_rxp=com_rxp+1:com_rxp=com_rxp and 8191
-color_rg(1,y,1):?" Com read #" ;com_rxp;" Address";mbase;" with";msize;" bytes.         ";
+color_rg(1,y,1):?" Com read #" ;px9999(com_rxp);" Address ";px99999(mbase);" with";px9999(msize);" bytes.   ";
 
 ?#1,cmd_null16;
 if COM_FLUSH=1 then
-	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Flushing GPU. ",
-	for x=0 to 32
+	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Flushing GPU.  ";
+	for x=0 to 16
 	?#1,cmd_null16;
 	next x
 endif
 
 com_timer = timer*100 + COM_PRE_TIMEOUT
 if COM_WAIT=1 and COM_PRE_TIMEOUT>0 then
-	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Waiting for flush. ",
+	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Waiting for flush.  ";
 	while (loc(1)>0 or com_timer>timer*100 )
 		if loc(1)>0 then get #1,,com_buffer(0),1:com_timer = timer*100 + COM_PRE_TIMEOUT
 	wend
@@ -524,12 +639,12 @@ end if
 stemp = chr(int(mbase/65536) and 255) + chr(int(mbase/256) and 255) + chr(mbase and 255) + chr(msize-1)
 stemp = cmd_read + stemp
 
-if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending read command. ",
-?#1,stemp;stemp;stemp;
+if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending read command.  ";
+?#1,cmd_prefix;stemp;stemp;
 
 
 com_timer = timer*100 + COM_POST_TIMEOUT
-if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for response. ",
+if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for response.  ";
 	while (loc(1)<msize and com_timer>timer*100 )
 	sleep 1,0
 	wend
@@ -537,14 +652,14 @@ if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for response. ",
 
 z=loc(1)
 if z<msize and z<257 then
-color_rg(2,y+5,1):?" Error, read # ";com_rxp;" received";loc(1);" bytes of";msize;".       ";
+color_rg(2,y+5,1):?" Error, read #";px9999(com_rxp);" received";px9999(loc(1));" bytes of";px9999(msize);".  ";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
 end if
 
 if z>msize then
-color_rg(2,y+5,1):?" Error, read # ";com_rxp;" received";loc(1);" bytes of ";msize;".       ";
+color_rg(2,y+5,1):?" Error, read #";px9999(com_rxp);" received";px9999(loc(1));" bytes of ";px9999(msize);".  ";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
@@ -552,7 +667,7 @@ end if
 
 if z=msize then
 	get #1,,read_buffer(mbase),z
-	if COM_VERBOSE=1 then color_rg(1,y+4,1):?" Read #";com_rxp;" was successfull.   ";
+	if COM_VERBOSE=1 then color_rg(1,y+4,1):?" Read #";px9999(com_rxp);" was successfull.  ";
 endif
 
 
@@ -574,19 +689,19 @@ if com_num<>"" then
 
 y=45:if COM_VERBOSE=1 then for x=0 to 3:color_rg(0,x+y,1):? "                ",,:next x
 com_txp=com_txp+1:com_txp=com_txp and 8191
-color_rg(2,y,1):?" Com write #" ;com_txp;" Address";mbase;" with";msize;" bytes.         ";
+color_rg(2,y,1):?" Com write #" ;px9999(com_txp);" Address ";px99999(mbase);" with";px9999(msize);" bytes.  ";
 
 ?#1,cmd_null16;
 if COM_FLUSH=1 then
-	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Flushing GPU.",
-	for x=0 to 32
+	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Flushing GPU.  ";
+	for x=0 to 16
 	?#1,cmd_null16;
 	next x
 endif
 
 com_timer = timer*100 + COM_PRE_TIMEOUT
 if COM_WAIT=1 and COM_PRE_TIMEOUT>0 then
-	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Waiting for flush.",
+	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Waiting for flush.  ";
 	while (loc(1)>0 or com_timer>timer*100 )
 		if loc(1)>0 then get #1,,com_buffer(0),1:com_timer = timer*100 + COM_PRE_TIMEOUT
 	wend
@@ -596,29 +711,29 @@ end if
 stemp = chr(int(mbase/65536) and 255) + chr(int(mbase/256) and 255) + chr(mbase and 255) + chr(msize-1)
 stemp = cmd_write + stemp
 
-if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending write command.",
-?#1,stemp;stemp;stemp;
+if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending write command.  ";
+?#1,cmd_prefix;stemp;stemp;
 
-if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending write data.",
+if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending write data.  ";
 put #1,,read_buffer(mbase),msize
 
 
 com_timer = timer*100 + COM_POST_TIMEOUT
-if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for write data echo.",
+if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for write data echo.  ";
 	while (loc(1)<msize and com_timer>timer*100 )
 	wend
 
 
 z=loc(1)
 if z<msize and z<257 then
-color_rg(2,y+5,1):?" Error, write #";com_txp;" verify received";loc(1);" bytes of";msize;".       ";
+color_rg(2,y+5,1):?" Error, write #";px9999(com_txp);" verify received ";px9999(loc(1));" bytes of";px9999(msize);".  ";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
 end if
 
 if z>msize then
-color_rg(2,y+5,1):?" Error, write #";com_txp;" verify received";loc(1);" bytes of";msize;".       ";
+color_rg(2,y+5,1):?" Error, write #";px9999(com_txp);" verify received ";px9999(loc(1));" bytes of ";px9999(msize);".  ";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
@@ -632,17 +747,98 @@ if z=msize then
 	if read_buffer(mbase+x)<>verify_buffer(x) then c=0
 	next x
 
-	if COM_VERBOSE=1 then if c=1 then color_rg(1,y+4,1):?" Write #";com_txp;" was confirmed.             ";
-	if c=0 then                       color_rg(2,y+5,1):?" Write #";com_txp;" verify has data errors.    ";
+	if COM_VERBOSE=1 then if c=1 then color_rg(1,y+4,1):?" Write #";px9999(com_txp);" was confirmed.  ";
+	if c=0 then color_rg(2,y+5,1):?" Write #";px9999(com_txp);" verify has data errors. ";:if COM_VERBOSE=1 then show_errors(mbase)
 
+
+end if
+end if
+end sub
+
+sub show_errors(q as integer)
+for y=0 to 15
+for x=0 to 15
+c=1
+if read_buffer(q+x+y*16)<>verify_buffer(x+y*16) then c=2
+color_rg(c, y*2+5+1, x*3+7 ):? " ";phex8(verify_buffer(x+y*16));" ";
+next x
+next y
+end sub
+
+
+
+
+' *****************************************************
+' ******************* handle RS232 communications
+' *****************************************************
+' ******************* Set Out0,1,2,3, Read In0,1,2,3
+' *****************************************************
+
+Sub com_setport()
+dim as integer msize
+msize = 4
+
+if com_num<>"" then
+
+y=61:if COM_VERBOSE=1 then for x=0 to 3:color_rg(0,x+y,1):? "                ",:next x
+com_sxp=com_sxp+1:com_sxp=com_sxp and 8191
+if COM_VERBOSE=1 then color_rg(1,y,1):?" Com Setport #" ;px9999(com_sxp);". ";
+
+?#1,cmd_null16;
+if COM_FLUSH=1 then
+	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Flushing COM. ";
+	for x=0 to 16
+	?#1,cmd_null16;
+	next x
 endif
 
+com_timer = timer*100 + COM_PRE_TIMEOUT
+if COM_WAIT=1 and COM_PRE_TIMEOUT>0 then
+	if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Waiting for flush. ";
+	while (loc(1)>0 or com_timer>timer*100 )
+		if loc(1)>0 then get #1,,com_buffer(0),1:com_timer = timer*100 + COM_PRE_TIMEOUT
+	wend
+end if
+
+
+stemp = chr(out_port(0)) + chr(out_port(1)) + chr(out_port(2)) + chr(out_port(3))
+stemp = cmd_setp + stemp
+
+if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending Set Port Command. ";
+?#1,cmd_prefix;stemp;stemp;
+
+
+com_timer = timer*100 + COM_POST_TIMEOUT
+if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for response. ";
+	while (loc(1)<msize and com_timer>timer*100 )
+	sleep 1,0
+	wend
+
+
+z=loc(1)
+if z<msize and z<257 then
+color_rg(2,y+5,1):?" Error, read #";px9999(com_sxp);". Received ";px9999(loc(1));" bytes of ";px9999(msize);".";
+	While ( loc(1)>0 )
+	get #1,,com_buffer(0),1
+	wend
+end if
+
+if z>msize then
+color_rg(2,y+5,1):?" Error, read #";px9999(com_sxp);". Received";px9999(loc(1));" bytes of ";px9999(msize);".";
+	While ( loc(1)>0 )
+	get #1,,com_buffer(0),1
+	wend
+end if
+
+if z=msize then
+	get #1,,in_port(0),z
+	if COM_VERBOSE=1 then color_rg(1,y+4,1):?" Setport #";px9999(com_sxp);" was successfull.";
+endif
 
 
 
 end if
 end sub
-
 
 
 ' *****************************************************
@@ -845,6 +1041,28 @@ end if : rem edit mode 1
 
 end sub
 
+
+
+sub click_binary(xp as integer, yp as integer, eb as Ubyte)
+
+		m2cx = (mx+4)/8
+		m2cy = (my+4)/8
+		'locate m2cy,m2cx:? m2cx;m2cy;
+
+if m2cy=yp and m2cx+2 > xp and m2cx-16 < xp then
+color_rg(7,yp,xp-1):? bin_str(out_port(eb));
+out_port(eb)=out_port(eb) + mwd
+	if m2cx = (xp + 0 ) and mbl=0 and mb=1 then out_port(eb)=out_port(eb) xor 128
+	if m2cx = (xp + 2 ) and mbl=0 and mb=1 then out_port(eb)=out_port(eb) xor 64
+	if m2cx = (xp + 4 ) and mbl=0 and mb=1 then out_port(eb)=out_port(eb) xor 32
+	if m2cx = (xp + 6 ) and mbl=0 and mb=1 then out_port(eb)=out_port(eb) xor 16
+	if m2cx = (xp + 8 ) and mbl=0 and mb=1 then out_port(eb)=out_port(eb) xor 8
+	if m2cx = (xp + 10) and mbl=0 and mb=1 then out_port(eb)=out_port(eb) xor 4
+	if m2cx = (xp + 12) and mbl=0 and mb=1 then out_port(eb)=out_port(eb) xor 2
+	if m2cx = (xp + 14) and mbl=0 and mb=1 then out_port(eb)=out_port(eb) xor 1
+	end if
+
+end sub
 
 
 
