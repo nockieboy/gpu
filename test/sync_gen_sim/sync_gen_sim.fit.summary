@@ -1,0 +1,16 @@
+Fitter Status : Successful - Mon Nov 25 23:51:23 2019
+Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
+Revision Name : sync_gen_sim
+Top-level Entity Name : sync_gen_sim
+Family : Cyclone III
+Device : EP3C5F256C8
+Timing Models : Final
+Total logic elements : 51 / 5,136 ( < 1 % )
+    Total combinational functions : 51 / 5,136 ( < 1 % )
+    Dedicated logic registers : 28 / 5,136 ( < 1 % )
+Total registers : 28
+Total pins : 10 / 183 ( 5 % )
+Total virtual pins : 0
+Total memory bits : 0 / 423,936 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 46 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

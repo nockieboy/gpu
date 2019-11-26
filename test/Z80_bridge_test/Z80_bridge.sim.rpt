@@ -1,0 +1,474 @@
+Simulator report for Z80_bridge
+Mon Nov 25 23:30:33 2019
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. Coverage Summary
+  6. Complete 1/0-Value Coverage
+  7. Missing 1-Value Coverage
+  8. Missing 0-Value Coverage
+  9. Simulator INI Usage
+ 10. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 10.0 us      ;
+; Simulation Netlist Size     ; 217 nodes    ;
+; Simulation Coverage         ;      30.80 % ;
+; Total Number of Transitions ; 2693         ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone III  ;
++-----------------------------+--------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                          ;
++--------------------------------------------------------------------------------------------+----------------+---------------+
+; Option                                                                                     ; Setting        ; Default Value ;
++--------------------------------------------------------------------------------------------+----------------+---------------+
+; Simulation mode                                                                            ; Functional     ; Timing        ;
+; Start time                                                                                 ; 0 ns           ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF           ;               ;
+; Vector input source                                                                        ; Z80_bridge.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On             ; On            ;
+; Check outputs                                                                              ; Off            ; Off           ;
+; Report simulation coverage                                                                 ; On             ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On             ; On            ;
+; Display missing 1-value coverage report                                                    ; On             ; On            ;
+; Display missing 0-value coverage report                                                    ; On             ; On            ;
+; Detect setup and hold time violations                                                      ; Off            ; Off           ;
+; Detect glitches                                                                            ; Off            ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off            ; Off           ;
+; Generate Signal Activity File                                                              ; Off            ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off            ; Off           ;
+; Group bus channels in simulation results                                                   ; Off            ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On             ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE     ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off            ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off            ;               ;
+; Perform Glitch Filtering in Timing Simulation                                              ; Auto           ; Auto          ;
+; Interconnect Delay Model Type                                                              ; Transport      ; Transport     ;
+; Cell Delay Model Type                                                                      ; Transport      ; Transport     ;
++--------------------------------------------------------------------------------------------+----------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      30.80 % ;
+; Total nodes checked                                 ; 217          ;
+; Total output ports checked                          ; 224          ;
+; Total output ports with complete 1/0-value coverage ; 69           ;
+; Total output ports with no 1/0-value coverage       ; 87           ;
+; Total output ports with no 1-value coverage         ; 93           ;
+; Total output ports with no 0-value coverage         ; 149          ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++--------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                        ;
++------------------------------------------------+------------------------------------------------+------------------+
+; Node Name                                      ; Output Port Name                               ; Output Port Type ;
++------------------------------------------------+------------------------------------------------+------------------+
+; |Block1|gp_wr_ena                              ; |Block1|gp_wr_ena                              ; pin_out          ;
+; |Block1|g_clk                                  ; |Block1|g_clk                                  ; out              ;
+; |Block1|z_clk                                  ; |Block1|z_clk                                  ; out              ;
+; |Block1|z_MREQn                                ; |Block1|z_MREQn                                ; out              ;
+; |Block1|z_WRn                                  ; |Block1|z_WRn                                  ; out              ;
+; |Block1|z_RDn                                  ; |Block1|z_RDn                                  ; out              ;
+; |Block1|g_rd_rdy                               ; |Block1|g_rd_rdy                               ; pin_out          ;
+; |Block1|inst24                                 ; |Block1|inst24                                 ; regout           ;
+; |Block1|inst23                                 ; |Block1|inst23                                 ; regout           ;
+; |Block1|inst22                                 ; |Block1|inst22                                 ; regout           ;
+; |Block1|inst21                                 ; |Block1|inst21                                 ; regout           ;
+; |Block1|g_rd_req                               ; |Block1|g_rd_req                               ; pin_out          ;
+; |Block1|g_rdata[6]                             ; |Block1|g_rdata[6]                             ; out              ;
+; |Block1|g_rdata[4]                             ; |Block1|g_rdata[4]                             ; out              ;
+; |Block1|g_rdata[2]                             ; |Block1|g_rdata[2]                             ; out              ;
+; |Block1|g_rdata[0]                             ; |Block1|g_rdata[0]                             ; out              ;
+; |Block1|z_addr[20]                             ; |Block1|z_addr[20]                             ; out              ;
+; |Block1|z_addr[19]                             ; |Block1|z_addr[19]                             ; out              ;
+; |Block1|z_addr[7]                              ; |Block1|z_addr[7]                              ; out              ;
+; |Block1|z_addr[5]                              ; |Block1|z_addr[5]                              ; out              ;
+; |Block1|z_addr[4]                              ; |Block1|z_addr[4]                              ; out              ;
+; |Block1|z_addr[3]                              ; |Block1|z_addr[3]                              ; out              ;
+; |Block1|z_addr[1]                              ; |Block1|z_addr[1]                              ; out              ;
+; |Block1|z_addr[0]                              ; |Block1|z_addr[0]                              ; out              ;
+; |Block1|z_data[7]                              ; |Block1|z_data[7]~result                       ; pin_out          ;
+; |Block1|z_data[5]                              ; |Block1|z_data[5]~result                       ; pin_out          ;
+; |Block1|z_data[4]                              ; |Block1|z_data[4]~result                       ; pin_out          ;
+; |Block1|z_data[3]                              ; |Block1|z_data[3]~result                       ; pin_out          ;
+; |Block1|z_data[1]                              ; |Block1|z_data[1]~result                       ; pin_out          ;
+; |Block1|z_data[0]                              ; |Block1|z_data[0]~result                       ; pin_out          ;
+; |Block1|z_data~0                               ; |Block1|z_data~0                               ; out0             ;
+; |Block1|z_data~2                               ; |Block1|z_data~2                               ; out0             ;
+; |Block1|z_data~3                               ; |Block1|z_data~3                               ; out0             ;
+; |Block1|z_data~4                               ; |Block1|z_data~4                               ; out0             ;
+; |Block1|z_data~6                               ; |Block1|z_data~6                               ; out0             ;
+; |Block1|z_data~7                               ; |Block1|z_data~7                               ; out0             ;
+; |Block1|z_rd_ena                               ; |Block1|z_rd_ena                               ; pin_out          ;
+; |Block1|z_245_oe                               ; |Block1|z_245_oe                               ; pin_out          ;
+; |Block1|Z80_bridge:inst|Z80_mreq               ; |Block1|Z80_bridge:inst|Z80_mreq               ; out0             ;
+; |Block1|Z80_bridge:inst|Z80_write              ; |Block1|Z80_bridge:inst|Z80_write              ; out0             ;
+; |Block1|Z80_bridge:inst|Write_GPU_RAM          ; |Block1|Z80_bridge:inst|Write_GPU_RAM          ; out0             ;
+; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN~0   ; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN~0   ; out0             ;
+; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN~1   ; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN~1   ; out0             ;
+; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN~2   ; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN~2   ; out0             ;
+; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN~3   ; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN~3   ; out0             ;
+; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN     ; |Block1|Z80_bridge:inst|Read_GPU_RAM_BEGIN     ; out0             ;
+; |Block1|Z80_bridge:inst|Read_GPU_RAM_END       ; |Block1|Z80_bridge:inst|Read_GPU_RAM_END       ; out0             ;
+; |Block1|Z80_bridge:inst|Z80_rData_ena~0        ; |Block1|Z80_bridge:inst|Z80_rData_ena~0        ; out              ;
+; |Block1|Z80_bridge:inst|Z80_245_oe~0           ; |Block1|Z80_bridge:inst|Z80_245_oe~0           ; out              ;
+; |Block1|Z80_bridge:inst|gpu_wr_ena~0           ; |Block1|Z80_bridge:inst|gpu_wr_ena~0           ; out              ;
+; |Block1|Z80_bridge:inst|gpu_wr_ena~1           ; |Block1|Z80_bridge:inst|gpu_wr_ena~1           ; out              ;
+; |Block1|Z80_bridge:inst|Z80_245_oe~1           ; |Block1|Z80_bridge:inst|Z80_245_oe~1           ; out              ;
+; |Block1|Z80_bridge:inst|Z80_245_oe~2           ; |Block1|Z80_bridge:inst|Z80_245_oe~2           ; out              ;
+; |Block1|Z80_bridge:inst|Z80_rData_ena~1        ; |Block1|Z80_bridge:inst|Z80_rData_ena~1        ; out              ;
+; |Block1|Z80_bridge:inst|Z80_245_oe~3           ; |Block1|Z80_bridge:inst|Z80_245_oe~3           ; out              ;
+; |Block1|Z80_bridge:inst|Z80_rData_ena~2        ; |Block1|Z80_bridge:inst|Z80_rData_ena~2        ; out              ;
+; |Block1|Z80_bridge:inst|last_Z80_WR            ; |Block1|Z80_bridge:inst|last_Z80_WR            ; regout           ;
+; |Block1|Z80_bridge:inst|last_Z80_RD            ; |Block1|Z80_bridge:inst|last_Z80_RD            ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_clk_delay          ; |Block1|Z80_bridge:inst|Z80_clk_delay          ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_rd_req             ; |Block1|Z80_bridge:inst|gpu_rd_req             ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wr_ena             ; |Block1|Z80_bridge:inst|gpu_wr_ena             ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_245_oe             ; |Block1|Z80_bridge:inst|Z80_245_oe             ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData_ena          ; |Block1|Z80_bridge:inst|Z80_rData_ena          ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_write_sequencer[0] ; |Block1|Z80_bridge:inst|Z80_write_sequencer[0] ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_write_sequencer[1] ; |Block1|Z80_bridge:inst|Z80_write_sequencer[1] ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_write_sequencer[2] ; |Block1|Z80_bridge:inst|Z80_write_sequencer[2] ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_write_sequencer[3] ; |Block1|Z80_bridge:inst|Z80_write_sequencer[3] ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_write_sequencer[4] ; |Block1|Z80_bridge:inst|Z80_write_sequencer[4] ; regout           ;
+; |Block1|Z80_bridge:inst|Equal0~0               ; |Block1|Z80_bridge:inst|Equal0~0               ; out0             ;
++------------------------------------------------+------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++------------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                       ;
++--------------------------------------+--------------------------------------+------------------+
+; Node Name                            ; Output Port Name                     ; Output Port Type ;
++--------------------------------------+--------------------------------------+------------------+
+; |Block1|z_M1n                        ; |Block1|z_M1n                        ; out              ;
+; |Block1|g_rdata[7]                   ; |Block1|g_rdata[7]                   ; out              ;
+; |Block1|g_rdata[5]                   ; |Block1|g_rdata[5]                   ; out              ;
+; |Block1|g_rdata[3]                   ; |Block1|g_rdata[3]                   ; out              ;
+; |Block1|g_rdata[1]                   ; |Block1|g_rdata[1]                   ; out              ;
+; |Block1|z_addr[21]                   ; |Block1|z_addr[21]                   ; out              ;
+; |Block1|z_addr[18]                   ; |Block1|z_addr[18]                   ; out              ;
+; |Block1|z_addr[17]                   ; |Block1|z_addr[17]                   ; out              ;
+; |Block1|z_addr[16]                   ; |Block1|z_addr[16]                   ; out              ;
+; |Block1|z_addr[15]                   ; |Block1|z_addr[15]                   ; out              ;
+; |Block1|z_addr[14]                   ; |Block1|z_addr[14]                   ; out              ;
+; |Block1|z_addr[13]                   ; |Block1|z_addr[13]                   ; out              ;
+; |Block1|z_addr[12]                   ; |Block1|z_addr[12]                   ; out              ;
+; |Block1|z_addr[11]                   ; |Block1|z_addr[11]                   ; out              ;
+; |Block1|z_addr[10]                   ; |Block1|z_addr[10]                   ; out              ;
+; |Block1|z_addr[9]                    ; |Block1|z_addr[9]                    ; out              ;
+; |Block1|z_addr[8]                    ; |Block1|z_addr[8]                    ; out              ;
+; |Block1|z_addr[6]                    ; |Block1|z_addr[6]                    ; out              ;
+; |Block1|z_addr[2]                    ; |Block1|z_addr[2]                    ; out              ;
+; |Block1|z_data[4]                    ; |Block1|z_data[4]                    ; out              ;
+; |Block1|z_data[0]                    ; |Block1|z_data[0]                    ; out              ;
+; |Block1|g_adr[19]                    ; |Block1|g_adr[19]                    ; pin_out          ;
+; |Block1|g_adr[18]                    ; |Block1|g_adr[18]                    ; pin_out          ;
+; |Block1|g_adr[17]                    ; |Block1|g_adr[17]                    ; pin_out          ;
+; |Block1|g_adr[16]                    ; |Block1|g_adr[16]                    ; pin_out          ;
+; |Block1|g_adr[15]                    ; |Block1|g_adr[15]                    ; pin_out          ;
+; |Block1|g_adr[14]                    ; |Block1|g_adr[14]                    ; pin_out          ;
+; |Block1|g_adr[13]                    ; |Block1|g_adr[13]                    ; pin_out          ;
+; |Block1|g_adr[12]                    ; |Block1|g_adr[12]                    ; pin_out          ;
+; |Block1|g_adr[11]                    ; |Block1|g_adr[11]                    ; pin_out          ;
+; |Block1|g_adr[10]                    ; |Block1|g_adr[10]                    ; pin_out          ;
+; |Block1|g_adr[9]                     ; |Block1|g_adr[9]                     ; pin_out          ;
+; |Block1|g_adr[8]                     ; |Block1|g_adr[8]                     ; pin_out          ;
+; |Block1|g_adr[6]                     ; |Block1|g_adr[6]                     ; pin_out          ;
+; |Block1|g_adr[2]                     ; |Block1|g_adr[2]                     ; pin_out          ;
+; |Block1|g_wdata[4]                   ; |Block1|g_wdata[4]                   ; pin_out          ;
+; |Block1|g_wdata[0]                   ; |Block1|g_wdata[0]                   ; pin_out          ;
+; |Block1|inst20[7]                    ; |Block1|inst20[7]                    ; out              ;
+; |Block1|inst20[5]                    ; |Block1|inst20[5]                    ; out              ;
+; |Block1|inst20[3]                    ; |Block1|inst20[3]                    ; out              ;
+; |Block1|inst20[1]                    ; |Block1|inst20[1]                    ; out              ;
+; |Block1|z_rdata[7]                   ; |Block1|z_rdata[7]                   ; pin_out          ;
+; |Block1|z_rdata[5]                   ; |Block1|z_rdata[5]                   ; pin_out          ;
+; |Block1|z_rdata[3]                   ; |Block1|z_rdata[3]                   ; pin_out          ;
+; |Block1|z_rdata[1]                   ; |Block1|z_rdata[1]                   ; pin_out          ;
+; |Block1|Z80_bridge:inst|Z80_rData[3] ; |Block1|Z80_bridge:inst|Z80_rData[3] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr~0   ; |Block1|Z80_bridge:inst|gpu_addr~0   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~1   ; |Block1|Z80_bridge:inst|gpu_addr~1   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~2   ; |Block1|Z80_bridge:inst|gpu_addr~2   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~3   ; |Block1|Z80_bridge:inst|gpu_addr~3   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~4   ; |Block1|Z80_bridge:inst|gpu_addr~4   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~5   ; |Block1|Z80_bridge:inst|gpu_addr~5   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~6   ; |Block1|Z80_bridge:inst|gpu_addr~6   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~7   ; |Block1|Z80_bridge:inst|gpu_addr~7   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~8   ; |Block1|Z80_bridge:inst|gpu_addr~8   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~9   ; |Block1|Z80_bridge:inst|gpu_addr~9   ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~10  ; |Block1|Z80_bridge:inst|gpu_addr~10  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~11  ; |Block1|Z80_bridge:inst|gpu_addr~11  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~13  ; |Block1|Z80_bridge:inst|gpu_addr~13  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~17  ; |Block1|Z80_bridge:inst|gpu_addr~17  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~20  ; |Block1|Z80_bridge:inst|gpu_addr~20  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~21  ; |Block1|Z80_bridge:inst|gpu_addr~21  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~22  ; |Block1|Z80_bridge:inst|gpu_addr~22  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~23  ; |Block1|Z80_bridge:inst|gpu_addr~23  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~24  ; |Block1|Z80_bridge:inst|gpu_addr~24  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~25  ; |Block1|Z80_bridge:inst|gpu_addr~25  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~26  ; |Block1|Z80_bridge:inst|gpu_addr~26  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~27  ; |Block1|Z80_bridge:inst|gpu_addr~27  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~28  ; |Block1|Z80_bridge:inst|gpu_addr~28  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~29  ; |Block1|Z80_bridge:inst|gpu_addr~29  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~30  ; |Block1|Z80_bridge:inst|gpu_addr~30  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~31  ; |Block1|Z80_bridge:inst|gpu_addr~31  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~33  ; |Block1|Z80_bridge:inst|gpu_addr~33  ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~37  ; |Block1|Z80_bridge:inst|gpu_addr~37  ; out              ;
+; |Block1|Z80_bridge:inst|Z80_rData[1] ; |Block1|Z80_bridge:inst|Z80_rData[1] ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData[5] ; |Block1|Z80_bridge:inst|Z80_rData[5] ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData[7] ; |Block1|Z80_bridge:inst|Z80_rData[7] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[0] ; |Block1|Z80_bridge:inst|gpu_wdata[0] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[4] ; |Block1|Z80_bridge:inst|gpu_wdata[4] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[2]  ; |Block1|Z80_bridge:inst|gpu_addr[2]  ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[6]  ; |Block1|Z80_bridge:inst|gpu_addr[6]  ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[8]  ; |Block1|Z80_bridge:inst|gpu_addr[8]  ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[9]  ; |Block1|Z80_bridge:inst|gpu_addr[9]  ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[10] ; |Block1|Z80_bridge:inst|gpu_addr[10] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[11] ; |Block1|Z80_bridge:inst|gpu_addr[11] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[12] ; |Block1|Z80_bridge:inst|gpu_addr[12] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[13] ; |Block1|Z80_bridge:inst|gpu_addr[13] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[14] ; |Block1|Z80_bridge:inst|gpu_addr[14] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[15] ; |Block1|Z80_bridge:inst|gpu_addr[15] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[16] ; |Block1|Z80_bridge:inst|gpu_addr[16] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[17] ; |Block1|Z80_bridge:inst|gpu_addr[17] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[18] ; |Block1|Z80_bridge:inst|gpu_addr[18] ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[19] ; |Block1|Z80_bridge:inst|gpu_addr[19] ; regout           ;
++--------------------------------------+--------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++----------------------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                                 ;
++-------------------------------------------+-------------------------------------------+------------------+
+; Node Name                                 ; Output Port Name                          ; Output Port Type ;
++-------------------------------------------+-------------------------------------------+------------------+
+; |Block1|z_M1n                             ; |Block1|z_M1n                             ; out              ;
+; |Block1|g_rdata[7]                        ; |Block1|g_rdata[7]                        ; out              ;
+; |Block1|g_rdata[5]                        ; |Block1|g_rdata[5]                        ; out              ;
+; |Block1|g_rdata[3]                        ; |Block1|g_rdata[3]                        ; out              ;
+; |Block1|g_rdata[1]                        ; |Block1|g_rdata[1]                        ; out              ;
+; |Block1|z_addr[21]                        ; |Block1|z_addr[21]                        ; out              ;
+; |Block1|z_addr[18]                        ; |Block1|z_addr[18]                        ; out              ;
+; |Block1|z_addr[17]                        ; |Block1|z_addr[17]                        ; out              ;
+; |Block1|z_addr[16]                        ; |Block1|z_addr[16]                        ; out              ;
+; |Block1|z_addr[15]                        ; |Block1|z_addr[15]                        ; out              ;
+; |Block1|z_addr[14]                        ; |Block1|z_addr[14]                        ; out              ;
+; |Block1|z_addr[13]                        ; |Block1|z_addr[13]                        ; out              ;
+; |Block1|z_addr[12]                        ; |Block1|z_addr[12]                        ; out              ;
+; |Block1|z_addr[11]                        ; |Block1|z_addr[11]                        ; out              ;
+; |Block1|z_addr[10]                        ; |Block1|z_addr[10]                        ; out              ;
+; |Block1|z_addr[9]                         ; |Block1|z_addr[9]                         ; out              ;
+; |Block1|z_addr[8]                         ; |Block1|z_addr[8]                         ; out              ;
+; |Block1|z_addr[6]                         ; |Block1|z_addr[6]                         ; out              ;
+; |Block1|z_addr[2]                         ; |Block1|z_addr[2]                         ; out              ;
+; |Block1|z_data[7]                         ; |Block1|z_data[7]                         ; out              ;
+; |Block1|z_data[6]                         ; |Block1|z_data[6]                         ; out              ;
+; |Block1|z_data[6]                         ; |Block1|z_data[6]~result                  ; pin_out          ;
+; |Block1|z_data[5]                         ; |Block1|z_data[5]                         ; out              ;
+; |Block1|z_data[3]                         ; |Block1|z_data[3]                         ; out              ;
+; |Block1|z_data[2]                         ; |Block1|z_data[2]                         ; out              ;
+; |Block1|z_data[2]                         ; |Block1|z_data[2]~result                  ; pin_out          ;
+; |Block1|z_data[1]                         ; |Block1|z_data[1]                         ; out              ;
+; |Block1|z_data~1                          ; |Block1|z_data~1                          ; out0             ;
+; |Block1|z_data~5                          ; |Block1|z_data~5                          ; out0             ;
+; |Block1|z_245_dir                         ; |Block1|z_245_dir                         ; pin_out          ;
+; |Block1|g_adr[19]                         ; |Block1|g_adr[19]                         ; pin_out          ;
+; |Block1|g_adr[18]                         ; |Block1|g_adr[18]                         ; pin_out          ;
+; |Block1|g_adr[17]                         ; |Block1|g_adr[17]                         ; pin_out          ;
+; |Block1|g_adr[16]                         ; |Block1|g_adr[16]                         ; pin_out          ;
+; |Block1|g_adr[15]                         ; |Block1|g_adr[15]                         ; pin_out          ;
+; |Block1|g_adr[14]                         ; |Block1|g_adr[14]                         ; pin_out          ;
+; |Block1|g_adr[13]                         ; |Block1|g_adr[13]                         ; pin_out          ;
+; |Block1|g_adr[12]                         ; |Block1|g_adr[12]                         ; pin_out          ;
+; |Block1|g_adr[11]                         ; |Block1|g_adr[11]                         ; pin_out          ;
+; |Block1|g_adr[10]                         ; |Block1|g_adr[10]                         ; pin_out          ;
+; |Block1|g_adr[9]                          ; |Block1|g_adr[9]                          ; pin_out          ;
+; |Block1|g_adr[8]                          ; |Block1|g_adr[8]                          ; pin_out          ;
+; |Block1|g_adr[7]                          ; |Block1|g_adr[7]                          ; pin_out          ;
+; |Block1|g_adr[6]                          ; |Block1|g_adr[6]                          ; pin_out          ;
+; |Block1|g_adr[5]                          ; |Block1|g_adr[5]                          ; pin_out          ;
+; |Block1|g_adr[4]                          ; |Block1|g_adr[4]                          ; pin_out          ;
+; |Block1|g_adr[3]                          ; |Block1|g_adr[3]                          ; pin_out          ;
+; |Block1|g_adr[2]                          ; |Block1|g_adr[2]                          ; pin_out          ;
+; |Block1|g_adr[1]                          ; |Block1|g_adr[1]                          ; pin_out          ;
+; |Block1|g_adr[0]                          ; |Block1|g_adr[0]                          ; pin_out          ;
+; |Block1|g_wdata[7]                        ; |Block1|g_wdata[7]                        ; pin_out          ;
+; |Block1|g_wdata[6]                        ; |Block1|g_wdata[6]                        ; pin_out          ;
+; |Block1|g_wdata[5]                        ; |Block1|g_wdata[5]                        ; pin_out          ;
+; |Block1|g_wdata[4]                        ; |Block1|g_wdata[4]                        ; pin_out          ;
+; |Block1|g_wdata[3]                        ; |Block1|g_wdata[3]                        ; pin_out          ;
+; |Block1|g_wdata[2]                        ; |Block1|g_wdata[2]                        ; pin_out          ;
+; |Block1|g_wdata[1]                        ; |Block1|g_wdata[1]                        ; pin_out          ;
+; |Block1|g_wdata[0]                        ; |Block1|g_wdata[0]                        ; pin_out          ;
+; |Block1|inst20[6]                         ; |Block1|inst20[6]                         ; out              ;
+; |Block1|inst20[4]                         ; |Block1|inst20[4]                         ; out              ;
+; |Block1|inst20[2]                         ; |Block1|inst20[2]                         ; out              ;
+; |Block1|inst20[0]                         ; |Block1|inst20[0]                         ; out              ;
+; |Block1|z_rdata[7]                        ; |Block1|z_rdata[7]                        ; pin_out          ;
+; |Block1|z_rdata[6]                        ; |Block1|z_rdata[6]                        ; pin_out          ;
+; |Block1|z_rdata[5]                        ; |Block1|z_rdata[5]                        ; pin_out          ;
+; |Block1|z_rdata[4]                        ; |Block1|z_rdata[4]                        ; pin_out          ;
+; |Block1|z_rdata[3]                        ; |Block1|z_rdata[3]                        ; pin_out          ;
+; |Block1|z_rdata[2]                        ; |Block1|z_rdata[2]                        ; pin_out          ;
+; |Block1|z_rdata[1]                        ; |Block1|z_rdata[1]                        ; pin_out          ;
+; |Block1|z_rdata[0]                        ; |Block1|z_rdata[0]                        ; pin_out          ;
+; |Block1|Z80_bridge:inst|Z80_rData[3]      ; |Block1|Z80_bridge:inst|Z80_rData[3]      ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData[2]      ; |Block1|Z80_bridge:inst|Z80_rData[2]      ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_245data_dir~0 ; |Block1|Z80_bridge:inst|Z80_245data_dir~0 ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~0        ; |Block1|Z80_bridge:inst|gpu_addr~0        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~1        ; |Block1|Z80_bridge:inst|gpu_addr~1        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~2        ; |Block1|Z80_bridge:inst|gpu_addr~2        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~3        ; |Block1|Z80_bridge:inst|gpu_addr~3        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~4        ; |Block1|Z80_bridge:inst|gpu_addr~4        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~5        ; |Block1|Z80_bridge:inst|gpu_addr~5        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~6        ; |Block1|Z80_bridge:inst|gpu_addr~6        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~7        ; |Block1|Z80_bridge:inst|gpu_addr~7        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~8        ; |Block1|Z80_bridge:inst|gpu_addr~8        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~9        ; |Block1|Z80_bridge:inst|gpu_addr~9        ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~10       ; |Block1|Z80_bridge:inst|gpu_addr~10       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~11       ; |Block1|Z80_bridge:inst|gpu_addr~11       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~12       ; |Block1|Z80_bridge:inst|gpu_addr~12       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~13       ; |Block1|Z80_bridge:inst|gpu_addr~13       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~14       ; |Block1|Z80_bridge:inst|gpu_addr~14       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~15       ; |Block1|Z80_bridge:inst|gpu_addr~15       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~16       ; |Block1|Z80_bridge:inst|gpu_addr~16       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~17       ; |Block1|Z80_bridge:inst|gpu_addr~17       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~18       ; |Block1|Z80_bridge:inst|gpu_addr~18       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~19       ; |Block1|Z80_bridge:inst|gpu_addr~19       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~20       ; |Block1|Z80_bridge:inst|gpu_addr~20       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~21       ; |Block1|Z80_bridge:inst|gpu_addr~21       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~22       ; |Block1|Z80_bridge:inst|gpu_addr~22       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~23       ; |Block1|Z80_bridge:inst|gpu_addr~23       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~24       ; |Block1|Z80_bridge:inst|gpu_addr~24       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~25       ; |Block1|Z80_bridge:inst|gpu_addr~25       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~26       ; |Block1|Z80_bridge:inst|gpu_addr~26       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~27       ; |Block1|Z80_bridge:inst|gpu_addr~27       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~28       ; |Block1|Z80_bridge:inst|gpu_addr~28       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~29       ; |Block1|Z80_bridge:inst|gpu_addr~29       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~30       ; |Block1|Z80_bridge:inst|gpu_addr~30       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~31       ; |Block1|Z80_bridge:inst|gpu_addr~31       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~32       ; |Block1|Z80_bridge:inst|gpu_addr~32       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~33       ; |Block1|Z80_bridge:inst|gpu_addr~33       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~34       ; |Block1|Z80_bridge:inst|gpu_addr~34       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~35       ; |Block1|Z80_bridge:inst|gpu_addr~35       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~36       ; |Block1|Z80_bridge:inst|gpu_addr~36       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~37       ; |Block1|Z80_bridge:inst|gpu_addr~37       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~38       ; |Block1|Z80_bridge:inst|gpu_addr~38       ; out              ;
+; |Block1|Z80_bridge:inst|gpu_addr~39       ; |Block1|Z80_bridge:inst|gpu_addr~39       ; out              ;
+; |Block1|Z80_bridge:inst|Z80_245data_dir~1 ; |Block1|Z80_bridge:inst|Z80_245data_dir~1 ; out              ;
+; |Block1|Z80_bridge:inst|Z80_rData[1]      ; |Block1|Z80_bridge:inst|Z80_rData[1]      ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData[0]      ; |Block1|Z80_bridge:inst|Z80_rData[0]      ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData[4]      ; |Block1|Z80_bridge:inst|Z80_rData[4]      ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData[5]      ; |Block1|Z80_bridge:inst|Z80_rData[5]      ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData[6]      ; |Block1|Z80_bridge:inst|Z80_rData[6]      ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_rData[7]      ; |Block1|Z80_bridge:inst|Z80_rData[7]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[0]      ; |Block1|Z80_bridge:inst|gpu_wdata[0]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[1]      ; |Block1|Z80_bridge:inst|gpu_wdata[1]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[2]      ; |Block1|Z80_bridge:inst|gpu_wdata[2]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[3]      ; |Block1|Z80_bridge:inst|gpu_wdata[3]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[4]      ; |Block1|Z80_bridge:inst|gpu_wdata[4]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[5]      ; |Block1|Z80_bridge:inst|gpu_wdata[5]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[6]      ; |Block1|Z80_bridge:inst|gpu_wdata[6]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_wdata[7]      ; |Block1|Z80_bridge:inst|gpu_wdata[7]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[0]       ; |Block1|Z80_bridge:inst|gpu_addr[0]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[1]       ; |Block1|Z80_bridge:inst|gpu_addr[1]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[2]       ; |Block1|Z80_bridge:inst|gpu_addr[2]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[3]       ; |Block1|Z80_bridge:inst|gpu_addr[3]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[4]       ; |Block1|Z80_bridge:inst|gpu_addr[4]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[5]       ; |Block1|Z80_bridge:inst|gpu_addr[5]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[6]       ; |Block1|Z80_bridge:inst|gpu_addr[6]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[7]       ; |Block1|Z80_bridge:inst|gpu_addr[7]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[8]       ; |Block1|Z80_bridge:inst|gpu_addr[8]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[9]       ; |Block1|Z80_bridge:inst|gpu_addr[9]       ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[10]      ; |Block1|Z80_bridge:inst|gpu_addr[10]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[11]      ; |Block1|Z80_bridge:inst|gpu_addr[11]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[12]      ; |Block1|Z80_bridge:inst|gpu_addr[12]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[13]      ; |Block1|Z80_bridge:inst|gpu_addr[13]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[14]      ; |Block1|Z80_bridge:inst|gpu_addr[14]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[15]      ; |Block1|Z80_bridge:inst|gpu_addr[15]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[16]      ; |Block1|Z80_bridge:inst|gpu_addr[16]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[17]      ; |Block1|Z80_bridge:inst|gpu_addr[17]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[18]      ; |Block1|Z80_bridge:inst|gpu_addr[18]      ; regout           ;
+; |Block1|Z80_bridge:inst|gpu_addr[19]      ; |Block1|Z80_bridge:inst|gpu_addr[19]      ; regout           ;
+; |Block1|Z80_bridge:inst|Z80_245data_dir   ; |Block1|Z80_bridge:inst|Z80_245data_dir   ; regout           ;
++-------------------------------------------+-------------------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Mon Nov 25 23:30:33 2019
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off Z80_bridge -c Z80_bridge
+Info: Using vector source file "G:/fpga/Quartus Projects/GPU/test/Z80_bridge_test/Z80_bridge.vwf"
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      30.80 %
+Info: Number of transitions in simulation is 2693
+Info: Quartus II Simulator was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 149 megabytes
+    Info: Processing ended: Mon Nov 25 23:30:33 2019
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:01
+
+

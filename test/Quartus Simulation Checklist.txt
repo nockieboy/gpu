@@ -1,0 +1,11 @@
+Quartus II Simulation steps:
+
+1) Compile design
+2) Create New Vector Waveform
+3) Assign inputs and outputs using node finder (d/click in Name column)
+4) Set End Time (in Edit... menu)
+5) Draw truth table / assign values to input signals
+6) Assignments > Setting > Simulator Setting > Simulator Mode > Functional
+7) Processing > Generate Functional Simulation Netlist
+8) OK
+9) Start Simulation

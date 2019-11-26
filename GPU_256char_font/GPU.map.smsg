@@ -1,2 +1,2 @@
-Info (10281): Verilog HDL Declaration information at rs232_DEBUGGER.v(303): object "RX_PERIOD" differs only in case from object "rx_period" in the same scope File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/rs232_DEBUGGER.v Line: 303
-Info (10281): Verilog HDL Declaration information at rs232_DEBUGGER.v(304): object "TX_PERIOD" differs only in case from object "tx_period" in the same scope File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/rs232_DEBUGGER.v Line: 304
+Info (10281): Verilog HDL Declaration information at sync_rs232_uart.v(34): object "RX_PERIOD" differs only in case from object "rx_period" in the same scope File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/sync_rs232_uart.v Line: 34
+Info (10281): Verilog HDL Declaration information at sync_rs232_uart.v(35): object "TX_PERIOD" differs only in case from object "tx_period" in the same scope File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/sync_rs232_uart.v Line: 35

@@ -66,18 +66,6 @@ set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
 set_global_assignment -name TIMING_ANALYZER_DO_CCPP_REMOVAL ON
 set_global_assignment -name ALLOW_POWER_UP_DONT_CARE ON
 set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
-set_global_assignment -name BDF_FILE GPU.bdf
-set_global_assignment -name VERILOG_FILE vid_out_stencil.v
-set_global_assignment -name VERILOG_FILE sync_gen.v
-set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
-set_global_assignment -name VERILOG_FILE multiport_gpu_ram.v
-set_global_assignment -name VERILOG_FILE vid_osd_generator.v
-set_global_assignment -name VECTOR_WAVEFORM_FILE GPU_full_osd.vwf
-set_global_assignment -name SDC_FILE SDC1.sdc
-set_global_assignment -name QIP_FILE altpll0.qip
-set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
-set_global_assignment -name MIF_FILE gpu_16K_RAM2.mif
-set_global_assignment -name BDF_FILE color_sel.bdf
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name ENABLE_OCT_DONE OFF
 set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
@@ -106,4 +94,20 @@ set_location_assignment PIN_80 -to vs
 set_location_assignment PIN_83 -to hs
 set_location_assignment PIN_85 -to uart_txd
 set_location_assignment PIN_87 -to uart_rxd
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VERILOG_FILE ../host_handler.v
+set_global_assignment -name BDF_FILE GPU.bdf
+set_global_assignment -name VERILOG_FILE vid_out_stencil.v
+set_global_assignment -name VERILOG_FILE sync_gen.v
+set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
+set_global_assignment -name VERILOG_FILE multiport_gpu_ram.v
+set_global_assignment -name VERILOG_FILE vid_osd_generator.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE GPU_full_osd.vwf
+set_global_assignment -name SDC_FILE SDC1.sdc
+set_global_assignment -name QIP_FILE altpll0.qip
+set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
+set_global_assignment -name MIF_FILE gpu_16K_RAM2.mif
+set_global_assignment -name BDF_FILE color_sel.bdf
+set_global_assignment -name VERILOG_FILE ../Z80_bridge.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

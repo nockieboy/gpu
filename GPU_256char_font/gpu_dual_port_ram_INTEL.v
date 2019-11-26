@@ -93,7 +93,7 @@ reg [3:0] pc_ena_pipe;
 		altsyncram_component.width_byteena_a = 1,
 		altsyncram_component.width_byteena_b = 1,
 		altsyncram_component.wrcontrol_wraddress_reg_b = "CLOCK1",
-		altsyncram_component.init_file = "gpu_16K_RAM.mif";
+		altsyncram_component.init_file = "gpu_16K_VGA.mif";
 		
 // ****************************************************************************************************************************
 

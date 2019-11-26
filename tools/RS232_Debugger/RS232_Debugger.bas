@@ -8,8 +8,8 @@
 ' ***** Written By Brian Guralnick. November 2019
 ' ***********************************************************************
 
-const  MAX_MEM          = 16384
-const  COM_CACHE        = 1   : REM number of allowed sequential commands
+const  MAX_MEM          = 16384 '131072 '16384 '1048576
+const  COM_CACHE        = 2048: REM number of allowed sequential bytes to be seant and received FOR FTDI FT232 serial cables, use 2048.  1/2 their fifo size.
 const  COM_PRE_TIMEOUT  = 2   : REM time in ms to wait for flush to take effect
 const  COM_POST_TIMEOUT = 20  : REM time in ms to wait for GPU to respond before considering an error
 const  COM_FLUSH        = 0   : REM 1 = send 272 null characters before every command  0 = high speed
@@ -147,19 +147,18 @@ function px99999(byval i As Integer) As String
  function = d
 end function
 
-dim Shared as string   ink, stemp, cmd_write, cmd_saddr, cmd_read, cmd_reset, cmd_null16, cmd_prefix, com_num, cmd_setp
+dim Shared as string   ink, stemp, cmd_write, cmd_write_page, cmd_saddr, cmd_read, cmd_read_page, cmd_reset, cmd_null16, cmd_prefix, com_num, cmd_setp
 dim Shared as ubyte    ser_byte
 dim Shared as integer  gpu_addr, gpu_addr_now, ser_rxbuf, x, y, z, c, hp, undobase
 dim shared as integer  mx,my,mb,mw,mwl,mbl,mwd,mcx1,mcy1,mcz,mcx2,mcy2,mcx,mcy, edit_mode, edit_pos
 dim shared as integer  m2cx1,m2cy1,m2cz,m2cx2,m2cy2,m2cx,m2cy,edit_col
 Dim Shared read_buffer  (0 To MAX_MEM) As Ubyte
 Dim Shared undo_buffer  (0 To 256) As Ubyte
-Dim Shared verify_buffer  (0 To 256) As Ubyte
-Dim Shared write_buffer (0 To 256) As Ubyte
+Dim Shared verify_buffer  (0 To 65536) As Ubyte
 Dim Shared phex8        (0 To 255) As string
 Dim Shared asc_str      (0 To 255) As string
 Dim Shared bin_str      (0 To 255) As string
-Dim Shared in_port      (0 to 3)   As Ubyte
+Dim Shared in_port      (0 to 4)   As Ubyte
 Dim Shared out_port     (0 to 3)   As Ubyte
 
 dim Shared as integer   mstart,mstop,mpos
@@ -173,9 +172,11 @@ dim shared as integer   d_membase, d_memsize
 ScreenRes 720,560,16,0,0
 cmd_null16 = chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
 cmd_prefix = chr(128) + chr(128) + chr(255) + chr(255) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
-cmd_write  = "Writ"     :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to write
-cmd_read   = "Read"     :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to read
-cmd_setp   = "SetP"     :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to read
+cmd_write  = "Writ"      :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to write
+cmd_read   = "Read"      :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to read
+cmd_write_page  = "WriP" :rem The next 3 BYTEs defines the base address and the next byte defines the number of 256 bytes to write
+cmd_read_page   = "ReaP" :rem The next 3 BYTEs defines the base address and the next byte defines the number of 256 bytes to read
+cmd_setp   = "SetP"      :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to read
 cmd_reset  = "ResetNow"
 cmd_reset  = cmd_null16 + cmd_prefix + cmd_reset + cmd_reset: Rem this is the full reset sequence
 
@@ -311,6 +312,9 @@ if edit_mode = 0 then
 	if ink="s" then            save_dialog()
 	if ink="m" then            save_mif()
 
+	if ink="r" then            read_gpu_all(0,MAX_MEM)
+	if ink="w" then            write_gpu_all(0,MAX_MEM)
+
 
 	if asc(mid(ink,2,1))=71  then gpu_addr=0
 	if asc(mid(ink,2,1))=79  then gpu_addr=(MAX_MEM-256)
@@ -378,6 +382,7 @@ end sub
 
 
 sub print_ports()
+color_rg(1,1,1):? " RS232 Address Size = ";in_port(4);" = ";(2^in_port(4));" bytes.";
 
 for y=0 to 3
 dim as string d
@@ -598,16 +603,36 @@ end sub
 ' *****************************************************
 
 Sub read_gpu_all(mbase as integer, msize as integer)
-for mpos=mbase to msize-1 step 256
-read_gpu(mpos,256)
-next mpos
+
+	if msize > COM_CACHE then
+		for mpos=mbase to msize-1 step COM_CACHE
+		read_gpu(mpos,COM_CACHE)
+		next mpos
+		end if
+
+	if msize <= COM_CACHE then read_gpu(mpos,msize)
+
+	'	for mpos=mbase to msize-1 step 256
+	'	read_gpu(mpos,256)
+	'	next mpos
+
 end sub
 
-
 Sub write_gpu_all(mbase as integer, msize as integer)
-for mpos=mbase to msize-1 step 256
-write_gpu(mpos,256)
-next mpos
+
+	if msize > COM_CACHE then
+		for mpos=mbase to msize-1 step COM_CACHE
+		write_gpu(mpos,COM_CACHE)
+		next mpos
+		end if
+
+	if msize <= COM_CACHE then write_gpu(mpos,msize)
+
+
+	'	for mpos=mbase to msize-1 step 256
+	'	write_gpu(mpos,256)
+	'	next mpos
+
 end sub
 
 
@@ -636,8 +661,15 @@ if COM_WAIT=1 and COM_PRE_TIMEOUT>0 then
 end if
 
 
-stemp = chr(int(mbase/65536) and 255) + chr(int(mbase/256) and 255) + chr(mbase and 255) + chr(msize-1)
-stemp = cmd_read + stemp
+if msize < 256 then 
+		stemp = chr(int(mbase/65536) and 255) + chr(int(mbase/256) and 255) + chr(mbase and 255) + chr(msize-1)
+		stemp = cmd_read + stemp
+	end if
+if msize >255 then
+		stemp = chr(int(mbase/65536) and 255) + chr(int(mbase/256) and 255) + chr(mbase and 255) + chr(int(msize/256)-1)
+		stemp = cmd_read_page + stemp
+	end if
+
 
 if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending read command.  ";
 ?#1,cmd_prefix;stemp;stemp;
@@ -708,8 +740,15 @@ if COM_WAIT=1 and COM_PRE_TIMEOUT>0 then
 end if
 
 
-stemp = chr(int(mbase/65536) and 255) + chr(int(mbase/256) and 255) + chr(mbase and 255) + chr(msize-1)
-stemp = cmd_write + stemp
+if msize < 256 then 
+		stemp = chr(int(mbase/65536) and 255) + chr(int(mbase/256) and 255) + chr(mbase and 255) + chr(msize-1)
+		stemp = cmd_write + stemp
+	end if
+if msize >255 then
+		stemp = chr(int(mbase/65536) and 255) + chr(int(mbase/256) and 255) + chr(mbase and 255) + chr(int(msize/256)-1)
+		stemp = cmd_write_page + stemp
+	end if
+
 
 if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending write command.  ";
 ?#1,cmd_prefix;stemp;stemp;
@@ -776,7 +815,7 @@ end sub
 
 Sub com_setport()
 dim as integer msize
-msize = 4
+msize = 5
 
 if com_num<>"" then
 
