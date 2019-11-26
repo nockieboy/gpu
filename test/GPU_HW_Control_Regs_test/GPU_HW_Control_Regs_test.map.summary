@@ -1,7 +1,7 @@
-Analysis & Synthesis Status : Failed - Thu Nov 21 13:48:52 2019
+Analysis & Synthesis Status : Failed - Tue Nov 26 12:23:28 2019
 Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
-Revision Name : sync_gen_TEST
-Top-level Entity Name : sync_gen
+Revision Name : GPU_HW_Control_Regs_test
+Top-level Entity Name : GPU_HW_Control_Regs_test
 Family : Cyclone III
 Total logic elements : N/A until Partition Merge
     Total combinational functions : N/A until Partition Merge

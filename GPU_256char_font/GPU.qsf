@@ -110,4 +110,6 @@ set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
 set_global_assignment -name MIF_FILE gpu_16K_RAM2.mif
 set_global_assignment -name BDF_FILE color_sel.bdf
 set_global_assignment -name VERILOG_FILE ../Z80_bridge.v
+set_global_assignment -name VERILOG_FILE GPU_HW_Control_Regs.v
+set_global_assignment -name SYSTEMVERILOG_FILE GPU_HW_Control_Regs.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

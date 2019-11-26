@@ -18,13 +18,13 @@
 #
 # Quartus II
 # Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-# Date created = 15:49:21  November 20, 2019
+# Date created = 12:21:43  November 26, 2019
 #
 # -------------------------------------------------------------------------- #
 
 QUARTUS_VERSION = "9.1"
-DATE = "15:49:21  November 20, 2019"
+DATE = "12:21:43  November 26, 2019"
 
 # Revisions
 
-PROJECT_REVISION = "sync_gen_TEST"
+PROJECT_REVISION = "GPU_HW_Control_Regs_test"

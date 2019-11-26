@@ -30,11 +30,12 @@ module Z80_bridge (
 parameter MEMORY_RANGE = 3'b011;	// Z80_addr[21:19] == 3'b011 targets the 512KB 'window' at 0x180000-0x1FFFFF
 parameter DELAY_CYCLES = 2;		// number of cycles to delay write for 245
 
-wire mem_window, Z80_mreq, Z80_write, Z80_read, Z80_nRead, Write_GPU_RAM, Read_GPU_RAM, GPU_data_oe, Z80_clk_delay;
+wire mem_window, Z80_mreq, Z80_write, Z80_read, Z80_nRead, Write_GPU_RAM, Read_GPU_RAM, GPU_data_oe;
 wire Read_GPU_RAM_BEGIN, Read_GPU_RAM_END;
 
 reg last_Z80_WR	= 1'b0;  // keep these low on power-up, otherwise a read or write pulse may be triggered
 reg last_Z80_RD	= 1'b0;
+reg Z80_clk_delay;
 //reg data_hold		= 1'b0;	// used to latch the gpu_rd_rdy signal
 reg [9:0] Z80_write_sequencer;
 
@@ -46,13 +47,13 @@ assign Z80_nRead	= 	Z80_RDn && ~last_Z80_RD;	// Isolate end of a read transactio
 
 assign Write_GPU_RAM	= mem_window && Z80_mreq && Z80_write;	// Define a GPU Write action
 //assign Read_GPU_RAM	= mem_window && Z80_mreq && Z80_read;	// Define a GPU Read action
-assign Read_GPU_RAM_BEGIN = mem_window && Z80_mreq && ~Z80_RDn && Z80_CLK && ~Z80_clk_delay;   // Define the beginning of a Z80 read request of GPU Ram.
+assign Read_GPU_RAM_BEGIN = mem_window && Z80_mreq && ~Z80_RDn && Z80_CLK && ~Z80_clk_delay && ~Z80_rData_ena;   // Define the beginning of a Z80 read request of GPU Ram.
 assign Read_GPU_RAM_END = Z80_RDn && ~last_Z80_RD;  // Define the time to end a GPU ram read
 assign GPU_data_oe	= mem_window && Z80_mreq && ~Z80_RDn;	// Define the time the GPU ouputs data onto the Z80 data bus
 
-assign gpu_rd_req = 1'b0;				// default gpu_rd_req to LOW
-assign Z80_245_oe		= 1'b0;				// disable 245 output
-assign Z80_rData_ena = 1'b0;			// set Z80 data pins to input on the FPGA
+//assign gpu_rd_req = 1'b0;				// default gpu_rd_req to LOW
+//assign Z80_245_oe		= 1'b0;				// disable 245 output
+//assign Z80_rData_ena = 1'b0;			// set Z80 data pins to input on the FPGA
 
 always @ (posedge GPU_CLK)
 begin
@@ -77,14 +78,14 @@ begin
 		gpu_rd_req			<= 1'b1;				// flag a read request to the mux which is one-shotted in the mux
 		Z80_245data_dir	<= 1'b0;				// set 245 direction (TO Z80)
 		Z80_245_oe			<= 1'b1;				// enable 245 output
-	end
+	end else gpu_rd_req		<= 1'b0;					// end GPU read req after 1 pulse
 
 	if ( gpu_rd_rdy )	// gpu_rd_rdy is a one-shot from the mux, reset after one clock
 	begin
 		
 		//data_hold		<= 1'b1;					// latch the gpu_rd_rdy signal to keep outputting data until Z80 is done with it
 		Z80_rData_ena	<= 1'b1;					// set bidir pins to output
-		gpu_rd_req		<= 1'b0;					// End the read request once the read is ready
+		//gpu_rd_req		<= 1'b0;					// End the read request once the read is ready
 		Z80_rData[7:0]	<= gpu_rData[7:0];	// Latch the GPU RAM read into the output register for the Z80
 		
 	end
