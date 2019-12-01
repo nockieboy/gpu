@@ -10,6 +10,27 @@ This repo contains the Verilog HDL code to create a VGA-, and later maybe HDMI-c
 
 During early stages of development (for the text-mode design) however, you can get by on an Intel/Altera Cyclone II EP2C5T144C8 dev board, which can be had for less than £14 via everyone's favourite auction website - do a search for ['Cyclone II minimum development board'](https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=cyclone+II+minimum+development&_sacat=0).
 
+### Folders
+
+This repository contains a number of folders and not all are essential to get a GPU up and running, although the non-essential folders will no-doubt assist in getting it set up and facilitate testing and tweaking.
+
+Primary folders are:
+
+#### GPU_256char_font
+The main Quartus Prime project folder.
+
+#### docs
+Contains manuals, documentation and information on the project and its constituent parts.
+
+#### fonts
+Contains font files for use with the GPU.
+
+#### test
+Contains various Quartus II projects (yes, Quartus II - version 9.1) used for simulating and testing components of the project.
+
+#### tools
+Contains the RS232 debugger, written by Brian Guralnick, which is an essential part of the setup and testing for the GPU.
+
 ### Prerequisites
 
 * A suitable FPGA development board - detailed above
