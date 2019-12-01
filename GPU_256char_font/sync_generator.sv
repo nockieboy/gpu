@@ -98,6 +98,8 @@ module sync_generator(
 				// start of visible display area - set HDE HIGH
 				if (h_count == IMAGE_OFFSET_X)
 					hde <= 1'b1;  		// Turn on horizontal video data enable
+				else if (h_count == IMAGE_OFFSET_X + H_RES)
+					hde <= 1'b0 ;  	// Turn off horizontal video data enable
 				
 				// check for generation of HSYNC pulse
 				if (h_count == HS_STA)
@@ -151,8 +153,6 @@ module sync_generator(
 				begin
 					
 					h_count <= h_count + 1'b1;
-					if (h_count == IMAGE_OFFSET_X + H_RES)
-						hde <= 1'b0 ;  // Turn off horizontal video data enable
 					
 				end // if (h_count == LINE - 1)
 				

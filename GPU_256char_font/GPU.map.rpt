@@ -1,5 +1,5 @@
 Analysis & Synthesis report for GPU
-Sun Dec 01 14:06:41 2019
+Sun Dec 01 17:39:13 2019
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -23,33 +23,35 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
  15. Registers Packed Into Inferred Megafunctions
  16. Multiplexer Restructuring Statistics (Restructuring Performed)
  17. Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_akb2:auto_generated
- 18. Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated|altsyncram_0b81:altsyncram2
- 19. Parameter Settings for User Entity Instance: vid_out_stencil:inst
- 20. Parameter Settings for User Entity Instance: altpll0:inst17|altpll:altpll_component
- 21. Parameter Settings for User Entity Instance: rs232_debugger:inst3
- 22. Parameter Settings for User Entity Instance: rs232_debugger:inst3|sync_rs232_uart:rs232_io
- 23. Parameter Settings for User Entity Instance: vid_osd_generator:inst16
- 24. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM
- 25. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM
- 26. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component
- 27. Parameter Settings for User Entity Instance: sync_generator:inst2
- 28. Parameter Settings for User Entity Instance: GPU_HW_Control_Regs:inst6
- 29. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst
- 30. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst19
- 31. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst14
- 32. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst3
- 33. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst4
- 34. Parameter Settings for User Entity Instance: Z80_bridge:inst7
- 35. Parameter Settings for Inferred Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0
- 36. altpll Parameter Settings by Entity Instance
- 37. altsyncram Parameter Settings by Entity Instance
- 38. altshift_taps Parameter Settings by Entity Instance
- 39. Port Connectivity Checks: "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM"
- 40. Port Connectivity Checks: "rs232_debugger:inst3|sync_rs232_uart:rs232_io"
- 41. Post-Synthesis Netlist Statistics for Top Partition
- 42. Elapsed Time Per Partition
- 43. Analysis & Synthesis Messages
- 44. Analysis & Synthesis Suppressed Messages
+ 18. Source assignments for vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0|shift_taps_qnm:auto_generated|altsyncram_0e81:altsyncram2
+ 19. Source assignments for vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated|altsyncram_0b81:altsyncram2
+ 20. Parameter Settings for User Entity Instance: vid_out_stencil:inst
+ 21. Parameter Settings for User Entity Instance: altpll0:inst17|altpll:altpll_component
+ 22. Parameter Settings for User Entity Instance: rs232_debugger:inst3
+ 23. Parameter Settings for User Entity Instance: rs232_debugger:inst3|sync_rs232_uart:rs232_io
+ 24. Parameter Settings for User Entity Instance: vid_osd_generator:inst16
+ 25. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM
+ 26. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM
+ 27. Parameter Settings for User Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component
+ 28. Parameter Settings for User Entity Instance: sync_generator:inst2
+ 29. Parameter Settings for User Entity Instance: GPU_HW_Control_Regs:inst6
+ 30. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst
+ 31. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst19
+ 32. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst14
+ 33. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst3
+ 34. Parameter Settings for User Entity Instance: color_sel:inst1|BUSMUX:inst4
+ 35. Parameter Settings for User Entity Instance: Z80_bridge:inst7
+ 36. Parameter Settings for Inferred Entity Instance: vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0
+ 37. Parameter Settings for Inferred Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0
+ 38. altpll Parameter Settings by Entity Instance
+ 39. altsyncram Parameter Settings by Entity Instance
+ 40. altshift_taps Parameter Settings by Entity Instance
+ 41. Port Connectivity Checks: "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM"
+ 42. Port Connectivity Checks: "rs232_debugger:inst3|sync_rs232_uart:rs232_io"
+ 43. Post-Synthesis Netlist Statistics for Top Partition
+ 44. Elapsed Time Per Partition
+ 45. Analysis & Synthesis Messages
+ 46. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -75,18 +77,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Dec 01 14:06:41 2019       ;
+; Analysis & Synthesis Status        ; Successful - Sun Dec 01 17:39:13 2019       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GPU                                         ;
 ; Top-level Entity Name              ; GPU                                         ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 1,930                                       ;
-;     Total combinational functions  ; 1,279                                       ;
-;     Dedicated logic registers      ; 1,199                                       ;
-; Total registers                    ; 1199                                        ;
+; Total logic elements               ; 2,017                                       ;
+;     Total combinational functions  ; 1,285                                       ;
+;     Dedicated logic registers      ; 1,282                                       ;
+; Total registers                    ; 1282                                        ;
 ; Total pins                         ; 21                                          ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 131,088                                     ;
+; Total memory bits                  ; 131,241                                     ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
 ; Total PLLs                         ; 1                                           ;
 +------------------------------------+---------------------------------------------+
@@ -193,8 +195,8 @@ refer to the applicable agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.2%      ;
-;     Processor 3            ;   0.2%      ;
+;     Processor 2            ;   0.1%      ;
+;     Processor 3            ;   0.1%      ;
 +----------------------------+-------------+
 
 
@@ -247,6 +249,10 @@ refer to the applicable agreement for further details.
 ; lpm_counter.inc                  ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_counter.inc          ;         ;
 ; lpm_compare.inc                  ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_compare.inc          ;         ;
 ; lpm_constant.inc                 ; yes             ; Megafunction                           ; g:/altera/18.1/quartus/libraries/megafunctions/lpm_constant.inc         ;         ;
+; db/shift_taps_qnm.tdf            ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/shift_taps_qnm.tdf     ;         ;
+; db/altsyncram_0e81.tdf           ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/altsyncram_0e81.tdf    ;         ;
+; db/cntr_6pf.tdf                  ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/cntr_6pf.tdf           ;         ;
+; db/cmpr_ogc.tdf                  ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/cmpr_ogc.tdf           ;         ;
 ; db/shift_taps_u4m.tdf            ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/shift_taps_u4m.tdf     ;         ;
 ; db/altsyncram_0b81.tdf           ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/altsyncram_0b81.tdf    ;         ;
 ; db/cntr_4pf.tdf                  ; yes             ; Auto-Generated Megafunction            ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/cntr_4pf.tdf           ;         ;
@@ -258,24 +264,24 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+--------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                    ;
 +---------------------------------------------+--------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 1,930                                                                    ;
+; Estimated Total logic elements              ; 2,017                                                                    ;
 ;                                             ;                                                                          ;
-; Total combinational functions               ; 1279                                                                     ;
+; Total combinational functions               ; 1285                                                                     ;
 ; Logic element usage by number of LUT inputs ;                                                                          ;
 ;     -- 4 input functions                    ; 761                                                                      ;
 ;     -- 3 input functions                    ; 137                                                                      ;
-;     -- <=2 input functions                  ; 381                                                                      ;
+;     -- <=2 input functions                  ; 387                                                                      ;
 ;                                             ;                                                                          ;
 ; Logic elements by mode                      ;                                                                          ;
-;     -- normal mode                          ; 1135                                                                     ;
-;     -- arithmetic mode                      ; 144                                                                      ;
+;     -- normal mode                          ; 1139                                                                     ;
+;     -- arithmetic mode                      ; 146                                                                      ;
 ;                                             ;                                                                          ;
-; Total registers                             ; 1199                                                                     ;
-;     -- Dedicated logic registers            ; 1199                                                                     ;
+; Total registers                             ; 1282                                                                     ;
+;     -- Dedicated logic registers            ; 1282                                                                     ;
 ;     -- I/O registers                        ; 0                                                                        ;
 ;                                             ;                                                                          ;
 ; I/O pins                                    ; 21                                                                       ;
-; Total memory bits                           ; 131088                                                                   ;
+; Total memory bits                           ; 131241                                                                   ;
 ;                                             ;                                                                          ;
 ; Embedded Multiplier 9-bit elements          ; 0                                                                        ;
 ;                                             ;                                                                          ;
@@ -283,9 +289,9 @@ refer to the applicable agreement for further details.
 ;     -- PLLs                                 ; 1                                                                        ;
 ;                                             ;                                                                          ;
 ; Maximum fan-out node                        ; altpll0:inst17|altpll:altpll_component|altpll_d1l2:auto_generated|clk[0] ;
-; Maximum fan-out                             ; 1224                                                                     ;
-; Total fan-out                               ; 8525                                                                     ;
-; Average fan-out                             ; 3.35                                                                     ;
+; Maximum fan-out                             ; 1358                                                                     ;
+; Total fan-out                               ; 9039                                                                     ;
+; Average fan-out                             ; 3.37                                                                     ;
 +---------------------------------------------+--------------------------------------------------------------------------+
 
 
@@ -294,8 +300,8 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
 ; Compilation Hierarchy Node                      ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                       ; Entity Name             ; Library Name ;
 +-------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
-; |GPU                                            ; 1279 (2)            ; 1199 (1)                  ; 131088      ; 0            ; 0       ; 0         ; 21   ; 0            ; |GPU                                                                                                                                                                      ; GPU                     ; work         ;
-;    |GPU_HW_Control_Regs:inst6|                  ; 136 (136)           ; 480 (480)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|GPU_HW_Control_Regs:inst6                                                                                                                                            ; GPU_HW_Control_Regs     ; work         ;
+; |GPU                                            ; 1285 (2)            ; 1282 (1)                  ; 131241      ; 0            ; 0       ; 0         ; 21   ; 0            ; |GPU                                                                                                                                                                      ; GPU                     ; work         ;
+;    |GPU_HW_Control_Regs:inst6|                  ; 137 (137)           ; 480 (480)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|GPU_HW_Control_Regs:inst6                                                                                                                                            ; GPU_HW_Control_Regs     ; work         ;
 ;    |altpll0:inst17|                             ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17                                                                                                                                                       ; altpll0                 ; work         ;
 ;       |altpll:altpll_component|                 ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17|altpll:altpll_component                                                                                                                               ; altpll                  ; work         ;
 ;          |altpll_d1l2:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17|altpll:altpll_component|altpll_d1l2:auto_generated                                                                                                    ; altpll_d1l2             ; work         ;
@@ -308,10 +314,14 @@ refer to the applicable agreement for further details.
 ;             |mux_psc:auto_generated|            ; 8 (8)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|color_sel:inst1|busmux:inst4|lpm_mux:$00000|mux_psc:auto_generated                                                                                                   ; mux_psc                 ; work         ;
 ;       |white_noise:inst1|                       ; 90 (90)             ; 90 (90)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|color_sel:inst1|white_noise:inst1                                                                                                                                    ; white_noise             ; work         ;
 ;    |raster_trigger_mux:inst9|                   ; 15 (15)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|raster_trigger_mux:inst9                                                                                                                                             ; raster_trigger_mux      ; work         ;
-;    |rs232_debugger:inst3|                       ; 510 (419)           ; 370 (289)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst3                                                                                                                                                 ; rs232_debugger          ; work         ;
+;    |rs232_debugger:inst3|                       ; 509 (418)           ; 370 (289)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst3                                                                                                                                                 ; rs232_debugger          ; work         ;
 ;       |sync_rs232_uart:rs232_io|                ; 91 (91)             ; 81 (81)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io                                                                                                                        ; sync_rs232_uart         ; work         ;
-;    |sync_generator:inst2|                       ; 405 (405)           ; 92 (92)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|sync_generator:inst2                                                                                                                                                 ; sync_generator          ; work         ;
-;    |vid_osd_generator:inst16|                   ; 65 (40)             ; 151 (83)                  ; 131088      ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16                                                                                                                                             ; vid_osd_generator       ; work         ;
+;    |sync_generator:inst2|                       ; 406 (406)           ; 92 (92)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|sync_generator:inst2                                                                                                                                                 ; sync_generator          ; work         ;
+;    |vid_osd_generator:inst16|                   ; 70 (40)             ; 234 (164)                 ; 131241      ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16                                                                                                                                             ; vid_osd_generator       ; work         ;
+;       |altshift_taps:hs_pipe_rtl_0|             ; 5 (0)               ; 2 (0)                     ; 153         ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0                                                                                                                 ; altshift_taps           ; work         ;
+;          |shift_taps_qnm:auto_generated|        ; 5 (0)               ; 2 (0)                     ; 153         ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0|shift_taps_qnm:auto_generated                                                                                   ; shift_taps_qnm          ; work         ;
+;             |altsyncram_0e81:altsyncram2|       ; 0 (0)               ; 0 (0)                     ; 153         ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0|shift_taps_qnm:auto_generated|altsyncram_0e81:altsyncram2                                                       ; altsyncram_0e81         ; work         ;
+;             |cntr_6pf:cntr1|                    ; 5 (5)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0|shift_taps_qnm:auto_generated|cntr_6pf:cntr1                                                                    ; cntr_6pf                ; work         ;
 ;       |multiport_gpu_ram:gpu_RAM|               ; 25 (14)             ; 68 (65)                   ; 131088      ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM                                                                                                                   ; multiport_gpu_ram       ; work         ;
 ;          |altshift_taps:data_pipe_rtl_0|        ; 1 (0)               ; 1 (0)                     ; 16          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0                                                                                     ; altshift_taps           ; work         ;
 ;             |shift_taps_u4m:auto_generated|     ; 1 (0)               ; 1 (0)                     ; 16          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated                                                       ; shift_taps_u4m          ; work         ;
@@ -332,6 +342,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
 ; Name                                                                                                                                                         ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF             ;
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
+; vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0|shift_taps_qnm:auto_generated|altsyncram_0e81:altsyncram2|ALTSYNCRAM                                    ; AUTO ; Simple Dual Port ; 3            ; 51           ; 3            ; 51           ; 153    ; None            ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated|altsyncram_0b81:altsyncram2|ALTSYNCRAM        ; AUTO ; Simple Dual Port ; 2            ; 8            ; 2            ; 8            ; 16     ; None            ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_akb2:auto_generated|ALTSYNCRAM ; AUTO ; True Dual Port   ; 16384        ; 8            ; 16384        ; 8            ; 131072 ; gpu_16K_VGA.mif ;
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------+
@@ -397,12 +408,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1199  ;
+; Total registers                              ; 1282  ;
 ; Number of registers using Synchronous Clear  ; 119   ;
 ; Number of registers using Synchronous Load   ; 143   ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 1007  ;
+; Number of registers using Clock Enable       ; 1090  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -438,6 +449,10 @@ Encoding Type:  One-Hot
 +---------------------------------------------------------------------+--------------------------------------------------------------------+------------+
 ; Register Name                                                       ; Megafunction                                                       ; Type       ;
 +---------------------------------------------------------------------+--------------------------------------------------------------------+------------+
+; vid_osd_generator:inst16|hs_pipe[1..5]                              ; vid_osd_generator:inst16|hs_pipe_rtl_0                             ; SHIFT_TAPS ;
+; vid_osd_generator:inst16|vs_pipe[1..5]                              ; vid_osd_generator:inst16|hs_pipe_rtl_0                             ; SHIFT_TAPS ;
+; vid_osd_generator:inst16|vde_pipe[1..5]                             ; vid_osd_generator:inst16|hs_pipe_rtl_0                             ; SHIFT_TAPS ;
+; vid_osd_generator:inst16|HV_pipe[1..5][0..47]                       ; vid_osd_generator:inst16|hs_pipe_rtl_0                             ; SHIFT_TAPS ;
 ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|data_pipe[8..39] ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|data_pipe_rtl_0 ; SHIFT_TAPS ;
 +---------------------------------------------------------------------+--------------------------------------------------------------------+------------+
 
@@ -447,46 +462,48 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|tx_period[15]                       ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|led_txd_timeout[0]                                           ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|led_rxd_timeout[4]                                           ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|rst_clk[2]                                                   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|rx_period[15]                       ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|rx_position[3]                      ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[0][1]                               ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[1][7]                               ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[2][0]                               ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[3][7]                               ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[4][1]                               ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[5][6]                               ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|tx_period[7]                        ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|led_txd_timeout[4]                                           ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|led_rxd_timeout[3]                                           ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|rst_clk[3]                                                   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|rx_period[3]                        ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|rx_position[1]                      ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst16|disp_y[2]                                                ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |GPU|sync_generator:inst2|frame_ctr[7]                                                 ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[0][0]                               ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[1][6]                               ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[2][1]                               ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[3][4]                               ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[4][0]                               ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[5][7]                               ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[6][1]                               ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[7][0]                               ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[8][1]                               ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[9][7]                               ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[10][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[11][6]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[7][7]                               ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[8][0]                               ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[9][5]                               ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[10][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[11][3]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[12][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[13][6]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[13][4]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[14][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[15][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[15][6]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[16][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[17][5]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[18][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[19][5]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[20][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[21][4]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[17][1]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[18][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[19][2]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[20][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[21][0]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[22][1]                              ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[23][0]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[24][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[25][5]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[26][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[27][4]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[25][4]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[26][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[27][3]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[28][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[29][6]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[29][5]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[30][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[31][5]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[32][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[33][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[31][4]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[32][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[33][1]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[34][1]                              ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[35][0]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[36][1]                              ;
@@ -495,80 +512,78 @@ Encoding Type:  One-Hot
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[39][1]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[40][0]                              ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[41][0]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[42][0]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[42][1]                              ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[43][0]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[44][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[45][1]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[46][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[47][0]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[48][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[49][0]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[50][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[51][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[45][0]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[46][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[47][3]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[48][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[49][7]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[50][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[51][2]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[52][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[53][5]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[53][0]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[54][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[55][0]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[56][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[57][4]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[55][7]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[56][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[57][3]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[58][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[59][2]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[59][0]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[60][1]                              ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[61][7]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[62][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[63][5]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[62][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[63][1]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[64][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[65][7]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[65][6]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[66][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[67][6]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[68][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[69][7]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[70][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[71][0]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[72][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[73][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[67][2]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[68][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[69][1]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[70][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[71][7]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[72][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[73][4]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[74][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[75][5]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[76][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[77][1]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[78][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[79][0]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[80][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[81][7]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[75][0]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[76][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[77][3]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[78][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[79][4]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[80][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[81][2]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[82][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[83][6]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[84][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[83][2]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[84][0]                              ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[85][0]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[86][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[87][7]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[86][1]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[87][0]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[88][0]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[89][4]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[89][5]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[90][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[91][2]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[91][7]                              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[92][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[93][7]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[94][1]                              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[95][0]                              ;
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst16|disp_y[5]                                                ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |GPU|sync_generator:inst2|frame_ctr[8]                                                 ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|RXD_FF_cnt[2]                                                ;
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst16|disp_x[2]                                                ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|tx_position[1]                      ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|sync_generator:inst2|h_count[9]                                                   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[93][4]                              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[94][0]                              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|GPU_HW_Control_Regs:inst6|GPU_HW_Control_regs[95][3]                              ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|RXD_FF_cnt[0]                                                ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst16|disp_x[6]                                                ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|tx_position[2]                      ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|sync_generator:inst2|h_count[5]                                                   ;
 ; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|sync_generator:inst2|v_count[3]                                                   ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[12]                ;
-; 16:1               ; 11 bits   ; 110 LEs       ; 22 LEs               ; 88 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[8]                 ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[13]                ;
+; 16:1               ; 11 bits   ; 110 LEs       ; 22 LEs               ; 88 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|addr_in_mux[4]                 ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; Yes        ; |GPU|vid_out_stencil:inst|b_out[3]                                                     ;
-; 5:1                ; 128 bits  ; 384 LEs       ; 128 LEs              ; 256 LEs                ; Yes        ; |GPU|rs232_debugger:inst3|RX_buffer[38]                                                ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 9 LEs                ; 0 LEs                  ; Yes        ; |GPU|vid_out_stencil:inst|r_out[1]                                                     ;
-; 6:1                ; 5 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|vid_out_stencil:inst|g_out[0]                                                     ;
+; 5:1                ; 128 bits  ; 384 LEs       ; 128 LEs              ; 256 LEs                ; Yes        ; |GPU|rs232_debugger:inst3|RX_buffer[82]                                                ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 9 LEs                ; 0 LEs                  ; Yes        ; |GPU|vid_out_stencil:inst|r_out[2]                                                     ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |GPU|vid_out_stencil:inst|g_out[1]                                                     ;
 ; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|tx_cyc[3]                                                    ;
-; 8:1                ; 24 bits   ; 120 LEs       ; 48 LEs               ; 72 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|host_addr_reg[20]                                            ;
-; 9:1                ; 5 bits    ; 30 LEs        ; 5 LEs                ; 25 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|timeout_cnt[2]                                               ;
-; 14:1               ; 8 bits    ; 72 LEs        ; 32 LEs               ; 40 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|uart_tbyte[1]                                                ;
-; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|byte_count[13]                                               ;
-; 12:1               ; 7 bits    ; 56 LEs        ; 14 LEs               ; 42 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|byte_count[7]                                                ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|tx_byte[3]                          ;
+; 8:1                ; 24 bits   ; 120 LEs       ; 48 LEs               ; 72 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|host_addr_reg[10]                                            ;
+; 9:1                ; 5 bits    ; 30 LEs        ; 5 LEs                ; 25 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|timeout_cnt[4]                                               ;
+; 14:1               ; 8 bits    ; 72 LEs        ; 32 LEs               ; 40 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|uart_tbyte[4]                                                ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|byte_count[9]                                                ;
+; 12:1               ; 7 bits    ; 56 LEs        ; 14 LEs               ; 42 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|byte_count[3]                                                ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|tx_byte[5]                          ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |GPU|color_sel:inst1|busmux:inst|lpm_mux:$00000|mux_psc:auto_generated|result_node[11] ;
 ; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |GPU|rs232_debugger:inst3|Function                                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------+
@@ -581,6 +596,15 @@ Encoding Type:  One-Hot
 +---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------------+
 ; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                                                          ;
 +---------------------------------+--------------------+------+------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0|shift_taps_qnm:auto_generated|altsyncram_0e81:altsyncram2 ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                      ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                       ;
++---------------------------------+--------------------+------+-------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1105,8 +1129,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------+-------+-----------------------------------------+
 ; H_RES           ; 640   ; Signed Integer                          ;
 ; V_RES           ; 480   ; Signed Integer                          ;
-; IMAGE_OFFSET_X  ; 16    ; Signed Integer                          ;
-; IMAGE_OFFSET_Y  ; 16    ; Signed Integer                          ;
+; IMAGE_OFFSET_X  ; 0     ; Signed Integer                          ;
+; IMAGE_OFFSET_Y  ; 0     ; Signed Integer                          ;
 ; H_FRONT_PORCH   ; 16    ; Signed Integer                          ;
 ; HSYNC_WIDTH     ; 96    ; Signed Integer                          ;
 ; H_BACK_PORCH    ; 48    ; Signed Integer                          ;
@@ -1193,6 +1217,21 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0 ;
++----------------+----------------+---------------------------------------------------------------------+
+; Parameter Name ; Value          ; Type                                                                ;
++----------------+----------------+---------------------------------------------------------------------+
+; WIDTH_BYTEENA  ; 1              ; Untyped                                                             ;
+; NUMBER_OF_TAPS ; 1              ; Untyped                                                             ;
+; TAP_DISTANCE   ; 5              ; Untyped                                                             ;
+; WIDTH          ; 51             ; Untyped                                                             ;
+; POWER_UP_STATE ; CLEARED        ; Untyped                                                             ;
+; CBXI_PARAMETER ; shift_taps_qnm ; Untyped                                                             ;
++----------------+----------------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-----------------------------------------------------------------------------------------------------------------------------------+
 ; Parameter Settings for Inferred Entity Instance: vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0 ;
 +----------------+----------------+-------------------------------------------------------------------------------------------------+
@@ -1250,7 +1289,11 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------------------+----------------------------------------------------------------------------------+
 ; Name                       ; Value                                                                            ;
 +----------------------------+----------------------------------------------------------------------------------+
-; Number of entity instances ; 1                                                                                ;
+; Number of entity instances ; 2                                                                                ;
+; Entity Instance            ; vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0                             ;
+;     -- NUMBER_OF_TAPS      ; 1                                                                                ;
+;     -- TAP_DISTANCE        ; 5                                                                                ;
+;     -- WIDTH               ; 51                                                                               ;
 ; Entity Instance            ; vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0 ;
 ;     -- NUMBER_OF_TAPS      ; 1                                                                                ;
 ;     -- TAP_DISTANCE        ; 4                                                                                ;
@@ -1307,29 +1350,29 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 21                          ;
-; cycloneiii_ff         ; 1199                        ;
-;     ENA               ; 879                         ;
+; cycloneiii_ff         ; 1282                        ;
+;     ENA               ; 962                         ;
 ;     ENA SCLR          ; 36                          ;
 ;     ENA SCLR SLD      ; 33                          ;
 ;     ENA SLD           ; 59                          ;
 ;     SCLR              ; 50                          ;
 ;     SLD               ; 51                          ;
 ;     plain             ; 91                          ;
-; cycloneiii_lcell_comb ; 1279                        ;
-;     arith             ; 144                         ;
-;         2 data inputs ; 142                         ;
+; cycloneiii_lcell_comb ; 1285                        ;
+;     arith             ; 146                         ;
+;         2 data inputs ; 144                         ;
 ;         3 data inputs ; 2                           ;
-;     normal            ; 1135                        ;
-;         0 data inputs ; 1                           ;
+;     normal            ; 1139                        ;
+;         0 data inputs ; 2                           ;
 ;         1 data inputs ; 28                          ;
-;         2 data inputs ; 210                         ;
+;         2 data inputs ; 213                         ;
 ;         3 data inputs ; 135                         ;
 ;         4 data inputs ; 761                         ;
 ; cycloneiii_pll        ; 1                           ;
-; cycloneiii_ram_block  ; 24                          ;
+; cycloneiii_ram_block  ; 75                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 8.00                        ;
-; Average LUT depth     ; 2.94                        ;
+; Average LUT depth     ; 2.80                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1338,7 +1381,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:07     ;
+; Top            ; 00:00:06     ;
 +----------------+--------------+
 
 
@@ -1348,7 +1391,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Sun Dec 01 14:06:11 2019
+    Info: Processing started: Sun Dec 01 17:38:46 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off GPU -c GPU
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20032): Parallel compilation is enabled and will use up to 3 processors
@@ -1460,11 +1503,11 @@ Warning (12125): Using design file sync_rs232_uart.v, which is not specified as 
     Info (12023): Found entity 1: sync_rs232_uart File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/sync_rs232_uart.v Line: 15
 Info (12128): Elaborating entity "sync_rs232_uart" for hierarchy "rs232_debugger:inst3|sync_rs232_uart:rs232_io" File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/rs232_DEBUGGER.v Line: 209
 Info (12128): Elaborating entity "vid_osd_generator" for hierarchy "vid_osd_generator:inst16"
-Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(30): object "dly8_disp_x" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 30
-Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(31): object "dly4_disp_y" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 31
-Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(33): object "dly6_dena" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 33
-Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(34): object "dly4_letter" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 34
-Info (12128): Elaborating entity "multiport_gpu_ram" for hierarchy "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM" File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 95
+Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(32): object "dly8_disp_x" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 32
+Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(33): object "dly4_disp_y" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 33
+Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(35): object "dly6_dena" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 35
+Warning (10036): Verilog HDL or VHDL warning at vid_osd_generator.v(36): object "dly4_letter" assigned a value but never read File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 36
+Info (12128): Elaborating entity "multiport_gpu_ram" for hierarchy "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM" File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 98
 Info (12128): Elaborating entity "gpu_dual_port_ram_INTEL" for hierarchy "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM" File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/multiport_gpu_ram.v Line: 90
 Info (12128): Elaborating entity "altsyncram" for hierarchy "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component" File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/gpu_dual_port_ram_INTEL.v Line: 68
 Info (12130): Elaborated megafunction instantiation "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component" File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/gpu_dual_port_ram_INTEL.v Line: 68
@@ -1544,11 +1587,28 @@ Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.v(32): object "GPU_da
 Info (13014): Ignored 13 buffer(s)
     Info (13018): Ignored 13 EXPANDER buffer(s)
 Info (286030): Timing-Driven Synthesis is running
-Info (19000): Inferred 1 megafunctions from design logic
+Info (19000): Inferred 2 megafunctions from design logic
+    Info (276034): Inferred altshift_taps megafunction from the following design logic: "vid_osd_generator:inst16|hs_pipe_rtl_0"
+        Info (286033): Parameter NUMBER_OF_TAPS set to 1
+        Info (286033): Parameter TAP_DISTANCE set to 5
+        Info (286033): Parameter WIDTH set to 51
     Info (276034): Inferred altshift_taps megafunction from the following design logic: "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|data_pipe_rtl_0"
         Info (286033): Parameter NUMBER_OF_TAPS set to 1
         Info (286033): Parameter TAP_DISTANCE set to 4
         Info (286033): Parameter WIDTH set to 8
+Info (12130): Elaborated megafunction instantiation "vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0"
+Info (12133): Instantiated megafunction "vid_osd_generator:inst16|altshift_taps:hs_pipe_rtl_0" with the following parameter:
+    Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
+    Info (12134): Parameter "TAP_DISTANCE" = "5"
+    Info (12134): Parameter "WIDTH" = "51"
+Info (12021): Found 1 design units, including 1 entities, in source file db/shift_taps_qnm.tdf
+    Info (12023): Found entity 1: shift_taps_qnm File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/shift_taps_qnm.tdf Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_0e81.tdf
+    Info (12023): Found entity 1: altsyncram_0e81 File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/altsyncram_0e81.tdf Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file db/cntr_6pf.tdf
+    Info (12023): Found entity 1: cntr_6pf File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/cntr_6pf.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_ogc.tdf
+    Info (12023): Found entity 1: cmpr_ogc File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/cmpr_ogc.tdf Line: 22
 Info (12130): Elaborated megafunction instantiation "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0"
 Info (12133): Instantiated megafunction "vid_osd_generator:inst16|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0" with the following parameter:
     Info (12134): Parameter "NUMBER_OF_TAPS" = "1"
@@ -1566,17 +1626,17 @@ Info (144001): Generated suppressed messages file G:/fpga/Quartus Projects/GPU/G
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
 Warning (15899): PLL "altpll0:inst17|altpll:altpll_component|altpll_d1l2:auto_generated|pll1" has parameters clk1_multiply_by and clk1_divide_by specified but port CLK[1] is not connected File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/altpll_d1l2.tdf Line: 27
-Info (21057): Implemented 1995 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 2133 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 3 input pins
     Info (21059): Implemented 18 output pins
-    Info (21061): Implemented 1949 logic cells
-    Info (21064): Implemented 24 RAM segments
+    Info (21061): Implemented 2036 logic cells
+    Info (21064): Implemented 75 RAM segments
     Info (21065): Implemented 1 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 27 warnings
     Info: Peak virtual memory: 4816 megabytes
-    Info: Processing ended: Sun Dec 01 14:06:41 2019
-    Info: Elapsed time: 00:00:30
-    Info: Total CPU time (on all processors): 00:00:51
+    Info: Processing ended: Sun Dec 01 17:39:13 2019
+    Info: Elapsed time: 00:00:27
+    Info: Total CPU time (on all processors): 00:00:48
 
 
 +------------------------------------------+

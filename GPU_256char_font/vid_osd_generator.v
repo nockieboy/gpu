@@ -10,6 +10,7 @@ module vid_osd_generator (
 	input wire [19:0] host_addr,
 	input wire [7:0] host_wr_data,
 	input wire [7:0] GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
+	input wire [47:0] HV_triggers_in,
 		
 	output reg osd_ena_out,
 	output wire osd_image,
@@ -17,7 +18,8 @@ module vid_osd_generator (
 	output reg vde_out,
 	output reg hs_out,
 	output reg vs_out,
-	output wire [7:0] host_rd_data
+	output wire [7:0] host_rd_data,
+	output reg [47:0] HV_triggers_out
 	
 );
 
@@ -27,12 +29,13 @@ module vid_osd_generator (
 // the wren_font is the write enable for the font memory.  Only 2 bits are used of the wr_data[1:0] and wr_addr[12:0] are used.
 // tie these ports to GND for now disabling them
 
-reg  [9:0] disp_x,dly1_disp_x,dly2_disp_x,dly3_disp_x,dly4_disp_x,dly5_disp_x,dly6_disp_x,dly7_disp_x,dly8_disp_x;
-reg  [8:0] disp_y,dly1_disp_y,dly2_disp_y,dly3_disp_y,dly4_disp_y;
+reg [9:0] disp_x,dly1_disp_x,dly2_disp_x,dly3_disp_x,dly4_disp_x,dly5_disp_x,dly6_disp_x,dly7_disp_x,dly8_disp_x;
+reg [8:0] disp_y,dly1_disp_y,dly2_disp_y,dly3_disp_y,dly4_disp_y;
 
-reg  dena,dly1_dena,dly2_dena,dly3_dena,dly4_dena,dly5_dena,dly6_dena;
-reg  [7:0] dly1_letter, dly2_letter, dly3_letter, dly4_letter;
-reg  [9:0] hde_pipe, vde_pipe, hs_pipe, vs_pipe;
+reg dena,dly1_dena,dly2_dena,dly3_dena,dly4_dena,dly5_dena,dly6_dena;
+reg [7:0] dly1_letter, dly2_letter, dly3_letter, dly4_letter;
+reg [9:0] hde_pipe, vde_pipe, hs_pipe, vs_pipe;
+reg [47:0] HV_pipe[9:0];
 
 parameter   PIPE_DELAY =  6;	// This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
 parameter   FONT_8x16  =  0;	// 0 = 8 pixel tall font, 1 = 16 pixel tall font.
@@ -124,37 +127,41 @@ assign read_font_adr[19:11+FONT_8x16] = 0;        // my mistake, I has 1bit inst
 always @ ( posedge clk ) begin
 
 	if (pc_ena[3:0] == 0) begin
-
+		
 		// **************************************************************************************************************************
 		// *** Create a serial pipe where the PIPE_DELAY parameter selects the pixel count delay for the xxx_in to the xxx_out ports
 		// **************************************************************************************************************************
-
-		hde_pipe[0]   <= hde_in;
-		hde_pipe[9:1] <= hde_pipe[8:0];
-		hde_out       <= hde_pipe[PIPE_DELAY-1];
-
-		vde_pipe[0]   <= vde_in;
-		vde_pipe[9:1] <= vde_pipe[8:0];
-		vde_out       <= vde_pipe[PIPE_DELAY-1];
-
-		hs_pipe[0]    <= hs_in;
-		hs_pipe[9:1]  <= hs_pipe[8:0];
-		hs_out        <= hs_pipe[PIPE_DELAY-1];
-
-		vs_pipe[0]    <= vs_in;
-		vs_pipe[9:1]  <= vs_pipe[8:0];
-		vs_out        <= vs_pipe[PIPE_DELAY-1];
-
+		
+		hde_pipe[0]		<= hde_in;
+		hde_pipe[9:1]	<= hde_pipe[8:0];
+		hde_out			<= hde_pipe[PIPE_DELAY-1];
+		
+		vde_pipe[0]		<= vde_in;
+		vde_pipe[9:1]	<= vde_pipe[8:0];
+		vde_out			<= vde_pipe[PIPE_DELAY-1];
+		
+		hs_pipe[0]		<= hs_in;
+		hs_pipe[9:1]	<= hs_pipe[8:0];
+		hs_out			<= hs_pipe[PIPE_DELAY-1];
+		
+		vs_pipe[0]		<= vs_in;
+		vs_pipe[9:1]	<= vs_pipe[8:0];
+		vs_out			<= vs_pipe[PIPE_DELAY-1];
+		
+		HV_pipe[0]		<= HV_triggers_in;
+		HV_pipe[9:1]	<= HV_pipe[8:0];
+		HV_triggers_out	<= HV_pipe[PIPE_DELAY-1];
+		
 		// **********************************************************************************************
 		// This OSD generator's window is only 512 pixels by 256 lines.
 		// Since the disp_X&Y counters are the screens X&Y coordinates, I'm using an extra most 
 		// significant bit in the counters to determine if the OSD ena flag should be on or off.
-
+		
 		if (disp_x[9] || disp_y[8])
 			dena <= 0;									// When disp_x > 511 or disp_y > 255, then turn off the OSD's output enable flag
 		else
 			dena <= 1;									// otherwise, turn on the OSD output enable flag
-
+		
 		if (~vde_in)
 			disp_y[8:0] <= 9'b111111111;			// preset the disp_y counter to max while the vertical display is disabled
 			
@@ -168,7 +175,7 @@ always @ ( posedge clk ) begin
 		end
 		else if (!disp_x[9])
 			disp_x <= disp_x + 1'b1;  // keep on addind to the disp_x counter until it reaches it's end.
-
+		
 		// **********************************************************************************************
 		// *** These delay pipes registers are explained in the 'assign's above
 		// **********************************************************************************************
@@ -180,28 +187,28 @@ always @ ( posedge clk ) begin
 		dly6_disp_x <= dly5_disp_x;
 		dly7_disp_x <= dly6_disp_x;
 		dly8_disp_x <= dly7_disp_x;
-
+		
 		dly1_disp_y <= disp_y;
 		dly2_disp_y <= dly1_disp_y;
 		dly3_disp_y <= dly2_disp_y;
 		dly4_disp_y <= dly3_disp_y;
-
+		
 		dly1_letter <= letter;
 		dly2_letter <= dly1_letter;
 		dly3_letter <= dly2_letter;
 		dly4_letter <= dly3_letter;
-
+		
 		dly1_dena   <= dena;
 		dly2_dena   <= dly1_dena;
 		dly3_dena   <= dly2_dena;
 		dly4_dena   <= dly3_dena;
 		dly5_dena   <= dly4_dena;
 		dly6_dena   <= dly5_dena;
-
+		
 		// **********************************************************************************************
 		osd_ena_out  <= dly4_dena;	// This is used to drive a graphics A/B switch which tells when the OSD graphics should be shown
 											// It needs to be delayed by the number of pixel clocks required for the above memories
-
+		
 	end // ena
 	
 end // always@clk
