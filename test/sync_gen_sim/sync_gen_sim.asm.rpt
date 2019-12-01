@@ -1,5 +1,5 @@
 Assembler report for sync_gen_sim
-Mon Nov 25 23:51:25 2019
+Fri Nov 29 22:48:15 2019
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Nov 25 23:51:25 2019 ;
+; Assembler Status      ; Successful - Fri Nov 29 22:48:15 2019 ;
 ; Revision Name         ; sync_gen_sim                          ;
 ; Top-level Entity Name ; sync_gen_sim                          ;
 ; Family                ; Cyclone III                           ;
@@ -93,7 +93,7 @@ applicable agreement for further details.
 +----------------+--------------------------------------------------------------------------+
 ; Device         ; EP3C5F256C8                                                              ;
 ; JTAG usercode  ; 0xFFFFFFFF                                                               ;
-; Checksum       ; 0x0008FA1F                                                               ;
+; Checksum       ; 0x0008FD66                                                               ;
 +----------------+--------------------------------------------------------------------------+
 
 
@@ -103,13 +103,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Nov 25 23:51:24 2019
+    Info: Processing started: Fri Nov 29 22:48:14 2019
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off sync_gen_sim -c sync_gen_sim
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 214 megabytes
-    Info: Processing ended: Mon Nov 25 23:51:25 2019
+    Info: Processing ended: Fri Nov 29 22:48:15 2019
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

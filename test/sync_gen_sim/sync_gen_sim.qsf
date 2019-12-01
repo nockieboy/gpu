@@ -50,11 +50,12 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
-set_global_assignment -name BDF_FILE sync_gen_sim.bdf
-set_global_assignment -name VERILOG_FILE ../../GPU_256char_font/sync_gen.v
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
 set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL ON
-set_global_assignment -name VECTOR_WAVEFORM_FILE sync_gen_sim.vwf
 set_global_assignment -name SIMULATION_MODE FUNCTIONAL
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE sync_gen_sim.vwf
+set_global_assignment -name BDF_FILE sync_gen_sim.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE sync_gen_sim.vwf
+set_global_assignment -name SYSTEMVERILOG_FILE ../../GPU_256char_font/GPU_HW_Control_Regs.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../GPU_256char_font/sync_generator.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

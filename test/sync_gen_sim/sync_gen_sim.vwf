@@ -37,8 +37,8 @@ expand_groups 0\
 print_all 1\
 print_row_height 100";
 	DATA_OFFSET = 0.0;
-	DATA_DURATION = 1000000.0;
-	SIMULATION_TIME = 1000000.0;
+	DATA_DURATION = 25000000.0;
+	SIMULATION_TIME = 25000000.0;
 	GRID_PHASE = 0.0;
 	GRID_PERIOD = 10.0;
 	GRID_DUTY_CYCLE = 50;
@@ -174,7 +174,7 @@ SIGNAL("divider 162")
 	PARENT = "";
 }
 
-SIGNAL("sync_generator:inst|h_count")
+SIGNAL("sync_generator:inst1|h_count")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = BUS;
@@ -184,107 +184,107 @@ SIGNAL("sync_generator:inst|h_count")
 	PARENT = "";
 }
 
-SIGNAL("sync_generator:inst|h_count[9]")
+SIGNAL("sync_generator:inst1|h_count[9]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[8]")
+SIGNAL("sync_generator:inst1|h_count[8]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[7]")
+SIGNAL("sync_generator:inst1|h_count[7]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[6]")
+SIGNAL("sync_generator:inst1|h_count[6]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[5]")
+SIGNAL("sync_generator:inst1|h_count[5]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[4]")
+SIGNAL("sync_generator:inst1|h_count[4]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[3]")
+SIGNAL("sync_generator:inst1|h_count[3]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[2]")
+SIGNAL("sync_generator:inst1|h_count[2]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[1]")
+SIGNAL("sync_generator:inst1|h_count[1]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|h_count[0]")
+SIGNAL("sync_generator:inst1|h_count[0]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|h_count";
+	PARENT = "sync_generator:inst1|h_count";
 }
 
-SIGNAL("sync_generator:inst|v_count")
+SIGNAL("sync_generator:inst1|v_count")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = BUS;
@@ -294,104 +294,104 @@ SIGNAL("sync_generator:inst|v_count")
 	PARENT = "";
 }
 
-SIGNAL("sync_generator:inst|v_count[9]")
+SIGNAL("sync_generator:inst1|v_count[9]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[8]")
+SIGNAL("sync_generator:inst1|v_count[8]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[7]")
+SIGNAL("sync_generator:inst1|v_count[7]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[6]")
+SIGNAL("sync_generator:inst1|v_count[6]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[5]")
+SIGNAL("sync_generator:inst1|v_count[5]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[4]")
+SIGNAL("sync_generator:inst1|v_count[4]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[3]")
+SIGNAL("sync_generator:inst1|v_count[3]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[2]")
+SIGNAL("sync_generator:inst1|v_count[2]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[1]")
+SIGNAL("sync_generator:inst1|v_count[1]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
-SIGNAL("sync_generator:inst|v_count[0]")
+SIGNAL("sync_generator:inst1|v_count[0]")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
 	SIGNAL_TYPE = SINGLE_BIT;
 	WIDTH = 1;
 	LSB_INDEX = -1;
 	DIRECTION = BURIED;
-	PARENT = "sync_generator:inst|v_count";
+	PARENT = "sync_generator:inst1|v_count";
 }
 
 TRANSITION_LIST("clk")
@@ -401,7 +401,7 @@ TRANSITION_LIST("clk")
 		REPEAT = 1;
 		NODE
 		{
-			REPEAT = 100000;
+			REPEAT = 2500000;
 			LEVEL 0 FOR 5.0;
 			LEVEL 1 FOR 5.0;
 		}
@@ -413,14 +413,14 @@ TRANSITION_LIST("hde")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 8105.0;
+		LEVEL 0 FOR 8155.0;
 		NODE
 		{
-			REPEAT = 24;
+			REPEAT = 624;
 			LEVEL 1 FOR 32000.0;
 			LEVEL 0 FOR 8000.0;
 		}
-		LEVEL 1 FOR 31895.0;
+		LEVEL 1 FOR 31845.0;
 	}
 }
 
@@ -432,7 +432,7 @@ TRANSITION_LIST("hs")
 		LEVEL 0 FOR 905.0;
 		NODE
 		{
-			REPEAT = 24;
+			REPEAT = 624;
 			LEVEL 1 FOR 4800.0;
 			LEVEL 0 FOR 35200.0;
 		}
@@ -446,7 +446,7 @@ TRANSITION_LIST("pena[3]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000000.0;
+		LEVEL 0 FOR 25000000.0;
 	}
 }
 
@@ -458,7 +458,7 @@ TRANSITION_LIST("pena[2]")
 		LEVEL 0 FOR 35.0;
 		NODE
 		{
-			REPEAT = 19999;
+			REPEAT = 499999;
 			LEVEL 1 FOR 10.0;
 			LEVEL 0 FOR 40.0;
 		}
@@ -475,7 +475,7 @@ TRANSITION_LIST("pena[1]")
 		LEVEL 0 FOR 15.0;
 		NODE
 		{
-			REPEAT = 19999;
+			REPEAT = 499999;
 			LEVEL 1 FOR 20.0;
 			LEVEL 0 FOR 30.0;
 		}
@@ -492,7 +492,7 @@ TRANSITION_LIST("pena[0]")
 		LEVEL 0 FOR 5.0;
 		NODE
 		{
-			REPEAT = 19999;
+			REPEAT = 499999;
 			LEVEL 1 FOR 10.0;
 			LEVEL 0 FOR 10.0;
 			LEVEL 1 FOR 10.0;
@@ -511,7 +511,7 @@ TRANSITION_LIST("rst")
 	{
 		REPEAT = 1;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 999990.0;
+		LEVEL 0 FOR 24999990.0;
 	}
 }
 
@@ -520,8 +520,10 @@ TRANSITION_LIST("vde")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 48105.0;
-		LEVEL 1 FOR 951895.0;
+		LEVEL 0 FOR 88105.0;
+		LEVEL 1 FOR 19200000.0;
+		LEVEL 0 FOR 1800000.0;
+		LEVEL 1 FOR 3911895.0;
 	}
 }
 
@@ -530,11 +532,13 @@ TRANSITION_LIST("vs")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000000.0;
+		LEVEL 0 FOR 19648155.0;
+		LEVEL 1 FOR 80000.0;
+		LEVEL 0 FOR 5271845.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[9]")
+TRANSITION_LIST("sync_generator:inst1|h_count[9]")
 {
 	NODE
 	{
@@ -543,7 +547,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[9]")
 		LEVEL 1 FOR 8100.0;
 		NODE
 		{
-			REPEAT = 24;
+			REPEAT = 624;
 			LEVEL 0 FOR 25600.0;
 			LEVEL 1 FOR 14400.0;
 		}
@@ -552,7 +556,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[9]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[8]")
+TRANSITION_LIST("sync_generator:inst1|h_count[8]")
 {
 	NODE
 	{
@@ -560,7 +564,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[8]")
 		LEVEL 0 FOR 6505.0;
 		NODE
 		{
-			REPEAT = 24;
+			REPEAT = 624;
 			LEVEL 1 FOR 1600.0;
 			LEVEL 0 FOR 12800.0;
 			LEVEL 1 FOR 12800.0;
@@ -573,7 +577,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[8]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[7]")
+TRANSITION_LIST("sync_generator:inst1|h_count[7]")
 {
 	NODE
 	{
@@ -581,7 +585,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[7]")
 		LEVEL 0 FOR 105.0;
 		NODE
 		{
-			REPEAT = 24;
+			REPEAT = 624;
 			LEVEL 1 FOR 6400.0;
 			LEVEL 0 FOR 8000.0;
 			NODE
@@ -600,7 +604,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[7]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[6]")
+TRANSITION_LIST("sync_generator:inst1|h_count[6]")
 {
 	NODE
 	{
@@ -610,7 +614,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[6]")
 		LEVEL 0 FOR 3200.0;
 		NODE
 		{
-			REPEAT = 24;
+			REPEAT = 624;
 			LEVEL 1 FOR 3200.0;
 			LEVEL 0 FOR 4800.0;
 			NODE
@@ -632,7 +636,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[6]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[5]")
+TRANSITION_LIST("sync_generator:inst1|h_count[5]")
 {
 	NODE
 	{
@@ -647,7 +651,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[5]")
 		}
 		NODE
 		{
-			REPEAT = 24;
+			REPEAT = 624;
 			LEVEL 0 FOR 3200.0;
 			NODE
 			{
@@ -668,7 +672,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[5]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[4]")
+TRANSITION_LIST("sync_generator:inst1|h_count[4]")
 {
 	NODE
 	{
@@ -677,7 +681,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[4]")
 		LEVEL 1 FOR 100.0;
 		NODE
 		{
-			REPEAT = 624;
+			REPEAT = 15624;
 			LEVEL 0 FOR 800.0;
 			LEVEL 1 FOR 800.0;
 		}
@@ -686,7 +690,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[4]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[3]")
+TRANSITION_LIST("sync_generator:inst1|h_count[3]")
 {
 	NODE
 	{
@@ -695,7 +699,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[3]")
 		LEVEL 1 FOR 100.0;
 		NODE
 		{
-			REPEAT = 1249;
+			REPEAT = 31249;
 			LEVEL 0 FOR 400.0;
 			LEVEL 1 FOR 400.0;
 		}
@@ -704,7 +708,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[3]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[2]")
+TRANSITION_LIST("sync_generator:inst1|h_count[2]")
 {
 	NODE
 	{
@@ -713,7 +717,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[2]")
 		LEVEL 1 FOR 100.0;
 		NODE
 		{
-			REPEAT = 2499;
+			REPEAT = 62499;
 			LEVEL 0 FOR 200.0;
 			LEVEL 1 FOR 200.0;
 		}
@@ -722,7 +726,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[2]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[1]")
+TRANSITION_LIST("sync_generator:inst1|h_count[1]")
 {
 	NODE
 	{
@@ -730,7 +734,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[1]")
 		LEVEL 0 FOR 5.0;
 		NODE
 		{
-			REPEAT = 4999;
+			REPEAT = 124999;
 			LEVEL 1 FOR 100.0;
 			LEVEL 0 FOR 100.0;
 		}
@@ -739,7 +743,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[1]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|h_count[0]")
+TRANSITION_LIST("sync_generator:inst1|h_count[0]")
 {
 	NODE
 	{
@@ -747,7 +751,7 @@ TRANSITION_LIST("sync_generator:inst|h_count[0]")
 		LEVEL 0 FOR 55.0;
 		NODE
 		{
-			REPEAT = 9999;
+			REPEAT = 249999;
 			LEVEL 1 FOR 50.0;
 			LEVEL 0 FOR 50.0;
 		}
@@ -755,77 +759,132 @@ TRANSITION_LIST("sync_generator:inst|h_count[0]")
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[9]")
+TRANSITION_LIST("sync_generator:inst1|v_count[9]")
 {
 	NODE
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 5.0;
 		LEVEL 1 FOR 48100.0;
-		LEVEL 0 FOR 951895.0;
+		LEVEL 0 FOR 20480000.0;
+		LEVEL 1 FOR 520000.0;
+		LEVEL 0 FOR 3951895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[8]")
+TRANSITION_LIST("sync_generator:inst1|v_count[8]")
 {
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000000.0;
+		LEVEL 0 FOR 10288105.0;
+		LEVEL 1 FOR 10240000.0;
+		LEVEL 0 FOR 4471895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[7]")
+TRANSITION_LIST("sync_generator:inst1|v_count[7]")
 {
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000000.0;
+		LEVEL 0 FOR 5168105.0;
+		LEVEL 1 FOR 5120000.0;
+		LEVEL 0 FOR 5120000.0;
+		LEVEL 1 FOR 5120000.0;
+		LEVEL 0 FOR 4471895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[6]")
+TRANSITION_LIST("sync_generator:inst1|v_count[6]")
 {
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000000.0;
+		LEVEL 0 FOR 2608105.0;
+		NODE
+		{
+			REPEAT = 3;
+			LEVEL 1 FOR 2560000.0;
+			LEVEL 0 FOR 2560000.0;
+		}
+		LEVEL 1 FOR 2560000.0;
+		LEVEL 0 FOR 3080000.0;
+		LEVEL 1 FOR 1391895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[5]")
+TRANSITION_LIST("sync_generator:inst1|v_count[5]")
 {
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1000000.0;
+		LEVEL 0 FOR 1328105.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 1280000.0;
+			LEVEL 0 FOR 1280000.0;
+		}
+		LEVEL 1 FOR 1280000.0;
+		LEVEL 0 FOR 1800000.0;
+		LEVEL 1 FOR 1280000.0;
+		LEVEL 0 FOR 1280000.0;
+		LEVEL 1 FOR 111895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[4]")
+TRANSITION_LIST("sync_generator:inst1|v_count[4]")
 {
 	NODE
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 688105.0;
-		LEVEL 1 FOR 311895.0;
+		NODE
+		{
+			REPEAT = 15;
+			LEVEL 1 FOR 640000.0;
+			LEVEL 0 FOR 640000.0;
+		}
+		LEVEL 1 FOR 640000.0;
+		LEVEL 0 FOR 1160000.0;
+		NODE
+		{
+			REPEAT = 2;
+			LEVEL 1 FOR 640000.0;
+			LEVEL 0 FOR 640000.0;
+		}
+		LEVEL 1 FOR 640000.0;
+		LEVEL 0 FOR 111895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[3]")
+TRANSITION_LIST("sync_generator:inst1|v_count[3]")
 {
 	NODE
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 5.0;
 		LEVEL 1 FOR 48100.0;
+		NODE
+		{
+			REPEAT = 32;
+			LEVEL 0 FOR 320000.0;
+			LEVEL 1 FOR 320000.0;
+		}
 		LEVEL 0 FOR 320000.0;
-		LEVEL 1 FOR 320000.0;
-		LEVEL 0 FOR 311895.0;
+		LEVEL 1 FOR 200000.0;
+		NODE
+		{
+			REPEAT = 6;
+			LEVEL 0 FOR 320000.0;
+			LEVEL 1 FOR 320000.0;
+		}
+		LEVEL 0 FOR 111895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[2]")
+TRANSITION_LIST("sync_generator:inst1|v_count[2]")
 {
 	NODE
 	{
@@ -834,16 +893,23 @@ TRANSITION_LIST("sync_generator:inst|v_count[2]")
 		LEVEL 1 FOR 40000.0;
 		NODE
 		{
-			REPEAT = 2;
+			REPEAT = 65;
 			LEVEL 0 FOR 160000.0;
 			LEVEL 1 FOR 160000.0;
 		}
 		LEVEL 0 FOR 160000.0;
-		LEVEL 1 FOR 151895.0;
+		LEVEL 1 FOR 40000.0;
+		NODE
+		{
+			REPEAT = 12;
+			LEVEL 0 FOR 160000.0;
+			LEVEL 1 FOR 160000.0;
+		}
+		LEVEL 0 FOR 111895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[1]")
+TRANSITION_LIST("sync_generator:inst1|v_count[1]")
 {
 	NODE
 	{
@@ -853,15 +919,23 @@ TRANSITION_LIST("sync_generator:inst|v_count[1]")
 		LEVEL 0 FOR 120000.0;
 		NODE
 		{
-			REPEAT = 5;
+			REPEAT = 130;
 			LEVEL 1 FOR 80000.0;
 			LEVEL 0 FOR 80000.0;
 		}
-		LEVEL 1 FOR 71895.0;
+		LEVEL 1 FOR 80000.0;
+		LEVEL 0 FOR 120000.0;
+		NODE
+		{
+			REPEAT = 24;
+			LEVEL 1 FOR 80000.0;
+			LEVEL 0 FOR 80000.0;
+		}
+		LEVEL 1 FOR 31895.0;
 	}
 }
 
-TRANSITION_LIST("sync_generator:inst|v_count[0]")
+TRANSITION_LIST("sync_generator:inst1|v_count[0]")
 {
 	NODE
 	{
@@ -871,11 +945,20 @@ TRANSITION_LIST("sync_generator:inst|v_count[0]")
 		LEVEL 0 FOR 80000.0;
 		NODE
 		{
-			REPEAT = 11;
+			REPEAT = 261;
 			LEVEL 1 FOR 40000.0;
 			LEVEL 0 FOR 40000.0;
 		}
-		LEVEL 1 FOR 31895.0;
+		LEVEL 1 FOR 40000.0;
+		LEVEL 0 FOR 80000.0;
+		NODE
+		{
+			REPEAT = 48;
+			LEVEL 1 FOR 40000.0;
+			LEVEL 0 FOR 40000.0;
+		}
+		LEVEL 1 FOR 40000.0;
+		LEVEL 0 FOR 31895.0;
 	}
 }
 
@@ -1005,7 +1088,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count";
+	CHANNEL = "sync_generator:inst1|h_count";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 13;
@@ -1015,7 +1098,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[9]";
+	CHANNEL = "sync_generator:inst1|h_count[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 14;
@@ -1025,7 +1108,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[8]";
+	CHANNEL = "sync_generator:inst1|h_count[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 15;
@@ -1035,7 +1118,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[7]";
+	CHANNEL = "sync_generator:inst1|h_count[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 16;
@@ -1045,7 +1128,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[6]";
+	CHANNEL = "sync_generator:inst1|h_count[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 17;
@@ -1055,7 +1138,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[5]";
+	CHANNEL = "sync_generator:inst1|h_count[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 18;
@@ -1065,7 +1148,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[4]";
+	CHANNEL = "sync_generator:inst1|h_count[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 19;
@@ -1075,7 +1158,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[3]";
+	CHANNEL = "sync_generator:inst1|h_count[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 20;
@@ -1085,7 +1168,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[2]";
+	CHANNEL = "sync_generator:inst1|h_count[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 21;
@@ -1095,7 +1178,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[1]";
+	CHANNEL = "sync_generator:inst1|h_count[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 22;
@@ -1105,7 +1188,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|h_count[0]";
+	CHANNEL = "sync_generator:inst1|h_count[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 23;
@@ -1115,7 +1198,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count";
+	CHANNEL = "sync_generator:inst1|v_count";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 24;
@@ -1125,7 +1208,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[9]";
+	CHANNEL = "sync_generator:inst1|v_count[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 25;
@@ -1135,7 +1218,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[8]";
+	CHANNEL = "sync_generator:inst1|v_count[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 26;
@@ -1145,7 +1228,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[7]";
+	CHANNEL = "sync_generator:inst1|v_count[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 27;
@@ -1155,7 +1238,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[6]";
+	CHANNEL = "sync_generator:inst1|v_count[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 28;
@@ -1165,7 +1248,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[5]";
+	CHANNEL = "sync_generator:inst1|v_count[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 29;
@@ -1175,7 +1258,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[4]";
+	CHANNEL = "sync_generator:inst1|v_count[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 30;
@@ -1185,7 +1268,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[3]";
+	CHANNEL = "sync_generator:inst1|v_count[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 31;
@@ -1195,7 +1278,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[2]";
+	CHANNEL = "sync_generator:inst1|v_count[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 32;
@@ -1205,7 +1288,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[1]";
+	CHANNEL = "sync_generator:inst1|v_count[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 33;
@@ -1215,7 +1298,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "sync_generator:inst|v_count[0]";
+	CHANNEL = "sync_generator:inst1|v_count[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Unsigned;
 	TREE_INDEX = 34;
@@ -1225,7 +1308,7 @@ DISPLAY_LINE
 
 TIME_BAR
 {
-	TIME = 18350;
+	TIME = 15000;
 	MASTER = TRUE;
 }
 ;

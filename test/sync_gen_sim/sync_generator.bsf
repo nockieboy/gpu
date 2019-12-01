@@ -20,7 +20,7 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 176 176)
+	(rect 16 16 464 176)
 	(text "sync_generator" (rect 5 0 81 12)(font "Arial" ))
 	(text "inst" (rect 8 144 25 156)(font "Arial" ))
 	(port
@@ -38,46 +38,60 @@ applicable agreement for further details.
 		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
-		(pt 160 32)
+		(pt 0 64)
+		(input)
+		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 0 0 273 12)(font "Arial" ))
+		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 21 59 294 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 448 32)
 		(output)
 		(text "pc_ena[3..0]" (rect 0 0 61 12)(font "Arial" ))
-		(text "pc_ena[3..0]" (rect 78 27 139 39)(font "Arial" ))
-		(line (pt 160 32)(pt 144 32)(line_width 3))
+		(text "pc_ena[3..0]" (rect 366 27 427 39)(font "Arial" ))
+		(line (pt 448 32)(pt 432 32)(line_width 3))
 	)
 	(port
-		(pt 160 48)
+		(pt 448 48)
 		(output)
 		(text "hde" (rect 0 0 17 12)(font "Arial" ))
-		(text "hde" (rect 122 43 139 55)(font "Arial" ))
-		(line (pt 160 48)(pt 144 48)(line_width 1))
+		(text "hde" (rect 410 43 427 55)(font "Arial" ))
+		(line (pt 448 48)(pt 432 48)(line_width 1))
 	)
 	(port
-		(pt 160 64)
+		(pt 448 64)
 		(output)
 		(text "vde" (rect 0 0 18 12)(font "Arial" ))
-		(text "vde" (rect 121 59 139 71)(font "Arial" ))
-		(line (pt 160 64)(pt 144 64)(line_width 1))
+		(text "vde" (rect 409 59 427 71)(font "Arial" ))
+		(line (pt 448 64)(pt 432 64)(line_width 1))
 	)
 	(port
-		(pt 160 80)
+		(pt 448 80)
 		(output)
 		(text "hsync" (rect 0 0 30 12)(font "Arial" ))
-		(text "hsync" (rect 109 75 139 87)(font "Arial" ))
-		(line (pt 160 80)(pt 144 80)(line_width 1))
+		(text "hsync" (rect 397 75 427 87)(font "Arial" ))
+		(line (pt 448 80)(pt 432 80)(line_width 1))
 	)
 	(port
-		(pt 160 96)
+		(pt 448 96)
 		(output)
 		(text "vsync" (rect 0 0 31 12)(font "Arial" ))
-		(text "vsync" (rect 108 91 139 103)(font "Arial" ))
-		(line (pt 160 96)(pt 144 96)(line_width 1))
+		(text "vsync" (rect 396 91 427 103)(font "Arial" ))
+		(line (pt 448 96)(pt 432 96)(line_width 1))
 	)
 	(port
-		(pt 160 112)
+		(pt 448 112)
 		(output)
 		(text "frame_ctr[15..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "frame_ctr[15..0]" (rect 59 107 139 119)(font "Arial" ))
-		(line (pt 160 112)(pt 144 112)(line_width 3))
+		(text "frame_ctr[15..0]" (rect 347 107 427 119)(font "Arial" ))
+		(line (pt 448 112)(pt 432 112)(line_width 3))
+	)
+	(port
+		(pt 448 128)
+		(output)
+		(text "raster_HV_triggers[47..0]" (rect 0 0 123 12)(font "Arial" ))
+		(text "raster_HV_triggers[47..0]" (rect 304 123 427 135)(font "Arial" ))
+		(line (pt 448 128)(pt 432 128)(line_width 3))
 	)
 	(parameter
 		"H_RES"
@@ -87,6 +101,16 @@ applicable agreement for further details.
 	(parameter
 		"V_RES"
 		"480"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IMAGE_OFFSET_X"
+		"16"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IMAGE_OFFSET_Y"
+		"16"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -120,12 +144,22 @@ applicable agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
-		"PIX_CLK_DIVIED"
+		"PIX_CLK_DIVIDER"
 		"4"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"HW_REGS_SIZE"
+		"8"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"BASE_OFFSET"
+		"32"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 144 144)(line_width 1))
+		(rectangle (rect 16 16 432 144)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 176 -64 276 16))
+	(annotation_block (parameter)(rect 464 -64 564 16))
 )

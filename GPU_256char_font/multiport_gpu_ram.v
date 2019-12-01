@@ -26,7 +26,6 @@ module multiport_gpu_ram (
 	output reg [19:0] addr_out_2,
 	output reg [19:0] addr_out_3,
 	output reg [19:0] addr_out_4,
-	//output reg [19:0] addr_host_out,                    // Not used
 	
 	// auxilliary read command bus (pass-thru output)
 	output reg [15:0] cmd_out_0,
@@ -45,7 +44,7 @@ module multiport_gpu_ram (
 	input clk_b,			// Host (Z80) clock input
 	input write_ena_b,	// Host (Z80) clock enable
 	input [19:0] addr_host_in,
-    input [7:0]  data_host_in,
+   input [7:0]  data_host_in,
 	output [7:0] data_host_out
 	
 );

@@ -1,0 +1,722 @@
+Simulator report for REGISTER_BANK
+Tue Nov 26 19:53:05 2019
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. Coverage Summary
+  6. Complete 1/0-Value Coverage
+  7. Missing 1-Value Coverage
+  8. Missing 0-Value Coverage
+  9. Simulator INI Usage
+ 10. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 1.0 us       ;
+; Simulation Netlist Size     ; 361 nodes    ;
+; Simulation Coverage         ;      22.44 % ;
+; Total Number of Transitions ; 553          ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone III  ;
++-----------------------------+--------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                             ;
++--------------------------------------------------------------------------------------------+-------------------+---------------+
+; Option                                                                                     ; Setting           ; Default Value ;
++--------------------------------------------------------------------------------------------+-------------------+---------------+
+; Simulation mode                                                                            ; Functional        ; Timing        ;
+; Start time                                                                                 ; 0 ns              ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF              ;               ;
+; Vector input source                                                                        ; REGISTER_BANK.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On                ; On            ;
+; Check outputs                                                                              ; Off               ; Off           ;
+; Report simulation coverage                                                                 ; On                ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On                ; On            ;
+; Display missing 1-value coverage report                                                    ; On                ; On            ;
+; Display missing 0-value coverage report                                                    ; On                ; On            ;
+; Detect setup and hold time violations                                                      ; Off               ; Off           ;
+; Detect glitches                                                                            ; Off               ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off               ; Off           ;
+; Generate Signal Activity File                                                              ; Off               ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off               ; Off           ;
+; Group bus channels in simulation results                                                   ; Off               ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On                ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE        ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off               ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off               ;               ;
+; Perform Glitch Filtering in Timing Simulation                                              ; Auto              ; Auto          ;
+; Interconnect Delay Model Type                                                              ; Transport         ; Transport     ;
+; Cell Delay Model Type                                                                      ; Transport         ; Transport     ;
++--------------------------------------------------------------------------------------------+-------------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      22.44 % ;
+; Total nodes checked                                 ; 361          ;
+; Total output ports checked                          ; 361          ;
+; Total output ports with complete 1/0-value coverage ; 81           ;
+; Total output ports with no 1/0-value coverage       ; 198          ;
+; Total output ports with no 1-value coverage         ; 212          ;
+; Total output ports with no 0-value coverage         ; 266          ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                                                              ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+; Node Name                                                         ; Output Port Name                                                  ; Output Port Type ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+; |REGISTER_BANK|out0[2]                                            ; |REGISTER_BANK|out0[2]                                            ; pin_out          ;
+; |REGISTER_BANK|rst                                                ; |REGISTER_BANK|rst                                                ; out              ;
+; |REGISTER_BANK|clk                                                ; |REGISTER_BANK|clk                                                ; out              ;
+; |REGISTER_BANK|addr[5]                                            ; |REGISTER_BANK|addr[5]                                            ; out              ;
+; |REGISTER_BANK|addr[4]                                            ; |REGISTER_BANK|addr[4]                                            ; out              ;
+; |REGISTER_BANK|addr[3]                                            ; |REGISTER_BANK|addr[3]                                            ; out              ;
+; |REGISTER_BANK|addr[2]                                            ; |REGISTER_BANK|addr[2]                                            ; out              ;
+; |REGISTER_BANK|addr[1]                                            ; |REGISTER_BANK|addr[1]                                            ; out              ;
+; |REGISTER_BANK|addr[0]                                            ; |REGISTER_BANK|addr[0]                                            ; out              ;
+; |REGISTER_BANK|data[4]                                            ; |REGISTER_BANK|data[4]                                            ; out              ;
+; |REGISTER_BANK|data[3]                                            ; |REGISTER_BANK|data[3]                                            ; out              ;
+; |REGISTER_BANK|data[2]                                            ; |REGISTER_BANK|data[2]                                            ; out              ;
+; |REGISTER_BANK|data[1]                                            ; |REGISTER_BANK|data[1]                                            ; out              ;
+; |REGISTER_BANK|data[0]                                            ; |REGISTER_BANK|data[0]                                            ; out              ;
+; |REGISTER_BANK|out1[2]                                            ; |REGISTER_BANK|out1[2]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[0]                                            ; |REGISTER_BANK|out1[0]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[2]                                            ; |REGISTER_BANK|out2[2]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[1]                                            ; |REGISTER_BANK|out3[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[0]                                            ; |REGISTER_BANK|out3[0]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[3]                                            ; |REGISTER_BANK|out4[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[3]                                            ; |REGISTER_BANK|out5[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[0]                                            ; |REGISTER_BANK|out5[0]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[3]                                            ; |REGISTER_BANK|out6[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[1]                                            ; |REGISTER_BANK|out7[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[0]                                            ; |REGISTER_BANK|out7[0]                                            ; pin_out          ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1990  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1990  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1991  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1991  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1996  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1996  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2004  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2004  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2007  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2007  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2012  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2012  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2022  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2022  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2023  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2023  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2029  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2029  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2037  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2037  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2039  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2039  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2045  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2045  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2053  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2053  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2061  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2061  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2063  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2063  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2069  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2069  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2078  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2078  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2079  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2079  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2084  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2084  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2092  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2092  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2095  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2095  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2100  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2100  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2110  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2110  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2111  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2111  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4101  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4101  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4109  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4109  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4111  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4111  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4117  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4117  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4126  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4126  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4127  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4127  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4132  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4132  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4140  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4140  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4143  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4143  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4148  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4148  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4158  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4158  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4159  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4159  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][0] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][0] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][0] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][0] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][0] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][0] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][0] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][0] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~0                ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~0                ; out0             ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~1                ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~1                ; out0             ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~2                ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~2                ; out0             ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~3                ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~3                ; out0             ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~4                ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~4                ; out0             ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~5                ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~5                ; out0             ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~6                ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~6                ; out0             ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~7                ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Decoder0~7                ; out0             ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                                                                                 ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+; Node Name                                                         ; Output Port Name                                                  ; Output Port Type ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+; |REGISTER_BANK|out0[7]                                            ; |REGISTER_BANK|out0[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[6]                                            ; |REGISTER_BANK|out0[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[5]                                            ; |REGISTER_BANK|out0[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[4]                                            ; |REGISTER_BANK|out0[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[3]                                            ; |REGISTER_BANK|out0[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[1]                                            ; |REGISTER_BANK|out0[1]                                            ; pin_out          ;
+; |REGISTER_BANK|wena                                               ; |REGISTER_BANK|wena                                               ; out              ;
+; |REGISTER_BANK|addr[19]                                           ; |REGISTER_BANK|addr[19]                                           ; out              ;
+; |REGISTER_BANK|addr[18]                                           ; |REGISTER_BANK|addr[18]                                           ; out              ;
+; |REGISTER_BANK|addr[17]                                           ; |REGISTER_BANK|addr[17]                                           ; out              ;
+; |REGISTER_BANK|addr[16]                                           ; |REGISTER_BANK|addr[16]                                           ; out              ;
+; |REGISTER_BANK|addr[15]                                           ; |REGISTER_BANK|addr[15]                                           ; out              ;
+; |REGISTER_BANK|addr[14]                                           ; |REGISTER_BANK|addr[14]                                           ; out              ;
+; |REGISTER_BANK|addr[13]                                           ; |REGISTER_BANK|addr[13]                                           ; out              ;
+; |REGISTER_BANK|addr[12]                                           ; |REGISTER_BANK|addr[12]                                           ; out              ;
+; |REGISTER_BANK|addr[11]                                           ; |REGISTER_BANK|addr[11]                                           ; out              ;
+; |REGISTER_BANK|addr[10]                                           ; |REGISTER_BANK|addr[10]                                           ; out              ;
+; |REGISTER_BANK|addr[9]                                            ; |REGISTER_BANK|addr[9]                                            ; out              ;
+; |REGISTER_BANK|addr[8]                                            ; |REGISTER_BANK|addr[8]                                            ; out              ;
+; |REGISTER_BANK|addr[7]                                            ; |REGISTER_BANK|addr[7]                                            ; out              ;
+; |REGISTER_BANK|addr[6]                                            ; |REGISTER_BANK|addr[6]                                            ; out              ;
+; |REGISTER_BANK|data[7]                                            ; |REGISTER_BANK|data[7]                                            ; out              ;
+; |REGISTER_BANK|data[6]                                            ; |REGISTER_BANK|data[6]                                            ; out              ;
+; |REGISTER_BANK|out1[7]                                            ; |REGISTER_BANK|out1[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[6]                                            ; |REGISTER_BANK|out1[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[5]                                            ; |REGISTER_BANK|out1[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[4]                                            ; |REGISTER_BANK|out1[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[3]                                            ; |REGISTER_BANK|out1[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[7]                                            ; |REGISTER_BANK|out2[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[6]                                            ; |REGISTER_BANK|out2[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[5]                                            ; |REGISTER_BANK|out2[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[4]                                            ; |REGISTER_BANK|out2[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[3]                                            ; |REGISTER_BANK|out2[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[7]                                            ; |REGISTER_BANK|out3[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[6]                                            ; |REGISTER_BANK|out3[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[5]                                            ; |REGISTER_BANK|out3[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[4]                                            ; |REGISTER_BANK|out3[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[3]                                            ; |REGISTER_BANK|out3[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[7]                                            ; |REGISTER_BANK|out4[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[6]                                            ; |REGISTER_BANK|out4[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[5]                                            ; |REGISTER_BANK|out4[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[4]                                            ; |REGISTER_BANK|out4[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[1]                                            ; |REGISTER_BANK|out4[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[7]                                            ; |REGISTER_BANK|out5[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[6]                                            ; |REGISTER_BANK|out5[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[5]                                            ; |REGISTER_BANK|out5[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[4]                                            ; |REGISTER_BANK|out5[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[7]                                            ; |REGISTER_BANK|out6[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[6]                                            ; |REGISTER_BANK|out6[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[5]                                            ; |REGISTER_BANK|out6[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[4]                                            ; |REGISTER_BANK|out6[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[7]                                            ; |REGISTER_BANK|out7[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[6]                                            ; |REGISTER_BANK|out7[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[5]                                            ; |REGISTER_BANK|out7[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[4]                                            ; |REGISTER_BANK|out7[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[2]                                            ; |REGISTER_BANK|out7[2]                                            ; pin_out          ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1984  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1984  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1985  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1985  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1986  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1986  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1987  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1987  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1989  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1989  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1992  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1992  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1993  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1993  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1994  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1994  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1995  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1995  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2000  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2000  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2001  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2001  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2002  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2002  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2003  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2003  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2008  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2008  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2009  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2009  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2010  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2010  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2011  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2011  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2014  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2014  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2016  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2016  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2017  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2017  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2018  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2018  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2019  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2019  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2020  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2020  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2024  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2024  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2025  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2025  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2026  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2026  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2027  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2027  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2028  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2028  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2032  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2032  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2033  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2033  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2034  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2034  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2035  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2035  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2036  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2036  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2040  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2040  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2041  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2041  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2042  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2042  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2043  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2043  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2044  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2044  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2046  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2046  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2048  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2048  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2049  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2049  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2050  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2050  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2051  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2051  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2052  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2052  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2054  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2054  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2056  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2056  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2057  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2057  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2058  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2058  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2059  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2059  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2060  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2060  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2064  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2064  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2065  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2065  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2066  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2066  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2067  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2067  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2068  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2068  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2072  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2072  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2073  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2073  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2074  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2074  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2075  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2075  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2076  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2076  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2080  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2080  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2081  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2081  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2082  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2082  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2083  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2083  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2086  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2086  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2088  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2088  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2089  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2089  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2090  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2090  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2091  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2091  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2096  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2096  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2097  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2097  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2098  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2098  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2099  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2099  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2104  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2104  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2105  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2105  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2106  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2106  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2107  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2107  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2109  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2109  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4096  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4096  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4097  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4097  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4098  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4098  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4099  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4099  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4100  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4100  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4102  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4102  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4104  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4104  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4105  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4105  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4106  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4106  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4107  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4107  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4108  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4108  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4112  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4112  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4113  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4113  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4114  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4114  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4115  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4115  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4116  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4116  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4120  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4120  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4121  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4121  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4122  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4122  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4123  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4123  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4124  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4124  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4128  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4128  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4129  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4129  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4130  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4130  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4131  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4131  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4134  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4134  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4136  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4136  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4137  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4137  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4138  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4138  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4139  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4139  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4144  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4144  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4145  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4145  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4146  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4146  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4147  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4147  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4152  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4152  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4153  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4153  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4154  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4154  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4155  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4155  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4157  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4157  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][7] ; regout           ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                                                                                 ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+; Node Name                                                         ; Output Port Name                                                  ; Output Port Type ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+; |REGISTER_BANK|out0[7]                                            ; |REGISTER_BANK|out0[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[6]                                            ; |REGISTER_BANK|out0[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[5]                                            ; |REGISTER_BANK|out0[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[4]                                            ; |REGISTER_BANK|out0[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[3]                                            ; |REGISTER_BANK|out0[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[1]                                            ; |REGISTER_BANK|out0[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out0[0]                                            ; |REGISTER_BANK|out0[0]                                            ; pin_out          ;
+; |REGISTER_BANK|wena                                               ; |REGISTER_BANK|wena                                               ; out              ;
+; |REGISTER_BANK|data[7]                                            ; |REGISTER_BANK|data[7]                                            ; out              ;
+; |REGISTER_BANK|data[6]                                            ; |REGISTER_BANK|data[6]                                            ; out              ;
+; |REGISTER_BANK|data[5]                                            ; |REGISTER_BANK|data[5]                                            ; out              ;
+; |REGISTER_BANK|out1[7]                                            ; |REGISTER_BANK|out1[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[6]                                            ; |REGISTER_BANK|out1[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[5]                                            ; |REGISTER_BANK|out1[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[4]                                            ; |REGISTER_BANK|out1[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[3]                                            ; |REGISTER_BANK|out1[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out1[1]                                            ; |REGISTER_BANK|out1[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[7]                                            ; |REGISTER_BANK|out2[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[6]                                            ; |REGISTER_BANK|out2[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[5]                                            ; |REGISTER_BANK|out2[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[4]                                            ; |REGISTER_BANK|out2[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[3]                                            ; |REGISTER_BANK|out2[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[1]                                            ; |REGISTER_BANK|out2[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out2[0]                                            ; |REGISTER_BANK|out2[0]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[7]                                            ; |REGISTER_BANK|out3[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[6]                                            ; |REGISTER_BANK|out3[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[5]                                            ; |REGISTER_BANK|out3[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[4]                                            ; |REGISTER_BANK|out3[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[3]                                            ; |REGISTER_BANK|out3[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out3[2]                                            ; |REGISTER_BANK|out3[2]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[7]                                            ; |REGISTER_BANK|out4[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[6]                                            ; |REGISTER_BANK|out4[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[5]                                            ; |REGISTER_BANK|out4[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[4]                                            ; |REGISTER_BANK|out4[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[2]                                            ; |REGISTER_BANK|out4[2]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[1]                                            ; |REGISTER_BANK|out4[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out4[0]                                            ; |REGISTER_BANK|out4[0]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[7]                                            ; |REGISTER_BANK|out5[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[6]                                            ; |REGISTER_BANK|out5[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[5]                                            ; |REGISTER_BANK|out5[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[4]                                            ; |REGISTER_BANK|out5[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[2]                                            ; |REGISTER_BANK|out5[2]                                            ; pin_out          ;
+; |REGISTER_BANK|out5[1]                                            ; |REGISTER_BANK|out5[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[7]                                            ; |REGISTER_BANK|out6[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[6]                                            ; |REGISTER_BANK|out6[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[5]                                            ; |REGISTER_BANK|out6[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[4]                                            ; |REGISTER_BANK|out6[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[2]                                            ; |REGISTER_BANK|out6[2]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[1]                                            ; |REGISTER_BANK|out6[1]                                            ; pin_out          ;
+; |REGISTER_BANK|out6[0]                                            ; |REGISTER_BANK|out6[0]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[7]                                            ; |REGISTER_BANK|out7[7]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[6]                                            ; |REGISTER_BANK|out7[6]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[5]                                            ; |REGISTER_BANK|out7[5]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[4]                                            ; |REGISTER_BANK|out7[4]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[3]                                            ; |REGISTER_BANK|out7[3]                                            ; pin_out          ;
+; |REGISTER_BANK|out7[2]                                            ; |REGISTER_BANK|out7[2]                                            ; pin_out          ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|valid_wr                  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|valid_wr                  ; out0             ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1984  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1984  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1985  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1985  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1986  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1986  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1987  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1987  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1988  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1988  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1989  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1989  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1992  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1992  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1993  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1993  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1994  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1994  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1995  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1995  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1997  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1997  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1998  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1998  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1999  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~1999  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2000  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2000  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2001  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2001  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2002  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2002  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2003  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2003  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2005  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2005  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2006  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2006  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2008  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2008  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2009  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2009  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2010  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2010  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2011  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2011  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2013  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2013  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2014  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2014  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2015  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2015  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2016  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2016  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2017  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2017  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2018  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2018  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2019  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2019  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2020  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2020  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2021  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2021  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2024  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2024  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2025  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2025  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2026  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2026  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2027  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2027  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2028  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2028  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2030  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2030  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2031  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2031  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2032  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2032  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2033  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2033  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2034  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2034  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2035  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2035  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2036  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2036  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2038  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2038  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2040  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2040  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2041  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2041  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2042  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2042  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2043  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2043  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2044  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2044  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2046  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2046  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2047  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2047  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2048  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2048  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2049  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2049  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2050  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2050  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2051  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2051  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2052  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2052  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2054  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2054  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2055  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2055  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2056  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2056  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2057  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2057  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2058  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2058  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2059  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2059  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2060  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2060  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2062  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2062  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2064  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2064  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2065  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2065  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2066  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2066  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2067  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2067  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2068  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2068  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2070  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2070  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2071  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2071  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2072  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2072  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2073  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2073  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2074  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2074  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2075  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2075  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2076  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2076  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2077  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2077  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2080  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2080  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2081  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2081  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2082  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2082  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2083  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2083  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2085  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2085  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2086  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2086  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2087  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2087  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2088  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2088  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2089  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2089  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2090  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2090  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2091  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2091  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2093  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2093  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2094  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2094  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2096  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2096  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2097  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2097  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2098  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2098  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2099  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2099  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2101  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2101  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2102  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2102  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2103  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2103  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2104  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2104  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2105  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2105  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2106  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2106  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2107  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2107  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2108  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2108  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2109  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~2109  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4096  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4096  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4097  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4097  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4098  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4098  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4099  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4099  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4100  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4100  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4102  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4102  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4103  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4103  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4104  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4104  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4105  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4105  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4106  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4106  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4107  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4107  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4108  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4108  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4110  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4110  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4112  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4112  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4113  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4113  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4114  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4114  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4115  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4115  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4116  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4116  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4118  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4118  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4119  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4119  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4120  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4120  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4121  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4121  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4122  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4122  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4123  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4123  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4124  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4124  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4125  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4125  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4128  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4128  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4129  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4129  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4130  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4130  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4131  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4131  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4133  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4133  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4134  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4134  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4135  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4135  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4136  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4136  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4137  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4137  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4138  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4138  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4139  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4139  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4141  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4141  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4142  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4142  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4144  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4144  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4145  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4145  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4146  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4146  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4147  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4147  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4149  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4149  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4150  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4150  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4151  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4151  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4152  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4152  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4153  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4153  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4154  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4154  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4155  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4155  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4156  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4156  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4157  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs~4157  ; out              ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[7][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][0] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][0] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[6][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[5][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][0] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][0] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[4][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][2] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][2] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[3][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][0] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][0] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[2][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[1][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][0] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][0] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][1] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][1] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][3] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][3] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][4] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][4] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][5] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][5] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][6] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][6] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][7] ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|GPU_HW_Control_regs[0][7] ; regout           ;
+; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Equal0~0                  ; |REGISTER_BANK|GPU_HW_Control_Regs:inst|Equal0~0                  ; out0             ;
++-------------------------------------------------------------------+-------------------------------------------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Tue Nov 26 19:53:04 2019
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off REGISTER_BANK -c REGISTER_BANK
+Info: Using vector source file "G:/fpga/Quartus Projects/GPU/test/REGISTER_BANK/REGISTER_BANK.vwf"
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      22.44 %
+Info: Number of transitions in simulation is 553
+Info: Quartus II Simulator was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 152 megabytes
+    Info: Processing ended: Tue Nov 26 19:53:05 2019
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+

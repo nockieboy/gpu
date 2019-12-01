@@ -49,7 +49,7 @@ module GPU_HW_Control_Regs (
 	
 	wire valid_wr;
 	
-	assign valid_wr = we && ( addr_in[19:HW_REGS_SIZE] == BASE_WRITE_ADDRESS[19:HW_REGS_SIZE] );		// upper 8-bits of addr_in should equal data_in for a successful write
+	assign valid_wr = we && ( addr_in[19:HW_REGS_SIZE] == BASE_WRITE_ADDRESS[19:HW_REGS_SIZE] );	// upper x-bits of addr_in should equal BASE_WRITE_ADDRESS for a successful write
 	
 	integer i;
  

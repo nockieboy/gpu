@@ -14,16 +14,15 @@ module Z80_bridge (
 	input wire	gpu_rd_rdy,		// one-shot signal from mux that data is ready
 	
 	// output
-	//output wire [7:0]  	h_rd_data,	// Z80 DATA bus to return data from GPU RAM to Z80
-	//output reg            h_rd_req,	//
-	output reg	gpu_wr_ena,					// flag HIGH when writing to GPU RAM
+	
 	output reg	Z80_245data_dir,			// control level converter direction for data flow - HIGH = A -> B (toward FPGA)
-	output reg	[19:0]  gpu_addr,			// connect to Z80_addr in vid_osd_generator to address GPU RAM
-	output reg	[7:0]   gpu_wdata,		// 8-bit data bus to GPU RAM in vid_osd_generator
-	output reg	[7:0]   Z80_rData,
+	output reg	[7:0]   Z80_rData,		// Z80 DATA bus to return data from GPU RAM to Z80
 	output reg	Z80_rData_ena,				// flag HIGH to write data back to Z80
-	output reg	gpu_rd_req,
-	output reg	Z80_245_oe					// OE for 245 level translator (active LOW)
+	output reg	Z80_245_oe,					// OE for 245 level translator (active LOW)
+	output reg	gpu_wr_ena,					// flag HIGH for 1 clock when writing to GPU RAM
+	output reg	gpu_rd_req,					// flag HIGH for 1 clock when reading from GPU RAM
+	output reg	[19:0]  gpu_addr,			// connect to Z80_addr in vid_osd_generator to address GPU RAM
+	output reg	[7:0]   gpu_wdata			// 8-bit data bus to GPU RAM in vid_osd_generator
 
 );
 

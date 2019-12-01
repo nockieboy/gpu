@@ -1,5 +1,5 @@
 Analysis & Synthesis report for sync_gen_sim
-Mon Nov 25 23:51:17 2019
+Fri Nov 29 22:48:07 2019
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -15,8 +15,9 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
   9. Multiplexer Restructuring Statistics (Restructuring Performed)
- 10. Parameter Settings for User Entity Instance: sync_generator:inst
- 11. Analysis & Synthesis Messages
+ 10. Parameter Settings for User Entity Instance: sync_generator:inst1
+ 11. Parameter Settings for User Entity Instance: GPU_HW_Control_Regs:inst
+ 12. Analysis & Synthesis Messages
 
 
 
@@ -42,13 +43,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Nov 25 23:51:17 2019        ;
+; Analysis & Synthesis Status        ; Successful - Fri Nov 29 22:48:07 2019        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; sync_gen_sim                                 ;
 ; Top-level Entity Name              ; sync_gen_sim                                 ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 51                                           ;
-;     Total combinational functions  ; 51                                           ;
+; Total logic elements               ; 55                                           ;
+;     Total combinational functions  ; 55                                           ;
 ;     Dedicated logic registers      ; 28                                           ;
 ; Total registers                    ; 28                                           ;
 ; Total pins                         ; 10                                           ;
@@ -151,14 +152,15 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                     ;
-+-----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------+
-; File Name with User-Entered Path  ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                    ;
-+-----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------+
-; sync_gen_sim.bdf                  ; yes             ; User Block Diagram/Schematic File  ; G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/sync_gen_sim.bdf ;
-; ../../GPU_256char_font/sync_gen.v ; yes             ; User Verilog HDL File              ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/sync_gen.v        ;
-+-----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                      ;
++-----------------------------------------------+-----------------+------------------------------------+----------------------------------------------------------------------+
+; File Name with User-Entered Path              ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                         ;
++-----------------------------------------------+-----------------+------------------------------------+----------------------------------------------------------------------+
+; sync_gen_sim.bdf                              ; yes             ; User Block Diagram/Schematic File  ; G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/sync_gen_sim.bdf      ;
+; ../../GPU_256char_font/GPU_HW_Control_Regs.sv ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/GPU_HW_Control_Regs.sv ;
+; ../../GPU_256char_font/sync_generator.sv      ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Quartus Projects/GPU/GPU_256char_font/sync_generator.sv      ;
++-----------------------------------------------+-----------------+------------------------------------+----------------------------------------------------------------------+
 
 
 +---------------------------------------------------------+
@@ -166,16 +168,16 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 51        ;
+; Estimated Total logic elements              ; 55        ;
 ;                                             ;           ;
-; Total combinational functions               ; 51        ;
+; Total combinational functions               ; 55        ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 20        ;
+;     -- 4 input functions                    ; 23        ;
 ;     -- 3 input functions                    ; 5         ;
-;     -- <=2 input functions                  ; 26        ;
+;     -- <=2 input functions                  ; 27        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 33        ;
+;     -- normal mode                          ; 37        ;
 ;     -- arithmetic mode                      ; 18        ;
 ;                                             ;           ;
 ; Total registers                             ; 28        ;
@@ -185,19 +187,19 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; I/O pins                                    ; 10        ;
 ; Maximum fan-out node                        ; clk~input ;
 ; Maximum fan-out                             ; 28        ;
-; Total fan-out                               ; 281       ;
-; Average fan-out                             ; 2.84      ;
+; Total fan-out                               ; 295       ;
+; Average fan-out                             ; 2.86      ;
 +---------------------------------------------+-----------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                       ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name               ; Library Name ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------+--------------+
-; |sync_gen_sim              ; 51 (1)            ; 28 (0)       ; 0           ; 0            ; 0       ; 0         ; 10   ; 0            ; |sync_gen_sim                     ; work         ;
-;    |sync_generator:inst|   ; 50 (50)           ; 28 (28)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |sync_gen_sim|sync_generator:inst ;              ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                        ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------+--------------+
+; |sync_gen_sim              ; 55 (1)            ; 28 (0)       ; 0           ; 0            ; 0       ; 0         ; 10   ; 0            ; |sync_gen_sim                      ; work         ;
+;    |sync_generator:inst1|  ; 54 (54)           ; 28 (28)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |sync_gen_sim|sync_generator:inst1 ;              ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -216,31 +218,47 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                             ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                   ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------+
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |sync_gen_sim|sync_generator:inst|h_count[0] ;
-; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |sync_gen_sim|sync_generator:inst|v_count[0] ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |sync_gen_sim|sync_generator:inst1|h_count[9] ;
+; 5:1                ; 10 bits   ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; Yes        ; |sync_gen_sim|sync_generator:inst1|v_count[9] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------+
 
 
-+------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: sync_generator:inst ;
-+----------------+-------+-----------------------------------------+
-; Parameter Name ; Value ; Type                                    ;
-+----------------+-------+-----------------------------------------+
-; H_RES          ; 640   ; Signed Integer                          ;
-; V_RES          ; 480   ; Signed Integer                          ;
-; H_FRONT_PORCH  ; 16    ; Signed Integer                          ;
-; HSYNC_WIDTH    ; 96    ; Signed Integer                          ;
-; H_BACK_PORCH   ; 48    ; Signed Integer                          ;
-; V_FRONT_PORCH  ; 10    ; Signed Integer                          ;
-; VSYNC_HEIGHT   ; 2     ; Signed Integer                          ;
-; V_BACK_PORCH   ; 33    ; Signed Integer                          ;
-; PIX_CLK_DIVIED ; 4     ; Signed Integer                          ;
-+----------------+-------+-----------------------------------------+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sync_generator:inst1 ;
++-----------------+-------+-----------------------------------------+
+; Parameter Name  ; Value ; Type                                    ;
++-----------------+-------+-----------------------------------------+
+; H_RES           ; 640   ; Signed Integer                          ;
+; V_RES           ; 480   ; Signed Integer                          ;
+; IMAGE_OFFSET_X  ; 0     ; Signed Integer                          ;
+; IMAGE_OFFSET_Y  ; 0     ; Signed Integer                          ;
+; H_FRONT_PORCH   ; 16    ; Signed Integer                          ;
+; HSYNC_WIDTH     ; 96    ; Signed Integer                          ;
+; H_BACK_PORCH    ; 48    ; Signed Integer                          ;
+; V_FRONT_PORCH   ; 10    ; Signed Integer                          ;
+; VSYNC_HEIGHT    ; 2     ; Signed Integer                          ;
+; V_BACK_PORCH    ; 33    ; Signed Integer                          ;
+; PIX_CLK_DIVIDER ; 4     ; Signed Integer                          ;
+; HW_REGS_SIZE    ; 8     ; Signed Integer                          ;
+; BASE_OFFSET     ; 32    ; Signed Integer                          ;
++-----------------+-------+-----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: GPU_HW_Control_Regs:inst                                          ;
++--------------------+--------------------------------------------------------------------------+----------------+
+; Parameter Name     ; Value                                                                    ; Type           ;
++--------------------+--------------------------------------------------------------------------+----------------+
+; HW_REGS_SIZE       ; 8                                                                        ; Signed Integer ;
+; BASE_WRITE_ADDRESS ; 0                                                                        ; Signed Integer ;
+; RST_VALUES         ; A(0,23,0,0,2,149,0,16,0,0,1,238,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0) ; Untyped        ;
++--------------------+--------------------------------------------------------------------------+----------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -250,26 +268,29 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Nov 25 23:51:16 2019
+    Info: Processing started: Fri Nov 29 22:48:04 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off sync_gen_sim -c sync_gen_sim
 Info: Found 1 design units, including 1 entities, in source file sync_gen_sim.bdf
     Info: Found entity 1: sync_gen_sim
-Info: Found 1 design units, including 1 entities, in source file /fpga/quartus projects/gpu/gpu_256char_font/sync_gen.v
+Info: Found 1 design units, including 1 entities, in source file /fpga/quartus projects/gpu/gpu_256char_font/gpu_hw_control_regs.sv
+    Info: Found entity 1: GPU_HW_Control_Regs
+Info: Found 1 design units, including 1 entities, in source file /fpga/quartus projects/gpu/gpu_256char_font/sync_generator.sv
     Info: Found entity 1: sync_generator
 Info: Elaborating entity "sync_gen_sim" for the top level hierarchy
-Info: Elaborating entity "sync_generator" for hierarchy "sync_generator:inst"
-Warning (10230): Verilog HDL assignment warning at sync_gen.v(52): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at sync_gen.v(59): truncated value with size 32 to match size of target (10)
-Warning (10230): Verilog HDL assignment warning at sync_gen.v(60): truncated value with size 32 to match size of target (10)
+Info: Elaborating entity "sync_generator" for hierarchy "sync_generator:inst1"
+Warning (10230): Verilog HDL assignment warning at sync_generator.sv(64): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at sync_generator.sv(74): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at sync_generator.sv(75): truncated value with size 32 to match size of target (10)
+Info: Elaborating entity "GPU_HW_Control_Regs" for hierarchy "GPU_HW_Control_Regs:inst"
 Info: Timing-Driven Synthesis is running
-Info: Implemented 61 device resources after synthesis - the final resource count might be different
+Info: Implemented 65 device resources after synthesis - the final resource count might be different
     Info: Implemented 2 input pins
     Info: Implemented 8 output pins
-    Info: Implemented 51 logic cells
+    Info: Implemented 55 logic cells
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 227 megabytes
-    Info: Processing ended: Mon Nov 25 23:51:17 2019
-    Info: Elapsed time: 00:00:01
+    Info: Peak virtual memory: 237 megabytes
+    Info: Processing ended: Fri Nov 29 22:48:07 2019
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 
 

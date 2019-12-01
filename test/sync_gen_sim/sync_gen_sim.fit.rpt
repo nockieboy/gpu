@@ -1,5 +1,5 @@
 Fitter report for sync_gen_sim
-Mon Nov 25 23:51:23 2019
+Fri Nov 29 22:48:13 2019
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -66,15 +66,15 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Mon Nov 25 23:51:23 2019        ;
+; Fitter Status                      ; Successful - Fri Nov 29 22:48:13 2019        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; sync_gen_sim                                 ;
 ; Top-level Entity Name              ; sync_gen_sim                                 ;
 ; Family                             ; Cyclone III                                  ;
 ; Device                             ; EP3C5F256C8                                  ;
 ; Timing Models                      ; Final                                        ;
-; Total logic elements               ; 51 / 5,136 ( < 1 % )                         ;
-;     Total combinational functions  ; 51 / 5,136 ( < 1 % )                         ;
+; Total logic elements               ; 55 / 5,136 ( 1 % )                           ;
+;     Total combinational functions  ; 55 / 5,136 ( 1 % )                           ;
 ;     Dedicated logic registers      ; 28 / 5,136 ( < 1 % )                         ;
 ; Total registers                    ; 28                                           ;
 ; Total pins                         ; 10 / 183 ( 5 % )                             ;
@@ -184,8 +184,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;     -- Achieved         ; 0 / 0 ( 0.00 % )   ;
 ;                         ;                    ;
 ; Placement               ;                    ;
-;     -- Requested        ; 0 / 110 ( 0.00 % ) ;
-;     -- Achieved         ; 0 / 110 ( 0.00 % ) ;
+;     -- Requested        ; 0 / 114 ( 0.00 % ) ;
+;     -- Achieved         ; 0 / 114 ( 0.00 % ) ;
 ;                         ;                    ;
 ; Routing (by Connection) ;                    ;
 ;     -- Requested        ; 0 / 0 ( 0.00 % )   ;
@@ -207,7 +207,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------+---------+-------------------+-------------------------+-------------------+
 ; Partition Name ; # Nodes ; # Preserved Nodes ; Preservation Level Used ; Netlist Type Used ;
 +----------------+---------+-------------------+-------------------------+-------------------+
-; Top            ; 110     ; 0                 ; N/A                     ; Source File       ;
+; Top            ; 114     ; 0                 ; N/A                     ; Source File       ;
 +----------------+---------+-------------------+-------------------------+-------------------+
 
 
@@ -222,19 +222,19 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 +---------------------------------------------+----------------------+
 ; Resource                                    ; Usage                ;
 +---------------------------------------------+----------------------+
-; Total logic elements                        ; 51 / 5,136 ( < 1 % ) ;
-;     -- Combinational with no register       ; 23                   ;
+; Total logic elements                        ; 55 / 5,136 ( 1 % )   ;
+;     -- Combinational with no register       ; 27                   ;
 ;     -- Register only                        ; 0                    ;
 ;     -- Combinational with a register        ; 28                   ;
 ;                                             ;                      ;
 ; Logic element usage by number of LUT inputs ;                      ;
-;     -- 4 input functions                    ; 20                   ;
+;     -- 4 input functions                    ; 23                   ;
 ;     -- 3 input functions                    ; 5                    ;
-;     -- <=2 input functions                  ; 26                   ;
+;     -- <=2 input functions                  ; 27                   ;
 ;     -- Register only                        ; 0                    ;
 ;                                             ;                      ;
 ; Logic elements by mode                      ;                      ;
-;     -- normal mode                          ; 33                   ;
+;     -- normal mode                          ; 37                   ;
 ;     -- arithmetic mode                      ; 18                   ;
 ;                                             ;                      ;
 ; Total registers*                            ; 28 / 6,000 ( < 1 % ) ;
@@ -264,8 +264,8 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; Maximum fan-out                             ; 28                   ;
 ; Highest non-global fan-out signal           ; rst~input            ;
 ; Highest non-global fan-out                  ; 19                   ;
-; Total fan-out                               ; 287                  ;
-; Average fan-out                             ; 2.61                 ;
+; Total fan-out                               ; 301                  ;
+; Average fan-out                             ; 2.64                 ;
 +---------------------------------------------+----------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -277,7 +277,7 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; Name ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination Control Block ; Location assigned by ;
 +------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+
 ; clk  ; E2    ; 1        ; 0            ; 11           ; 0            ; 28                    ; 0                  ; yes    ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ;
-; rst  ; F1    ; 1        ; 0            ; 19           ; 21           ; 19                    ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ;
+; rst  ; G2    ; 1        ; 0            ; 18           ; 14           ; 19                    ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; Fitter               ;
 +------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+
 
 
@@ -286,13 +286,13 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 +---------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+------+----------------------+---------------------+
 ; Name    ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Output Register ; Output Enable Register ; Power Up High ; Slew Rate ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination                       ; Termination Control Block ; Output Buffer Pre-emphasis ; Voltage Output Differential ; Location assigned by ; Load ; Output Enable Source ; Output Enable Group ;
 +---------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+------+----------------------+---------------------+
-; hde     ; J1    ; 2        ; 0            ; 10           ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
+; hde     ; L2    ; 2        ; 0            ; 8            ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
 ; hs      ; J6    ; 2        ; 0            ; 10           ; 21           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
-; pena[0] ; G5    ; 1        ; 0            ; 19           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
-; pena[1] ; D1    ; 1        ; 0            ; 21           ; 21           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
-; pena[2] ; F2    ; 1        ; 0            ; 19           ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
-; pena[3] ; G1    ; 1        ; 0            ; 18           ; 21           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
-; vde     ; G2    ; 1        ; 0            ; 18           ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
+; pena[0] ; J1    ; 2        ; 0            ; 10           ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
+; pena[1] ; N2    ; 2        ; 0            ; 7            ; 14           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
+; pena[2] ; L4    ; 2        ; 0            ; 6            ; 21           ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
+; pena[3] ; J2    ; 2        ; 0            ; 10           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
+; vde     ; K1    ; 2        ; 0            ; 8            ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
 ; vs      ; C11   ; 7        ; 23           ; 24           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; 0 pF ; -                    ; -                   ;
 +---------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+------+----------------------+---------------------+
 
@@ -318,20 +318,20 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 +----------+-----------------------------+--------------------------+-------------------------+---------------------------+
 
 
-+------------------------------------------------------------+
-; I/O Bank Usage                                             ;
-+----------+------------------+---------------+--------------+
-; I/O Bank ; Usage            ; VCCIO Voltage ; VREF Voltage ;
-+----------+------------------+---------------+--------------+
-; 1        ; 11 / 18 ( 61 % ) ; 2.5V          ; --           ;
-; 2        ; 2 / 19 ( 11 % )  ; 2.5V          ; --           ;
-; 3        ; 0 / 26 ( 0 % )   ; 2.5V          ; --           ;
-; 4        ; 0 / 27 ( 0 % )   ; 2.5V          ; --           ;
-; 5        ; 0 / 25 ( 0 % )   ; 2.5V          ; --           ;
-; 6        ; 1 / 16 ( 6 % )   ; 2.5V          ; --           ;
-; 7        ; 1 / 26 ( 4 % )   ; 2.5V          ; --           ;
-; 8        ; 0 / 26 ( 0 % )   ; 2.5V          ; --           ;
-+----------+------------------+---------------+--------------+
++-----------------------------------------------------------+
+; I/O Bank Usage                                            ;
++----------+-----------------+---------------+--------------+
+; I/O Bank ; Usage           ; VCCIO Voltage ; VREF Voltage ;
++----------+-----------------+---------------+--------------+
+; 1        ; 6 / 18 ( 33 % ) ; 2.5V          ; --           ;
+; 2        ; 7 / 19 ( 37 % ) ; 2.5V          ; --           ;
+; 3        ; 0 / 26 ( 0 % )  ; 2.5V          ; --           ;
+; 4        ; 0 / 27 ( 0 % )  ; 2.5V          ; --           ;
+; 5        ; 0 / 25 ( 0 % )  ; 2.5V          ; --           ;
+; 6        ; 1 / 16 ( 6 % )  ; 2.5V          ; --           ;
+; 7        ; 1 / 26 ( 4 % )  ; 2.5V          ; --           ;
+; 8        ; 0 / 26 ( 0 % )  ; 2.5V          ; --           ;
++----------+-----------------+---------------+--------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -387,7 +387,7 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; C14      ; 149        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; C15      ; 147        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; C16      ; 146        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; D1       ; 8          ; 1        ; pena[1]                                                   ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; D1       ; 8          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; D2       ; 7          ; 1        ; ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; On           ;
 ; D3       ; 203        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; D4       ; 0          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -419,8 +419,8 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; E14      ;            ; 6        ; VCCIO6                                                    ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; E15      ; 128        ; 6        ; GND+                                                      ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
 ; E16      ; 127        ; 6        ; GND+                                                      ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
-; F1       ; 12         ; 1        ; rst                                                       ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
-; F2       ; 11         ; 1        ; pena[2]                                                   ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; F1       ; 12         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; F2       ; 11         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F3       ; 6          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F4       ; 9          ; 1        ; ^nSTATUS                                                  ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; F5       ; 2          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
@@ -435,11 +435,11 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; F14      ; 142        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F15      ; 140        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F16      ; 139        ; 6        ; ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN                ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
-; G1       ; 14         ; 1        ; pena[3]                                                   ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
-; G2       ; 13         ; 1        ; vde                                                       ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; G1       ; 14         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; G2       ; 13         ; 1        ; rst                                                       ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; G3       ;            ; 1        ; VCCIO1                                                    ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; G4       ;            ;          ; GND                                                       ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; G5       ; 10         ; 1        ; pena[0]                                                   ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; G5       ; 10         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; G6       ;            ;          ; VCCINT                                                    ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; G7       ;            ;          ; VCCINT                                                    ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; G8       ;            ;          ; VCCINT                                                    ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
@@ -468,8 +468,8 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; H14      ; 129        ; 6        ; ^CONF_DONE                                                ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; H15      ; 135        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; H16      ; 134        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; J1       ; 28         ; 2        ; hde                                                       ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
-; J2       ; 27         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; J1       ; 28         ; 2        ; pena[0]                                                   ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; J2       ; 27         ; 2        ; pena[3]                                                   ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; J3       ; 22         ; 1        ; ^nCE                                                      ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; J4       ; 21         ; 1        ; #TDO                                                      ; output ;              ;         ; --         ;                 ; --       ; --           ;
 ; J5       ; 20         ; 1        ; #TMS                                                      ; input  ;              ;         ; --         ;                 ; --       ; --           ;
@@ -484,7 +484,7 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; J14      ; 122        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; J15      ; 121        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; J16      ; 120        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; K1       ; 33         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; K1       ; 33         ; 2        ; vde                                                       ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; K2       ; 32         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; K3       ;            ; 2        ; VCCIO2                                                    ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; K4       ;            ;          ; GND                                                       ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
@@ -501,9 +501,9 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; K15      ; 119        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; K16      ; 118        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; L1       ; 35         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; L2       ; 34         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; L2       ; 34         ; 2        ; hde                                                       ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; L3       ; 36         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; L4       ; 40         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; L4       ; 40         ; 2        ; pena[2]                                                   ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; L5       ;            ; --       ; VCCA1                                                     ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; L6       ; 31         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; L7       ; 65         ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
@@ -533,7 +533,7 @@ The pin-out file can be found in G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/
 ; M15      ; 126        ; 5        ; GND+                                                      ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
 ; M16      ; 125        ; 5        ; GND+                                                      ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
 ; N1       ; 38         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; N2       ; 37         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; N2       ; 37         ; 2        ; pena[1]                                                   ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; N3       ; 45         ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; N4       ;            ;          ; VCCD_PLL1                                                 ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; N5       ; 55         ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
@@ -650,14 +650,14 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 Note: User assignments will override these defaults. The user specified values are listed in the Output Pins and Bidir Pins tables.
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                         ;
-+----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------+--------------+
-; Compilation Hierarchy Node ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M9Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name               ; Library Name ;
-+----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------+--------------+
-; |sync_gen_sim              ; 51 (1)      ; 28 (0)                    ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 10   ; 0            ; 23 (1)       ; 0 (0)             ; 28 (0)           ; |sync_gen_sim                     ; work         ;
-;    |sync_generator:inst|   ; 50 (50)     ; 28 (28)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 22 (22)      ; 0 (0)             ; 28 (28)          ; |sync_gen_sim|sync_generator:inst ;              ;
-+----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                          ;
++----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------+--------------+
+; Compilation Hierarchy Node ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M9Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                ; Library Name ;
++----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------+--------------+
+; |sync_gen_sim              ; 55 (1)      ; 28 (0)                    ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 10   ; 0            ; 27 (1)       ; 0 (0)             ; 28 (0)           ; |sync_gen_sim                      ; work         ;
+;    |sync_generator:inst1|  ; 54 (54)     ; 28 (28)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 26 (26)      ; 0 (0)             ; 28 (28)          ; |sync_gen_sim|sync_generator:inst1 ;              ;
++----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -675,51 +675,51 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; pena[1] ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; pena[0] ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; clk     ; Input    ; (0) 0 ps      ; --            ; --                    ; --  ; --   ;
-; rst     ; Input    ; --            ; (6) 2585 ps   ; --                    ; --  ; --   ;
+; rst     ; Input    ; (6) 2585 ps   ; --            ; --                    ; --  ; --   ;
 +---------+----------+---------------+---------------+-----------------------+-----+------+
 
 
-+------------------------------------------------------------------------+
-; Pad To Core Delay Chain Fanout                                         ;
-+------------------------------------------+-------------------+---------+
-; Source Pin / Fanout                      ; Pad To Core Index ; Setting ;
-+------------------------------------------+-------------------+---------+
-; clk                                      ;                   ;         ;
-; rst                                      ;                   ;         ;
-;      - sync_generator:inst|hde           ; 1                 ; 6       ;
-;      - sync_generator:inst|vde           ; 1                 ; 6       ;
-;      - sync_generator:inst|hsync         ; 1                 ; 6       ;
-;      - sync_generator:inst|vsync         ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[1]    ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[2]    ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[3]    ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[4]    ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[5]    ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[6]    ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[9]    ; 1                 ; 6       ;
-;      - sync_generator:inst|v_count[0]    ; 1                 ; 6       ;
-;      - sync_generator:inst|v_count[1]    ; 1                 ; 6       ;
-;      - sync_generator:inst|v_count[3]    ; 1                 ; 6       ;
-;      - sync_generator:inst|v_count[9]    ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[0]~22 ; 1                 ; 6       ;
-;      - sync_generator:inst|h_count[0]~23 ; 1                 ; 6       ;
-;      - sync_generator:inst|v_count[0]~22 ; 1                 ; 6       ;
-;      - sync_generator:inst|v_count[0]~23 ; 1                 ; 6       ;
-+------------------------------------------+-------------------+---------+
++-------------------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                                          ;
++-------------------------------------------+-------------------+---------+
+; Source Pin / Fanout                       ; Pad To Core Index ; Setting ;
++-------------------------------------------+-------------------+---------+
+; clk                                       ;                   ;         ;
+; rst                                       ;                   ;         ;
+;      - sync_generator:inst1|hde           ; 0                 ; 6       ;
+;      - sync_generator:inst1|vde           ; 0                 ; 6       ;
+;      - sync_generator:inst1|hsync         ; 0                 ; 6       ;
+;      - sync_generator:inst1|vsync         ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[1]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[2]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[3]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[4]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[5]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[6]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[9]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|v_count[0]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|v_count[1]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|v_count[3]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|v_count[9]    ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[9]~20 ; 0                 ; 6       ;
+;      - sync_generator:inst1|h_count[9]~21 ; 0                 ; 6       ;
+;      - sync_generator:inst1|v_count[9]~14 ; 0                 ; 6       ;
+;      - sync_generator:inst1|v_count[9]~16 ; 0                 ; 6       ;
++-------------------------------------------+-------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                                                ;
-+-----------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; Name                              ; Location           ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+-----------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; clk                               ; PIN_E2             ; 28      ; Clock        ; yes    ; Global Clock         ; GCLK4            ; --                        ;
-; rst                               ; PIN_F1             ; 19      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
-; sync_generator:inst|h_count[0]~22 ; LCCOMB_X30_Y14_N4  ; 10      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
-; sync_generator:inst|h_count[0]~23 ; LCCOMB_X31_Y14_N4  ; 10      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; sync_generator:inst|v_count[0]~22 ; LCCOMB_X29_Y14_N22 ; 10      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
-; sync_generator:inst|v_count[0]~23 ; LCCOMB_X30_Y14_N6  ; 10      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-+-----------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                 ;
++------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
+; Name                               ; Location           ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
+; clk                                ; PIN_E2             ; 28      ; Clock        ; yes    ; Global Clock         ; GCLK4            ; --                        ;
+; rst                                ; PIN_G2             ; 19      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; sync_generator:inst1|h_count[9]~20 ; LCCOMB_X31_Y15_N18 ; 10      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
+; sync_generator:inst1|h_count[9]~21 ; LCCOMB_X29_Y15_N4  ; 10      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; sync_generator:inst1|v_count[9]~14 ; LCCOMB_X29_Y15_N30 ; 10      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
+; sync_generator:inst1|v_count[9]~16 ; LCCOMB_X31_Y15_N30 ; 10      ; Clock enable ; no     ; --                   ; --               ; --                        ;
++------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------+
@@ -731,62 +731,62 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------+----------+---------+--------------------------------------+----------------------+------------------+---------------------------+
 
 
-+---------------------------------------------+
-; Non-Global High Fan-Out Signals             ;
-+-----------------------------------+---------+
-; Name                              ; Fan-Out ;
-+-----------------------------------+---------+
-; rst~input                         ; 19      ;
-; sync_generator:inst|v_count[0]~23 ; 10      ;
-; sync_generator:inst|v_count[0]~22 ; 10      ;
-; sync_generator:inst|h_count[0]~23 ; 10      ;
-; sync_generator:inst|h_count[0]~22 ; 10      ;
-; ~GND                              ; 9       ;
-; sync_generator:inst|Equal1~0      ; 7       ;
-; sync_generator:inst|pc_ena[0]     ; 6       ;
-; sync_generator:inst|pc_ena[1]     ; 6       ;
-; sync_generator:inst|Equal7~1      ; 5       ;
-; sync_generator:inst|pc_ena[2]     ; 5       ;
-; sync_generator:inst|pc_ena[3]     ; 5       ;
-; sync_generator:inst|v_count[2]    ; 4       ;
-; sync_generator:inst|v_count[1]    ; 4       ;
-; sync_generator:inst|v_count[4]    ; 4       ;
-; sync_generator:inst|v_count[0]    ; 4       ;
-; sync_generator:inst|v_count[9]    ; 4       ;
-; sync_generator:inst|v_count[5]    ; 4       ;
-; sync_generator:inst|h_count[9]    ; 4       ;
-; sync_generator:inst|h_count[8]    ; 4       ;
-; sync_generator:inst|h_count[6]    ; 4       ;
-; sync_generator:inst|h_count[5]    ; 4       ;
-; sync_generator:inst|Equal2~0      ; 3       ;
-; sync_generator:inst|v_count[8]    ; 3       ;
-; sync_generator:inst|v_count[7]    ; 3       ;
-; sync_generator:inst|v_count[6]    ; 3       ;
-; sync_generator:inst|v_count[3]    ; 3       ;
-; sync_generator:inst|h_count[7]    ; 3       ;
-; sync_generator:inst|h_count[4]    ; 3       ;
-; sync_generator:inst|Equal8~2      ; 2       ;
-; sync_generator:inst|vsync~0       ; 2       ;
-; sync_generator:inst|Equal2~1      ; 2       ;
-; sync_generator:inst|h_count[3]    ; 2       ;
-; sync_generator:inst|h_count[2]    ; 2       ;
-; sync_generator:inst|h_count[1]    ; 2       ;
-; sync_generator:inst|h_count[0]    ; 2       ;
-; sync_generator:inst|vsync         ; 2       ;
-; sync_generator:inst|hsync         ; 2       ;
-; sync_generator:inst|vde           ; 2       ;
-; sync_generator:inst|hde           ; 2       ;
-; ~ALTERA_nCEO~~obuf                ; 1       ;
-; ~ALTERA_DATA0~                    ; 1       ;
-; ~ALTERA_DCLK~~obuf                ; 1       ;
-; ~ALTERA_FLASH_nCE_nCSO~           ; 1       ;
-; ~ALTERA_ASDO_DATA1~               ; 1       ;
-; rst                               ; 1       ;
-; clk                               ; 1       ;
-; pena[0]~output                    ; 1       ;
-; pena[1]~output                    ; 1       ;
-; pena[2]~output                    ; 1       ;
-+-----------------------------------+---------+
++----------------------------------------------+
+; Non-Global High Fan-Out Signals              ;
++------------------------------------+---------+
+; Name                               ; Fan-Out ;
++------------------------------------+---------+
+; rst~input                          ; 19      ;
+; sync_generator:inst1|v_count[9]~16 ; 10      ;
+; sync_generator:inst1|v_count[9]~14 ; 10      ;
+; sync_generator:inst1|h_count[9]~21 ; 10      ;
+; sync_generator:inst1|h_count[9]~20 ; 10      ;
+; ~GND                               ; 9       ;
+; sync_generator:inst1|Equal1~0      ; 6       ;
+; sync_generator:inst1|pc_ena[0]     ; 6       ;
+; sync_generator:inst1|pc_ena[1]     ; 6       ;
+; sync_generator:inst1|pc_ena[2]     ; 5       ;
+; sync_generator:inst1|pc_ena[3]     ; 5       ;
+; sync_generator:inst1|h_count[9]    ; 5       ;
+; sync_generator:inst1|h_count[8]    ; 5       ;
+; sync_generator:inst1|h_count[7]    ; 5       ;
+; sync_generator:inst1|h_count[4]    ; 5       ;
+; sync_generator:inst1|v_count[3]    ; 4       ;
+; sync_generator:inst1|v_count[2]    ; 4       ;
+; sync_generator:inst1|v_count[9]    ; 4       ;
+; sync_generator:inst1|v_count[1]    ; 4       ;
+; sync_generator:inst1|h_count[6]    ; 4       ;
+; sync_generator:inst1|h_count[5]    ; 4       ;
+; sync_generator:inst1|Equal56~0     ; 3       ;
+; sync_generator:inst1|v_count[8]    ; 3       ;
+; sync_generator:inst1|v_count[7]    ; 3       ;
+; sync_generator:inst1|v_count[6]    ; 3       ;
+; sync_generator:inst1|v_count[5]    ; 3       ;
+; sync_generator:inst1|v_count[4]    ; 3       ;
+; sync_generator:inst1|v_count[0]    ; 3       ;
+; sync_generator:inst1|h_count[3]    ; 3       ;
+; sync_generator:inst1|h_count[2]    ; 3       ;
+; sync_generator:inst1|h_count[1]    ; 3       ;
+; sync_generator:inst1|h_count[0]    ; 3       ;
+; sync_generator:inst1|hsync         ; 3       ;
+; sync_generator:inst1|Equal107~0    ; 2       ;
+; sync_generator:inst1|vde~4         ; 2       ;
+; sync_generator:inst1|vsync~2       ; 2       ;
+; sync_generator:inst1|Equal56~2     ; 2       ;
+; sync_generator:inst1|Equal56~1     ; 2       ;
+; sync_generator:inst1|vde~1         ; 2       ;
+; sync_generator:inst1|hde~3         ; 2       ;
+; sync_generator:inst1|hsync~0       ; 2       ;
+; sync_generator:inst1|hde~0         ; 2       ;
+; sync_generator:inst1|vsync         ; 2       ;
+; sync_generator:inst1|vde           ; 2       ;
+; sync_generator:inst1|hde           ; 2       ;
+; ~ALTERA_nCEO~~obuf                 ; 1       ;
+; ~ALTERA_DATA0~                     ; 1       ;
+; ~ALTERA_DCLK~~obuf                 ; 1       ;
+; ~ALTERA_FLASH_nCE_nCSO~            ; 1       ;
+; ~ALTERA_ASDO_DATA1~                ; 1       ;
++------------------------------------+---------+
 
 
 +----------------------------------------------------+
@@ -794,38 +794,38 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------+-----------------------+
 ; Interconnect Resource Type ; Usage                 ;
 +----------------------------+-----------------------+
-; Block interconnects        ; 57 / 32,401 ( < 1 % ) ;
-; C16 interconnects          ; 0 / 1,326 ( 0 % )     ;
-; C4 interconnects           ; 29 / 21,816 ( < 1 % ) ;
-; Direct links               ; 29 / 32,401 ( < 1 % ) ;
+; Block interconnects        ; 66 / 32,401 ( < 1 % ) ;
+; C16 interconnects          ; 3 / 1,326 ( < 1 % )   ;
+; C4 interconnects           ; 33 / 21,816 ( < 1 % ) ;
+; Direct links               ; 13 / 32,401 ( < 1 % ) ;
 ; Global clocks              ; 1 / 10 ( 10 % )       ;
 ; Local interconnects        ; 42 / 10,320 ( < 1 % ) ;
-; R24 interconnects          ; 19 / 1,289 ( 1 % )    ;
-; R4 interconnects           ; 54 / 28,186 ( < 1 % ) ;
+; R24 interconnects          ; 14 / 1,289 ( 1 % )    ;
+; R4 interconnects           ; 57 / 28,186 ( < 1 % ) ;
 +----------------------------+-----------------------+
 
 
 +---------------------------------------------------------------------------+
 ; LAB Logic Elements                                                        ;
 +---------------------------------------------+-----------------------------+
-; Number of Logic Elements  (Average = 12.75) ; Number of LABs  (Total = 4) ;
+; Number of Logic Elements  (Average = 13.75) ; Number of LABs  (Total = 4) ;
 +---------------------------------------------+-----------------------------+
 ; 1                                           ; 0                           ;
 ; 2                                           ; 0                           ;
-; 3                                           ; 1                           ;
+; 3                                           ; 0                           ;
 ; 4                                           ; 0                           ;
 ; 5                                           ; 0                           ;
 ; 6                                           ; 0                           ;
 ; 7                                           ; 0                           ;
 ; 8                                           ; 0                           ;
 ; 9                                           ; 0                           ;
-; 10                                          ; 0                           ;
+; 10                                          ; 1                           ;
 ; 11                                          ; 0                           ;
 ; 12                                          ; 0                           ;
-; 13                                          ; 0                           ;
+; 13                                          ; 1                           ;
 ; 14                                          ; 0                           ;
 ; 15                                          ; 0                           ;
-; 16                                          ; 3                           ;
+; 16                                          ; 2                           ;
 +---------------------------------------------+-----------------------------+
 
 
@@ -835,16 +835,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; LAB-wide Signals  (Average = 2.00) ; Number of LABs  (Total = 4) ;
 +------------------------------------+-----------------------------+
 ; 1 Clock                            ; 4                           ;
-; 1 Clock enable                     ; 1                           ;
-; 1 Sync. clear                      ; 2                           ;
-; 1 Sync. load                       ; 1                           ;
+; 1 Clock enable                     ; 2                           ;
+; 1 Sync. load                       ; 2                           ;
 +------------------------------------+-----------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                        ;
 +----------------------------------------------+-----------------------------+
-; Number of Signals Sourced  (Average = 19.75) ; Number of LABs  (Total = 4) ;
+; Number of Signals Sourced  (Average = 20.75) ; Number of LABs  (Total = 4) ;
 +----------------------------------------------+-----------------------------+
 ; 0                                            ; 0                           ;
 ; 1                                            ; 0                           ;
@@ -852,7 +851,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 3                                            ; 0                           ;
 ; 4                                            ; 0                           ;
 ; 5                                            ; 0                           ;
-; 6                                            ; 1                           ;
+; 6                                            ; 0                           ;
 ; 7                                            ; 0                           ;
 ; 8                                            ; 0                           ;
 ; 9                                            ; 0                           ;
@@ -865,35 +864,32 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 16                                           ; 0                           ;
 ; 17                                           ; 0                           ;
 ; 18                                           ; 0                           ;
-; 19                                           ; 0                           ;
-; 20                                           ; 0                           ;
+; 19                                           ; 1                           ;
+; 20                                           ; 1                           ;
 ; 21                                           ; 1                           ;
 ; 22                                           ; 0                           ;
-; 23                                           ; 0                           ;
-; 24                                           ; 0                           ;
-; 25                                           ; 0                           ;
-; 26                                           ; 2                           ;
+; 23                                           ; 1                           ;
 +----------------------------------------------+-----------------------------+
 
 
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +--------------------------------------------------+-----------------------------+
-; Number of Signals Sourced Out  (Average = 10.00) ; Number of LABs  (Total = 4) ;
+; Number of Signals Sourced Out  (Average = 10.75) ; Number of LABs  (Total = 4) ;
 +--------------------------------------------------+-----------------------------+
 ; 0                                                ; 0                           ;
 ; 1                                                ; 0                           ;
 ; 2                                                ; 0                           ;
-; 3                                                ; 1                           ;
+; 3                                                ; 0                           ;
 ; 4                                                ; 0                           ;
 ; 5                                                ; 0                           ;
 ; 6                                                ; 0                           ;
 ; 7                                                ; 0                           ;
-; 8                                                ; 0                           ;
+; 8                                                ; 1                           ;
 ; 9                                                ; 0                           ;
-; 10                                               ; 0                           ;
+; 10                                               ; 1                           ;
 ; 11                                               ; 0                           ;
-; 12                                               ; 2                           ;
+; 12                                               ; 1                           ;
 ; 13                                               ; 1                           ;
 +--------------------------------------------------+-----------------------------+
 
@@ -901,26 +897,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                        ;
 +----------------------------------------------+-----------------------------+
-; Number of Distinct Inputs  (Average = 11.50) ; Number of LABs  (Total = 4) ;
+; Number of Distinct Inputs  (Average = 12.75) ; Number of LABs  (Total = 4) ;
 +----------------------------------------------+-----------------------------+
 ; 0                                            ; 0                           ;
 ; 1                                            ; 0                           ;
 ; 2                                            ; 0                           ;
 ; 3                                            ; 0                           ;
 ; 4                                            ; 0                           ;
-; 5                                            ; 0                           ;
-; 6                                            ; 2                           ;
+; 5                                            ; 1                           ;
+; 6                                            ; 1                           ;
 ; 7                                            ; 0                           ;
 ; 8                                            ; 0                           ;
 ; 9                                            ; 0                           ;
 ; 10                                           ; 0                           ;
-; 11                                           ; 1                           ;
+; 11                                           ; 0                           ;
 ; 12                                           ; 0                           ;
 ; 13                                           ; 0                           ;
 ; 14                                           ; 0                           ;
 ; 15                                           ; 0                           ;
 ; 16                                           ; 0                           ;
-; 17                                           ; 0                           ;
+; 17                                           ; 1                           ;
 ; 18                                           ; 0                           ;
 ; 19                                           ; 0                           ;
 ; 20                                           ; 0                           ;
@@ -1053,7 +1049,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Nov 25 23:51:18 2019
+    Info: Processing started: Fri Nov 29 22:48:08 2019
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off sync_gen_sim -c sync_gen_sim
 Info: Selected device EP3C5F256C8 for design "sync_gen_sim"
 Info: Core supply voltage is 1.2V
@@ -1130,7 +1126,7 @@ Info: Started post-fitting delay annotation
 Info: Delay annotation completed successfully
 Info: Quartus II Fitter was successful. 0 errors, 4 warnings
     Info: Peak virtual memory: 273 megabytes
-    Info: Processing ended: Mon Nov 25 23:51:23 2019
+    Info: Processing ended: Fri Nov 29 22:48:13 2019
     Info: Elapsed time: 00:00:05
     Info: Total CPU time (on all processors): 00:00:05
 

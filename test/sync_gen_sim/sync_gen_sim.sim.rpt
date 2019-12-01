@@ -1,5 +1,5 @@
 Simulator report for sync_gen_sim
-Mon Nov 25 23:59:42 2019
+Sun Dec 01 11:00:55 2019
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -44,10 +44,10 @@ applicable agreement for further details.
 ; Type                        ; Value        ;
 +-----------------------------+--------------+
 ; Simulation Start Time       ; 0 ps         ;
-; Simulation End Time         ; 1.0 ms       ;
-; Simulation Netlist Size     ; 179 nodes    ;
-; Simulation Coverage         ;      67.60 % ;
-; Total Number of Transitions ; 1410791      ;
+; Simulation End Time         ; 25.0 ms      ;
+; Simulation Netlist Size     ; 181 nodes    ;
+; Simulation Coverage         ;      96.69 % ;
+; Total Number of Transitions ; 38198975     ;
 ; Simulation Breakpoints      ; 0            ;
 ; Family                      ; Cyclone III  ;
 +-----------------------------+--------------+
@@ -96,144 +96,198 @@ Please use Quartus II to view the waveform report data.
 +-----------------------------------------------------+--------------+
 ; Type                                                ; Value        ;
 +-----------------------------------------------------+--------------+
-; Total coverage as a percentage                      ;      67.60 % ;
-; Total nodes checked                                 ; 179          ;
-; Total output ports checked                          ; 179          ;
-; Total output ports with complete 1/0-value coverage ; 121          ;
-; Total output ports with no 1/0-value coverage       ; 43           ;
-; Total output ports with no 1-value coverage         ; 45           ;
-; Total output ports with no 0-value coverage         ; 56           ;
+; Total coverage as a percentage                      ;      96.69 % ;
+; Total nodes checked                                 ; 181          ;
+; Total output ports checked                          ; 181          ;
+; Total output ports with complete 1/0-value coverage ; 175          ;
+; Total output ports with no 1/0-value coverage       ; 5            ;
+; Total output ports with no 1-value coverage         ; 6            ;
+; Total output ports with no 0-value coverage         ; 5            ;
 +-----------------------------------------------------+--------------+
 
 
 The following table displays output ports that toggle between 1 and 0 during simulation.
-+----------------------------------------------------------------------------------------------------------------+
-; Complete 1/0-Value Coverage                                                                                    ;
-+----------------------------------------------+----------------------------------------------+------------------+
-; Node Name                                    ; Output Port Name                             ; Output Port Type ;
-+----------------------------------------------+----------------------------------------------+------------------+
-; |sync_gen_sim|hde                            ; |sync_gen_sim|hde                            ; pin_out          ;
-; |sync_gen_sim|clk                            ; |sync_gen_sim|clk                            ; out              ;
-; |sync_gen_sim|hs                             ; |sync_gen_sim|hs                             ; pin_out          ;
-; |sync_gen_sim|pena[2]                        ; |sync_gen_sim|pena[2]                        ; pin_out          ;
-; |sync_gen_sim|pena[1]                        ; |sync_gen_sim|pena[1]                        ; pin_out          ;
-; |sync_gen_sim|pena[0]                        ; |sync_gen_sim|pena[0]                        ; pin_out          ;
-; |sync_gen_sim|sync_generator:inst|pc_ena~1   ; |sync_gen_sim|sync_generator:inst|pc_ena~1   ; out              ;
-; |sync_gen_sim|sync_generator:inst|pc_ena~2   ; |sync_gen_sim|sync_generator:inst|pc_ena~2   ; out              ;
-; |sync_gen_sim|sync_generator:inst|pc_ena~3   ; |sync_gen_sim|sync_generator:inst|pc_ena~3   ; out              ;
-; |sync_gen_sim|sync_generator:inst|hde~0      ; |sync_gen_sim|sync_generator:inst|hde~0      ; out              ;
-; |sync_gen_sim|sync_generator:inst|hsync~0    ; |sync_gen_sim|sync_generator:inst|hsync~0    ; out              ;
-; |sync_gen_sim|sync_generator:inst|hsync~1    ; |sync_gen_sim|sync_generator:inst|hsync~1    ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~0  ; |sync_gen_sim|sync_generator:inst|v_count~0  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~6  ; |sync_gen_sim|sync_generator:inst|v_count~6  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~7  ; |sync_gen_sim|sync_generator:inst|v_count~7  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~8  ; |sync_gen_sim|sync_generator:inst|v_count~8  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~9  ; |sync_gen_sim|sync_generator:inst|v_count~9  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~0  ; |sync_gen_sim|sync_generator:inst|h_count~0  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~1  ; |sync_gen_sim|sync_generator:inst|h_count~1  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~2  ; |sync_gen_sim|sync_generator:inst|h_count~2  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~3  ; |sync_gen_sim|sync_generator:inst|h_count~3  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~4  ; |sync_gen_sim|sync_generator:inst|h_count~4  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~5  ; |sync_gen_sim|sync_generator:inst|h_count~5  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~6  ; |sync_gen_sim|sync_generator:inst|h_count~6  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~7  ; |sync_gen_sim|sync_generator:inst|h_count~7  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~8  ; |sync_gen_sim|sync_generator:inst|h_count~8  ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~9  ; |sync_gen_sim|sync_generator:inst|h_count~9  ; out              ;
-; |sync_gen_sim|sync_generator:inst|hde~1      ; |sync_gen_sim|sync_generator:inst|hde~1      ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~10 ; |sync_gen_sim|sync_generator:inst|v_count~10 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~16 ; |sync_gen_sim|sync_generator:inst|v_count~16 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~17 ; |sync_gen_sim|sync_generator:inst|v_count~17 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~18 ; |sync_gen_sim|sync_generator:inst|v_count~18 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~19 ; |sync_gen_sim|sync_generator:inst|v_count~19 ; out              ;
-; |sync_gen_sim|sync_generator:inst|hde~2      ; |sync_gen_sim|sync_generator:inst|hde~2      ; out              ;
-; |sync_gen_sim|sync_generator:inst|hde~3      ; |sync_gen_sim|sync_generator:inst|hde~3      ; out              ;
-; |sync_gen_sim|sync_generator:inst|hsync~2    ; |sync_gen_sim|sync_generator:inst|hsync~2    ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~10 ; |sync_gen_sim|sync_generator:inst|h_count~10 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~11 ; |sync_gen_sim|sync_generator:inst|h_count~11 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~12 ; |sync_gen_sim|sync_generator:inst|h_count~12 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~13 ; |sync_gen_sim|sync_generator:inst|h_count~13 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~14 ; |sync_gen_sim|sync_generator:inst|h_count~14 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~15 ; |sync_gen_sim|sync_generator:inst|h_count~15 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~16 ; |sync_gen_sim|sync_generator:inst|h_count~16 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~17 ; |sync_gen_sim|sync_generator:inst|h_count~17 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~18 ; |sync_gen_sim|sync_generator:inst|h_count~18 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~19 ; |sync_gen_sim|sync_generator:inst|h_count~19 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~20 ; |sync_gen_sim|sync_generator:inst|v_count~20 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~26 ; |sync_gen_sim|sync_generator:inst|v_count~26 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~27 ; |sync_gen_sim|sync_generator:inst|v_count~27 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~28 ; |sync_gen_sim|sync_generator:inst|v_count~28 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~29 ; |sync_gen_sim|sync_generator:inst|v_count~29 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~20 ; |sync_gen_sim|sync_generator:inst|h_count~20 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~21 ; |sync_gen_sim|sync_generator:inst|h_count~21 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~22 ; |sync_gen_sim|sync_generator:inst|h_count~22 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~23 ; |sync_gen_sim|sync_generator:inst|h_count~23 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~24 ; |sync_gen_sim|sync_generator:inst|h_count~24 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~25 ; |sync_gen_sim|sync_generator:inst|h_count~25 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~26 ; |sync_gen_sim|sync_generator:inst|h_count~26 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~27 ; |sync_gen_sim|sync_generator:inst|h_count~27 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~28 ; |sync_gen_sim|sync_generator:inst|h_count~28 ; out              ;
-; |sync_gen_sim|sync_generator:inst|h_count~29 ; |sync_gen_sim|sync_generator:inst|h_count~29 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~36 ; |sync_gen_sim|sync_generator:inst|v_count~36 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~37 ; |sync_gen_sim|sync_generator:inst|v_count~37 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~38 ; |sync_gen_sim|sync_generator:inst|v_count~38 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~39 ; |sync_gen_sim|sync_generator:inst|v_count~39 ; out              ;
-; |sync_gen_sim|sync_generator:inst|hsync~3    ; |sync_gen_sim|sync_generator:inst|hsync~3    ; out              ;
-; |sync_gen_sim|sync_generator:inst|hde~4      ; |sync_gen_sim|sync_generator:inst|hde~4      ; out              ;
-; |sync_gen_sim|sync_generator:inst|pc_ena[0]  ; |sync_gen_sim|sync_generator:inst|pc_ena[0]  ; regout           ;
-; |sync_gen_sim|sync_generator:inst|hde        ; |sync_gen_sim|sync_generator:inst|hde        ; regout           ;
-; |sync_gen_sim|sync_generator:inst|hsync      ; |sync_gen_sim|sync_generator:inst|hsync      ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[0] ; |sync_gen_sim|sync_generator:inst|v_count[0] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[1] ; |sync_gen_sim|sync_generator:inst|v_count[1] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[2] ; |sync_gen_sim|sync_generator:inst|v_count[2] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[3] ; |sync_gen_sim|sync_generator:inst|v_count[3] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[9] ; |sync_gen_sim|sync_generator:inst|v_count[9] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[0] ; |sync_gen_sim|sync_generator:inst|h_count[0] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[1] ; |sync_gen_sim|sync_generator:inst|h_count[1] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[2] ; |sync_gen_sim|sync_generator:inst|h_count[2] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[3] ; |sync_gen_sim|sync_generator:inst|h_count[3] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[4] ; |sync_gen_sim|sync_generator:inst|h_count[4] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[5] ; |sync_gen_sim|sync_generator:inst|h_count[5] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[6] ; |sync_gen_sim|sync_generator:inst|h_count[6] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[7] ; |sync_gen_sim|sync_generator:inst|h_count[7] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[8] ; |sync_gen_sim|sync_generator:inst|h_count[8] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|h_count[9] ; |sync_gen_sim|sync_generator:inst|h_count[9] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|pc_ena[1]  ; |sync_gen_sim|sync_generator:inst|pc_ena[1]  ; regout           ;
-; |sync_gen_sim|sync_generator:inst|pc_ena[2]  ; |sync_gen_sim|sync_generator:inst|pc_ena[2]  ; regout           ;
-; |sync_gen_sim|sync_generator:inst|Add0~0     ; |sync_gen_sim|sync_generator:inst|Add0~0     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add0~1     ; |sync_gen_sim|sync_generator:inst|Add0~1     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add0~2     ; |sync_gen_sim|sync_generator:inst|Add0~2     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~0     ; |sync_gen_sim|sync_generator:inst|Add2~0     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~1     ; |sync_gen_sim|sync_generator:inst|Add2~1     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~2     ; |sync_gen_sim|sync_generator:inst|Add2~2     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~3     ; |sync_gen_sim|sync_generator:inst|Add2~3     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~4     ; |sync_gen_sim|sync_generator:inst|Add2~4     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~5     ; |sync_gen_sim|sync_generator:inst|Add2~5     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~16    ; |sync_gen_sim|sync_generator:inst|Add2~16    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~0     ; |sync_gen_sim|sync_generator:inst|Add3~0     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~1     ; |sync_gen_sim|sync_generator:inst|Add3~1     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~2     ; |sync_gen_sim|sync_generator:inst|Add3~2     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~3     ; |sync_gen_sim|sync_generator:inst|Add3~3     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~4     ; |sync_gen_sim|sync_generator:inst|Add3~4     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~5     ; |sync_gen_sim|sync_generator:inst|Add3~5     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~6     ; |sync_gen_sim|sync_generator:inst|Add3~6     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~7     ; |sync_gen_sim|sync_generator:inst|Add3~7     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~8     ; |sync_gen_sim|sync_generator:inst|Add3~8     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~9     ; |sync_gen_sim|sync_generator:inst|Add3~9     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~10    ; |sync_gen_sim|sync_generator:inst|Add3~10    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~11    ; |sync_gen_sim|sync_generator:inst|Add3~11    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~12    ; |sync_gen_sim|sync_generator:inst|Add3~12    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~13    ; |sync_gen_sim|sync_generator:inst|Add3~13    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~14    ; |sync_gen_sim|sync_generator:inst|Add3~14    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~15    ; |sync_gen_sim|sync_generator:inst|Add3~15    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add3~16    ; |sync_gen_sim|sync_generator:inst|Add3~16    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal0~0   ; |sync_gen_sim|sync_generator:inst|Equal0~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal1~0   ; |sync_gen_sim|sync_generator:inst|Equal1~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal2~0   ; |sync_gen_sim|sync_generator:inst|Equal2~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal3~0   ; |sync_gen_sim|sync_generator:inst|Equal3~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal4~0   ; |sync_gen_sim|sync_generator:inst|Equal4~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal7~0   ; |sync_gen_sim|sync_generator:inst|Equal7~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal8~0   ; |sync_gen_sim|sync_generator:inst|Equal8~0   ; out0             ;
-+----------------------------------------------+----------------------------------------------+------------------+
++------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                      ;
++-----------------------------------------------+-----------------------------------------------+------------------+
+; Node Name                                     ; Output Port Name                              ; Output Port Type ;
++-----------------------------------------------+-----------------------------------------------+------------------+
+; |sync_gen_sim|hde                             ; |sync_gen_sim|hde                             ; pin_out          ;
+; |sync_gen_sim|clk                             ; |sync_gen_sim|clk                             ; out              ;
+; |sync_gen_sim|vde                             ; |sync_gen_sim|vde                             ; pin_out          ;
+; |sync_gen_sim|hs                              ; |sync_gen_sim|hs                              ; pin_out          ;
+; |sync_gen_sim|vs                              ; |sync_gen_sim|vs                              ; pin_out          ;
+; |sync_gen_sim|pena[2]                         ; |sync_gen_sim|pena[2]                         ; pin_out          ;
+; |sync_gen_sim|pena[1]                         ; |sync_gen_sim|pena[1]                         ; pin_out          ;
+; |sync_gen_sim|pena[0]                         ; |sync_gen_sim|pena[0]                         ; pin_out          ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena~1   ; |sync_gen_sim|sync_generator:inst1|pc_ena~1   ; out              ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena~2   ; |sync_gen_sim|sync_generator:inst1|pc_ena~2   ; out              ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena~3   ; |sync_gen_sim|sync_generator:inst1|pc_ena~3   ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count[7] ; |sync_gen_sim|sync_generator:inst1|h_count[7] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[6] ; |sync_gen_sim|sync_generator:inst1|h_count[6] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[5] ; |sync_gen_sim|sync_generator:inst1|h_count[5] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[4] ; |sync_gen_sim|sync_generator:inst1|h_count[4] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[3] ; |sync_gen_sim|sync_generator:inst1|h_count[3] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[2] ; |sync_gen_sim|sync_generator:inst1|h_count[2] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[1] ; |sync_gen_sim|sync_generator:inst1|h_count[1] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[0] ; |sync_gen_sim|sync_generator:inst1|h_count[0] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[9] ; |sync_gen_sim|sync_generator:inst1|v_count[9] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[8] ; |sync_gen_sim|sync_generator:inst1|v_count[8] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[7] ; |sync_gen_sim|sync_generator:inst1|v_count[7] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[6] ; |sync_gen_sim|sync_generator:inst1|v_count[6] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[5] ; |sync_gen_sim|sync_generator:inst1|v_count[5] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[4] ; |sync_gen_sim|sync_generator:inst1|v_count[4] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[3] ; |sync_gen_sim|sync_generator:inst1|v_count[3] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[2] ; |sync_gen_sim|sync_generator:inst1|v_count[2] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[1] ; |sync_gen_sim|sync_generator:inst1|v_count[1] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|v_count[0] ; |sync_gen_sim|sync_generator:inst1|v_count[0] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|hsync      ; |sync_gen_sim|sync_generator:inst1|hsync      ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|vsync      ; |sync_gen_sim|sync_generator:inst1|vsync      ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|vde        ; |sync_gen_sim|sync_generator:inst1|vde        ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|hde        ; |sync_gen_sim|sync_generator:inst1|hde        ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|hde~0      ; |sync_gen_sim|sync_generator:inst1|hde~0      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|hsync~0    ; |sync_gen_sim|sync_generator:inst1|hsync~0    ; out              ;
+; |sync_gen_sim|sync_generator:inst1|hsync~1    ; |sync_gen_sim|sync_generator:inst1|hsync~1    ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vsync~0    ; |sync_gen_sim|sync_generator:inst1|vsync~0    ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vsync~1    ; |sync_gen_sim|sync_generator:inst1|vsync~1    ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vde~0      ; |sync_gen_sim|sync_generator:inst1|vde~0      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vde~1      ; |sync_gen_sim|sync_generator:inst1|vde~1      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~0  ; |sync_gen_sim|sync_generator:inst1|v_count~0  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~1  ; |sync_gen_sim|sync_generator:inst1|v_count~1  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~2  ; |sync_gen_sim|sync_generator:inst1|v_count~2  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~3  ; |sync_gen_sim|sync_generator:inst1|v_count~3  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~4  ; |sync_gen_sim|sync_generator:inst1|v_count~4  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~5  ; |sync_gen_sim|sync_generator:inst1|v_count~5  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~6  ; |sync_gen_sim|sync_generator:inst1|v_count~6  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~7  ; |sync_gen_sim|sync_generator:inst1|v_count~7  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~8  ; |sync_gen_sim|sync_generator:inst1|v_count~8  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~9  ; |sync_gen_sim|sync_generator:inst1|v_count~9  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|hde~1      ; |sync_gen_sim|sync_generator:inst1|hde~1      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~0  ; |sync_gen_sim|sync_generator:inst1|h_count~0  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~1  ; |sync_gen_sim|sync_generator:inst1|h_count~1  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~2  ; |sync_gen_sim|sync_generator:inst1|h_count~2  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~3  ; |sync_gen_sim|sync_generator:inst1|h_count~3  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~4  ; |sync_gen_sim|sync_generator:inst1|h_count~4  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~5  ; |sync_gen_sim|sync_generator:inst1|h_count~5  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~6  ; |sync_gen_sim|sync_generator:inst1|h_count~6  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~7  ; |sync_gen_sim|sync_generator:inst1|h_count~7  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~8  ; |sync_gen_sim|sync_generator:inst1|h_count~8  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~9  ; |sync_gen_sim|sync_generator:inst1|h_count~9  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vde~2      ; |sync_gen_sim|sync_generator:inst1|vde~2      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~10 ; |sync_gen_sim|sync_generator:inst1|v_count~10 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~11 ; |sync_gen_sim|sync_generator:inst1|v_count~11 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~12 ; |sync_gen_sim|sync_generator:inst1|v_count~12 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~13 ; |sync_gen_sim|sync_generator:inst1|v_count~13 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~14 ; |sync_gen_sim|sync_generator:inst1|v_count~14 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~15 ; |sync_gen_sim|sync_generator:inst1|v_count~15 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~16 ; |sync_gen_sim|sync_generator:inst1|v_count~16 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~17 ; |sync_gen_sim|sync_generator:inst1|v_count~17 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~18 ; |sync_gen_sim|sync_generator:inst1|v_count~18 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~19 ; |sync_gen_sim|sync_generator:inst1|v_count~19 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|hde~2      ; |sync_gen_sim|sync_generator:inst1|hde~2      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|hde~3      ; |sync_gen_sim|sync_generator:inst1|hde~3      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|hsync~2    ; |sync_gen_sim|sync_generator:inst1|hsync~2    ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vsync~2    ; |sync_gen_sim|sync_generator:inst1|vsync~2    ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~10 ; |sync_gen_sim|sync_generator:inst1|h_count~10 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~11 ; |sync_gen_sim|sync_generator:inst1|h_count~11 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~12 ; |sync_gen_sim|sync_generator:inst1|h_count~12 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~13 ; |sync_gen_sim|sync_generator:inst1|h_count~13 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~14 ; |sync_gen_sim|sync_generator:inst1|h_count~14 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~15 ; |sync_gen_sim|sync_generator:inst1|h_count~15 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~16 ; |sync_gen_sim|sync_generator:inst1|h_count~16 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~17 ; |sync_gen_sim|sync_generator:inst1|h_count~17 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~18 ; |sync_gen_sim|sync_generator:inst1|h_count~18 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~19 ; |sync_gen_sim|sync_generator:inst1|h_count~19 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vde~3      ; |sync_gen_sim|sync_generator:inst1|vde~3      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~20 ; |sync_gen_sim|sync_generator:inst1|v_count~20 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~21 ; |sync_gen_sim|sync_generator:inst1|v_count~21 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~22 ; |sync_gen_sim|sync_generator:inst1|v_count~22 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~23 ; |sync_gen_sim|sync_generator:inst1|v_count~23 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~24 ; |sync_gen_sim|sync_generator:inst1|v_count~24 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~25 ; |sync_gen_sim|sync_generator:inst1|v_count~25 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~26 ; |sync_gen_sim|sync_generator:inst1|v_count~26 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~27 ; |sync_gen_sim|sync_generator:inst1|v_count~27 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~28 ; |sync_gen_sim|sync_generator:inst1|v_count~28 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~29 ; |sync_gen_sim|sync_generator:inst1|v_count~29 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~20 ; |sync_gen_sim|sync_generator:inst1|h_count~20 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~21 ; |sync_gen_sim|sync_generator:inst1|h_count~21 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~22 ; |sync_gen_sim|sync_generator:inst1|h_count~22 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~23 ; |sync_gen_sim|sync_generator:inst1|h_count~23 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~24 ; |sync_gen_sim|sync_generator:inst1|h_count~24 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~25 ; |sync_gen_sim|sync_generator:inst1|h_count~25 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~26 ; |sync_gen_sim|sync_generator:inst1|h_count~26 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~27 ; |sync_gen_sim|sync_generator:inst1|h_count~27 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~28 ; |sync_gen_sim|sync_generator:inst1|h_count~28 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|h_count~29 ; |sync_gen_sim|sync_generator:inst1|h_count~29 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~30 ; |sync_gen_sim|sync_generator:inst1|v_count~30 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~31 ; |sync_gen_sim|sync_generator:inst1|v_count~31 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~32 ; |sync_gen_sim|sync_generator:inst1|v_count~32 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~33 ; |sync_gen_sim|sync_generator:inst1|v_count~33 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~34 ; |sync_gen_sim|sync_generator:inst1|v_count~34 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~35 ; |sync_gen_sim|sync_generator:inst1|v_count~35 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~36 ; |sync_gen_sim|sync_generator:inst1|v_count~36 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~37 ; |sync_gen_sim|sync_generator:inst1|v_count~37 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~38 ; |sync_gen_sim|sync_generator:inst1|v_count~38 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|v_count~39 ; |sync_gen_sim|sync_generator:inst1|v_count~39 ; out              ;
+; |sync_gen_sim|sync_generator:inst1|hsync~3    ; |sync_gen_sim|sync_generator:inst1|hsync~3    ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vsync~3    ; |sync_gen_sim|sync_generator:inst1|vsync~3    ; out              ;
+; |sync_gen_sim|sync_generator:inst1|vde~4      ; |sync_gen_sim|sync_generator:inst1|vde~4      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|hde~4      ; |sync_gen_sim|sync_generator:inst1|hde~4      ; out              ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena[0]  ; |sync_gen_sim|sync_generator:inst1|pc_ena[0]  ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[8] ; |sync_gen_sim|sync_generator:inst1|h_count[8] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|h_count[9] ; |sync_gen_sim|sync_generator:inst1|h_count[9] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena[1]  ; |sync_gen_sim|sync_generator:inst1|pc_ena[1]  ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena[2]  ; |sync_gen_sim|sync_generator:inst1|pc_ena[2]  ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|Add0~0     ; |sync_gen_sim|sync_generator:inst1|Add0~0     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add0~1     ; |sync_gen_sim|sync_generator:inst1|Add0~1     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add0~2     ; |sync_gen_sim|sync_generator:inst1|Add0~2     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~0     ; |sync_gen_sim|sync_generator:inst1|Add2~0     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~1     ; |sync_gen_sim|sync_generator:inst1|Add2~1     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~2     ; |sync_gen_sim|sync_generator:inst1|Add2~2     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~3     ; |sync_gen_sim|sync_generator:inst1|Add2~3     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~4     ; |sync_gen_sim|sync_generator:inst1|Add2~4     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~5     ; |sync_gen_sim|sync_generator:inst1|Add2~5     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~6     ; |sync_gen_sim|sync_generator:inst1|Add2~6     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~7     ; |sync_gen_sim|sync_generator:inst1|Add2~7     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~8     ; |sync_gen_sim|sync_generator:inst1|Add2~8     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~9     ; |sync_gen_sim|sync_generator:inst1|Add2~9     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~10    ; |sync_gen_sim|sync_generator:inst1|Add2~10    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~11    ; |sync_gen_sim|sync_generator:inst1|Add2~11    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~12    ; |sync_gen_sim|sync_generator:inst1|Add2~12    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~13    ; |sync_gen_sim|sync_generator:inst1|Add2~13    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~14    ; |sync_gen_sim|sync_generator:inst1|Add2~14    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~15    ; |sync_gen_sim|sync_generator:inst1|Add2~15    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add2~16    ; |sync_gen_sim|sync_generator:inst1|Add2~16    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~0     ; |sync_gen_sim|sync_generator:inst1|Add3~0     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~1     ; |sync_gen_sim|sync_generator:inst1|Add3~1     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~2     ; |sync_gen_sim|sync_generator:inst1|Add3~2     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~3     ; |sync_gen_sim|sync_generator:inst1|Add3~3     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~4     ; |sync_gen_sim|sync_generator:inst1|Add3~4     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~5     ; |sync_gen_sim|sync_generator:inst1|Add3~5     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~6     ; |sync_gen_sim|sync_generator:inst1|Add3~6     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~7     ; |sync_gen_sim|sync_generator:inst1|Add3~7     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~8     ; |sync_gen_sim|sync_generator:inst1|Add3~8     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~9     ; |sync_gen_sim|sync_generator:inst1|Add3~9     ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~10    ; |sync_gen_sim|sync_generator:inst1|Add3~10    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~11    ; |sync_gen_sim|sync_generator:inst1|Add3~11    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~12    ; |sync_gen_sim|sync_generator:inst1|Add3~12    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~13    ; |sync_gen_sim|sync_generator:inst1|Add3~13    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~14    ; |sync_gen_sim|sync_generator:inst1|Add3~14    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~15    ; |sync_gen_sim|sync_generator:inst1|Add3~15    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add3~16    ; |sync_gen_sim|sync_generator:inst1|Add3~16    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal0~0   ; |sync_gen_sim|sync_generator:inst1|Equal0~0   ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal1~0   ; |sync_gen_sim|sync_generator:inst1|Equal1~0   ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal50~0  ; |sync_gen_sim|sync_generator:inst1|Equal50~0  ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal51~0  ; |sync_gen_sim|sync_generator:inst1|Equal51~0  ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal52~0  ; |sync_gen_sim|sync_generator:inst1|Equal52~0  ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal53~0  ; |sync_gen_sim|sync_generator:inst1|Equal53~0  ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal54~0  ; |sync_gen_sim|sync_generator:inst1|Equal54~0  ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal55~0  ; |sync_gen_sim|sync_generator:inst1|Equal55~0  ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal104~0 ; |sync_gen_sim|sync_generator:inst1|Equal104~0 ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal105~0 ; |sync_gen_sim|sync_generator:inst1|Equal105~0 ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal106~0 ; |sync_gen_sim|sync_generator:inst1|Equal106~0 ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Equal107~0 ; |sync_gen_sim|sync_generator:inst1|Equal107~0 ; out0             ;
++-----------------------------------------------+-----------------------------------------------+------------------+
 
 
 The following table displays output ports that do not toggle to 1 during simulation.
@@ -243,50 +297,11 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; Node Name                                    ; Output Port Name                             ; Output Port Type ;
 +----------------------------------------------+----------------------------------------------+------------------+
 ; |sync_gen_sim|rst                            ; |sync_gen_sim|rst                            ; out              ;
-; |sync_gen_sim|vs                             ; |sync_gen_sim|vs                             ; pin_out          ;
 ; |sync_gen_sim|pena[3]                        ; |sync_gen_sim|pena[3]                        ; pin_out          ;
-; |sync_gen_sim|sync_generator:inst|pc_ena~0   ; |sync_gen_sim|sync_generator:inst|pc_ena~0   ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync~0    ; |sync_gen_sim|sync_generator:inst|vsync~0    ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync~1    ; |sync_gen_sim|sync_generator:inst|vsync~1    ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~1  ; |sync_gen_sim|sync_generator:inst|v_count~1  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~2  ; |sync_gen_sim|sync_generator:inst|v_count~2  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~3  ; |sync_gen_sim|sync_generator:inst|v_count~3  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~4  ; |sync_gen_sim|sync_generator:inst|v_count~4  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~11 ; |sync_gen_sim|sync_generator:inst|v_count~11 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~12 ; |sync_gen_sim|sync_generator:inst|v_count~12 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~13 ; |sync_gen_sim|sync_generator:inst|v_count~13 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~14 ; |sync_gen_sim|sync_generator:inst|v_count~14 ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync~2    ; |sync_gen_sim|sync_generator:inst|vsync~2    ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~21 ; |sync_gen_sim|sync_generator:inst|v_count~21 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~22 ; |sync_gen_sim|sync_generator:inst|v_count~22 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~23 ; |sync_gen_sim|sync_generator:inst|v_count~23 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~24 ; |sync_gen_sim|sync_generator:inst|v_count~24 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~30 ; |sync_gen_sim|sync_generator:inst|v_count~30 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~31 ; |sync_gen_sim|sync_generator:inst|v_count~31 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~32 ; |sync_gen_sim|sync_generator:inst|v_count~32 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~33 ; |sync_gen_sim|sync_generator:inst|v_count~33 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~34 ; |sync_gen_sim|sync_generator:inst|v_count~34 ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync~3    ; |sync_gen_sim|sync_generator:inst|vsync~3    ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync      ; |sync_gen_sim|sync_generator:inst|vsync      ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[5] ; |sync_gen_sim|sync_generator:inst|v_count[5] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[6] ; |sync_gen_sim|sync_generator:inst|v_count[6] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[7] ; |sync_gen_sim|sync_generator:inst|v_count[7] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[8] ; |sync_gen_sim|sync_generator:inst|v_count[8] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|pc_ena[3]  ; |sync_gen_sim|sync_generator:inst|pc_ena[3]  ; regout           ;
-; |sync_gen_sim|sync_generator:inst|Add0~3     ; |sync_gen_sim|sync_generator:inst|Add0~3     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add0~4     ; |sync_gen_sim|sync_generator:inst|Add0~4     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~7     ; |sync_gen_sim|sync_generator:inst|Add2~7     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~8     ; |sync_gen_sim|sync_generator:inst|Add2~8     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~9     ; |sync_gen_sim|sync_generator:inst|Add2~9     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~10    ; |sync_gen_sim|sync_generator:inst|Add2~10    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~11    ; |sync_gen_sim|sync_generator:inst|Add2~11    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~12    ; |sync_gen_sim|sync_generator:inst|Add2~12    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~13    ; |sync_gen_sim|sync_generator:inst|Add2~13    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~14    ; |sync_gen_sim|sync_generator:inst|Add2~14    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~15    ; |sync_gen_sim|sync_generator:inst|Add2~15    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal5~0   ; |sync_gen_sim|sync_generator:inst|Equal5~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal6~0   ; |sync_gen_sim|sync_generator:inst|Equal6~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal9~0   ; |sync_gen_sim|sync_generator:inst|Equal9~0   ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena~0  ; |sync_gen_sim|sync_generator:inst1|pc_ena~0  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena[3] ; |sync_gen_sim|sync_generator:inst1|pc_ena[3] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|Add0~3    ; |sync_gen_sim|sync_generator:inst1|Add0~3    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add0~4    ; |sync_gen_sim|sync_generator:inst1|Add0~4    ; out0             ;
 +----------------------------------------------+----------------------------------------------+------------------+
 
 
@@ -296,62 +311,11 @@ The following table displays output ports that do not toggle to 0 during simulat
 +----------------------------------------------+----------------------------------------------+------------------+
 ; Node Name                                    ; Output Port Name                             ; Output Port Type ;
 +----------------------------------------------+----------------------------------------------+------------------+
-; |sync_gen_sim|vde                            ; |sync_gen_sim|vde                            ; pin_out          ;
-; |sync_gen_sim|vs                             ; |sync_gen_sim|vs                             ; pin_out          ;
 ; |sync_gen_sim|pena[3]                        ; |sync_gen_sim|pena[3]                        ; pin_out          ;
-; |sync_gen_sim|sync_generator:inst|pc_ena~0   ; |sync_gen_sim|sync_generator:inst|pc_ena~0   ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync~0    ; |sync_gen_sim|sync_generator:inst|vsync~0    ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync~1    ; |sync_gen_sim|sync_generator:inst|vsync~1    ; out              ;
-; |sync_gen_sim|sync_generator:inst|vde~0      ; |sync_gen_sim|sync_generator:inst|vde~0      ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~1  ; |sync_gen_sim|sync_generator:inst|v_count~1  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~2  ; |sync_gen_sim|sync_generator:inst|v_count~2  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~3  ; |sync_gen_sim|sync_generator:inst|v_count~3  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~4  ; |sync_gen_sim|sync_generator:inst|v_count~4  ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~5  ; |sync_gen_sim|sync_generator:inst|v_count~5  ; out              ;
-; |sync_gen_sim|sync_generator:inst|vde~1      ; |sync_gen_sim|sync_generator:inst|vde~1      ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~11 ; |sync_gen_sim|sync_generator:inst|v_count~11 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~12 ; |sync_gen_sim|sync_generator:inst|v_count~12 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~13 ; |sync_gen_sim|sync_generator:inst|v_count~13 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~14 ; |sync_gen_sim|sync_generator:inst|v_count~14 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~15 ; |sync_gen_sim|sync_generator:inst|v_count~15 ; out              ;
-; |sync_gen_sim|sync_generator:inst|vde~2      ; |sync_gen_sim|sync_generator:inst|vde~2      ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync~2    ; |sync_gen_sim|sync_generator:inst|vsync~2    ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~21 ; |sync_gen_sim|sync_generator:inst|v_count~21 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~22 ; |sync_gen_sim|sync_generator:inst|v_count~22 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~23 ; |sync_gen_sim|sync_generator:inst|v_count~23 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~24 ; |sync_gen_sim|sync_generator:inst|v_count~24 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~25 ; |sync_gen_sim|sync_generator:inst|v_count~25 ; out              ;
-; |sync_gen_sim|sync_generator:inst|vde~3      ; |sync_gen_sim|sync_generator:inst|vde~3      ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~31 ; |sync_gen_sim|sync_generator:inst|v_count~31 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~32 ; |sync_gen_sim|sync_generator:inst|v_count~32 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~33 ; |sync_gen_sim|sync_generator:inst|v_count~33 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~34 ; |sync_gen_sim|sync_generator:inst|v_count~34 ; out              ;
-; |sync_gen_sim|sync_generator:inst|v_count~35 ; |sync_gen_sim|sync_generator:inst|v_count~35 ; out              ;
-; |sync_gen_sim|sync_generator:inst|vsync~3    ; |sync_gen_sim|sync_generator:inst|vsync~3    ; out              ;
-; |sync_gen_sim|sync_generator:inst|vde~4      ; |sync_gen_sim|sync_generator:inst|vde~4      ; out              ;
-; |sync_gen_sim|sync_generator:inst|vde        ; |sync_gen_sim|sync_generator:inst|vde        ; regout           ;
-; |sync_gen_sim|sync_generator:inst|vsync      ; |sync_gen_sim|sync_generator:inst|vsync      ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[4] ; |sync_gen_sim|sync_generator:inst|v_count[4] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[5] ; |sync_gen_sim|sync_generator:inst|v_count[5] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[6] ; |sync_gen_sim|sync_generator:inst|v_count[6] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[7] ; |sync_gen_sim|sync_generator:inst|v_count[7] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|v_count[8] ; |sync_gen_sim|sync_generator:inst|v_count[8] ; regout           ;
-; |sync_gen_sim|sync_generator:inst|pc_ena[3]  ; |sync_gen_sim|sync_generator:inst|pc_ena[3]  ; regout           ;
-; |sync_gen_sim|sync_generator:inst|Add0~3     ; |sync_gen_sim|sync_generator:inst|Add0~3     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add0~4     ; |sync_gen_sim|sync_generator:inst|Add0~4     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~6     ; |sync_gen_sim|sync_generator:inst|Add2~6     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~7     ; |sync_gen_sim|sync_generator:inst|Add2~7     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~8     ; |sync_gen_sim|sync_generator:inst|Add2~8     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~9     ; |sync_gen_sim|sync_generator:inst|Add2~9     ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~10    ; |sync_gen_sim|sync_generator:inst|Add2~10    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~11    ; |sync_gen_sim|sync_generator:inst|Add2~11    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~12    ; |sync_gen_sim|sync_generator:inst|Add2~12    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~13    ; |sync_gen_sim|sync_generator:inst|Add2~13    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~14    ; |sync_gen_sim|sync_generator:inst|Add2~14    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Add2~15    ; |sync_gen_sim|sync_generator:inst|Add2~15    ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal5~0   ; |sync_gen_sim|sync_generator:inst|Equal5~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal6~0   ; |sync_gen_sim|sync_generator:inst|Equal6~0   ; out0             ;
-; |sync_gen_sim|sync_generator:inst|Equal9~0   ; |sync_gen_sim|sync_generator:inst|Equal9~0   ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena~0  ; |sync_gen_sim|sync_generator:inst1|pc_ena~0  ; out              ;
+; |sync_gen_sim|sync_generator:inst1|pc_ena[3] ; |sync_gen_sim|sync_generator:inst1|pc_ena[3] ; regout           ;
+; |sync_gen_sim|sync_generator:inst1|Add0~3    ; |sync_gen_sim|sync_generator:inst1|Add0~3    ; out0             ;
+; |sync_gen_sim|sync_generator:inst1|Add0~4    ; |sync_gen_sim|sync_generator:inst1|Add0~4    ; out0             ;
 +----------------------------------------------+----------------------------------------------+------------------+
 
 
@@ -368,18 +332,18 @@ The following table displays output ports that do not toggle to 0 during simulat
 Info: *******************************************************************
 Info: Running Quartus II Simulator
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Nov 25 23:59:36 2019
+    Info: Processing started: Sun Dec 01 10:58:24 2019
 Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off sync_gen_sim -c sync_gen_sim
 Info: Using vector source file "G:/fpga/Quartus Projects/GPU/test/sync_gen_sim/sync_gen_sim.vwf"
 Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
     Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
 Info: Simulation partitioned into 1 sub-simulations
-Info: Simulation coverage is      67.60 %
-Info: Number of transitions in simulation is 1410791
+Info: Simulation coverage is      96.69 %
+Info: Number of transitions in simulation is 38198975
 Info: Quartus II Simulator was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 149 megabytes
-    Info: Processing ended: Mon Nov 25 23:59:42 2019
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:08
+    Info: Peak virtual memory: 151 megabytes
+    Info: Processing ended: Sun Dec 01 11:00:55 2019
+    Info: Elapsed time: 00:02:31
+    Info: Total CPU time (on all processors): 00:02:39
 
 

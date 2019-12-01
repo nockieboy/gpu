@@ -7,6 +7,7 @@
 // Written by BrianHG
 
 module vid_out_stencil(
+
 	input wire pclk,
 	input wire reset,
 	input wire [3:0] pc_ena,	// Pixel clock enable
@@ -18,7 +19,8 @@ module vid_out_stencil(
 	input wire [RGB_hbit:0] r_in,
 	input wire [RGB_hbit:0] g_in,
 	input wire [RGB_hbit:0] b_in,
-
+	input wire [7:0] GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
+	
 	output reg hde_out,
 	output reg vde_out,
 	output reg hs_out,
@@ -28,13 +30,14 @@ module vid_out_stencil(
 	output reg [RGB_hbit:0] g_out,
 	output reg [RGB_hbit:0] b_out,
 
-	output reg vid_de_out		// Actual H&V data enable required by some DVI encoders/serializers
-	);
+	output reg vid_de_out			// Actual H&V data enable required by some DVI encoders/serializers
+	
+);
 
-	parameter RGB_hbit  = 1;	// 1 will make the RGB ports go from 1 to 0, eg [1:0].  I know others prefer a '2' here for 2 bits
-	parameter HS_invert = 0;	// use a 1 to invert the HS output, the invert feature is only for this video output module
-	parameter VS_invert = 0;	// use a 1 to invert the VS output, the invert feature is only for this video output module
-
+	parameter RGB_hbit  = 1;		// 1 will make the RGB ports go from 1 to 0, eg [1:0].  I know others prefer a '2' here for 2 bits
+	parameter HS_invert = 0;		// use a 1 to invert the HS output, the invert feature is only for this video output module
+	parameter VS_invert = 0;		// use a 1 to invert the VS output, the invert feature is only for this video output module
+	parameter HW_REGS_SIZE = 8;	// default size for hardware register bus - set by HW_REGS parameter in design view
 
 	always @(posedge pclk)
 	begin
