@@ -113,4 +113,5 @@ set_global_assignment -name SYSTEMVERILOG_FILE GPU_HW_Control_Regs.sv
 set_global_assignment -name BDF_FILE raster_trigger_mux.bdf
 set_global_assignment -name VERILOG_FILE Z80_bridge.v
 set_global_assignment -name VERILOG_FILE data_mux.v
+set_global_assignment -name VERILOG_FILE bitplane_to_raster.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

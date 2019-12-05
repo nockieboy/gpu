@@ -1,4 +1,6 @@
-module vid_osd_generator (
+module vid_osd_gen_2 (
+
+	// inputs
 	input clk,
 	input [3:0] pc_ena,
 	input hde_in,
@@ -12,6 +14,7 @@ module vid_osd_generator (
 	input wire [7:0] GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
 	input wire [47:0] HV_triggers_in,
 		
+	// outputs
 	output reg osd_ena_out,
 	output wire osd_image,
 	output reg hde_out,
