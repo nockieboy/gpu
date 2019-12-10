@@ -11,11 +11,11 @@ module multiport_gpu_ram (
 	input [19:0] addr_in_4,
 	
 	// auxilliary read command buses (input)
-	input [15:0] cmd_in_0,
-	input [15:0] cmd_in_1,
-	input [15:0] cmd_in_2,
-	input [15:0] cmd_in_3,
-	input [15:0] cmd_in_4,
+	input [31:0] cmd_in_0,				// ****** changed to 32 bit width
+	input [31:0] cmd_in_1,				// ****** changed to 32 bit width
+	input [31:0] cmd_in_2,				// ****** changed to 32 bit width
+	input [31:0] cmd_in_3,				// ****** changed to 32 bit width
+	input [31:0] cmd_in_4,				// ****** changed to 32 bit width
 	
 	// outputs
 	output wire [3:0] pc_ena_out,
@@ -28,21 +28,21 @@ module multiport_gpu_ram (
 	output reg [19:0] addr_out_4,
 	
 	// auxilliary read command bus (pass-thru output)
-	output reg [15:0] cmd_out_0,
-	output reg [15:0] cmd_out_1,
-	output reg [15:0] cmd_out_2,
-	output reg [15:0] cmd_out_3,
-	output reg [15:0] cmd_out_4,
+	output reg [31:0] cmd_out_0,		// ****** changed to 32 bit width
+	output reg [31:0] cmd_out_1,		// ****** changed to 32 bit width
+	output reg [31:0] cmd_out_2,		// ****** changed to 32 bit width
+	output reg [31:0] cmd_out_3,		// ****** changed to 32 bit width
+	output reg [31:0] cmd_out_4,		// ****** changed to 32 bit width
 	
 	// data buses (output)
-	output reg [7:0] data_out_0,
-	output reg [7:0] data_out_1,
-	output reg [7:0] data_out_2,
-	output reg [7:0] data_out_3,
-	output reg [7:0] data_out_4,
+	output reg [15:0] data_out_0,		// ****** changed to 16 bit width
+	output reg [15:0] data_out_1,		// ****** changed to 16 bit width
+	output reg [15:0] data_out_2,		// ****** changed to 16 bit width
+	output reg [15:0] data_out_3,		// ****** changed to 16 bit width
+	output reg [15:0] data_out_4,		// ****** changed to 16 bit width
 
-	input clk_b,			// Host (Z80) clock input
-	input write_ena_b,	// Host (Z80) clock enable
+	input clk_b,							// Host (Z80) clock input
+	input write_ena_b,					// Host (Z80) clock enable
 	input [19:0] addr_host_in,
    input [7:0]  data_host_in,
 	output [7:0] data_host_out
@@ -56,28 +56,28 @@ parameter ADDR_SIZE = 14;
 parameter NUM_WORDS = 2 ** ADDR_SIZE;
 
 reg [19:0] addr_in_mux;
-reg [15:0] cmd_mux_in;
+reg [31:0] cmd_mux_in;		// ****** changed to 32 bit width
 
 reg [19:0] addr_lat_1;
 reg [19:0] addr_lat_2;
 reg [19:0] addr_lat_3;
 reg [19:0] addr_lat_4;
 
-reg [15:0] cmd_lat_1;
-reg [15:0] cmd_lat_2;
-reg [15:0] cmd_lat_3;
-reg [15:0] cmd_lat_4;
+reg [31:0] cmd_lat_1;		// ****** changed to 32 bit width
+reg [31:0] cmd_lat_2;		// ****** changed to 32 bit width
+reg [31:0] cmd_lat_3;		// ****** changed to 32 bit width
+reg [31:0] cmd_lat_4;		// ****** changed to 32 bit width
 
-wire [15:0] cmd_mux_out;
+wire [31:0] cmd_mux_out;	// ****** changed to 32 bit width
 wire [19:0] addr_mux_out;
-wire [7:0] data_mux_out;
+wire [15:0] data_mux_out;	// ****** changed to 16 bit width
 
 // create a GPU RAM instance
 gpu_dual_port_ram_INTEL gpu_RAM(
 	.clk(clk),
 	.pc_ena_in(pc_ena_in),
 	.clk_b(clk_b),
-	.wr_en_b(write_ena_b),   // **** error, you wrote (wr_en_b), it should be (write_ena_b)
+	.wr_en_b(write_ena_b),
 	.addr_a(addr_in_mux),
 	.addr_b(addr_host_in),
 	.data_in_b(data_host_in),
@@ -86,14 +86,14 @@ gpu_dual_port_ram_INTEL gpu_RAM(
 	.pc_ena_out(pc_ena_out),
 	.cmd_out(cmd_mux_out),
 	.data_out_a(data_mux_out),
-	.data_out_b(data_host_out)   // ****** error, you had this field empty.
+	.data_out_b(data_host_out)
 );
 
 defparam gpu_RAM.ADDR_SIZE = ADDR_SIZE,	// pass ADDR_SIZE into the gpu_RAM instance
 			gpu_RAM.NUM_WORDS = NUM_WORDS;	// set non-default word size for the RAM (16 KB)
 
 
-parameter   PIXEL_PIPE = 3;  // This externally set parameter defines the number of 25MHz pixels it takes to receive a new pixel from a presented address
+parameter PIXEL_PIPE = 3;  // This externally set parameter defines the number of 25MHz pixels it takes to receive a new pixel from a presented address
 
 localparam CLK_CYCLES_MUX = 1;	// adjust this parameter to the number of 'clk' cycles it takes to select 1 of 5 muxed outputs
 localparam CLK_CYCLES_RAM = 2;	// adjust this figure to the number of clock cycles the DP_ram takes to retrieve valid data from the read address in
@@ -103,30 +103,30 @@ localparam CLK_CYCLES_PIX = 5;	// adjust this figure to the number of 125MHz clo
 localparam  DEMUX_PIPE_TOP    =  (( (PIXEL_PIPE - 1) * CLK_CYCLES_PIX ) - 1) - CLK_CYCLES_MUX - CLK_CYCLES_RAM;
 
 
-localparam MUX_0_POS = DEMUX_PIPE_TOP - 0;  // pixel offset positions in their respective synchronisation
-localparam MUX_1_POS = DEMUX_PIPE_TOP - 1;	  // pipelines (where the pixels will be found in the pipeline
-localparam MUX_2_POS = DEMUX_PIPE_TOP - 2;	  // when pc_ena[3:0]==0).
-localparam MUX_3_POS = DEMUX_PIPE_TOP - 3;	  //
+localparam MUX_0_POS = DEMUX_PIPE_TOP - 0;	// pixel offset positions in their respective synchronisation
+localparam MUX_1_POS = DEMUX_PIPE_TOP - 1;	// pipelines (where the pixels will be found in the pipeline
+localparam MUX_2_POS = DEMUX_PIPE_TOP - 2;	// when pc_ena[3:0]==0).
+localparam MUX_3_POS = DEMUX_PIPE_TOP - 3;	//
 localparam MUX_4_POS = DEMUX_PIPE_TOP - 4;	//
 
 // Now that we know the DEMUX_PIPE_TOP, we can assign the top size of the 3 pipe regs
 
-reg [DEMUX_PIPE_TOP*8+7:0] data_pipe;
+reg [DEMUX_PIPE_TOP*16+15:0] data_pipe;		// ****** changed to 16 bit width
 reg [DEMUX_PIPE_TOP*20+19:0] addr_pipe;
-reg [DEMUX_PIPE_TOP*16+15:0] cmd_pipe;
+reg [DEMUX_PIPE_TOP*32+31:0] cmd_pipe;		// ****** changed to 32 bit width
 
 always @(posedge clk) begin
 
 // We also need to limit the pipe in the 3 ' <= '
 
-	data_pipe[7:0] 	                   	<= data_mux_out[7:0];		// fill the first 8-bit word in the register pipe with data from RAM
-	data_pipe[DEMUX_PIPE_TOP*8+7:1*8]	   <= data_pipe[ (DEMUX_PIPE_TOP-1) *8+7:0*8];	// shift over the next 9 words in this 10 word, 8-bit wide pipe
-																	// this moves the data up one word at a time, dropping the top most 8 bits
+	data_pipe[15:0] 	             	    	<= data_mux_out[15:0];		// fill the first 16-bit word in the register pipe with data from RAM
+	data_pipe[DEMUX_PIPE_TOP*16+15:1*16]	<= data_pipe[ (DEMUX_PIPE_TOP-1) *16+15:0*16];	// shift over the next 9 words in this 10 word, 16-bit wide pipe
+																	// this moves the data up two words at a time, dropping the top most 16 bits
 	addr_pipe[19:0]	                  	<= addr_mux_out;
 	addr_pipe[DEMUX_PIPE_TOP*20+19:1*20]	<= addr_pipe[ (DEMUX_PIPE_TOP-1) *20+19:0*20];
 	
-	cmd_pipe[15:0]	                     	<= cmd_mux_out[15:0];
-	cmd_pipe[DEMUX_PIPE_TOP*16+15:1*16]	   <= cmd_pipe[ (DEMUX_PIPE_TOP-1) *16+15:0*16];
+	cmd_pipe[31:0]	                     	<= cmd_mux_out[31:0];
+	cmd_pipe[DEMUX_PIPE_TOP*32+31:1*32]	   <= cmd_pipe[ (DEMUX_PIPE_TOP-1) *32+31:0*32];		// ****** changed to 32 bit width
 
 
 	if (pc_ena_in[3:0] == 0)
@@ -137,22 +137,20 @@ always @(posedge clk) begin
 		addr_out_3 <= addr_pipe[MUX_3_POS*20+19:MUX_3_POS*20];
 		addr_out_4 <= addr_pipe[MUX_4_POS*20+19:MUX_4_POS*20];
 		
-		cmd_out_0 <= cmd_pipe[MUX_0_POS*16+15:MUX_0_POS*16];
-		cmd_out_1 <= cmd_pipe[MUX_1_POS*16+15:MUX_1_POS*16];
-		cmd_out_2 <= cmd_pipe[MUX_2_POS*16+15:MUX_2_POS*16];
-		cmd_out_3 <= cmd_pipe[MUX_3_POS*16+15:MUX_3_POS*16];
-		cmd_out_4 <= cmd_pipe[MUX_4_POS*16+15:MUX_4_POS*16];
+		cmd_out_0 <= cmd_pipe[MUX_0_POS*32+31:MUX_0_POS*32];		// ****** changed to 32 bit width
+		cmd_out_1 <= cmd_pipe[MUX_1_POS*32+31:MUX_1_POS*32];
+		cmd_out_2 <= cmd_pipe[MUX_2_POS*32+31:MUX_2_POS*32];
+		cmd_out_3 <= cmd_pipe[MUX_3_POS*32+31:MUX_3_POS*32];
+		cmd_out_4 <= cmd_pipe[MUX_4_POS*32+31:MUX_4_POS*32];
 		
-		data_out_0 <= data_pipe[MUX_0_POS*8+7:MUX_0_POS*8];
-		data_out_1 <= data_pipe[MUX_1_POS*8+7:MUX_1_POS*8];
-		data_out_2 <= data_pipe[MUX_2_POS*8+7:MUX_2_POS*8];
-		data_out_3 <= data_pipe[MUX_3_POS*8+7:MUX_3_POS*8];
-		data_out_4 <= data_pipe[MUX_4_POS*8+7:MUX_4_POS*8];
+		data_out_0 <= data_pipe[MUX_0_POS*16+15:MUX_0_POS*16];		// ****** changed to 16 bit width
+		data_out_1 <= data_pipe[MUX_1_POS*16+15:MUX_1_POS*16];
+		data_out_2 <= data_pipe[MUX_2_POS*16+15:MUX_2_POS*16];
+		data_out_3 <= data_pipe[MUX_3_POS*16+15:MUX_3_POS*16];
+		data_out_4 <= data_pipe[MUX_4_POS*16+15:MUX_4_POS*16];
 	end
 	
 	// perform 5:1 mux for all inputs to the dual-port RAM
-
-
 	case (pc_ena_in[3:0])
 		4'h0 : begin
 						addr_in_mux <= addr_in_0;  // Send the first, #0 addr & cmd to the memory module.

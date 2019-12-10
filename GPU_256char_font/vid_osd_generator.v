@@ -1,4 +1,6 @@
 module vid_osd_generator (
+
+	// inputs
 	input clk,
 	input [3:0] pc_ena,
 	input hde_in,
@@ -11,9 +13,14 @@ module vid_osd_generator (
 	input wire [7:0] host_wr_data,
 	input wire [7:0] GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
 	input wire [47:0] HV_triggers_in,
-		
+	
+	// outputs
 	output reg osd_ena_out,
-	output wire osd_image,
+	//output wire osd_image,
+	output reg pixel_out_ena,
+	output reg pixel_out_top_16bit,   // <--- new
+	output reg [7:0] pixel_out_top,   // <--- new
+	output reg [7:0] pixel_out_top_h, // <--- new
 	output reg hde_out,
 	output reg vde_out,
 	output reg hs_out,
@@ -41,6 +48,7 @@ parameter   PIPE_DELAY =  6;	// This parameter selects the number of pixel clock
 parameter   FONT_8x16  =  0;	// 0 = 8 pixel tall font, 1 = 16 pixel tall font.
 parameter	HW_REGS_SIZE = 8;	// default size for hardware register bus - set by HW_REGS parameter in design view
 
+wire pixel_ena;
 wire [12:0] font_pos;
 wire [10:0] disp_pos;
 wire [19:0] read_text_adr;
@@ -50,7 +58,9 @@ wire [7:0]  char_line;
 
 
 // ****************************************************************************************************************************
-// create a multiport GPU RAM handler instance
+// *
+// * create a multiport GPU RAM handler instance
+// *
 // ****************************************************************************************************************************
 multiport_gpu_ram gpu_RAM(
 
@@ -63,11 +73,11 @@ multiport_gpu_ram gpu_RAM(
 	.addr_in_3(20'b0),
 	.addr_in_4(20'b0),
 	
-	.cmd_in_0(16'b0),
-	.cmd_in_1(16'b0),
-	.cmd_in_2(16'b0),
-	.cmd_in_3(16'b0),
-	.cmd_in_4(16'b0),
+	.cmd_in_0(32'b0),
+	.cmd_in_1(32'b0),
+	.cmd_in_2(32'b0),
+	.cmd_in_3(32'b0),
+	.cmd_in_4(32'b0),
 	
 	.pc_ena_out(),
 	
@@ -96,8 +106,42 @@ multiport_gpu_ram gpu_RAM(
 	.data_host_out(host_rd_data[7:0])
 
 );
+
 defparam gpu_RAM.ADDR_SIZE = 14,	// pass ADDR_SIZE into the gpu_RAM instance
          gpu_RAM.PIXEL_PIPE = 3;    // set the length of the pixel pipe to offset multi-read port sequencing
+
+// ****************************************************************************************************************************
+// *
+// * create a bitplane_to_raster instance
+// *
+// * NOTE:  For testing, GPU_HW_Control_regs [10] sets foreground and background colour
+// *                                         [11] sets two_byte_mode
+// *                                         [12] sets colour_mode_in
+// *
+// ****************************************************************************************************************************
+bitplane_to_raster b2r_1(
+
+	.clk(clk),
+	.pc_ena(pc_ena[3:0]),
+	
+	// inputs
+	.pixel_in_ena(pixel_ena),
+	.ram_byte_in(char_line),
+	.ram_byte_h(8'b00000000),
+	.bg_colour( GPU_HW_Control_regs[10] ),
+	.x_in( dly6_disp_x ),
+	.colour_mode_in( GPU_HW_Control_regs[12][2:0] ),
+	.two_byte_mode( GPU_HW_Control_regs[11][0] ),
+	
+	// outputs
+	.pixel_out_ena( pixel_out_ena ),
+	.mode_16bit( pixel_out_top_16bit ),
+	.pixel_out( pixel_out_top ),
+	.pixel_out_h( pixel_out_top_h ),
+	.x_out(),				// disconnected for moment
+	.colour_mode_out()	// disconnected for moment
+
+);
 
 //  The disp_x is the X coordinate counter.  It runs from 0 to 512 and stops there
 //  The disp_y is the Y coordinate counter.  It runs from 0 to 256 and stops there
@@ -116,7 +160,8 @@ assign font_pos[2+FONT_8x16:0]				= dly3_disp_y[2+FONT_8x16:0] ;  // select the 
 
 //  The resulting 2-bit font image at x is assigned to the OSD[1:0] output
 //  Also, since there is an 8th bit in the ascii text memory, I use that as a third OSD output color bit
-assign osd_image = char_line[(~dly6_disp_x[2:0])];
+
+//assign osd_image = char_line[(~dly6_disp_x[2:0])];   <--- edited out - replaced by bitplane_to_raster instance
 
 assign read_text_adr[10:0] = disp_pos[10:0];
 assign read_text_adr[19:11] = 9'h2;        // my mistake, I has 1bit instead of 10bits
@@ -206,8 +251,9 @@ always @ ( posedge clk ) begin
 		dly6_dena   <= dly5_dena;
 		
 		// **********************************************************************************************
-		osd_ena_out  <= dly4_dena;	// This is used to drive a graphics A/B switch which tells when the OSD graphics should be shown
+		osd_ena_out	<= dly4_dena;	// This is used to drive a graphics A/B switch which tells when the OSD graphics should be shown
 											// It needs to be delayed by the number of pixel clocks required for the above memories
+		pixel_ena	<= dly4_dena;
 		
 	end // ena
 	

@@ -1,0 +1,77 @@
+*********************************************************************************
+PALETTE MODULES
+*********************************************************************************
+Now for the palette memory.  You will have 2 palettes.
+Palette #1, specialized for the ASCII text and sprites.
+
+On the Read only port, IE, pixel_in -to- text_pixel out, you will have:
+8 bit address input, ie pixel_in[7:0].
+On the data output, you will have a 16bit pixel_out[15:0].
+The 16 bit output will be wired as follows:
+text_pixel_out[15:12] -will be sent to- text_a[3:0]
+text_pixel_out[15:12] -will be sent to- text_r[7:4] -and- text_r[3:0]
+text_pixel_out[15:12] -will be sent to- text_g[7:4] -and- text_g[3:0]
+text_pixel_out[15:12] -will be sent to- text_b[7:4] -and- text_b[3:0]
+
+On the pixel side you will want the 'CLOCK ENABLE' feature for the address latch coming in and data latch going out.
+The clock enables will be connected to the (pc_ena[3:0]==0) wire.
+
+On the 'host' memory side, you will have a 9 bit address [9:0] and 8 bit data in and out.
+The write ena will need attention as you will need to position this memory withing the system not to conflict with the main graphics memory.
+
+You will need to generate a .mif default palette, otherwise, everything will be black.
+
+-----------------------------------------------------------------------------------
+Palette #2, specialized for the 256 color background.
+
+Same as the text memory except the data_input will be wired to a 'graphics_data_in' and there will be a 'graphics_data_out' which will be wired like this:
+
+graphics_pixel_out[15:11] -will be sent to- graphics_r[7:3] -and the upper bits to - graphics_r[2:0]
+graphics_pixel_out[10:5]   -will be sent to- graphics_g[7:2] -and the upper bits to - graphics_g[1:0]
+graphics_pixel_out[4:0]     -will be sent to- graphics_b[7:3] -and the upper bits to - graphics_b[2:0]
+
+--------------------------------------------------------------------------------
+Don't forget to page the graphics color palette on a different page on the hose writing side.
+------------------------------------------------------------------------------
+For now, just wire the output of the
+text_r[3:0] to the modules output  img_out_r[7:4] and img_out_r[3:0]
+text_g[3:0] to the modules output  img_out_g[7:4] and img_out_g[3:0]
+text_b[3:0] to the modules output  img_out_b[7:4] and img_out_b[3:0]
+
+Yes, 24 bit color output, you will only pass the top 12 used bits to the pins after the stencil module.
+
+*********************************************************************************
+PALETTE CREATION
+*********************************************************************************
+
+Now, I'm telling you this so you could construct 2 real palette .mif files...
+For the text mode/sprites, the data in the 16 bit output goes like this:
+1                                0
+6                                0
+AAAA RRRR GGGG BBBB
+
+
+The RGB are 12 bit color data like you are used to.
+The A     is a 4 bit translucency value.  0 being 100% opaque, 15 being completely translucent to the graphics mode beneath.
+
+The text colors are as follows:
+0 through 15 = The outline color, or, pixel data = 0 color.  Whenever a font has a 0 bit, depending on your character color background selection, one of these 16 colors will be used.
+
+16 through 31 = The pen color, or, pixel data = 1 color.  Whenever a font has a 1 bit, depending on your character color foreground selection, one of these 16 colors will be used.
+
+(When making a default VGA palette, for now, the foreground and background colors may be mirror or offset values.  Whatever mimics VGA's 16 text color settings)
+
+For the graphics palette, colors 0 through 255 are used in order, however, the 16bits hold the color differently:
+1                               0
+6                               0
+RRRRR GGGGGG BBBBB
+
+This is known as 565 color, being 5 bits red, 6 bits green, 5 bits blue.
+
+I would look for an old VGA paint software palette to close as close as possible for the 256 color palette truncated to the 565 standard while for the text, look for the standard 16 colors used by VGA.  Copy those to the text palette in 12bit color, plus, use 0 for the alpha channel except for background color 0.
+
+The palette module should be external between the OSD and Stencil.  It should pass through the HDE,VDE,HS,VS with appropriate internal delay to match the speed of the palette memories.
+
+You will need a host port to read & write to the palette as well.
+
+The palette should have 2 inputs, the text top layer and graphics bottom layer feeding the 2 palettes.  The output for now will just be the text layer palette.  We will do the translucency mixer math after the line address generators as they are needed to feed the graphics bottom layer.
