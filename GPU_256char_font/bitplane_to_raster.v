@@ -4,7 +4,7 @@ module bitplane_to_raster (
 	input wire clk,
 	input wire pixel_in_ena,
 	input wire [3:0] pc_ena,
-	input wire [15:0] ram_byte_in,		// ****** changed to 16 bit width
+	input wire [15:0] ram_byte_in,
 	input wire [7:0] ram_byte_h,
 	input wire [7:0] bg_colour,
 	input wire [9:0] x_in,
@@ -21,9 +21,6 @@ module bitplane_to_raster (
 	
 );
 
-// internal registers
-//reg [7:0] colour_data;
-
 // *****************************************************************************
 // *                                                                           *
 // *  PASS-THRUS                                                               *
@@ -35,7 +32,6 @@ always @ ( posedge clk ) begin
 	if (pc_ena[3:0] == 0) begin
 		
 		x_out					<= x_in;
-		//colour_data			<= ram_byte_in; // in two-byte mode, colour_data should follow the ram_data byte		
 		colour_mode_out	<= colour_mode_in;		
 		
 	end // pc_ena
@@ -85,15 +81,13 @@ always @ (posedge clk) begin
 					
 					if (ram_byte_in[(~x_in[2:0])] == 1'b1) begin
 						
-						pixel_out[7:4]	<= 4'b0000;				// was: pixel_out[7:5] <= 3'b000;
-						//pixel_out[4]	<= 1'b1;					// changed for new palette_mixer module
+						pixel_out[7:4]	<= 4'b0000;
 						pixel_out[3:0]	<= bg_colour[7:4];
 						
 					end
 					else begin
 						
 						pixel_out[7:4]	<= 4'b0000;
-						//pixel_out[4]	<= 1'b0;
 						pixel_out[3:0]	<= bg_colour[3:0];
 						
 					end
@@ -107,7 +101,7 @@ always @ (posedge clk) begin
 					
 					mode_16bit <= 1'b0;	// update mode_16bit output to 8-bit mode
 					
-					pixel_out[7:2] <= 6'b000000;
+					pixel_out[7:2] <= bg_colour[7:2];
 					
 					case (x_in[2:1])
 						2'h0 : begin
@@ -141,7 +135,7 @@ always @ (posedge clk) begin
 					
 					mode_16bit <= 1'b0;	// update mode_16bit output to 8-bit mode
 					
-					pixel_out[7:4] <= 4'b0000;
+					pixel_out[7:4] <= bg_colour[7:4];
 					
 					if (x_in[3])
 						pixel_out[3:0] <= ram_byte_in[3:0];
@@ -179,15 +173,13 @@ always @ (posedge clk) begin
 					
 					if (ram_byte_in[(~x_in[2:0])] == 1'b1) begin
 						
-						pixel_out[7:5]	<= 3'b000;
-						pixel_out[4]	<= 1'b1;
+						pixel_out[7:4]	<= bg_colour[7:4];
 						pixel_out[3:0]	<= ram_byte_h[7:4];
 						
 					end
 					else begin
 						
-						pixel_out[7:5]	<= 3'b000;
-						pixel_out[4]	<= 1'b0;
+						pixel_out[7:4]	<= bg_colour[7:4];
 						pixel_out[3:0]	<= ram_byte_h[3:0];
 						
 					end

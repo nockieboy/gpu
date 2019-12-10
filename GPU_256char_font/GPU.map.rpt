@@ -1,5 +1,5 @@
 Analysis & Synthesis report for GPU
-Tue Dec 10 16:02:51 2019
+Tue Dec 10 19:31:41 2019
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -89,13 +89,13 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Dec 10 16:02:51 2019       ;
+; Analysis & Synthesis Status        ; Successful - Tue Dec 10 19:31:41 2019       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GPU                                         ;
 ; Top-level Entity Name              ; GPU                                         ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 2,193                                       ;
-;     Total combinational functions  ; 1,476                                       ;
+; Total logic elements               ; 2,189                                       ;
+;     Total combinational functions  ; 1,472                                       ;
 ;     Dedicated logic registers      ; 1,242                                       ;
 ; Total registers                    ; 1242                                        ;
 ; Total pins                         ; 21                                          ;
@@ -208,7 +208,7 @@ refer to the applicable agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.1%      ;
+;     Processor 2            ;   0.2%      ;
 ;     Processor 3            ;   0.1%      ;
 ;     Processor 4            ;   0.1%      ;
 +----------------------------+-------------+
@@ -282,16 +282,16 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+--------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                    ;
 +---------------------------------------------+--------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 2,193                                                                    ;
+; Estimated Total logic elements              ; 2,189                                                                    ;
 ;                                             ;                                                                          ;
-; Total combinational functions               ; 1476                                                                     ;
+; Total combinational functions               ; 1472                                                                     ;
 ; Logic element usage by number of LUT inputs ;                                                                          ;
-;     -- 4 input functions                    ; 887                                                                      ;
-;     -- 3 input functions                    ; 253                                                                      ;
+;     -- 4 input functions                    ; 880                                                                      ;
+;     -- 3 input functions                    ; 256                                                                      ;
 ;     -- <=2 input functions                  ; 336                                                                      ;
 ;                                             ;                                                                          ;
 ; Logic elements by mode                      ;                                                                          ;
-;     -- normal mode                          ; 1213                                                                     ;
+;     -- normal mode                          ; 1209                                                                     ;
 ;     -- arithmetic mode                      ; 263                                                                      ;
 ;                                             ;                                                                          ;
 ; Total registers                             ; 1242                                                                     ;
@@ -308,7 +308,7 @@ refer to the applicable agreement for further details.
 ;                                             ;                                                                          ;
 ; Maximum fan-out node                        ; altpll0:inst17|altpll:altpll_component|altpll_d1l2:auto_generated|clk[0] ;
 ; Maximum fan-out                             ; 1334                                                                     ;
-; Total fan-out                               ; 9788                                                                     ;
+; Total fan-out                               ; 9781                                                                     ;
 ; Average fan-out                             ; 3.43                                                                     ;
 +---------------------------------------------+--------------------------------------------------------------------------+
 
@@ -318,8 +318,8 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+--------------+
 ; Compilation Hierarchy Node                               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                       ; Entity Name                 ; Library Name ;
 +----------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------+--------------+
-; |GPU                                                     ; 1476 (2)            ; 1242 (1)                  ; 135624      ; 0            ; 0       ; 0         ; 21   ; 0            ; |GPU                                                                                                                                                                      ; GPU                         ; work         ;
-;    |GPU_HW_Control_Regs:inst6|                           ; 140 (140)           ; 487 (487)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|GPU_HW_Control_Regs:inst6                                                                                                                                            ; GPU_HW_Control_Regs         ; work         ;
+; |GPU                                                     ; 1472 (2)            ; 1242 (1)                  ; 135624      ; 0            ; 0       ; 0         ; 21   ; 0            ; |GPU                                                                                                                                                                      ; GPU                         ; work         ;
+;    |GPU_HW_Control_Regs:inst6|                           ; 137 (137)           ; 487 (487)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|GPU_HW_Control_Regs:inst6                                                                                                                                            ; GPU_HW_Control_Regs         ; work         ;
 ;    |altpll0:inst17|                                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17                                                                                                                                                       ; altpll0                     ; work         ;
 ;       |altpll:altpll_component|                          ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17|altpll:altpll_component                                                                                                                               ; altpll                      ; work         ;
 ;          |altpll_d1l2:auto_generated|                    ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|altpll0:inst17|altpll:altpll_component|altpll_d1l2:auto_generated                                                                                                    ; altpll_d1l2                 ; work         ;
@@ -346,12 +346,12 @@ refer to the applicable agreement for further details.
 ;    |rs232_debugger:inst3|                                ; 510 (419)           ; 343 (262)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst3                                                                                                                                                 ; rs232_debugger              ; work         ;
 ;       |sync_rs232_uart:rs232_io|                         ; 91 (91)             ; 81 (81)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io                                                                                                                        ; sync_rs232_uart             ; work         ;
 ;    |sync_generator:inst2|                                ; 405 (405)           ; 92 (92)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|sync_generator:inst2                                                                                                                                                 ; sync_generator              ; work         ;
-;    |vid_osd_generator:inst11|                            ; 117 (35)            ; 201 (120)                 ; 131496      ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11                                                                                                                                             ; vid_osd_generator           ; work         ;
+;    |vid_osd_generator:inst11|                            ; 116 (35)            ; 201 (120)                 ; 131496      ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11                                                                                                                                             ; vid_osd_generator           ; work         ;
 ;       |altshift_taps:hs_pipe_rtl_0|                      ; 3 (0)               ; 3 (0)                     ; 408         ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|altshift_taps:hs_pipe_rtl_0                                                                                                                 ; altshift_taps               ; work         ;
 ;          |shift_taps_6pm:auto_generated|                 ; 3 (0)               ; 3 (0)                     ; 408         ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|altshift_taps:hs_pipe_rtl_0|shift_taps_6pm:auto_generated                                                                                   ; shift_taps_6pm              ; work         ;
 ;             |altsyncram_ce81:altsyncram2|                ; 0 (0)               ; 0 (0)                     ; 408         ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|altshift_taps:hs_pipe_rtl_0|shift_taps_6pm:auto_generated|altsyncram_ce81:altsyncram2                                                       ; altsyncram_ce81             ; work         ;
 ;             |cntr_cpf:cntr1|                             ; 3 (3)               ; 3 (3)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|altshift_taps:hs_pipe_rtl_0|shift_taps_6pm:auto_generated|cntr_cpf:cntr1                                                                    ; cntr_cpf                    ; work         ;
-;       |bitplane_to_raster:b2r_1|                         ; 46 (46)             ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|bitplane_to_raster:b2r_1                                                                                                                    ; bitplane_to_raster          ; work         ;
+;       |bitplane_to_raster:b2r_1|                         ; 45 (45)             ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|bitplane_to_raster:b2r_1                                                                                                                    ; bitplane_to_raster          ; work         ;
 ;       |multiport_gpu_ram:gpu_RAM|                        ; 33 (14)             ; 70 (65)                   ; 131088      ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM                                                                                                                   ; multiport_gpu_ram           ; work         ;
 ;          |altshift_taps:data_pipe_rtl_0|                 ; 1 (0)               ; 1 (0)                     ; 16          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0                                                                                     ; altshift_taps               ; work         ;
 ;             |shift_taps_u4m:auto_generated|              ; 1 (0)               ; 1 (0)                     ; 16          ; 0            ; 0       ; 0         ; 0    ; 0            ; |GPU|vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|altshift_taps:data_pipe_rtl_0|shift_taps_u4m:auto_generated                                                       ; shift_taps_u4m              ; work         ;
@@ -429,15 +429,16 @@ Encoding Type:  One-Hot
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                                            ;
-+-------------------------------------------------------------------+---------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Register name                                                     ; Reason for Removal        ; Registers Removed due to This Register                                                                                                                                 ;
-+-------------------------------------------------------------------+---------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|addr_lat_4[13] ; Stuck at GND              ; vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|addr_in_mux[13],                                                                                                    ;
-;                                                                   ; due to stuck port data_in ; vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_t2e2:auto_generated|address_reg_a[0],    ;
-;                                                                   ;                           ; vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_t2e2:auto_generated|out_address_reg_a[0] ;
-+-------------------------------------------------------------------+---------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                                             ;
++-------------------------------------------------------------------+---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Register name                                                     ; Reason for Removal        ; Registers Removed due to This Register                                                                                                                                  ;
++-------------------------------------------------------------------+---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|addr_lat_4[13] ; Stuck at GND              ; vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|addr_in_mux[13],                                                                                                     ;
+;                                                                   ; due to stuck port data_in ; vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_t2e2:auto_generated|address_reg_a[0],     ;
+;                                                                   ;                           ; vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_t2e2:auto_generated|out_address_reg_a[0], ;
+;                                                                   ;                           ; rs232_debugger:inst3|host_addr_reg[21]                                                                                                                                  ;
++-------------------------------------------------------------------+---------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -446,8 +447,8 @@ Encoding Type:  One-Hot
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
 ; Total registers                              ; 1242  ;
-; Number of registers using Synchronous Clear  ; 62    ;
-; Number of registers using Synchronous Load   ; 134   ;
+; Number of registers using Synchronous Clear  ; 66    ;
+; Number of registers using Synchronous Load   ; 138   ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 1138  ;
@@ -620,16 +621,16 @@ Encoding Type:  One-Hot
 ; 16:1               ; 2 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|addr_in_mux[13] ;
 ; 16:1               ; 11 bits   ; 110 LEs       ; 22 LEs               ; 88 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|addr_in_mux[10] ;
 ; 5:1                ; 128 bits  ; 384 LEs       ; 128 LEs              ; 256 LEs                ; Yes        ; |GPU|rs232_debugger:inst3|RX_buffer[26]                                 ;
-; 10:1               ; 3 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst11|bitplane_to_raster:b2r_1|pixel_out[5]     ;
 ; 7:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|tx_cyc[1]                                     ;
-; 12:1               ; 2 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst11|bitplane_to_raster:b2r_1|pixel_out[3]     ;
+; 12:1               ; 2 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst11|bitplane_to_raster:b2r_1|pixel_out[2]     ;
 ; 12:1               ; 2 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|vid_osd_generator:inst11|bitplane_to_raster:b2r_1|pixel_out[0]     ;
-; 8:1                ; 24 bits   ; 120 LEs       ; 48 LEs               ; 72 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|host_addr_reg[1]                              ;
-; 9:1                ; 5 bits    ; 30 LEs        ; 5 LEs                ; 25 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|timeout_cnt[4]                                ;
+; 8:1                ; 24 bits   ; 120 LEs       ; 48 LEs               ; 72 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|host_addr_reg[21]                             ;
+; 12:1               ; 4 bits    ; 32 LEs        ; 8 LEs                ; 24 LEs                 ; Yes        ; |GPU|vid_osd_generator:inst11|bitplane_to_raster:b2r_1|pixel_out[4]     ;
+; 9:1                ; 5 bits    ; 30 LEs        ; 5 LEs                ; 25 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|timeout_cnt[3]                                ;
 ; 14:1               ; 8 bits    ; 72 LEs        ; 32 LEs               ; 40 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|uart_tbyte[0]                                 ;
-; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|byte_count[15]                                ;
-; 12:1               ; 7 bits    ; 56 LEs        ; 14 LEs               ; 42 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|byte_count[0]                                 ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|tx_byte[7]           ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|byte_count[13]                                ;
+; 12:1               ; 7 bits    ; 56 LEs        ; 14 LEs               ; 42 LEs                 ; Yes        ; |GPU|rs232_debugger:inst3|byte_count[1]                                 ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |GPU|rs232_debugger:inst3|sync_rs232_uart:rs232_io|tx_byte[4]           ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |GPU|vid_osd_generator:inst11|bitplane_to_raster:b2r_1|Mux10            ;
 ; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |GPU|rs232_debugger:inst3|Function                                      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------+
@@ -1870,28 +1871,28 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; boundary_port         ; 21                          ;
 ; cycloneiii_ff         ; 1242                        ;
-;     ENA               ; 1018                        ;
+;     ENA               ; 1014                        ;
 ;     ENA SCLR          ; 36                          ;
-;     ENA SCLR SLD      ; 25                          ;
+;     ENA SCLR SLD      ; 29                          ;
 ;     ENA SLD           ; 59                          ;
 ;     SCLR              ; 1                           ;
 ;     SLD               ; 50                          ;
 ;     plain             ; 53                          ;
-; cycloneiii_lcell_comb ; 1476                        ;
+; cycloneiii_lcell_comb ; 1472                        ;
 ;     arith             ; 263                         ;
 ;         2 data inputs ; 165                         ;
 ;         3 data inputs ; 98                          ;
-;     normal            ; 1213                        ;
+;     normal            ; 1209                        ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 33                          ;
 ;         2 data inputs ; 137                         ;
-;         3 data inputs ; 155                         ;
-;         4 data inputs ; 887                         ;
+;         3 data inputs ; 158                         ;
+;         4 data inputs ; 880                         ;
 ; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 91                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 7.00                        ;
-; Average LUT depth     ; 2.87                        ;
+; Average LUT depth     ; 2.86                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1910,7 +1911,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Tue Dec 10 16:02:18 2019
+    Info: Processing started: Tue Dec 10 19:31:10 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off GPU -c GPU
 Info (20032): Parallel compilation is enabled and will use up to 4 processors
 Info (12021): Found 1 design units, including 1 entities, in source file gpu.bdf
@@ -2076,8 +2077,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/mux_
     Info (12023): Found entity 1: mux_3nb File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/mux_3nb.tdf Line: 22
 Info (12128): Elaborating entity "mux_3nb" for hierarchy "vid_osd_generator:inst11|multiport_gpu_ram:gpu_RAM|gpu_dual_port_ram_INTEL:gpu_RAM|altsyncram:altsyncram_component|altsyncram_t2e2:auto_generated|mux_3nb:mux5" File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/altsyncram_t2e2.tdf Line: 53
 Info (12128): Elaborating entity "bitplane_to_raster" for hierarchy "vid_osd_generator:inst11|bitplane_to_raster:b2r_1" File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/vid_osd_generator.v Line: 144
-Warning (10027): Verilog HDL or VHDL warning at the bitplane_to_raster.v(86): index expression is not wide enough to address all of the elements in the array File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/bitplane_to_raster.v Line: 86
-Warning (10027): Verilog HDL or VHDL warning at the bitplane_to_raster.v(180): index expression is not wide enough to address all of the elements in the array File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/bitplane_to_raster.v Line: 180
+Warning (10027): Verilog HDL or VHDL warning at the bitplane_to_raster.v(82): index expression is not wide enough to address all of the elements in the array File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/bitplane_to_raster.v Line: 82
+Warning (10027): Verilog HDL or VHDL warning at the bitplane_to_raster.v(174): index expression is not wide enough to address all of the elements in the array File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/bitplane_to_raster.v Line: 174
 Info (12128): Elaborating entity "sync_generator" for hierarchy "sync_generator:inst2"
 Warning (10230): Verilog HDL assignment warning at sync_generator.sv(64): truncated value with size 32 to match size of target (4) File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/sync_generator.sv Line: 64
 Warning (10230): Verilog HDL assignment warning at sync_generator.sv(74): truncated value with size 32 to match size of target (10) File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/sync_generator.sv Line: 74
@@ -2286,17 +2287,17 @@ Info (144001): Generated suppressed messages file G:/fpga/Quartus Projects/GPU/G
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
 Warning (15899): PLL "altpll0:inst17|altpll:altpll_component|altpll_d1l2:auto_generated|pll1" has parameters clk1_multiply_by and clk1_divide_by specified but port CLK[1] is not connected File: G:/fpga/Quartus Projects/GPU/GPU_256char_font/db/altpll_d1l2.tdf Line: 27
-Info (21057): Implemented 2324 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 2320 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 3 input pins
     Info (21059): Implemented 18 output pins
-    Info (21061): Implemented 2211 logic cells
+    Info (21061): Implemented 2207 logic cells
     Info (21064): Implemented 91 RAM segments
     Info (21065): Implemented 1 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 73 warnings
-    Info: Peak virtual memory: 4835 megabytes
-    Info: Processing ended: Tue Dec 10 16:02:51 2019
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:00:57
+    Info: Peak virtual memory: 4832 megabytes
+    Info: Processing ended: Tue Dec 10 19:31:41 2019
+    Info: Elapsed time: 00:00:31
+    Info: Total CPU time (on all processors): 00:00:52
 
 
 +------------------------------------------+
