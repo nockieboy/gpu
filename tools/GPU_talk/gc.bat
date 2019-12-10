@@ -1,1 +1,0 @@
-..\fbc.exe GPUtalk.bas
