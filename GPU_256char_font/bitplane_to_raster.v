@@ -8,9 +8,7 @@ module bitplane_to_raster (
 	input wire [3:0]  pc_ena,
 	input wire [15:0] ram_byte_in,
 	input wire [7:0]  ram_byte_h,
-	input wire [7:0]  bg_colour,
 	input wire [9:0]  x_in,
-	//input wire [2:0]  colour_mode_in,
 	input wire [7:0]  GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
 	
 	// outputs
@@ -20,11 +18,10 @@ module bitplane_to_raster (
 	output reg [7:0] pixel_out,
 	output reg [7:0] pixel_out_h,
 	output reg [9:0] x_out
-	//output reg [2:0] colour_mode_out
 	
 );
 
-parameter CTRL_BYTE_BASE = 8'h0;	// defines the base address of the 3 control bytes (video_mode, bg_colour, fg_colour) in the HW_REGS
+parameter CTRL_BYTE_BASE = 16;	// defines the base address of the 3 control bytes (video_mode, bg_colour, fg_colour) in the HW_REGS
 
 // *****************************************************************************
 // video_mode byte - CTRL_BYTE_BASE + 0
@@ -46,6 +43,9 @@ parameter CTRL_BYTE_BASE = 8'h0;	// defines the base address of the 3 control by
 
 parameter HW_REGS_SIZE	= 8;		// default size for hardware register bus - set by HW_REGS parameter in design view
 
+wire [7:0] bg_colour = GPU_HW_Control_regs[CTRL_BYTE_BASE + 1];
+wire [7:0] fg_colour = GPU_HW_Control_regs[CTRL_BYTE_BASE + 2];
+
 // *****************************************************************************
 // *                                                                           *
 // *  PASS-THRUS                                                               *
@@ -57,7 +57,6 @@ always @ ( posedge clk ) begin
 	if (pc_ena[3:0] == 0) begin
 		
 		x_out					<= x_in;
-		//colour_mode_out	<= colour_mode_in;		
 		
 	end // pc_ena
 	
@@ -70,15 +69,6 @@ end // always@clk
 // *  RASTER GENERATION                                                        *
 // *                                                                           *
 // *****************************************************************************
-
-// color_mode_in determines the operating mode for the bitplane_to_raster module
-// it is a 3-bit signal, providing 4 modes of operation to this module e.g.:
-//
-// 000 =   2 colour mode - 8 pixels per byte in GPU RAM
-// 001 =   4 colour mode - 4 pixels -----"------"------
-// 010 =  16 colour mode - 2 pixels -----"------"------
-// 011 = 256 colour mode - 1 pixels -----"------"------
-// 1xx = OFF
 
 always @ (posedge clk) begin
 
@@ -112,14 +102,16 @@ always @ (posedge clk) begin
 					
 					if (ram_byte_in[(~x_in[2:0])] == 1'b1) begin
 						
-						pixel_out[7:4]	<= 4'b0000;
-						pixel_out[3:0]	<= bg_colour[7:4];
+						//pixel_out[7:4]	<= 4'b0000;
+						//pixel_out[3:0]	<= bg_colour[7:4];
+						pixel_out <= fg_colour;
 						
 					end
 					else begin
 						
-						pixel_out[7:4]	<= 4'b0000;
-						pixel_out[3:0]	<= bg_colour[3:0];
+						//pixel_out[7:4]	<= 4'b0000;
+						//pixel_out[3:0]	<= bg_colour[3:0];
+						pixel_out <= bg_colour;
 						
 					end
 					

@@ -128,7 +128,6 @@ bitplane_to_raster b2r_1(
 	.enable_in(1'b1),
 	.ram_byte_in(char_line),
 	.ram_byte_h(8'b00000000),
-	.bg_colour( GPU_HW_Control_regs[10] ),
 	.x_in( dly6_disp_x ),
 	//.colour_mode_in( GPU_HW_Control_regs[12][2:0] ),
 	.two_byte_mode( GPU_HW_Control_regs[11][0] ),
