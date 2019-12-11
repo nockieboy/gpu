@@ -3,23 +3,48 @@ module bitplane_to_raster (
 	// inputs
 	input wire clk,
 	input wire pixel_in_ena,
-	input wire [3:0] pc_ena,
-	input wire [15:0] ram_byte_in,
-	input wire [7:0] ram_byte_h,
-	input wire [7:0] bg_colour,
-	input wire [9:0] x_in,
-	input wire [2:0] colour_mode_in,
 	input wire two_byte_mode,
+	input wire enable_in,
+	input wire [3:0]  pc_ena,
+	input wire [15:0] ram_byte_in,
+	input wire [7:0]  ram_byte_h,
+	input wire [7:0]  bg_colour,
+	input wire [9:0]  x_in,
+	//input wire [2:0]  colour_mode_in,
+	input wire [7:0]  GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
 	
 	// outputs
+	output reg enable_out,
 	output reg pixel_out_ena,
 	output reg mode_16bit,					// high when in 16-bit mode
 	output reg [7:0] pixel_out,
 	output reg [7:0] pixel_out_h,
-	output reg [9:0] x_out,
-	output reg [2:0] colour_mode_out
+	output reg [9:0] x_out
+	//output reg [2:0] colour_mode_out
 	
 );
+
+parameter CTRL_BYTE_BASE = 8'h0;	// defines the base address of the 3 control bytes (video_mode, bg_colour, fg_colour) in the HW_REGS
+
+// *****************************************************************************
+// video_mode byte - CTRL_BYTE_BASE + 0
+//
+// This HW_REG defines the video mode:
+//
+// 0000 - Off
+// 0001 - 1 bit color
+// 0010 - 2 bit color
+// 0011 - 4 bit color
+// 0100 - 8 bit color
+// 0101 - 16 bit color
+// 0110 - Special 2-byte text colour mode
+// 0111 - ARGB4444
+// 1000 - RGB565
+// 1001 - 16 bit 565 thru
+// 1010 - Mixed 16-bit 656 thru with last 256 colors assigned through the palette
+// *****************************************************************************
+
+parameter HW_REGS_SIZE	= 8;		// default size for hardware register bus - set by HW_REGS parameter in design view
 
 // *****************************************************************************
 // *                                                                           *
@@ -32,7 +57,7 @@ always @ ( posedge clk ) begin
 	if (pc_ena[3:0] == 0) begin
 		
 		x_out					<= x_in;
-		colour_mode_out	<= colour_mode_in;		
+		//colour_mode_out	<= colour_mode_in;		
 		
 	end // pc_ena
 	
@@ -59,25 +84,31 @@ always @ (posedge clk) begin
 
 	if (pc_ena[3:0] == 0) begin
 		
-		pixel_out_ena <= pixel_in_ena;	// pass pixel_ena through to the output
+		pixel_out_ena	<= pixel_in_ena;	// pass pixel_ena through to the output
+		enable_out 		<= enable_in;
 		
-		if (~pixel_in_ena || colour_mode_in[2]) begin
+		if (~pixel_in_ena || ~enable_in) begin
 			
-			// nothing to see here (disabled)
+			// disable output as not in display area or enable_in is LOW
 			pixel_out	<= 8'b00000000;
 			pixel_out_h	<= 8'b00000000;
 			
 		end
-		else if (~two_byte_mode) begin // 8-bit mode
+		else begin
 			
-			case (colour_mode_in)
+			case (GPU_HW_Control_regs[CTRL_BYTE_BASE + 0]) // select case based on video_mode HW_reg
 				
-				2'h0 : begin	// 1-bit (2 colour) - 8 pixels per byte
-					// set the output pixel color to the first 4 bits of the background color
-					// when the bit on the picture bitplane byte is 0 and use the upper 4 bits
-					// when the bit on the bit-plane byte is high
+				2'h0 : begin	// off
+					// disable output as turned off
+					pixel_out	<= 8'b00000000;
+					pixel_out_h	<= 8'b00000000;
+					enable_out 	<= 1'b0;				// set enable_out LOW
+				end
+				
+				2'h1 : begin	// 1-bit (2 colour) - 8 pixels per byte
 					
-					mode_16bit <= 1'b0;	// update mode_16bit output to 8-bit mode
+					mode_16bit <= 1'b0;	// set mode_16bit output to 8-bit mode
+					enable_out <= 1'b1;	// set enable_out HIGH
 					
 					if (ram_byte_in[(~x_in[2:0])] == 1'b1) begin
 						
@@ -94,12 +125,10 @@ always @ (posedge clk) begin
 					
 				end
 				
-				2'h1 : begin	// 2-bit (4 colour) - 4 pixels per byte
-					// output will be 2 bits stacked, 2 copies every second X pixel, you will
-					// output a 2 bit color. EG pixel 0&1 output bitplane[7:6],  pixel 2&3
-					// output bitplane[5:4], pixel 4&5 output bitplane[3:2]
+				2'h2 : begin	// 2-bit (4 colour) - 4 pixels per byte
 					
-					mode_16bit <= 1'b0;	// update mode_16bit output to 8-bit mode
+					mode_16bit <= 1'b0;	// set mode_16bit output to 8-bit mode
+					enable_out <= 1'b1;	// set enable_out HIGH
 					
 					pixel_out[7:2] <= bg_colour[7:2];
 					
@@ -128,12 +157,10 @@ always @ (posedge clk) begin
 					
 				end
 				
-				2'h2 : begin	// 4-bit (16 colour) - 2 pixels per byte
-					// output will be 4 bits stacked, 4 copies every four X pixel, you will
-					// output a 4 bit color.  EG pixel 0,1,2,3 output bitplane[7:4], EG pixel
-					// 4,5,6,7 output bitplane[3:0]
+				2'h3 : begin	// 4-bit (16 colour) - 2 pixels per byte
 					
-					mode_16bit <= 1'b0;	// update mode_16bit output to 8-bit mode
+					mode_16bit <= 1'b0;	// set mode_16bit output to 8-bit mode
+					enable_out <= 1'b1;	// set enable_out HIGH
 					
 					pixel_out[7:4] <= bg_colour[7:4];
 					
@@ -144,32 +171,29 @@ always @ (posedge clk) begin
 					
 				end
 				
-				2'h3 : begin	// 8-bit (256 colour) - 1 pixel per byte
-					// output will be 8 bits stacked, 8 copies every eight X pixel, you will
-					// output a 4 bit color.  EG pixel 0,1,2,3,4,5,6,7 output bitplane[7:0],
-					// yes that same 1 value will repeat 8 times is the source X counter
-					// counts through those numbers sequentially
+				2'h4 : begin	// 8-bit (256 colour) - 1 pixel per byte
 					
-					mode_16bit <= 1'b0;	// update the mode output to show whether it's 8 or 16-bit mode
+					mode_16bit <= 1'b0;	// set mode_16bit output to 8-bit mode
+					enable_out <= 1'b1;	// set enable_out HIGH
 					
 					pixel_out <= ram_byte_in[7:0];
 					
 				end
 				
-			endcase
-			
-		end // 8-bit mode
-		else begin // 16-bit mode
-			
-			case (colour_mode_in)
-				
-				2'h0 : begin	// special colour text mode
-					// 2-bit colour 2-byte mode
-					// latch ram_byte as the bit plane graphic and colour_data
-					// as a replacement for the background default color. The
-					// rest should follow #1.
+				2'h5 : begin	// 16-bit (true colour)
 					
-					mode_16bit <= 1'b0;	// update mode_16bit output to 8-bit mode
+					mode_16bit <= 1'b1;	// set mode_16bit output to 16-bit mode
+					enable_out <= 1'b1;	// set enable_out HIGH
+					
+					pixel_out	<= ram_byte_in[7:0];
+					pixel_out_h	<= ram_byte_h;
+					
+				end
+				
+				2'h6 : begin	// special colour text mode
+					
+					mode_16bit <= 1'b0;	// set mode_16bit output to 8-bit mode
+					enable_out <= 1'b1;	// set enable_out HIGH
 					
 					if (ram_byte_in[(~x_in[2:0])] == 1'b1) begin
 						
@@ -185,20 +209,10 @@ always @ (posedge clk) begin
 					end
 					
 				end
-				2'h3 : begin	// 16-bit (true colour)
-					// taking 2 sequential bytes, like the color text mode, and outputting
-					// a full 16 bits parallel on the output
-					
-					mode_16bit <= 1'b1;	// update mode_16bit output to 16-bit mode
-					
-					pixel_out	<= ram_byte_in[7:0];
-					pixel_out_h	<= ram_byte_h;
-					
-				end
 				
 			endcase
 			
-		end // 16-bit mode
+		end
 		
 	end // if (pc_ena[3:0] == 0)
 	

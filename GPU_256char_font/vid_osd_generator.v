@@ -16,11 +16,10 @@ module vid_osd_generator (
 	
 	// outputs
 	output reg osd_ena_out,
-	//output wire osd_image,
 	output reg pixel_out_ena,
-	output reg pixel_out_top_16bit,   // <--- new
-	output reg [7:0] pixel_out_top,   // <--- new
-	output reg [7:0] pixel_out_top_h, // <--- new
+	output reg pixel_out_top_16bit,
+	output reg [7:0] pixel_out_top,
+	output reg [7:0] pixel_out_top_h,
 	output reg hde_out,
 	output reg vde_out,
 	output reg hs_out,
@@ -44,9 +43,9 @@ reg [7:0] dly1_letter, dly2_letter, dly3_letter, dly4_letter;
 reg [9:0] hde_pipe, vde_pipe, hs_pipe, vs_pipe;
 reg [47:0] HV_pipe[9:0];
 
-parameter   PIPE_DELAY =  6;	// This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
-parameter   FONT_8x16  =  0;	// 0 = 8 pixel tall font, 1 = 16 pixel tall font.
-parameter	HW_REGS_SIZE = 8;	// default size for hardware register bus - set by HW_REGS parameter in design view
+parameter PIPE_DELAY		= 6;	// This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
+parameter FONT_8x16		= 0;	// 0 = 8 pixel tall font, 1 = 16 pixel tall font.
+parameter HW_REGS_SIZE	= 8;	// default size for hardware register bus - set by HW_REGS parameter in design view
 
 wire pixel_ena;
 wire [12:0] font_pos;
@@ -99,7 +98,7 @@ multiport_gpu_ram gpu_RAM(
 	.data_out_3(),
 	.data_out_4(),
 	
-	.clk_b(host_clk),			// Host (Z80) clock input
+	.clk_b(host_clk),				// Host (Z80) clock input
 	.write_ena_b(host_wr_ena),	// Host (Z80) clock enable
 	.addr_host_in(host_addr[19:0]),
    .data_host_in(host_wr_data[7:0]),
@@ -108,7 +107,7 @@ multiport_gpu_ram gpu_RAM(
 );
 
 defparam gpu_RAM.ADDR_SIZE = 14,	// pass ADDR_SIZE into the gpu_RAM instance
-         gpu_RAM.PIXEL_PIPE = 3;    // set the length of the pixel pipe to offset multi-read port sequencing
+         gpu_RAM.PIXEL_PIPE = 3;	// set the length of the pixel pipe to offset multi-read port sequencing
 
 // ****************************************************************************************************************************
 // *
@@ -116,7 +115,7 @@ defparam gpu_RAM.ADDR_SIZE = 14,	// pass ADDR_SIZE into the gpu_RAM instance
 // *
 // * NOTE:  For testing, GPU_HW_Control_regs [10] sets foreground and background colour
 // *                                         [11] sets two_byte_mode
-// *                                         [12] sets colour_mode_in
+// *                                         [00] sets colour_mode_in (set in bitplane_to_raster)
 // *
 // ****************************************************************************************************************************
 bitplane_to_raster b2r_1(
@@ -126,20 +125,23 @@ bitplane_to_raster b2r_1(
 	
 	// inputs
 	.pixel_in_ena(pixel_ena),
+	.enable_in(1'b1),
 	.ram_byte_in(char_line),
 	.ram_byte_h(8'b00000000),
 	.bg_colour( GPU_HW_Control_regs[10] ),
 	.x_in( dly6_disp_x ),
-	.colour_mode_in( GPU_HW_Control_regs[12][2:0] ),
+	//.colour_mode_in( GPU_HW_Control_regs[12][2:0] ),
 	.two_byte_mode( GPU_HW_Control_regs[11][0] ),
+	.GPU_HW_Control_regs(GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)]),
 	
 	// outputs
+	.enable_out(),
 	.pixel_out_ena( pixel_out_ena ),
 	.mode_16bit( pixel_out_top_16bit ),
 	.pixel_out( pixel_out_top ),
 	.pixel_out_h( pixel_out_top_h ),
-	.x_out(),				// disconnected for moment
-	.colour_mode_out()	// disconnected for moment
+	.x_out()//,
+	//.colour_mode_out()
 
 );
 
@@ -176,7 +178,6 @@ always @ ( posedge clk ) begin
 		// **************************************************************************************************************************
 		// *** Create a serial pipe where the PIPE_DELAY parameter selects the pixel count delay for the xxx_in to the xxx_out ports
 		// **************************************************************************************************************************
-		
 		hde_pipe[0]		<= hde_in;
 		hde_pipe[9:1]	<= hde_pipe[8:0];
 		hde_out			<= hde_pipe[PIPE_DELAY-1];
@@ -201,7 +202,7 @@ always @ ( posedge clk ) begin
 		// This OSD generator's window is only 512 pixels by 256 lines.
 		// Since the disp_X&Y counters are the screens X&Y coordinates, I'm using an extra most 
 		// significant bit in the counters to determine if the OSD ena flag should be on or off.
-		
+		// **********************************************************************************************
 		if (disp_x[9] || disp_y[8])
 			dena <= 0;									// When disp_x > 511 or disp_y > 255, then turn off the OSD's output enable flag
 		else
