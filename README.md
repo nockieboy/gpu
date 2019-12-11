@@ -35,12 +35,12 @@ Contains the RS232 debugger, written by Brian Guralnick, which is an essential p
 
 * A suitable FPGA development board - detailed above
 * The project code in this repo
-* An FPGA-compatible IDE for the FPGA to compile and upload the code (Quartus II)
-* Note: If you're using a Cyclone II, Quartus II does not support this FPGA after version 13.0sp2
+* An FPGA-compatible IDE for the FPGA to compile and upload the code (Quartus Prime)
+* Note: *If you're using a Cyclone II, Quartus II/Prime does not support this FPGA after version 13.0sp2*
 
 ## Built With
 
-* [Quartus II](https://www.intel.com/content/www/us/en/programmable/downloads/download-center.html)
+* [Quartus Prime](https://www.intel.com/content/www/us/en/programmable/downloads/download-center.html)
 
 ## Contributing
 
@@ -49,8 +49,9 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 ## Authors
 
 * **nockieboy** - *Initial work* - [nockieboy](https://https://github.com/nockieboy)
+* **BrianHG** - thanks for your support, without which I'd still be struggling to get colour bars to display!
 
-See also the [eevBlog forum](https://www.eevblog.com/forum/fpga/fpga-vga-controller-for-8-bit-computer/new/#new) for the users who participated and contributed to this project.
+See also the [eevBlog forum](https://www.eevblog.com/forum/fpga/fpga-vga-controller-for-8-bit-computer/new/#new) for the users who participated and contributed to this project, along with the discussion and development of the GPU.
 
 ## License
 
@@ -58,5 +59,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* *BrianHG* - thanks for your support, without which I'd still be struggling to get colour bars to display!
 * Inspirational advice and tips from the many users of the eevBlog forums, including *jhpadjustable*, *berni*, *asmi* and many others
