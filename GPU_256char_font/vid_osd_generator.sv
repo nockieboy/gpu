@@ -15,17 +15,19 @@ module vid_osd_generator (
 	input wire [47:0] HV_triggers_in,
 	
 	// outputs
-	output reg osd_ena_out,
-	output reg pixel_out_ena,
-	output reg pixel_out_top_16bit,
-	output reg [7:0] pixel_out_top,
-	output reg [7:0] pixel_out_top_h,
+	output wire osd_ena_out,
+	output wire window_ena_out,
+	output wire pixel_out_top_16bit,
+	output wire [7:0] pixel_out_top,
+	output wire [7:0] gfx_pixel,
 	output reg hde_out,
 	output reg vde_out,
 	output reg hs_out,
 	output reg vs_out,
 	output wire [7:0] host_rd_data,
-	output reg [47:0] HV_triggers_out
+	output reg [47:0] HV_triggers_out,
+	output wire mode_16_bit,
+	output wire mode_565
 	
 );
 
@@ -69,13 +71,13 @@ multiport_gpu_ram gpu_RAM(
 	.addr_in_0(read_text_adr[19:0]),
 	.addr_in_1(read_font_adr[19:0]),
 	.addr_in_2(20'b0),
-	.addr_in_3(20'b0),
+	.addr_in_3(maggie_rd_addr),
 	.addr_in_4(20'b0),
 	
 	.cmd_in_0(32'b0),
 	.cmd_in_1(32'b0),
 	.cmd_in_2(32'b0),
-	.cmd_in_3(32'b0),
+	.cmd_in_3(maggie_cmd_out),
 	.cmd_in_4(32'b0),
 	
 	.pc_ena_out(),
@@ -88,14 +90,14 @@ multiport_gpu_ram gpu_RAM(
 	
 	.cmd_out_0(),
 	.cmd_out_1(),
-	.cmd_out_2(),
-	.cmd_out_3(),
+	.cmd_out_2(maggie_cmd_in),
+	.cmd_out_3(bart_cmd_in),
 	.cmd_out_4(),
 	
 	.data_out_0(letter[7:0]),
 	.data_out_1(char_line[7:0]),
-	.data_out_2(),
-	.data_out_3(),
+	.data_out_2(maggie_data_in),
+	.data_out_3(bart_data_in),
 	.data_out_4(),
 	
 	.clk_b(host_clk),				// Host (Z80) clock input
@@ -118,6 +120,7 @@ defparam gpu_RAM.ADDR_SIZE = 14,	// pass ADDR_SIZE into the gpu_RAM instance
 // *                                         [00] sets colour_mode_in (set in bitplane_to_raster)
 // *
 // ****************************************************************************************************************************
+
 bitplane_to_raster b2r_1(
 
 	.clk(clk),
@@ -125,22 +128,67 @@ bitplane_to_raster b2r_1(
 	
 	// inputs
 	.pixel_in_ena(pixel_ena),
-	.enable_in(1'b1),
 	.ram_byte_in(char_line),
 	.ram_byte_h(8'b00000000),
+	.bg_colour( GPU_HW_Control_regs[10] ),
 	.x_in( dly6_disp_x ),
-	//.colour_mode_in( GPU_HW_Control_regs[12][2:0] ),
+	.colour_mode_in( GPU_HW_Control_regs[12][2:0] ),
 	.two_byte_mode( GPU_HW_Control_regs[11][0] ),
-	.GPU_HW_Control_regs(GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)]),
 	
 	// outputs
-	.enable_out(),
-	.pixel_out_ena( pixel_out_ena ),
+	.pixel_out_ena( window_ena_out ),
 	.mode_16bit( pixel_out_top_16bit ),
 	.pixel_out( pixel_out_top ),
 	.pixel_out_h( pixel_out_top_h ),
-	.x_out()//,
-	//.colour_mode_out()
+	.x_out(),				// disconnected for moment
+	.colour_mode_out()	// disconnected for moment
+
+);
+
+wire [15:0] maggie_data_in;
+wire [31:0] maggie_cmd_in;
+wire [19:0] maggie_rd_addr;
+wire [31:0] maggie_cmd_out;
+
+maggie maggie_1(
+
+	//inputs
+	.clk( clk ),
+	.pc_ena_in( pc_ena[3:0] ),
+	.hw_regs( GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)] ),
+	.HV_trig( HV_triggers_in ),
+	.cmd_in( maggie_cmd_in ),
+	.ram_din( maggie_data_in ),
+
+	//outputs (all wires as we will embed the connected registers inside the module)
+	.read_addr( maggie_rd_addr ),
+	.cmd_out( maggie_cmd_out ),
+	.bp_2_rast_cmd( maggie_bp2r )
+
+
+);
+
+// ****************************************************************************************************************************
+
+wire [15:0] pixel_out;
+wire [15:0] bart_data_in;
+wire [31:0] bart_cmd_in;
+wire [23:0] maggie_bp2r;
+
+bart bart_1(
+
+	// inputs
+	.clk( clk ),
+	.pc_ena( pc_ena[3:0] ),
+	.cmd_in( bart_cmd_in ),
+	.bp_2_rast_cmd( maggie_bp2r ),
+	.ram_byte_in( bart_data_in ),
+	
+	// outputs
+	.window_ena_out( window_ena_out ),
+	.mode_16bit(),					// high when in 16-bit mode
+	.pixel_out( gfx_pixel ),
+	.mode_565()
 
 );
 
@@ -173,7 +221,7 @@ assign read_font_adr[19:11+FONT_8x16] = 0;        // my mistake, I has 1bit inst
 always @ ( posedge clk ) begin
 
 	if (pc_ena[3:0] == 0) begin
-		
+				
 		// **************************************************************************************************************************
 		// *** Create a serial pipe where the PIPE_DELAY parameter selects the pixel count delay for the xxx_in to the xxx_out ports
 		// **************************************************************************************************************************

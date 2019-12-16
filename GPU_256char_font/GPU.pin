@@ -131,7 +131,7 @@ RESERVED_INPUT               : 60        :        :                   :         
 VCCINT                       : 61        : power  :                   : 1.2V    :           :                
 VCCIO4                       : 62        : power  :                   : 3.3V    : 4         :                
 GND                          : 63        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 64        :        :                   :         : 4         :                
+vde                          : 64        : output : 3.3-V LVTTL       :         : 4         : N              
 RESERVED_INPUT               : 65        :        :                   :         : 4         :                
 b[0]                         : 66        : output : 3.3-V LVTTL       :         : 4         : Y              
 b[1]                         : 67        : output : 3.3-V LVTTL       :         : 4         : Y              
@@ -151,7 +151,7 @@ vs                           : 80        : output : 3.3-V LVTTL       :         
 VCCIO5                       : 81        : power  :                   : 3.3V    : 5         :                
 GND                          : 82        : gnd    :                   :         :           :                
 hs                           : 83        : output : 3.3-V LVTTL       :         : 5         : Y              
-vde                          : 84        : output : 3.3-V LVTTL       :         : 5         : N              
+RESERVED_INPUT               : 84        :        :                   :         : 5         :                
 uart_txd                     : 85        : output : 3.3-V LVTTL       :         : 5         : Y              
 RESERVED_INPUT               : 86        :        :                   :         : 5         :                
 uart_rxd                     : 87        : input  : 3.3-V LVTTL       :         : 5         : Y              
@@ -167,7 +167,7 @@ MSEL1                        : 96        :        :                   :         
 MSEL2                        : 97        :        :                   :         : 6         :                
 RESERVED_INPUT               : 98        :        :                   :         : 6         :                
 RESERVED_INPUT               : 99        :        :                   :         : 6         :                
-LED_rdx                      : 100       : output : 3.3-V LVTTL       :         : 6         : N              
+RESERVED_INPUT               : 100       :        :                   :         : 6         :                
 ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN : 101       : output : 3.3-V LVTTL       :         : 6         : N              
 VCCINT                       : 102       : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 103       :        :                   :         : 6         :                
@@ -188,11 +188,11 @@ VCCIO7                       : 117       : power  :                   : 3.3V    
 GND                          : 118       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 119       :        :                   :         : 7         :                
 RESERVED_INPUT               : 120       :        :                   :         : 7         :                
-LED_txd                      : 121       : output : 3.3-V LVTTL       :         : 7         : N              
+RESERVED_INPUT               : 121       :        :                   :         : 7         :                
 VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
 GND                          : 123       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 124       :        :                   :         : 7         :                
-RESERVED_INPUT               : 125       :        :                   :         : 7         :                
+LED_txd                      : 124       : output : 3.3-V LVTTL       :         : 7         : N              
+LED_rdx                      : 125       : output : 3.3-V LVTTL       :         : 7         : N              
 RESERVED_INPUT               : 126       :        :                   :         : 7         :                
 RESERVED_INPUT               : 127       :        :                   :         : 7         :                
 RESERVED_INPUT               : 128       :        :                   :         : 8         :                

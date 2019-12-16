@@ -1,5 +1,5 @@
 Flow report for GPU
-Wed Dec 11 16:24:09 2019
+Mon Dec 16 08:31:54 2019
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,20 +40,20 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Wed Dec 11 16:24:01 2019       ;
+; Flow Status                        ; Successful - Mon Dec 16 08:31:46 2019       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GPU                                         ;
 ; Top-level Entity Name              ; GPU                                         ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6E22C8                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 1,831 / 6,272 ( 29 % )                      ;
-;     Total combinational functions  ; 1,456 / 6,272 ( 23 % )                      ;
-;     Dedicated logic registers      ; 1,247 / 6,272 ( 20 % )                      ;
-; Total registers                    ; 1247                                        ;
+; Total logic elements               ; 1,665 / 6,272 ( 27 % )                      ;
+;     Total combinational functions  ; 1,390 / 6,272 ( 22 % )                      ;
+;     Dedicated logic registers      ; 984 / 6,272 ( 16 % )                        ;
+; Total registers                    ; 984                                         ;
 ; Total pins                         ; 21 / 92 ( 23 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 135,624 / 276,480 ( 49 % )                  ;
+; Total memory bits                  ; 139,320 / 276,480 ( 50 % )                  ;
 ; Embedded Multiplier 9-bit elements ; 0 / 30 ( 0 % )                              ;
 ; Total PLLs                         ; 1 / 2 ( 50 % )                              ;
 +------------------------------------+---------------------------------------------+
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/11/2019 16:23:05 ;
+; Start date & time ; 12/16/2019 08:30:49 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; GPU                 ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+--------------------+-------------+----------------+
 ; Assignment Name                     ; Value                                  ; Default Value      ; Entity Name ; Section Id     ;
 +-------------------------------------+----------------------------------------+--------------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 36074246109237.157608138408376         ; --                 ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 36074246109237.157648504803844         ; --                 ; --          ; --             ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE    ; Speed                                  ; Balanced           ; --          ; --             ;
 ; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit           ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --                 ; --          ; --             ;
@@ -108,11 +108,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:31     ; 1.0                     ; 4838 MB             ; 00:00:53                           ;
-; Fitter               ; 00:00:19     ; 1.1                     ; 5529 MB             ; 00:00:30                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4682 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:07     ; 1.4                     ; 4782 MB             ; 00:00:07                           ;
-; Total                ; 00:00:59     ; --                      ; --                  ; 00:01:32                           ;
+; Analysis & Synthesis ; 00:00:31     ; 1.0                     ; 4834 MB             ; 00:00:48                           ;
+; Fitter               ; 00:00:19     ; 1.1                     ; 5500 MB             ; 00:00:24                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 4681 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:06     ; 1.4                     ; 4780 MB             ; 00:00:06                           ;
+; Total                ; 00:00:58     ; --                      ; --                  ; 00:01:20                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

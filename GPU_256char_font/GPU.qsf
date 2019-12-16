@@ -102,7 +102,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE sync_generator.sv
 set_global_assignment -name VERILOG_FILE vid_out_stencil.v
 set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
 set_global_assignment -name VERILOG_FILE multiport_gpu_ram.v
-set_global_assignment -name VERILOG_FILE vid_osd_generator.v
 set_global_assignment -name VERILOG_FILE white_noise.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE GPU_full_osd.vwf
 set_global_assignment -name SDC_FILE SDC1.sdc
@@ -119,4 +118,7 @@ set_global_assignment -name MIF_FILE palette_4444.mif
 set_global_assignment -name MIF_FILE palette_565.mif
 set_global_assignment -name VERILOG_FILE dual_port_palette_ram_INTEL.v
 set_global_assignment -name VERILOG_FILE palette_mixer.v
+set_global_assignment -name VERILOG_FILE bart.v
+set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
+set_global_assignment -name SYSTEMVERILOG_FILE vid_osd_generator.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

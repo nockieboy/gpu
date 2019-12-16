@@ -87,6 +87,8 @@ assign host_wrena_gfx = host_wrena & gfx_addressed;
 // route the palette data out to the host
 assign host_data_out = host_txt_data_out | host_gfx_data_out;
 
+integer blend;
+
 // *********************************************************************
 // *
 // * create a text/sprite palette RAM instance (4444)
@@ -151,6 +153,8 @@ defparam graphics_palette_RAM.INIT_PALETTE = "palette_565.mif";
 
 always @(posedge clk) begin
 
+blend = alpha_blend[3:0];
+
 	if (pc_ena_in[3:0] == 0) begin
 		
 		hde_pipe[0]		<= hde_in;
@@ -174,16 +178,16 @@ always @(posedge clk) begin
 		HV_triggers_out	<= HV_pipe[PIPE_DELAY-1];
 		
 		// mix output rgb
-		pixel_r1		<= (text_r[7:0] * (15-alpha_blend[3:0])) >> 4;
-		pixel_r2		<= (graphics_r[7:0] * alpha_blend[3:0]) >> 4;
+		pixel_r1		<= (text_r[7:0] * (15-blend)) >> 4;
+		pixel_r2		<= (graphics_r[7:0] * blend) >> 4;
 		pixel_out_r <= pixel_r1 + pixel_r2;
 		
-		pixel_g1		<= (text_g[7:0] * (15-alpha_blend[3:0])) >> 4;
-		pixel_g2		<= (graphics_g[7:0] * alpha_blend[3:0]) >> 4;
+		pixel_g1		<= (text_g[7:0] * (15-blend)) >> 4;
+		pixel_g2		<= (graphics_g[7:0] * blend) >> 4;
 		pixel_out_g <= pixel_g1 + pixel_g2;
 		
-		pixel_b1		<= (text_b[7:0] * (15-alpha_blend[3:0])) >> 4;
-		pixel_b2		<= (graphics_b[7:0] * alpha_blend[3:0]) >> 4;
+		pixel_b1		<= (text_b[7:0] * (15-blend)) >> 4;
+		pixel_b2		<= (graphics_b[7:0] * blend) >> 4;
 		pixel_out_b <= pixel_b1 + pixel_b2;
 		
 	end
