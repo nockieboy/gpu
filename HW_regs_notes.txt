@@ -1,0 +1,26 @@
+// parameters
+parameter HW_REGS		= 8;
+parameter HW_REG_BASE		= 96;
+parameter H_RESET_TRIG		= 8;
+parameter H_POS_TRIG		= 10;
+parameter RAM_READ_CYCLES	= 3;
+// LOAD: START: 4608, LENGTH: 11520
+// local parameters
+localparam V_RESET_TRIG	= H_RESET_TRIG	+  1;
+localparam V_POS_TRIG	= H_POS_TRIG	+  1;
+localparam BP2RAST_cmd	= HW_REG_BASE	+  0;	// Transfers the video mode setting to the new bitplane_2_raster module
+localparam BP2RAST_bgc	= HW_REG_BASE	+  1;	// Transfers the bg_colour setting to the new bitplane_2_raster module
+localparam BP2RAST_fgc	= HW_REG_BASE	+  2;	// Transfers the fg_colour setting to the new bitplane_2_raster module
+localparam RST_ADDR_H	= HW_REG_BASE	+  3;	// MSB bits of 24 bit base read address
+localparam RST_ADDR_M	= HW_REG_BASE	+  4;	// MID bits of 24 bit base read address
+localparam RST_ADDR_L	= HW_REG_BASE	+  5;	// LSB bits of 24 bit base read address
+localparam YINC_ADDR_H	= HW_REG_BASE	+  6;	// MSB bits of 16 bit Y-Line increment for read address
+localparam YINC_ADDR_L	= HW_REG_BASE	+  7;	// LSB bits of 16 bit Y-Line increment for read address
+localparam X_SIZE_H	= HW_REG_BASE	+  8;	// MSB bits of 16 bit display width screen pixels
+localparam X_SIZE_L	= HW_REG_BASE	+  9;	// LSB bits of 16 bit display width screen pixels
+localparam Y_SIZE_H	= HW_REG_BASE	+ 10;	// MSB bits of 16 bit display height screen y lines
+localparam Y_SIZE_L	= HW_REG_BASE	+ 11;	// LSB bits of 16 bit display height screen y lines
+localparam X_SCALE	= HW_REG_BASE	+ 12;	// Compound of two 4 bit words. Upper 4 bits controls the X increment every period, lower 4 bits is a pixel period counter to define the number of pixels until the upper 4 bits are added to the address-pointer.
+localparam Y_SCALE	= HW_REG_BASE	+ 13;	// Compound of two 4 bit words. Upper 4 bits reserved for text tile mode Y size while the lower lower 4 bits is a line period counter to define the number of lines until YINC_ADDR is added to the address-pointer
+localparam X_START_SUB	= HW_REG_BASE	+ 14;	// An 8 bit word which defines an odd pixel start position within the period counter and X position within a bitplane's X coordinate position
+localparam Y_START_SUB	= HW_REG_BASE	+ 15;	// An 8 bit word which defines an odd line start within within the period counter and Y coordinates inside a font.

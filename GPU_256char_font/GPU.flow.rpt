@@ -1,5 +1,5 @@
 Flow report for GPU
-Mon Dec 16 08:31:54 2019
+Wed Dec 25 15:24:40 2019
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,20 +40,20 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Mon Dec 16 08:31:46 2019       ;
+; Flow Status                        ; Successful - Wed Dec 25 15:24:31 2019       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GPU                                         ;
 ; Top-level Entity Name              ; GPU                                         ;
 ; Family                             ; Cyclone IV E                                ;
-; Device                             ; EP4CE6E22C8                                 ;
+; Device                             ; EP4CE6E22C7                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 1,665 / 6,272 ( 27 % )                      ;
-;     Total combinational functions  ; 1,390 / 6,272 ( 22 % )                      ;
-;     Dedicated logic registers      ; 984 / 6,272 ( 16 % )                        ;
-; Total registers                    ; 984                                         ;
-; Total pins                         ; 21 / 92 ( 23 % )                            ;
+; Total logic elements               ; 4,306 / 6,272 ( 69 % )                      ;
+;     Total combinational functions  ; 3,382 / 6,272 ( 54 % )                      ;
+;     Dedicated logic registers      ; 2,649 / 6,272 ( 42 % )                      ;
+; Total registers                    ; 2663                                        ;
+; Total pins                         ; 33 / 92 ( 36 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 139,320 / 276,480 ( 50 % )                  ;
+; Total memory bits                  ; 237,568 / 276,480 ( 86 % )                  ;
 ; Embedded Multiplier 9-bit elements ; 0 / 30 ( 0 % )                              ;
 ; Total PLLs                         ; 1 / 2 ( 50 % )                              ;
 +------------------------------------+---------------------------------------------+
@@ -64,43 +64,46 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/16/2019 08:30:49 ;
+; Start date & time ; 12/25/2019 15:23:13 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; GPU                 ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                 ;
-+-------------------------------------+----------------------------------------+--------------------+-------------+----------------+
-; Assignment Name                     ; Value                                  ; Default Value      ; Entity Name ; Section Id     ;
-+-------------------------------------+----------------------------------------+--------------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 36074246109237.157648504803844         ; --                 ; --          ; --             ;
-; CYCLONEII_OPTIMIZATION_TECHNIQUE    ; Speed                                  ; Balanced           ; --          ; --             ;
-; FITTER_EFFORT                       ; Standard Fit                           ; Auto Fit           ; --          ; --             ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --                 ; --          ; --             ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --                 ; --          ; --             ;
-; MISC_FILE                           ; altpll0.bsf                            ; --                 ; --          ; --             ;
-; MISC_FILE                           ; altpll0_bb.v                           ; --                 ; --          ; --             ;
-; MISC_FILE                           ; altpll0.ppf                            ; --                 ; --          ; --             ;
-; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                   ; --                 ; --          ; --             ;
-; NUM_PARALLEL_PROCESSORS             ; 4                                      ; --                 ; --          ; --             ;
-; OPTIMIZE_MULTI_CORNER_TIMING        ; Off                                    ; On                 ; --          ; --             ;
-; OPTIMIZE_POWER_DURING_FITTING       ; Off                                    ; Normal compilation ; --          ; --             ;
-; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --                 ; --          ; --             ;
-; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --                 ; --          ; --             ;
-; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                             ; --                 ; --          ; --             ;
-; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                             ; --                 ; --          ; --             ;
-; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
-; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
-; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --                 ; --          ; --             ;
-; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --                 ; --          ; --             ;
-; USE_GENERATED_PHYSICAL_CONSTRAINTS  ; Off                                    ; --                 ; --          ; eda_blast_fpga ;
-; VERILOG_INPUT_VERSION               ; SystemVerilog_2005                     ; Verilog_2001       ; --          ; --             ;
-; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                                    ; --                 ; --          ; --             ;
-; VHDL_SHOW_LMF_MAPPING_MESSAGES      ; Off                                    ; --                 ; --          ; --             ;
-+-------------------------------------+----------------------------------------+--------------------+-------------+----------------+
++--------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                     ;
++-----------------------------------------+----------------------------------------+--------------------+-------------+----------------+
+; Assignment Name                         ; Value                                  ; Default Value      ; Entity Name ; Section Id     ;
++-----------------------------------------+----------------------------------------+--------------------+-------------+----------------+
+; ALM_REGISTER_PACKING_EFFORT             ; High                                   ; Medium             ; --          ; --             ;
+; AUTO_RAM_RECOGNITION                    ; Off                                    ; On                 ; --          ; --             ;
+; AUTO_RAM_TO_LCELL_CONVERSION            ; On                                     ; Off                ; --          ; --             ;
+; AUTO_ROM_RECOGNITION                    ; Off                                    ; On                 ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                   ; 36074246109237.157728739216644         ; --                 ; --          ; --             ;
+; CYCLONEII_OPTIMIZATION_TECHNIQUE        ; Speed                                  ; Balanced           ; --          ; --             ;
+; FITTER_EFFORT                           ; Standard Fit                           ; Auto Fit           ; --          ; --             ;
+; MAX_CORE_JUNCTION_TEMP                  ; 85                                     ; --                 ; --          ; --             ;
+; MIN_CORE_JUNCTION_TEMP                  ; 0                                      ; --                 ; --          ; --             ;
+; NUM_PARALLEL_PROCESSORS                 ; 4                                      ; --                 ; --          ; --             ;
+; OPTIMIZATION_MODE                       ; Aggressive Area                        ; Balanced           ; --          ; --             ;
+; OPTIMIZE_MULTI_CORNER_TIMING            ; Off                                    ; On                 ; --          ; --             ;
+; OPTIMIZE_POWER_DURING_FITTING           ; Off                                    ; Normal compilation ; --          ; --             ;
+; OPTIMIZE_POWER_DURING_SYNTHESIS         ; Off                                    ; Normal compilation ; --          ; --             ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS          ; Half Signal Swing                      ; --                 ; --          ; --             ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS          ; Half Signal Swing                      ; --                 ; --          ; --             ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS         ; Half Vccio                             ; --                 ; --          ; --             ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS         ; Half Vccio                             ; --                 ; --          ; --             ;
+; PARTITION_COLOR                         ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL     ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
+; PARTITION_NETLIST_TYPE                  ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA ; On                                     ; Off                ; --          ; --             ;
+; POWER_BOARD_THERMAL_MODEL               ; None (CONSERVATIVE)                    ; --                 ; --          ; --             ;
+; POWER_PRESET_COOLING_SOLUTION           ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --                 ; --          ; --             ;
+; USE_GENERATED_PHYSICAL_CONSTRAINTS      ; Off                                    ; --                 ; --          ; eda_blast_fpga ;
+; VERILOG_INPUT_VERSION                   ; SystemVerilog_2005                     ; Verilog_2001       ; --          ; --             ;
+; VERILOG_SHOW_LMF_MAPPING_MESSAGES       ; Off                                    ; --                 ; --          ; --             ;
+; VHDL_SHOW_LMF_MAPPING_MESSAGES          ; Off                                    ; --                 ; --          ; --             ;
++-----------------------------------------+----------------------------------------+--------------------+-------------+----------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
@@ -108,11 +111,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:31     ; 1.0                     ; 4834 MB             ; 00:00:48                           ;
-; Fitter               ; 00:00:19     ; 1.1                     ; 5500 MB             ; 00:00:24                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4681 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:06     ; 1.4                     ; 4780 MB             ; 00:00:06                           ;
-; Total                ; 00:00:58     ; --                      ; --                  ; 00:01:20                           ;
+; Analysis & Synthesis ; 00:00:39     ; 1.0                     ; 4893 MB             ; 00:01:02                           ;
+; Fitter               ; 00:00:33     ; 1.1                     ; 5548 MB             ; 00:00:59                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 4691 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:08     ; 1.6                     ; 4814 MB             ; 00:00:10                           ;
+; Total                ; 00:01:22     ; --                      ; --                  ; 00:02:13                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

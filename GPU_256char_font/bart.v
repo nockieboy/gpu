@@ -14,12 +14,8 @@ module bart (
 	input wire [15:0] ram_byte_in,
 	
 	// outputs
-	output reg window_ena_out,
-	output reg mode_16bit,					// high when in 16-bit mode
-	output reg [15:0] pixel_out,
-	output wire mode_565
-	
-);
+	output wire [18:0] pixel_out 
+	);
 
 // *****************************************************************************
 // colour_mode_in[3:0] defines the video mode:
@@ -36,12 +32,14 @@ module bart (
 // 1111 - 16 bit true colour
 // *****************************************************************************
 
-wire [7:0] bg_colour;
-wire [7:0] fg_colour;
-wire [7:0] font_colour;
-wire [9:0] x_in;
-wire [7:0] colour_mode_in;
-wire window_enable;
+wire [7:0]  bg_colour;
+wire [7:0]  fg_colour;
+wire [7:0]  font_colour;
+wire [9:0]  x_in;
+wire [7:0]  colour_mode_in;
+wire        window_enable, mode_565;
+reg         window_ena_out, mode_16bit;
+reg  [15:0] reg_pixel_out;
 
 // *****************************************************************************
 // *                                                                           *
@@ -57,6 +55,11 @@ assign x_in[4:0]				= cmd_in[4:0];
 assign font_colour[7:0]		= cmd_in[15:8];
 assign mode_565				= colour_mode_in[4];
 
+assign pixel_out[15:0]      = reg_pixel_out[15:0];
+assign pixel_out[16]        = mode_565;
+assign pixel_out[17]        = window_ena_out;
+assign pixel_out[18]        = mode_16bit;
+
 // *****************************************************************************
 // *                                                                           *
 // *  RASTER GENERATION                                                        *
@@ -67,12 +70,10 @@ always @ (posedge clk) begin
 
 	if (pc_ena[3:0] == 0) begin
 		
-		window_ena_out	<= window_enable && colour_mode_in;	// pass pixel_ena through to the output
-		
 		if (~window_enable | ~colour_mode_in[3]) begin
 			
 			// disable output as turned off
-			pixel_out	<= 16'b0000000000000000;
+			reg_pixel_out	<= 16'b0000000000000000;
 			// disable output as not in display area
 			window_ena_out <= 1'b0;
 			
@@ -86,14 +87,14 @@ always @ (posedge clk) begin
 					mode_16bit <= 1'b0;		// set mode_16bit output to 8-bit mode
 					window_ena_out <= 1'b1;	// set enable_out HIGH
 					
-					if (ram_byte_in[(~x_in[2:0])] == 1'b1) begin
+					if (ram_byte_in[(~x_in[2:0])] == 1'b1 ) begin
 						
-						pixel_out <= fg_colour;
+						reg_pixel_out <= fg_colour;
 						
 					end
 					else begin
 						
-						pixel_out <= bg_colour;
+						reg_pixel_out <= bg_colour;
 						
 					end
 					
@@ -104,27 +105,27 @@ always @ (posedge clk) begin
 					mode_16bit <= 1'b0;		// set mode_16bit output to 8-bit mode
 					window_ena_out <= 1'b1;	// set enable_out HIGH
 					
-					pixel_out[7:2] <= bg_colour[7:2];
+					reg_pixel_out[7:2] <= bg_colour[7:2];
 					
 					case (x_in[2:1])
 						2'h0 : begin
 							
-							pixel_out[1:0] <= ram_byte_in[7:6];
+							reg_pixel_out[1:0] <= ram_byte_in[7:6];
 							
 						end
 						2'h1 : begin
 							
-							pixel_out[1:0] <= ram_byte_in[5:4];
+							reg_pixel_out[1:0] <= ram_byte_in[5:4];
 							
 						end
 						2'h2 : begin
 							
-							pixel_out[1:0] <= ram_byte_in[3:2];
+							reg_pixel_out[1:0] <= ram_byte_in[3:2];
 							
 						end
 						2'h3 : begin
 							
-							pixel_out[1:0] <= ram_byte_in[1:0];
+							reg_pixel_out[1:0] <= ram_byte_in[1:0];
 							
 						end
 					endcase
@@ -136,12 +137,12 @@ always @ (posedge clk) begin
 					mode_16bit <= 1'b0;		// set mode_16bit output to 8-bit mode
 					window_ena_out <= 1'b1;	// set enable_out HIGH
 					
-					pixel_out[7:4] <= bg_colour[7:4];
+					reg_pixel_out[7:4] <= bg_colour[7:4];
 					
 					if (~x_in[2])
-						pixel_out[3:0] <= ram_byte_in[7:4];
+						reg_pixel_out[3:0] <= ram_byte_in[7:4];
 					else
-						pixel_out[3:0] <= ram_byte_in[3:0];
+						reg_pixel_out[3:0] <= ram_byte_in[3:0];
 					
 				end
 				
@@ -150,7 +151,7 @@ always @ (posedge clk) begin
 					mode_16bit <= 1'b0;		// set mode_16bit output to 8-bit mode
 					window_ena_out <= 1'b1;	// set enable_out HIGH
 					
-					pixel_out <= ram_byte_in[7:0];
+					reg_pixel_out <= ram_byte_in[7:0];
 					
 				end
 				
@@ -159,16 +160,16 @@ always @ (posedge clk) begin
 					mode_16bit		<= 1'b0;	// I know this is weird, the 16 bit mode is reserved for turning off the palette and passing 16 bits straight to the DAC
 					window_ena_out <= 1'b1;	// set enable_out HIGH
 					
-					if (ram_byte_in[(~x_in[2:0])] == 1'b1) begin
+					if (ram_byte_in[(~x_in[2:0])] == 1'b1 ) begin
 						
-						pixel_out[3:0] <= font_colour[7:4];
-						pixel_out[7:4] <= fg_colour[7:4];
+						reg_pixel_out[3:0] <= font_colour[7:4];
+						reg_pixel_out[7:4] <= fg_colour[7:4];
 						
 					end
 					else begin
 						
-						pixel_out[3:0] <= font_colour[3:0];
-						pixel_out[7:4] <= bg_colour[7:4];
+						reg_pixel_out[3:0] <= font_colour[3:0];
+						reg_pixel_out[7:4] <= bg_colour[7:4];
 						
 					end
 					
@@ -178,27 +179,27 @@ always @ (posedge clk) begin
 					
 					mode_16bit		<= 1'b0;	// I know this is weird, the 16 bit mode is reserved for turning off the palette and passing 16 bits straight to the DAC
 					window_ena_out <= 1'b1;	// set enable_out HIGH
-					pixel_out[7:2] <= font_colour[7:2];
+					reg_pixel_out[7:2] <= font_colour[7:2];
 					
 					case (x_in[2:1])
 						2'h0 : begin
 							
-							pixel_out[1:0] <= ram_byte_in[7:6];
+							reg_pixel_out[1:0] <= ram_byte_in[7:6];
 							
 						end
 						2'h1 : begin
 							
-							pixel_out[1:0] <= ram_byte_in[5:4];
+							reg_pixel_out[1:0] <= ram_byte_in[5:4];
 							
 						end
 						2'h2 : begin
 							
-							pixel_out[1:0] <= ram_byte_in[3:2];
+							reg_pixel_out[1:0] <= ram_byte_in[3:2];
 							
 						end
 						2'h3 : begin
 							
-							pixel_out[1:0] <= ram_byte_in[1:0];
+							reg_pixel_out[1:0] <= ram_byte_in[1:0];
 							
 						end
 					endcase
@@ -210,12 +211,12 @@ always @ (posedge clk) begin
 					mode_16bit		<= 1'b0;	// I know this is weird, the 16 bit mode is reserved for turning off the palette and passing 16 bits straight to the DAC
 					window_ena_out <= 1'b1;	// set enable_out HIGH
 					
-					pixel_out[7:4] <= font_colour[7:4];
+					reg_pixel_out[7:4] <= font_colour[7:4];
 					
 					if (~x_in[2])
-						pixel_out[3:0] <= ram_byte_in[7:4];
+						reg_pixel_out[3:0] <= ram_byte_in[7:4];
 					else
-						pixel_out[3:0] <= ram_byte_in[3:0];
+						reg_pixel_out[3:0] <= ram_byte_in[3:0];
 					
 				end
 				
@@ -224,7 +225,7 @@ always @ (posedge clk) begin
 					mode_16bit		<= 1'b1;	// set mode_16bit output to 16-bit mode
 					window_ena_out <= 1'b1;	// set enable_out HIGH
 					
-					pixel_out	<= ram_byte_in;
+					reg_pixel_out	<= ram_byte_in;
 					
 				end
 				

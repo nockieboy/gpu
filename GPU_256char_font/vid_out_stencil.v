@@ -19,7 +19,6 @@ module vid_out_stencil(
 	input wire [RGB_hbit:0] r_in,
 	input wire [RGB_hbit:0] g_in,
 	input wire [RGB_hbit:0] b_in,
-	input wire [7:0] GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
 	
 	output reg hde_out,
 	output reg vde_out,
@@ -34,10 +33,9 @@ module vid_out_stencil(
 	
 );
 
-	parameter RGB_hbit  = 1;		// 1 will make the RGB ports go from 1 to 0, eg [1:0].  I know others prefer a '2' here for 2 bits
-	parameter HS_invert = 0;		// use a 1 to invert the HS output, the invert feature is only for this video output module
-	parameter VS_invert = 0;		// use a 1 to invert the VS output, the invert feature is only for this video output module
-	parameter HW_REGS_SIZE = 8;	// default size for hardware register bus - set by HW_REGS parameter in design view
+	parameter RGB_hbit  = 3;		// 1 will make the RGB ports go from 1 to 0, eg [1:0].  I know others prefer a '2' here for 2 bits
+	parameter HS_invert = 1;		// use a 1 to invert the HS output, the invert feature is only for this video output module
+	parameter VS_invert = 1;		// use a 1 to invert the VS output, the invert feature is only for this video output module
 
 	always @(posedge pclk)
 	begin
@@ -54,8 +52,8 @@ module vid_out_stencil(
 
 				hde_out <= hde_in;             // since the video muting switch algorithm delays the output by 1 pixel clock,
 				vde_out <= vde_in;             // all the video timing reference signals will also get the 1 pixel delay treatment to keep the output aligned perfectly.
-				hs_out  <= hs_in ^ HS_invert ; // the invert feature is only for this video output module
-				vs_out  <= vs_in ^ VS_invert ; // the invert feature is only for this video output module
+				hs_out  <= hs_in ^ HS_invert[0] ; // the invert feature is only for this video output module
+				vs_out  <= vs_in ^ VS_invert[0] ; // the invert feature is only for this video output module
 
 				if ( hde_in && vde_in )
 				begin

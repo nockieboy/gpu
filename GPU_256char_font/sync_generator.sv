@@ -61,7 +61,7 @@ module sync_generator(
 	
    always @(posedge pclk)
 		if (pc_ena == PIX_CLK_DIVIDER) pc_ena <= 0;
-		else pc_ena <= pc_ena +1;
+		else pc_ena <= pc_ena + 1'b1;
 	
 	integer i;
 	
@@ -71,8 +71,8 @@ module sync_generator(
 		
 		if (reset)	// reset to start of frame
 		begin
-			h_count <= (IMAGE_OFFSET_X + H_RES - 2);
-			v_count <= (SCANLINES - 2);
+			h_count <= (IMAGE_OFFSET_X[9:0] + H_RES[9:0] - 2'h2);
+			v_count <= (SCANLINES[9:0] - 2'h2);
 			//z_count <= 1'b0;
 			hsync   <= 1'b0;
 			vsync   <= 1'b0;

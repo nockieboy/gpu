@@ -200,17 +200,22 @@ refer to the applicable agreement for further details.
 	)
 	(parameter
 		"PIPE_DELAY"
-		"6"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"FONT_8x16"
-		"0"
+		"7"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"HW_REGS_SIZE"
 		"8"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"ADDR_SIZE"
+		"14"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_WORDS"
+		""
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing

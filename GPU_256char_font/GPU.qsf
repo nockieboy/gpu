@@ -37,7 +37,7 @@
 
 
 set_global_assignment -name FAMILY "Cyclone IV E"
-set_global_assignment -name DEVICE EP4CE6E22C8
+set_global_assignment -name DEVICE EP4CE6E22C7
 set_global_assignment -name TOP_LEVEL_ENTITY GPU
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "9.1 SP2"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "00:02:33  NOVEMBER 13, 2019"
@@ -45,7 +45,6 @@ set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
 set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
-set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
@@ -56,7 +55,6 @@ set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
 set_global_assignment -name SIMULATION_MODE FUNCTIONAL
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE GPU_full_osd.vwf
 set_global_assignment -name DEVICE_FILTER_PACKAGE "ANY QFP"
-set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 8
 set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING OFF
 set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
@@ -97,28 +95,44 @@ set_location_assignment PIN_85 -to uart_txd
 set_location_assignment PIN_87 -to uart_rxd
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to r[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to r[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to r[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to r[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to g[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to g[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to g[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to g[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to vs
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to hs
+set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE AREA"
+set_global_assignment -name AUTO_ROM_RECOGNITION OFF
+set_global_assignment -name AUTO_RAM_RECOGNITION OFF
+set_global_assignment -name AUTO_RAM_TO_LCELL_CONVERSION ON
+set_global_assignment -name OPTIMIZE_POWER_DURING_SYNTHESIS OFF
 set_global_assignment -name BDF_FILE GPU.bdf
-set_global_assignment -name SYSTEMVERILOG_FILE sync_generator.sv
-set_global_assignment -name VERILOG_FILE vid_out_stencil.v
-set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
-set_global_assignment -name VERILOG_FILE multiport_gpu_ram.v
-set_global_assignment -name VERILOG_FILE white_noise.v
-set_global_assignment -name VECTOR_WAVEFORM_FILE GPU_full_osd.vwf
+set_global_assignment -name SYSTEMVERILOG_FILE sixteen_port_gpu_ram.sv
 set_global_assignment -name SDC_FILE SDC1.sdc
-set_global_assignment -name QIP_FILE altpll0.qip
-set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
-set_global_assignment -name MIF_FILE gpu_16K_RAM2.mif
-set_global_assignment -name BDF_FILE color_sel.bdf
-set_global_assignment -name SYSTEMVERILOG_FILE GPU_HW_Control_Regs.sv
-set_global_assignment -name BDF_FILE raster_trigger_mux.bdf
+set_global_assignment -name MIF_FILE palette.mif
+set_global_assignment -name MIF_FILE gpu_16K_VGA.mif
 set_global_assignment -name VERILOG_FILE Z80_bridge.v
-set_global_assignment -name VERILOG_FILE data_mux.v
-set_global_assignment -name VERILOG_FILE bitplane_to_raster.v
-set_global_assignment -name MIF_FILE palette_4444.mif
-set_global_assignment -name MIF_FILE palette_565.mif
-set_global_assignment -name VERILOG_FILE dual_port_palette_ram_INTEL.v
-set_global_assignment -name VERILOG_FILE palette_mixer.v
-set_global_assignment -name VERILOG_FILE bart.v
-set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
+set_global_assignment -name VERILOG_FILE vid_out_stencil.v
 set_global_assignment -name SYSTEMVERILOG_FILE vid_osd_generator.sv
+set_global_assignment -name VERILOG_FILE SYNC_RS232_UART.v
+set_global_assignment -name SYSTEMVERILOG_FILE sync_generator.sv
+set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
+set_global_assignment -name BDF_FILE raster_trigger_mux.bdf
+set_global_assignment -name SYSTEMVERILOG_FILE palette_mixer.sv
+set_global_assignment -name VERILOG_FILE multiport_gpu_ram.v
+set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
+set_global_assignment -name SYSTEMVERILOG_FILE GPU_HW_Control_Regs.sv
+set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
+set_global_assignment -name VERILOG_FILE data_mux.v
+set_global_assignment -name BDF_FILE color_sel.bdf
+set_global_assignment -name VERILOG_FILE bart.v
+set_global_assignment -name VERILOG_FILE altpll0.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

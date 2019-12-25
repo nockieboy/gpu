@@ -1,6 +1,7 @@
 module vid_osd_generator (
 
 	// inputs
+	input clk_2x,       // DDR clock for internal multiport ram to run at double speed
 	input clk,
 	input [3:0] pc_ena,
 	input hde_in,
@@ -15,293 +16,299 @@ module vid_osd_generator (
 	input wire [47:0] HV_triggers_in,
 	
 	// outputs
-	output wire osd_ena_out,
-	output wire window_ena_out,
-	output wire pixel_out_top_16bit,
-	output wire [7:0] pixel_out_top,
-	output wire [7:0] gfx_pixel,
 	output reg hde_out,
 	output reg vde_out,
 	output reg hs_out,
 	output reg vs_out,
+	output wire [7:0] red,
+	output wire [7:0] green,
+	output wire [7:0] blue,
 	output wire [7:0] host_rd_data,
-	output reg [47:0] HV_triggers_out,
-	output wire mode_16_bit,
-	output wire mode_565
-	
+	output reg [47:0] HV_triggers_out
 );
 
-// To write contents into the display and font memories, the wr_addr[15:0] selects the address
-// the wr_data[7:0] contains a byte which will be written
-// the wren_disp is the write enable for the ascii text ram.  Only the wr_addr[8:0] are used as the character display is 32x16.
-// the wren_font is the write enable for the font memory.  Only 2 bits are used of the wr_data[1:0] and wr_addr[12:0] are used.
-// tie these ports to GND for now disabling them
+reg [PIPE_DELAY:0] hde_pipe, vde_pipe, hs_pipe, vs_pipe;
+reg [47:0] HV_pipe[PIPE_DELAY:0];
 
-reg [9:0] disp_x,dly1_disp_x,dly2_disp_x,dly3_disp_x,dly4_disp_x,dly5_disp_x,dly6_disp_x,dly7_disp_x,dly8_disp_x;
-reg [8:0] disp_y,dly1_disp_y,dly2_disp_y,dly3_disp_y,dly4_disp_y;
-
-reg dena,dly1_dena,dly2_dena,dly3_dena,dly4_dena,dly5_dena,dly6_dena;
-reg [7:0] dly1_letter, dly2_letter, dly3_letter, dly4_letter;
-reg [9:0] hde_pipe, vde_pipe, hs_pipe, vs_pipe;
-reg [47:0] HV_pipe[9:0];
-
-parameter PIPE_DELAY		= 6;	// This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
-parameter FONT_8x16		= 0;	// 0 = 8 pixel tall font, 1 = 16 pixel tall font.
+parameter PIPE_DELAY		= 12;	// This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
 parameter HW_REGS_SIZE	= 8;	// default size for hardware register bus - set by HW_REGS parameter in design view
+parameter ADDR_SIZE     = 14;
+parameter NUM_WORDS     = 2 ** ADDR_SIZE;
+parameter NUM_LAYERS    = 5;    // This parameter defines the number of used MAGGIE graphics layers.
+parameter PALETTE_ADDR  = 20'h07C00 ; // Base address where host Z80 may access the palette memory
 
-wire pixel_ena;
-wire [12:0] font_pos;
-wire [10:0] disp_pos;
-wire [19:0] read_text_adr;
-wire [19:0] read_font_adr;
-wire [7:0]  letter;
-wire [7:0]  char_line;
+wire   [7:0] host_rd_data_main,host_rd_data_pal;
+assign       host_rd_data = host_rd_data_main | host_rd_data_pal; // merge the read data outputs of all internal rams.
 
+wire [23:0] maggie_to_bp2r[14:0];
+wire [19:0] GPU_ram_addr_in[14:0];
+wire [31:0] GPU_ram_cmd_in[14:0];
+wire [19:0] GPU_ram_cmd_out[14:0];
+wire [15:0] GPU_ram_data_out[14:0];
+wire [17:0] BART_to_PAL_MIXER[14:0];
+
+
+// **** Create the yellow HV trigger test cursors at output
+wire [7:0] red_pc,green_pc,blue_pc;
+wire [7:0] test_cursors;
+assign test_cursors[6:0] = 7'h0;
+assign test_cursors[7]   = HV_triggers_out[0] | HV_triggers_out[1] | HV_triggers_out[2] | HV_triggers_out[3];
+assign red   = red_pc   | test_cursors;
+assign green = green_pc | test_cursors;
+assign blue  = blue_pc  ; //| test_cursors;
+// **** Create the yellow HV trigger test cursors at output
+
+
+integer i;
 
 // ****************************************************************************************************************************
 // *
 // * create a multiport GPU RAM handler instance
 // *
 // ****************************************************************************************************************************
-multiport_gpu_ram gpu_RAM(
+sixteen_port_gpu_ram gpu_RAM(
 
-	.clk(clk),
-	.pc_ena_in(pc_ena[3:0]),
+	.clk_2x         ( clk_2x ),
+	.clk            ( clk ),
+	.pc_ena_in      ( pc_ena[3:0] ),
 	
-	.addr_in_0(read_text_adr[19:0]),
-	.addr_in_1(read_font_adr[19:0]),
-	.addr_in_2(20'b0),
-	.addr_in_3(maggie_rd_addr),
-	.addr_in_4(20'b0),
+	.addr_in        ( GPU_ram_addr_in   ),
+	.cmd_in         ( GPU_ram_cmd_in    ),
+	.cmd_out        ( GPU_ram_cmd_out   ),
+	.data_out       ( GPU_ram_data_out  ),
 	
-	.cmd_in_0(32'b0),
-	.cmd_in_1(32'b0),
-	.cmd_in_2(32'b0),
-	.cmd_in_3(maggie_cmd_out),
-	.cmd_in_4(32'b0),
-	
-	.pc_ena_out(),
-	
-	.addr_out_0(),
-	.addr_out_1(),
-	.addr_out_2(),
-	.addr_out_3(),
-	.addr_out_4(),
-	
-	.cmd_out_0(),
-	.cmd_out_1(),
-	.cmd_out_2(maggie_cmd_in),
-	.cmd_out_3(bart_cmd_in),
-	.cmd_out_4(),
-	
-	.data_out_0(letter[7:0]),
-	.data_out_1(char_line[7:0]),
-	.data_out_2(maggie_data_in),
-	.data_out_3(bart_data_in),
-	.data_out_4(),
-	
-	.clk_b(host_clk),				// Host (Z80) clock input
-	.write_ena_b(host_wr_ena),	// Host (Z80) clock enable
-	.addr_host_in(host_addr[19:0]),
-   .data_host_in(host_wr_data[7:0]),
-	.data_host_out(host_rd_data[7:0])
+	.write_ena_host ( host_wr_ena            ),
+	.addr_host_in   ( host_addr[19:0]        ),
+	.data_host_in   ( host_wr_data[7:0]      ),
+	.data_host_out  ( host_rd_data_main[7:0] )  );
 
-);
-
-defparam gpu_RAM.ADDR_SIZE = 14,	// pass ADDR_SIZE into the gpu_RAM instance
-         gpu_RAM.PIXEL_PIPE = 3;	// set the length of the pixel pipe to offset multi-read port sequencing
+defparam	gpu_RAM.ADDR_SIZE          = ADDR_SIZE,	// pass ADDR_SIZE into the gpu_RAM instance
+			gpu_RAM.NUM_WORDS          = NUM_WORDS,
+			gpu_RAM.HOST_BASE_ADDRESS  = 20'h0,
+         gpu_RAM.PIXEL_PIPE         = 3,          // set the length of the pixel pipe to offset multi-read port sequencing
+         gpu_RAM.MIF_FILE           = "gpu_16K_VGA.mif";
 
 // ****************************************************************************************************************************
-// *
-// * create a bitplane_to_raster instance
-// *
-// * NOTE:  For testing, GPU_HW_Control_regs [10] sets foreground and background colour
-// *                                         [11] sets two_byte_mode
-// *                                         [00] sets colour_mode_in (set in bitplane_to_raster)
-// *
-// ****************************************************************************************************************************
+maggie maggie_0(
+	.clk           ( clk ),
+	.pc_ena_in     ( pc_ena[3:0] ),         // Synchronous sub-pixel clock divider
+	.hw_regs       ( GPU_HW_Control_regs ), // MAGGIE controls
+	.HV_trig       ( HV_triggers_in ),      // H&V sync and top left window coordinates going into MAGGIE
 
-bitplane_to_raster b2r_1(
+	.cmd_in        (),//( GPU_ram_cmd_out[NUM_LAYERS-1]  ), // comand coming in from previous MAGGIE channel
+	.ram_din       (),//( GPU_ram_data_out[NUM_LAYERS-1] ), // GPU ram read data comand coming in from previous MAGGIE channel
 
-	.clk(clk),
-	.pc_ena(pc_ena[3:0]),
-	
-	// inputs
-	.pixel_in_ena(pixel_ena),
-	.ram_byte_in(char_line),
-	.ram_byte_h(8'b00000000),
-	.bg_colour( GPU_HW_Control_regs[10] ),
-	.x_in( dly6_disp_x ),
-	.colour_mode_in( GPU_HW_Control_regs[12][2:0] ),
-	.two_byte_mode( GPU_HW_Control_regs[11][0] ),
-	
-	// outputs
-	.pixel_out_ena( window_ena_out ),
-	.mode_16bit( pixel_out_top_16bit ),
-	.pixel_out( pixel_out_top ),
-	.pixel_out_h( pixel_out_top_h ),
-	.x_out(),				// disconnected for moment
-	.colour_mode_out()	// disconnected for moment
+	.read_addr     ( GPU_ram_addr_in[0] ),  // current MAGGIE directed pixel/pixel or tile/tile read address going out
+	.cmd_out       ( GPU_ram_cmd_in[0]  ),  // current MAGGIE directed real time pixel/pixel command  going out
 
+	.bp_2_rast_cmd ( maggie_to_bp2r[0]  )	 // once per frame BART controls going out
 );
 
-wire [15:0] maggie_data_in;
-wire [31:0] maggie_cmd_in;
-wire [19:0] maggie_rd_addr;
-wire [31:0] maggie_cmd_out;
-
+defparam maggie_0.H_RESET_TRIG      = 8  ,  // H&V trigger which defines when the MAGGIE resets and increments it's internal registers
+         maggie_0.H_POS_TRIG        = 10 ,  // H&V trigger which defines the beginning top left coordinate of the MAGGIE's open window
+         maggie_0.HW_REG_BASE       = 128+16*0,  // Base address for the 16 bytes which controls the MAGGIE and paired BART modules.
+         maggie_0.RAM_READ_CYCLES	= 3  ;  // Defines the GPU_ram module's read pixel clock cycles.
+// ****************************************************************************************************************************
 maggie maggie_1(
+	.clk           ( clk ),
+	.pc_ena_in     ( pc_ena[3:0] ),         // Synchronous sub-pixel clock divider
+	.hw_regs       ( GPU_HW_Control_regs ), // MAGGIE controls
+	.HV_trig       ( HV_triggers_in ),      // H&V sync and top left window coordinates going into MAGGIE
 
-	//inputs
-	.clk( clk ),
-	.pc_ena_in( pc_ena[3:0] ),
-	.hw_regs( GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)] ),
-	.HV_trig( HV_triggers_in ),
-	.cmd_in( maggie_cmd_in ),
-	.ram_din( maggie_data_in ),
+	.cmd_in        ( GPU_ram_cmd_out[0]  ), // comand coming in from previous MAGGIE channel
+	.ram_din       ( GPU_ram_data_out[0] ), // GPU ram read data comand coming in from previous MAGGIE channel
 
-	//outputs (all wires as we will embed the connected registers inside the module)
-	.read_addr( maggie_rd_addr ),
-	.cmd_out( maggie_cmd_out ),
-	.bp_2_rast_cmd( maggie_bp2r )
+	.read_addr     ( GPU_ram_addr_in[1] ),  // current MAGGIE directed pixel/pixel or tile/tile read address going out
+	.cmd_out       ( GPU_ram_cmd_in[1]  ),  // current MAGGIE directed real time pixel/pixel command  going out
 
-
+	.bp_2_rast_cmd ( maggie_to_bp2r[1]  )	 // once per frame BART controls going out
 );
 
+defparam maggie_1.H_RESET_TRIG      = 8  ,  // H&V trigger which defines when the MAGGIE resets and increments it's internal registers
+         maggie_1.H_POS_TRIG        = 12 ,  // H&V trigger which defines the beginning top left coordinate of the MAGGIE's open window
+         maggie_1.HW_REG_BASE       = 128+16*1 ,  // Base address for the 16 bytes which controls the MAGGIE and paired BART modules.
+         maggie_1.RAM_READ_CYCLES	= 3  ;  // Defines the GPU_ram module's read pixel clock cycles.
+// ****************************************************************************************************************************
+maggie maggie_2(
+	.clk           ( clk ),
+	.pc_ena_in     ( pc_ena[3:0] ),         // Synchronous sub-pixel clock divider
+	.hw_regs       ( GPU_HW_Control_regs ), // MAGGIE controls
+	.HV_trig       ( HV_triggers_in ),      // H&V sync and top left window coordinates going into MAGGIE
+
+	.cmd_in        ( GPU_ram_cmd_out[1]  ), // comand coming in from previous MAGGIE channel
+	.ram_din       ( GPU_ram_data_out[1] ), // GPU ram read data comand coming in from previous MAGGIE channel
+
+	.read_addr     ( GPU_ram_addr_in[2] ),  // current MAGGIE directed pixel/pixel or tile/tile read address going out
+	.cmd_out       ( GPU_ram_cmd_in[2]  ),  // current MAGGIE directed real time pixel/pixel command  going out
+
+	.bp_2_rast_cmd ( maggie_to_bp2r[2]  )	 // once per frame BART controls going out
+);
+
+defparam maggie_2.H_RESET_TRIG      = 8  ,  // H&V trigger which defines when the MAGGIE resets and increments it's internal registers
+         maggie_2.H_POS_TRIG        = 14 ,  // H&V trigger which defines the beginning top left coordinate of the MAGGIE's open window
+         maggie_2.HW_REG_BASE       = 128+16*2,  // Base address for the 16 bytes which controls the MAGGIE and paired BART modules.
+         maggie_2.RAM_READ_CYCLES	= 3  ;  // Defines the GPU_ram module's read pixel clock cycles.
+// ****************************************************************************************************************************
+maggie maggie_3(
+	.clk           ( clk ),
+	.pc_ena_in     ( pc_ena[3:0] ),         // Synchronous sub-pixel clock divider
+	.hw_regs       ( GPU_HW_Control_regs ), // MAGGIE controls
+	.HV_trig       ( HV_triggers_in ),      // H&V sync and top left window coordinates going into MAGGIE
+
+	.cmd_in        ( GPU_ram_cmd_out[2]  ), // comand coming in from previous MAGGIE channel
+	.ram_din       ( GPU_ram_data_out[2] ), // GPU ram read data comand coming in from previous MAGGIE channel
+
+	.read_addr     ( GPU_ram_addr_in[3] ),  // current MAGGIE directed pixel/pixel or tile/tile read address going out
+	.cmd_out       ( GPU_ram_cmd_in[3]  ),  // current MAGGIE directed real time pixel/pixel command  going out
+
+	.bp_2_rast_cmd ( maggie_to_bp2r[3]  )	 // once per frame BART controls going out
+);
+
+defparam maggie_3.H_RESET_TRIG      = 8  ,  // H&V trigger which defines when the MAGGIE resets and increments it's internal registers
+         maggie_3.H_POS_TRIG        = 16 ,  // H&V trigger which defines the beginning top left coordinate of the MAGGIE's open window
+         maggie_3.HW_REG_BASE       = 128+16*3,  // Base address for the 16 bytes which controls the MAGGIE and paired BART modules.
+         maggie_3.RAM_READ_CYCLES	= 3  ;  // Defines the GPU_ram module's read pixel clock cycles.
+// ****************************************************************************************************************************
+maggie maggie_4(
+	.clk           ( clk ),
+	.pc_ena_in     ( pc_ena[3:0] ),         // Synchronous sub-pixel clock divider
+	.hw_regs       ( GPU_HW_Control_regs ), // MAGGIE controls
+	.HV_trig       ( HV_triggers_in ),      // H&V sync and top left window coordinates going into MAGGIE
+
+	.cmd_in        ( GPU_ram_cmd_out[3]  ), // comand coming in from previous MAGGIE channel
+	.ram_din       ( GPU_ram_data_out[3] ), // GPU ram read data comand coming in from previous MAGGIE channel
+
+	.read_addr     ( GPU_ram_addr_in[4] ),  // current MAGGIE directed pixel/pixel or tile/tile read address going out
+	.cmd_out       ( GPU_ram_cmd_in[4]  ),  // current MAGGIE directed real time pixel/pixel command  going out
+
+	.bp_2_rast_cmd ( maggie_to_bp2r[4]  )	 // once per frame BART controls going out
+);
+
+defparam maggie_4.H_RESET_TRIG      = 8  ,  // H&V trigger which defines when the MAGGIE resets and increments it's internal registers
+         maggie_4.H_POS_TRIG        = 18 ,  // H&V trigger which defines the beginning top left coordinate of the MAGGIE's open window
+         maggie_4.HW_REG_BASE       = 128+16*4,  // Base address for the 16 bytes which controls the MAGGIE and paired BART modules.
+         maggie_4.RAM_READ_CYCLES	= 3  ;  // Defines the GPU_ram module's read pixel clock cycles.
 // ****************************************************************************************************************************
 
-wire [15:0] pixel_out;
-wire [15:0] bart_data_in;
-wire [31:0] bart_cmd_in;
-wire [23:0] maggie_bp2r;
 
+// ****************************************************************************************************************************
+bart bart_0(
+	.clk            ( clk ),
+	.pc_ena         ( pc_ena[3:0] ),
+	.bp_2_rast_cmd  ( maggie_to_bp2r[0] ),
+
+	.cmd_in         ( GPU_ram_cmd_out[0]  ),
+	.ram_byte_in    ( GPU_ram_data_out[0] ),
+
+	.pixel_out      ( BART_to_PAL_MIXER[0] )
+);
+// ****************************************************************************************************************************
 bart bart_1(
+	.clk            ( clk ),
+	.pc_ena         ( pc_ena[3:0] ),
+	.bp_2_rast_cmd  ( maggie_to_bp2r[1] ),
 
-	// inputs
-	.clk( clk ),
-	.pc_ena( pc_ena[3:0] ),
-	.cmd_in( bart_cmd_in ),
-	.bp_2_rast_cmd( maggie_bp2r ),
-	.ram_byte_in( bart_data_in ),
+	.cmd_in         ( GPU_ram_cmd_out[1]  ),
+	.ram_byte_in    ( GPU_ram_data_out[1] ),
+
+	.pixel_out      ( BART_to_PAL_MIXER[1] )
+);
+// ****************************************************************************************************************************
+bart bart_2(
+	.clk            ( clk ),
+	.pc_ena         ( pc_ena[3:0] ),
+	.bp_2_rast_cmd  ( maggie_to_bp2r[2] ),
+
+	.cmd_in         ( GPU_ram_cmd_out[2]  ),
+	.ram_byte_in    ( GPU_ram_data_out[2] ),
+
+	.pixel_out      ( BART_to_PAL_MIXER[2] )
+);
+// ****************************************************************************************************************************
+bart bart_3(
+	.clk            ( clk ),
+	.pc_ena         ( pc_ena[3:0] ),
+	.bp_2_rast_cmd  ( maggie_to_bp2r[3] ),
+
+	.cmd_in         ( GPU_ram_cmd_out[3]  ),
+	.ram_byte_in    ( GPU_ram_data_out[3] ),
+
+	.pixel_out      ( BART_to_PAL_MIXER[3] )
+);
+// ****************************************************************************************************************************
+bart bart_4(
+	.clk            ( clk ),
+	.pc_ena         ( pc_ena[3:0] ),
+	.bp_2_rast_cmd  ( maggie_to_bp2r[4] ),
+
+	.cmd_in         ( GPU_ram_cmd_out[4]  ),
+	.ram_byte_in    ( GPU_ram_data_out[4] ),
+
+	.pixel_out      ( BART_to_PAL_MIXER[4] )
+);
+// ****************************************************************************************************************************
+
+// ****************************************************************************************************************************
+// Palette mixer
+// ****************************************************************************************************************************
+palette_mixer  pmixer (
+	.clk_2x        ( clk_2x ),
+	.clk				( clk ),
+	.pc_ena_in		( pc_ena[3:0] ),
+	.pixel_in		( BART_to_PAL_MIXER ),
 	
 	// outputs
-	.window_ena_out( window_ena_out ),
-	.mode_16bit(),					// high when in 16-bit mode
-	.pixel_out( gfx_pixel ),
-	.mode_565()
+	.pixel_out_r	( red_pc ),
+	.pixel_out_g	( green_pc ),
+	.pixel_out_b	( blue_pc ),
 
+	// host port
+	.host_wrena    ( host_wr_ena            ),
+	.host_addr_in  ( host_addr[19:0]        ),
+	.host_data_in  ( host_wr_data[7:0]      ),
+	.host_data_out ( host_rd_data_pal[7:0]  )
 );
 
-//  The disp_x is the X coordinate counter.  It runs from 0 to 512 and stops there
-//  The disp_y is the Y coordinate counter.  It runs from 0 to 256 and stops there
+defparam pmixer.PALETTE_ADDR = PALETTE_ADDR,  // Base address where host Z80 may access the palette memory
+         pmixer.NUM_LAYERS   = NUM_LAYERS ;
+// ****************************************************************************************************************************
 
-// Get the character at the current x, y position
-assign disp_pos[5:0]  = disp_x[8:3] ;  // The disp_pos[5:0] is the lower address for the 64 characters for the ascii text.
-assign disp_pos[10:6] = disp_y[7+FONT_8x16:3+FONT_8x16] ;  // the disp_pos[10:6] is the upper address for the 32 lines of text
-
-//  The result from the ascii memory component 'altsyncram_component_osd_mem'  is called letter[7:0]
-//  Since disp_pos[8:0] has entered the read address, it takes 2 pixel clock cycles for the resulting letter[7:0] to come out.
-
-//  Now, font_pos[12:0] is the read address for the memory block containing the character specified in letter[]
-
-assign font_pos[10+FONT_8x16:3+FONT_8x16] = letter[7:0] ;       // Select the upper font address with the 7 bit letter, note the atari font has only 128 characters.
-assign font_pos[2+FONT_8x16:0]				= dly3_disp_y[2+FONT_8x16:0] ;  // select the font x coordinate with a 2 pixel clock DELAYED disp_x address.  [3:1] is used so that every 2 x lines are repeats
-
-//  The resulting 2-bit font image at x is assigned to the OSD[1:0] output
-//  Also, since there is an 8th bit in the ascii text memory, I use that as a third OSD output color bit
-
-//assign osd_image = char_line[(~dly6_disp_x[2:0])];   <--- edited out - replaced by bitplane_to_raster instance
-
-assign read_text_adr[10:0] = disp_pos[10:0];
-assign read_text_adr[19:11] = 9'h2;        // my mistake, I has 1bit instead of 10bits
-
-assign read_font_adr[10+FONT_8x16:0] = font_pos[10+FONT_8x16:0];
-assign read_font_adr[19:11+FONT_8x16] = 0;        // my mistake, I has 1bit instead of 10bits
 
 always @ ( posedge clk ) begin
 
+	if (NUM_LAYERS < 15) begin // Zero out all unused layers so compiler simplifies out unused ram and palette mixer channels.
+		for (i = NUM_LAYERS ; i < 15; i = i + 1) begin 
+			maggie_to_bp2r[i]    = 24'h0;
+			GPU_ram_addr_in[i]   = 20'h0;
+			GPU_ram_cmd_in[i]    = 32'h0;
+			BART_to_PAL_MIXER[i] = 18'h0;
+		end
+	end
+
 	if (pc_ena[3:0] == 0) begin
-				
+		
 		// **************************************************************************************************************************
 		// *** Create a serial pipe where the PIPE_DELAY parameter selects the pixel count delay for the xxx_in to the xxx_out ports
 		// **************************************************************************************************************************
-		hde_pipe[0]		<= hde_in;
-		hde_pipe[9:1]	<= hde_pipe[8:0];
-		hde_out			<= hde_pipe[PIPE_DELAY-1];
+		hde_pipe[0]					<= hde_in;
+		hde_pipe[PIPE_DELAY:1]	<= hde_pipe[PIPE_DELAY-1:0];
+		hde_out						<= hde_pipe[PIPE_DELAY-1];
 		
-		vde_pipe[0]		<= vde_in;
-		vde_pipe[9:1]	<= vde_pipe[8:0];
-		vde_out			<= vde_pipe[PIPE_DELAY-1];
+		vde_pipe[0]					<= vde_in;
+		vde_pipe[PIPE_DELAY:1]	<= vde_pipe[PIPE_DELAY-1:0];
+		vde_out						<= vde_pipe[PIPE_DELAY-1];
 		
-		hs_pipe[0]		<= hs_in;
-		hs_pipe[9:1]	<= hs_pipe[8:0];
-		hs_out			<= hs_pipe[PIPE_DELAY-1];
+		hs_pipe[0]					<= hs_in;
+		hs_pipe[PIPE_DELAY:1]	<= hs_pipe[PIPE_DELAY-1:0];
+		hs_out						<= hs_pipe[PIPE_DELAY-1];
 		
-		vs_pipe[0]		<= vs_in;
-		vs_pipe[9:1]	<= vs_pipe[8:0];
-		vs_out			<= vs_pipe[PIPE_DELAY-1];
+		vs_pipe[0]					<= vs_in;
+		vs_pipe[PIPE_DELAY:1]	<= vs_pipe[PIPE_DELAY-1:0];
+		vs_out						<= vs_pipe[PIPE_DELAY-1];
 		
-		HV_pipe[0]		<= HV_triggers_in;
-		HV_pipe[9:1]	<= HV_pipe[8:0];
-		HV_triggers_out	<= HV_pipe[PIPE_DELAY-1];
-		
-		// **********************************************************************************************
-		// This OSD generator's window is only 512 pixels by 256 lines.
-		// Since the disp_X&Y counters are the screens X&Y coordinates, I'm using an extra most 
-		// significant bit in the counters to determine if the OSD ena flag should be on or off.
-		// **********************************************************************************************
-		if (disp_x[9] || disp_y[8])
-			dena <= 0;									// When disp_x > 511 or disp_y > 255, then turn off the OSD's output enable flag
-		else
-			dena <= 1;									// otherwise, turn on the OSD output enable flag
-		
-		if (~vde_in)
-			disp_y[8:0] <= 9'b111111111;			// preset the disp_y counter to max while the vertical display is disabled
-			
-		else if (hde_in && ~hde_pipe[0])
-		begin		// isolate a single event at the begining of the active display area
-		
-			disp_x[9:0] <= 10'b0000000000;		// clear the disp_x counter
-			if (!disp_y[8] | (disp_y[8:7] == 2'b11))
-				disp_y <= disp_y + 1'b1;				// only increment the disp_y counter if it hasn't reached it's end
-				
-		end
-		else if (!disp_x[9])
-			disp_x <= disp_x + 1'b1;  // keep on addind to the disp_x counter until it reaches it's end.
-		
-		// **********************************************************************************************
-		// *** These delay pipes registers are explained in the 'assign's above
-		// **********************************************************************************************
-		dly1_disp_x <= disp_x;
-		dly2_disp_x <= dly1_disp_x;
-		dly3_disp_x <= dly2_disp_x;
-		dly4_disp_x <= dly3_disp_x;
-		dly5_disp_x <= dly4_disp_x;
-		dly6_disp_x <= dly5_disp_x;
-		dly7_disp_x <= dly6_disp_x;
-		dly8_disp_x <= dly7_disp_x;
-		
-		dly1_disp_y <= disp_y;
-		dly2_disp_y <= dly1_disp_y;
-		dly3_disp_y <= dly2_disp_y;
-		dly4_disp_y <= dly3_disp_y;
-		
-		dly1_letter <= letter;
-		dly2_letter <= dly1_letter;
-		dly3_letter <= dly2_letter;
-		dly4_letter <= dly3_letter;
-		
-		dly1_dena   <= dena;
-		dly2_dena   <= dly1_dena;
-		dly3_dena   <= dly2_dena;
-		dly4_dena   <= dly3_dena;
-		dly5_dena   <= dly4_dena;
-		dly6_dena   <= dly5_dena;
-		
-		// **********************************************************************************************
-		osd_ena_out	<= dly4_dena;	// This is used to drive a graphics A/B switch which tells when the OSD graphics should be shown
-											// It needs to be delayed by the number of pixel clocks required for the above memories
-		pixel_ena	<= dly4_dena;
+		HV_pipe[0]					<= HV_triggers_in;
+		HV_pipe[PIPE_DELAY:1]	<= HV_pipe[PIPE_DELAY-1:0];
+		HV_triggers_out			<= HV_pipe[PIPE_DELAY-1];
 		
 	end // ena
 	

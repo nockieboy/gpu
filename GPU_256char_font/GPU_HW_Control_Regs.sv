@@ -6,8 +6,8 @@ module GPU_HW_Control_Regs (
 		input [19:0] addr_in,
 		input [7:0] data_in,
 		
-		output reg  [7:0] GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)]
-		
+		output reg  [7:0] GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
+		output reg  [7:0] data_out
 );
  
 	parameter HW_REGS_SIZE = 8;
@@ -47,9 +47,10 @@ module GPU_HW_Control_Regs (
 	8'h1F,
 	8'h20 };
 	
-	wire valid_wr;
+	wire enable,valid_wr;
 	
-	assign valid_wr = we && ( addr_in[19:HW_REGS_SIZE] == BASE_WRITE_ADDRESS[19:HW_REGS_SIZE] );	// upper x-bits of addr_in should equal BASE_WRITE_ADDRESS for a successful write
+	assign enable      = ( addr_in[19:HW_REGS_SIZE] == BASE_WRITE_ADDRESS[19:HW_REGS_SIZE] );	// upper x-bits of addr_in should equal BASE_WRITE_ADDRESS for a successful read or write
+	assign valid_wr    = we && enable;
 	
 	integer i;
  
@@ -79,6 +80,11 @@ module GPU_HW_Control_Regs (
 			end
 			
 		end
+		
+		if (enable) begin
+					 data_out <= GPU_HW_Control_regs[addr_in[HW_REGS_SIZE-1:0]];
+			end else data_out <= 0;
+		
 	end
 
 endmodule

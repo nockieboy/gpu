@@ -4,6 +4,7 @@ module gpu_dual_port_ram_INTEL (
 	input clk,
 	input clk_b,
 	input wr_en_b,
+	input host_read_ena,
 	input [3:0] pc_ena_in,
 	input [19:0] addr_a,
 	input [19:0] addr_b,
@@ -28,6 +29,9 @@ parameter ADDR_SIZE = 14;
 // but defaults to power-of-two sizing based on ADDR_SIZE if not otherwise specified
 parameter NUM_WORDS = 2 ** ADDR_SIZE;
 
+parameter MIF_FILE  = "gpu_16K_VGA.mif";
+
+
 // define delay pipe registers
 reg [19:0] rd_addr_pipe_a;
 reg [31:0] cmd_pipe;		// ****** changed to 32 bit width
@@ -42,6 +46,9 @@ wire [15:0] ram_out_a;
 assign data_out_a[7:0]	= (addr_out_a[0] == 1'b0) ? ram_out_a[7:0]  : ram_out_a[15:8];
 assign data_out_a[15:8]	= (addr_out_a[0] == 1'b0) ? ram_out_a[15:8] : ram_out_a[7:0];
 
+reg    read_ena,read_ena_d1;
+wire   [7:0] data_out_h;
+assign data_out_b[7:0]  = read_ena ? data_out_h : 8'h0  ; // output 0's when host_read enablo is low
 // ********************************************************************************
 
 // ****************************************************************************************************************************
@@ -62,7 +69,7 @@ altsyncram	altsyncram_component (
 	.address_a (addr_a[ADDR_SIZE - 1:1]),	// ****** changed LSB from 0 to 1
 	.data_a (16'b0000000000000000),			// ****** changed to 16 bit data width
 	.q_a (ram_out_a),								// ****** changed from data_out_a to ram_out_a
-	.q_b (data_out_b),
+	.q_b (data_out_h),
 	.aclr0 (1'b0),
 	.aclr1 (1'b0),
 	.addressstall_a (1'b0),
@@ -105,7 +112,7 @@ defparam
 	altsyncram_component.width_byteena_b = 1,
 	altsyncram_component.wrcontrol_wraddress_reg_b = "CLOCK1",
 	altsyncram_component.init_file_layout = "PORT_B",
-	altsyncram_component.init_file = "gpu_16K_VGA.mif";
+	altsyncram_component.init_file = MIF_FILE;
 	
 // ****************************************************************************************************************************
 
@@ -123,6 +130,10 @@ always @(posedge clk) begin
 	pc_ena_pipe <= pc_ena_in;
 	pc_ena_out <= pc_ena_pipe;
 	// **************************************************************************************************************************
+
+	read_ena_d1 <= host_read_ena; // setup host read data port to return all 0's if the read enable is low in parallel with the read data.
+	read_ena    <= read_ena_d1;
+	
 	
 end
 
