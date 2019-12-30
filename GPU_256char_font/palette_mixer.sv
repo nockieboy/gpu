@@ -1,6 +1,7 @@
 module palette_mixer (
 	// inputs
 	input clk_2x,
+	input clk_2x_phase,
 	input clk,
 	input [3:0]  pc_ena_in,
 	input [17:0] pixel_in[14:0],
@@ -47,9 +48,10 @@ wire [3:0] layer_sel;
 // *********************************************************************
 sixteen_port_gpu_ram palette_RAM(
 
-	.clk_2x   (clk_2x),
-	.clk      (clk),		// Primary clk input (125 MHz)
-	.pc_ena_in(pc_ena_in),  // Pixel clock enable
+	.clk_2x       (clk_2x),
+	.clk_2x_phase (clk_2x_phase),
+	.clk          (clk),		// Primary clk input (125 MHz)
+	.pc_ena_in    (pc_ena_in),  // Pixel clock enable
 
 	.addr_in  (pal_in_addr ),
 	.data_out (pal_out     ),

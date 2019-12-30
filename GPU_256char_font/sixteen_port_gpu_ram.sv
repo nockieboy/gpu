@@ -1,6 +1,7 @@
 module sixteen_port_gpu_ram ( 
 
 	input clk_2x,
+	input clk_2x_phase,
 	input clk,				// Primary clk input (125 MHz)
 	input [3:0] pc_ena_in,	// Pixel clock enable
 
@@ -37,8 +38,12 @@ parameter MIF_FILE          = "gpu_16K_VGA.mif";
 wire host_enable;
 assign host_enable = (HOST_BASE_ADDRESS[19:ADDR_SIZE] == addr_host_in[19:ADDR_SIZE]) && ( addr_host_in[ADDR_SIZE-1:0] < NUM_WORDS ); // Limnit the read & write enable window 
 
-reg [19:0] addr_in_mux[3:0];
-reg [31:0] cmd_mux_in[3:0];		// ****** changed to 32 bit width
+reg   [19:0] addr_mux_in[3:0];
+reg   [31:0] cmd_mux_in[3:0];		// ****** changed to 32 bit width
+
+wire  [19:0] w_addr_mux_in[3:0];
+wire  [31:0] w_cmd_mux_in[3:0];		// ****** changed to 32 bit width
+wire  [15:0] data_mux_in[3:0];
 
 reg [19:0] addr_lat[3:0][4:1];
 
@@ -48,30 +53,37 @@ wire [31:0] cmd_mux_out[3:0];	// ****** changed to 32 bit width
 wire [19:0] addr_mux_out[3:0];
 wire [15:0] data_mux_out[3:0];	// ****** changed to 16 bit width
 
+wire [3:0]  wren_host;
+wire [3:0]  mode_8bit_host;
+
+assign      w_addr_mux_in[2:0]     = addr_mux_in[2:0];
+assign      w_cmd_mux_in[2:0]      = cmd_mux_in[2:0];
+
+assign      mode_8bit_host         = 4'b1000 ; // Assign port 4 to writing in 8 bit mode only.
+assign      wren_host[2:0]         = 3'b000  ; // disable writing of first 3 ports
+assign      wren_host[3]           = write_ena_host && host_enable ; // Set port 4 to the host port write enable.
+assign      w_cmd_mux_in[3][0]     = host_enable ; // pipe into the cmd mux of port 4 a the host enable function.       
+assign      w_addr_mux_in[3]       = addr_host_in ; // Set port 4 to host address
+assign      data_mux_in[3][7:0]    = data_host_in ; // Set port 4 write data low byte to host data input
+assign      data_mux_in[3][15:8]   = data_host_in ; // Set port 4 write data high byte to host data input, required for 8 bit write emulation mode
+assign      data_host_out          = cmd_mux_out[3][0] ? data_mux_out[3][7:0] : 8'h0 ; // set the host read port to port 4 if a hosr_enable read command went in, otherwise return 0
+
 // create a GPU RAM instance
-gpu_dual_port_ram_INTEL gpu_RAM(
-	.clk(clk),
-	.clk_b(clk),
-	.pc_ena_in(pc_ena_in),
-	.pc_ena_out(),
+gpu_quad_port_ram gpu_RAM(
 
+	.clk         ( clk ),
+	.clk_2x      ( clk_2x ),
+	.clk_2x_phase ( clk_2x_phase ),
+	.wren        ( wren_host ),
+	.addr        ( w_addr_mux_in ),
+	.data_in     ( data_mux_in ),
+	.mode_8bit   ( mode_8bit_host ),      // When writing in 8 bit mode, the high and low byte of the 'data_in' need to be wired together.
+	.data_out    ( data_mux_out ),
+	.addr_out    ( addr_mux_out ),
+	
+	.cmd_in      ( w_cmd_mux_in ),
+	.cmd_out     ( cmd_mux_out ) );
 
-	.addr_a(addr_in_mux[0]),
-	.addr_out_a(addr_mux_out[0]),
-	.data_out_a(data_mux_out[0]),
-
-	.cmd_in(cmd_mux_in[0]),
-	.cmd_out(cmd_mux_out[0]),
-
-
-
-	.host_read_ena( host_enable ),
-	.wr_en_b(write_ena_host && host_enable ),
-	.addr_b(addr_host_in),
-	.data_in_b(data_host_in),
-	.data_out_b(data_host_out)
-
-);
 
 defparam    gpu_RAM.ADDR_SIZE = ADDR_SIZE,	// pass ADDR_SIZE into the gpu_RAM instance
 			gpu_RAM.NUM_WORDS = NUM_WORDS,  // set non-default word size for the RAM (16 KB)
@@ -141,7 +153,7 @@ for (i=0 ; i<3; i=i+1) begin
 	// perform 5:1 mux for all inputs to the dual-port RAM
 	case (pc_ena_in[3:0])
 		4'h0 : begin
-						addr_in_mux[i] <= addr_in[0+i*5];  // Send the first, #0 addr & cmd to the memory module.
+						addr_mux_in[i] <= addr_in[0+i*5];  // Send the first, #0 addr & cmd to the memory module.
 						cmd_mux_in[i]  <= cmd_in[0+i*5];
 						
 						addr_lat[i][1] <= addr_in[1+i*5];  // latch all addr_in_# in parallel
@@ -156,19 +168,19 @@ for (i=0 ; i<3; i=i+1) begin
 						
 					end
 		4'h1 : begin
-						addr_in_mux[i] <= addr_lat[i][1]; //  Send the latched, #1 addr & cmd to the memory module.
+						addr_mux_in[i] <= addr_lat[i][1]; //  Send the latched, #1 addr & cmd to the memory module.
 						cmd_mux_in[i]  <= cmd_lat[i][1];
 					end
 		4'h2 : begin   
-						addr_in_mux[i] <= addr_lat[i][2]; //  Send the latched, #2 addr & cmd to the memory module.
+						addr_mux_in[i] <= addr_lat[i][2]; //  Send the latched, #2 addr & cmd to the memory module.
 						cmd_mux_in[i]  <= cmd_lat[i][2];
 					end
 		4'h3 : begin    
-						addr_in_mux[i] <= addr_lat[i][3]; //  Send the latched, #3 addr & cmd to the memory module.
+						addr_mux_in[i] <= addr_lat[i][3]; //  Send the latched, #3 addr & cmd to the memory module.
 						cmd_mux_in[i]  <= cmd_lat[i][3];
 					end
 		4'h4 : begin    
-						addr_in_mux[i] <= addr_lat[i][4]; //  Send the latched, #4 addr & cmd to the memory module.
+						addr_mux_in[i] <= addr_lat[i][4]; //  Send the latched, #4 addr & cmd to the memory module.
 						cmd_mux_in[i]  <= cmd_lat[i][4];
 					end
 		endcase

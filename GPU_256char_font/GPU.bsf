@@ -4,108 +4,108 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2010 Altera Corporation
-Your use of Altera Corporation's design tools, logic functions 
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
-to the terms and conditions of the Altera Program License 
-Subscription Agreement, Altera MegaCore Function License 
-Agreement, or other applicable license agreement, including, 
-without limitation, that your use is for the sole purpose of 
-programming logic devices manufactured by Altera and sold by 
-Altera or its authorized distributors.  Please refer to the 
-applicable agreement for further details.
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
 */
-(header "symbol" (version "1.1"))
+(header "symbol" (version "1.2"))
 (symbol
 	(rect 16 16 168 208)
-	(text "GPU" (rect 5 0 29 14)(font "Arial" (font_size 8)))
-	(text "inst" (rect 8 176 25 188)(font "Arial" ))
+	(text "GPU" (rect 5 0 32 19)(font "Intel Clear" (font_size 8)))
+	(text "inst" (rect 8 171 24 188)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "clk54m" (rect 0 0 38 14)(font "Arial" (font_size 8)))
-		(text "clk54m" (rect 21 27 59 41)(font "Arial" (font_size 8)))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
+		(text "clk54m" (rect 0 0 44 19)(font "Intel Clear" (font_size 8)))
+		(text "clk54m" (rect 21 27 65 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "rst" (rect 0 0 15 14)(font "Arial" (font_size 8)))
-		(text "rst" (rect 21 43 36 57)(font "Arial" (font_size 8)))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
+		(text "rst" (rect 0 0 15 19)(font "Intel Clear" (font_size 8)))
+		(text "rst" (rect 21 43 36 62)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "uart_rxd" (rect 0 0 48 14)(font "Arial" (font_size 8)))
-		(text "uart_rxd" (rect 21 59 69 73)(font "Arial" (font_size 8)))
-		(line (pt 0 64)(pt 16 64)(line_width 1))
+		(text "uart_rxd" (rect 0 0 49 19)(font "Intel Clear" (font_size 8)))
+		(text "uart_rxd" (rect 21 59 70 78)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 64)(pt 16 64))
 	)
 	(port
 		(pt 152 32)
 		(output)
-		(text "hs" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "hs" (rect 117 27 131 41)(font "Arial" (font_size 8)))
-		(line (pt 152 32)(pt 136 32)(line_width 1))
+		(text "hs" (rect 0 0 12 19)(font "Intel Clear" (font_size 8)))
+		(text "hs" (rect 119 27 131 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 152 32)(pt 136 32))
 	)
 	(port
 		(pt 152 48)
 		(output)
-		(text "vs" (rect 0 0 14 14)(font "Arial" (font_size 8)))
-		(text "vs" (rect 117 43 131 57)(font "Arial" (font_size 8)))
-		(line (pt 152 48)(pt 136 48)(line_width 1))
+		(text "vs" (rect 0 0 12 19)(font "Intel Clear" (font_size 8)))
+		(text "vs" (rect 119 43 131 62)(font "Intel Clear" (font_size 8)))
+		(line (pt 152 48)(pt 136 48))
 	)
 	(port
 		(pt 152 64)
 		(output)
-		(text "r[7..0]" (rect 0 0 33 14)(font "Arial" (font_size 8)))
-		(text "r[7..0]" (rect 98 59 131 73)(font "Arial" (font_size 8)))
+		(text "r[3..0]" (rect 0 0 35 19)(font "Intel Clear" (font_size 8)))
+		(text "r[3..0]" (rect 96 59 131 78)(font "Intel Clear" (font_size 8)))
 		(line (pt 152 64)(pt 136 64)(line_width 3))
 	)
 	(port
 		(pt 152 80)
 		(output)
-		(text "g[7..0]" (rect 0 0 35 14)(font "Arial" (font_size 8)))
-		(text "g[7..0]" (rect 96 75 131 89)(font "Arial" (font_size 8)))
+		(text "g[3..0]" (rect 0 0 37 19)(font "Intel Clear" (font_size 8)))
+		(text "g[3..0]" (rect 94 75 131 94)(font "Intel Clear" (font_size 8)))
 		(line (pt 152 80)(pt 136 80)(line_width 3))
 	)
 	(port
 		(pt 152 96)
 		(output)
-		(text "b[7..0]" (rect 0 0 35 14)(font "Arial" (font_size 8)))
-		(text "b[7..0]" (rect 96 91 131 105)(font "Arial" (font_size 8)))
+		(text "b[3..0]" (rect 0 0 38 19)(font "Intel Clear" (font_size 8)))
+		(text "b[3..0]" (rect 93 91 131 110)(font "Intel Clear" (font_size 8)))
 		(line (pt 152 96)(pt 136 96)(line_width 3))
 	)
 	(port
 		(pt 152 112)
 		(output)
-		(text "vde" (rect 0 0 21 14)(font "Arial" (font_size 8)))
-		(text "vde" (rect 110 107 131 121)(font "Arial" (font_size 8)))
-		(line (pt 152 112)(pt 136 112)(line_width 1))
+		(text "vde" (rect 0 0 22 19)(font "Intel Clear" (font_size 8)))
+		(text "vde" (rect 109 107 131 126)(font "Intel Clear" (font_size 8)))
+		(line (pt 152 112)(pt 136 112))
 	)
 	(port
 		(pt 152 128)
 		(output)
-		(text "uart_txd" (rect 0 0 47 14)(font "Arial" (font_size 8)))
-		(text "uart_txd" (rect 84 123 131 137)(font "Arial" (font_size 8)))
-		(line (pt 152 128)(pt 136 128)(line_width 1))
+		(text "uart_txd" (rect 0 0 49 19)(font "Intel Clear" (font_size 8)))
+		(text "uart_txd" (rect 82 123 131 142)(font "Intel Clear" (font_size 8)))
+		(line (pt 152 128)(pt 136 128))
 	)
 	(port
 		(pt 152 144)
 		(output)
-		(text "LED_txd" (rect 0 0 47 14)(font "Arial" (font_size 8)))
-		(text "LED_txd" (rect 84 139 131 153)(font "Arial" (font_size 8)))
-		(line (pt 152 144)(pt 136 144)(line_width 1))
+		(text "LED_txd" (rect 0 0 49 19)(font "Intel Clear" (font_size 8)))
+		(text "LED_txd" (rect 82 139 131 158)(font "Intel Clear" (font_size 8)))
+		(line (pt 152 144)(pt 136 144))
 	)
 	(port
 		(pt 152 160)
 		(output)
-		(text "LED_rdx" (rect 0 0 48 14)(font "Arial" (font_size 8)))
-		(text "LED_rdx" (rect 83 155 131 169)(font "Arial" (font_size 8)))
-		(line (pt 152 160)(pt 136 160)(line_width 1))
+		(text "LED_rdx" (rect 0 0 49 19)(font "Intel Clear" (font_size 8)))
+		(text "LED_rdx" (rect 82 155 131 174)(font "Intel Clear" (font_size 8)))
+		(line (pt 152 160)(pt 136 160))
 	)
 	(parameter
 		"HW_REGS"
@@ -113,7 +113,7 @@ applicable agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 136 176)(line_width 1))
+		(rectangle (rect 16 16 136 176))
 	)
 	(annotation_block (parameter)(rect 168 -64 268 16))
 )

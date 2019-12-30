@@ -56,14 +56,10 @@ set_global_assignment -name SIMULATION_MODE FUNCTIONAL
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE GPU_full_osd.vwf
 set_global_assignment -name DEVICE_FILTER_PACKAGE "ANY QFP"
 set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
-set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING OFF
-set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
-set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
 set_global_assignment -name ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP OFF
 set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
 set_global_assignment -name TIMING_ANALYZER_DO_CCPP_REMOVAL ON
 set_global_assignment -name ALLOW_POWER_UP_DONT_CARE ON
-set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name ENABLE_OCT_DONE OFF
 set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
@@ -109,16 +105,19 @@ set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[1]
 set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[0]
 set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to vs
 set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to hs
-set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE AREA"
+set_global_assignment -name OPTIMIZATION_MODE BALANCED
 set_global_assignment -name AUTO_ROM_RECOGNITION OFF
 set_global_assignment -name AUTO_RAM_RECOGNITION OFF
 set_global_assignment -name AUTO_RAM_TO_LCELL_CONVERSION ON
 set_global_assignment -name OPTIMIZE_POWER_DURING_SYNTHESIS OFF
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE ANY
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF
 set_global_assignment -name BDF_FILE GPU.bdf
+set_global_assignment -name MIF_FILE GPU_MIF.mif
 set_global_assignment -name SYSTEMVERILOG_FILE sixteen_port_gpu_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE gpu_quad_port_ram.sv
 set_global_assignment -name SDC_FILE SDC1.sdc
 set_global_assignment -name MIF_FILE palette.mif
-set_global_assignment -name MIF_FILE gpu_16K_VGA.mif
 set_global_assignment -name VERILOG_FILE Z80_bridge.v
 set_global_assignment -name VERILOG_FILE vid_out_stencil.v
 set_global_assignment -name SYSTEMVERILOG_FILE vid_osd_generator.sv
@@ -127,7 +126,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE sync_generator.sv
 set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
 set_global_assignment -name BDF_FILE raster_trigger_mux.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE palette_mixer.sv
-set_global_assignment -name VERILOG_FILE multiport_gpu_ram.v
 set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
 set_global_assignment -name SYSTEMVERILOG_FILE GPU_HW_Control_Regs.sv
 set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
@@ -135,4 +133,5 @@ set_global_assignment -name VERILOG_FILE data_mux.v
 set_global_assignment -name BDF_FILE color_sel.bdf
 set_global_assignment -name VERILOG_FILE bart.v
 set_global_assignment -name VERILOG_FILE altpll0.v
+set_global_assignment -name ALLOW_REGISTER_RETIMING OFF
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

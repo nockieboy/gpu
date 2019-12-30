@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 424 256)
+	(rect 16 16 264 224)
 	(text "vid_out_stencil" (rect 5 0 64 12)(font "Arial" ))
-	(text "inst" (rect 8 224 20 236)(font "Arial" ))
+	(text "inst" (rect 8 192 20 204)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -94,90 +94,78 @@ refer to the applicable agreement for further details.
 		(line (pt 0 176)(pt 16 176)(line_width 3))
 	)
 	(port
-		(pt 0 192)
-		(input)
-		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 0 0 227 12)(font "Arial" ))
-		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 21 187 248 199)(font "Arial" ))
-		(line (pt 0 192)(pt 16 192)(line_width 3))
-	)
-	(port
-		(pt 408 32)
+		(pt 248 32)
 		(output)
 		(text "hde_out" (rect 0 0 31 12)(font "Arial" ))
-		(text "hde_out" (rect 356 27 387 39)(font "Arial" ))
-		(line (pt 408 32)(pt 392 32)(line_width 1))
+		(text "hde_out" (rect 196 27 227 39)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32)(line_width 1))
 	)
 	(port
-		(pt 408 48)
+		(pt 248 48)
 		(output)
 		(text "vde_out" (rect 0 0 33 12)(font "Arial" ))
-		(text "vde_out" (rect 354 43 387 55)(font "Arial" ))
-		(line (pt 408 48)(pt 392 48)(line_width 1))
+		(text "vde_out" (rect 194 43 227 55)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48)(line_width 1))
 	)
 	(port
-		(pt 408 64)
+		(pt 248 64)
 		(output)
 		(text "hs_out" (rect 0 0 27 12)(font "Arial" ))
-		(text "hs_out" (rect 360 59 387 71)(font "Arial" ))
-		(line (pt 408 64)(pt 392 64)(line_width 1))
+		(text "hs_out" (rect 200 59 227 71)(font "Arial" ))
+		(line (pt 248 64)(pt 232 64)(line_width 1))
 	)
 	(port
-		(pt 408 80)
+		(pt 248 80)
 		(output)
 		(text "vs_out" (rect 0 0 28 12)(font "Arial" ))
-		(text "vs_out" (rect 359 75 387 87)(font "Arial" ))
-		(line (pt 408 80)(pt 392 80)(line_width 1))
+		(text "vs_out" (rect 199 75 227 87)(font "Arial" ))
+		(line (pt 248 80)(pt 232 80)(line_width 1))
 	)
 	(port
-		(pt 408 96)
+		(pt 248 96)
 		(output)
 		(text "r_out[RGB_hbit..0]" (rect 0 0 76 12)(font "Arial" ))
-		(text "r_out[RGB_hbit..0]" (rect 311 91 387 103)(font "Arial" ))
-		(line (pt 408 96)(pt 392 96)(line_width 3))
+		(text "r_out[RGB_hbit..0]" (rect 151 91 227 103)(font "Arial" ))
+		(line (pt 248 96)(pt 232 96)(line_width 3))
 	)
 	(port
-		(pt 408 112)
+		(pt 248 112)
 		(output)
 		(text "g_out[RGB_hbit..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "g_out[RGB_hbit..0]" (rect 310 107 387 119)(font "Arial" ))
-		(line (pt 408 112)(pt 392 112)(line_width 3))
+		(text "g_out[RGB_hbit..0]" (rect 150 107 227 119)(font "Arial" ))
+		(line (pt 248 112)(pt 232 112)(line_width 3))
 	)
 	(port
-		(pt 408 128)
+		(pt 248 128)
 		(output)
 		(text "b_out[RGB_hbit..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "b_out[RGB_hbit..0]" (rect 310 123 387 135)(font "Arial" ))
-		(line (pt 408 128)(pt 392 128)(line_width 3))
+		(text "b_out[RGB_hbit..0]" (rect 150 123 227 135)(font "Arial" ))
+		(line (pt 248 128)(pt 232 128)(line_width 3))
 	)
 	(port
-		(pt 408 144)
+		(pt 248 144)
 		(output)
 		(text "vid_de_out" (rect 0 0 44 12)(font "Arial" ))
-		(text "vid_de_out" (rect 343 139 387 151)(font "Arial" ))
-		(line (pt 408 144)(pt 392 144)(line_width 1))
+		(text "vid_de_out" (rect 183 139 227 151)(font "Arial" ))
+		(line (pt 248 144)(pt 232 144)(line_width 1))
 	)
 	(parameter
 		"RGB_hbit"
-		"1"
+		"3"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"HS_invert"
-		"0"
+		"1"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"VS_invert"
-		"0"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"HW_REGS_SIZE"
-		"8"
+		"1"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 392 224)(line_width 1))
+		(rectangle (rect 16 16 232 192)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 424 -64 524 16))
+	(annotation_block (parameter)(rect 264 -64 364 16))
 )

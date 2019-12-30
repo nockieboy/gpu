@@ -166,22 +166,26 @@ always @(posedge clk) begin
 			end // V_TRIG
 			else begin  // ~V_TRIG
 				
+				
 				if (run_y) begin										// after the first line, do these functions.
 					
 					if (period_y[3:0] == height_count) begin	// If the vertical scale period count has reached it's end
 						
 						height					<= height - 1'b1;		// count down the visible window size
 						height_count			<= 8'h0;					// reset the vertical period
-							
+
+
 							if (font_y_pos == font_y_size) begin
 								ram_read_pointer_y	<= ram_read_pointer_y + (inc_addr_y[15:0] << (3 - pixel_16_bit));  // vertical increment display position in backup buffer
 								ram_read_pointer_x	<= ram_read_pointer_y + (inc_addr_y[15:0] << (3 - pixel_16_bit));  // vertical increment display position in current display address
 								font_y_pos <= 0 ;
-							end else begin
+								end else begin
 								ram_read_pointer_x	<= ram_read_pointer_y;	// restore the memory read address to the previous backup buffer address + offset
 								font_y_pos <= font_y_pos + 1'b1 ;
-							end
-							
+								end
+
+
+						
 					end // (period_y[3:0] == height_count
 					else begin											// if the period count hasn't reached it's end,
 						

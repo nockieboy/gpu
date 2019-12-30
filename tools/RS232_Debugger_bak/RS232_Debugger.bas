@@ -8,8 +8,8 @@
 ' ***** Written By Brian Guralnick. November 2019
 ' ***********************************************************************
 
-const  MAX_MEM_ALLOC    = 1048576 '16384 '1048576
-const  COM_CACHE        = 2048: REM number of allowed sequential bytes to be sent and received. FOR FTDI FT232 serial cables, use 2048.  1/2 their fifo size.
+const  MAX_MEM          = 16384 '131072 '16384 '1048576
+const  COM_CACHE        = 2048: REM number of allowed sequential bytes to be seant and received FOR FTDI FT232 serial cables, use 2048.  1/2 their fifo size.
 const  COM_PRE_TIMEOUT  = 2   : REM time in ms to wait for flush to take effect
 const  COM_POST_TIMEOUT = 20  : REM time in ms to wait for GPU to respond before considering an error
 const  COM_FLUSH        = 0   : REM 1 = send 272 null characters before every command  0 = high speed
@@ -36,8 +36,6 @@ Declare Sub get_undo()
 Declare Sub do_commands()
 Declare Sub print_ports()
 Declare sub click_binary(xp as integer, yp as integer, eb as Ubyte)
-Declare Sub open_com()
-Declare Sub close_com()
 
 
 Declare Sub read_gpu(mbase as integer, msize as integer)
@@ -51,7 +49,6 @@ Declare Sub load_file(fname as string, start as integer, size as integer)
 Declare Sub save_dialog()
 Declare Sub load_dialog()
 Declare Sub save_mif()
-Declare Sub save_mif16()
 Declare Sub file_dialog( i as string, fn as string )
 Declare Sub edit16( i as integer )
 Declare Sub enter16( i as integer )
@@ -150,14 +147,14 @@ function px99999(byval i As Integer) As String
  function = d
 end function
 
-dim Shared as string   ink, stemp, cmd_write, cmd_write_page, cmd_saddr, cmd_read, cmd_read_page, cmd_reset, cmd_null16, cmd_prefix, com_num, cmd_setp, com_port
+dim Shared as string   ink, stemp, cmd_write, cmd_write_page, cmd_saddr, cmd_read, cmd_read_page, cmd_reset, cmd_null16, cmd_prefix, com_num, cmd_setp
 dim Shared as ubyte    ser_byte
-dim Shared as integer  gpu_addr, gpu_addr_now, ser_rxbuf, x, y, z, c, hp, undobase, MAX_MEM
+dim Shared as integer  gpu_addr, gpu_addr_now, ser_rxbuf, x, y, z, c, hp, undobase
 dim shared as integer  mx,my,mb,mw,mwl,mbl,mwd,mcx1,mcy1,mcz,mcx2,mcy2,mcx,mcy, edit_mode, edit_pos
 dim shared as integer  m2cx1,m2cy1,m2cz,m2cx2,m2cy2,m2cx,m2cy,edit_col
-Dim Shared read_buffer  (0 To MAX_MEM_ALLOC) As Ubyte
+Dim Shared read_buffer  (0 To MAX_MEM) As Ubyte
 Dim Shared undo_buffer  (0 To 256) As Ubyte
-Dim Shared verify_buffer  (0 To COM_CACHE) As Ubyte
+Dim Shared verify_buffer  (0 To 65536) As Ubyte
 Dim Shared phex8        (0 To 255) As string
 Dim Shared asc_str      (0 To 255) As string
 Dim Shared bin_str      (0 To 255) As string
@@ -167,14 +164,14 @@ Dim Shared out_port     (0 to 3)   As Ubyte
 dim Shared as integer   mstart,mstop,mpos
 
 Dim Shared com_buffer   (0 To 16) As Ubyte
-dim shared as integer   com_addr, com_bytepos, com_command, com_timer, com_txp, com_rxp, com_sxp, com_rx_error, com_tx_error
+dim shared as integer   com_addr, com_bytepos, com_command, com_timer, com_txp, com_rxp, com_sxp
 
 dim shared as string    d_filename
 dim shared as integer   d_membase, d_memsize
 
 ScreenRes 720,560,16,0,0
 cmd_null16 = chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
-cmd_prefix = chr(128) + chr(255) + chr(255) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
+cmd_prefix = chr(128) + chr(128) + chr(255) + chr(255) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0) + chr(0)
 cmd_write  = "Writ"      :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to write
 cmd_read   = "Read"      :rem The next 3 BYTEs defines the base address and the next byte defines the number of bytes to read
 cmd_write_page  = "WriP" :rem The next 3 BYTEs defines the base address and the next byte defines the number of 256 bytes to write
@@ -200,8 +197,6 @@ asc_str(13) = " 1 1 0 1"
 asc_str(14) = " 1 1 1 0"
 asc_str(15) = " 1 1 1 1"
 
-
-MAX_MEM = MAX_MEM_ALLOC
 for x=0 to 255
 bin_str(x) = asc_str(int(x/16)) + asc_str(x and 15) + " "
 next x
@@ -214,7 +209,6 @@ asc_str(x) = "."
 if x<>7 and x<>0 and x<>32 and x<>13 and not (x>=8 and x<=10) then asc_str(x)=chr(x): rem remove screen bell sound
 next x
 
-' This dummy fills a 16bit wide counter into memory
 'for x=0 to MAX_MEM/2-1
 'read_buffer(x*2)   = int(x/256) and 255:rem fill dummy data
 'read_buffer(x*2+1) = int(x) and 255:rem fill dummy data
@@ -225,14 +219,27 @@ read_buffer(x)   = 0
 next x
 
 
-close_com()
+?:? "Enter Com# ";:input com_num
+'ink="COM"+com_num+":115200,N,8,1,CS,DS,BIN,DT"
+ink="COM"+com_num+":921600,N,8,1,CS,DS,BIN,DT"
+'ink="COM"+com_num+":19200,N,8,1,CS,DS,BIN,DT"
+cls
+
+
+if com_num="" then color_rg(2,60,1):? "  Com disabled!  ";
+if com_num<>"" then
+	color_rg(0,60,1):? ink;
+	OPEN COM ink For Binary Access AS 1
+	?#1,chr(0); : rem Must tx at least 1 character
+end if
+
 print_setup()
 
 
 
 
 ' Wait for keyboard input
-
+read_gpu_all(0,MAX_MEM)
 
 getmouse mx,my,mw,mb:mbl=mb:mwl=mw
 ink=inkey
@@ -253,7 +260,6 @@ end
 
 sub print_setup()
 color rgb(224,224,64),rgb(0,0,0)
-cls
 locate 52,1:
 ? "Keys: PGUP & PGDN & Arrows = Scroll Up / Down    Home & End = Top and Bottom of memory"
 ? "                +CTRL+     = Scroll faster              ESC = Quit"
@@ -271,11 +277,8 @@ locate 42,60:?"CTRL -L Load Debug_quick_file2"
 locate 43,60:?"[l] Load Binary"
 locate 44,60:?"[s] Save Binary"
 locate 46,60:?"[m] Save Quartus .mif file"
-locate 47,60:?"[M] Save 16bit Quartus .mif"
 
-locate 48,60:?"CTRL -R RESET GPU"
-locate 49,60:?"CTRL -O Open RS232 com port"
-locate 50,60:?"CTRL -C Close RS232 com port"
+locate 48,60:?"CTRL -R to RESET GPU"
 
 
 for y=0 to 8
@@ -285,11 +288,6 @@ next y
 
 
 color rgb(224,224,224),rgb(0,0,0)
-
-
-if com_num<>"" then color_rg(0,60,1):? com_port;
-if com_num=""  then color_rg(2,60,1):? " Com Disabled!  File hex editor mode. ";
-
 end sub
 
 
@@ -313,14 +311,9 @@ if edit_mode = 0 then
 	if ink="l" then put_undo():load_dialog()
 	if ink="s" then            save_dialog()
 	if ink="m" then            save_mif()
-	if ink="M" then            save_mif16()
 
 	if ink="r" then            read_gpu_all(0,MAX_MEM)
 	if ink="w" then            write_gpu_all(0,MAX_MEM)
-
-
-	if asc(mid(ink,1,1))=3   then close_com()
-	if asc(mid(ink,1,1))=15  then open_com()
 
 
 	if asc(mid(ink,2,1))=71  then gpu_addr=0
@@ -455,7 +448,7 @@ end sub
 
 
 Sub box( i as integer )
-for y=0 to 10
+for y=0 to 9
 color_rg(i,TXT_BOX_y-1+y,TXT_BOX_x-1):?"                                                  ";
 next y
 end sub
@@ -483,7 +476,7 @@ file_dialog("Save a Quartus .mif (Memory Initialization File):",".mif")
 if d_filename<>"" then
 
 	OPEN d_filename FOR OUTPUT AS #2
-	PRINT #2, "-- Generated by BrianHG's RS232_Debugger hex editor."
+	PRINT #2, "-- Generated by BrianHG's GPUtalk hex editor."
 	PRINT #2, ""
 	PRINT #2, "WIDTH=8;"
 	PRINT #2, "DEPTH=";d_memsize;";"
@@ -509,50 +502,6 @@ box(0)
 end sub
 
 
-Sub save_mif16()
-dim as integer mifpos
-file_dialog("Save a Quartus .mif (Memory Initialization File):",".mif")
-
-if d_filename<>"" then
-
-	OPEN d_filename FOR OUTPUT AS #2
-	PRINT #2, "-- Generated by BrianHG's RS232_Debugger hex editor."
-	PRINT #2, ""
-	PRINT #2, "WIDTH=16;"
-	PRINT #2, "DEPTH=";int(d_memsize/2);";"
-	PRINT #2, ""
-	PRINT #2, "ADDRESS_RADIX=UNS;"
-	PRINT #2, "DATA_RADIX=UNS;"
-	PRINT #2, ""
-	PRINT #2, "CONTENT BEGIN"
-
-	for x=d_membase to d_membase+int(d_memsize/2)-1
-
-		?#2, mifpos;" : ";int(read_buffer(x*2+1)*256+read_buffer(x*2+0));";"
-
-	mifpos=mifpos + 1
-	next x
-
-	PRINT #2, "END;"
-	close #2
-
-end if
-
-box(0)
-
-open "HW_regs.txt" for output as 2
-?#2,"Hardware regs ="
-
-for y=0 to 7
-?#2,"A(";
-for x=0 to 30
-?#2,read_buffer(y*32+x);",";
-next x
-?#2,read_buffer(y*32+x);")"
-next y
-
-close #2
-end sub
 
 
 Sub file_dialog( i as string, fn as string )
@@ -650,91 +599,7 @@ end sub
 ' *****************************************************
 ' ******************* handle RS232 communications
 ' *****************************************************
-' ******************* Open and close com port
-' *****************************************************
-
-Sub open_com()
-
-close #1
-
-box(7)
-color_rg(7,TXT_BOX_y+0,TXT_BOX_x):? "Note that opening a valid com will replace the"
-color_rg(7,TXT_BOX_y+1,TXT_BOX_x):? "current memory on display with the contents of"
-color_rg(7,TXT_BOX_y+2,TXT_BOX_x):? "the RS232_Debugger hardware."
-color_rg(7,TXT_BOX_y+3,TXT_BOX_x):? "Press ";:color_rg(2,0,0):?"[ENTER]";:color_rg(7,0,0):?" to abort.";
-color_rg(7,TXT_BOX_y+5,TXT_BOX_x):? "Enter Com# ";:input com_num
-
-
-com_port="COM"+com_num+":921600,N,8,1,CS,DS,BIN,DT"
-
-
-if com_num<>"" then
-
-box(7)
-color_rg(7,TXT_BOX_y+0,TXT_BOX_x):? "Opening com:"
-color_rg(7,TXT_BOX_y+2,TXT_BOX_x):? com_port;
-
-	OPEN COM com_port For Binary Access AS 1
-	?#1,chr(0); : rem Must tx at least 1 character
-	in_port(4)=0:com_setport():in_port(4)=0:com_setport() : rem get ADDR size, 2 attempts
-end if
-
-if in_port(4)=0 and com_num<>"" then 
-
-color_rg(2,TXT_BOX_y+4,TXT_BOX_x):? "Opening COM";com_num;" has not connected";
-color_rg(2,TXT_BOX_y+5,TXT_BOX_x):? "to a RS232 Debugger peripheral.";
-color_rg(2,TXT_BOX_y+6,TXT_BOX_x):? "Entering COM debug state.";
-color_rg(2,TXT_BOX_y+8,TXT_BOX_x):? "Use CTRL-O / CTRL-C to change COM port.";
-rem com_num=""
-sleep
-rem close #1
-
-end if 
-
-if com_num<>"" and in_port(4)>7 then
-MAX_MEM = 2^in_port(4)
-if MAX_MEM>MAX_MEM_ALLOC then MAX_MEM = MAX_MEM_ALLOC
-
-color_rg(7,TXT_BOX_y+4,TXT_BOX_x):? "Received RS232_Debugger address size of:";
-color_rg(7,TXT_BOX_y+6,TXT_BOX_x):? in_port(4);" which =";MAX_MEM;" bytes of ram.";
-color_rg(7,TXT_BOX_y+8,TXT_BOX_x):? "Press any key to begin editing memory.";
-
-
-
-if MAX_MEM > MAX_MEM_ALLOC then MAX_MEM = MAX_MEM_ALLOC
-sleep 5000
-gpu_addr=0:read_gpu_all(0,MAX_MEM)
-
-end if
-
-print_setup()
-
-end sub
-
-
-Sub close_com()
-
-close #1
-box(7)
-color_rg(7,TXT_BOX_y+0,TXT_BOX_x):? "Closed COM";com_num;".";
-color_rg(7,TXT_BOX_y+2,TXT_BOX_x):? "Press any key to enter file hex editor mode."
-color_rg(7,TXT_BOX_y+4,TXT_BOX_x):? "Use CTRL-O to open a new com port at any time."
-color_rg(7,TXT_BOX_y+6,TXT_BOX_x):? "Use CTRL-C to close the com port and enter"
-color_rg(7,TXT_BOX_y+7,TXT_BOX_x):? "           file hext editor mode."
-
-
-com_num=""
-MAX_MEM = MAX_MEM_ALLOC
-gpu_addr=0
-sleep 4000
-print_setup()
-
-end sub
-
-' *****************************************************
-' ******************* handle RS232 communications
-' *****************************************************
-' ******************* Read and Write All
+' ******************* READ
 ' *****************************************************
 
 Sub read_gpu_all(mbase as integer, msize as integer)
@@ -746,6 +611,10 @@ Sub read_gpu_all(mbase as integer, msize as integer)
 		end if
 
 	if msize <= COM_CACHE then read_gpu(mpos,msize)
+
+	'	for mpos=mbase to msize-1 step 256
+	'	read_gpu(mpos,256)
+	'	next mpos
 
 end sub
 
@@ -760,21 +629,20 @@ Sub write_gpu_all(mbase as integer, msize as integer)
 	if msize <= COM_CACHE then write_gpu(mpos,msize)
 
 
+	'	for mpos=mbase to msize-1 step 256
+	'	write_gpu(mpos,256)
+	'	next mpos
+
 end sub
 
 
-' *****************************************************
-' ******************* handle RS232 communications
-' *****************************************************
-' ******************* READ
-' *****************************************************
 
 Sub read_gpu(mbase as integer, msize as integer)
 if com_num<>"" then
 
 y=45:if COM_VERBOSE=1 then for x=0 to 3:color_rg(0,x+y,1):? "                ",,:next x
 com_rxp=com_rxp+1:com_rxp=com_rxp and 8191
-color_rg(1,y,1):?" Com read #" ;px9999(com_rxp);" Address $";phex24(mbase);" with ";px9999(msize);" bytes.   ";
+color_rg(1,y,1):?" Com read #" ;px9999(com_rxp);" Address ";px99999(mbase);" with";px9999(msize);" bytes.   ";
 
 ?#1,cmd_null16;
 if COM_FLUSH=1 then
@@ -816,14 +684,14 @@ if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for response.  ";
 
 z=loc(1)
 if z<msize and z<257 then
-color_rg(2,y+3,1):?" Error, read #";px9999(com_rxp);" received";px9999(loc(1));" bytes of";px9999(msize);".  ";
+color_rg(2,y+5,1):?" Error, read #";px9999(com_rxp);" received";px9999(loc(1));" bytes of";px9999(msize);".  ";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
 end if
 
 if z>msize then
-color_rg(2,y+3,1):?" Error, read #";px9999(com_rxp);" received";px9999(loc(1));" bytes of ";px9999(msize);".  ";
+color_rg(2,y+5,1):?" Error, read #";px9999(com_rxp);" received";px9999(loc(1));" bytes of ";px9999(msize);".  ";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
@@ -831,7 +699,7 @@ end if
 
 if z=msize then
 	get #1,,read_buffer(mbase),z
-	if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Read #";px9999(com_rxp);" was successfull.  ";
+	if COM_VERBOSE=1 then color_rg(1,y+4,1):?" Read #";px9999(com_rxp);" was successfull.  ";
 endif
 
 
@@ -853,7 +721,7 @@ if com_num<>"" then
 
 y=45:if COM_VERBOSE=1 then for x=0 to 3:color_rg(0,x+y,1):? "                ",,:next x
 com_txp=com_txp+1:com_txp=com_txp and 8191
-color_rg(2,y,1):?" Com write #" ;px9999(com_txp);" Address $";phex24(mbase);" with";px9999(msize);" bytes.  ";
+color_rg(2,y,1):?" Com write #" ;px9999(com_txp);" Address ";px99999(mbase);" with";px9999(msize);" bytes.  ";
 
 ?#1,cmd_null16;
 if COM_FLUSH=1 then
@@ -897,14 +765,14 @@ if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for write data echo.  ";
 
 z=loc(1)
 if z<msize and z<257 then
-color_rg(2,y+3,1):?" Error, write #";px9999(com_txp);" verify received ";px9999(loc(1));" bytes of";px9999(msize);".  ";
+color_rg(2,y+5,1):?" Error, write #";px9999(com_txp);" verify received ";px9999(loc(1));" bytes of";px9999(msize);".  ";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
 end if
 
 if z>msize then
-color_rg(2,y+3,1):?" Error, write #";px9999(com_txp);" verify received ";px9999(loc(1));" bytes of ";px9999(msize);".  ";
+color_rg(2,y+5,1):?" Error, write #";px9999(com_txp);" verify received ";px9999(loc(1));" bytes of ";px9999(msize);".  ";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
@@ -918,8 +786,8 @@ if z=msize then
 	if read_buffer(mbase+x)<>verify_buffer(x) then c=0
 	next x
 
-	if COM_VERBOSE=1 then if c=1 then color_rg(1,y+3,1):?" Write #";px9999(com_txp);" was confirmed.  ";
-	if c=0 then color_rg(2,y+3,1):?" Write #";px9999(com_txp);" verify has data errors. ";:if COM_VERBOSE=1 then show_errors(mbase)
+	if COM_VERBOSE=1 then if c=1 then color_rg(1,y+4,1):?" Write #";px9999(com_txp);" was confirmed.  ";
+	if c=0 then color_rg(2,y+5,1):?" Write #";px9999(com_txp);" verify has data errors. ";:if COM_VERBOSE=1 then show_errors(mbase)
 
 
 end if
@@ -939,11 +807,11 @@ end sub
 
 
 
-' *****************************************************************
+' *****************************************************
 ' ******************* handle RS232 communications
-' *****************************************************************
-' ******************* Set Out0,1,2,3, Read In0,1,2,3,ADDR_SIZE
-' *****************************************************************
+' *****************************************************
+' ******************* Set Out0,1,2,3, Read In0,1,2,3
+' *****************************************************
 
 Sub com_setport()
 dim as integer msize
@@ -951,7 +819,7 @@ msize = 5
 
 if com_num<>"" then
 
-y=47:if COM_VERBOSE=1 then for x=0 to 3:color_rg(0,x+y,1):? "                ",:next x
+y=61:if COM_VERBOSE=1 then for x=0 to 3:color_rg(0,x+y,1):? "                ",:next x
 com_sxp=com_sxp+1:com_sxp=com_sxp and 8191
 if COM_VERBOSE=1 then color_rg(1,y,1):?" Com Setport #" ;px9999(com_sxp);". ";
 
@@ -975,12 +843,12 @@ end if
 stemp = chr(out_port(0)) + chr(out_port(1)) + chr(out_port(2)) + chr(out_port(3))
 stemp = cmd_setp + stemp
 
-if COM_VERBOSE=1 then color_rg(1,y+1,1):?" Sending Set Port Command. ";
+if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Sending Set Port Command. ";
 ?#1,cmd_prefix;stemp;stemp;
 
 
 com_timer = timer*100 + COM_POST_TIMEOUT
-if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Waiting for response. ";
+if COM_VERBOSE=1 then color_rg(1,y+3,1):?" Waiting for response. ";
 	while (loc(1)<msize and com_timer>timer*100 )
 	sleep 1,0
 	wend
@@ -988,14 +856,14 @@ if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Waiting for response. ";
 
 z=loc(1)
 if z<msize and z<257 then
-color_rg(2,y+2,1):?" Error, read #";px9999(com_sxp);". Received ";px9999(loc(1));" bytes of ";px9999(msize);".";
+color_rg(2,y+5,1):?" Error, read #";px9999(com_sxp);". Received ";px9999(loc(1));" bytes of ";px9999(msize);".";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
 end if
 
 if z>msize then
-color_rg(2,y+2,1):?" Error, read #";px9999(com_sxp);". Received";px9999(loc(1));" bytes of ";px9999(msize);".";
+color_rg(2,y+5,1):?" Error, read #";px9999(com_sxp);". Received";px9999(loc(1));" bytes of ";px9999(msize);".";
 	While ( loc(1)>0 )
 	get #1,,com_buffer(0),1
 	wend
@@ -1003,7 +871,7 @@ end if
 
 if z=msize then
 	get #1,,in_port(0),z
-	if COM_VERBOSE=1 then color_rg(1,y+2,1):?" Setport #";px9999(com_sxp);" was successfull.";
+	if COM_VERBOSE=1 then color_rg(1,y+4,1):?" Setport #";px9999(com_sxp);" was successfull.";
 endif
 
 
@@ -1080,7 +948,7 @@ end sub
 sub print_hex()
 
 c=1:if edit_mode=1 and edit_pos=0 then c=2
-color_rg(c, 3       , 1        ):? " HEX   +0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +A +B +C +D +E +F ":? "      ";
+color_rg(c, 3       , 1        ):? "       +0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +A +B +C +D +E +F ":? "      ";
 
 	for y=0 to 15
 		z=gpu_addr+y*16:gpu_printadr()
@@ -1095,7 +963,7 @@ color_rg(c, 3       , 1        ):? " HEX   +0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +A +B +
 	next y
 
 c=1:if edit_mode=1 and edit_pos=1 then c=2
-color_rg(c, 3       , 57        ):? " ASCII                            ";
+color_rg(c, 3       , 57        ):? "                                  ";
 for y=3 to 36:locate y,90:?" ";
 next y
 color_rg(0,0,0)
