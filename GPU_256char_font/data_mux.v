@@ -63,8 +63,8 @@ assign run_w_portb	= wr_ena_b && ~porta_bsy && ~run_r_porta && ~run_w_porta;
 assign gpu_rd_rdy_b	= rd_sequencer_b[DELAY_CYCLES];
 assign gpu_rd_rdy_a	= rd_sequencer_a[DELAY_CYCLES];
 
-assign data_out_a		= gpu_data_in ;
-assign data_out_b		= gpu_data_in ;
+assign data_out_a	= gpu_data_in ;
+assign data_out_b	= gpu_data_in ;
 
 always @ (posedge clk) begin
 
@@ -75,30 +75,30 @@ always @ (posedge clk) begin
 
 	// *** HANDLE PORT A READ REQUESTS AND SEQUENCER ***
 	if (run_r_porta) begin
-		rd_sequencer_a[9:0] <= { rd_sequencer_a[8:0], 1'b1 };
-		gpu_address		     <= address_a;
+		rd_sequencer_a[9:0]	<= { rd_sequencer_a[8:0], 1'b1 };
+		gpu_address				<= address_a;
 	end else begin
-		rd_sequencer_a[9:0] <= { rd_sequencer_a[8:0], 1'b0 };	// this line must always run no matter any other state
+		rd_sequencer_a[9:0]	<= { rd_sequencer_a[8:0], 1'b0 };	// this line must always run no matter any other state
 	end
 	
 	// *** HANDLE PORT A WRITE REQUESTS ***
 	if (run_w_porta) begin
-		gpu_address		     <= address_a;
-		gpu_data_out        <= data_in_a;
+		gpu_address				<= address_a;
+		gpu_data_out			<= data_in_a;
 	end
 	
 	// *** HANDLE PORT B READ REQUESTS AND SEQUENCER ***
 	if (run_r_portb) begin
-		rd_sequencer_b[9:0] <= { rd_sequencer_b[8:0], 1'b1 };
-		gpu_address		     <= address_b;
+		rd_sequencer_b[9:0]	<= { rd_sequencer_b[8:0], 1'b1 };
+		gpu_address				<= address_b;
 	end else begin
-		rd_sequencer_b[9:0] <= { rd_sequencer_b[8:0], 1'b0 };	// this line must always run no matter any other state
+		rd_sequencer_b[9:0]	<= { rd_sequencer_b[8:0], 1'b0 };	// this line must always run no matter any other state
 	end
 	
 	// *** HANDLE PORT B WRITE REQUESTS ***
 	if (run_w_portb) begin
-		gpu_address		     <= address_b;
-		gpu_data_out        <= data_in_b;
+		gpu_address				<= address_b;
+		gpu_data_out			<= data_in_b;
 	end
 	
 end
