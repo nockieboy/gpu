@@ -68,17 +68,17 @@ CHIP  "GPU"  ASSIGNED TO AN: EP4CE6E22C7
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
-Z80_data[7]                  : 1         : bidir  : 3.3-V LVTTL       :         : 1         : N              
-Z80_ADDR[17]                 : 2         : input  : 3.3-V LVTTL       :         : 1         : N              
-Z80_ADDR[7]                  : 3         : input  : 3.3-V LVTTL       :         : 1         : N              
+Z80_data[5]                  : 1         : bidir  : 3.3-V LVTTL       :         : 1         : Y              
+Z80_data[4]                  : 2         : bidir  : 3.3-V LVTTL       :         : 1         : Y              
+Z80_data[3]                  : 3         : bidir  : 3.3-V LVTTL       :         : 1         : Y              
 GND                          : 4         : gnd    :                   :         :           :                
 VCCINT                       : 5         : power  :                   : 1.2V    :           :                
 ~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 6         : input  : 3.3-V LVTTL       :         : 1         : N              
-Z80_data[2]                  : 7         : bidir  : 3.3-V LVTTL       :         : 1         : N              
+Z80_data[2]                  : 7         : bidir  : 3.3-V LVTTL       :         : 1         : Y              
 ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 8         : input  : 3.3-V LVTTL       :         : 1         : N              
 nSTATUS                      : 9         :        :                   :         : 1         :                
-Z80_ADDR[18]                 : 10        : input  : 3.3-V LVTTL       :         : 1         : N              
-Z80_data[4]                  : 11        : bidir  : 3.3-V LVTTL       :         : 1         : N              
+Z80_data[1]                  : 10        : bidir  : 3.3-V LVTTL       :         : 1         : Y              
+Z80_data[0]                  : 11        : bidir  : 3.3-V LVTTL       :         : 1         : Y              
 ~ALTERA_DCLK~                : 12        : output : 3.3-V LVTTL       :         : 1         : N              
 ~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 13        : input  : 3.3-V LVTTL       :         : 1         : N              
 nCONFIG                      : 14        :        :                   :         : 1         :                
@@ -95,44 +95,44 @@ GND+                         : 24        :        :                   :         
 rst                          : 25        : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 26        : power  :                   : 3.3V    : 2         :                
 GND                          : 27        : gnd    :                   :         :           :                
-Z80_ADDR[5]                  : 28        : input  : 3.3-V LVTTL       :         : 2         : N              
+245_OE                       : 28        : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
-RESERVED_INPUT               : 30        :        :                   :         : 2         :                
-Z80_ADDR[15]                 : 31        : input  : 3.3-V LVTTL       :         : 2         : N              
+245_DIR                      : 30        : output : 3.3-V LVTTL       :         : 2         : Y              
+RESERVED_INPUT               : 31        :        :                   :         : 2         :                
 RESERVED_INPUT               : 32        :        :                   :         : 2         :                
 RESERVED_INPUT               : 33        :        :                   :         : 2         :                
 RESERVED_INPUT               : 34        :        :                   :         : 2         :                
 VCCA1                        : 35        : power  :                   : 2.5V    :           :                
 GNDA1                        : 36        : gnd    :                   :         :           :                
 VCCD_PLL1                    : 37        : power  :                   : 1.2V    :           :                
-Z80_data[3]                  : 38        : bidir  : 3.3-V LVTTL       :         : 3         : N              
-Z80_data[5]                  : 39        : bidir  : 3.3-V LVTTL       :         : 3         : N              
+RESERVED_INPUT               : 38        :        :                   :         : 3         :                
+RESERVED_INPUT               : 39        :        :                   :         : 3         :                
 VCCIO3                       : 40        : power  :                   : 3.3V    : 3         :                
 GND                          : 41        : gnd    :                   :         :           :                
-Z80_ADDR[16]                 : 42        : input  : 3.3-V LVTTL       :         : 3         : N              
-Z80_ADDR[4]                  : 43        : input  : 3.3-V LVTTL       :         : 3         : N              
+RESERVED_INPUT               : 42        :        :                   :         : 3         :                
+RESERVED_INPUT               : 43        :        :                   :         : 3         :                
 RESERVED_INPUT               : 44        :        :                   :         : 3         :                
 VCCINT                       : 45        : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 46        :        :                   :         : 3         :                
 VCCIO3                       : 47        : power  :                   : 3.3V    : 3         :                
 GND                          : 48        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 49        :        :                   :         : 3         :                
-Z80_ADDR[14]                 : 50        : input  : 3.3-V LVTTL       :         : 3         : N              
-Z80_ADDR[3]                  : 51        : input  : 3.3-V LVTTL       :         : 3         : N              
+RESERVED_INPUT               : 50        :        :                   :         : 3         :                
+RESERVED_INPUT               : 51        :        :                   :         : 3         :                
 RESERVED_INPUT               : 52        :        :                   :         : 3         :                
-Z80_data[1]                  : 53        : bidir  : 3.3-V LVTTL       :         : 3         : N              
-RESERVED_INPUT               : 54        :        :                   :         : 4         :                
+RESERVED_INPUT               : 53        :        :                   :         : 3         :                
+LED_rdx                      : 54        : output : 3.3-V LVTTL       :         : 4         : N              
 RESERVED_INPUT               : 55        :        :                   :         : 4         :                
 VCCIO4                       : 56        : power  :                   : 3.3V    : 4         :                
 GND                          : 57        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 58        :        :                   :         : 4         :                
 RESERVED_INPUT               : 59        :        :                   :         : 4         :                
-RESERVED_INPUT               : 60        :        :                   :         : 4         :                
+LED_txd                      : 60        : output : 3.3-V LVTTL       :         : 4         : N              
 VCCINT                       : 61        : power  :                   : 1.2V    :           :                
 VCCIO4                       : 62        : power  :                   : 3.3V    : 4         :                
 GND                          : 63        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 64        :        :                   :         : 4         :                
-Z80_ADDR[9]                  : 65        : input  : 3.3-V LVTTL       :         : 4         : N              
+vde                          : 65        : output : 3.3-V LVTTL       :         : 4         : N              
 b[0]                         : 66        : output : 3.3-V LVTTL       :         : 4         : Y              
 b[1]                         : 67        : output : 3.3-V LVTTL       :         : 4         : Y              
 b[2]                         : 68        : output : 3.3-V LVTTL       :         : 4         : Y              
@@ -155,34 +155,34 @@ RESERVED_INPUT               : 84        :        :                   :         
 uart_txd                     : 85        : output : 3.3-V LVTTL       :         : 5         : Y              
 RESERVED_INPUT               : 86        :        :                   :         : 5         :                
 uart_rxd                     : 87        : input  : 3.3-V LVTTL       :         : 5         : Y              
-GND+                         : 88        :        :                   :         : 5         :                
-GND+                         : 89        :        :                   :         : 5         :                
-Z80_RD                       : 90        : input  : 3.3-V LVTTL       :         : 6         : N              
-Z80_WR                       : 91        : input  : 3.3-V LVTTL       :         : 6         : N              
+Z80_ADDR[12]                 : 88        : input  : 3.3-V LVTTL       :         : 5         : Y              
+Z80_ADDR[13]                 : 89        : input  : 3.3-V LVTTL       :         : 5         : Y              
+Z80_ADDR[10]                 : 90        : input  : 3.3-V LVTTL       :         : 6         : Y              
+Z80_ADDR[11]                 : 91        : input  : 3.3-V LVTTL       :         : 6         : Y              
 CONF_DONE                    : 92        :        :                   :         : 6         :                
 VCCIO6                       : 93        : power  :                   : 3.3V    : 6         :                
 MSEL0                        : 94        :        :                   :         : 6         :                
 GND                          : 95        : gnd    :                   :         :           :                
 MSEL1                        : 96        :        :                   :         : 6         :                
 MSEL2                        : 97        :        :                   :         : 6         :                
-Z80_MREQ                     : 98        : input  : 3.3-V LVTTL       :         : 6         : N              
-245_OE                       : 99        : output : 3.3-V LVTTL       :         : 6         : N              
-245_DIR                      : 100       : output : 3.3-V LVTTL       :         : 6         : N              
-~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN : 101       : output : 3.3-V LVTTL       :         : 6         : N              
+Z80_ADDR[8]                  : 98        : input  : 3.3-V LVTTL       :         : 6         : Y              
+Z80_ADDR[9]                  : 99        : input  : 3.3-V LVTTL       :         : 6         : Y              
+Z80_ADDR[6]                  : 100       : input  : 3.3-V LVTTL       :         : 6         : Y              
+Z80_ADDR[7]                  : 101       : input  : 3.3-V LVTTL       :         : 6         : Y              
 VCCINT                       : 102       : power  :                   : 1.2V    :           :                
-Z80_ADDR[20]                 : 103       : input  : 3.3-V LVTTL       :         : 6         : N              
-Z80_ADDR[19]                 : 104       : input  : 3.3-V LVTTL       :         : 6         : N              
-Z80_ADDR[21]                 : 105       : input  : 3.3-V LVTTL       :         : 6         : N              
-Z80_M1                       : 106       : input  : 3.3-V LVTTL       :         : 6         : N              
+Z80_ADDR[4]                  : 103       : input  : 3.3-V LVTTL       :         : 6         : Y              
+Z80_ADDR[5]                  : 104       : input  : 3.3-V LVTTL       :         : 6         : Y              
+RESERVED_INPUT               : 105       :        :                   :         : 6         :                
+RESERVED_INPUT               : 106       :        :                   :         : 6         :                
 VCCA2                        : 107       : power  :                   : 2.5V    :           :                
 GNDA2                        : 108       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                
-LED_txd                      : 110       : output : 3.3-V LVTTL       :         : 7         : N              
-Z80_CLK                      : 111       : input  : 3.3-V LVTTL       :         : 7         : N              
-Z80_ADDR[12]                 : 112       : input  : 3.3-V LVTTL       :         : 7         : N              
-Z80_ADDR[1]                  : 113       : input  : 3.3-V LVTTL       :         : 7         : N              
-LED_rdx                      : 114       : output : 3.3-V LVTTL       :         : 7         : N              
-Z80_ADDR[10]                 : 115       : input  : 3.3-V LVTTL       :         : 7         : N              
+RESERVED_INPUT               : 110       :        :                   :         : 7         :                
+RESERVED_INPUT               : 111       :        :                   :         : 7         :                
+Z80_ADDR[0]                  : 112       : input  : 3.3-V LVTTL       :         : 7         : Y              
+Z80_ADDR[1]                  : 113       : input  : 3.3-V LVTTL       :         : 7         : Y              
+Z80_ADDR[2]                  : 114       : input  : 3.3-V LVTTL       :         : 7         : Y              
+Z80_ADDR[3]                  : 115       : input  : 3.3-V LVTTL       :         : 7         : Y              
 VCCINT                       : 116       : power  :                   : 1.2V    :           :                
 VCCIO7                       : 117       : power  :                   : 3.3V    : 7         :                
 GND                          : 118       : gnd    :                   :         :           :                
@@ -192,24 +192,24 @@ RESERVED_INPUT               : 121       :        :                   :         
 VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
 GND                          : 123       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 124       :        :                   :         : 7         :                
-RESERVED_INPUT               : 125       :        :                   :         : 7         :                
-vde                          : 126       : output : 3.3-V LVTTL       :         : 7         : N              
-Z80_ADDR[11]                 : 127       : input  : 3.3-V LVTTL       :         : 7         : N              
-Z80_ADDR[8]                  : 128       : input  : 3.3-V LVTTL       :         : 8         : N              
-Z80_ADDR[2]                  : 129       : input  : 3.3-V LVTTL       :         : 8         : N              
+Z80_ADDR[14]                 : 125       : input  : 3.3-V LVTTL       :         : 7         : Y              
+Z80_ADDR[15]                 : 126       : input  : 3.3-V LVTTL       :         : 7         : Y              
+Z80_ADDR[16]                 : 127       : input  : 3.3-V LVTTL       :         : 7         : Y              
+Z80_ADDR[17]                 : 128       : input  : 3.3-V LVTTL       :         : 8         : Y              
+Z80_ADDR[18]                 : 129       : input  : 3.3-V LVTTL       :         : 8         : Y              
 VCCIO8                       : 130       : power  :                   : 3.3V    : 8         :                
 GND                          : 131       : gnd    :                   :         :           :                
-RESERVED_INPUT               : 132       :        :                   :         : 8         :                
-Z80_ADDR[6]                  : 133       : input  : 3.3-V LVTTL       :         : 8         : N              
+Z80_ADDR[19]                 : 132       : input  : 3.3-V LVTTL       :         : 8         : Y              
+Z80_ADDR[20]                 : 133       : input  : 3.3-V LVTTL       :         : 8         : Y              
 VCCINT                       : 134       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT               : 135       :        :                   :         : 8         :                
-RESERVED_INPUT               : 136       :        :                   :         : 8         :                
-RESERVED_INPUT               : 137       :        :                   :         : 8         :                
-Z80_data[0]                  : 138       : bidir  : 3.3-V LVTTL       :         : 8         : N              
+Z80_ADDR[21]                 : 135       : input  : 3.3-V LVTTL       :         : 8         : Y              
+Z80_CLK                      : 136       : input  : 3.3-V LVTTL       :         : 8         : Y              
+Z80_M1                       : 137       : input  : 3.3-V LVTTL       :         : 8         : Y              
+Z80_RD                       : 138       : input  : 3.3-V LVTTL       :         : 8         : Y              
 VCCIO8                       : 139       : power  :                   : 3.3V    : 8         :                
 GND                          : 140       : gnd    :                   :         :           :                
-Z80_data[6]                  : 141       : bidir  : 3.3-V LVTTL       :         : 8         : N              
-Z80_ADDR[0]                  : 142       : input  : 3.3-V LVTTL       :         : 8         : N              
-RESERVED_INPUT               : 143       :        :                   :         : 8         :                
-Z80_ADDR[13]                 : 144       : input  : 3.3-V LVTTL       :         : 8         : N              
+Z80_WR                       : 141       : input  : 3.3-V LVTTL       :         : 8         : Y              
+Z80_MREQ                     : 142       : input  : 3.3-V LVTTL       :         : 8         : Y              
+Z80_data[7]                  : 143       : bidir  : 3.3-V LVTTL       :         : 8         : Y              
+Z80_data[6]                  : 144       : bidir  : 3.3-V LVTTL       :         : 8         : Y              
 GND                          : EPAD      :        :                   :         :           :                

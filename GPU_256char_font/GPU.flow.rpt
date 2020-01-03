@@ -1,5 +1,5 @@
 Flow report for GPU
-Tue Dec 31 11:29:39 2019
+Fri Jan 03 19:51:56 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,17 +40,17 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Tue Dec 31 11:29:30 2019       ;
+; Flow Status                        ; Successful - Fri Jan 03 19:51:48 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GPU                                         ;
 ; Top-level Entity Name              ; GPU                                         ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6E22C7                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 5,987 / 6,272 ( 95 % )                      ;
-;     Total combinational functions  ; 4,421 / 6,272 ( 70 % )                      ;
-;     Dedicated logic registers      ; 3,777 / 6,272 ( 60 % )                      ;
-; Total registers                    ; 3791                                        ;
+; Total logic elements               ; 6,010 / 6,272 ( 96 % )                      ;
+;     Total combinational functions  ; 4,457 / 6,272 ( 71 % )                      ;
+;     Dedicated logic registers      ; 3,821 / 6,272 ( 61 % )                      ;
+; Total registers                    ; 3835                                        ;
 ; Total pins                         ; 58 / 92 ( 63 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 204,800 / 276,480 ( 74 % )                  ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/31/2019 11:27:53 ;
+; Start date & time ; 01/03/2020 19:50:18 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; GPU                 ;
 +-------------------+---------------------+
@@ -80,7 +80,7 @@ refer to the applicable agreement for further details.
 ; AUTO_RAM_TO_LCELL_CONVERSION        ; On                                     ; Off                ; --          ; --             ;
 ; AUTO_ROM_RECOGNITION                ; Off                                    ; On                 ; --          ; --             ;
 ; AUTO_SHIFT_REGISTER_RECOGNITION     ; Off                                    ; Auto               ; --          ; --             ;
-; COMPILER_SIGNATURE_ID               ; 36074246109237.157779167203064         ; --                 ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 36074246109237.157808101709084         ; --                 ; --          ; --             ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE    ; Speed                                  ; Balanced           ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --                 ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --                 ; --          ; --             ;
@@ -107,11 +107,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:43     ; 1.0                     ; 4933 MB             ; 00:01:05                           ;
-; Fitter               ; 00:00:48     ; 1.1                     ; 5636 MB             ; 00:01:23                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4702 MB             ; 00:00:02                           ;
+; Analysis & Synthesis ; 00:00:41     ; 1.0                     ; 4940 MB             ; 00:01:02                           ;
+; Fitter               ; 00:00:43     ; 1.2                     ; 5652 MB             ; 00:01:15                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 4696 MB             ; 00:00:02                           ;
 ; Timing Analyzer      ; 00:00:07     ; 1.4                     ; 4826 MB             ; 00:00:09                           ;
-; Total                ; 00:01:40     ; --                      ; --                  ; 00:02:39                           ;
+; Total                ; 00:01:33     ; --                      ; --                  ; 00:02:28                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

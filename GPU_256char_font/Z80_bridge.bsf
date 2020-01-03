@@ -166,6 +166,11 @@ refer to the applicable agreement for further details.
 		"2"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"MAX_MEM_SIZE"
+		"32768"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 224 224)(line_width 1))
 	)

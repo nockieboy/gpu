@@ -52,16 +52,24 @@ reg [9:0] rd_sequencer_a;
 reg [9:0] rd_sequencer_b;
 
 reg porta_bsy, portb_bsy;
+reg last_run_portb = 1'b0;		// set LOW on power up to prevent false triggers
+//reg block_RW = 1'b0;
 
 wire run_r_porta, run_r_portb, run_w_porta, run_w_portb;
 
+//assign run_r_porta   = rd_req_a && ~block_RW && ~portb_bsy;
+//assign run_w_porta   = wr_ena_a && ~block_RW && ~portb_bsy;
 assign run_r_porta   = rd_req_a && ~portb_bsy;
 assign run_w_porta   = wr_ena_a && ~portb_bsy;
-assign run_r_portb   = rd_req_b && ~porta_bsy && ~run_r_porta && ~run_w_porta;
-assign run_w_portb   = wr_ena_b && ~porta_bsy && ~run_r_porta && ~run_w_porta;
 
-assign gpu_rd_rdy_b  = rd_sequencer_b[DELAY_CYCLES];
+// Port B reads and writes are 1-shots, hence the edge-detect (...&& ~last_portb_xx)
+//assign run_r_portb   = ~block_RW && (rd_req_b && ~last_run_portb) && ~porta_bsy && ~run_r_porta && ~run_w_porta;
+//assign run_w_portb   = ~block_RW && (wr_ena_b && ~last_run_portb) && ~porta_bsy && ~run_r_porta && ~run_w_porta;
+assign run_r_portb   = (rd_req_b && ~last_run_portb) && ~porta_bsy && ~run_r_porta && ~run_w_porta;
+assign run_w_portb   = (wr_ena_b && ~last_run_portb) && ~porta_bsy && ~run_r_porta && ~run_w_porta;
+
 assign gpu_rd_rdy_a  = rd_sequencer_a[DELAY_CYCLES];
+assign gpu_rd_rdy_b  = rd_sequencer_b[DELAY_CYCLES];
 
 assign data_out_a = gpu_data_in ;
 assign data_out_b = gpu_data_in ;
@@ -72,14 +80,20 @@ always @ (posedge clk) begin
    gpu_wr_ena  <= run_w_porta || run_w_portb;
    porta_bsy   <= run_r_porta || run_w_porta;
    portb_bsy   <= run_r_portb || run_w_portb;
-
+	
+	// *** UPDATE READ SEQUENCERS ***
+	rd_sequencer_a[9:0]  <= { rd_sequencer_a[8:0], run_r_porta };
+	rd_sequencer_b[9:0]  <= { rd_sequencer_b[8:0], run_r_portb };
+	
    // *** HANDLE PORT A READ REQUESTS AND SEQUENCER ***
    if (run_r_porta) begin
-      rd_sequencer_a[9:0]  <= { rd_sequencer_a[8:0], 1'b1 };
+	//	block_RW					<= 1'b1;
       gpu_address          <= address_a;
-   end else begin
-      rd_sequencer_a[9:0]  <= { rd_sequencer_a[8:0], 1'b0 };   // this line must always run no matter any other state
    end
+	
+	//if (block_RW) begin
+	//	block_RW					<= ~rd_sequencer_a[DELAY_CYCLES + 1];	// reset block_RW after gpu_rd_rdy_a goes HIGH
+	//end
    
    // *** HANDLE PORT A WRITE REQUESTS ***
    if (run_w_porta) begin
@@ -89,10 +103,9 @@ always @ (posedge clk) begin
    
    // *** HANDLE PORT B READ REQUESTS AND SEQUENCER ***
    if (run_r_portb) begin
-      rd_sequencer_b[9:0]  <= { rd_sequencer_b[8:0], 1'b1 };
       gpu_address          <= address_b;
    end else begin
-      rd_sequencer_b[9:0]  <= { rd_sequencer_b[8:0], 1'b0 };   // this line must always run no matter any other state
+      
    end
    
    // *** HANDLE PORT B WRITE REQUESTS ***
@@ -100,6 +113,9 @@ always @ (posedge clk) begin
       gpu_address          <= address_b;
       gpu_data_out         <= data_in_b;
    end
+	
+	// update the 1-shot trigger for Port B
+	last_run_portb				<= run_r_portb || run_w_portb;
    
 end
 
