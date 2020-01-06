@@ -176,18 +176,8 @@ refer to the applicable agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
-		"DELAY_CYCLES"
-		"2"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
 		"MEM_SIZE_BITS"
 		"15"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"MREQ_DLY_CLK"
-		"2"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing

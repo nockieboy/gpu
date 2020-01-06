@@ -89,8 +89,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 0 176)
 		(input)
-		(text "address_b[14..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "address_b[14..0]" (rect 21 171 88 183)(font "Arial" ))
+		(text "address_b[19..0]" (rect 0 0 66 12)(font "Arial" ))
+		(text "address_b[19..0]" (rect 21 171 87 183)(font "Arial" ))
 		(line (pt 0 176)(pt 16 176)(line_width 3))
 	)
 	(port
@@ -150,7 +150,7 @@ refer to the applicable agreement for further details.
 		(line (pt 248 128)(pt 232 128)(line_width 3))
 	)
 	(parameter
-		"DELAY_CYCLES"
+		"READ_CLOCK_CYCLES"
 		"2"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)

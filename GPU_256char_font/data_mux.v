@@ -46,32 +46,39 @@ module data_mux (
 
 );
 
-reg    dumb_ab_mux, ab_mux_dl1, ab_mux_dl2, ab_mux_dl3, wena_a_dly, wena_b_dly ;
+parameter  READ_CLOCK_CYCLES = 2 ;
 
-//assign gpu_wr_ena   =  dumb_ab_mux ? (wr_ena_a || wena_a_dly)  : (wr_ena_b || wena_b_dly)  ;
-//assign gpu_address  =  dumb_ab_mux ?  address_a                :  address_b                ;
-//assign gpu_data_out =  dumb_ab_mux ?  data_in_a                :  data_in_b                ;
+reg    dumb_ab_mux, ab_mux_dl1, ab_mux_dl2, ab_mux_dl3, wena_a_dly, wena_b_dly, rdreq_a_dly,  rdreq_b_dly ;
+reg [9:0] rd_req_dlya, rd_req_dlyb ;
+
 assign data_out_a   =  gpu_data_in ;  // with this line, it is the responsibility of the next module to latch the data when the gpu_rd_rdy_a is high
 assign data_out_b   =  gpu_data_in ;  // with this line, it is the responsibility of the next module to latch the data when the gpu_rd_rdy_b is high
 
 
 
 always @ (posedge clk) begin
-dumb_ab_mux  <= ~dumb_ab_mux; // as dumb as it gets, just switches between A & B once every clock.
-ab_mux_dl1   <=  dumb_ab_mux;
-ab_mux_dl2   <=  ab_mux_dl1;
-ab_mux_dl3   <=  ab_mux_dl2;
+dumb_ab_mux     <= ~dumb_ab_mux; // as dumb as it gets, just switches between A & B once every clock.
 
-gpu_rd_rdy_a <= ~ab_mux_dl3 ; // needs to be high when 2 clock cycles has passed since address_a was sent out
-gpu_rd_rdy_b <=  ab_mux_dl3 ; // needs to be high when 2 clock cycles has passed since address_b was sent out
+gpu_rd_rdy_a   <= rd_req_dlya[READ_CLOCK_CYCLES-1]; // needs to be high when 2 clock cycles has passed since address_a was sent out
+gpu_rd_rdy_b   <= rd_req_dlyb[READ_CLOCK_CYCLES-1]; // needs to be high when 2 clock cycles has passed since address_b was sent out
 
 
-gpu_wr_ena   <=  dumb_ab_mux ? (wr_ena_a || wena_a_dly)  : (wr_ena_b || wena_b_dly)  ;
-gpu_address  <=  dumb_ab_mux ?  address_a                :  address_b                ;
-gpu_data_out <=  dumb_ab_mux ?  data_in_a                :  data_in_b                ;
+gpu_wr_ena     <=  dumb_ab_mux ? (wr_ena_a || wena_a_dly)  : (wr_ena_b || wena_b_dly)  ;
+gpu_address    <=  dumb_ab_mux ?  address_a                :  address_b                ;
+gpu_data_out 	<=  dumb_ab_mux ?  data_in_a                :  data_in_b                ;
+
+rd_req_dlya[0]	<=   dumb_ab_mux && (rd_req_a || rdreq_a_dly)  ;  // internally hold the read request
+rd_req_dlyb[0]	<=  ~dumb_ab_mux && (rd_req_b || rdreq_b_dly)  ;  // internally hold the read request
+
+rd_req_dlya[9:1] <= rd_req_dlya[8:0] ; // delay the read request by the correct amount of clocks matching the 
+rd_req_dlyb[9:1] <= rd_req_dlyb[8:0] ; // delay the read request by the correct amount of clocks matching the 
+
 
 wena_a_dly   <=  wr_ena_a ; // widen the write pulse by 1 clock
 wena_b_dly   <=  wr_ena_b ; // widen the write pulse by 1 clock
+rdreq_a_dly  <=  rd_req_a ; // widen the read request pulse by 1 clock.
+rdreq_b_dly  <=  rd_req_b ; // widen the read request pulse by 1 clock.
+
 
 end // always
 

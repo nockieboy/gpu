@@ -1257,146 +1257,6 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 400 936 648 1176)
-	(text "data_mux" (rect 5 0 53 12)(font "Arial" ))
-	(text "inst10" (rect 8 224 37 236)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "reset" (rect 0 0 24 12)(font "Arial" ))
-		(text "reset" (rect 21 43 45 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "gpu_data_in[7..0]" (rect 0 0 84 12)(font "Arial" ))
-		(text "gpu_data_in[7..0]" (rect 21 59 105 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64)(line_width 3))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "wr_ena_a" (rect 0 0 46 12)(font "Arial" ))
-		(text "wr_ena_a" (rect 21 75 67 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "rd_req_a" (rect 0 0 42 12)(font "Arial" ))
-		(text "rd_req_a" (rect 21 91 63 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "address_a[19..0]" (rect 0 0 82 12)(font "Arial" ))
-		(text "address_a[19..0]" (rect 21 107 103 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 3))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "data_in_a[7..0]" (rect 0 0 73 12)(font "Arial" ))
-		(text "data_in_a[7..0]" (rect 21 123 94 135)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128)(line_width 3))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "wr_ena_b" (rect 0 0 46 12)(font "Arial" ))
-		(text "wr_ena_b" (rect 21 139 67 151)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144))
-	)
-	(port
-		(pt 0 160)
-		(input)
-		(text "rd_req_b" (rect 0 0 42 12)(font "Arial" ))
-		(text "rd_req_b" (rect 21 155 63 167)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "address_b[14..0]" (rect 0 0 82 12)(font "Arial" ))
-		(text "address_b[14..0]" (rect 21 171 103 183)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176)(line_width 3))
-	)
-	(port
-		(pt 0 192)
-		(input)
-		(text "data_in_b[7..0]" (rect 0 0 73 12)(font "Arial" ))
-		(text "data_in_b[7..0]" (rect 21 187 94 199)(font "Arial" ))
-		(line (pt 0 192)(pt 16 192)(line_width 3))
-	)
-	(port
-		(pt 248 32)
-		(output)
-		(text "gpu_wr_ena" (rect 0 0 57 12)(font "Arial" ))
-		(text "gpu_wr_ena" (rect 179 27 236 39)(font "Arial" ))
-		(line (pt 248 32)(pt 232 32))
-	)
-	(port
-		(pt 248 48)
-		(output)
-		(text "gpu_address[19..0]" (rect 0 0 94 12)(font "Arial" ))
-		(text "gpu_address[19..0]" (rect 148 43 242 55)(font "Arial" ))
-		(line (pt 248 48)(pt 232 48)(line_width 3))
-	)
-	(port
-		(pt 248 64)
-		(output)
-		(text "gpu_data_out[7..0]" (rect 0 0 92 12)(font "Arial" ))
-		(text "gpu_data_out[7..0]" (rect 150 59 242 71)(font "Arial" ))
-		(line (pt 248 64)(pt 232 64)(line_width 3))
-	)
-	(port
-		(pt 248 80)
-		(output)
-		(text "gpu_rd_rdy_a" (rect 0 0 67 12)(font "Arial" ))
-		(text "gpu_rd_rdy_a" (rect 171 75 238 87)(font "Arial" ))
-		(line (pt 248 80)(pt 232 80))
-	)
-	(port
-		(pt 248 96)
-		(output)
-		(text "data_out_a[7..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "data_out_a[7..0]" (rect 160 91 240 103)(font "Arial" ))
-		(line (pt 248 96)(pt 232 96)(line_width 3))
-	)
-	(port
-		(pt 248 112)
-		(output)
-		(text "gpu_rd_rdy_b" (rect 0 0 67 12)(font "Arial" ))
-		(text "gpu_rd_rdy_b" (rect 171 107 238 119)(font "Arial" ))
-		(line (pt 248 112)(pt 232 112))
-	)
-	(port
-		(pt 248 128)
-		(output)
-		(text "data_out_b[7..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "data_out_b[7..0]" (rect 160 123 240 135)(font "Arial" ))
-		(line (pt 248 128)(pt 232 128)(line_width 3))
-	)
-	(parameter
-		"DELAY_CYCLES"
-		"2"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 232 224))
-	)
-	(annotation_block (parameter)(rect 424 1200 624 1240))
-)
-(symbol
 	(rect -152 1200 -104 1232)
 	(text "TRI" (rect 1 0 16 10)(font "Arial" (font_size 6)))
 	(text "inst12" (rect 3 21 31 38)(font "Intel Clear" ))
@@ -1688,9 +1548,149 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
+	(rect 400 936 648 1176)
+	(text "data_mux" (rect 5 0 53 12)(font "Arial" ))
+	(text "inst10" (rect 8 224 36 241)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "reset" (rect 0 0 24 12)(font "Arial" ))
+		(text "reset" (rect 21 43 45 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "gpu_data_in[7..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "gpu_data_in[7..0]" (rect 21 59 105 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "wr_ena_a" (rect 0 0 46 12)(font "Arial" ))
+		(text "wr_ena_a" (rect 21 75 67 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "rd_req_a" (rect 0 0 42 12)(font "Arial" ))
+		(text "rd_req_a" (rect 21 91 63 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "address_a[19..0]" (rect 0 0 82 12)(font "Arial" ))
+		(text "address_a[19..0]" (rect 21 107 103 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "data_in_a[7..0]" (rect 0 0 73 12)(font "Arial" ))
+		(text "data_in_a[7..0]" (rect 21 123 94 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "wr_ena_b" (rect 0 0 46 12)(font "Arial" ))
+		(text "wr_ena_b" (rect 21 139 67 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "rd_req_b" (rect 0 0 42 12)(font "Arial" ))
+		(text "rd_req_b" (rect 21 155 63 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "address_b[19..0]" (rect 0 0 82 12)(font "Arial" ))
+		(text "address_b[19..0]" (rect 21 171 103 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "data_in_b[7..0]" (rect 0 0 73 12)(font "Arial" ))
+		(text "data_in_b[7..0]" (rect 21 187 94 199)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 3))
+	)
+	(port
+		(pt 248 32)
+		(output)
+		(text "gpu_wr_ena" (rect 0 0 57 12)(font "Arial" ))
+		(text "gpu_wr_ena" (rect 179 27 236 39)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32))
+	)
+	(port
+		(pt 248 48)
+		(output)
+		(text "gpu_address[19..0]" (rect 0 0 94 12)(font "Arial" ))
+		(text "gpu_address[19..0]" (rect 148 43 242 55)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48)(line_width 3))
+	)
+	(port
+		(pt 248 64)
+		(output)
+		(text "gpu_data_out[7..0]" (rect 0 0 92 12)(font "Arial" ))
+		(text "gpu_data_out[7..0]" (rect 150 59 242 71)(font "Arial" ))
+		(line (pt 248 64)(pt 232 64)(line_width 3))
+	)
+	(port
+		(pt 248 80)
+		(output)
+		(text "gpu_rd_rdy_a" (rect 0 0 67 12)(font "Arial" ))
+		(text "gpu_rd_rdy_a" (rect 171 75 238 87)(font "Arial" ))
+		(line (pt 248 80)(pt 232 80))
+	)
+	(port
+		(pt 248 96)
+		(output)
+		(text "data_out_a[7..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "data_out_a[7..0]" (rect 160 91 240 103)(font "Arial" ))
+		(line (pt 248 96)(pt 232 96)(line_width 3))
+	)
+	(port
+		(pt 248 112)
+		(output)
+		(text "gpu_rd_rdy_b" (rect 0 0 67 12)(font "Arial" ))
+		(text "gpu_rd_rdy_b" (rect 171 107 238 119)(font "Arial" ))
+		(line (pt 248 112)(pt 232 112))
+	)
+	(port
+		(pt 248 128)
+		(output)
+		(text "data_out_b[7..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "data_out_b[7..0]" (rect 160 123 240 135)(font "Arial" ))
+		(line (pt 248 128)(pt 232 128)(line_width 3))
+	)
+	(parameter
+		"READ_CLOCK_CYCLES"
+		"2"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 232 224))
+	)
+	(annotation_block (parameter)(rect 400 1184 640 1224))
+)
+(symbol
 	(rect -152 888 88 1160)
 	(text "Z80_bridge" (rect 5 0 59 12)(font "Arial" ))
-	(text "inst7" (rect 8 256 31 268)(font "Arial" ))
+	(text "inst18" (rect 8 256 36 273)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1844,11 +1844,6 @@ refer to the applicable agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
-		"DELAY_CYCLES"
-		"12"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
 		"MEM_SIZE_BITS"
 		"15"
 		""
@@ -1856,7 +1851,7 @@ refer to the applicable agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 224 256))
 	)
-	(annotation_block (parameter)(rect -416 792 -200 868))
+	(annotation_block (parameter)(rect -400 816 -184 880))
 )
 (connector
 	(text "clk" (rect 258 224 272 236)(font "Arial" ))
@@ -2317,12 +2312,6 @@ refer to the applicable agreement for further details.
 	(pt 400 1096)
 )
 (connector
-	(text "RS232_addr[14..0]" (rect 320 1096 407 1113)(font "Intel Clear" ))
-	(pt 320 1112)
-	(pt 400 1112)
-	(bus)
-)
-(connector
 	(text "RS232_wDat[7..0]" (rect 322 1112 406 1129)(font "Intel Clear" ))
 	(pt 320 1128)
 	(pt 400 1128)
@@ -2586,6 +2575,12 @@ refer to the applicable agreement for further details.
 	(text "out3[6]" (rect -230 1096 -196 1108)(font "Arial" ))
 	(pt -232 1112)
 	(pt -152 1112)
+)
+(connector
+	(text "RS232_addr[19..0]" (rect 320 1096 407 1113)(font "Intel Clear" ))
+	(pt 320 1112)
+	(pt 400 1112)
+	(bus)
 )
 (junction (pt 600 616))
 (junction (pt 600 704))

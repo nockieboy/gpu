@@ -176,7 +176,7 @@ set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
 set_global_assignment -name PLACEMENT_EFFORT_MULTIPLIER 4
 set_global_assignment -name ROUTER_EFFORT_MULTIPLIER 4
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION OFF
-set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING OFF
 set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[0]
 set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[0]
 set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[0]
