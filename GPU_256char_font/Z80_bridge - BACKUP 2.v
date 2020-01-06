@@ -45,19 +45,23 @@ wire Z80_clk_pos,Z80_clk_neg,Z80_clk_trig;
 reg Z80_clk_delay, last_Z80_WR, last_Z80_RD, mem_valid_range, MREQn_dly, MREQn_dly2, mem_window ;
 reg [9:0] Z80_write_sequencer,Z80_mreq_dly;
 
+
+
 assign Z80_clk_pos   = ~Z80_clk_delay &&  Z80_CLK;
 assign Z80_clk_neg   =  Z80_clk_delay && ~Z80_CLK;
 assign Z80_clk_trig  = (Z80_clk_pos && sel_pclk) || (Z80_clk_neg && ~sel_nclk);
 
 
+assign Z80_mreq_pulse = ~Z80_mreq_dly[MREQ_DLY_CLK] && Z80_mreq_dly[MREQ_DLY_CLK+1];
+assign Z80_unmreq_pulse = Z80_mreq_dly[MREQ_DLY_CLK] && ~Z80_mreq_dly[MREQ_DLY_CLK+1];
 assign Z80_mreq	    = ~Z80_MREQn && Z80_M1n;					// Define a bus memory access state
-assign Z80_write		 = ~Z80_WRn ; // && last_Z80_WR;					// Isolate a single write transaction
-
+assign Z80_write		 = ~Z80_WRn && last_Z80_WR;					// Isolate a single write transaction
 assign Z80_read	    = ~Z80_RDn;				// Isolate a single read transaction
 assign Z80_readn	    =  Z80_RDn && ~last_Z80_RD;				// Isolate a single read transaction
 
 assign Write_GPU_RAM			=  mem_window && Z80_mreq && Z80_write && mem_valid_range;	// Define a GPU Write action - only write to address within GPU RAM bounds
-assign Read_GPU_RAM_BEGIN 	=  mem_window && Z80_mreq && Z80_read  && mem_valid_range;   // Define the beginning of a Z80 read request of GPU Ram.
+assign Read_GPU_RAM_BEGIN 	=  mem_window && Z80_mreq && Z80_read && mem_valid_range;   // Define the beginning of a Z80 read request of GPU Ram.
+assign Read_GPU_RAM_END 	=  Z80_readn ;   // Define the ending of a Z80 read request of GPU Ram.
 
 // **********************************************************************************************************
 
@@ -76,31 +80,19 @@ always @ (posedge GPU_CLK) begin
 
 
 
-//	Z80_write_sequencer[9:0] <= { Z80_write_sequencer[8:0], Write_GPU_RAM };
+	Z80_write_sequencer[9:0] <= { Z80_write_sequencer[8:0], Write_GPU_RAM };
 
-//	if ( Z80_write_sequencer[0] )                 Z80_245data_dir  <= 1'b1;				// set 245 dir toward FPGA
-//	if ( Z80_write_sequencer[0] )                 Z80_rData_ena    <= 1'b0;				// set FPGA pins to input (should be by default)
-//	if ( Z80_write_sequencer[0] )                 Z80_245_oe       <= 1'b0;				// enable 245 output (WAS 1 - moved forward to step 0)
+	if ( Z80_write_sequencer[0] )                 Z80_245data_dir  <= 1'b1;				// set 245 dir toward FPGA
+	if ( Z80_write_sequencer[0] )                 Z80_rData_ena    <= 1'b0;				// set FPGA pins to input (should be by default)
+	if ( Z80_write_sequencer[0] )                 Z80_245_oe       <= 1'b0;				// enable 245 output (WAS 1 - moved forward to step 0)
 
-//	if ( Z80_write_sequencer[DELAY_CYCLES] )  gpu_wdata        <= Z80_wData;		// latch data bus onto GPU data bus
-//	if ( Z80_write_sequencer[DELAY_CYCLES] )  gpu_wr_ena       <= 1'b1;				// turn on FPGA RAM we
+	if ( Z80_write_sequencer[DELAY_CYCLES] )  gpu_wdata        <= Z80_wData;		// latch data bus onto GPU data bus
+	if ( Z80_write_sequencer[DELAY_CYCLES] )  gpu_wr_ena       <= 1'b1;				// turn on FPGA RAM we
 
-//	if ( Z80_write_sequencer[DELAY_CYCLES + 1] )  gpu_wr_ena       <= 1'b0;				// turn off FPGA RAM we (WAS STEP +2, now STEP +3 for additional WR)
+	if ( Z80_write_sequencer[DELAY_CYCLES + 2] )  gpu_wr_ena       <= 1'b0;				// turn off FPGA RAM we (WAS STEP +2, now STEP +3 for additional WR)
+	if ( Z80_write_sequencer[DELAY_CYCLES + 2] )  Z80_245_oe			<= 1'b1;				// disable 245 output
 
-
-if ( Write_GPU_RAM ) begin
-		Z80_245data_dir  <= 1'b1;				// set 245 dir toward FPGA
-		Z80_rData_ena    <= 1'b0;				// set FPGA pins to input (should be by default)
-		Z80_245_oe       <= 1'b0;				// enable 245 output (WAS 1 - moved forward to step 0)
- 
-		gpu_wdata        <= Z80_wData;		// latch data bus onto GPU data bus
-		gpu_wr_ena       <= 1'b1;				// turn on FPGA RAM we
-	end else begin
-		gpu_wr_ena       <= 1'b0;				// turn off FPGA RAM we
-	end
-
-
-	if ( Read_GPU_RAM_BEGIN ) begin
+	if ( Read_GPU_RAM_BEGIN && Z80_WRn ) begin
 		
 		gpu_rd_req			<= 1'b1;				// flag a read request to the mux which is one-shotted in the mux
 		Z80_245data_dir	<= 1'b0;				// set 245 direction (TO Z80)
@@ -109,12 +101,11 @@ if ( Write_GPU_RAM ) begin
 
 		
 	end else begin
-			gpu_rd_req			<= 1'b0;				// end GPU read req after 1 pulse
-			Z80_245data_dir   <= 1'b1;				// set 245 dir toward FPGA
-			Z80_rData_ena		<= 1'b0;					// re-set bidir pins to input
+		gpu_rd_req			<= 1'b0;				// end GPU read req after 1 pulse
 
 		if ( Z80_WRn ) begin
-		   //Z80_245_oe			<= 1'b1;				// disable 245 output
+			Z80_rData_ena		<= 1'b0;					// re-set bidir pins to input
+		   Z80_245_oe			<= 1'b1;				// disable 245 output
 		end
 	end
 

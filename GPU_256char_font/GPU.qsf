@@ -70,7 +70,7 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
-set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
 set_location_assignment PIN_23 -to clk54m
 set_location_assignment PIN_25 -to rst
 set_location_assignment PIN_77 -to r[3]
@@ -133,7 +133,7 @@ set_global_assignment -name VERILOG_FILE data_mux.v
 set_global_assignment -name BDF_FILE color_sel.bdf
 set_global_assignment -name VERILOG_FILE bart.v
 set_global_assignment -name VERILOG_FILE altpll0.v
-set_global_assignment -name ALLOW_REGISTER_RETIMING OFF
+set_global_assignment -name ALLOW_REGISTER_RETIMING ON
 set_location_assignment PIN_28 -to 245_OE
 set_location_assignment PIN_30 -to 245_DIR
 set_location_assignment PIN_11 -to Z80_data[0]
@@ -144,7 +144,7 @@ set_location_assignment PIN_2 -to Z80_data[4]
 set_location_assignment PIN_1 -to Z80_data[5]
 set_location_assignment PIN_144 -to Z80_data[6]
 set_location_assignment PIN_143 -to Z80_data[7]
-set_location_assignment PIN_136 -to Z80_CLK
+set_location_assignment PIN_90 -to Z80_CLK
 set_location_assignment PIN_137 -to Z80_M1
 set_location_assignment PIN_142 -to Z80_MREQ
 set_location_assignment PIN_138 -to Z80_RD
@@ -159,10 +159,10 @@ set_location_assignment PIN_100 -to Z80_ADDR[6]
 set_location_assignment PIN_101 -to Z80_ADDR[7]
 set_location_assignment PIN_98 -to Z80_ADDR[8]
 set_location_assignment PIN_99 -to Z80_ADDR[9]
-set_location_assignment PIN_90 -to Z80_ADDR[10]
-set_location_assignment PIN_91 -to Z80_ADDR[11]
-set_location_assignment PIN_88 -to Z80_ADDR[12]
-set_location_assignment PIN_89 -to Z80_ADDR[13]
+set_location_assignment PIN_105 -to Z80_ADDR[10]
+set_location_assignment PIN_106 -to Z80_ADDR[11]
+set_location_assignment PIN_84 -to Z80_ADDR[12]
+set_location_assignment PIN_86 -to Z80_ADDR[13]
 set_location_assignment PIN_125 -to Z80_ADDR[14]
 set_location_assignment PIN_126 -to Z80_ADDR[15]
 set_location_assignment PIN_127 -to Z80_ADDR[16]
@@ -172,4 +172,55 @@ set_location_assignment PIN_132 -to Z80_ADDR[19]
 set_location_assignment PIN_133 -to Z80_ADDR[20]
 set_location_assignment PIN_135 -to Z80_ADDR[21]
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
+set_global_assignment -name PLACEMENT_EFFORT_MULTIPLIER 4
+set_global_assignment -name ROUTER_EFFORT_MULTIPLIER 4
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[0]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to 245_DIR
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_M1
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_MREQ
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_RD
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_WR
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[4]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[5]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[6]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[7]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[1]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[2]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[3]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[4]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[5]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[6]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[7]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[8]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[9]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[10]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[11]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[12]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[13]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[14]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[15]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[16]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[17]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[18]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[19]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[20]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[21]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_CLK
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[1]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[2]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[3]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[4]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[5]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[6]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[7]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to 245_OE
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to data_en
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

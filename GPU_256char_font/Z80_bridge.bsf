@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 256 256)
+	(rect 16 16 256 288)
 	(text "Z80_bridge" (rect 5 0 51 12)(font "Arial" ))
-	(text "inst" (rect 8 224 20 236)(font "Arial" ))
+	(text "inst" (rect 8 256 20 268)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -101,6 +101,20 @@ refer to the applicable agreement for further details.
 		(line (pt 0 192)(pt 16 192)(line_width 1))
 	)
 	(port
+		(pt 0 208)
+		(input)
+		(text "sel_pclk" (rect 0 0 31 12)(font "Arial" ))
+		(text "sel_pclk" (rect 21 203 52 215)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 1))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "sel_nclk" (rect 0 0 31 12)(font "Arial" ))
+		(text "sel_nclk" (rect 21 219 52 231)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 1))
+	)
+	(port
 		(pt 240 32)
 		(output)
 		(text "Z80_245data_dir" (rect 0 0 69 12)(font "Arial" ))
@@ -158,7 +172,7 @@ refer to the applicable agreement for further details.
 	)
 	(parameter
 		"MEMORY_RANGE"
-		"011"
+		"010"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
@@ -167,12 +181,17 @@ refer to the applicable agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
-		"MAX_MEM_SIZE"
-		"32768"
+		"MEM_SIZE_BITS"
+		"15"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"MREQ_DLY_CLK"
+		"2"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 224 224)(line_width 1))
+		(rectangle (rect 16 16 224 256)(line_width 1))
 	)
 	(annotation_block (parameter)(rect 256 -64 356 16))
 )

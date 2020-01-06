@@ -36,14 +36,14 @@ module Z80_bridge (
 parameter MEMORY_RANGE  = 3'b010;	// Z80_addr[21:19] == 3'b010 targets the 512KB 'window' at 0x100000-0x17FFFF (Socket 3 on the Microcom)
 parameter DELAY_CYCLES  = 2;		// number of cycles to delay write for 245
 parameter MEM_SIZE_BITS = 15;		//
-parameter MREQ_DLY_CLK  = 2;		// number of cycles +1 to delay mreq trigger
+//parameter MREQ_DLY_CLK  = 2;		// number of cycles +1 to delay mreq trigger
 
 wire Z80_mreq, Z80_mreq_pulse, Z80_unmreq_pulse, Z80_write, Z80_read, Write_GPU_RAM;
 wire Read_GPU_RAM_BEGIN, Read_GPU_RAM_END;
 wire Z80_clk_pos,Z80_clk_neg,Z80_clk_trig;
 
 reg Z80_clk_delay, last_Z80_WR, last_Z80_RD, mem_valid_range, MREQn_dly, MREQn_dly2, mem_window ;
-reg [9:0] Z80_write_sequencer,Z80_mreq_dly;
+reg [15:0] Z80_write_sequencer; //,Z80_mreq_dly;
 
 assign Z80_clk_pos   = ~Z80_clk_delay &&  Z80_CLK;
 assign Z80_clk_neg   =  Z80_clk_delay && ~Z80_CLK;
@@ -51,8 +51,7 @@ assign Z80_clk_trig  = (Z80_clk_pos && sel_pclk) || (Z80_clk_neg && ~sel_nclk);
 
 
 assign Z80_mreq	    = ~Z80_MREQn && Z80_M1n;					// Define a bus memory access state
-assign Z80_write		 = ~Z80_WRn ; // && last_Z80_WR;					// Isolate a single write transaction
-
+assign Z80_write		 = ~Z80_WRn && last_Z80_WR;					// Isolate a single write transaction
 assign Z80_read	    = ~Z80_RDn;				// Isolate a single read transaction
 assign Z80_readn	    =  Z80_RDn && ~last_Z80_RD;				// Isolate a single read transaction
 
@@ -63,7 +62,7 @@ assign Read_GPU_RAM_BEGIN 	=  mem_window && Z80_mreq && Z80_read  && mem_valid_r
 
 always @ (posedge GPU_CLK) begin
 
-	Z80_mreq_dly[9:0] <= { Z80_mreq_dly[8:0], Z80_MREQn };
+	//Z80_mreq_dly[9:0] <= { Z80_mreq_dly[8:0], Z80_MREQn };
 
 //if (Z80_mreq_pulse) begin
 	gpu_addr         <=  Z80_addr[18:0];                         // latch address bus onto GPU address bus
@@ -76,29 +75,16 @@ always @ (posedge GPU_CLK) begin
 
 
 
-//	Z80_write_sequencer[9:0] <= { Z80_write_sequencer[8:0], Write_GPU_RAM };
+	Z80_write_sequencer[15:0] <= { Z80_write_sequencer[14:0], Write_GPU_RAM };
 
-//	if ( Z80_write_sequencer[0] )                 Z80_245data_dir  <= 1'b1;				// set 245 dir toward FPGA
-//	if ( Z80_write_sequencer[0] )                 Z80_rData_ena    <= 1'b0;				// set FPGA pins to input (should be by default)
-//	if ( Z80_write_sequencer[0] )                 Z80_245_oe       <= 1'b0;				// enable 245 output (WAS 1 - moved forward to step 0)
+	if ( Z80_write_sequencer[0] )                 Z80_245data_dir  <= 1'b1;				// set 245 dir toward FPGA
+	if ( Z80_write_sequencer[0] )                 Z80_rData_ena    <= 1'b0;				// set FPGA pins to input (should be by default)
+	if ( Z80_write_sequencer[0] )                 Z80_245_oe       <= 1'b0;				// enable 245 output (WAS 1 - moved forward to step 0)
 
-//	if ( Z80_write_sequencer[DELAY_CYCLES] )  gpu_wdata        <= Z80_wData;		// latch data bus onto GPU data bus
-//	if ( Z80_write_sequencer[DELAY_CYCLES] )  gpu_wr_ena       <= 1'b1;				// turn on FPGA RAM we
+	if ( Z80_write_sequencer[DELAY_CYCLES] )  gpu_wdata        <= Z80_wData;		// latch data bus onto GPU data bus
+	if ( Z80_write_sequencer[DELAY_CYCLES] )  gpu_wr_ena       <= 1'b1;				// turn on FPGA RAM we
 
-//	if ( Z80_write_sequencer[DELAY_CYCLES + 1] )  gpu_wr_ena       <= 1'b0;				// turn off FPGA RAM we (WAS STEP +2, now STEP +3 for additional WR)
-
-
-if ( Write_GPU_RAM ) begin
-		Z80_245data_dir  <= 1'b1;				// set 245 dir toward FPGA
-		Z80_rData_ena    <= 1'b0;				// set FPGA pins to input (should be by default)
-		Z80_245_oe       <= 1'b0;				// enable 245 output (WAS 1 - moved forward to step 0)
- 
-		gpu_wdata        <= Z80_wData;		// latch data bus onto GPU data bus
-		gpu_wr_ena       <= 1'b1;				// turn on FPGA RAM we
-	end else begin
-		gpu_wr_ena       <= 1'b0;				// turn off FPGA RAM we
-	end
-
+	if ( Z80_write_sequencer[DELAY_CYCLES + 2] )  gpu_wr_ena       <= 1'b0;				// turn off FPGA RAM we (WAS STEP +2, now STEP +3 for additional WR)
 
 	if ( Read_GPU_RAM_BEGIN ) begin
 		

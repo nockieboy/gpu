@@ -28,7 +28,7 @@ module data_mux (
    // inputs Port B - RS232
    input wire        wr_ena_b,
    input wire        rd_req_b,
-   input wire [14:0] address_b,
+   input wire [19:0] address_b,
    input wire [7:0]  data_in_b,
    
    // gpu outputs
@@ -37,86 +37,42 @@ module data_mux (
    output reg [7:0]  gpu_data_out,
    
    // outputs Port A
-   output wire       gpu_rd_rdy_a,  // one-CLK HIGH pulse here indicates valid data on data_out_a
+   output reg        gpu_rd_rdy_a,  // one-CLK HIGH pulse here indicates valid data on data_out_a
    output wire [7:0] data_out_a,
    
    // outputs Port B
-   output wire       gpu_rd_rdy_b,  // one-CLK HIGH pulse here indicates valid data on data_out_b
+   output reg        gpu_rd_rdy_b,  // one-CLK HIGH pulse here indicates valid data on data_out_b
    output wire [7:0] data_out_b
 
 );
 
-parameter DELAY_CYCLES = 2;
+reg    dumb_ab_mux, ab_mux_dl1, ab_mux_dl2, ab_mux_dl3, wena_a_dly, wena_b_dly ;
 
-reg [9:0] rd_sequencer_a;
-reg [9:0] rd_sequencer_b;
+//assign gpu_wr_ena   =  dumb_ab_mux ? (wr_ena_a || wena_a_dly)  : (wr_ena_b || wena_b_dly)  ;
+//assign gpu_address  =  dumb_ab_mux ?  address_a                :  address_b                ;
+//assign gpu_data_out =  dumb_ab_mux ?  data_in_a                :  data_in_b                ;
+assign data_out_a   =  gpu_data_in ;  // with this line, it is the responsibility of the next module to latch the data when the gpu_rd_rdy_a is high
+assign data_out_b   =  gpu_data_in ;  // with this line, it is the responsibility of the next module to latch the data when the gpu_rd_rdy_b is high
 
-reg porta_bsy, portb_bsy;
-reg last_run_portb = 1'b0;		// set LOW on power up to prevent false triggers
-//reg block_RW = 1'b0;
 
-wire run_r_porta, run_r_portb, run_w_porta, run_w_portb;
-
-//assign run_r_porta   = rd_req_a && ~block_RW && ~portb_bsy;
-//assign run_w_porta   = wr_ena_a && ~block_RW && ~portb_bsy;
-assign run_r_porta   = rd_req_a && ~portb_bsy;
-assign run_w_porta   = wr_ena_a && ~portb_bsy;
-
-// Port B reads and writes are 1-shots, hence the edge-detect (...&& ~last_portb_xx)
-//assign run_r_portb   = ~block_RW && (rd_req_b && ~last_run_portb) && ~porta_bsy && ~run_r_porta && ~run_w_porta;
-//assign run_w_portb   = ~block_RW && (wr_ena_b && ~last_run_portb) && ~porta_bsy && ~run_r_porta && ~run_w_porta;
-assign run_r_portb   = (rd_req_b && ~last_run_portb) && ~porta_bsy && ~run_r_porta && ~run_w_porta;
-assign run_w_portb   = (wr_ena_b && ~last_run_portb) && ~porta_bsy && ~run_r_porta && ~run_w_porta;
-
-assign gpu_rd_rdy_a  = rd_sequencer_a[DELAY_CYCLES];
-assign gpu_rd_rdy_b  = rd_sequencer_b[DELAY_CYCLES];
-
-assign data_out_a = gpu_data_in ;
-assign data_out_b = gpu_data_in ;
 
 always @ (posedge clk) begin
+dumb_ab_mux  <= ~dumb_ab_mux; // as dumb as it gets, just switches between A & B once every clock.
+ab_mux_dl1   <=  dumb_ab_mux;
+ab_mux_dl2   <=  ab_mux_dl1;
+ab_mux_dl3   <=  ab_mux_dl2;
 
-   // *** UPDATE GPU_WR_ENA AND FLAGS EACH CLOCK ***
-   gpu_wr_ena  <= run_w_porta || run_w_portb;
-   porta_bsy   <= run_r_porta || run_w_porta;
-   portb_bsy   <= run_r_portb || run_w_portb;
-	
-	// *** UPDATE READ SEQUENCERS ***
-	rd_sequencer_a[9:0]  <= { rd_sequencer_a[8:0], run_r_porta };
-	rd_sequencer_b[9:0]  <= { rd_sequencer_b[8:0], run_r_portb };
-	
-   // *** HANDLE PORT A READ REQUESTS AND SEQUENCER ***
-   if (run_r_porta) begin
-	//	block_RW					<= 1'b1;
-      gpu_address          <= address_a;
-   end
-	
-	//if (block_RW) begin
-	//	block_RW					<= ~rd_sequencer_a[DELAY_CYCLES + 1];	// reset block_RW after gpu_rd_rdy_a goes HIGH
-	//end
-   
-   // *** HANDLE PORT A WRITE REQUESTS ***
-   if (run_w_porta) begin
-      gpu_address          <= address_a;
-      gpu_data_out         <= data_in_a;
-   end
-   
-   // *** HANDLE PORT B READ REQUESTS AND SEQUENCER ***
-   if (run_r_portb) begin
-      gpu_address          <= address_b;
-   end else begin
-      
-   end
-   
-   // *** HANDLE PORT B WRITE REQUESTS ***
-   if (run_w_portb) begin
-      gpu_address          <= address_b;
-      gpu_data_out         <= data_in_b;
-   end
-	
-	// update the 1-shot trigger for Port B
-	last_run_portb				<= run_r_portb || run_w_portb;
-   
-end
+gpu_rd_rdy_a <= ~ab_mux_dl3 ; // needs to be high when 2 clock cycles has passed since address_a was sent out
+gpu_rd_rdy_b <=  ab_mux_dl3 ; // needs to be high when 2 clock cycles has passed since address_b was sent out
+
+
+gpu_wr_ena   <=  dumb_ab_mux ? (wr_ena_a || wena_a_dly)  : (wr_ena_b || wena_b_dly)  ;
+gpu_address  <=  dumb_ab_mux ?  address_a                :  address_b                ;
+gpu_data_out <=  dumb_ab_mux ?  data_in_a                :  data_in_b                ;
+
+wena_a_dly   <=  wr_ena_a ; // widen the write pulse by 1 clock
+wena_b_dly   <=  wr_ena_b ; // widen the write pulse by 1 clock
+
+end // always
 
 endmodule
