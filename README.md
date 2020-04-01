@@ -16,8 +16,8 @@ This repository contains a number of folders and not all are essential to get a 
 
 Primary folders are:
 
-#### GPU_256char_font
-The main Quartus Prime project folder.
+#### GPU_EP4CExx
+The main Quartus Prime project folder, specific to a particular version of FPGA.
 
 #### docs
 Contains manuals, documentation and information on the project and its constituent parts.
