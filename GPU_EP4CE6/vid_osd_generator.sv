@@ -31,11 +31,11 @@ module vid_osd_generator (
 reg [PIPE_DELAY:0] hde_pipe, vde_pipe, hs_pipe, vs_pipe;
 reg [47:0] HV_pipe[PIPE_DELAY:0];
 
-parameter PIPE_DELAY	= 11;							// This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
-parameter HW_REGS_SIZE	= 9;							// default size for hardware register bus - set by HW_REGS parameter in design view
+parameter PIPE_DELAY	= 11;						// This parameter selects the number of pixel clocks to delay the VDE and sync outputs.  Only use 2 through 9.
+parameter HW_REGS_SIZE	= 9;					// default size for hardware register bus - set by HW_REGS parameter in design view
 parameter ADDR_SIZE     = 15;
 parameter NUM_WORDS     = 24576;
-parameter NUM_LAYERS    = 7;    						// This parameter defines the number of used MAGGIE graphics layers.
+parameter NUM_LAYERS    = 7;    				// This parameter defines the number of used MAGGIE graphics layers.
 parameter PALETTE_ADDR  = (2 ** ADDR_SIZE) - 1024 ;	// Base address where host Z80 may access the palette memory, usually located in the last 1024 bytes of addressable memory
 parameter GPU_RAM_MIF   = "GPU_MIF.mif" ;	// MIF file for the main GPU ram.
 

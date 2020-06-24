@@ -1,8 +1,8 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="81bcf134b75a7d3629f7"/>
+    <hash md5_digest_80b="c7cf86541805607b23d5"/>
   </project>
   <file_info>
-    <file device="EP4CE10E22C8" path="GPU.sof" usercode="0xFFFFFFFF"/>
+    <file device="EP4CE10E22C7" path="GPU.sof" usercode="0xFFFFFFFF"/>
   </file_info>
 </sld_project_info>

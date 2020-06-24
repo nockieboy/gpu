@@ -42,7 +42,6 @@ parameter MEMORY_RANGE  = 3'b010;      // Z80_addr[21:19] == 3'b010 targets the 
 parameter MEM_SIZE_BITS = 15;          // Specifies maximum address size for the GPU RAM (anything above this returns $FF)
 parameter BANK_RESPONSE = 1;           // 1 - respond to reads at BANK_ID_ADDR with appropriate data, 0 - ignore reads to that address
 parameter BANK_ID_ADDR  = 17'b10111111111111111;      // Address to respond to BANK_ID queries with data (lowest 4 bits left off)
-
 parameter int BANK_ID[16] = '{9,3,71,80,85,32,69,80,52,67,69,54,0,255,255,255};  // The BANK_ID data to return
 
 wire 	Z80_mreq,
@@ -68,25 +67,45 @@ reg	Z80_clk_delay,
 
 // ********************** PS2 Keyboard interface stuff ********************** 
 //
-parameter int INT_TYP  = 0;            // 0 = polled (IO), 1 = interrupt
-parameter byte INT_VEC = 'h30;         // INTerrupt VECtor to be passed to host in event of an interrupt acknowledge
-parameter int IO_DATA  = 240;          // IO address for keyboard polling
+parameter int INT_TYP  	= 0;           // 0 = polled (IO), 1 = interrupt
+parameter byte INT_VEC 	= 'h30;        // INTerrupt VECtor to be passed to host in event of an interrupt acknowledge
+parameter int IO_DATA  	= 240;         // IO address for keyboard data polling
+parameter int IO_STAT	= 241;			// IO address for keyboard status polling
 
-wire PS2_READY, IO_DATA_RQ, IO_DATA_ST, IO_DATA_RL, IO_DATA_EX, INTA_start, INTA_end, Z80_INTACK;
+wire	PS2_READY,
+		IO_DATA_RQ,
+		IO_DATA_ST,
+		IO_DATA_RL,
+		IO_DATA_EX,
+		IO_STAT_RQ,
+		IO_STAT_ST,
+		IO_STAT_RL,
+		IO_STAT_EX,
+		INTA_start,
+		INTA_end,
+		Z80_INTACK;
 
-reg [7:0] PS2_CHAR 	= 'b0;
-reg PS2_prev 			= 'b0;
-reg INTACK_prev 		= 'b0;
-reg IO_DATA_prev 		= 'b0;
-reg [4:0] INT_DELAY 	= 'b0;
-reg [4:0] IO_245_DLY = 'b0;
+reg [7:0] PS2_CHAR 	= 8'b0;				// Stores value to return when PS2_CHAR IO port is queried
+reg [7:0] PS2_STAT	= 8'b0;				// Stores value to return when PS2_STATUS IO port is queried
+reg PS2_prev 			= 1'b0;
+reg INTACK_prev 		= 1'b0;
+reg IO_DATA_prev 		= 1'b0;
+reg IO_STAT_prev 		= 1'b0;
+reg [4:0] INT_DELAY 	= 5'b0;
+reg [4:0] IO_245_DLY = 5'b0;
+reg IIR_flag			= 1'b0;				// Internal Interrupt Request flag
 
-assign PS2_READY     = PS2_RDY && ~PS2_prev;                                  // HIGH for 1 CLK when valid data is available on PS2_DAT
+assign PS2_READY     = PS2_RDY && ~PS2_prev;  						               // HIGH for 1 CLK when valid data is available on PS2_DAT and PS2_dly_ena is LOW
 
-assign IO_DATA_RQ    = ~Z80_IORQn && (IO_DATA == Z80_addr[7:0]) & ~Z80_RDn;   // HIGH when host is reading data via appropriate IO address
+assign IO_DATA_RQ    = ~Z80_IORQn && (IO_DATA == Z80_addr[7:0]) & ~Z80_RDn;   // HIGH when host is reading data from IO_DATA address
 assign IO_DATA_ST		= IO_DATA_RQ && ~IO_DATA_prev;									// HIGH for 1 CLK when valid IO_DATA cycle starts
 assign IO_DATA_RL		= IO_DATA_RQ && IO_245_DLY[4];									// HIGH for 1 CLK after 4 CLK delay to ReLease IO_DATA onto bus
 assign IO_DATA_EX		= ~IO_DATA_RQ && IO_DATA_prev;									// HIGH for 1 CLK when valid IO_DATA cycle ends
+
+assign IO_STAT_RQ    = ~Z80_IORQn && (IO_STAT == Z80_addr[7:0]) & ~Z80_RDn;   // HIGH when host is reading data from IO_STAT address
+assign IO_STAT_ST		= IO_STAT_RQ && ~IO_STAT_prev;									// HIGH for 1 CLK when valid IO_STAT cycle starts
+assign IO_STAT_RL		= IO_STAT_RQ && IO_245_DLY[4];									// HIGH for 1 CLK after 4 CLK delay to ReLease IO_STAT onto bus
+assign IO_STAT_EX		= ~IO_STAT_RQ && IO_STAT_prev;									// HIGH for 1 CLK when valid IO_STAT cycle ends
 
 assign Z80_INTACK    = INT_TYP && ~Z80_M1n && ~Z80_IORQn;                     // HIGH when host is acknowledging interrupt
 assign INTA_start    = INT_TYP && Z80_INT_REQ && Z80_INTACK && ~INTACK_prev;  // HIGH for 1 CLK when interrupt acknowledge detected
@@ -103,18 +122,18 @@ assign Z80_write     = ~Z80_WRn;                // write transaction
 assign Z80_read      = ~Z80_RDn;                // read transaction
 
 // Only allow WR to valid GPU RAM space
-assign Write_GPU_RAM  =  mem_window && Z80_mreq && Z80_write && mem_valid_range; // Define a GPU Write action - only write to address within GPU RAM bounds
+assign Write_GPU_RAM =  mem_window && Z80_mreq && Z80_write && mem_valid_range; // Define a GPU Write action - only write to address within GPU RAM bounds
 // Only allow RD to valid GPU RAM space
 //assign Read_GPU_RAM   =  mem_window && Z80_mreq && Z80_read  && mem_valid_range; // Define the beginning of a Z80 read request of GPU Ram.
 
 // Allow WR to entire 512KB memory window
 //assign Write_GPU_RAM  =  mem_window && Z80_mreq && Z80_write;   // Define a GPU Write action - only write to address within GPU RAM bounds
 // Allow RD of entire 512KB memory window
-assign Read_GPU_RAM   =  mem_window && Z80_mreq && Z80_read;   	// Define the beginning of a Z80 read request of GPU Ram.
+assign Read_GPU_RAM  =  mem_window && Z80_mreq && Z80_read;   	// Define the beginning of a Z80 read request of GPU Ram.
 
 // **********************************************************************************************************
 
-always @ (posedge GPU_CLK) begin
+always @(posedge GPU_CLK) begin
 
    gpu_addr             <=  Z80_addr[18:0];                       // Latch address bus onto GPU address bus
    mem_valid_range      <= (Z80_addr[18:0]  <  2**MEM_SIZE_BITS); // Define GPU addressable memory space
@@ -144,17 +163,13 @@ always @ (posedge GPU_CLK) begin
          
          Z80_rData[7:0] <= gpu_rData[7:0];  // Latch the GPU RAM read into the output register for the Z80
          
+      end else if (BANK_RESPONSE && bank_id_access) begin
+         
+         Z80_rData[7:0] <= BANK_ID[Z80_addr[3:0]]; // Return the appropriate value
+         
       end else begin
          
-         if (BANK_RESPONSE && bank_id_access) begin
-            
-            Z80_rData[7:0] <= BANK_ID[Z80_addr[3:0]]; // Return the appropriate value
-            
-         end else begin
-            
-            Z80_rData[7:0] <= 8'b11111111;   // return $FF if addressed byte is outside the GPU's upper RAM limit
-            
-         end
+         Z80_rData[7:0] <= 8'b11111111;   // return $FF if addressed byte is outside the GPU's upper RAM limit
          
       end
       
@@ -186,15 +201,24 @@ always @ (posedge GPU_CLK) begin
    if (PS2_READY) begin       // valid data on PS2_DAT
       
       PS2_CHAR          <= PS2_DAT; 	// Latch the character into Ps2_char register
-      
-      // Check IEI here to make sure we can request an interrupt
+		PS2_STAT				<= 2'h01;		// Set PS2_STAT to show valid data is available
       
       if (INT_TYP) begin
-         Z80_INT_REQ    <= 1'b1;   		// Fire off an INTerrupt REQuest
-         Z80_IEO        <= 1'b1;   		// Pull IEO LOW to prevent anything downstream from requesting interrupts
-      end
-      
+			
+			IIR_flag			<= 1'b1;			// Set internal interrupt request flag
+			Z80_IEO        <= 1'b1;   		// Pull IEO LOW to prevent anything downstream from requesting interrupts
+			
+		end
+		
    end
+	
+	// *** REQUEST INTERRUPT WHEN IEI, IIR_flag AND INT_TYP ARE HIGH
+	if (INT_TYP && IIR_flag && Z80_IEI) begin
+		
+		IIR_flag				<= 1'b0;				// Reset internal interrupt flag
+		Z80_INT_REQ   		<= 1'b1;   			// Fire off an INTerrupt REQuest
+		
+	end
    
    // *** START of IO cycle requesting PS2_CHAR byte
    if (IO_DATA_ST) begin
@@ -214,19 +238,45 @@ always @ (posedge GPU_CLK) begin
       
    end
    
-   // *** END of IO cycle
+   // *** END of PS2_CHAR IO cycle
    if (IO_DATA_EX) begin
       
       Z80_245data_dir   <= 1'b1;       // Set 245 dir toward FPGA
       Z80_rData_ena     <= 1'b0;       // Re-set bidir pins to input
       PS2_CHAR          <= 8'b0;       // Reset PS_CHAR value
+		PS2_STAT          <= 8'b0;       // Reset PS_STAT value
+      
+   end
+	
+	// *** START of IO cycle requesting PS2_STATUS
+   if (IO_STAT_ST) begin
+      
+      Z80_245data_dir   <= 1'b0;       // Set 245 DIR TO Z80
+      Z80_245_oe        <= 1'b0;       // Enable 245 output
+      Z80_rData_ena     <= 1'b1;       // Set bidir pins to output
+      IO_245_DLY[0]     <= 1'b1;       // Start delay timer before putting data on bus
+      
+   end
+   
+   // *** RESPONDING TO IO READ FOR PS2_STATUS
+   if (IO_STAT_RL) begin
+      
+      Z80_rData[7:0]    <= PS2_STAT;   // Put PS2_STAT onto data bus after delay to allow 245 to get itself sorted
+      
+   end
+   
+   // *** END of PS2_STATUS IO cycle
+   if (IO_STAT_EX) begin
+      
+      Z80_245data_dir   <= 1'b1;       // Set 245 dir toward FPGA
+      Z80_rData_ena     <= 1'b0;       // Re-set bidir pins to input
       
    end
    
    //
    // *** IF NO INTERRUPT, MEMORY OR IO READ OPERATIONS ARE ONGOING, ENFORCE DATA BUS DEFAULTS ***
    //
-   if (~Z80_INT_REQ && ~Read_GPU_RAM && ~IO_DATA_RQ) begin
+   if (~Z80_INT_REQ && ~Read_GPU_RAM && ~IO_DATA_RQ && ~IO_STAT_RQ) begin
       
       Z80_245data_dir   <= 1'b1;       // Set 245 dir toward FPGA
       Z80_rData_ena     <= 1'b0;       // Re-set bidir pins to input

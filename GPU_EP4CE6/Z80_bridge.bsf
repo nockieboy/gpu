@@ -252,6 +252,16 @@ refer to the applicable agreement for further details.
 		"240"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IO_STAT"
+		"241"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"KEY_DELAY"
+		"1250000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 224 320)(line_width 1))
 	)

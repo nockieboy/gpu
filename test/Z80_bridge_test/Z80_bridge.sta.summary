@@ -2,40 +2,40 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow 1200mV 85C Model Setup 'g_clk'
-Slack : -1.686
-TNS   : -47.462
+Type  : Slow 1200mV 85C Model Setup 'gpu_clk'
+Slack : -2.517
+TNS   : -41.194
 
-Type  : Slow 1200mV 85C Model Hold 'g_clk'
-Slack : 0.433
+Type  : Slow 1200mV 85C Model Hold 'gpu_clk'
+Slack : 0.432
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'g_clk'
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'gpu_clk'
 Slack : -3.000
-TNS   : -74.376
+TNS   : -44.636
 
-Type  : Slow 1200mV 0C Model Setup 'g_clk'
-Slack : -1.552
-TNS   : -42.482
+Type  : Slow 1200mV 0C Model Setup 'gpu_clk'
+Slack : -2.308
+TNS   : -36.850
 
-Type  : Slow 1200mV 0C Model Hold 'g_clk'
-Slack : 0.382
+Type  : Slow 1200mV 0C Model Hold 'gpu_clk'
+Slack : 0.381
 TNS   : 0.000
 
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'g_clk'
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'gpu_clk'
 Slack : -3.000
-TNS   : -74.376
+TNS   : -44.636
 
-Type  : Fast 1200mV 0C Model Setup 'g_clk'
-Slack : -0.189
-TNS   : -2.686
+Type  : Fast 1200mV 0C Model Setup 'gpu_clk'
+Slack : -0.469
+TNS   : -7.081
 
-Type  : Fast 1200mV 0C Model Hold 'g_clk'
-Slack : 0.166
+Type  : Fast 1200mV 0C Model Hold 'gpu_clk'
+Slack : 0.167
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'g_clk'
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'gpu_clk'
 Slack : -3.000
-TNS   : -53.939
+TNS   : -32.708
 
 ------------------------------------------------------------

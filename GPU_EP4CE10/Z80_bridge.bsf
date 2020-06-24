@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 256 288)
+	(rect 16 16 256 352)
 	(text "Z80_bridge" (rect 5 0 51 12)(font "Arial" ))
-	(text "inst" (rect 8 256 20 268)(font "Arial" ))
+	(text "inst" (rect 8 320 20 332)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -115,6 +115,34 @@ refer to the applicable agreement for further details.
 		(line (pt 0 224)(pt 16 224)(line_width 1))
 	)
 	(port
+		(pt 0 240)
+		(input)
+		(text "PS2_RDY" (rect 0 0 44 12)(font "Arial" ))
+		(text "PS2_RDY" (rect 21 235 65 247)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240)(line_width 1))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "PS2_DAT[7..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "PS2_DAT[7..0]" (rect 21 251 84 263)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256)(line_width 3))
+	)
+	(port
+		(pt 0 272)
+		(input)
+		(text "Z80_IORQn" (rect 0 0 51 12)(font "Arial" ))
+		(text "Z80_IORQn" (rect 21 267 72 279)(font "Arial" ))
+		(line (pt 0 272)(pt 16 272)(line_width 1))
+	)
+	(port
+		(pt 0 288)
+		(input)
+		(text "Z80_IEI" (rect 0 0 34 12)(font "Arial" ))
+		(text "Z80_IEI" (rect 21 283 55 295)(font "Arial" ))
+		(line (pt 0 288)(pt 16 288)(line_width 1))
+	)
+	(port
 		(pt 240 32)
 		(output)
 		(text "Z80_245data_dir" (rect 0 0 69 12)(font "Arial" ))
@@ -170,6 +198,48 @@ refer to the applicable agreement for further details.
 		(text "gpu_wdata[7..0]" (rect 157 139 219 151)(font "Arial" ))
 		(line (pt 240 144)(pt 224 144)(line_width 3))
 	)
+	(port
+		(pt 240 160)
+		(output)
+		(text "Z80_INT_REQ" (rect 0 0 66 12)(font "Arial" ))
+		(text "Z80_INT_REQ" (rect 153 155 219 167)(font "Arial" ))
+		(line (pt 240 160)(pt 224 160)(line_width 1))
+	)
+	(port
+		(pt 240 176)
+		(output)
+		(text "Z80_IEO" (rect 0 0 38 12)(font "Arial" ))
+		(text "Z80_IEO" (rect 181 171 219 183)(font "Arial" ))
+		(line (pt 240 176)(pt 224 176)(line_width 1))
+	)
+	(port
+		(pt 240 192)
+		(output)
+		(text "EA_DIR" (rect 0 0 38 12)(font "Arial" ))
+		(text "EA_DIR" (rect 181 187 219 199)(font "Arial" ))
+		(line (pt 240 192)(pt 224 192)(line_width 1))
+	)
+	(port
+		(pt 240 208)
+		(output)
+		(text "EA_OE" (rect 0 0 35 12)(font "Arial" ))
+		(text "EA_OE" (rect 184 203 219 215)(font "Arial" ))
+		(line (pt 240 208)(pt 224 208)(line_width 1))
+	)
+	(port
+		(pt 240 224)
+		(output)
+		(text "SPKR_EN" (rect 0 0 47 12)(font "Arial" ))
+		(text "SPKR_EN" (rect 172 219 219 231)(font "Arial" ))
+		(line (pt 240 224)(pt 224 224)(line_width 1))
+	)
+	(port
+		(pt 240 240)
+		(output)
+		(text "VIDEO_EN" (rect 0 0 51 12)(font "Arial" ))
+		(text "VIDEO_EN" (rect 168 235 219 247)(font "Arial" ))
+		(line (pt 240 240)(pt 224 240)(line_width 1))
+	)
 	(parameter
 		"MEMORY_RANGE"
 		"010"
@@ -180,8 +250,63 @@ refer to the applicable agreement for further details.
 		"15"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"BANK_RESPONSE"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"BANK_ID_ADDR"
+		"10111111111111111"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"BANK_ID"
+		"A(9,3,71,80,85,32,69,80,52,67,69,54,0,255,255,255)"
+		""
+		(type "PARAMETER_UNKNOWN")	)
+	(parameter
+		"INT_TYP"
+		"0"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"INT_VEC"
+		"00110000"
+		""
+		(type "PARAMETER_SIGNED_BIN")	)
+	(parameter
+		"IO_DATA"
+		"240"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IO_STAT"
+		"241"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IO_SPKR"
+		"242"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IO_BLNK"
+		"243"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"data_in"
+		"0"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"data_out"
+		"1"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
-		(rectangle (rect 16 16 224 256)(line_width 1))
+		(rectangle (rect 16 16 224 320)(line_width 1))
 	)
 	(annotation_block (parameter)(rect 256 -64 356 16))
 )

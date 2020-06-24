@@ -98,7 +98,7 @@ GND                          : 27        : gnd    :                   :         
 245_OE                       : 28        : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 245_DIR                      : 30        : output : 3.3-V LVTTL       :         : 2         : Y              
-IEO                          : 31        : output : 3.3-V LVTTL       :         : 2         : N              
+RESERVED_INPUT               : 31        :        :                   :         : 2         :                
 RESERVED_INPUT               : 32        :        :                   :         : 2         :                
 RESERVED_INPUT               : 33        :        :                   :         : 2         :                
 RESERVED_INPUT               : 34        :        :                   :         : 2         :                
@@ -127,12 +127,12 @@ VCCIO4                       : 56        : power  :                   : 3.3V    
 GND                          : 57        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 58        :        :                   :         : 4         :                
 RESERVED_INPUT               : 59        :        :                   :         : 4         :                
-RESERVED_INPUT               : 60        :        :                   :         : 4         :                
+vde                          : 60        : output : 3.3-V LVTTL       :         : 4         : N              
 VCCINT                       : 61        : power  :                   : 1.2V    :           :                
 VCCIO4                       : 62        : power  :                   : 3.3V    : 4         :                
 GND                          : 63        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 64        :        :                   :         : 4         :                
-vde                          : 65        : output : 3.3-V LVTTL       :         : 4         : N              
+IEO                          : 64        : output : 3.3-V LVTTL       :         : 4         : N              
+LED_txd                      : 65        : output : 3.3-V LVTTL       :         : 4         : N              
 b[0]                         : 66        : output : 3.3-V LVTTL       :         : 4         : Y              
 b[1]                         : 67        : output : 3.3-V LVTTL       :         : 4         : Y              
 b[2]                         : 68        : output : 3.3-V LVTTL       :         : 4         : Y              
@@ -177,8 +177,8 @@ Z80_ADDR[11]                 : 106       : input  : 3.3-V LVTTL       :         
 VCCA2                        : 107       : power  :                   : 2.5V    :           :                
 GNDA2                        : 108       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                
-LED_rdx                      : 110       : output : 3.3-V LVTTL       :         : 7         : N              
-LED_txd                      : 111       : output : 3.3-V LVTTL       :         : 7         : N              
+IEI                          : 110       : input  : 3.3-V LVTTL       :         : 7         : N              
+LED_rdx                      : 111       : output : 3.3-V LVTTL       :         : 7         : N              
 Z80_ADDR[0]                  : 112       : input  : 3.3-V LVTTL       :         : 7         : Y              
 Z80_ADDR[1]                  : 113       : input  : 3.3-V LVTTL       :         : 7         : Y              
 Z80_ADDR[2]                  : 114       : input  : 3.3-V LVTTL       :         : 7         : Y              
@@ -203,7 +203,7 @@ Z80_ADDR[19]                 : 132       : input  : 3.3-V LVTTL       :         
 Z80_ADDR[20]                 : 133       : input  : 3.3-V LVTTL       :         : 8         : Y              
 VCCINT                       : 134       : power  :                   : 1.2V    :           :                
 Z80_ADDR[21]                 : 135       : input  : 3.3-V LVTTL       :         : 8         : Y              
-IEI                          : 136       : input  : 3.3-V LVTTL       :         : 8         : N              
+RESERVED_INPUT               : 136       :        :                   :         : 8         :                
 Z80_M1                       : 137       : input  : 3.3-V LVTTL       :         : 8         : Y              
 Z80_RD                       : 138       : input  : 3.3-V LVTTL       :         : 8         : Y              
 VCCIO8                       : 139       : power  :                   : 3.3V    : 8         :                

@@ -1,0 +1,5 @@
+From time to time I need to convert a binary ROM file (bios or cartridge data) to a format which the Altera Quartus Suite can understand. It can be in hex, but the Memory Initialization File (MIF) format by Altera is as good as any and a binary file can be converted to a MIF using the command below.
+
+Note the byte-swap filter to reverse the byte-order - this counters the reversal that occurs during the translation to MIF format.
+
+srec_cat <input file> -binary -o -byte-swap <output file>.mif -mif

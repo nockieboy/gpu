@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Z80_bridge
-Mon Nov 25 23:03:50 2019
+Tue Jun 23 15:18:04 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -18,6 +18,7 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
  10. Multiplexer Restructuring Statistics (Restructuring Performed)
  11. Parameter Settings for User Entity Instance: Z80_bridge:inst
  12. Analysis & Synthesis Messages
+ 13. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -43,16 +44,16 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Nov 25 23:03:50 2019        ;
+; Analysis & Synthesis Status        ; Successful - Tue Jun 23 15:18:04 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; Z80_bridge                                   ;
 ; Top-level Entity Name              ; Block1                                       ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 55                                           ;
-;     Total combinational functions  ; 13                                           ;
-;     Dedicated logic registers      ; 48                                           ;
-; Total registers                    ; 48                                           ;
-; Total pins                         ; 87                                           ;
+; Total logic elements               ; 49                                           ;
+;     Total combinational functions  ; 36                                           ;
+;     Dedicated logic registers      ; 28                                           ;
+; Total registers                    ; 28                                           ;
+; Total pins                         ; 49                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0                                            ;
 ; Embedded Multiplier 9-bit elements ; 0                                            ;
@@ -152,43 +153,43 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                   ;
-+----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                   ;
-+----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------+
-; Block1.bdf                       ; yes             ; User Block Diagram/Schematic File  ; G:/fpga/Quartus Projects/GPU/test/Z80_bridge_test/Block1.bdf   ;
-; Z80_bridge.v                     ; yes             ; User Verilog HDL File              ; G:/fpga/Quartus Projects/GPU/test/Z80_bridge_test/Z80_bridge.v ;
-+----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                            ;
++----------------------------------+-----------------+------------------------------------+---------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                            ;
++----------------------------------+-----------------+------------------------------------+---------------------------------------------------------+
+; Block1.bdf                       ; yes             ; User Block Diagram/Schematic File  ; G:/fpga/Projects/GPU/test/Z80_bridge_test/Block1.bdf    ;
+; Z80_bridge.sv                    ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Projects/GPU/test/Z80_bridge_test/Z80_bridge.sv ;
++----------------------------------+-----------------+------------------------------------+---------------------------------------------------------+
 
 
-+-----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary               ;
-+---------------------------------------------+-------------+
-; Resource                                    ; Usage       ;
-+---------------------------------------------+-------------+
-; Estimated Total logic elements              ; 55          ;
-;                                             ;             ;
-; Total combinational functions               ; 13          ;
-; Logic element usage by number of LUT inputs ;             ;
-;     -- 4 input functions                    ; 5           ;
-;     -- 3 input functions                    ; 7           ;
-;     -- <=2 input functions                  ; 1           ;
-;                                             ;             ;
-; Logic elements by mode                      ;             ;
-;     -- normal mode                          ; 13          ;
-;     -- arithmetic mode                      ; 0           ;
-;                                             ;             ;
-; Total registers                             ; 48          ;
-;     -- Dedicated logic registers            ; 48          ;
-;     -- I/O registers                        ; 0           ;
-;                                             ;             ;
-; I/O pins                                    ; 87          ;
-; Maximum fan-out node                        ; g_clk~input ;
-; Maximum fan-out                             ; 48          ;
-; Total fan-out                               ; 325         ;
-; Average fan-out                             ; 1.34        ;
-+---------------------------------------------+-------------+
++-------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                 ;
++---------------------------------------------+---------------+
+; Resource                                    ; Usage         ;
++---------------------------------------------+---------------+
+; Estimated Total logic elements              ; 49            ;
+;                                             ;               ;
+; Total combinational functions               ; 36            ;
+; Logic element usage by number of LUT inputs ;               ;
+;     -- 4 input functions                    ; 29            ;
+;     -- 3 input functions                    ; 2             ;
+;     -- <=2 input functions                  ; 5             ;
+;                                             ;               ;
+; Logic elements by mode                      ;               ;
+;     -- normal mode                          ; 36            ;
+;     -- arithmetic mode                      ; 0             ;
+;                                             ;               ;
+; Total registers                             ; 28            ;
+;     -- Dedicated logic registers            ; 28            ;
+;     -- I/O registers                        ; 0             ;
+;                                             ;               ;
+; I/O pins                                    ; 49            ;
+; Maximum fan-out node                        ; gpu_clk~input ;
+; Maximum fan-out                             ; 28            ;
+; Total fan-out                               ; 271           ;
+; Average fan-out                             ; 1.67          ;
++---------------------------------------------+---------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -196,20 +197,22 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name     ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------+--------------+
-; |Block1                    ; 13 (0)            ; 48 (0)       ; 0           ; 0            ; 0       ; 0         ; 87   ; 0            ; |Block1                 ; work         ;
-;    |Z80_bridge:inst|       ; 13 (13)           ; 48 (48)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Block1|Z80_bridge:inst ;              ;
+; |Block1                    ; 36 (0)            ; 28 (0)       ; 0           ; 0            ; 0       ; 0         ; 49   ; 0            ; |Block1                 ; work         ;
+;    |Z80_bridge:inst|       ; 36 (36)           ; 28 (28)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Block1|Z80_bridge:inst ;              ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+--------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                             ;
-+---------------------------------------+----------------------------------------+
-; Register name                         ; Reason for Removal                     ;
-+---------------------------------------+----------------------------------------+
-; Z80_bridge:inst|gpu_addr[19]          ; Stuck at GND due to stuck port data_in ;
-; Total Number of Removed Registers = 1 ;                                        ;
-+---------------------------------------+----------------------------------------+
++-----------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                ;
++---------------------------------------+-------------------------------------------+
+; Register name                         ; Reason for Removal                        ;
++---------------------------------------+-------------------------------------------+
+; Z80_bridge:inst|Z80_245data_dir       ; Merged with Z80_bridge:inst|Z80_rData_ena ;
+; Z80_bridge:inst|Z80_INT_REQ           ; Stuck at GND due to stuck port data_in    ;
+; Z80_bridge:inst|Z80_245_oe            ; Stuck at GND due to stuck port data_in    ;
+; Total Number of Removed Registers = 3 ;                                           ;
++---------------------------------------+-------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -217,33 +220,43 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 48    ;
+; Total registers                              ; 28    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 35    ;
+; Number of registers using Clock Enable       ; 16    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------+
-; 3:1                ; 19 bits   ; 38 LEs        ; 0 LEs                ; 38 LEs                 ; Yes        ; |Block1|Z80_bridge:inst|gpu_addr[18] ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |Block1|Z80_bridge:inst|Z80_rData[7]~reg0 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
 
 
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Z80_bridge:inst ;
-+----------------+-------+-------------------------------------+
-; Parameter Name ; Value ; Type                                ;
-+----------------+-------+-------------------------------------+
-; MEMORY_RANGE   ; 011   ; Unsigned Binary                     ;
-; DELAY_CYCLES   ; 2     ; Signed Integer                      ;
-+----------------+-------+-------------------------------------+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Z80_bridge:inst                          ;
++----------------+----------------------------------------------------+-----------------+
+; Parameter Name ; Value                                              ; Type            ;
++----------------+----------------------------------------------------+-----------------+
+; MEMORY_RANGE   ; 010                                                ; Unsigned Binary ;
+; MEM_SIZE_BITS  ; 15                                                 ; Signed Integer  ;
+; BANK_RESPONSE  ; 1                                                  ; Signed Integer  ;
+; BANK_ID_ADDR   ; 10111111111111111                                  ; Unsigned Binary ;
+; BANK_ID        ; A(9,3,71,80,85,32,69,80,52,67,69,54,0,255,255,255) ; Untyped         ;
+; INT_TYP        ; 0                                                  ; Signed Integer  ;
+; INT_VEC        ; 00110000                                           ; Signed Binary   ;
+; IO_DATA        ; 240                                                ; Signed Integer  ;
+; IO_SPKR        ; 242                                                ; Signed Integer  ;
+; IO_BLNK        ; 243                                                ; Signed Integer  ;
+; data_in        ; 0                                                  ; Unsigned Binary ;
+; data_out       ; 1                                                  ; Unsigned Binary ;
++----------------+----------------------------------------------------+-----------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -253,31 +266,50 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Nov 25 23:03:49 2019
+    Info: Processing started: Tue Jun 23 15:18:02 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Z80_bridge -c Z80_bridge
 Info: Found 1 design units, including 1 entities, in source file block1.bdf
     Info: Found entity 1: Block1
-Info: Found 1 design units, including 1 entities, in source file z80_bridge.v
+Warning (10229): Verilog HDL Expression warning at Z80_bridge.sv(251): truncated literal to match 2 bits
+Info: Found 1 design units, including 1 entities, in source file z80_bridge.sv
     Info: Found entity 1: Z80_bridge
 Info: Elaborating entity "Block1" for the top level hierarchy
 Info: Elaborating entity "Z80_bridge" for hierarchy "Z80_bridge:inst"
-Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.v(33): object "Z80_read" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.v(33): object "Z80_nRead" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.v(33): object "GPU_data_oe" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.sv(68): object "Z80_clk_delay" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.sv(74): object "last_Z80_WR3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.sv(76): object "last_Z80_RD3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.sv(120): object "PS2_CHAR" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at Z80_bridge.sv(125): object "IO_STAT_prev" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at Z80_bridge.sv(247): truncated value with size 32 to match size of target (8)
 Warning: Output pins are stuck at VCC or GND
-    Warning (13410): Pin "g_adr[19]" is stuck at GND
+    Warning (13410): Pin "z80_OE_EN" is stuck at GND
 Info: Timing-Driven Synthesis is running
-Warning: Design contains 1 input pin(s) that do not drive logic
+Info: Generated suppressed messages file G:/fpga/Projects/GPU/test/Z80_bridge_test/Z80_bridge.map.smsg
+Warning: Design contains 10 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "rst"
-Info: Implemented 142 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "z80_clk"
+    Warning (15610): No output dependent on input pin "z80_wDATA[7]"
+    Warning (15610): No output dependent on input pin "z80_wDATA[6]"
+    Warning (15610): No output dependent on input pin "z80_wDATA[5]"
+    Warning (15610): No output dependent on input pin "z80_wDATA[4]"
+    Warning (15610): No output dependent on input pin "z80_wDATA[3]"
+    Warning (15610): No output dependent on input pin "z80_wDATA[2]"
+    Warning (15610): No output dependent on input pin "z80_wDATA[1]"
+    Warning (15610): No output dependent on input pin "z80_wDATA[0]"
+Info: Implemented 101 device resources after synthesis - the final resource count might be different
     Info: Implemented 38 input pins
-    Info: Implemented 41 output pins
-    Info: Implemented 8 bidirectional pins
-    Info: Implemented 55 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 227 megabytes
-    Info: Processing ended: Mon Nov 25 23:03:50 2019
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Implemented 11 output pins
+    Info: Implemented 52 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 20 warnings
+    Info: Peak virtual memory: 220 megabytes
+    Info: Processing ended: Tue Jun 23 15:18:04 2020
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in G:/fpga/Projects/GPU/test/Z80_bridge_test/Z80_bridge.map.smsg.
 
 

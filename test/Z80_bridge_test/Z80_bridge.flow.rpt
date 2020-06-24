@@ -1,5 +1,5 @@
 Flow report for Z80_bridge
-Mon Nov 25 23:04:02 2019
+Tue Jun 23 15:18:14 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Mon Nov 25 23:04:00 2019        ;
+; Flow Status                        ; Successful - Tue Jun 23 15:18:13 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; Z80_bridge                                   ;
 ; Top-level Entity Name              ; Block1                                       ;
@@ -46,11 +46,11 @@ applicable agreement for further details.
 ; Device                             ; EP3C5F256C8                                  ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; N/A                                          ;
-; Total logic elements               ; 51 / 5,136 ( < 1 % )                         ;
-;     Total combinational functions  ; 13 / 5,136 ( < 1 % )                         ;
-;     Dedicated logic registers      ; 48 / 5,136 ( < 1 % )                         ;
-; Total registers                    ; 48                                           ;
-; Total pins                         ; 87 / 183 ( 48 % )                            ;
+; Total logic elements               ; 48 / 5,136 ( < 1 % )                         ;
+;     Total combinational functions  ; 36 / 5,136 ( < 1 % )                         ;
+;     Dedicated logic registers      ; 28 / 5,136 ( < 1 % )                         ;
+; Total registers                    ; 28                                           ;
+; Total pins                         ; 49 / 183 ( 27 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0 / 423,936 ( 0 % )                          ;
 ; Embedded Multiplier 9-bit elements ; 0 / 46 ( 0 % )                               ;
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/25/2019 23:03:49 ;
+; Start date & time ; 06/23/2020 15:18:03 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Z80_bridge          ;
 +-------------------+---------------------+
@@ -74,7 +74,7 @@ applicable agreement for further details.
 +------------------------------------+---------------------------------+---------------+-------------+----------------+
 ; Assignment Name                    ; Value                           ; Default Value ; Entity Name ; Section Id     ;
 +------------------------------------+---------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID              ; 213398122494286.157472302916504 ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID              ; 213398122494286.159292188311484 ; --            ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP             ; 85                              ; --            ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP             ; 0                               ; --            ; --          ; --             ;
 ; NOMINAL_CORE_SUPPLY_VOLTAGE        ; 1.2V                            ; --            ; --          ; --             ;
@@ -90,11 +90,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:01     ; 1.0                     ; 227 MB              ; 00:00:03                           ;
-; Fitter                    ; 00:00:06     ; 1.0                     ; 274 MB              ; 00:00:08                           ;
-; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 244 MB              ; 00:00:03                           ;
-; Assembler                 ; 00:00:01     ; 1.0                     ; 215 MB              ; 00:00:01                           ;
-; Total                     ; 00:00:10     ; --                      ; --                  ; 00:00:14                           ;
+; Analysis & Synthesis      ; 00:00:02     ; 1.0                     ; 220 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:05     ; 1.0                     ; 267 MB              ; 00:00:06                           ;
+; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 237 MB              ; 00:00:03                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 207 MB              ; 00:00:01                           ;
+; Total                     ; 00:00:10     ; --                      ; --                  ; 00:00:11                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

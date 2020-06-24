@@ -52,19 +52,19 @@ module vid_out_stencil(
 
 				hde_out <= hde_in;             // since the video muting switch algorithm delays the output by 1 pixel clock,
 				vde_out <= vde_in;             // all the video timing reference signals will also get the 1 pixel delay treatment to keep the output aligned perfectly.
-				hs_out  <= hs_in ^ HS_invert[0] ; // the invert feature is only for this video output module
-				vs_out  <= vs_in ^ VS_invert[0] ; // the invert feature is only for this video output module
+				hs_out  <= hs_in ^ HS_invert[0]; // the invert feature is only for this video output module
+				vs_out  <= vs_in ^ VS_invert[0]; // the invert feature is only for this video output module
 
 				if ( hde_in && vde_in )
 				begin
-					vid_de_out <= 1'b1 ; // turn on video enable for DVI transmitters
+					vid_de_out <= 1'b1;  // turn on video enable for DVI transmitters
 					r_out <= r_in;			// copy video input to output
 					g_out <= g_in;			// copy video input to output
 					b_out <= b_in;			// copy video input to output
 				end
 				else
 				begin
-					vid_de_out <= 1'b0 ; // turn off video enable for DVI transmitters
+					vid_de_out <= 1'b0;  // turn off video enable for DVI transmitters
 					r_out <= 0;				// Mute video output to black
 					g_out <= 0;				// Mute video output to black
 					b_out <= 0;				// Mute video output to black

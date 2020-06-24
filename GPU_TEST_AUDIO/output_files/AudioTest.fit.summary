@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sat Jun 13 18:40:44 2020
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : AudioTest
+Top-level Entity Name : AudioTest
+Family : Cyclone IV E
+Device : EP4CE10E22C8
+Timing Models : Final
+Total logic elements : 130 / 10,320 ( 1 % )
+    Total combinational functions : 129 / 10,320 ( 1 % )
+    Dedicated logic registers : 65 / 10,320 ( < 1 % )
+Total registers : 65
+Total pins : 4 / 92 ( 4 % )
+Total virtual pins : 0
+Total memory bits : 2,048 / 423,936 ( < 1 % )
+Embedded Multiplier 9-bit elements : 0 / 46 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

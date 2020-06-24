@@ -19,8 +19,6 @@ module GPU_HW_Control_Regs (
 	parameter int RST_VALUES3[32] = '{128,16,0,0,18,0,0,80,2,127,1,223,0,240,0,0,72,0,15,0,2,0,0,0,0,0,0,0,0,1,0,0};
 	parameter int RST_VALUES4[32] = '{132,16,0,0,27,96,0,80,1,63,0,239,1,241,0,0,76,0,15,0,2,0,0,0,0,0,0,0,0,1,0,0};
 	parameter int RST_VALUES5[32] = '{26,16,0,0,51,0,0,96,0,191,0,119,0,0,0,0,26,112,0,0,51,0,0,96,0,191,0,119,1,1,0,0};
-	parameter int RST_VALUES6[32] = '{10,176,0,0,51,10,0,96,0,191,0,119,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-
 	
 	wire enable,valid_wr;
 	
@@ -58,16 +56,9 @@ module GPU_HW_Control_Regs (
 			for (i = 0; i < 32; i = i + 1) begin
 				GPU_HW_Control_regs[i+x*32] <= RST_VALUES5[i][7:0];
 			end
-			x=6;
-			for (i = 0; i < 32; i = i + 1) begin
-				GPU_HW_Control_regs[i+x*32] <= RST_VALUES6[i][7:0];
-			end
-
-
-
 			
 			// reset remaining registers to zero
-			for (i = 32*7; i < 2**HW_REGS_SIZE; i = i + 1) begin
+			for (i = 32*6; i < 2**HW_REGS_SIZE; i = i + 1) begin
 				GPU_HW_Control_regs[i] <= 8'h0;
 			end
 			
@@ -85,8 +76,10 @@ module GPU_HW_Control_Regs (
 		end
 		
 		if (enable) begin
-					 data_out <= GPU_HW_Control_regs[addr_in[HW_REGS_SIZE-1:0]];
-			end else data_out <= 0;
+		
+			data_out <= GPU_HW_Control_regs[addr_in[HW_REGS_SIZE-1:0]];
+			
+		end else data_out <= 0;
 		
 	end
 
