@@ -12,8 +12,9 @@ module vid_osd_generator (
    input wire host_clk,
    input wire host_wr_ena,
    input wire [19:0] host_addr,
-   input wire [7:0] host_wr_data,
-   input wire [7:0] GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
+   input wire [15:0] host_wr_data,
+	input wire        ena_host_16bit,
+   input wire [7:0]  GPU_HW_Control_regs[0:(2**HW_REGS_SIZE-1)],
    input wire [47:0] HV_triggers_in,
    
    // outputs
@@ -21,11 +22,11 @@ module vid_osd_generator (
    output reg vde_out,
    output reg hs_out,
    output reg vs_out,
-   output wire [7:0] red,
-   output wire [7:0] green,
-   output wire [7:0] blue,
-   output wire [7:0] host_rd_data,
-   output reg [47:0] HV_triggers_out
+   output wire [7:0]  red,
+   output wire [7:0]  green,
+   output wire [7:0]  blue,
+   output wire [15:0] host_rd_data,
+   output reg  [47:0] HV_triggers_out
 );
 
 reg [PIPE_DELAY:0] hde_pipe, vde_pipe, hs_pipe, vs_pipe;
@@ -40,8 +41,9 @@ parameter PALETTE_ADDR  = (2 ** ADDR_SIZE) - 1024 ;   // Base address where host
 parameter GPU_RAM_MIF   = "GPU_MIF.mif" ; // MIF file for the main GPU ram.
 
 
-wire   [7:0] host_rd_data_main,host_rd_data_pal;
-assign       host_rd_data = host_rd_data_main | host_rd_data_pal; // merge the read data outputs of all internal rams.
+wire   [15:0] host_rd_data_main,host_rd_data_pal;
+assign        host_rd_data_pal[15:8] = 8'd0;
+assign        host_rd_data           = host_rd_data_main | host_rd_data_pal; // merge the read data outputs of all internal rams.
 
 wire [23:0] maggie_to_bp2r[14:0];
 wire [19:0] GPU_ram_addr_in[14:0];
@@ -81,10 +83,11 @@ sixteen_port_gpu_ram gpu_RAM(
    .cmd_out        ( GPU_ram_cmd_out   ),
    .data_out       ( GPU_ram_data_out  ),
    
-   .write_ena_host ( host_wr_ena            ),
-   .addr_host_in   ( host_addr[19:0]        ),
-   .data_host_in   ( host_wr_data[7:0]      ),
-   .data_host_out  ( host_rd_data_main[7:0] )
+   .write_ena_host ( host_wr_ena             ),
+   .ena_host_16bit ( ena_host_16bit          ),
+   .addr_host_in   ( host_addr[19:0]         ),
+   .data_host_in   ( host_wr_data[15:0]      ),
+   .data_host_out  ( host_rd_data_main[15:0] )
 );
 
 defparam gpu_RAM.ADDR_SIZE          = ADDR_SIZE,   // pass ADDR_SIZE into the gpu_RAM instance

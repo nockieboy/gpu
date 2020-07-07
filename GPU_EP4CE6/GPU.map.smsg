@@ -1,6 +1,0 @@
-Warning (10268): Verilog HDL information at vid_osd_generator.sv(194): always construct contains both blocking and non-blocking assignments File: G:/fpga/Projects/GPU/GPU_EP4CE6/vid_osd_generator.sv Line: 194
-Info (10281): Verilog HDL Declaration information at SYNC_RS232_UART.v(34): object "RX_PERIOD" differs only in case from object "rx_period" in the same scope File: G:/fpga/Projects/GPU/GPU_EP4CE6/SYNC_RS232_UART.v Line: 34
-Info (10281): Verilog HDL Declaration information at SYNC_RS232_UART.v(35): object "TX_PERIOD" differs only in case from object "tx_period" in the same scope File: G:/fpga/Projects/GPU/GPU_EP4CE6/SYNC_RS232_UART.v Line: 35
-Warning (10268): Verilog HDL information at palette_mixer.sv(78): always construct contains both blocking and non-blocking assignments File: G:/fpga/Projects/GPU/GPU_EP4CE6/palette_mixer.sv Line: 78
-Info (10281): Verilog HDL Declaration information at maggie.sv(12): object "hw_regs" differs only in case from object "HW_REGS" in the same scope File: G:/fpga/Projects/GPU/GPU_EP4CE6/maggie.sv Line: 12
-Warning (10268): Verilog HDL information at GPU_HW_Control_Regs.sv(32): always construct contains both blocking and non-blocking assignments File: G:/fpga/Projects/GPU/GPU_EP4CE6/GPU_HW_Control_Regs.sv Line: 32

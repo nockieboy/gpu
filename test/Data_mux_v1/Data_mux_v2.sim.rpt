@@ -1,0 +1,344 @@
+Simulator report for Data_mux_v2
+Thu Jul 02 22:56:26 2020
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ALTSYNCRAM
+  6. Coverage Summary
+  7. Complete 1/0-Value Coverage
+  8. Missing 1-Value Coverage
+  9. Missing 0-Value Coverage
+ 10. Simulator INI Usage
+ 11. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 2.0 us       ;
+; Simulation Netlist Size     ; 170 nodes    ;
+; Simulation Coverage         ;      77.18 % ;
+; Total Number of Transitions ; 2915         ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone III  ;
++-----------------------------+--------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                           ;
++--------------------------------------------------------------------------------------------+-----------------+---------------+
+; Option                                                                                     ; Setting         ; Default Value ;
++--------------------------------------------------------------------------------------------+-----------------+---------------+
+; Simulation mode                                                                            ; Functional      ; Timing        ;
+; Start time                                                                                 ; 0 ns            ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF            ;               ;
+; Vector input source                                                                        ; Data_mux_v2.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On              ; On            ;
+; Check outputs                                                                              ; Off             ; Off           ;
+; Report simulation coverage                                                                 ; On              ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On              ; On            ;
+; Display missing 1-value coverage report                                                    ; On              ; On            ;
+; Display missing 0-value coverage report                                                    ; On              ; On            ;
+; Detect setup and hold time violations                                                      ; Off             ; Off           ;
+; Detect glitches                                                                            ; Off             ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off             ; Off           ;
+; Generate Signal Activity File                                                              ; Off             ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off             ; Off           ;
+; Group bus channels in simulation results                                                   ; Off             ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On              ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE      ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off             ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off             ;               ;
+; Perform Glitch Filtering in Timing Simulation                                              ; Auto            ; Auto          ;
+; Interconnect Delay Model Type                                                              ; Transport       ; Transport     ;
+; Cell Delay Model Type                                                                      ; Transport       ; Transport     ;
++--------------------------------------------------------------------------------------------+-----------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++---------------------------------------------------------------------------------------------------+
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ALTSYNCRAM ;
++---------------------------------------------------------------------------------------------------+
+Please refer to fitter text-based report (*.fit.rpt) to view logical memory report content in ASCII.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      77.18 % ;
+; Total nodes checked                                 ; 170          ;
+; Total output ports checked                          ; 149          ;
+; Total output ports with complete 1/0-value coverage ; 115          ;
+; Total output ports with no 1/0-value coverage       ; 25           ;
+; Total output ports with no 1-value coverage         ; 29           ;
+; Total output ports with no 0-value coverage         ; 30           ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                                                                                                                            ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                           ; Output Port Name                                                                              ; Output Port Type ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+; |Top|rardy                                                                                          ; |Top|rardy                                                                                    ; pin_out          ;
+; |Top|clk                                                                                            ; |Top|clk                                                                                      ; out              ;
+; |Top|wa                                                                                             ; |Top|wa                                                                                       ; out              ;
+; |Top|ra                                                                                             ; |Top|ra                                                                                       ; out              ;
+; |Top|rb                                                                                             ; |Top|rb                                                                                       ; out              ;
+; |Top|aa[6]                                                                                          ; |Top|aa[6]                                                                                    ; out              ;
+; |Top|aa[5]                                                                                          ; |Top|aa[5]                                                                                    ; out              ;
+; |Top|aa[4]                                                                                          ; |Top|aa[4]                                                                                    ; out              ;
+; |Top|aa[2]                                                                                          ; |Top|aa[2]                                                                                    ; out              ;
+; |Top|aa[1]                                                                                          ; |Top|aa[1]                                                                                    ; out              ;
+; |Top|aa[0]                                                                                          ; |Top|aa[0]                                                                                    ; out              ;
+; |Top|ab[6]                                                                                          ; |Top|ab[6]                                                                                    ; out              ;
+; |Top|ab[4]                                                                                          ; |Top|ab[4]                                                                                    ; out              ;
+; |Top|ab[2]                                                                                          ; |Top|ab[2]                                                                                    ; out              ;
+; |Top|ab[0]                                                                                          ; |Top|ab[0]                                                                                    ; out              ;
+; |Top|daw[6]                                                                                         ; |Top|daw[6]                                                                                   ; out              ;
+; |Top|daw[5]                                                                                         ; |Top|daw[5]                                                                                   ; out              ;
+; |Top|daw[4]                                                                                         ; |Top|daw[4]                                                                                   ; out              ;
+; |Top|daw[3]                                                                                         ; |Top|daw[3]                                                                                   ; out              ;
+; |Top|daw[2]                                                                                         ; |Top|daw[2]                                                                                   ; out              ;
+; |Top|daw[1]                                                                                         ; |Top|daw[1]                                                                                   ; out              ;
+; |Top|daw[0]                                                                                         ; |Top|daw[0]                                                                                   ; out              ;
+; |Top|dbw[6]                                                                                         ; |Top|dbw[6]                                                                                   ; out              ;
+; |Top|dbw[5]                                                                                         ; |Top|dbw[5]                                                                                   ; out              ;
+; |Top|dbw[4]                                                                                         ; |Top|dbw[4]                                                                                   ; out              ;
+; |Top|dbw[3]                                                                                         ; |Top|dbw[3]                                                                                   ; out              ;
+; |Top|dbw[2]                                                                                         ; |Top|dbw[2]                                                                                   ; out              ;
+; |Top|dbw[1]                                                                                         ; |Top|dbw[1]                                                                                   ; out              ;
+; |Top|dbw[0]                                                                                         ; |Top|dbw[0]                                                                                   ; out              ;
+; |Top|gwr                                                                                            ; |Top|gwr                                                                                      ; pin_out          ;
+; |Top|gdi[6]                                                                                         ; |Top|gdi[6]                                                                                   ; pin_out          ;
+; |Top|gdi[5]                                                                                         ; |Top|gdi[5]                                                                                   ; pin_out          ;
+; |Top|gdi[4]                                                                                         ; |Top|gdi[4]                                                                                   ; pin_out          ;
+; |Top|gdi[3]                                                                                         ; |Top|gdi[3]                                                                                   ; pin_out          ;
+; |Top|gdi[2]                                                                                         ; |Top|gdi[2]                                                                                   ; pin_out          ;
+; |Top|gdi[1]                                                                                         ; |Top|gdi[1]                                                                                   ; pin_out          ;
+; |Top|gdi[0]                                                                                         ; |Top|gdi[0]                                                                                   ; pin_out          ;
+; |Top|ga[6]                                                                                          ; |Top|ga[6]                                                                                    ; pin_out          ;
+; |Top|ga[5]                                                                                          ; |Top|ga[5]                                                                                    ; pin_out          ;
+; |Top|ga[4]                                                                                          ; |Top|ga[4]                                                                                    ; pin_out          ;
+; |Top|ga[2]                                                                                          ; |Top|ga[2]                                                                                    ; pin_out          ;
+; |Top|ga[1]                                                                                          ; |Top|ga[1]                                                                                    ; pin_out          ;
+; |Top|ga[0]                                                                                          ; |Top|ga[0]                                                                                    ; pin_out          ;
+; |Top|rbrdy                                                                                          ; |Top|rbrdy                                                                                    ; pin_out          ;
+; |Top|dar[6]                                                                                         ; |Top|dar[6]                                                                                   ; pin_out          ;
+; |Top|dar[5]                                                                                         ; |Top|dar[5]                                                                                   ; pin_out          ;
+; |Top|dar[4]                                                                                         ; |Top|dar[4]                                                                                   ; pin_out          ;
+; |Top|dar[3]                                                                                         ; |Top|dar[3]                                                                                   ; pin_out          ;
+; |Top|dar[2]                                                                                         ; |Top|dar[2]                                                                                   ; pin_out          ;
+; |Top|dar[1]                                                                                         ; |Top|dar[1]                                                                                   ; pin_out          ;
+; |Top|dar[0]                                                                                         ; |Top|dar[0]                                                                                   ; pin_out          ;
+; |Top|dbr[6]                                                                                         ; |Top|dbr[6]                                                                                   ; pin_out          ;
+; |Top|dbr[5]                                                                                         ; |Top|dbr[5]                                                                                   ; pin_out          ;
+; |Top|dbr[4]                                                                                         ; |Top|dbr[4]                                                                                   ; pin_out          ;
+; |Top|dbr[3]                                                                                         ; |Top|dbr[3]                                                                                   ; pin_out          ;
+; |Top|dbr[2]                                                                                         ; |Top|dbr[2]                                                                                   ; pin_out          ;
+; |Top|dbr[1]                                                                                         ; |Top|dbr[1]                                                                                   ; pin_out          ;
+; |Top|dbr[0]                                                                                         ; |Top|dbr[0]                                                                                   ; pin_out          ;
+; |Top|grdo[6]                                                                                        ; |Top|grdo[6]                                                                                  ; pin_out          ;
+; |Top|grdo[5]                                                                                        ; |Top|grdo[5]                                                                                  ; pin_out          ;
+; |Top|grdo[4]                                                                                        ; |Top|grdo[4]                                                                                  ; pin_out          ;
+; |Top|grdo[3]                                                                                        ; |Top|grdo[3]                                                                                  ; pin_out          ;
+; |Top|grdo[2]                                                                                        ; |Top|grdo[2]                                                                                  ; pin_out          ;
+; |Top|grdo[1]                                                                                        ; |Top|grdo[1]                                                                                  ; pin_out          ;
+; |Top|grdo[0]                                                                                        ; |Top|grdo[0]                                                                                  ; pin_out          ;
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ram_block1a0 ; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|q_b[0] ; portbdataout0    ;
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ram_block1a1 ; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|q_b[1] ; portbdataout0    ;
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ram_block1a2 ; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|q_b[2] ; portbdataout0    ;
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ram_block1a3 ; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|q_b[3] ; portbdataout0    ;
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ram_block1a4 ; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|q_b[4] ; portbdataout0    ;
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ram_block1a5 ; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|q_b[5] ; portbdataout0    ;
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ram_block1a6 ; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|q_b[6] ; portbdataout0    ;
+; |Top|data_mux:inst|gpu_wr_ena~0                                                                     ; |Top|data_mux:inst|gpu_wr_ena~0                                                               ; out0             ;
+; |Top|data_mux:inst|gpu_wr_ena~2                                                                     ; |Top|data_mux:inst|gpu_wr_ena~2                                                               ; out              ;
+; |Top|data_mux:inst|gpu_address~13                                                                   ; |Top|data_mux:inst|gpu_address~13                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address~14                                                                   ; |Top|data_mux:inst|gpu_address~14                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address~15                                                                   ; |Top|data_mux:inst|gpu_address~15                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address~17                                                                   ; |Top|data_mux:inst|gpu_address~17                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address~18                                                                   ; |Top|data_mux:inst|gpu_address~18                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address~19                                                                   ; |Top|data_mux:inst|gpu_address~19                                                             ; out              ;
+; |Top|data_mux:inst|gpu_data_out~1                                                                   ; |Top|data_mux:inst|gpu_data_out~1                                                             ; out              ;
+; |Top|data_mux:inst|gpu_data_out~2                                                                   ; |Top|data_mux:inst|gpu_data_out~2                                                             ; out              ;
+; |Top|data_mux:inst|gpu_data_out~3                                                                   ; |Top|data_mux:inst|gpu_data_out~3                                                             ; out              ;
+; |Top|data_mux:inst|gpu_data_out~4                                                                   ; |Top|data_mux:inst|gpu_data_out~4                                                             ; out              ;
+; |Top|data_mux:inst|gpu_data_out~5                                                                   ; |Top|data_mux:inst|gpu_data_out~5                                                             ; out              ;
+; |Top|data_mux:inst|gpu_data_out~6                                                                   ; |Top|data_mux:inst|gpu_data_out~6                                                             ; out              ;
+; |Top|data_mux:inst|gpu_data_out~7                                                                   ; |Top|data_mux:inst|gpu_data_out~7                                                             ; out              ;
+; |Top|data_mux:inst|rd_req_dlya~0                                                                    ; |Top|data_mux:inst|rd_req_dlya~0                                                              ; out0             ;
+; |Top|data_mux:inst|rd_req_dlya~1                                                                    ; |Top|data_mux:inst|rd_req_dlya~1                                                              ; out0             ;
+; |Top|data_mux:inst|rd_req_dlyb~0                                                                    ; |Top|data_mux:inst|rd_req_dlyb~0                                                              ; out0             ;
+; |Top|data_mux:inst|rd_req_dlyb~1                                                                    ; |Top|data_mux:inst|rd_req_dlyb~1                                                              ; out0             ;
+; |Top|data_mux:inst|gpu_address[6]                                                                   ; |Top|data_mux:inst|gpu_address[6]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_address[5]                                                                   ; |Top|data_mux:inst|gpu_address[5]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_address[4]                                                                   ; |Top|data_mux:inst|gpu_address[4]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_address[2]                                                                   ; |Top|data_mux:inst|gpu_address[2]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_address[1]                                                                   ; |Top|data_mux:inst|gpu_address[1]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_address[0]                                                                   ; |Top|data_mux:inst|gpu_address[0]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_data_out[6]                                                                  ; |Top|data_mux:inst|gpu_data_out[6]                                                            ; regout           ;
+; |Top|data_mux:inst|gpu_data_out[5]                                                                  ; |Top|data_mux:inst|gpu_data_out[5]                                                            ; regout           ;
+; |Top|data_mux:inst|gpu_data_out[4]                                                                  ; |Top|data_mux:inst|gpu_data_out[4]                                                            ; regout           ;
+; |Top|data_mux:inst|gpu_data_out[3]                                                                  ; |Top|data_mux:inst|gpu_data_out[3]                                                            ; regout           ;
+; |Top|data_mux:inst|gpu_data_out[2]                                                                  ; |Top|data_mux:inst|gpu_data_out[2]                                                            ; regout           ;
+; |Top|data_mux:inst|gpu_data_out[1]                                                                  ; |Top|data_mux:inst|gpu_data_out[1]                                                            ; regout           ;
+; |Top|data_mux:inst|gpu_data_out[0]                                                                  ; |Top|data_mux:inst|gpu_data_out[0]                                                            ; regout           ;
+; |Top|data_mux:inst|rd_req_dlya[1]                                                                   ; |Top|data_mux:inst|rd_req_dlya[1]                                                             ; regout           ;
+; |Top|data_mux:inst|rd_req_dlya[0]                                                                   ; |Top|data_mux:inst|rd_req_dlya[0]                                                             ; regout           ;
+; |Top|data_mux:inst|rd_req_dlyb[1]                                                                   ; |Top|data_mux:inst|rd_req_dlyb[1]                                                             ; regout           ;
+; |Top|data_mux:inst|rd_req_dlyb[0]                                                                   ; |Top|data_mux:inst|rd_req_dlyb[0]                                                             ; regout           ;
+; |Top|data_mux:inst|wena_a_dly                                                                       ; |Top|data_mux:inst|wena_a_dly                                                                 ; regout           ;
+; |Top|data_mux:inst|rdreq_a_dly                                                                      ; |Top|data_mux:inst|rdreq_a_dly                                                                ; regout           ;
+; |Top|data_mux:inst|rdreq_b_dly                                                                      ; |Top|data_mux:inst|rdreq_b_dly                                                                ; regout           ;
+; |Top|data_mux:inst|gpu_wr_ena                                                                       ; |Top|data_mux:inst|gpu_wr_ena                                                                 ; regout           ;
+; |Top|data_mux:inst|gpu_rd_rdy_b                                                                     ; |Top|data_mux:inst|gpu_rd_rdy_b                                                               ; regout           ;
+; |Top|data_mux:inst|gpu_rd_rdy_a                                                                     ; |Top|data_mux:inst|gpu_rd_rdy_a                                                               ; regout           ;
+; |Top|data_mux:inst|dumb_ab_mux                                                                      ; |Top|data_mux:inst|dumb_ab_mux                                                                ; regout           ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                                                                                                                                               ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+; Node Name                                                                                           ; Output Port Name                                                                              ; Output Port Type ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+; |Top|wb                                                                                             ; |Top|wb                                                                                       ; out              ;
+; |Top|aa[9]                                                                                          ; |Top|aa[9]                                                                                    ; out              ;
+; |Top|aa[8]                                                                                          ; |Top|aa[8]                                                                                    ; out              ;
+; |Top|aa[7]                                                                                          ; |Top|aa[7]                                                                                    ; out              ;
+; |Top|aa[3]                                                                                          ; |Top|aa[3]                                                                                    ; out              ;
+; |Top|ab[9]                                                                                          ; |Top|ab[9]                                                                                    ; out              ;
+; |Top|ab[8]                                                                                          ; |Top|ab[8]                                                                                    ; out              ;
+; |Top|ab[7]                                                                                          ; |Top|ab[7]                                                                                    ; out              ;
+; |Top|ab[5]                                                                                          ; |Top|ab[5]                                                                                    ; out              ;
+; |Top|ab[3]                                                                                          ; |Top|ab[3]                                                                                    ; out              ;
+; |Top|ab[1]                                                                                          ; |Top|ab[1]                                                                                    ; out              ;
+; |Top|ga[9]                                                                                          ; |Top|ga[9]                                                                                    ; pin_out          ;
+; |Top|ga[8]                                                                                          ; |Top|ga[8]                                                                                    ; pin_out          ;
+; |Top|ga[7]                                                                                          ; |Top|ga[7]                                                                                    ; pin_out          ;
+; |Top|ga[3]                                                                                          ; |Top|ga[3]                                                                                    ; pin_out          ;
+; |Top|dar[7]                                                                                         ; |Top|dar[7]                                                                                   ; pin_out          ;
+; |Top|dbr[7]                                                                                         ; |Top|dbr[7]                                                                                   ; pin_out          ;
+; |Top|grdo[7]                                                                                        ; |Top|grdo[7]                                                                                  ; pin_out          ;
+; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|ram_block1a7 ; |Top|lpm_ram_dp0:inst12|altsyncram:altsyncram_component|altsyncram_1mq1:auto_generated|q_b[7] ; portbdataout0    ;
+; |Top|data_mux:inst|gpu_wr_ena~1                                                                     ; |Top|data_mux:inst|gpu_wr_ena~1                                                               ; out0             ;
+; |Top|data_mux:inst|gpu_address~10                                                                   ; |Top|data_mux:inst|gpu_address~10                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address~11                                                                   ; |Top|data_mux:inst|gpu_address~11                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address~12                                                                   ; |Top|data_mux:inst|gpu_address~12                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address~16                                                                   ; |Top|data_mux:inst|gpu_address~16                                                             ; out              ;
+; |Top|data_mux:inst|gpu_address[9]                                                                   ; |Top|data_mux:inst|gpu_address[9]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_address[8]                                                                   ; |Top|data_mux:inst|gpu_address[8]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_address[7]                                                                   ; |Top|data_mux:inst|gpu_address[7]                                                             ; regout           ;
+; |Top|data_mux:inst|gpu_address[3]                                                                   ; |Top|data_mux:inst|gpu_address[3]                                                             ; regout           ;
+; |Top|data_mux:inst|wena_b_dly                                                                       ; |Top|data_mux:inst|wena_b_dly                                                                 ; regout           ;
++-----------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++--------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                   ;
++------------------------------------+------------------------------------+------------------+
+; Node Name                          ; Output Port Name                   ; Output Port Type ;
++------------------------------------+------------------------------------+------------------+
+; |Top|wb                            ; |Top|wb                            ; out              ;
+; |Top|aa[9]                         ; |Top|aa[9]                         ; out              ;
+; |Top|aa[8]                         ; |Top|aa[8]                         ; out              ;
+; |Top|aa[7]                         ; |Top|aa[7]                         ; out              ;
+; |Top|aa[3]                         ; |Top|aa[3]                         ; out              ;
+; |Top|ab[9]                         ; |Top|ab[9]                         ; out              ;
+; |Top|ab[8]                         ; |Top|ab[8]                         ; out              ;
+; |Top|ab[7]                         ; |Top|ab[7]                         ; out              ;
+; |Top|ab[5]                         ; |Top|ab[5]                         ; out              ;
+; |Top|ab[3]                         ; |Top|ab[3]                         ; out              ;
+; |Top|ab[1]                         ; |Top|ab[1]                         ; out              ;
+; |Top|daw[7]                        ; |Top|daw[7]                        ; out              ;
+; |Top|dbw[7]                        ; |Top|dbw[7]                        ; out              ;
+; |Top|gdi[7]                        ; |Top|gdi[7]                        ; pin_out          ;
+; |Top|ga[9]                         ; |Top|ga[9]                         ; pin_out          ;
+; |Top|ga[8]                         ; |Top|ga[8]                         ; pin_out          ;
+; |Top|ga[7]                         ; |Top|ga[7]                         ; pin_out          ;
+; |Top|ga[3]                         ; |Top|ga[3]                         ; pin_out          ;
+; |Top|data_mux:inst|gpu_wr_ena~1    ; |Top|data_mux:inst|gpu_wr_ena~1    ; out0             ;
+; |Top|data_mux:inst|gpu_address~10  ; |Top|data_mux:inst|gpu_address~10  ; out              ;
+; |Top|data_mux:inst|gpu_address~11  ; |Top|data_mux:inst|gpu_address~11  ; out              ;
+; |Top|data_mux:inst|gpu_address~12  ; |Top|data_mux:inst|gpu_address~12  ; out              ;
+; |Top|data_mux:inst|gpu_address~16  ; |Top|data_mux:inst|gpu_address~16  ; out              ;
+; |Top|data_mux:inst|gpu_data_out~0  ; |Top|data_mux:inst|gpu_data_out~0  ; out              ;
+; |Top|data_mux:inst|gpu_address[9]  ; |Top|data_mux:inst|gpu_address[9]  ; regout           ;
+; |Top|data_mux:inst|gpu_address[8]  ; |Top|data_mux:inst|gpu_address[8]  ; regout           ;
+; |Top|data_mux:inst|gpu_address[7]  ; |Top|data_mux:inst|gpu_address[7]  ; regout           ;
+; |Top|data_mux:inst|gpu_address[3]  ; |Top|data_mux:inst|gpu_address[3]  ; regout           ;
+; |Top|data_mux:inst|gpu_data_out[7] ; |Top|data_mux:inst|gpu_data_out[7] ; regout           ;
+; |Top|data_mux:inst|wena_b_dly      ; |Top|data_mux:inst|wena_b_dly      ; regout           ;
++------------------------------------+------------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Thu Jul 02 22:56:26 2020
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off Data_mux_v2 -c Data_mux_v2
+Info: Using vector source file "C:/altera/Qdesigns/Data_mux_v2/Data_mux_v2.vwf"
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      77.18 %
+Info: Number of transitions in simulation is 2915
+Info: Quartus II Simulator was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 151 megabytes
+    Info: Processing ended: Thu Jul 02 22:56:26 2020
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+
+

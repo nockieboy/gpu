@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at fifo_3word_0_latency.sv(36): always construct contains both blocking and non-blocking assignments

@@ -241,13 +241,28 @@ applicable agreement for further details.
 		(line (pt 216 240)(pt 200 240)(line_width 1))
 	)
 	(parameter
+		"USE_Z80_CLK"
+		"0"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"INV_Z80_CLK"
+		"0"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Z80_CLK_FILTER"
+		"4"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
 		"MEMORY_RANGE"
 		"010"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
-		"MEM_SIZE_BITS"
-		"15"
+		"MEM_SIZE_BYTES"
+		"65536"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter

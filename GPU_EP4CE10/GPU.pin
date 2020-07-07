@@ -95,10 +95,10 @@ GND+                         : 24        :        :                   :         
 GND+                         : 25        :        :                   :         : 2         :                
 VCCIO2                       : 26        : power  :                   : 3.3V    : 2         :                
 GND                          : 27        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 28        :        :                   :         : 2         :                
+LED_txd                      : 28        : output : 3.3-V LVCMOS      :         : 2         : N              
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 STATUS_LED                   : 30        : output : 3.3-V LVCMOS      :         : 2         : Y              
-RESERVED_INPUT               : 31        :        :                   :         : 2         :                
+LED_rdx                      : 31        : output : 3.3-V LVCMOS      :         : 2         : N              
 RESERVED_INPUT               : 32        :        :                   :         : 2         :                
 RESERVED_INPUT               : 33        :        :                   :         : 2         :                
 Z80_ADDR[0]                  : 34        : input  : 3.3-V LVCMOS      :         : 2         : Y              
@@ -140,8 +140,8 @@ Z80_ADDR[18]                 : 69        : input  : 3.3-V LVCMOS      :         
 Z80_ADDR[19]                 : 70        : input  : 3.3-V LVCMOS      :         : 4         : Y              
 Z80_ADDR[20]                 : 71        : input  : 3.3-V LVCMOS      :         : 4         : Y              
 Z80_ADDR[21]                 : 72        : input  : 3.3-V LVCMOS      :         : 4         : Y              
-RESERVED_INPUT               : 73        :        :                   :         : 5         :                
-LED_rdx                      : 74        : output : 3.3-V LVCMOS      :         : 5         : N              
+PS2_CLK                      : 73        : input  : 3.3-V LVCMOS      :         : 5         : Y              
+PS2_DAT                      : 74        : input  : 3.3-V LVCMOS      :         : 5         : Y              
 IEI                          : 75        : input  : 3.3-V LVCMOS      :         : 5         : Y              
 IEO                          : 76        : output : 3.3-V LVCMOS      :         : 5         : Y              
 hs                           : 77        : output : 3.3-V LVCMOS      :         : 5         : Y              
@@ -188,7 +188,7 @@ VCCIO7                       : 117       : power  :                   : 3.3V    
 GND                          : 118       : gnd    :                   :         :           :                
 r[0]                         : 119       : output : 3.3-V LVCMOS      :         : 7         : Y              
 Z80_CLK                      : 120       : input  : 3.3-V LVCMOS      :         : 7         : Y              
-LED_txd                      : 121       : output : 3.3-V LVCMOS      :         : 7         : N              
+RESERVED_INPUT               : 121       :        :                   :         : 7         :                
 VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
 GND                          : 123       : gnd    :                   :         :           :                
 Z80_RD                       : 124       : input  : 3.3-V LVCMOS      :         : 7         : Y              

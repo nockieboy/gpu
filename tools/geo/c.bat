@@ -1,0 +1,1 @@
+..\fbc.exe geo.bas

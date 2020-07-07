@@ -4,23 +4,23 @@ module Z80_bridge (
    input wire  reset,            // GPU reset signal
    input wire  GPU_CLK,          // GPU clock (125 MHz)
    input wire  Z80_CLK,          // uCom clock signal (8 MHz)
-   input wire  Z80_M1n,          // Z80 M1 - active LOW
+   input wire  Z80_M1n,          // Z80 M1   - active LOW
    input wire  Z80_MREQn,        // Z80 MREQ - active LOW
-   input wire  Z80_WRn,          // Z80 WR - active LOW
-   input wire  Z80_RDn,          // Z80 RD - active LOW
+   input wire  Z80_WRn,          // Z80 WR   - active LOW
+   input wire  Z80_RDn,          // Z80 RD   - active LOW
    input wire  [21:0] Z80_addr,  // uCom 22-bit address bus
    input wire  [7:0]  Z80_wData, // Z80 DATA bus to pass incoming data to GPU RAM
    input wire  [7:0]  gpu_rData,
-   input wire  gpu_rd_rdy,       // one-shot signal from mux that data is ready
-   input wire  sel_pclk,         // make HIGH to trigger the Z80 bus on the positive edge of Z80_CLK
-   input wire  sel_nclk,         // make LOW  to trigger the Z80 bus on the negative edge of Z80_CLK
-   input wire  PS2_RDY,          // goes HIGH when data is ready from PS2 keyboard on PS2_DAT
+   input wire  gpu_rd_rdy,       // 'data ready' one-shot from mux
+   input wire  sel_pclk,         // HIGH to trigger the Z80 bus on the positive edge of Z80_CLK
+   input wire  sel_nclk,         // LOW  to trigger the Z80 bus on the negative edge of Z80_CLK
+   input wire  PS2_RDY,          // HIGH when data is ready from PS2 keyboard on PS2_DAT
    input wire  [7:0] PS2_DAT,    // data from keyboard
    input wire  Z80_IORQn,        // Z80 IORQ - active LOW
    input wire  Z80_IEI,          // if HIGH, Z80_bridge can request interrupt immediately
    //
    // output
-   output reg  Z80_245data_dir,  // Control level converter direction for data flow - HIGH = A->B (toward Z80)
+   output reg  Z80_245data_dir,  // Controls level converter direction for data flow - HIGH = A->B (to Z80), LOW = A<-B (to FPGA)
    output reg  [7:0]  Z80_rData, // Z80 DATA bus to return data from GPU RAM to Z80
    output reg  Z80_rData_ena,    // Flag HIGH to write data back to Z80
    output reg  Z80_245_oe,       // OE for 245 level translator *** ACTIVE LOW ***
@@ -38,7 +38,8 @@ module Z80_bridge (
 //
 // TODO:
 //
-// 1) Implement PS2 keyboard interface and IO-polled / interrupt handling
+// 1) Interrupt handling for keyboard data
+//
 //
 // **************************************** Parameters ***************************************************
 //
@@ -46,7 +47,7 @@ parameter MEMORY_RANGE  = 3'b010;// Z80_addr[21:19] == 3'b010 targets the 512KB 
 parameter MEM_SIZE_BITS = 15;    // Specifies maximum address size for the GPU RAM (anything above this returns $FF)
 parameter BANK_RESPONSE = 1;     // 1 - respond to reads at BANK_ID_ADDR with appropriate data, 0 - ignore reads to that address
 parameter BANK_ID_ADDR  = 17'b10111111111111111;      // Address to respond to BANK_ID queries with data (lowest 4 bits left off)
-parameter int BANK_ID[16] = '{9,3,71,80,85,32,69,80,52,67,69,54,0,255,255,255};  // The BANK_ID data to return
+parameter int BANK_ID[16] = '{9,3,71,80,85,32,69,80,52,67,69,49,48,0,255,255};  // The BANK_ID data to return (16 bytes)
 //
 // *******************************************************************************************************
 //
@@ -89,7 +90,7 @@ parameter int IO_DATA   = 240;         // IO address for keyboard data polling
 parameter int IO_SPKR   = 242;         // IO address for speaker/audio output enable
 parameter int IO_BLNK   = 243;         // IO address for BLANK signal to video DAC
 //
-// Direction control for DATA BUS level converter
+// Direction control for DATA BUS level converter (these are hardware-specific)
 //
 parameter bit data_in   = 0;				// 245_DIR for data in
 parameter bit data_out  = 1;				// 245_DIR for data out
@@ -129,7 +130,7 @@ reg [4:0] INT_DELAY  = 5'b0;
 reg [14:0] IO_245_DLY = 5'b0;
 reg IIR_flag         = 1'b0;           // Internal Interrupt Request flag
 
-assign PS2_READY     = PS2_RDY && ~PS2_prev;                                  // HIGH for 1 CLK when valid data is available on PS2_DAT and PS2_dly_ena is LOW
+assign PS2_READY     = PS2_RDY && ~PS2_prev;                                  // HIGH for 1 CLK when valid data is available on PS2_DAT
 
 assign IO_DATA_RQ    = ~Z80_IORQn && (IO_DATA == Z80_addr[7:0]) & ~Z80_RDn;   // HIGH when host is reading data from IO_DATA address
 assign IO_DATA_ST    = IO_DATA_RQ && ~IO_DATA_prev;                           // HIGH for 1 CLK when valid IO_DATA cycle starts
@@ -230,13 +231,18 @@ always @(posedge GPU_CLK) begin
    
    if (Read_GPU_RAM) begin    // *** READING FROM GPU RAM
       
-      Z80_245data_dir   <= data_out;   // Set 245 DIR TO Z80
+      //Z80_rData[7:0]    <= 8'bz;       // Set FPGA data bus to high impedance
+		Z80_245data_dir   <= data_out;   // Set 245 DIR TO Z80
       Z80_245_oe        <= 1'b0;       // Enable 245 output
       Z80_rData_ena     <= 1'b1;       // Set bidir pins to output
       
    end
 
    if (gpu_rd_rdy) begin
+	
+		//Z80_245data_dir   <= data_out;   // Set 245 DIR TO Z80
+      //Z80_245_oe        <= 1'b0;       // Enable 245 output
+      //Z80_rData_ena     <= 1'b1;       // Set bidir pins to output
       
       if (mem_valid_range) begin
          
@@ -248,7 +254,7 @@ always @(posedge GPU_CLK) begin
          
       end else begin
          
-         Z80_rData[7:0] <= 2'hFF;      // return $FF if addressed byte is outside the GPU's upper RAM limit
+         Z80_rData[7:0] <= 'hFF;      // return $FF if addressed byte is outside the GPU's upper RAM limit
          
       end
       
@@ -363,7 +369,7 @@ always @(posedge GPU_CLK) begin
 // *******************************************************************************************************
 // *** IF NO INTERRUPT, MEMORY OR IO READ OPERATIONS ARE ONGOING, ENFORCE DATA BUS DEFAULTS            ***
 // *******************************************************************************************************
-   if (~Z80_INT_REQ && ~Read_GPU_RAM && ~Write_GPU_RAM && ~IO_DATA_RQ /*&& ~IO_STAT_RQ*/) begin
+   if (~Z80_INT_REQ && ~Read_GPU_RAM && ~Write_GPU_RAM && ~IO_DATA_RQ && ~gpu_rd_rdy /*&& ~IO_STAT_RQ*/) begin
       
       //Z80_245_oe        <= 1'b1;       // Disable 245 output
       Z80_245data_dir   <= data_in;    // Set 245 dir toward FPGA
@@ -404,8 +410,14 @@ always @(posedge GPU_CLK) begin
    PS2_prev       <= PS2_RDY;
 
    // GPU RAM FLAGS
-   gpu_wr_ena     <= Write_GPU_RAM && ~last_Z80_WR2 ; // Pulse the GPU ram's write enable only once after the Z80 write cycle has completed
-   gpu_rd_req     <= Read_GPU_RAM  && ~last_Z80_RD2 ; // Pulse the read request only once at the beginning of a read cycle.
+   //gpu_wr_ena     <= Write_GPU_RAM && ~last_Z80_WR2; // Pulse the GPU ram's write enable only once after the Z80 write cycle has completed
+   //gpu_rd_req     <= Read_GPU_RAM  && ~last_Z80_RD2; // Pulse the read request only once at the beginning of a read cycle.
+   //gpu_rd_req     <= Read_GPU_RAM  && ~last_Z80_RD ; // (data_mux bug fixed, pulse for only 1 clock, not 2) 2 ; // Pulse the read request only once at the beginning of a read cycle.
+	gpu_rd_req 		<= (Read_GPU_RAM && last_Z80_RD && last_Z80_RD2) && ~last_Z80_RD3 ;
+
+	// This will make sure the Write_GPU_RAM is high for 3 consecutive clocks.  The output 'gpu_wr_ena' will still only pulse for 1 clock cycle.
+	// Think of this like a noise removal for the bus write command and address with extra time for the Z80 data bus to stabilize before accepting and writing the data to the GPU
+	gpu_wr_ena     <= (Write_GPU_RAM && last_Z80_WR && last_Z80_WR2) && ~last_Z80_WR3; // (data_mux bug fixed, pulse for only 1 clock, not 2) 2 ; // Pulse the GPU ram's write enable only once after the Z80 write cycle has completed
    
 end
 

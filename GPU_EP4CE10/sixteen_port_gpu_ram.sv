@@ -20,10 +20,11 @@ module sixteen_port_gpu_ram (
 	// data buses (output)
 	output reg [15:0] data_out[14:0],		// ****** changed to 16 bit width
 
-	input         write_ena_host,					// Host (Z80) clock enable
-	input  [19:0] addr_host_in,
-    input  [7:0]  data_host_in,
-	output [7:0]  data_host_out
+	input          write_ena_host,  // host GPU ram port write enable
+	input          ena_host_16bit,  // host GPU ram port write enable 16bit.
+	input  [19:0]  addr_host_in,
+   input  [15:0]  data_host_in,
+	output [15:0]  data_host_out
 	
 );
 
@@ -59,14 +60,15 @@ wire [3:0]  mode_8bit_host;
 assign      w_addr_mux_in[2:0]     = addr_mux_in[2:0];
 assign      w_cmd_mux_in[2:0]      = cmd_mux_in[2:0];
 
-assign      mode_8bit_host         = 4'b1000 ; // Assign port 4 to writing in 8 bit mode only.
-assign      wren_host[2:0]         = 3'b000  ; // disable writing of first 3 ports
-assign      wren_host[3]           = write_ena_host && host_enable ; // Set port 4 to the host port write enable.
-assign      w_cmd_mux_in[3][0]     = host_enable ; // pipe into the cmd mux of port 4 a the host enable function.       
-assign      w_addr_mux_in[3]       = addr_host_in ; // Set port 4 to host address
-assign      data_mux_in[3][7:0]    = data_host_in ; // Set port 4 write data low byte to host data input
-assign      data_mux_in[3][15:8]   = data_host_in ; // Set port 4 write data high byte to host data input, required for 8 bit write emulation mode
-assign      data_host_out          = cmd_mux_out[3][0] ? data_mux_out[3][7:0] : 8'h0 ; // set the host read port to port 4 if a hosr_enable read command went in, otherwise return 0
+assign      mode_8bit_host         = { ~ena_host_16bit, 3'b000 } ;    // Assign port 4 to writing 8 or 16 bits depending on 16bit writing mode input.
+assign      wren_host[2:0]         = 3'b000  ;                        // disable writing of first 3 ports
+assign      wren_host[3]           = write_ena_host && host_enable ;  // Set port 4 to the host port write enable.
+assign      w_cmd_mux_in[3][0]     = host_enable ;                    // pipe into the cmd mux of port 4 a the host enable function.       
+assign      w_addr_mux_in[3]       = addr_host_in ;                   // Set port 4 to host address
+assign      data_mux_in[3][7:0]    = data_host_in[7:0] ;              // Set port 4 write data low byte to host data input
+//assign      data_mux_in[3][15:8]   = ena_host_16bit    ? data_host_in[15:8]    : data_host_in[7:0] ; // in 8 bit mode, automatically set upper byte write data to the first 8 bits, in 16 bit mode, set it to the upper 8 bits.
+assign      data_mux_in[3][15:8]   = data_host_in[15:0] ; // When writing in 8 bit mode, make sure the upper byte has a copy of the first 8 bits.
+assign      data_host_out          = cmd_mux_out[3][0] ? data_mux_out[3][15:0] : 16'h0 ;             // set the host read port to port 4 if a hosr_enable read command went in, otherwise return 0
 
 // create a GPU RAM instance
 gpu_quad_port_ram gpu_RAM(

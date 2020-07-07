@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 440 288)
+	(rect 16 16 440 320)
 	(text "vid_osd_generator" (rect 5 0 80 12)(font "Arial" ))
-	(text "inst" (rect 8 256 20 268)(font "Arial" ))
+	(text "inst" (rect 8 288 20 300)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -103,23 +103,30 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 0 208)
 		(input)
-		(text "host_wr_data[7..0]" (rect 0 0 74 12)(font "Arial" ))
-		(text "host_wr_data[7..0]" (rect 21 203 95 215)(font "Arial" ))
+		(text "host_wr_data[15..0]" (rect 0 0 77 12)(font "Arial" ))
+		(text "host_wr_data[15..0]" (rect 21 203 98 215)(font "Arial" ))
 		(line (pt 0 208)(pt 16 208)(line_width 3))
 	)
 	(port
 		(pt 0 224)
 		(input)
-		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 0 0 227 12)(font "Arial" ))
-		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 21 219 248 231)(font "Arial" ))
-		(line (pt 0 224)(pt 16 224)(line_width 3))
+		(text "ena_host_16bit" (rect 0 0 59 12)(font "Arial" ))
+		(text "ena_host_16bit" (rect 21 219 80 231)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 1))
 	)
 	(port
 		(pt 0 240)
 		(input)
-		(text "HV_triggers_in[47..0]" (rect 0 0 88 12)(font "Arial" ))
-		(text "HV_triggers_in[47..0]" (rect 21 235 109 247)(font "Arial" ))
+		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 0 0 227 12)(font "Arial" ))
+		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 21 235 248 247)(font "Arial" ))
 		(line (pt 0 240)(pt 16 240)(line_width 3))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "HV_triggers_in[47..0]" (rect 0 0 88 12)(font "Arial" ))
+		(text "HV_triggers_in[47..0]" (rect 21 251 109 263)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256)(line_width 3))
 	)
 	(port
 		(pt 424 32)
@@ -173,8 +180,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 424 144)
 		(output)
-		(text "host_rd_data[7..0]" (rect 0 0 73 12)(font "Arial" ))
-		(text "host_rd_data[7..0]" (rect 330 139 403 151)(font "Arial" ))
+		(text "host_rd_data[15..0]" (rect 0 0 76 12)(font "Arial" ))
+		(text "host_rd_data[15..0]" (rect 327 139 403 151)(font "Arial" ))
 		(line (pt 424 144)(pt 408 144)(line_width 3))
 	)
 	(port
@@ -220,7 +227,7 @@ refer to the applicable agreement for further details.
 		""
 		(type "PARAMETER_STRING")	)
 	(drawing
-		(rectangle (rect 16 16 408 256)(line_width 1))
+		(rectangle (rect 16 16 408 288)(line_width 1))
 	)
 	(annotation_block (parameter)(rect 440 -64 540 16))
 )

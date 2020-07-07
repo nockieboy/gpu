@@ -1,0 +1,49 @@
+GED
+
+	Undo Commands
+	     1.	Properties
+	     2.	Move
+	     3.	Move
+	     4.	Move
+	     5.	Move
+	     6.	Paste
+	     7.	Properties
+	     8.	Move
+	     9.	Move
+	    10.	Move
+	    11.	Move
+	    12.	Paste
+
+
+WED
+
+	Undo Commands
+	     1.	Edit Waveform
+	     2.	Edit Waveform
+	     3.	Arbitrary Value
+			 *** 
+	     4.	Insert Node or Bus
+	     5.	Arbitrary Value
+			 *** 
+	     6.	Drop Node
+			 *** 
+	     7.	Drop Node
+			 *** 
+	     8.	Drop Node
+			 *** 
+	     9.	Drop Node
+			 *** 
+	    10.	Edit Waveform
+	    11.	Edit Waveform
+	    12.	Edit Waveform
+	    13.	Edit Waveform
+	    14.	Edit Waveform
+	    15.	Edit Waveform
+	    16.	Edit Waveform
+	    17.	Drop Node
+			 *** 
+	    18.	Drop Node
+			 *** 
+	    19.	Edit Waveform
+
+

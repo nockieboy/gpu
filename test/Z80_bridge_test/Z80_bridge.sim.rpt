@@ -1,5 +1,5 @@
 Simulator report for Z80_bridge
-Tue Jun 23 15:18:53 2020
+Tue Jul 07 15:29:51 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -44,10 +44,10 @@ applicable agreement for further details.
 ; Type                        ; Value        ;
 +-----------------------------+--------------+
 ; Simulation Start Time       ; 0 ps         ;
-; Simulation End Time         ; 2.0 us       ;
-; Simulation Netlist Size     ; 172 nodes    ;
-; Simulation Coverage         ;      29.01 % ;
-; Total Number of Transitions ; 606          ;
+; Simulation End Time         ; 50.0 us      ;
+; Simulation Netlist Size     ; 372 nodes    ;
+; Simulation Coverage         ;      68.04 % ;
+; Total Number of Transitions ; 21410        ;
 ; Simulation Breakpoints      ; 0            ;
 ; Family                      ; Cyclone III  ;
 +-----------------------------+--------------+
@@ -96,219 +96,520 @@ Please use Quartus II to view the waveform report data.
 +-----------------------------------------------------+--------------+
 ; Type                                                ; Value        ;
 +-----------------------------------------------------+--------------+
-; Total coverage as a percentage                      ;      29.01 % ;
-; Total nodes checked                                 ; 172          ;
-; Total output ports checked                          ; 162          ;
-; Total output ports with complete 1/0-value coverage ; 47           ;
-; Total output ports with no 1/0-value coverage       ; 16           ;
-; Total output ports with no 1-value coverage         ; 85           ;
-; Total output ports with no 0-value coverage         ; 46           ;
+; Total coverage as a percentage                      ;      68.04 % ;
+; Total nodes checked                                 ; 372          ;
+; Total output ports checked                          ; 363          ;
+; Total output ports with complete 1/0-value coverage ; 247          ;
+; Total output ports with no 1/0-value coverage       ; 116          ;
+; Total output ports with no 1-value coverage         ; 116          ;
+; Total output ports with no 0-value coverage         ; 116          ;
 +-----------------------------------------------------+--------------+
 
 
 The following table displays output ports that toggle between 1 and 0 during simulation.
-+----------------------------------------------------------------------------------------------------------+
-; Complete 1/0-Value Coverage                                                                              ;
-+-------------------------------------------+-------------------------------------------+------------------+
-; Node Name                                 ; Output Port Name                          ; Output Port Type ;
-+-------------------------------------------+-------------------------------------------+------------------+
-; |Block1|z80_DATA_DIR                      ; |Block1|z80_DATA_DIR                      ; pin_out          ;
-; |Block1|gpu_clk                           ; |Block1|gpu_clk                           ; out              ;
-; |Block1|z80_RD                            ; |Block1|z80_RD                            ; out              ;
-; |Block1|z80_IORQ                          ; |Block1|z80_IORQ                          ; out              ;
-; |Block1|z80_BDIR_EN                       ; |Block1|z80_BDIR_EN                       ; pin_out          ;
-; |Block1|Z80_bridge:inst|IO_DATA_RQ~0      ; |Block1|Z80_bridge:inst|IO_DATA_RQ~0      ; out0             ;
-; |Block1|Z80_bridge:inst|IO_DATA_RQ        ; |Block1|Z80_bridge:inst|IO_DATA_RQ        ; out0             ;
-; |Block1|Z80_bridge:inst|IO_DATA_ST        ; |Block1|Z80_bridge:inst|IO_DATA_ST        ; out0             ;
-; |Block1|Z80_bridge:inst|IO_DATA_RL        ; |Block1|Z80_bridge:inst|IO_DATA_RL        ; out0             ;
-; |Block1|Z80_bridge:inst|IO_DATA_EX        ; |Block1|Z80_bridge:inst|IO_DATA_EX        ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~en   ; |Block1|Z80_bridge:inst|Z80_rData[1]~en   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~1    ; |Block1|Z80_bridge:inst|Z80_rData[1]~1    ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~2    ; |Block1|Z80_bridge:inst|Z80_rData[1]~2    ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~3    ; |Block1|Z80_bridge:inst|Z80_rData[1]~3    ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~5    ; |Block1|Z80_bridge:inst|Z80_rData[1]~5    ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~6    ; |Block1|Z80_bridge:inst|Z80_rData[1]~6    ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~7    ; |Block1|Z80_bridge:inst|Z80_rData[1]~7    ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_245data_dir~0 ; |Block1|Z80_bridge:inst|Z80_245data_dir~0 ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData_ena~0   ; |Block1|Z80_bridge:inst|Z80_rData_ena~0   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245data_dir~1 ; |Block1|Z80_bridge:inst|Z80_245data_dir~1 ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData_ena~1   ; |Block1|Z80_bridge:inst|Z80_rData_ena~1   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[0]~en   ; |Block1|Z80_bridge:inst|Z80_rData[0]~en   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[6]~reg0 ; |Block1|Z80_bridge:inst|Z80_rData[6]~reg0 ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[4]~reg0 ; |Block1|Z80_bridge:inst|Z80_rData[4]~reg0 ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[2]~reg0 ; |Block1|Z80_bridge:inst|Z80_rData[2]~reg0 ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~reg0 ; |Block1|Z80_bridge:inst|Z80_rData[1]~reg0 ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[0]~10   ; |Block1|Z80_bridge:inst|Z80_rData[0]~10   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245data_dir~2 ; |Block1|Z80_bridge:inst|Z80_245data_dir~2 ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData_ena~2   ; |Block1|Z80_bridge:inst|Z80_rData_ena~2   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245data_dir~3 ; |Block1|Z80_bridge:inst|Z80_245data_dir~3 ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData_ena~3   ; |Block1|Z80_bridge:inst|Z80_rData_ena~3   ; out              ;
-; |Block1|Z80_bridge:inst|always0~3         ; |Block1|Z80_bridge:inst|always0~3         ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_245data_dir~4 ; |Block1|Z80_bridge:inst|Z80_245data_dir~4 ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData_ena~4   ; |Block1|Z80_bridge:inst|Z80_rData_ena~4   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[0]~reg0 ; |Block1|Z80_bridge:inst|Z80_rData[0]~reg0 ; regout           ;
-; |Block1|Z80_bridge:inst|IO_DATA_prev      ; |Block1|Z80_bridge:inst|IO_DATA_prev      ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[2]~11   ; |Block1|Z80_bridge:inst|Z80_rData[2]~11   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[2]~en   ; |Block1|Z80_bridge:inst|Z80_rData[2]~en   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[3]~en   ; |Block1|Z80_bridge:inst|Z80_rData[3]~en   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[4]~15   ; |Block1|Z80_bridge:inst|Z80_rData[4]~15   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[4]~en   ; |Block1|Z80_bridge:inst|Z80_rData[4]~en   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[5]~en   ; |Block1|Z80_bridge:inst|Z80_rData[5]~en   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[6]~19   ; |Block1|Z80_bridge:inst|Z80_rData[6]~19   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[6]~en   ; |Block1|Z80_bridge:inst|Z80_rData[6]~en   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[7]~en   ; |Block1|Z80_bridge:inst|Z80_rData[7]~en   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData_ena     ; |Block1|Z80_bridge:inst|Z80_rData_ena     ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_245data_dir   ; |Block1|Z80_bridge:inst|Z80_245data_dir   ; regout           ;
-+-------------------------------------------+-------------------------------------------+------------------+
++------------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                            ;
++--------------------------------------------------+--------------------------------------------------+------------------+
+; Node Name                                        ; Output Port Name                                 ; Output Port Type ;
++--------------------------------------------------+--------------------------------------------------+------------------+
+; |Block1|z80_DATA_DIR                             ; |Block1|z80_DATA_DIR                             ; pin_out          ;
+; |Block1|gpu_clk                                  ; |Block1|gpu_clk                                  ; out              ;
+; |Block1|z80_clk                                  ; |Block1|z80_clk                                  ; out              ;
+; |Block1|z80_M1                                   ; |Block1|z80_M1                                   ; out              ;
+; |Block1|z80_MREQ                                 ; |Block1|z80_MREQ                                 ; out              ;
+; |Block1|z80_WR                                   ; |Block1|z80_WR                                   ; out              ;
+; |Block1|z80_RD                                   ; |Block1|z80_RD                                   ; out              ;
+; |Block1|inst5                                    ; |Block1|inst5                                    ; regout           ;
+; |Block1|inst4                                    ; |Block1|inst4                                    ; regout           ;
+; |Block1|inst3                                    ; |Block1|inst3                                    ; regout           ;
+; |Block1|inst2                                    ; |Block1|inst2                                    ; regout           ;
+; |Block1|inst6                                    ; |Block1|inst6                                    ; regout           ;
+; |Block1|gpu_r_req                                ; |Block1|gpu_r_req                                ; pin_out          ;
+; |Block1|z80_IORQ                                 ; |Block1|z80_IORQ                                 ; out              ;
+; |Block1|gpu_rData[7]                             ; |Block1|gpu_rData[7]                             ; out              ;
+; |Block1|gpu_rData[6]                             ; |Block1|gpu_rData[6]                             ; out              ;
+; |Block1|gpu_rData[5]                             ; |Block1|gpu_rData[5]                             ; out              ;
+; |Block1|gpu_rData[4]                             ; |Block1|gpu_rData[4]                             ; out              ;
+; |Block1|gpu_rData[3]                             ; |Block1|gpu_rData[3]                             ; out              ;
+; |Block1|gpu_rData[2]                             ; |Block1|gpu_rData[2]                             ; out              ;
+; |Block1|gpu_rData[1]                             ; |Block1|gpu_rData[1]                             ; out              ;
+; |Block1|gpu_rData[0]                             ; |Block1|gpu_rData[0]                             ; out              ;
+; |Block1|z80_ADDR[20]                             ; |Block1|z80_ADDR[20]                             ; out              ;
+; |Block1|z80_ADDR[19]                             ; |Block1|z80_ADDR[19]                             ; out              ;
+; |Block1|z80_ADDR[18]                             ; |Block1|z80_ADDR[18]                             ; out              ;
+; |Block1|z80_ADDR[17]                             ; |Block1|z80_ADDR[17]                             ; out              ;
+; |Block1|z80_ADDR[16]                             ; |Block1|z80_ADDR[16]                             ; out              ;
+; |Block1|z80_ADDR[15]                             ; |Block1|z80_ADDR[15]                             ; out              ;
+; |Block1|z80_ADDR[14]                             ; |Block1|z80_ADDR[14]                             ; out              ;
+; |Block1|z80_ADDR[13]                             ; |Block1|z80_ADDR[13]                             ; out              ;
+; |Block1|z80_ADDR[12]                             ; |Block1|z80_ADDR[12]                             ; out              ;
+; |Block1|z80_ADDR[11]                             ; |Block1|z80_ADDR[11]                             ; out              ;
+; |Block1|z80_ADDR[10]                             ; |Block1|z80_ADDR[10]                             ; out              ;
+; |Block1|z80_ADDR[9]                              ; |Block1|z80_ADDR[9]                              ; out              ;
+; |Block1|z80_ADDR[8]                              ; |Block1|z80_ADDR[8]                              ; out              ;
+; |Block1|z80_ADDR[7]                              ; |Block1|z80_ADDR[7]                              ; out              ;
+; |Block1|z80_ADDR[6]                              ; |Block1|z80_ADDR[6]                              ; out              ;
+; |Block1|z80_ADDR[5]                              ; |Block1|z80_ADDR[5]                              ; out              ;
+; |Block1|z80_ADDR[4]                              ; |Block1|z80_ADDR[4]                              ; out              ;
+; |Block1|z80_ADDR[3]                              ; |Block1|z80_ADDR[3]                              ; out              ;
+; |Block1|z80_ADDR[2]                              ; |Block1|z80_ADDR[2]                              ; out              ;
+; |Block1|z80_ADDR[1]                              ; |Block1|z80_ADDR[1]                              ; out              ;
+; |Block1|z80_ADDR[0]                              ; |Block1|z80_ADDR[0]                              ; out              ;
+; |Block1|z80_wDATA[0]                             ; |Block1|z80_wDATA[0]                             ; out              ;
+; |Block1|z80_BDIR_EN                              ; |Block1|z80_BDIR_EN                              ; pin_out          ;
+; |Block1|gpu_w_req                                ; |Block1|gpu_w_req                                ; pin_out          ;
+; |Block1|gpu_r_RDY                                ; |Block1|gpu_r_RDY                                ; pin_out          ;
+; |Block1|speaker                                  ; |Block1|speaker                                  ; pin_out          ;
+; |Block1|z80_DATA[7]                              ; |Block1|z80_DATA[7]                              ; pin_out          ;
+; |Block1|z80_DATA[6]                              ; |Block1|z80_DATA[6]                              ; pin_out          ;
+; |Block1|z80_DATA[5]                              ; |Block1|z80_DATA[5]                              ; pin_out          ;
+; |Block1|z80_DATA[4]                              ; |Block1|z80_DATA[4]                              ; pin_out          ;
+; |Block1|z80_DATA[3]                              ; |Block1|z80_DATA[3]                              ; pin_out          ;
+; |Block1|z80_DATA[2]                              ; |Block1|z80_DATA[2]                              ; pin_out          ;
+; |Block1|z80_DATA[1]                              ; |Block1|z80_DATA[1]                              ; pin_out          ;
+; |Block1|z80_DATA[0]                              ; |Block1|z80_DATA[0]                              ; pin_out          ;
+; |Block1|Z80_bridge_v2:inst|z80_pclk              ; |Block1|Z80_bridge_v2:inst|z80_pclk              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_nclk              ; |Block1|Z80_bridge_v2:inst|z80_nclk              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|zclk                  ; |Block1|Z80_bridge_v2:inst|zclk                  ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_read_memory~0  ; |Block1|Z80_bridge_v2:inst|z80_op_read_memory~0  ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_read_memory    ; |Block1|Z80_bridge_v2:inst|z80_op_read_memory    ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_write_memory~0 ; |Block1|Z80_bridge_v2:inst|z80_op_write_memory~0 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_write_memory~1 ; |Block1|Z80_bridge_v2:inst|z80_op_write_memory~1 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_write_memory~2 ; |Block1|Z80_bridge_v2:inst|z80_op_write_memory~2 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_write_memory   ; |Block1|Z80_bridge_v2:inst|z80_op_write_memory   ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_read_port~0    ; |Block1|Z80_bridge_v2:inst|z80_op_read_port~0    ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_read_port      ; |Block1|Z80_bridge_v2:inst|z80_op_read_port      ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_write_port~0   ; |Block1|Z80_bridge_v2:inst|z80_op_write_port~0   ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_write_port~1   ; |Block1|Z80_bridge_v2:inst|z80_op_write_port~1   ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_write_port~2   ; |Block1|Z80_bridge_v2:inst|z80_op_write_port~2   ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_op_write_port     ; |Block1|Z80_bridge_v2:inst|z80_op_write_port     ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_1s    ; |Block1|Z80_bridge_v2:inst|z80_read_memory_1s    ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_1s      ; |Block1|Z80_bridge_v2:inst|z80_read_port_1s      ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_1s   ; |Block1|Z80_bridge_v2:inst|z80_write_memory_1s   ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_1s     ; |Block1|Z80_bridge_v2:inst|z80_write_port_1s     ; out0             ;
+; |Block1|Z80_bridge_v2:inst|mem_in_range          ; |Block1|Z80_bridge_v2:inst|mem_in_range          ; out0             ;
+; |Block1|Z80_bridge_v2:inst|port_in_range         ; |Block1|Z80_bridge_v2:inst|port_in_range         ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~1             ; |Block1|Z80_bridge_v2:inst|always0~1             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~2             ; |Block1|Z80_bridge_v2:inst|always0~2             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory~0     ; |Block1|Z80_bridge_v2:inst|z80_read_memory~0     ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory~1     ; |Block1|Z80_bridge_v2:inst|z80_read_memory~1     ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~3             ; |Block1|Z80_bridge_v2:inst|always0~3             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~1    ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~1    ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~2    ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~2    ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~4    ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~4    ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~5    ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~5    ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~4             ; |Block1|Z80_bridge_v2:inst|always0~4             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~5             ; |Block1|Z80_bridge_v2:inst|always0~5             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port~0       ; |Block1|Z80_bridge_v2:inst|z80_read_port~0       ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port~1       ; |Block1|Z80_bridge_v2:inst|z80_read_port~1       ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~7             ; |Block1|Z80_bridge_v2:inst|always0~7             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~8             ; |Block1|Z80_bridge_v2:inst|always0~8             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory~0    ; |Block1|Z80_bridge_v2:inst|z80_write_memory~0    ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory~1    ; |Block1|Z80_bridge_v2:inst|z80_write_memory~1    ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~9             ; |Block1|Z80_bridge_v2:inst|always0~9             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~1   ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~1   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~2   ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~2   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~4   ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~4   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~5   ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~5   ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~10            ; |Block1|Z80_bridge_v2:inst|always0~10            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~11            ; |Block1|Z80_bridge_v2:inst|always0~11            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port~0      ; |Block1|Z80_bridge_v2:inst|z80_write_port~0      ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port~1      ; |Block1|Z80_bridge_v2:inst|z80_write_port~1      ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~12            ; |Block1|Z80_bridge_v2:inst|always0~12            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~13            ; |Block1|Z80_bridge_v2:inst|always0~13            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~14            ; |Block1|Z80_bridge_v2:inst|always0~14            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~15            ; |Block1|Z80_bridge_v2:inst|always0~15            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~16            ; |Block1|Z80_bridge_v2:inst|always0~16            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~17            ; |Block1|Z80_bridge_v2:inst|always0~17            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_245data_dir       ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|always0~19            ; |Block1|Z80_bridge_v2:inst|always0~19            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~20            ; |Block1|Z80_bridge_v2:inst|always0~20            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~21            ; |Block1|Z80_bridge_v2:inst|always0~21            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|SPKR_EN               ; |Block1|Z80_bridge_v2:inst|SPKR_EN               ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~reg0     ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~reg0     ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~reg0     ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~reg0     ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~reg0     ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~reg0     ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~reg0     ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~0     ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~0     ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~0       ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~0       ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~22            ; |Block1|Z80_bridge_v2:inst|always0~22            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|WideOr0               ; |Block1|Z80_bridge_v2:inst|WideOr0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|WideOr1               ; |Block1|Z80_bridge_v2:inst|WideOr1               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|WideOr2               ; |Block1|Z80_bridge_v2:inst|WideOr2               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|WideOr3               ; |Block1|Z80_bridge_v2:inst|WideOr3               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|WideOr4               ; |Block1|Z80_bridge_v2:inst|WideOr4               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|WideOr5               ; |Block1|Z80_bridge_v2:inst|WideOr5               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData_ena         ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|WideOr6               ; |Block1|Z80_bridge_v2:inst|WideOr6               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~1     ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~1     ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~1       ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~1       ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~23            ; |Block1|Z80_bridge_v2:inst|always0~23            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~2     ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~2     ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~2       ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~2       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~3     ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~3     ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~3       ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~3       ; out              ;
+; |Block1|Z80_bridge_v2:inst|gpu_rd_req            ; |Block1|Z80_bridge_v2:inst|gpu_rd_req            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~reg0     ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~8        ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~8        ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~9        ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~9        ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~en       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[0]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~11       ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~11       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~12       ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~12       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~en       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[1]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~14       ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~14       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~15       ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~15       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~en       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[2]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~18       ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~18       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~en       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[3]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~20       ; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~20       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~21       ; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~21       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~en       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[4]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[4]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~23       ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~23       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~24       ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~24       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~en       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[5]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~27       ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~27       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~en       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[6]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~29       ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~29       ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~31       ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~31       ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~32       ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~32       ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~33       ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~33       ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~34       ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~34       ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~en       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|gpu_wr_ena            ; |Block1|Z80_bridge_v2:inst|gpu_wr_ena            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|last_z80_write_port   ; |Block1|Z80_bridge_v2:inst|last_z80_write_port   ; regout           ;
+; |Block1|Z80_bridge_v2:inst|last_z80_write_memory ; |Block1|Z80_bridge_v2:inst|last_z80_write_memory ; regout           ;
+; |Block1|Z80_bridge_v2:inst|last_z80_read_port    ; |Block1|Z80_bridge_v2:inst|last_z80_read_port    ; regout           ;
+; |Block1|Z80_bridge_v2:inst|last_z80_read_memory  ; |Block1|Z80_bridge_v2:inst|last_z80_read_memory  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port        ; |Block1|Z80_bridge_v2:inst|z80_write_port        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[0]  ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[0]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[1]  ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[1]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory      ; |Block1|Z80_bridge_v2:inst|z80_write_memory      ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port         ; |Block1|Z80_bridge_v2:inst|z80_read_port         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[0]   ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[0]   ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[1]   ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[1]   ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory       ; |Block1|Z80_bridge_v2:inst|z80_read_memory       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[0]        ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[0]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[0]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[0]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[1]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[1]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[2]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[2]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[3]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[3]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[4]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[4]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[5]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[5]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[6]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[6]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[7]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[7]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[8]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[8]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[9]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[9]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[10]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[10]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[11]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[11]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[12]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[12]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[13]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[13]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[14]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[14]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[15]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[15]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[16]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[16]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[17]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[17]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[18]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[18]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[19]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[19]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[20]        ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[20]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_IORQn_r           ; |Block1|Z80_bridge_v2:inst|Z80_IORQn_r           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_RDn_r             ; |Block1|Z80_bridge_v2:inst|Z80_RDn_r             ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_WRn_r             ; |Block1|Z80_bridge_v2:inst|Z80_WRn_r             ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_MREQn_r           ; |Block1|Z80_bridge_v2:inst|Z80_MREQn_r           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_M1n_r             ; |Block1|Z80_bridge_v2:inst|Z80_M1n_r             ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_CLKr2             ; |Block1|Z80_bridge_v2:inst|Z80_CLKr2             ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_CLKr              ; |Block1|Z80_bridge_v2:inst|Z80_CLKr              ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Decoder0~0            ; |Block1|Z80_bridge_v2:inst|Decoder0~0            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~0            ; |Block1|Z80_bridge_v2:inst|Decoder1~0            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~1            ; |Block1|Z80_bridge_v2:inst|Decoder1~1            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~2            ; |Block1|Z80_bridge_v2:inst|Decoder1~2            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~13           ; |Block1|Z80_bridge_v2:inst|Decoder1~13           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~14           ; |Block1|Z80_bridge_v2:inst|Decoder1~14           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~15           ; |Block1|Z80_bridge_v2:inst|Decoder1~15           ; out              ;
+; |Block1|Z80_bridge_v2:inst|LessThan0~0           ; |Block1|Z80_bridge_v2:inst|LessThan0~0           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan0~1           ; |Block1|Z80_bridge_v2:inst|LessThan0~1           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan0~3           ; |Block1|Z80_bridge_v2:inst|LessThan0~3           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan0~4           ; |Block1|Z80_bridge_v2:inst|LessThan0~4           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan0~5           ; |Block1|Z80_bridge_v2:inst|LessThan0~5           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan1~0           ; |Block1|Z80_bridge_v2:inst|LessThan1~0           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan1~1           ; |Block1|Z80_bridge_v2:inst|LessThan1~1           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan1~2           ; |Block1|Z80_bridge_v2:inst|LessThan1~2           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~0           ; |Block1|Z80_bridge_v2:inst|LessThan2~0           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~1           ; |Block1|Z80_bridge_v2:inst|LessThan2~1           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~2           ; |Block1|Z80_bridge_v2:inst|LessThan2~2           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~3           ; |Block1|Z80_bridge_v2:inst|LessThan2~3           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~4           ; |Block1|Z80_bridge_v2:inst|LessThan2~4           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~5           ; |Block1|Z80_bridge_v2:inst|LessThan2~5           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~6           ; |Block1|Z80_bridge_v2:inst|LessThan2~6           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~7           ; |Block1|Z80_bridge_v2:inst|LessThan2~7           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|LessThan2~8           ; |Block1|Z80_bridge_v2:inst|LessThan2~8           ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add1~0                ; |Block1|Z80_bridge_v2:inst|Add1~0                ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add3~0                ; |Block1|Z80_bridge_v2:inst|Add3~0                ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal1~0              ; |Block1|Z80_bridge_v2:inst|Equal1~0              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal3~0              ; |Block1|Z80_bridge_v2:inst|Equal3~0              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal5~0              ; |Block1|Z80_bridge_v2:inst|Equal5~0              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal6~0              ; |Block1|Z80_bridge_v2:inst|Equal6~0              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal7~0              ; |Block1|Z80_bridge_v2:inst|Equal7~0              ; out0             ;
++--------------------------------------------------+--------------------------------------------------+------------------+
 
 
 The following table displays output ports that do not toggle to 1 during simulation.
-+----------------------------------------------------------------------------------------------------------+
-; Missing 1-Value Coverage                                                                                 ;
-+-------------------------------------------+-------------------------------------------+------------------+
-; Node Name                                 ; Output Port Name                          ; Output Port Type ;
-+-------------------------------------------+-------------------------------------------+------------------+
-; |Block1|z80_M1                            ; |Block1|z80_M1                            ; out              ;
-; |Block1|z80_MREQ                          ; |Block1|z80_MREQ                          ; out              ;
-; |Block1|z80_WR                            ; |Block1|z80_WR                            ; out              ;
-; |Block1|z80_ADDR[21]                      ; |Block1|z80_ADDR[21]                      ; out              ;
-; |Block1|z80_ADDR[20]                      ; |Block1|z80_ADDR[20]                      ; out              ;
-; |Block1|z80_ADDR[19]                      ; |Block1|z80_ADDR[19]                      ; out              ;
-; |Block1|z80_ADDR[18]                      ; |Block1|z80_ADDR[18]                      ; out              ;
-; |Block1|z80_ADDR[17]                      ; |Block1|z80_ADDR[17]                      ; out              ;
-; |Block1|z80_ADDR[16]                      ; |Block1|z80_ADDR[16]                      ; out              ;
-; |Block1|z80_ADDR[15]                      ; |Block1|z80_ADDR[15]                      ; out              ;
-; |Block1|z80_ADDR[14]                      ; |Block1|z80_ADDR[14]                      ; out              ;
-; |Block1|z80_ADDR[13]                      ; |Block1|z80_ADDR[13]                      ; out              ;
-; |Block1|z80_ADDR[12]                      ; |Block1|z80_ADDR[12]                      ; out              ;
-; |Block1|z80_ADDR[11]                      ; |Block1|z80_ADDR[11]                      ; out              ;
-; |Block1|z80_ADDR[10]                      ; |Block1|z80_ADDR[10]                      ; out              ;
-; |Block1|z80_ADDR[9]                       ; |Block1|z80_ADDR[9]                       ; out              ;
-; |Block1|z80_ADDR[8]                       ; |Block1|z80_ADDR[8]                       ; out              ;
-; |Block1|z80_ADDR[3]                       ; |Block1|z80_ADDR[3]                       ; out              ;
-; |Block1|z80_ADDR[2]                       ; |Block1|z80_ADDR[2]                       ; out              ;
-; |Block1|z80_ADDR[1]                       ; |Block1|z80_ADDR[1]                       ; out              ;
-; |Block1|z80_ADDR[0]                       ; |Block1|z80_ADDR[0]                       ; out              ;
-; |Block1|z80_OE_EN                         ; |Block1|z80_OE_EN                         ; pin_out          ;
-; |Block1|z80_DATA[7]                       ; |Block1|z80_DATA[7]                       ; pin_out          ;
-; |Block1|z80_DATA[5]                       ; |Block1|z80_DATA[5]                       ; pin_out          ;
-; |Block1|z80_DATA[3]                       ; |Block1|z80_DATA[3]                       ; pin_out          ;
-; |Block1|z80_DATA[1]                       ; |Block1|z80_DATA[1]                       ; pin_out          ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]      ; |Block1|Z80_bridge:inst|Z80_rData[1]      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_mreq          ; |Block1|Z80_bridge:inst|Z80_mreq          ; out0             ;
-; |Block1|Z80_bridge:inst|Write_GPU_RAM~0   ; |Block1|Z80_bridge:inst|Write_GPU_RAM~0   ; out0             ;
-; |Block1|Z80_bridge:inst|Write_GPU_RAM~1   ; |Block1|Z80_bridge:inst|Write_GPU_RAM~1   ; out0             ;
-; |Block1|Z80_bridge:inst|Write_GPU_RAM     ; |Block1|Z80_bridge:inst|Write_GPU_RAM     ; out0             ;
-; |Block1|Z80_bridge:inst|Read_GPU_RAM      ; |Block1|Z80_bridge:inst|Read_GPU_RAM      ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData[1]~4    ; |Block1|Z80_bridge:inst|Z80_rData[1]~4    ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245_oe~0      ; |Block1|Z80_bridge:inst|Z80_245_oe~0      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245_oe~1      ; |Block1|Z80_bridge:inst|Z80_245_oe~1      ; out              ;
-; |Block1|Z80_bridge:inst|WideOr0           ; |Block1|Z80_bridge:inst|WideOr0           ; out0             ;
-; |Block1|Z80_bridge:inst|WideOr2           ; |Block1|Z80_bridge:inst|WideOr2           ; out0             ;
-; |Block1|Z80_bridge:inst|WideOr3           ; |Block1|Z80_bridge:inst|WideOr3           ; out0             ;
-; |Block1|Z80_bridge:inst|WideOr6           ; |Block1|Z80_bridge:inst|WideOr6           ; out0             ;
-; |Block1|Z80_bridge:inst|WideOr7           ; |Block1|Z80_bridge:inst|WideOr7           ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData~23      ; |Block1|Z80_bridge:inst|Z80_rData~23      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~24      ; |Block1|Z80_bridge:inst|Z80_rData~24      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~25      ; |Block1|Z80_bridge:inst|Z80_rData~25      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~26      ; |Block1|Z80_bridge:inst|Z80_rData~26      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~27      ; |Block1|Z80_bridge:inst|Z80_rData~27      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~28      ; |Block1|Z80_bridge:inst|Z80_rData~28      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~31      ; |Block1|Z80_bridge:inst|Z80_rData~31      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~32      ; |Block1|Z80_bridge:inst|Z80_rData~32      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~33      ; |Block1|Z80_bridge:inst|Z80_rData~33      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~34      ; |Block1|Z80_bridge:inst|Z80_rData~34      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~35      ; |Block1|Z80_bridge:inst|Z80_rData~35      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~36      ; |Block1|Z80_bridge:inst|Z80_rData~36      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~37      ; |Block1|Z80_bridge:inst|Z80_rData~37      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~38      ; |Block1|Z80_bridge:inst|Z80_rData~38      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[7]~reg0 ; |Block1|Z80_bridge:inst|Z80_rData[7]~reg0 ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[5]~reg0 ; |Block1|Z80_bridge:inst|Z80_rData[5]~reg0 ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[3]~reg0 ; |Block1|Z80_bridge:inst|Z80_rData[3]~reg0 ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_245_oe~2      ; |Block1|Z80_bridge:inst|Z80_245_oe~2      ; out              ;
-; |Block1|Z80_bridge:inst|always0~1         ; |Block1|Z80_bridge:inst|always0~1         ; out0             ;
-; |Block1|Z80_bridge:inst|always0~2         ; |Block1|Z80_bridge:inst|always0~2         ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_INT_REQ       ; |Block1|Z80_bridge:inst|Z80_INT_REQ       ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[3]~13   ; |Block1|Z80_bridge:inst|Z80_rData[3]~13   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[3]      ; |Block1|Z80_bridge:inst|Z80_rData[3]      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[5]~17   ; |Block1|Z80_bridge:inst|Z80_rData[5]~17   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[5]      ; |Block1|Z80_bridge:inst|Z80_rData[5]      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[7]~21   ; |Block1|Z80_bridge:inst|Z80_rData[7]~21   ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[7]      ; |Block1|Z80_bridge:inst|Z80_rData[7]      ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245_oe        ; |Block1|Z80_bridge:inst|Z80_245_oe        ; regout           ;
-; |Block1|Z80_bridge:inst|bank_id_access    ; |Block1|Z80_bridge:inst|bank_id_access    ; regout           ;
-; |Block1|Z80_bridge:inst|mem_window        ; |Block1|Z80_bridge:inst|mem_window        ; regout           ;
-; |Block1|Z80_bridge:inst|Decoder0~1        ; |Block1|Z80_bridge:inst|Decoder0~1        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~2        ; |Block1|Z80_bridge:inst|Decoder0~2        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~3        ; |Block1|Z80_bridge:inst|Decoder0~3        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~4        ; |Block1|Z80_bridge:inst|Decoder0~4        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~5        ; |Block1|Z80_bridge:inst|Decoder0~5        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~6        ; |Block1|Z80_bridge:inst|Decoder0~6        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~7        ; |Block1|Z80_bridge:inst|Decoder0~7        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~8        ; |Block1|Z80_bridge:inst|Decoder0~8        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~9        ; |Block1|Z80_bridge:inst|Decoder0~9        ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~10       ; |Block1|Z80_bridge:inst|Decoder0~10       ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~11       ; |Block1|Z80_bridge:inst|Decoder0~11       ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~12       ; |Block1|Z80_bridge:inst|Decoder0~12       ; out              ;
-; |Block1|Z80_bridge:inst|Decoder0~13       ; |Block1|Z80_bridge:inst|Decoder0~13       ; out              ;
-; |Block1|Z80_bridge:inst|Equal4~0          ; |Block1|Z80_bridge:inst|Equal4~0          ; out0             ;
-; |Block1|Z80_bridge:inst|Equal5~0          ; |Block1|Z80_bridge:inst|Equal5~0          ; out0             ;
-+-------------------------------------------+-------------------------------------------+------------------+
++--------------------------------------------------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                                                                 ;
++---------------------------------------------------+---------------------------------------------------+------------------+
+; Node Name                                         ; Output Port Name                                  ; Output Port Type ;
++---------------------------------------------------+---------------------------------------------------+------------------+
+; |Block1|z80_ADDR[21]                              ; |Block1|z80_ADDR[21]                              ; out              ;
+; |Block1|z80_OE_EN                                 ; |Block1|z80_OE_EN                                 ; pin_out          ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[2]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[2]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[1]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[1]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[0]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[0]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[7]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[7]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|mem_in_ID              ; |Block1|Z80_bridge_v2:inst|mem_in_ID              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[6]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[6]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[5]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[5]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|always0~0              ; |Block1|Z80_bridge_v2:inst|always0~0              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~0   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~0   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~1   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~1   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~2   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~2   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~3   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~3   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~4   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~4   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~5   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~5   ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~0     ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~0     ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~3     ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~3     ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~6              ; |Block1|Z80_bridge_v2:inst|always0~6              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~0  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~0  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~1  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~1  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~2  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~2  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~3  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~3  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~4  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~4  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~5  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~5  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~0    ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~0    ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~3    ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~3    ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[1]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[1]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~0             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~0             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~1             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~1             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~2             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~2             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~3             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~3             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~4             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~4             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~5             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~5             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~6             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~6             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~7             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~7             ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~18             ; |Block1|Z80_bridge_v2:inst|always0~18             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe~0           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~0           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~36           ; |Block1|Z80_bridge_v2:inst|Z80_rData~36           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~37           ; |Block1|Z80_bridge_v2:inst|Z80_rData~37           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~38           ; |Block1|Z80_bridge_v2:inst|Z80_rData~38           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~39           ; |Block1|Z80_bridge_v2:inst|Z80_rData~39           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~40           ; |Block1|Z80_bridge_v2:inst|Z80_rData~40           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~41           ; |Block1|Z80_bridge_v2:inst|Z80_rData~41           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~42           ; |Block1|Z80_bridge_v2:inst|Z80_rData~42           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~43           ; |Block1|Z80_bridge_v2:inst|Z80_rData~43           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe~1           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~1           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe~2           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~2           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe~3           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~3           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe             ; |Block1|Z80_bridge_v2:inst|Z80_245_oe             ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~0         ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~0         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~1         ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~1         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~2         ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~2         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~3         ; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~3         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~4         ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~4         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~5         ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~5         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~6         ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~6         ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[4]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[4]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[5]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[5]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[6]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[6]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[7]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[7]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~7         ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~7         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~17        ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~17        ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~26        ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~26        ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~30        ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~30        ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[2]   ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[2]   ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[0] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[0] ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[1] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[1] ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[2] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[2] ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[2]    ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[2]    ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[0]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[0]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[1]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[1]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[2]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[2]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[21]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[21]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~3             ; |Block1|Z80_bridge_v2:inst|Decoder1~3             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~4             ; |Block1|Z80_bridge_v2:inst|Decoder1~4             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~5             ; |Block1|Z80_bridge_v2:inst|Decoder1~5             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~6             ; |Block1|Z80_bridge_v2:inst|Decoder1~6             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~7             ; |Block1|Z80_bridge_v2:inst|Decoder1~7             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~8             ; |Block1|Z80_bridge_v2:inst|Decoder1~8             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~9             ; |Block1|Z80_bridge_v2:inst|Decoder1~9             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~10            ; |Block1|Z80_bridge_v2:inst|Decoder1~10            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~11            ; |Block1|Z80_bridge_v2:inst|Decoder1~11            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~12            ; |Block1|Z80_bridge_v2:inst|Decoder1~12            ; out              ;
+; |Block1|Z80_bridge_v2:inst|LessThan0~2            ; |Block1|Z80_bridge_v2:inst|LessThan0~2            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add0~0                 ; |Block1|Z80_bridge_v2:inst|Add0~0                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add0~1                 ; |Block1|Z80_bridge_v2:inst|Add0~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add0~2                 ; |Block1|Z80_bridge_v2:inst|Add0~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add1~1                 ; |Block1|Z80_bridge_v2:inst|Add1~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add1~2                 ; |Block1|Z80_bridge_v2:inst|Add1~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add2~0                 ; |Block1|Z80_bridge_v2:inst|Add2~0                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add2~1                 ; |Block1|Z80_bridge_v2:inst|Add2~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add2~2                 ; |Block1|Z80_bridge_v2:inst|Add2~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add3~1                 ; |Block1|Z80_bridge_v2:inst|Add3~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add3~2                 ; |Block1|Z80_bridge_v2:inst|Add3~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~0                 ; |Block1|Z80_bridge_v2:inst|Add4~0                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~1                 ; |Block1|Z80_bridge_v2:inst|Add4~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~2                 ; |Block1|Z80_bridge_v2:inst|Add4~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~3                 ; |Block1|Z80_bridge_v2:inst|Add4~3                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~4                 ; |Block1|Z80_bridge_v2:inst|Add4~4                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~5                 ; |Block1|Z80_bridge_v2:inst|Add4~5                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~6                 ; |Block1|Z80_bridge_v2:inst|Add4~6                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~7                 ; |Block1|Z80_bridge_v2:inst|Add4~7                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~8                 ; |Block1|Z80_bridge_v2:inst|Add4~8                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~9                 ; |Block1|Z80_bridge_v2:inst|Add4~9                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~10                ; |Block1|Z80_bridge_v2:inst|Add4~10                ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~11                ; |Block1|Z80_bridge_v2:inst|Add4~11                ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~12                ; |Block1|Z80_bridge_v2:inst|Add4~12                ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal0~0               ; |Block1|Z80_bridge_v2:inst|Equal0~0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal2~0               ; |Block1|Z80_bridge_v2:inst|Equal2~0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal4~0               ; |Block1|Z80_bridge_v2:inst|Equal4~0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal9~0               ; |Block1|Z80_bridge_v2:inst|Equal9~0               ; out0             ;
++---------------------------------------------------+---------------------------------------------------+------------------+
 
 
 The following table displays output ports that do not toggle to 0 during simulation.
-+------------------------------------------------------------------------------------------------------+
-; Missing 0-Value Coverage                                                                             ;
-+-----------------------------------------+-----------------------------------------+------------------+
-; Node Name                               ; Output Port Name                        ; Output Port Type ;
-+-----------------------------------------+-----------------------------------------+------------------+
-; |Block1|z80_M1                          ; |Block1|z80_M1                          ; out              ;
-; |Block1|z80_MREQ                        ; |Block1|z80_MREQ                        ; out              ;
-; |Block1|z80_WR                          ; |Block1|z80_WR                          ; out              ;
-; |Block1|z80_ADDR[7]                     ; |Block1|z80_ADDR[7]                     ; out              ;
-; |Block1|z80_ADDR[6]                     ; |Block1|z80_ADDR[6]                     ; out              ;
-; |Block1|z80_ADDR[5]                     ; |Block1|z80_ADDR[5]                     ; out              ;
-; |Block1|z80_ADDR[4]                     ; |Block1|z80_ADDR[4]                     ; out              ;
-; |Block1|z80_OE_EN                       ; |Block1|z80_OE_EN                       ; pin_out          ;
-; |Block1|z80_DATA[6]                     ; |Block1|z80_DATA[6]                     ; pin_out          ;
-; |Block1|z80_DATA[4]                     ; |Block1|z80_DATA[4]                     ; pin_out          ;
-; |Block1|z80_DATA[2]                     ; |Block1|z80_DATA[2]                     ; pin_out          ;
-; |Block1|z80_DATA[0]                     ; |Block1|z80_DATA[0]                     ; pin_out          ;
-; |Block1|Z80_bridge:inst|Z80_mreq        ; |Block1|Z80_bridge:inst|Z80_mreq        ; out0             ;
-; |Block1|Z80_bridge:inst|Write_GPU_RAM~0 ; |Block1|Z80_bridge:inst|Write_GPU_RAM~0 ; out0             ;
-; |Block1|Z80_bridge:inst|Write_GPU_RAM~1 ; |Block1|Z80_bridge:inst|Write_GPU_RAM~1 ; out0             ;
-; |Block1|Z80_bridge:inst|Write_GPU_RAM   ; |Block1|Z80_bridge:inst|Write_GPU_RAM   ; out0             ;
-; |Block1|Z80_bridge:inst|Read_GPU_RAM    ; |Block1|Z80_bridge:inst|Read_GPU_RAM    ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_245_oe~0    ; |Block1|Z80_bridge:inst|Z80_245_oe~0    ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245_oe~1    ; |Block1|Z80_bridge:inst|Z80_245_oe~1    ; out              ;
-; |Block1|Z80_bridge:inst|WideOr1         ; |Block1|Z80_bridge:inst|WideOr1         ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData[0]    ; |Block1|Z80_bridge:inst|Z80_rData[0]    ; out              ;
-; |Block1|Z80_bridge:inst|WideOr4         ; |Block1|Z80_bridge:inst|WideOr4         ; out0             ;
-; |Block1|Z80_bridge:inst|WideOr5         ; |Block1|Z80_bridge:inst|WideOr5         ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_rData~29    ; |Block1|Z80_bridge:inst|Z80_rData~29    ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData~30    ; |Block1|Z80_bridge:inst|Z80_rData~30    ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245_oe~2    ; |Block1|Z80_bridge:inst|Z80_245_oe~2    ; out              ;
-; |Block1|Z80_bridge:inst|always0~1       ; |Block1|Z80_bridge:inst|always0~1       ; out0             ;
-; |Block1|Z80_bridge:inst|always0~2       ; |Block1|Z80_bridge:inst|always0~2       ; out0             ;
-; |Block1|Z80_bridge:inst|Z80_INT_REQ     ; |Block1|Z80_bridge:inst|Z80_INT_REQ     ; regout           ;
-; |Block1|Z80_bridge:inst|IO_245_DLY[6]   ; |Block1|Z80_bridge:inst|IO_245_DLY[6]   ; regout           ;
-; |Block1|Z80_bridge:inst|IO_245_DLY[5]   ; |Block1|Z80_bridge:inst|IO_245_DLY[5]   ; regout           ;
-; |Block1|Z80_bridge:inst|IO_245_DLY[4]   ; |Block1|Z80_bridge:inst|IO_245_DLY[4]   ; regout           ;
-; |Block1|Z80_bridge:inst|IO_245_DLY[3]   ; |Block1|Z80_bridge:inst|IO_245_DLY[3]   ; regout           ;
-; |Block1|Z80_bridge:inst|IO_245_DLY[2]   ; |Block1|Z80_bridge:inst|IO_245_DLY[2]   ; regout           ;
-; |Block1|Z80_bridge:inst|IO_245_DLY[1]   ; |Block1|Z80_bridge:inst|IO_245_DLY[1]   ; regout           ;
-; |Block1|Z80_bridge:inst|IO_245_DLY[0]   ; |Block1|Z80_bridge:inst|IO_245_DLY[0]   ; regout           ;
-; |Block1|Z80_bridge:inst|Z80_rData[2]    ; |Block1|Z80_bridge:inst|Z80_rData[2]    ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[4]    ; |Block1|Z80_bridge:inst|Z80_rData[4]    ; out              ;
-; |Block1|Z80_bridge:inst|Z80_rData[6]    ; |Block1|Z80_bridge:inst|Z80_rData[6]    ; out              ;
-; |Block1|Z80_bridge:inst|Z80_245_oe      ; |Block1|Z80_bridge:inst|Z80_245_oe      ; regout           ;
-; |Block1|Z80_bridge:inst|mem_valid_range ; |Block1|Z80_bridge:inst|mem_valid_range ; regout           ;
-; |Block1|Z80_bridge:inst|Decoder0~0      ; |Block1|Z80_bridge:inst|Decoder0~0      ; out              ;
-; |Block1|Z80_bridge:inst|LessThan0~0     ; |Block1|Z80_bridge:inst|LessThan0~0     ; out0             ;
-; |Block1|Z80_bridge:inst|LessThan0~1     ; |Block1|Z80_bridge:inst|LessThan0~1     ; out0             ;
-; |Block1|Z80_bridge:inst|LessThan0~2     ; |Block1|Z80_bridge:inst|LessThan0~2     ; out0             ;
-; |Block1|Z80_bridge:inst|Equal0~0        ; |Block1|Z80_bridge:inst|Equal0~0        ; out0             ;
-+-----------------------------------------+-----------------------------------------+------------------+
++--------------------------------------------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                                                                 ;
++---------------------------------------------------+---------------------------------------------------+------------------+
+; Node Name                                         ; Output Port Name                                  ; Output Port Type ;
++---------------------------------------------------+---------------------------------------------------+------------------+
+; |Block1|z80_ADDR[21]                              ; |Block1|z80_ADDR[21]                              ; out              ;
+; |Block1|z80_OE_EN                                 ; |Block1|z80_OE_EN                                 ; pin_out          ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[2]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[2]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[1]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[1]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[0]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[0]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[7]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[7]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|mem_in_ID              ; |Block1|Z80_bridge_v2:inst|mem_in_ID              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[6]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[6]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[5]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[5]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|always0~0              ; |Block1|Z80_bridge_v2:inst|always0~0              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~0   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~0   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~1   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~1   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~2   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~2   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~3   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~3   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~4   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~4   ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~5   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~5   ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~0     ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~0     ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~3     ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~3     ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~6              ; |Block1|Z80_bridge_v2:inst|always0~6              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~0  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~0  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~1  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~1  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~2  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~2  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~3  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~3  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~4  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~4  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~5  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~5  ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~0    ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~0    ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~3    ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~3    ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[1]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[1]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~0             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~0             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~1             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~1             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~2             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~2             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~3             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~3             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~4             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~4             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~5             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~5             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~6             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~6             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR~7             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~7             ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~18             ; |Block1|Z80_bridge_v2:inst|always0~18             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe~0           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~0           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~36           ; |Block1|Z80_bridge_v2:inst|Z80_rData~36           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~37           ; |Block1|Z80_bridge_v2:inst|Z80_rData~37           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~38           ; |Block1|Z80_bridge_v2:inst|Z80_rData~38           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~39           ; |Block1|Z80_bridge_v2:inst|Z80_rData~39           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~40           ; |Block1|Z80_bridge_v2:inst|Z80_rData~40           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~41           ; |Block1|Z80_bridge_v2:inst|Z80_rData~41           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~42           ; |Block1|Z80_bridge_v2:inst|Z80_rData~42           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData~43           ; |Block1|Z80_bridge_v2:inst|Z80_rData~43           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe~1           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~1           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe~2           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~2           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe~3           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~3           ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_245_oe             ; |Block1|Z80_bridge_v2:inst|Z80_245_oe             ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~0         ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~0         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~1         ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~1         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~2         ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~2         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~3         ; |Block1|Z80_bridge_v2:inst|Z80_rData[4]~3         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~4         ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~4         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~5         ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~5         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~6         ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~6         ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[4]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[4]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[5]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[5]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[6]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[6]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[7]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[7]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~7         ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~7         ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~17        ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~17        ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~26        ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~26        ; out              ;
+; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~30        ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~30        ; out              ;
+; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[2]   ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[2]   ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[0] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[0] ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[1] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[1] ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[2] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[2] ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[2]    ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[2]    ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[0]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[0]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[1]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[1]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[2]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[2]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_addr_r[21]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[21]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~3             ; |Block1|Z80_bridge_v2:inst|Decoder1~3             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~4             ; |Block1|Z80_bridge_v2:inst|Decoder1~4             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~5             ; |Block1|Z80_bridge_v2:inst|Decoder1~5             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~6             ; |Block1|Z80_bridge_v2:inst|Decoder1~6             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~7             ; |Block1|Z80_bridge_v2:inst|Decoder1~7             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~8             ; |Block1|Z80_bridge_v2:inst|Decoder1~8             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~9             ; |Block1|Z80_bridge_v2:inst|Decoder1~9             ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~10            ; |Block1|Z80_bridge_v2:inst|Decoder1~10            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~11            ; |Block1|Z80_bridge_v2:inst|Decoder1~11            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~12            ; |Block1|Z80_bridge_v2:inst|Decoder1~12            ; out              ;
+; |Block1|Z80_bridge_v2:inst|LessThan0~2            ; |Block1|Z80_bridge_v2:inst|LessThan0~2            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add0~0                 ; |Block1|Z80_bridge_v2:inst|Add0~0                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add0~1                 ; |Block1|Z80_bridge_v2:inst|Add0~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add0~2                 ; |Block1|Z80_bridge_v2:inst|Add0~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add1~1                 ; |Block1|Z80_bridge_v2:inst|Add1~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add1~2                 ; |Block1|Z80_bridge_v2:inst|Add1~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add2~0                 ; |Block1|Z80_bridge_v2:inst|Add2~0                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add2~1                 ; |Block1|Z80_bridge_v2:inst|Add2~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add2~2                 ; |Block1|Z80_bridge_v2:inst|Add2~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add3~1                 ; |Block1|Z80_bridge_v2:inst|Add3~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add3~2                 ; |Block1|Z80_bridge_v2:inst|Add3~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~0                 ; |Block1|Z80_bridge_v2:inst|Add4~0                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~1                 ; |Block1|Z80_bridge_v2:inst|Add4~1                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~2                 ; |Block1|Z80_bridge_v2:inst|Add4~2                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~3                 ; |Block1|Z80_bridge_v2:inst|Add4~3                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~4                 ; |Block1|Z80_bridge_v2:inst|Add4~4                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~5                 ; |Block1|Z80_bridge_v2:inst|Add4~5                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~6                 ; |Block1|Z80_bridge_v2:inst|Add4~6                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~7                 ; |Block1|Z80_bridge_v2:inst|Add4~7                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~8                 ; |Block1|Z80_bridge_v2:inst|Add4~8                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~9                 ; |Block1|Z80_bridge_v2:inst|Add4~9                 ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~10                ; |Block1|Z80_bridge_v2:inst|Add4~10                ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~11                ; |Block1|Z80_bridge_v2:inst|Add4~11                ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Add4~12                ; |Block1|Z80_bridge_v2:inst|Add4~12                ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal0~0               ; |Block1|Z80_bridge_v2:inst|Equal0~0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal2~0               ; |Block1|Z80_bridge_v2:inst|Equal2~0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal4~0               ; |Block1|Z80_bridge_v2:inst|Equal4~0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal9~0               ; |Block1|Z80_bridge_v2:inst|Equal9~0               ; out0             ;
++---------------------------------------------------+---------------------------------------------------+------------------+
 
 
 +---------------------+
@@ -324,21 +625,20 @@ The following table displays output ports that do not toggle to 0 during simulat
 Info: *******************************************************************
 Info: Running Quartus II Simulator
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Tue Jun 23 15:18:53 2020
+    Info: Processing started: Tue Jul 07 15:29:50 2020
 Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off Z80_bridge -c Z80_bridge
 Info: Using vector source file "G:/fpga/Projects/GPU/test/Z80_bridge_test/Z80_bridge.vwf"
 Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
     Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
-Warning: Found clock-sensitive change during active clock edge at time 1.23 us on register "|Block1|Z80_bridge:inst|bank_id_access"
-Warning: Found clock-sensitive change during active clock edge at time 1.23 us on register "|Block1|Z80_bridge:inst|mem_window"
-Warning: Found clock-sensitive change during active clock edge at time 1.23 us on register "|Block1|Z80_bridge:inst|mem_valid_range"
+Warning: Found clock-sensitive change during active clock edge at time 500.0 ns on register "|Block1|Z80_bridge_v2:inst|Z80_CLKr"
+Warning: Found clock-sensitive change during active clock edge at time 2.5 us on register "|Block1|Z80_bridge_v2:inst|Z80_wData_r[0]"
 Info: Simulation partitioned into 1 sub-simulations
-Info: Simulation coverage is      29.01 %
-Info: Number of transitions in simulation is 606
-Info: Quartus II Simulator was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 142 megabytes
-    Info: Processing ended: Tue Jun 23 15:18:53 2020
-    Info: Elapsed time: 00:00:00
-    Info: Total CPU time (on all processors): 00:00:01
+Info: Simulation coverage is      68.04 %
+Info: Number of transitions in simulation is 21410
+Info: Quartus II Simulator was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 143 megabytes
+    Info: Processing ended: Tue Jul 07 15:29:51 2020
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:02
 
 

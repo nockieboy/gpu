@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Tue Jun 23 15:18:04 2020
+Analysis & Synthesis Status : Successful - Tue Jul 07 15:28:39 2020
 Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
 Revision Name : Z80_bridge
 Top-level Entity Name : Block1
 Family : Cyclone III
-Total logic elements : 49
-    Total combinational functions : 36
-    Dedicated logic registers : 28
-Total registers : 28
-Total pins : 49
+Total logic elements : 140
+    Total combinational functions : 101
+    Dedicated logic registers : 83
+Total registers : 83
+Total pins : 61
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

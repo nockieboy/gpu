@@ -1,0 +1,25 @@
+;
+; This file contains the OP-CODE bit structure for the FWASM compiler
+;
+nop	         [0000000000000000] ; do nothing
+reset	         [0000000011111111] ; reset GPU
+;
+set_x	         [10aabbbbbbbbbbbb] ; Set the 12 bit register x[a] with value [b]
+set_y            [11aabbbbbbbbbbbb] ; Set the 12 bit register y[a] with value [b]
+;
+set_destmem      [01111111000000aa] ; Set destination memory to xy[a]
+set_srcmem       [01111111000001aa] ; Set source memory to xy[a]
+;
+set_dest1_src2   [0111111100001000] ; No arguments
+set_dest2_src1   [0111111100001001] ; No arguments
+set_dest3_src4   [0111111100001010] ; No arguments
+set_dest4_src3   [0111111100001011] ; No arguments
+;
+set_max_xy       [01111111000011aa] ; Set max_y and max_y to x&y[a]
+;
+plot_dot         [00000001aaaaaaaa] ; plot_dot at    (x0,y0) with color [a]
+plot_line        [00000010aaaaaaaa] ; plot_line from (x0,y0)-(x1,y1) with color [a]
+plot_box         [00000011aaaaaaaa] ; plot_box at inside (x0,y0)-(x1,y1) with color [a]
+plot_box_fill    [00000100aaaaaaaa] ; plot_box filled inside (x0,y0)-(x1,y1) with color [a]
+plot_circle      [00000101aaaaaaaa] ; plot_circle at (x0,y0) with radius (x1,y1) with color [a]
+plot_circle_fill [00000110aaaaaaaa] ; plot_circle filled at (x0,y0) with radius (x1,y1) with color [a]
