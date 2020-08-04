@@ -1,5 +1,5 @@
 Analysis & Synthesis report for pixel_writer
-Tue Aug 04 18:19:11 2020
+Tue Aug 04 20:00:41 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -14,12 +14,16 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Parameter Settings for User Entity Instance: geo_pixel_writer:inst
- 12. Parameter Settings for User Entity Instance: geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1
- 13. Port Connectivity Checks: "geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1"
- 14. Analysis & Synthesis Messages
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Source assignments for altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated
+ 13. Parameter Settings for User Entity Instance: geo_pixel_writer:inst
+ 14. Parameter Settings for User Entity Instance: geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1
+ 15. Parameter Settings for User Entity Instance: altsyncram0:inst17|altsyncram:altsyncram_component
+ 16. altsyncram Parameter Settings by Entity Instance
+ 17. Port Connectivity Checks: "geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1"
+ 18. Analysis & Synthesis Messages
 
 
 
@@ -45,16 +49,16 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Aug 04 18:19:11 2020        ;
+; Analysis & Synthesis Status        ; Successful - Tue Aug 04 20:00:41 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; pixel_writer                                 ;
 ; Top-level Entity Name              ; pixel_writer                                 ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 248                                          ;
+; Total logic elements               ; 250                                          ;
 ;     Total combinational functions  ; 176                                          ;
-;     Dedicated logic registers      ; 129                                          ;
-; Total registers                    ; 129                                          ;
-; Total pins                         ; 121                                          ;
+;     Dedicated logic registers      ; 131                                          ;
+; Total registers                    ; 131                                          ;
+; Total pins                         ; 103                                          ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0                                            ;
 ; Embedded Multiplier 9-bit elements ; 0                                            ;
@@ -162,6 +166,10 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; pixel_writer.bdf                 ; yes             ; User Block Diagram/Schematic File  ; G:/fpga/Projects/GPU/test/pixel_writer/pixel_writer.bdf        ;
 ; geo_pixel_writer.sv              ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Projects/GPU/test/pixel_writer/geo_pixel_writer.sv     ;
 ; fifo_3word_0_latency.sv          ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Projects/GPU/test/pixel_writer/fifo_3word_0_latency.sv ;
+; altsyncram0.v                    ; yes             ; User Wizard-Generated File         ; G:/fpga/Projects/GPU/test/pixel_writer/altsyncram0.v           ;
+; test.mif                         ; yes             ; User Memory Initialization File    ; G:/fpga/Projects/GPU/test/pixel_writer/test.mif                ;
+; altsyncram.tdf                   ; yes             ; Megafunction                       ; g:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf ;
+; db/altsyncram_r0n1.tdf           ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/pixel_writer/db/altsyncram_r0n1.tdf  ;
 +----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------+
 
 
@@ -170,7 +178,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 248       ;
+; Estimated Total logic elements              ; 250       ;
 ;                                             ;           ;
 ; Total combinational functions               ; 176       ;
 ; Logic element usage by number of LUT inputs ;           ;
@@ -182,15 +190,15 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;     -- normal mode                          ; 176       ;
 ;     -- arithmetic mode                      ; 0         ;
 ;                                             ;           ;
-; Total registers                             ; 129       ;
-;     -- Dedicated logic registers            ; 129       ;
+; Total registers                             ; 131       ;
+;     -- Dedicated logic registers            ; 131       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
-; I/O pins                                    ; 121       ;
+; I/O pins                                    ; 103       ;
 ; Maximum fan-out node                        ; CLK~input ;
-; Maximum fan-out                             ; 129       ;
-; Total fan-out                               ; 1133      ;
-; Average fan-out                             ; 2.07      ;
+; Maximum fan-out                             ; 131       ;
+; Total fan-out                               ; 1119      ;
+; Average fan-out                             ; 2.18      ;
 +---------------------------------------------+-----------+
 
 
@@ -199,7 +207,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                       ; Library Name ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------+--------------+
-; |pixel_writer                                 ; 176 (0)           ; 129 (0)      ; 0           ; 0            ; 0       ; 0         ; 121  ; 0            ; |pixel_writer                                                             ; work         ;
+; |pixel_writer                                 ; 176 (0)           ; 131 (2)      ; 0           ; 0            ; 0       ; 0         ; 103  ; 0            ; |pixel_writer                                                             ; work         ;
 ;    |geo_pixel_writer:inst|                    ; 176 (59)          ; 129 (23)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst                                       ;              ;
 ;       |FIFO_3word_0_latency:input_cmd_fifo_1| ; 117 (117)         ; 106 (106)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1 ; work         ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------+--------------+
@@ -213,8 +221,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------+----------------------------------------+
 ; geo_pixel_writer:inst|rd_req_b        ; Stuck at GND due to stuck port data_in ;
 ; geo_pixel_writer:inst|rd_wait_b       ; Stuck at GND due to stuck port data_in ;
-; Total Number of Removed Registers = 2 ;                                        ;
+; inst3                                 ; Stuck at GND due to stuck port data_in ;
+; inst4                                 ; Lost fanout                            ;
+; Total Number of Removed Registers = 4 ;                                        ;
 +---------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                          ;
++---------------------------------+---------------------------+----------------------------------------+
+; Register name                   ; Reason for Removal        ; Registers Removed due to This Register ;
++---------------------------------+---------------------------+----------------------------------------+
+; geo_pixel_writer:inst|rd_req_b  ; Stuck at GND              ; inst3                                  ;
+;                                 ; due to stuck port data_in ;                                        ;
+; geo_pixel_writer:inst|rd_wait_b ; Stuck at GND              ; inst4                                  ;
+;                                 ; due to stuck port data_in ;                                        ;
++---------------------------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -222,7 +244,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 129   ;
+; Total registers                              ; 131   ;
 ; Number of registers using Synchronous Clear  ; 29    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
@@ -237,15 +259,24 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_words[2]        ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[3][3]  ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[2][19] ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[1][8]  ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_words[1]        ;
+; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[3][0]  ;
+; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[2][1]  ;
+; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[1][4]  ;
 ; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[0][19] ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rd_cache_valid                                             ;
 ; 6:1                ; 20 bits   ; 80 LEs        ; 20 LEs               ; 60 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rd_cache_addr[4]                                           ;
-; 8:1                ; 24 bits   ; 120 LEs       ; 72 LEs               ; 48 LEs                 ; No         ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|Mux3                 ;
+; 8:1                ; 24 bits   ; 120 LEs       ; 72 LEs               ; 48 LEs                 ; No         ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|Mux2                 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------+
+; Source assignments for altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated ;
++---------------------------------+--------------------+------+--------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                         ;
++---------------------------------+--------------------+------+--------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                          ;
++---------------------------------+--------------------+------+--------------------------------------------+
 
 
 +--------------------------------------------------------------------+
@@ -274,6 +305,85 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: altsyncram0:inst17|altsyncram:altsyncram_component ;
++------------------------------------+------------------------+-----------------------------------+
+; Parameter Name                     ; Value                  ; Type                              ;
++------------------------------------+------------------------+-----------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                      ; Untyped                           ;
+; AUTO_CARRY_CHAINS                  ; ON                     ; AUTO_CARRY                        ;
+; IGNORE_CARRY_BUFFERS               ; OFF                    ; IGNORE_CARRY                      ;
+; AUTO_CASCADE_CHAINS                ; ON                     ; AUTO_CASCADE                      ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                    ; IGNORE_CASCADE                    ;
+; WIDTH_BYTEENA                      ; 1                      ; Untyped                           ;
+; OPERATION_MODE                     ; SINGLE_PORT            ; Untyped                           ;
+; WIDTH_A                            ; 16                     ; Signed Integer                    ;
+; WIDTHAD_A                          ; 12                     ; Signed Integer                    ;
+; NUMWORDS_A                         ; 4096                   ; Signed Integer                    ;
+; OUTDATA_REG_A                      ; CLOCK0                 ; Untyped                           ;
+; ADDRESS_ACLR_A                     ; NONE                   ; Untyped                           ;
+; OUTDATA_ACLR_A                     ; NONE                   ; Untyped                           ;
+; WRCONTROL_ACLR_A                   ; NONE                   ; Untyped                           ;
+; INDATA_ACLR_A                      ; NONE                   ; Untyped                           ;
+; BYTEENA_ACLR_A                     ; NONE                   ; Untyped                           ;
+; WIDTH_B                            ; 1                      ; Untyped                           ;
+; WIDTHAD_B                          ; 1                      ; Untyped                           ;
+; NUMWORDS_B                         ; 1                      ; Untyped                           ;
+; INDATA_REG_B                       ; CLOCK1                 ; Untyped                           ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                 ; Untyped                           ;
+; RDCONTROL_REG_B                    ; CLOCK1                 ; Untyped                           ;
+; ADDRESS_REG_B                      ; CLOCK1                 ; Untyped                           ;
+; OUTDATA_REG_B                      ; UNREGISTERED           ; Untyped                           ;
+; BYTEENA_REG_B                      ; CLOCK1                 ; Untyped                           ;
+; INDATA_ACLR_B                      ; NONE                   ; Untyped                           ;
+; WRCONTROL_ACLR_B                   ; NONE                   ; Untyped                           ;
+; ADDRESS_ACLR_B                     ; NONE                   ; Untyped                           ;
+; OUTDATA_ACLR_B                     ; NONE                   ; Untyped                           ;
+; RDCONTROL_ACLR_B                   ; NONE                   ; Untyped                           ;
+; BYTEENA_ACLR_B                     ; NONE                   ; Untyped                           ;
+; WIDTH_BYTEENA_A                    ; 1                      ; Signed Integer                    ;
+; WIDTH_BYTEENA_B                    ; 1                      ; Untyped                           ;
+; RAM_BLOCK_TYPE                     ; AUTO                   ; Untyped                           ;
+; BYTE_SIZE                          ; 8                      ; Untyped                           ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE              ; Untyped                           ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_WITH_NBE_READ ; Untyped                           ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_WITH_NBE_READ ; Untyped                           ;
+; INIT_FILE                          ; test.mif               ; Untyped                           ;
+; INIT_FILE_LAYOUT                   ; PORT_A                 ; Untyped                           ;
+; MAXIMUM_DEPTH                      ; 0                      ; Untyped                           ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS                 ; Untyped                           ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                 ; Untyped                           ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS                 ; Untyped                           ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                 ; Untyped                           ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN        ; Untyped                           ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN        ; Untyped                           ;
+; ENABLE_ECC                         ; FALSE                  ; Untyped                           ;
+; DEVICE_FAMILY                      ; Cyclone III            ; Untyped                           ;
+; CBXI_PARAMETER                     ; altsyncram_r0n1        ; Untyped                           ;
++------------------------------------+------------------------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                               ;
++-------------------------------------------+----------------------------------------------------+
+; Name                                      ; Value                                              ;
++-------------------------------------------+----------------------------------------------------+
+; Number of entity instances                ; 1                                                  ;
+; Entity Instance                           ; altsyncram0:inst17|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                        ;
+;     -- WIDTH_A                            ; 16                                                 ;
+;     -- NUMWORDS_A                         ; 4096                                               ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                             ;
+;     -- WIDTH_B                            ; 1                                                  ;
+;     -- NUMWORDS_B                         ; 1                                                  ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                             ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                       ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                               ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                          ;
++-------------------------------------------+----------------------------------------------------+
+
+
 +----------------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1"                                    ;
 +------------------+--------+----------+-------------------------------------------------------------------------------------+
@@ -289,7 +399,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Tue Aug 04 18:19:08 2020
+    Info: Processing started: Tue Aug 04 20:00:38 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off pixel_writer -c pixel_writer
 Info: Found 1 design units, including 1 entities, in source file pixel_writer.bdf
     Info: Found entity 1: pixel_writer
@@ -297,6 +407,8 @@ Info: Found 1 design units, including 1 entities, in source file geo_pixel_write
     Info: Found entity 1: geo_pixel_writer
 Info: Found 1 design units, including 1 entities, in source file fifo_3word_0_latency.sv
     Info: Found entity 1: FIFO_3word_0_latency
+Info: Found 1 design units, including 1 entities, in source file altsyncram0.v
+    Info: Found entity 1: altsyncram0
 Info: Elaborating entity "pixel_writer" for the top level hierarchy
 Info: Elaborating entity "geo_pixel_writer" for hierarchy "geo_pixel_writer:inst"
 Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(81): object "wr_px_collision_counter" assigned a value but never read
@@ -316,27 +428,52 @@ Warning (10034): Output port "collision_wr" at geo_pixel_writer.sv(39) has no dr
 Warning (10034): Output port "next_cmd" at geo_pixel_writer.sv(25) has no driver
 Warning (10034): Output port "wr_ena" at geo_pixel_writer.sv(31) has no driver
 Info: Elaborating entity "FIFO_3word_0_latency" for hierarchy "geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1"
+Info: Elaborating entity "altsyncram0" for hierarchy "altsyncram0:inst17"
+Info: Elaborating entity "altsyncram" for hierarchy "altsyncram0:inst17|altsyncram:altsyncram_component"
+Info: Elaborated megafunction instantiation "altsyncram0:inst17|altsyncram:altsyncram_component"
+Info: Instantiated megafunction "altsyncram0:inst17|altsyncram:altsyncram_component" with the following parameter:
+    Info: Parameter "clock_enable_input_a" = "BYPASS"
+    Info: Parameter "clock_enable_output_a" = "BYPASS"
+    Info: Parameter "init_file" = "test.mif"
+    Info: Parameter "intended_device_family" = "Cyclone III"
+    Info: Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info: Parameter "lpm_type" = "altsyncram"
+    Info: Parameter "numwords_a" = "4096"
+    Info: Parameter "operation_mode" = "SINGLE_PORT"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "outdata_reg_a" = "CLOCK0"
+    Info: Parameter "power_up_uninitialized" = "FALSE"
+    Info: Parameter "read_during_write_mode_port_a" = "NEW_DATA_WITH_NBE_READ"
+    Info: Parameter "read_during_write_mode_port_b" = "NEW_DATA_WITH_NBE_READ"
+    Info: Parameter "widthad_a" = "12"
+    Info: Parameter "width_a" = "16"
+    Info: Parameter "width_byteena_a" = "1"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_r0n1.tdf
+    Info: Found entity 1: altsyncram_r0n1
+Info: Elaborating entity "altsyncram_r0n1" for hierarchy "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated"
+Warning: Synthesized away the following node(s):
+    Warning: Synthesized away the following RAM node(s):
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[0]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[1]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[2]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[3]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[4]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[5]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[6]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[7]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[8]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[9]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[10]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[11]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[12]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[13]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[14]"
+        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[15]"
 Info: Timing-Driven Synthesis is running
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "next_cmd" is stuck at GND
     Warning (13410): Pin "rd_req_b" is stuck at GND
     Warning (13410): Pin "wr_ena" is stuck at GND
-    Warning (13410): Pin "collision_rd[7]" is stuck at GND
-    Warning (13410): Pin "collision_rd[6]" is stuck at GND
-    Warning (13410): Pin "collision_rd[5]" is stuck at GND
-    Warning (13410): Pin "collision_rd[4]" is stuck at GND
-    Warning (13410): Pin "collision_rd[3]" is stuck at GND
-    Warning (13410): Pin "collision_rd[2]" is stuck at GND
-    Warning (13410): Pin "collision_rd[1]" is stuck at GND
-    Warning (13410): Pin "collision_rd[0]" is stuck at GND
-    Warning (13410): Pin "collision_wr[7]" is stuck at GND
-    Warning (13410): Pin "collision_wr[6]" is stuck at GND
-    Warning (13410): Pin "collision_wr[5]" is stuck at GND
-    Warning (13410): Pin "collision_wr[4]" is stuck at GND
-    Warning (13410): Pin "collision_wr[3]" is stuck at GND
-    Warning (13410): Pin "collision_wr[2]" is stuck at GND
-    Warning (13410): Pin "collision_wr[1]" is stuck at GND
-    Warning (13410): Pin "collision_wr[0]" is stuck at GND
     Warning (13410): Pin "ram_wr_data[15]" is stuck at GND
     Warning (13410): Pin "ram_wr_data[14]" is stuck at GND
     Warning (13410): Pin "ram_wr_data[13]" is stuck at GND
@@ -353,8 +490,25 @@ Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "ram_wr_data[2]" is stuck at GND
     Warning (13410): Pin "ram_wr_data[1]" is stuck at GND
     Warning (13410): Pin "ram_wr_data[0]" is stuck at GND
-Warning: Design contains 36 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "rd_data_rdy_b"
+    Warning (13410): Pin "collision_rd[7]" is stuck at GND
+    Warning (13410): Pin "collision_rd[6]" is stuck at GND
+    Warning (13410): Pin "collision_rd[5]" is stuck at GND
+    Warning (13410): Pin "collision_rd[4]" is stuck at GND
+    Warning (13410): Pin "collision_rd[3]" is stuck at GND
+    Warning (13410): Pin "collision_rd[2]" is stuck at GND
+    Warning (13410): Pin "collision_rd[1]" is stuck at GND
+    Warning (13410): Pin "collision_rd[0]" is stuck at GND
+    Warning (13410): Pin "collision_wr[7]" is stuck at GND
+    Warning (13410): Pin "collision_wr[6]" is stuck at GND
+    Warning (13410): Pin "collision_wr[5]" is stuck at GND
+    Warning (13410): Pin "collision_wr[4]" is stuck at GND
+    Warning (13410): Pin "collision_wr[3]" is stuck at GND
+    Warning (13410): Pin "collision_wr[2]" is stuck at GND
+    Warning (13410): Pin "collision_wr[1]" is stuck at GND
+    Warning (13410): Pin "collision_wr[0]" is stuck at GND
+Info: 1 registers lost all their fanouts during netlist optimizations. The first 1 are displayed below.
+    Info: Register "inst4" lost all its fanouts during netlist optimizations.
+Warning: Design contains 19 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "ram_mux_busy"
     Warning (15610): No output dependent on input pin "collision_rd_rst"
     Warning (15610): No output dependent on input pin "collision_wr_rst"
@@ -374,30 +528,14 @@ Warning: Design contains 36 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "cmd_in[22]"
     Warning (15610): No output dependent on input pin "cmd_in[21]"
     Warning (15610): No output dependent on input pin "cmd_in[20]"
-    Warning (15610): No output dependent on input pin "rd_data_in[15]"
-    Warning (15610): No output dependent on input pin "rd_data_in[14]"
-    Warning (15610): No output dependent on input pin "rd_data_in[13]"
-    Warning (15610): No output dependent on input pin "rd_data_in[12]"
-    Warning (15610): No output dependent on input pin "rd_data_in[11]"
-    Warning (15610): No output dependent on input pin "rd_data_in[10]"
-    Warning (15610): No output dependent on input pin "rd_data_in[9]"
-    Warning (15610): No output dependent on input pin "rd_data_in[8]"
-    Warning (15610): No output dependent on input pin "rd_data_in[7]"
-    Warning (15610): No output dependent on input pin "rd_data_in[6]"
-    Warning (15610): No output dependent on input pin "rd_data_in[5]"
-    Warning (15610): No output dependent on input pin "rd_data_in[4]"
-    Warning (15610): No output dependent on input pin "rd_data_in[3]"
-    Warning (15610): No output dependent on input pin "rd_data_in[2]"
-    Warning (15610): No output dependent on input pin "rd_data_in[1]"
-    Warning (15610): No output dependent on input pin "rd_data_in[0]"
-Info: Implemented 393 device resources after synthesis - the final resource count might be different
-    Info: Implemented 64 input pins
+Info: Implemented 377 device resources after synthesis - the final resource count might be different
+    Info: Implemented 46 input pins
     Info: Implemented 57 output pins
-    Info: Implemented 272 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 89 warnings
-    Info: Peak virtual memory: 222 megabytes
-    Info: Processing ended: Tue Aug 04 18:19:11 2020
+    Info: Implemented 274 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 90 warnings
+    Info: Peak virtual memory: 232 megabytes
+    Info: Processing ended: Tue Aug 04 20:00:41 2020
     Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Total CPU time (on all processors): 00:00:04
 
 
