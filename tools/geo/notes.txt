@@ -1,0 +1,42 @@
+[quote author=nockieboy link=topic=214604.msg3111282#msg3111282 date=1593449284]
+Hmm.. I have to call it on this ellipse business.   :palm:
+
+Should be easy in theory - I should be able to tweak the circle function to do it, but I'm having trouble finding anything reliable on ellipses that I can translate to Free Basic, and the function I've got isn't working because... well, I can't get it to work.  :-//
+[/quote]
+
+Ok, hang on.  Look here for notes on drawing an ellipse inside a rectangle: [url]http://members.chello.at/easyfilter/bresenham.html[/url]
+
+Too bad that algorithm uses floats.  But, it is easy to modify if you want to fill the ellipse by adding a for x loop when drawing between the left and right side.
+
+I need to look a little more tonight when I wake up.
+For now, star a new dummy Quartus project to simulate the Geometry_xy_plotter.sv.
+
+You will need inputs:
+clk        // system clock
+reset      // force reset
+cmd_ready  // load the 16 bit data command
+cmd_data[15:0] // data bus
+draw_busy      // when high, the pixel writer is busy, so the geometry plotter will pause before sending any new pixels
+
+You will need outputs:
+
+load_cmd       //  output high when ready to receive the next cmd_data[15:0] input
+
+draw_cmd_rdy   //  Pulsed high when the data on the draw_cmd[35:0] is ready to send to the pixel writer module.
+draw_cmd[35:0] //  bits [35:32] hold an aux function number 0 through 15.
+               //  When AUX=0,  do nothing
+               //  When AUX=1,  write pixel,                             bits 31:24 hold the color bits 23:12 hold the Y coordinates, 11:0 hold the Y coordinates
+               //  When AUX=2,  write pixel with color 0 mask,           bits 31:24 hold the color bits 23:12 hold the Y coordinates, 11:0 hold the Y coordinates 
+               //  When AUX=3,  write from read pixel,                   bits 31:24 ignored        bits 23:12 hold the Y coordinates, 11:0 hold the Y coordinates
+               //  When AUX=4,  write from read pixel with color 0 mask, bits 31:24 ignored 23:12 hold the Y coordinates, 11:0 hold the Y coordinates 
+               //  When AUX=6,  read source pixel,                       bits 31:24 ignored,       bits 23:12 hold the Y coordinates, 11:0 hold the Y coordinates
+               //  When AUX=7,  Set Truecolor pixel color                bits 31:24 8 bit alpha blend mixe value, bits 23:0  hold RGB 24 bit color.
+               //                                                        Use dunction Aux3/4 to draw this color, only works if the destination is set to 16 bit true-color mode
+
+               //  When AUX=14, set destination mem address,  bits 31:24 hold the bitplane mode and bits 23:0 hold the destination base memory addres for write pixel.
+               //  When AUX=15, set source mem address,       bits 31:24 hold the bitplane mode and bits 23:0 hold the source base memory address for read source pixel.
+
+
+
+When copying, yes, having a different bitplane mode for source and destination will work as the pixel writer will have basic conversion logic.
+Can you think of anything else?

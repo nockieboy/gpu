@@ -1,5 +1,5 @@
 Flow report for geo
-Sat Jul 04 12:11:50 2020
+Fri Jul 31 20:53:57 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,22 +38,22 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Sat Jul 04 12:11:48 2020        ;
+; Flow Status                        ; Successful - Fri Jul 31 20:53:54 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; geo                                          ;
 ; Top-level Entity Name              ; geo                                          ;
 ; Family                             ; Cyclone III                                  ;
-; Device                             ; EP3C5F256C8                                  ;
+; Device                             ; EP3C5F256C7                                  ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; N/A                                          ;
-; Total logic elements               ; 521 / 5,136 ( 10 % )                         ;
-;     Total combinational functions  ; 507 / 5,136 ( 10 % )                         ;
-;     Dedicated logic registers      ; 210 / 5,136 ( 4 % )                          ;
-; Total registers                    ; 210                                          ;
-; Total pins                         ; 58 / 183 ( 32 % )                            ;
+; Total logic elements               ; 1,095 / 5,136 ( 21 % )                       ;
+;     Total combinational functions  ; 992 / 5,136 ( 19 % )                         ;
+;     Dedicated logic registers      ; 441 / 5,136 ( 9 % )                          ;
+; Total registers                    ; 441                                          ;
+; Total pins                         ; 99 / 183 ( 54 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
-; Total memory bits                  ; 0 / 423,936 ( 0 % )                          ;
-; Embedded Multiplier 9-bit elements ; 0 / 46 ( 0 % )                               ;
+; Total memory bits                  ; 8,192 / 423,936 ( 2 % )                      ;
+; Embedded Multiplier 9-bit elements ; 4 / 46 ( 9 % )                               ;
 ; Total PLLs                         ; 0 / 2 ( 0 % )                                ;
 +------------------------------------+----------------------------------------------+
 
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/04/2020 12:11:32 ;
+; Start date & time ; 07/31/2020 20:52:53 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; geo                 ;
 +-------------------+---------------------+
@@ -74,17 +74,22 @@ applicable agreement for further details.
 +------------------------------------+---------------------------------------+--------------------+-------------+----------------+
 ; Assignment Name                    ; Value                                 ; Default Value      ; Entity Name ; Section Id     ;
 +------------------------------------+---------------------------------------+--------------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID              ; 207458820171152.159387909202288       ; --                 ; --          ; --             ;
-; CYCLONEII_OPTIMIZATION_TECHNIQUE   ; Area                                  ; Balanced           ; --          ; --             ;
+; AUTO_RAM_RECOGNITION               ; Off                                   ; On                 ; --          ; --             ;
+; AUTO_SHIFT_REGISTER_RECOGNITION    ; Off                                   ; Auto               ; --          ; --             ;
+; COMPILER_SIGNATURE_ID              ; 213398122494286.159622517305076       ; --                 ; --          ; --             ;
+; CYCLONEII_OPTIMIZATION_TECHNIQUE   ; Speed                                 ; Balanced           ; --          ; --             ;
+; FITTER_EFFORT                      ; Standard Fit                          ; Auto Fit           ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP             ; 85                                    ; --                 ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP             ; 0                                     ; --                 ; --          ; --             ;
+; MISC_FILE                          ; G:/fpga/Projects/GPU/test/Geo/geo.dpf ; --                 ; --          ; --             ;
 ; NOMINAL_CORE_SUPPLY_VOLTAGE        ; 1.2V                                  ; --                 ; --          ; --             ;
+; OPTIMIZE_MULTI_CORNER_TIMING       ; On                                    ; Off                ; --          ; --             ;
 ; OPTIMIZE_POWER_DURING_FITTING      ; Off                                   ; Normal compilation ; --          ; --             ;
 ; OPTIMIZE_POWER_DURING_SYNTHESIS    ; Off                                   ; Normal compilation ; --          ; --             ;
 ; PARTITION_COLOR                    ; 16764057                              ; --                 ; --          ; Top            ;
 ; PARTITION_NETLIST_TYPE             ; SOURCE                                ; --                 ; --          ; Top            ;
-; POWER_BOARD_THERMAL_MODEL          ; None (CONSERVATIVE)                   ; --                 ; --          ; --             ;
-; POWER_PRESET_COOLING_SOLUTION      ; 28 MM HEAT SINK WITH 400 LFPM AIRFLOW ; --                 ; --          ; --             ;
+; PLACEMENT_EFFORT_MULTIPLIER        ; 4.0                                   ; 1.0                ; --          ; --             ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL   ; MAXIMUM                               ; Normal             ; --          ; --             ;
 ; USE_GENERATED_PHYSICAL_CONSTRAINTS ; Off                                   ; --                 ; --          ; eda_blast_fpga ;
 ; VERILOG_INPUT_VERSION              ; SystemVerilog_2005                    ; Verilog_2001       ; --          ; --             ;
 ; VERILOG_SHOW_LMF_MAPPING_MESSAGES  ; Off                                   ; --                 ; --          ; --             ;
@@ -96,11 +101,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:04     ; 1.0                     ; 217 MB              ; 00:00:04                           ;
-; Fitter                    ; 00:00:09     ; 1.0                     ; 270 MB              ; 00:00:10                           ;
-; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 233 MB              ; 00:00:03                           ;
-; Assembler                 ; 00:00:01     ; 1.0                     ; 207 MB              ; 00:00:01                           ;
-; Total                     ; 00:00:16     ; --                      ; --                  ; 00:00:17                           ;
+; Analysis & Synthesis      ; 00:00:09     ; 1.0                     ; 238 MB              ; 00:00:10                           ;
+; Fitter                    ; 00:00:47     ; 1.0                     ; 296 MB              ; 00:00:47                           ;
+; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 246 MB              ; 00:00:04                           ;
+; Assembler                 ; 00:00:01     ; 1.0                     ; 209 MB              ; 00:00:01                           ;
+; Total                     ; 00:01:00     ; --                      ; --                  ; 00:01:01                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -109,10 +114,10 @@ applicable agreement for further details.
 +---------------------------+------------------+---------------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name       ; OS Version ; Processor type ;
 +---------------------------+------------------+---------------+------------+----------------+
-; Analysis & Synthesis      ; IMPLODER         ; Windows Vista ; 6.1        ; x86_64         ;
-; Fitter                    ; IMPLODER         ; Windows Vista ; 6.1        ; x86_64         ;
-; Assembler                 ; IMPLODER         ; Windows Vista ; 6.1        ; x86_64         ;
-; TimeQuest Timing Analyzer ; IMPLODER         ; Windows Vista ; 6.1        ; x86_64         ;
+; Analysis & Synthesis      ; TALOS            ; Windows Vista ; 6.2        ; x86_64         ;
+; Fitter                    ; TALOS            ; Windows Vista ; 6.2        ; x86_64         ;
+; Assembler                 ; TALOS            ; Windows Vista ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; TALOS            ; Windows Vista ; 6.2        ; x86_64         ;
 +---------------------------+------------------+---------------+------------+----------------+
 
 

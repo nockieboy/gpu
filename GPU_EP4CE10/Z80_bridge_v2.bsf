@@ -240,6 +240,20 @@ refer to the applicable agreement for further details.
 		(text "VIDEO_EN" (rect 168 235 219 247)(font "Arial" ))
 		(line (pt 240 240)(pt 224 240)(line_width 1))
 	)
+	(port
+		(pt 240 256)
+		(output)
+		(text "snd_data_tx" (rect 0 0 49 12)(font "Arial" ))
+		(text "snd_data_tx" (rect 170 251 219 263)(font "Arial" ))
+		(line (pt 240 256)(pt 224 256)(line_width 1))
+	)
+	(port
+		(pt 240 272)
+		(output)
+		(text "snd_data[8..0]" (rect 0 0 56 12)(font "Arial" ))
+		(text "snd_data[8..0]" (rect 163 267 219 279)(font "Arial" ))
+		(line (pt 240 272)(pt 224 272)(line_width 3))
+	)
 	(parameter
 		"USE_Z80_CLK"
 		"1"
@@ -267,7 +281,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"MEM_SIZE_BYTES"
-		"65536"
+		"40960"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -277,7 +291,7 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"BANK_ID_ADDR"
-		"10111111111111111"
+		"111111111111111"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
@@ -316,6 +330,16 @@ refer to the applicable agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
+		"SND_TON"
+		"244"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"SND_DUR"
+		"245"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
 		"data_in"
 		"0"
 		""
@@ -325,11 +349,6 @@ refer to the applicable agreement for further details.
 		"1"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"IO_RD_DELAY"
-		"12"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 224 320)(line_width 1))
 	)

@@ -33,7 +33,9 @@ module Z80_bridge_v2 (
    output wire EA_DIR,           // Controls level converter direction for EA address flow - HIGH = A->B (toward FPGA)
    output wire EA_OE,            // OE for EA address level converter *** ACTIVE LOW ***
    output wire SPKR_EN,          // HIGH to enable speaker output
-   output wire VIDEO_EN          // Controls BLANK input on DAC
+   output wire VIDEO_EN,         // Controls BLANK input on DAC
+	output wire snd_data_tx,		// HIGH for 1 clock for valid snd_data
+	output wire [8:0] snd_data		// Data bus to sound module
 );
 
 //
@@ -152,8 +154,10 @@ parameter byte INT_VEC  = 'h30;        // INTerrupt VECtor to be passed to host 
 //
 parameter int IO_DATA   = 240;         // IO address for keyboard data polling
 parameter int IO_STAT   = 241;         // IO address for keyboard status polling
-parameter int IO_SPKR   = 242;         // IO address for speaker/audio output enable
+parameter int SND_OUT   = 242;         // IO address for speaker/audio output enable
 parameter int IO_BLNK   = 243;         // IO address for BLANK signal to video DAC
+parameter int SND_TON   = 244;         // IO address for TONE register in sound module
+parameter int SND_DUR   = 245;         // IO address for DURATION register in sound module
 //
 // Direction control for DATA BUS level converter
 //
@@ -235,23 +239,41 @@ always @(posedge GPU_CLK) begin
       gpu_rd_req <= 1'b0;       // Flag HIGH for 1 clock when reading from GPU RAM
    end
 
-   if ( z80_write_port_1s && Z80_addr_r[7:0]==IO_SPKR ) begin     // Write_port 1 clock & speaker address
-      SPKR_EN    <= Z80_wData_r[0]; // send the inverted bit 0 of the Z80 transmitted data.
+   if ( z80_write_port_1s && Z80_addr_r[7:0]==SND_OUT ) begin     // Write_port 1 clock & SPEAKER ENABLE address
+      SPKR_EN    <= 1'b1;
    end
+	
+	if ( z80_write_port_1s && Z80_addr_r[7:0]==SND_DUR ) begin     // Write_port 1 clock & sound module STOP flag address
+      snd_data[8]   <= 1'b0;    // bit 8 LOW for STOP register
+		snd_data[7:0] <= Z80_wData_r[7:0];  // data is ignored
+		snd_data_tx   <= 1'b1;
+	end
+	
+	if ( z80_write_port_1s && Z80_addr_r[7:0]==SND_TON ) begin     // Write_port 1 clock & sound module TONE register address
+      snd_data[8]   <= 1'b1;    // bit 8 HIGH for TONE register
+		snd_data[7:0] <= Z80_wData_r[7:0];
+		snd_data_tx   <= 1'b1;
+   end
+	
+	// ENFORCE ONE-SHOTS
+	if ( snd_data_tx ) snd_data_tx <= 1'b0;	// Enforce snd_data_tx as one-shot
+	if ( SPKR_EN )     SPKR_EN     <= 1'b0;	// Enforce SPKR_EN as one-shot
 
    if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_DATA[7:0] ) begin  // Z80 is reading PS/2 port
       Z80_rData  <= PS2_CHAR;
       PS2_CHAR   <= 8'b0;
+		PS2_STAT	  <= 8'b0;		  // Reset PS2_STAT
    end
 
    PS2_RDY_r[7:0] <= {PS2_RDY_r[6:0],PS2_RDY};
-   if (PS2_RDY_r[7:0] == 8'b00001111 ) begin           // valid data on PS2_DAT
-      PS2_CHAR   <= PS2_DAT;    // Latch the character into Ps2_char register
+	
+   if (PS2_RDY_r[7:0] == 8'b00001111 ) begin            // valid data on PS2_DAT
+      PS2_CHAR   <= PS2_DAT ;                           // Latch the character into Ps2_char register
+		PS2_STAT	  <= { 6'b0, PS2_DAT[7], 1'b1 } ;		  // Set PS2_STAT bit 0 to indicate valid data, with bit 2 HIGH for BREAK codes
    end
 
    if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_STAT[7:0] ) begin     // Read_port 1 clock & keyboard status address
       Z80_rData  <= PS2_STAT;
-      PS2_STAT   <= PS2_STAT + 1;    // create a dummy counter to test if there are any read glitches.
    end
    
    if ( ~Z80_RDn_r ) begin  // this section sets the output enable and sends the correct data back to the Z80

@@ -26,76 +26,86 @@ start
 ; *************************************************************************************
 ; ** Draw a dot at coordinates (250,250) with palette color 15
 ; *************************************************************************************
-	set_x		0,d'250'	; set x0 register to 250
-	set_y		0,d'250'	; set y0 register to 250
-	plot_dot	d'15' 		; plot a dot with palette color 15
-
+;	set_x		0,d'250'	; set x0 register to 250
+;	set_y		0,d'250'	; set y0 register to 250
+;	plot_dot	d'15' 		; plot a dot with palette color 15
 
 ; *************************************************************************************
 ; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
 ; *************************************************************************************
 	set_x		0,d'200'	; set x0 register to 200
-	set_y		0,d'200'	; set y0 register to 200
-	set_x		1,d'300'	; set x0 register to 300
-	set_y		1,d'300'	; set y0 register to 300
-	plot_line d'14' 		; draw a line with palette color 14
+	set_y		0,d'350'	; set y0 register to 200
+	set_x		1,d'100'	; set x1 register to 300
+	set_y		1,d'200'	; set y1 register to 300
+	set_x		2,d'300'	; set x2 register to 300
+	set_y		2,d'300'	; set y2 register to 300
+	plot_tri_fill   d'13' 		; y0 > y2 > y1
 
+; *************************************************************************************
+; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+; *************************************************************************************
+	set_x		0,d'90'	; set x0 register to 200
+	set_y		0,d'50' 	; set y0 register to 200
+	set_x		1,d'600'	; set x1 register to 300
+	set_y		1,d'300'	; set y1 register to 300
+	set_x		2,d'180'	; set x2 register to 300
+	set_y		2,d'170'	; set y2 register to 300
+	plot_tri_fill   d'11' 		; y1 > y2 > y0
+	
+; *************************************************************************************
+; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+; *************************************************************************************
+	set_x		0,d'60'	; set x0 register to 200
+	set_y		0,d'250' ; set y0 register to 200
+	set_x		1,d'360'	; set x1 register to 300
+	set_y		1,d'170'	; set y1 register to 300
+	set_x		2,d'290'	; set x2 register to 300
+	set_y		2,d'70'	; set y2 register to 300
+	plot_tri_fill   d'8' 		; y0 > y1 > y2
 
+; *************************************************************************************
+; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+; *************************************************************************************
+	set_x		0,d'80'	; set x0 register to 200
+	set_y		0,d'200' ; set y0 register to 200
+	set_x		1,d'360'	; set x1 register to 300
+	set_y		1,d'140'	; set y1 register to 300
+	set_x		2,d'290'	; set x2 register to 300
+	set_y		2,d'270'	; set y2 register to 300
+	plot_tri_fill   d'9' 		; y2 > y0 > y1
+
+; *************************************************************************************
+; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+; *************************************************************************************
+	set_x		0,d'80'	; set x0 register to 200
+	set_y		0,d'180' ; set y0 register to 200
+	set_x		1,d'360'	; set x1 register to 300
+	set_y		1,d'220'	; set y1 register to 300
+	set_x		2,d'290'	; set x2 register to 300
+	set_y		2,d'110'	; set y2 register to 300
+	plot_tri_fill   d'3' 		; y1 > y0 > y2
+
+; *************************************************************************************
+; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+; *************************************************************************************
+	set_x		0,d'220'	; set x0 register to 200
+	set_y		0,d'210'	; set y0 register to 200
+	set_x		1,d'230'	; set x1 register to 300
+	set_y		1,d'220'	; set y1 register to 300
+	set_x		2,d'210'	; set x2 register to 300
+	set_y		2,d'230'	; set y2 register to 300
+	plot_tri_fill   d'14' 		; y2 > y1 > y0
+	
 ; *************************************************************************************
 ; ** Draw a line from coordinates (200,300) to (300,200) with palette color 14
 ; *************************************************************************************
-	set_x		0,d'200'	; set x0 register to 200
-	set_y		0,d'300'	; set y0 register to 300
-	set_x		1,d'300'	; set x0 register to 300
-	set_y		1,d'200'	; set y0 register to 200
-	plot_line d'14' 		; draw a line with palette color 14
-	
-
-; *************************************************************************************
-; ** Draw an outlined box with an outline (200,200)-(300,300) with palette color 14
-; *************************************************************************************
-	set_x		0,d'200'	; set x0 register to 200
-	set_y		0,d'200'	; set y0 register to 200
-	set_x		1,d'300'	; set x1 register to 300
-	set_y		1,d'300'	; set y1 register to 300
-	plot_box	d'14' 		; plot a box with palette color 14
+;	set_x		0,d'250'	; set x0 register to 200
+;	set_y		0,d'200'	; set y0 register to 200
+;	set_x		1,d'200'	; set x1 register to 300
+;	set_y		1,d'250'	; set y1 register to 300
+;	set_x		2,d'350'	; set x2 register to 300
+;	set_y		2,d'350'	; set y2 register to 300
+;	plot_line       d'1' 		; draw a line with palette color 14
 
 
-; *************************************************************************************
-; ** Draw a filled box within (225,225)-(275,275) with palette color 14
-; *************************************************************************************
-	set_x		0,d'225'	; set x0 register to 225
-	set_y		0,d'225'	; set y0 register to 225
-	set_x		1,d'275'	; set x1 register to 275
-	set_y		1,d'275'	; set y1 register to 275
-	plot_box	d'14' 		; plot a filled box with palette color 14
-	
 
-; *************************************************************************************
-; ** Draw a filled box within (226,226)-(274,274) with palette color 0
-; *************************************************************************************
-	set_x		0,d'226'	; set x0 register to 226
-	set_y		0,d'226'	; set y0 register to 226
-	set_x		1,d'274'	; set x1 register to 274
-	set_y		1,d'274'	; set y1 register to 274
-	plot_box_fill	d'0' 		; plot a filled box with palette color 0
-
-
-; *************************************************************************************
-; ** Draw a circle (250,250)-(325,325) with palette color 15
-; *************************************************************************************
-	set_x		0,d'250'	; set x0 register to 250
-	set_y		0,d'250'	; set y0 register to 250
-	set_x		1,d'325'	; set x1 register to 325
-	set_y		1,d'325'	; set y1 register to 325
-	plot_circle	d'15' 		; plot an ellipse with palette color 15
-
-
-; *************************************************************************************
-; ** Draw a filled ellipse (250,250)-(300,350) with palette color 9
-; *************************************************************************************
-	set_x		0,d'175'	; set x0 register to 250 - The ellipse's top-left X position
-	set_y		0,d'175'	; set y0 register to 250 - The ellipse's top-left Y position
-	set_x		1,d'300'	; set x1 register to 300 - The ellipse's bottom-right X position
-	set_y		1,d'350'	; set y1 register to 350 - The ellipse's bottom-right Y position
-	plot_circle_fill	d'9' 		; plot a filled ellipse with palette color 9

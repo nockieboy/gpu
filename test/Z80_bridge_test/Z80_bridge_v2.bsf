@@ -20,9 +20,9 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 232 336)
+	(rect 16 16 304 464)
 	(text "Z80_bridge_v2" (rect 5 0 78 12)(font "Arial" ))
-	(text "inst" (rect 8 304 25 316)(font "Arial" ))
+	(text "inst" (rect 8 432 25 444)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -143,102 +143,200 @@ applicable agreement for further details.
 		(line (pt 0 288)(pt 16 288)(line_width 1))
 	)
 	(port
-		(pt 216 32)
+		(pt 0 304)
+		(input)
+		(text "WR_PX_CTR[7..0]" (rect 0 0 92 12)(font "Arial" ))
+		(text "WR_PX_CTR[7..0]" (rect 21 299 113 311)(font "Arial" ))
+		(line (pt 0 304)(pt 16 304)(line_width 3))
+	)
+	(port
+		(pt 0 320)
+		(input)
+		(text "RD_PX_CTR[7..0]" (rect 0 0 89 12)(font "Arial" ))
+		(text "RD_PX_CTR[7..0]" (rect 21 315 110 327)(font "Arial" ))
+		(line (pt 0 320)(pt 16 320)(line_width 3))
+	)
+	(port
+		(pt 0 336)
+		(input)
+		(text "GEO_STAT_RD[7..0]" (rect 0 0 103 12)(font "Arial" ))
+		(text "GEO_STAT_RD[7..0]" (rect 21 331 124 343)(font "Arial" ))
+		(line (pt 0 336)(pt 16 336)(line_width 3))
+	)
+	(port
+		(pt 288 32)
 		(output)
 		(text "Z80_245data_dir" (rect 0 0 81 12)(font "Arial" ))
-		(text "Z80_245data_dir" (rect 114 27 195 39)(font "Arial" ))
-		(line (pt 216 32)(pt 200 32)(line_width 1))
+		(text "Z80_245data_dir" (rect 186 27 267 39)(font "Arial" ))
+		(line (pt 288 32)(pt 272 32)(line_width 1))
 	)
 	(port
-		(pt 216 48)
+		(pt 288 48)
 		(output)
 		(text "Z80_rData[7..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "Z80_rData[7..0]" (rect 118 43 195 55)(font "Arial" ))
-		(line (pt 216 48)(pt 200 48)(line_width 3))
+		(text "Z80_rData[7..0]" (rect 190 43 267 55)(font "Arial" ))
+		(line (pt 288 48)(pt 272 48)(line_width 3))
 	)
 	(port
-		(pt 216 64)
+		(pt 288 64)
 		(output)
 		(text "Z80_rData_ena" (rect 0 0 75 12)(font "Arial" ))
-		(text "Z80_rData_ena" (rect 120 59 195 71)(font "Arial" ))
-		(line (pt 216 64)(pt 200 64)(line_width 1))
+		(text "Z80_rData_ena" (rect 192 59 267 71)(font "Arial" ))
+		(line (pt 288 64)(pt 272 64)(line_width 1))
 	)
 	(port
-		(pt 216 80)
+		(pt 288 80)
 		(output)
 		(text "Z80_245_oe" (rect 0 0 60 12)(font "Arial" ))
-		(text "Z80_245_oe" (rect 135 75 195 87)(font "Arial" ))
-		(line (pt 216 80)(pt 200 80)(line_width 1))
+		(text "Z80_245_oe" (rect 207 75 267 87)(font "Arial" ))
+		(line (pt 288 80)(pt 272 80)(line_width 1))
 	)
 	(port
-		(pt 216 96)
+		(pt 288 96)
 		(output)
 		(text "gpu_wr_ena" (rect 0 0 57 12)(font "Arial" ))
-		(text "gpu_wr_ena" (rect 138 91 195 103)(font "Arial" ))
-		(line (pt 216 96)(pt 200 96)(line_width 1))
+		(text "gpu_wr_ena" (rect 210 91 267 103)(font "Arial" ))
+		(line (pt 288 96)(pt 272 96)(line_width 1))
 	)
 	(port
-		(pt 216 112)
+		(pt 288 112)
 		(output)
 		(text "gpu_rd_req" (rect 0 0 54 12)(font "Arial" ))
-		(text "gpu_rd_req" (rect 141 107 195 119)(font "Arial" ))
-		(line (pt 216 112)(pt 200 112)(line_width 1))
+		(text "gpu_rd_req" (rect 213 107 267 119)(font "Arial" ))
+		(line (pt 288 112)(pt 272 112)(line_width 1))
 	)
 	(port
-		(pt 216 128)
+		(pt 288 128)
 		(output)
 		(text "gpu_addr[19..0]" (rect 0 0 76 12)(font "Arial" ))
-		(text "gpu_addr[19..0]" (rect 119 123 195 135)(font "Arial" ))
-		(line (pt 216 128)(pt 200 128)(line_width 3))
+		(text "gpu_addr[19..0]" (rect 191 123 267 135)(font "Arial" ))
+		(line (pt 288 128)(pt 272 128)(line_width 3))
 	)
 	(port
-		(pt 216 144)
+		(pt 288 144)
 		(output)
 		(text "gpu_wdata[7..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "gpu_wdata[7..0]" (rect 118 139 195 151)(font "Arial" ))
-		(line (pt 216 144)(pt 200 144)(line_width 3))
+		(text "gpu_wdata[7..0]" (rect 190 139 267 151)(font "Arial" ))
+		(line (pt 288 144)(pt 272 144)(line_width 3))
 	)
 	(port
-		(pt 216 160)
+		(pt 288 160)
 		(output)
 		(text "Z80_INT_REQ" (rect 0 0 71 12)(font "Arial" ))
-		(text "Z80_INT_REQ" (rect 124 155 195 167)(font "Arial" ))
-		(line (pt 216 160)(pt 200 160)(line_width 1))
+		(text "Z80_INT_REQ" (rect 196 155 267 167)(font "Arial" ))
+		(line (pt 288 160)(pt 272 160)(line_width 1))
 	)
 	(port
-		(pt 216 176)
+		(pt 288 176)
 		(output)
 		(text "Z80_IEO" (rect 0 0 43 12)(font "Arial" ))
-		(text "Z80_IEO" (rect 152 171 195 183)(font "Arial" ))
-		(line (pt 216 176)(pt 200 176)(line_width 1))
+		(text "Z80_IEO" (rect 224 171 267 183)(font "Arial" ))
+		(line (pt 288 176)(pt 272 176)(line_width 1))
 	)
 	(port
-		(pt 216 192)
+		(pt 288 192)
 		(output)
 		(text "EA_DIR" (rect 0 0 40 12)(font "Arial" ))
-		(text "EA_DIR" (rect 155 187 195 199)(font "Arial" ))
-		(line (pt 216 192)(pt 200 192)(line_width 1))
+		(text "EA_DIR" (rect 227 187 267 199)(font "Arial" ))
+		(line (pt 288 192)(pt 272 192)(line_width 1))
 	)
 	(port
-		(pt 216 208)
+		(pt 288 208)
 		(output)
 		(text "EA_OE" (rect 0 0 35 12)(font "Arial" ))
-		(text "EA_OE" (rect 160 203 195 215)(font "Arial" ))
-		(line (pt 216 208)(pt 200 208)(line_width 1))
+		(text "EA_OE" (rect 232 203 267 215)(font "Arial" ))
+		(line (pt 288 208)(pt 272 208)(line_width 1))
 	)
 	(port
-		(pt 216 224)
+		(pt 288 224)
 		(output)
 		(text "SPKR_EN" (rect 0 0 50 12)(font "Arial" ))
-		(text "SPKR_EN" (rect 145 219 195 231)(font "Arial" ))
-		(line (pt 216 224)(pt 200 224)(line_width 1))
+		(text "SPKR_EN" (rect 217 219 267 231)(font "Arial" ))
+		(line (pt 288 224)(pt 272 224)(line_width 1))
 	)
 	(port
-		(pt 216 240)
+		(pt 288 240)
 		(output)
 		(text "VIDEO_EN" (rect 0 0 55 12)(font "Arial" ))
-		(text "VIDEO_EN" (rect 140 235 195 247)(font "Arial" ))
-		(line (pt 216 240)(pt 200 240)(line_width 1))
+		(text "VIDEO_EN" (rect 212 235 267 247)(font "Arial" ))
+		(line (pt 288 240)(pt 272 240)(line_width 1))
+	)
+	(port
+		(pt 288 256)
+		(output)
+		(text "snd_data_tx" (rect 0 0 60 12)(font "Arial" ))
+		(text "snd_data_tx" (rect 207 251 267 263)(font "Arial" ))
+		(line (pt 288 256)(pt 272 256)(line_width 1))
+	)
+	(port
+		(pt 288 272)
+		(output)
+		(text "snd_data[8..0]" (rect 0 0 70 12)(font "Arial" ))
+		(text "snd_data[8..0]" (rect 197 267 267 279)(font "Arial" ))
+		(line (pt 288 272)(pt 272 272)(line_width 3))
+	)
+	(port
+		(pt 288 288)
+		(output)
+		(text "GEO_WR_LO_STROBE" (rect 0 0 118 12)(font "Arial" ))
+		(text "GEO_WR_LO_STROBE" (rect 149 283 267 295)(font "Arial" ))
+		(line (pt 288 288)(pt 272 288)(line_width 1))
+	)
+	(port
+		(pt 288 304)
+		(output)
+		(text "GEO_WR_LO[7..0]" (rect 0 0 94 12)(font "Arial" ))
+		(text "GEO_WR_LO[7..0]" (rect 173 299 267 311)(font "Arial" ))
+		(line (pt 288 304)(pt 272 304)(line_width 3))
+	)
+	(port
+		(pt 288 320)
+		(output)
+		(text "GEO_WR_HI_STROBE" (rect 0 0 115 12)(font "Arial" ))
+		(text "GEO_WR_HI_STROBE" (rect 152 315 267 327)(font "Arial" ))
+		(line (pt 288 320)(pt 272 320)(line_width 1))
+	)
+	(port
+		(pt 288 336)
+		(output)
+		(text "GEO_WR_HI[7..0]" (rect 0 0 92 12)(font "Arial" ))
+		(text "GEO_WR_HI[7..0]" (rect 175 331 267 343)(font "Arial" ))
+		(line (pt 288 336)(pt 272 336)(line_width 3))
+	)
+	(port
+		(pt 288 352)
+		(output)
+		(text "WR_PX_CTR_STROBE" (rect 0 0 115 12)(font "Arial" ))
+		(text "WR_PX_CTR_STROBE" (rect 152 347 267 359)(font "Arial" ))
+		(line (pt 288 352)(pt 272 352)(line_width 1))
+	)
+	(port
+		(pt 288 368)
+		(output)
+		(text "RD_PX_CTR_STROBE" (rect 0 0 113 12)(font "Arial" ))
+		(text "RD_PX_CTR_STROBE" (rect 154 363 267 375)(font "Arial" ))
+		(line (pt 288 368)(pt 272 368)(line_width 1))
+	)
+	(port
+		(pt 288 384)
+		(output)
+		(text "GEO_RD_STAT_STROBE" (rect 0 0 127 12)(font "Arial" ))
+		(text "GEO_RD_STAT_STROBE" (rect 140 379 267 391)(font "Arial" ))
+		(line (pt 288 384)(pt 272 384)(line_width 1))
+	)
+	(port
+		(pt 288 400)
+		(output)
+		(text "GEO_WR_STAT_STROBE" (rect 0 0 129 12)(font "Arial" ))
+		(text "GEO_WR_STAT_STROBE" (rect 138 395 267 407)(font "Arial" ))
+		(line (pt 288 400)(pt 272 400)(line_width 1))
+	)
+	(port
+		(pt 288 416)
+		(output)
+		(text "GEO_STAT_WR[7..0]" (rect 0 0 106 12)(font "Arial" ))
+		(text "GEO_STAT_WR[7..0]" (rect 161 411 267 423)(font "Arial" ))
+		(line (pt 288 416)(pt 272 416)(line_width 3))
 	)
 	(parameter
 		"USE_Z80_CLK"
@@ -267,7 +365,7 @@ applicable agreement for further details.
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"MEM_SIZE_BYTES"
-		"65536"
+		"40960"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -277,7 +375,7 @@ applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"BANK_ID_ADDR"
-		"10111111111111111"
+		"111111111111111"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
@@ -306,13 +404,33 @@ applicable agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
-		"IO_SPKR"
+		"SND_OUT"
 		"242"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"IO_BLNK"
 		"243"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"SND_TON"
+		"244"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"SND_DUR"
+		"245"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"GEO_LO"
+		"246"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"GEO_HI"
+		"247"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -325,13 +443,8 @@ applicable agreement for further details.
 		"1"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"IO_RD_DELAY"
-		"12"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 200 304)(line_width 1))
+		(rectangle (rect 16 16 272 432)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 232 -64 332 16))
+	(annotation_block (parameter)(rect 304 -64 404 16))
 )

@@ -17,9 +17,11 @@ set_dest4_src3   [0111111100001011] ; No arguments
 ;
 set_max_xy       [01111111000011aa] ; Set max_y and max_y to x&y[a]
 ;
-plot_dot         [00000001aaaaaaaa] ; plot_dot at    (x0,y0) with color [a]
-plot_line        [00000010aaaaaaaa] ; plot_line from (x0,y0)-(x1,y1) with color [a]
-plot_box         [00000011aaaaaaaa] ; plot_box at inside (x0,y0)-(x1,y1) with color [a]
-plot_box_fill    [00000100aaaaaaaa] ; plot_box filled inside (x0,y0)-(x1,y1) with color [a]
-plot_circle      [00000101aaaaaaaa] ; plot_circle at (x0,y0) with radius (x1,y1) with color [a]
-plot_circle_fill [00000110aaaaaaaa] ; plot_circle filled at (x0,y0) with radius (x1,y1) with color [a]
+plot_dot          [00000000aaaaaaaa] ; plot_dot at    (x0,y0) with color [a]
+plot_line         [00000001aaaaaaaa] ; plot_line from (x0,y0)-(x1,y1) with color [a]
+plot_box          [00000010aaaaaaaa] ; plot_box at inside (x0,y0)-(x1,y1) with color [a]
+plot_box_fill     [00001010aaaaaaaa] ; plot_box filled inside (x0,y0)-(x1,y1) with color [a]
+plot_tri          [00000011aaaaaaaa] ; plot_triangle with points (x0,y0),(x1,y1),(x2,y2) with color [a]
+plot_tri_fill     [00001011aaaaaaaa] ; plot_triangle filled with points (x0,y0),(x1,y1),(x2,y2) with color [a]
+plot_ellipse      [00000100aaaaaaaa] ; plot_ellipse with at point (x0,y0) with radius (x1,y1) with color [a]
+plot_ellipse_fill [00001100aaaaaaaa] ; plot_ellipse filled with at point (x0,y0) with radius (x1,y1) with color [a]

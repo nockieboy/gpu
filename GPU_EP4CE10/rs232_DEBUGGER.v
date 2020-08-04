@@ -1,19 +1,24 @@
 // *********************************************************************************
 // *** RS232_Debugger.v Ver 1.0.  November 22, 2019
 // ***
+// *** New Ver 1.1, July 15, 2020 - Added parameter 'READ_REQ_1CLK'
+// ***
 // *** This RS232_Debugger.v allows a PC to access, real-time
 // *** display & edit up to 16 megabytes of addressable memory.
-// *** (For PC 921600, 1mb max recommended as it takes 14 seconds to transfer 
-// *** the entire block of memory.  This improves with faster com ports.)
+// *** (For PCs with a 921600 baud limit, 1 megabyte max memory
+// *** recommended as it takes 14 seconds to transfer that entire
+// *** block of memory.  This improves with faster com ports as the FPGA
+// *** can easily achieve more than 10 megabaud with this Verilog code.)
 // *** 
-// *** It can also generate a PC driven reset signal and it has
-// *** 4 utility 8bit input ports which are continuously monitored
-// *** in real-time and 4 utility 8 bit output ports which can
-// *** be set to any value at any time.
+// *** This RS232_Debugger.v can also generate a reset signal sent from the
+// *** PC control software and it also has 4 utility 8 bit input ports which
+// *** are continuously monitored  and displayed in real-time.  It also has 4
+// *** utility 8 bit output ports which can be set to any value at any time.
 // ***
-// ***  In a minimum configuration, this module uses 370 logic cells + the
-// ***  SYNC_RS232_UART.v uses 107 logic cells for a total of 477 logic cells.
-// ***  590 logic cells when every feature and all 24 address bits being used.
+// *** In a minimum configuration, this module uses 370 logic cells + the required
+// *** SYNC_RS232_UART.v uses 107 logic cells for a total of 477 logic cells.  The
+// *** total increases to 570 logic cells when every feature and all 24 address
+// *** bits are being used.
 // ***
 // *** Written by and (C) Brian Guralnick.
 // *** Using generic Verilog code which only uses synchronous logic.
@@ -27,7 +32,7 @@ module rs232_debugger (
     input  wire clk,       // System clock.  Recommend at least 20MHz for the 921600 baud rate.
                            // This module is capable of over 100MHz on even the slowest FPGAs.
 
-	output reg  cmd_rst,   // When sent by the RS232_Debugger utility, this outputs a high signal for 8 clock cycles.
+	output reg  cmd_rst,   // When sent by the PC RS232_Debugger utility, this outputs a high signal for 8 clock cycles.
 	                       // It also runs high for 8 clock cycles during power-up.
 
     input  wire rxd,       // Connect this to the RS232 RXD input pin.
@@ -36,13 +41,16 @@ module rs232_debugger (
 	output reg         LED_txd,             // Optionally wire this to a LED, it will go high whenever the RS232 TXD is active.
 	output reg         LED_rxd,             // Optionally wire this to a LED, it will go high whenever the RS232 RXD is active.
 
-	output reg         host_rd_req,         // This output will pulse high for 1 clock when a read request is taking place.
+	output wire        host_rd_req,         // This output will pulse high for 1 clock when a read request is taking place.
 	input  wire        host_rd_rdy,         // This input should be set high once the 'host_rdata[7:0]' input contains valid data.
+											// Tie this input high if your read data will be always valid within 12 clock cycles since the hosr_rd_req.
+	
 	output reg         host_wr_ena,         // This output will pulse high for 1 clock when a write request is taking place.
+
 	output wire [ADDR_SIZE-1:0] host_addr,  // This output contains the requested read and write address.
 	output reg  [7:0]  host_wdata,          // This output contains the source RS232 8bit data to be written.
 	input  wire [7:0]  host_rdata,          // This input receives the 8 bit ram data to be sent to the RS232.
-	                                        // If 'host_rd_rdy' is tied to '1' the data needs to be valid within 10 clocks of the 'host_rd_req' pulse.
+	                                        // If 'host_rd_rdy' is tied to '1' the data needs to be valid within 12 clocks of the 'host_rd_req' pulse.
 	
 	// These are 4 8 bit utility input ports which are continuously read and displayed in the RS232_Debugger utility.
 	input  wire [7:0]  in0,
@@ -67,6 +75,8 @@ parameter ADDR_SIZE    = 20;        // This sets the address size for the memory
                                     // 1048576 bytes / 1 megabyte takes around 14 seconds to transfer with the built in overhead.
                                     // For those who can access faster RS232 ports, these larger memory sizes could become more viable.
 
+parameter     READ_REQ_1CLK = 0;    // When 0, the 'host_rd_req' output stays high until a 'host_rd_rdy' is received.  When 1, the 'host_rd_req' pulses for 1 clock only.
+
 localparam CLK_1KHz_PERIOD  = CLK_IN_HZ / 1000 ;     // The counter period for generating an internal 1 KHz timer
 localparam DEBUG_WDT_TIME   = 4'd15;                 // Com activity watch dog timer.  Time until a incomming Write to ram command is aborted due to inactive com.
 localparam LED_HOLD_TIME    = 4'd15;                 // Keep the LED_rxd/txd signal high for at least this amount of ms time during RXD/TXD transactions.
@@ -74,16 +84,17 @@ localparam LED_HOLD_TIME    = 4'd15;                 // Keep the LED_rxd/txd sig
 reg        [17:0]  tick_1KHz_counter ;               // This reg is the counter for the main clock input which is used to generate the 1KHz timer.
 reg                tick_1KHz ;                       // This reg will pulse for 1 'clk' cycle at 1KHz.
 reg        [4:0]   timeout_cnt;				         // This is a counter which is used for the communications watch dog timer which times out at the 'DEBUG_WDT' parameter count running at 1KHz speed.
-reg        [4:0]   led_txd_timeout, led_rxd_timeout; // These ar timer counters used to keep the communication status LEDs on for the 'LED_HOLD_TIME' parameter count running at 1KHz speed.
+reg        [4:0]   led_txd_timeout, led_rxd_timeout; // These are timer counters used to keep the communication status LEDs on for the 'LED_HOLD_TIME' parameter count running at 1KHz speed.
 
-
+reg       host_rd_req_r, host_rd_req_r1; 
+assign    host_rd_req   = READ_REQ_1CLK  ?  (host_rd_req_r && !host_rd_req_r1) : host_rd_req_r ; // selects between a single clock pulse 'host_rd_req' or the original one which staye high until a 'host_rd_rdy' is received
 
 // *****************************************************************************************************************************************************************************
-// **** Example command structure shown in RS232 received and transmitted hex bytes:     ( 'xx' dont care, or garbage character )
+// **** Example command structure shown in RS232 received and transmitted hex bytes:
 // ****
 // **** Example #1: CMD_READ_BYTES (See figure #1)
-// ****                            <<   SETUP HEADER    >>  <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>> <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>>
-// **** Read host ram  string ( xx FF FF 00 00 00 00 00 00   52 65 61 64    00 01 00        04          52 65 61 64    00 01 00        04        ) Both copies must match for
+// ****                         <<      SETUP HEADER    >>  <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>> <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>>
+// **** Read host ram  string ( 80 FF FF 00 00 00 00 00 00   52 65 61 64    00 01 00        04          52 65 61 64    00 01 00        04        ) Both copies must match for
 // **** The last 16 characters RX_Buffer string             <<          Copy #1 of command          >> <<          Copy #2 of command          >>  the command to be accepted.
 // ****
 // ****                                                                        RX_Buffer #7,6,5,4= 32'h 52 65 61 64 = CMD_READ_BYTES
@@ -92,19 +103,19 @@ reg        [4:0]   led_txd_timeout, led_rxd_timeout; // These ar timer counters 
 // ****
 // ****                                                                        The RS232_Debugger will then transmit 5 bytes read from host ram port.
 // **** Example #2: CMD_READ_BURST
-// ****                            <<   SETUP HEADER    >>  <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>> <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>>
-// **** Read host ram  string ( xx FF FF 00 00 00 00 00 00   52 65 61 50    00 80 00        0F          52 65 61 50    00 80 00        0F        )
+// ****                         <<      SETUP HEADER    >>  <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>> <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>>
+// **** Read host ram  string ( 80 FF FF 00 00 00 00 00 00   52 65 61 50    00 80 00        0F          52 65 61 50    00 80 00        0F        )
 // **** The last 16 characters RX_Buffer string             <<          Copy #1 of command          >> <<          Copy #2 of command          >>
 // ****
 // ****                                                                        RX_Buffer #7,6,5,4= 32'h 52 65 61 50 = CMD_READ_BURST
 // ****                                                                        RX_Buffer #3,2,1=   24'h 00 80 00    = From Address 24'h008000
-// ****                                                                        RX_Buffer #0 =       8'h 0F          = Transfer 8'h0F *256 + 1 = 4096 bytes.
+// ****                                                                        RX_Buffer #0 =       8'h 0F          = Transfer (8'h0F + 1) *256 = 4096 bytes.
 // ****
 // ****                                                                        The RS232_Debugger will then transmit 4096 bytes read from host ram port.
 // ****
 // **** Example #3: CMD_WRITE_BYTES (See figure #2)
-// ****                            <<   SETUP HEADER    >>  <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>> <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>>
-// **** Read host ram  string ( xx FF FF 00 00 00 00 00 00   57 72 69 74    00 01 00        04          57 72 69 74    00 01 00        04        )
+// ****                         <<      SETUP HEADER    >>  <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>> <<CMD_PREFIX> <ADDR_POINT><TRANSFER_SIZE>>
+// **** Read host ram  string ( 80 FF FF 00 00 00 00 00 00   57 72 69 74    00 01 00        04          57 72 69 74    00 01 00        04        )
 // **** The last 16 characters RX_Buffer string             <<          Copy #1 of command          >> <<          Copy #2 of command          >>
 // ****
 // ****                                                                        RX_Buffer #7,6,5,4= 32'h 57 72 69 74 = CMD_WRITE_BYTES
@@ -116,8 +127,8 @@ reg        [4:0]   led_txd_timeout, led_rxd_timeout; // These ar timer counters 
 // ****                                                                        If there is a pause or delay for more than 0.1 seconds, write command halts/aborts.
 // ****
 // **** Example #4: CMD_SET_PORTS (See figure #3)
-// ****                            <<   SETUP HEADER    >>  <<CMD_PREFIX> <Out0><Out1><Out2><Out3>> <<CMD_PREFIX> <Out0><Out1><Out2><Out3>>
-// **** Read host ram  string ( xx FF FF 00 00 00 00 00 00   53 65 74 50    AA    BB    CC    DD     53 65 74 50    AA    BB    CC    DD    )
+// ****                         <<      SETUP HEADER    >>  <<CMD_PREFIX> <Out0><Out1><Out2><Out3>> <<CMD_PREFIX> <Out0><Out1><Out2><Out3>>
+// **** Read host ram  string ( 80 FF FF 00 00 00 00 00 00   53 65 74 50    AA    BB    CC    DD     53 65 74 50    AA    BB    CC    DD    )
 // **** The last 16 characters RX_Buffer string             <<       Copy #1 of command          >> <<          Copy #2 of command       >>
 // ****
 // ****                                                                        RX_Buffer #7,6,5,4= 32'h 53 65 74 50 = CMD_SET_PORTS
@@ -127,7 +138,7 @@ reg        [4:0]   led_txd_timeout, led_rxd_timeout; // These ar timer counters 
 // ****                                                                        RX_Buffer #0      =  8'h DD          = Output port Out3[7:0] will be set to 8'hDD
 // ****
 // ****                                                                        The RS232_Debugger will then transmit back the values of:
-// ****                                                                        Parameter 'ADDR_SIZE[7:0]', then ports In0[7:0], In1[7:0], In2[7:0], In3[7:0], 
+// ****                                                                        Ports In0[7:0], In1[7:0], In2[7:0], In3[7:0], then Parameter 'ADDR_SIZE[7:0]'.
 // ****
 // ****
 // *****************************************************************************************************************************************************************************
@@ -149,7 +160,7 @@ assign     CMD_HEADER          = ( RXD_FF_cnt==4'h2 && RXD_00_cnt==4'h6 );  // T
 
 assign     CMD_VERIFY          = ( RX_buffer[15*8+7:8*8] == RX_buffer[7*8+7:0*8] ); // To verify authenticate an incoming command, the 2 consecutive identical copies
 																				    // of the 8 byte command must match
-																				    
+ 
 assign     CMD_PREFIX          = RX_buffer[7*8+7:4*8] ;  // The point in the receive buffer is where the 4 character command is located
 assign     CMD_READ_BYTES      = 32'h52656164 ;          // Read host ram and transmit to RS232, from 1 through 256 bytes.
 assign     CMD_READ_BURST      = 32'h52656150 ;          // Page read host ram and transmit to RS232, from 256 through 65536 bytes.
@@ -253,7 +264,8 @@ end else begin
 if (cmd_rst) begin                          // Last single 1 shot reset from the reset output signal 'cmd_rst'.
 		host_addr_reg        <= 24'h0 ;
 		host_wr_ena          <= 1'b0 ;      // make sure we aren't writing ram.
-		host_rd_req          <= 1'b0 ;      // make sure we aren't requesting a read from memory
+		host_rd_req_r        <= 1'b0 ;      // make sure we aren't requesting a read from memory
+		host_rd_req_r1       <= 1'b0 ;      // make sure we aren't requesting a read from memory
 		ena_rxd_dly[4:0]     <= 5'h0 ;      // clear out any possible RS232 transceiver rx_rdy
 		RX_buffer[15*8+7:0]  <= 128'h0 ;    // clear out the entire 16 word by 8 bit character input command buffer.
 		Function             <= FUNC_WAIT ; // set the program state to the 'wait for incoming command' function.
@@ -266,7 +278,7 @@ if (cmd_rst) begin                          // Last single 1 shot reset from the
 // ******************************************************************************************
 		ena_rxd_dly[0]    <=  rxd_rdy ;
 		ena_rxd_dly[4:1]  <=  ena_rxd_dly[3:0] ;
-
+		host_rd_req_r1    <=  host_rd_req_r ;   // Single pulse isolator for 1 shot host_rd_req output
 
 // ******************************************************************************************************************
 // *** setup case statement for the 4 possible functions, FUNC_WAIT, FUNC_READ, FUNC_WRITE, FUNC_SET_PORTS
@@ -279,13 +291,12 @@ case (Function)
 	// ************************************************************************************************************************************************************************************
 	FUNC_WAIT : begin
 
-		host_rd_req <= 1'b0;  // force off any ram transactions.
-		host_wr_ena <= 1'b0;
+		host_rd_req_r <= 1'b0;  // force off any ram transactions.
+		host_wr_ena   <= 1'b0;
 
 		if (ena_rxd_dly[3]) begin  // Note we are using the ena_rxd_dly[3] deliberately since if the 'FUNC_WRITE' is called, it uses a pre-setup time by triggering sequenced actions on earlier ena_rxd_dly[#]s
 
-							RX_buffer[7:0]         <= uart_rbyte;			// This will shift 1 byte at a time through the 16 character command buffer
-							RX_buffer[15*8+7:8]    <= RX_buffer[14*8+7:0];
+							RX_buffer[15*8+7:0]    <= { RX_buffer[14*8+7:0] , uart_rbyte } ;  // This will shift 1 byte at a time through the 16 character command buffer
 
 							if      ( RX_buffer[15*8+7:15*8]==8'h00 ) 	RXD_00_cnt <= RXD_00_cnt + (RXD_00_cnt!=3'h7); // test the last byte in the 16 character buffer and
 							else 										RXD_00_cnt <= 3'h0 ;                           // count the number of bytes which are sequentially = 8'h00.
@@ -361,7 +372,7 @@ case (Function)
 				// *** CMD_PREFIX case CMD_RESET.  Trigger the com_rst output.
 				// ********************************************************************************************************
 				CMD_RESET       : begin
-											rst_clk             <= 4'h0;		// Clearing the rest_clk begins the 8 clock reset period
+											rst_clk             <= 4'h0;		// Clearing the rst_clk which will begin the 8 clock reset period
 											Function            <= FUNC_WAIT ;
 											RX_buffer[15*8+7:0] <= 128'h0;
 											end  // end of case CMD_RESET
@@ -371,7 +382,7 @@ case (Function)
 				// *********************************************************************************************************************************************
 				CMD_SET_PORTS   : begin 
 											out0				<= RX_buffer[3*8+7:3*8] ;  // The 4 out# ports were sent withing the RX_buffer command's suffix.
-											out1				<= RX_buffer[2*8+7:2*8] ;  // Usually, ther address and data transfer size is stored here.
+											out1				<= RX_buffer[2*8+7:2*8] ;  // Usually, the address and data transfer size is stored here.
 											out2				<= RX_buffer[1*8+7:1*8] ;
 											out3				<= RX_buffer[0*8+7:0*8] ;
 											// *** Parallel register all 4 peripheral input ports.
@@ -415,26 +426,29 @@ case (Function)
 								 if ( uart_tx        ) timeout_cnt <= DEBUG_WDT_TIME ;      // If a character is transmitted, reset the watch dog timeout counter
 							else if ( tick_1KHz      ) timeout_cnt <= timeout_cnt - 1'b1 ;  // Otherwise, countdown the watch dog timer once at every 1KHz tick.
 
-					if ( host_rd_rdy ) host_rdata_reg <= host_rdata ;  // latch the host_rdata input is the host_read_rdy is set.
+					if ( host_rd_rdy ) host_rdata_reg <= host_rdata ;  // latch the host_rdata input if the host_read_rdy is set.
 
 					if (~(uart_tx_full && tx_cyc==4'h0) && ~(~host_rd_rdy && tx_cyc==4'h1) ) begin  // only run the tx_cyc counter when the UART RS232 transmitter
 																									// is ready to transmit the next character and the host_rd_ready
 																									// has gone high after tx_cyc 0 when the host_re_req pulse has been sent.
 						tx_cyc <= tx_cyc + 1'b1; // increment this cycle counter
 						
-						if (tx_cyc==4'd0)  host_rd_req   <= 1'b1;				// pulse the host_rd_req with the current valid address
-						else               host_rd_req   <= 1'b0;
-						if (tx_cyc==4'd13) uart_tbyte    <= host_rdata_reg ;	// expect the returned data ready within 10 clock cycles, and latch that data into the RS232 transmitter data input register
-						if (tx_cyc==4'd14) uart_tx       <= 1'b1;				// Pulse the RS232 transmitter.
+						if (tx_cyc==4'd0)  host_rd_req_r <= 1'b1;				// pulse the host_rd_req_r with the current valid address
+						else               host_rd_req_r <= 1'b0;
+
+						if (tx_cyc==4'd13) uart_tbyte    <= host_rdata_reg ;	// expect the returned data ready within 12 clock cycles, and latch that data into the RS232 transmitter data input register
+
+						if (tx_cyc==4'd14) uart_tx       <= 1'b1;				// Trigger the RS232 transmit data enable
 						else               uart_tx       <= 1'b0;
-						if (tx_cyc==4'd15) host_addr_reg <= host_addr_reg + 1'b1;
-						if (tx_cyc==4'd15) byte_count    <= byte_count - 1'b1;
+
+						if (tx_cyc==4'd15) host_addr_reg <= host_addr_reg + 1'b1;  // increment the host memory address
+						if (tx_cyc==4'd15) byte_count    <= byte_count - 1'b1;     // decrement the byte transfer size counter
 					end
 
-				end else begin                 // byte_count cycles has completed or timeout WDT has elapsed,
-					Function     <= FUNC_WAIT; // leave FUNC_READ and switch back to FUNC_WAIT for the next command.
-					uart_tx      <= 1'b0;
-					host_rd_req  <= 1'b0;
+				end else begin                  // byte_count cycles has completed or timeout WDT has elapsed,
+					Function      <= FUNC_WAIT; // leave FUNC_READ and switch back to FUNC_WAIT for the next command.
+					uart_tx       <= 1'b0;
+					host_rd_req_r <= 1'b0;
 					end
 
 			end //  End of case FUNC_READ
@@ -455,17 +469,17 @@ case (Function)
 							else if ( tick_1KHz      ) timeout_cnt <= timeout_cnt - 1'b1 ;  // Otherwise, countdown the watch dog timer once at every 1KHz tick.
 
 
-							if (ena_rxd_dly[0]) host_wdata     <= uart_rbyte ;
-							if (ena_rxd_dly[0]) uart_tbyte     <= uart_rbyte ;
+							if (ena_rxd_dly[0]) host_wdata     <= uart_rbyte ;              // copy RS232 received data byte to the host memory data output port
+							if (ena_rxd_dly[0]) uart_tbyte     <= uart_rbyte ;              // copy RS232 received data byte to the RS232 transmitter output data port
 
-							if (ena_rxd_dly[1]) host_wr_ena     <= 1'b1;
+							if (ena_rxd_dly[1]) host_wr_ena     <= 1'b1;                    // Trigger the host memory write enable
 							else                host_wr_ena     <= 1'b0;
 
-							if (ena_rxd_dly[1]) uart_tx         <= 1'b1;					// echo back received characters
+							if (ena_rxd_dly[1]) uart_tx         <= 1'b1;					// echo back received character by triggering the RS232 transmit data enable
 							else                uart_tx         <= 1'b0;
 
-							if (ena_rxd_dly[3]) host_addr_reg   <= host_addr_reg + 1'b1 ;
-							if (ena_rxd_dly[3]) byte_count      <= byte_count - 1'b1 ;
+							if (ena_rxd_dly[3]) host_addr_reg   <= host_addr_reg + 1'b1 ;   // increment the host memory address
+							if (ena_rxd_dly[3]) byte_count      <= byte_count - 1'b1 ;      // decrement the byte transfer size counter
 
 					end else begin                           // byte_count cycles has completed or timeout WDT has elapsed,
 							Function        <= FUNC_WAIT ;   // leave FUNC_WRITE and switch back to FUNC_WAIT for the next command.
@@ -492,7 +506,7 @@ case (Function)
 								tx_cyc <= tx_cyc + 1'b1 ;
 
 								if (tx_cyc==4'd13) begin
-									case (byte_count[2:0])
+									case (byte_count[2:0])              // Set the RS232 transmitter's data port with the correct data during the correct byte number
 										3'h4 : uart_tbyte	<= in_reg0 ;
 										3'h3 : uart_tbyte	<= in_reg1 ;
 										3'h2 : uart_tbyte	<= in_reg2 ;
@@ -501,22 +515,22 @@ case (Function)
 									endcase // case (byte_count[2:0])
 								end
 
-								if (tx_cyc==4'd14) uart_tx     <= 1'b1 ;			  // Pulse the RS232 transmitter.
+								if (tx_cyc==4'd14) uart_tx     <= 1'b1 ;			  // Trigger the RS232 transmit data enable
 								else               uart_tx     <= 1'b0 ;
 								
-								if (tx_cyc==4'd15) byte_count  <= byte_count - 1'b1 ;
+								if (tx_cyc==4'd15) byte_count  <= byte_count - 1'b1 ; // decrement the byte transfer size counter
 
 							end
 
 						end else begin                   // byte_count cycles has completed, leave FUNC_SET_PORTS and switch back to FUNC_WAIT for the next command.
 							Function      <= FUNC_WAIT ;
 							uart_tx       <= 1'b0 ;
-							host_rd_req   <= 1'b0 ;
+							host_rd_req_r <= 1'b0 ;
 							end
 
 				end // End of case FUNC_WRITE_PORTS
 	// ************************************************************************************************************************************************************************************
-	// *** Beginning of Function FUNC_SET_PORTS.
+	// *** Ending of Function FUNC_SET_PORTS.
 	// ************************************************************************************************************************************************************************************
 
 

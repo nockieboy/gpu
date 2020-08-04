@@ -1,5 +1,5 @@
 Simulator report for Z80_bridge
-Tue Jul 07 15:29:51 2020
+Sun Aug 02 18:29:20 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -45,43 +45,43 @@ applicable agreement for further details.
 +-----------------------------+--------------+
 ; Simulation Start Time       ; 0 ps         ;
 ; Simulation End Time         ; 50.0 us      ;
-; Simulation Netlist Size     ; 372 nodes    ;
-; Simulation Coverage         ;      68.04 % ;
-; Total Number of Transitions ; 21410        ;
+; Simulation Netlist Size     ; 420 nodes    ;
+; Simulation Coverage         ;      64.20 % ;
+; Total Number of Transitions ; 21362        ;
 ; Simulation Breakpoints      ; 0            ;
 ; Family                      ; Cyclone III  ;
 +-----------------------------+--------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------+
-; Simulator Settings                                                                                                          ;
-+--------------------------------------------------------------------------------------------+----------------+---------------+
-; Option                                                                                     ; Setting        ; Default Value ;
-+--------------------------------------------------------------------------------------------+----------------+---------------+
-; Simulation mode                                                                            ; Functional     ; Timing        ;
-; Start time                                                                                 ; 0 ns           ; 0 ns          ;
-; Simulation results format                                                                  ; CVWF           ;               ;
-; Vector input source                                                                        ; Z80_bridge.vwf ;               ;
-; Add pins automatically to simulation output waveforms                                      ; On             ; On            ;
-; Check outputs                                                                              ; Off            ; Off           ;
-; Report simulation coverage                                                                 ; On             ; On            ;
-; Display complete 1/0 value coverage report                                                 ; On             ; On            ;
-; Display missing 1-value coverage report                                                    ; On             ; On            ;
-; Display missing 0-value coverage report                                                    ; On             ; On            ;
-; Detect setup and hold time violations                                                      ; Off            ; Off           ;
-; Detect glitches                                                                            ; Off            ; Off           ;
-; Disable timing delays in Timing Simulation                                                 ; Off            ; Off           ;
-; Generate Signal Activity File                                                              ; Off            ; Off           ;
-; Generate VCD File for PowerPlay Power Analyzer                                             ; Off            ; Off           ;
-; Group bus channels in simulation results                                                   ; Off            ; Off           ;
-; Preserve fewer signal transitions to reduce memory requirements                            ; On             ; On            ;
-; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE     ; INPUT_EDGE    ;
-; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off            ; Off           ;
-; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off            ;               ;
-; Perform Glitch Filtering in Timing Simulation                                              ; Auto           ; Auto          ;
-; Interconnect Delay Model Type                                                              ; Transport      ; Transport     ;
-; Cell Delay Model Type                                                                      ; Transport      ; Transport     ;
-+--------------------------------------------------------------------------------------------+----------------+---------------+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                              ;
++--------------------------------------------------------------------------------------------+--------------------+---------------+
+; Option                                                                                     ; Setting            ; Default Value ;
++--------------------------------------------------------------------------------------------+--------------------+---------------+
+; Simulation mode                                                                            ; Functional         ; Timing        ;
+; Start time                                                                                 ; 0 ns               ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF               ;               ;
+; Vector input source                                                                        ; Z80_bridge_GEO.vwf ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On                 ; On            ;
+; Check outputs                                                                              ; Off                ; Off           ;
+; Report simulation coverage                                                                 ; On                 ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On                 ; On            ;
+; Display missing 1-value coverage report                                                    ; On                 ; On            ;
+; Display missing 0-value coverage report                                                    ; On                 ; On            ;
+; Detect setup and hold time violations                                                      ; Off                ; Off           ;
+; Detect glitches                                                                            ; Off                ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off                ; Off           ;
+; Generate Signal Activity File                                                              ; Off                ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off                ; Off           ;
+; Group bus channels in simulation results                                                   ; Off                ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On                 ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE         ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off                ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off                ;               ;
+; Perform Glitch Filtering in Timing Simulation                                              ; Auto               ; Auto          ;
+; Interconnect Delay Model Type                                                              ; Transport          ; Transport     ;
+; Cell Delay Model Type                                                                      ; Transport          ; Transport     ;
++--------------------------------------------------------------------------------------------+--------------------+---------------+
 
 
 +----------------------+
@@ -96,13 +96,13 @@ Please use Quartus II to view the waveform report data.
 +-----------------------------------------------------+--------------+
 ; Type                                                ; Value        ;
 +-----------------------------------------------------+--------------+
-; Total coverage as a percentage                      ;      68.04 % ;
-; Total nodes checked                                 ; 372          ;
-; Total output ports checked                          ; 363          ;
-; Total output ports with complete 1/0-value coverage ; 247          ;
-; Total output ports with no 1/0-value coverage       ; 116          ;
-; Total output ports with no 1-value coverage         ; 116          ;
-; Total output ports with no 0-value coverage         ; 116          ;
+; Total coverage as a percentage                      ;      64.20 % ;
+; Total nodes checked                                 ; 420          ;
+; Total output ports checked                          ; 419          ;
+; Total output ports with complete 1/0-value coverage ; 269          ;
+; Total output ports with no 1/0-value coverage       ; 140          ;
+; Total output ports with no 1-value coverage         ; 140          ;
+; Total output ports with no 0-value coverage         ; 150          ;
 +-----------------------------------------------------+--------------+
 
 
@@ -155,11 +155,16 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |Block1|z80_ADDR[2]                              ; |Block1|z80_ADDR[2]                              ; out              ;
 ; |Block1|z80_ADDR[1]                              ; |Block1|z80_ADDR[1]                              ; out              ;
 ; |Block1|z80_ADDR[0]                              ; |Block1|z80_ADDR[0]                              ; out              ;
+; |Block1|z80_wDATA[7]                             ; |Block1|z80_wDATA[7]                             ; out              ;
+; |Block1|z80_wDATA[6]                             ; |Block1|z80_wDATA[6]                             ; out              ;
+; |Block1|z80_wDATA[4]                             ; |Block1|z80_wDATA[4]                             ; out              ;
 ; |Block1|z80_wDATA[0]                             ; |Block1|z80_wDATA[0]                             ; out              ;
 ; |Block1|z80_BDIR_EN                              ; |Block1|z80_BDIR_EN                              ; pin_out          ;
 ; |Block1|gpu_w_req                                ; |Block1|gpu_w_req                                ; pin_out          ;
 ; |Block1|gpu_r_RDY                                ; |Block1|gpu_r_RDY                                ; pin_out          ;
 ; |Block1|speaker                                  ; |Block1|speaker                                  ; pin_out          ;
+; |Block1|GEO_WR_LO_STROBE                         ; |Block1|GEO_WR_LO_STROBE                         ; pin_out          ;
+; |Block1|GEO_WR_HI_STROBE                         ; |Block1|GEO_WR_HI_STROBE                         ; pin_out          ;
 ; |Block1|z80_DATA[7]                              ; |Block1|z80_DATA[7]                              ; pin_out          ;
 ; |Block1|z80_DATA[6]                              ; |Block1|z80_DATA[6]                              ; pin_out          ;
 ; |Block1|z80_DATA[5]                              ; |Block1|z80_DATA[5]                              ; pin_out          ;
@@ -220,12 +225,20 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |Block1|Z80_bridge_v2:inst|always0~14            ; |Block1|Z80_bridge_v2:inst|always0~14            ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|always0~15            ; |Block1|Z80_bridge_v2:inst|always0~15            ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|always0~16            ; |Block1|Z80_bridge_v2:inst|always0~16            ; out0             ;
-; |Block1|Z80_bridge_v2:inst|always0~17            ; |Block1|Z80_bridge_v2:inst|always0~17            ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Z80_245data_dir       ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|SPKR_EN~0             ; |Block1|Z80_bridge_v2:inst|SPKR_EN~0             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|always0~19            ; |Block1|Z80_bridge_v2:inst|always0~19            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO_STROBE~0    ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO_STROBE~0    ; out              ;
 ; |Block1|Z80_bridge_v2:inst|always0~20            ; |Block1|Z80_bridge_v2:inst|always0~20            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI_STROBE~0    ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI_STROBE~0    ; out              ;
+; |Block1|Z80_bridge_v2:inst|SPKR_EN~1             ; |Block1|Z80_bridge_v2:inst|SPKR_EN~1             ; out              ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI_STROBE~1    ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI_STROBE~1    ; out              ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO_STROBE~1    ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO_STROBE~1    ; out              ;
 ; |Block1|Z80_bridge_v2:inst|always0~21            ; |Block1|Z80_bridge_v2:inst|always0~21            ; out0             ;
-; |Block1|Z80_bridge_v2:inst|SPKR_EN               ; |Block1|Z80_bridge_v2:inst|SPKR_EN               ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_245data_dir       ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir       ; regout           ;
+; |Block1|Z80_bridge_v2:inst|always0~23            ; |Block1|Z80_bridge_v2:inst|always0~23            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~24            ; |Block1|Z80_bridge_v2:inst|always0~24            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~25            ; |Block1|Z80_bridge_v2:inst|always0~25            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI_STROBE      ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI_STROBE      ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~reg0     ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~reg0     ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[5]~reg0     ; regout           ;
@@ -235,7 +248,7 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~reg0     ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~0     ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~0     ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~0       ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~0       ; out              ;
-; |Block1|Z80_bridge_v2:inst|always0~22            ; |Block1|Z80_bridge_v2:inst|always0~22            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~26            ; |Block1|Z80_bridge_v2:inst|always0~26            ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|WideOr0               ; |Block1|Z80_bridge_v2:inst|WideOr0               ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|WideOr1               ; |Block1|Z80_bridge_v2:inst|WideOr1               ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|WideOr2               ; |Block1|Z80_bridge_v2:inst|WideOr2               ; out0             ;
@@ -246,12 +259,11 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |Block1|Z80_bridge_v2:inst|WideOr6               ; |Block1|Z80_bridge_v2:inst|WideOr6               ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~1     ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~1     ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~1       ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~1       ; out              ;
-; |Block1|Z80_bridge_v2:inst|always0~23            ; |Block1|Z80_bridge_v2:inst|always0~23            ; out0             ;
+; |Block1|Z80_bridge_v2:inst|always0~27            ; |Block1|Z80_bridge_v2:inst|always0~27            ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~2     ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~2     ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~2       ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~2       ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~3     ; |Block1|Z80_bridge_v2:inst|Z80_245data_dir~3     ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~3       ; |Block1|Z80_bridge_v2:inst|Z80_rData_ena~3       ; out              ;
-; |Block1|Z80_bridge_v2:inst|gpu_rd_req            ; |Block1|Z80_bridge_v2:inst|gpu_rd_req            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~reg0     ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~reg0     ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~8        ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~8        ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~9        ; |Block1|Z80_bridge_v2:inst|Z80_rData[0]~9        ; out              ;
@@ -286,6 +298,9 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~34       ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~34       ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~en       ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~en       ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]          ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]          ; out              ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO_STROBE      ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO_STROBE      ; regout           ;
+; |Block1|Z80_bridge_v2:inst|SPKR_EN               ; |Block1|Z80_bridge_v2:inst|SPKR_EN               ; regout           ;
+; |Block1|Z80_bridge_v2:inst|gpu_rd_req            ; |Block1|Z80_bridge_v2:inst|gpu_rd_req            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|gpu_wr_ena            ; |Block1|Z80_bridge_v2:inst|gpu_wr_ena            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|last_z80_write_port   ; |Block1|Z80_bridge_v2:inst|last_z80_write_port   ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|last_z80_write_memory ; |Block1|Z80_bridge_v2:inst|last_z80_write_memory ; regout           ;
@@ -300,6 +315,9 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[1]   ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc[1]   ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory       ; |Block1|Z80_bridge_v2:inst|z80_read_memory       ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[0]        ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[0]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[4]        ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[4]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[6]        ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[6]        ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[7]        ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[7]        ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[0]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[0]         ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[1]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[1]         ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[2]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[2]         ; regout           ;
@@ -332,6 +350,8 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |Block1|Z80_bridge_v2:inst|Decoder1~0            ; |Block1|Z80_bridge_v2:inst|Decoder1~0            ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~1            ; |Block1|Z80_bridge_v2:inst|Decoder1~1            ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~2            ; |Block1|Z80_bridge_v2:inst|Decoder1~2            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~6            ; |Block1|Z80_bridge_v2:inst|Decoder1~6            ; out              ;
+; |Block1|Z80_bridge_v2:inst|Decoder1~7            ; |Block1|Z80_bridge_v2:inst|Decoder1~7            ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~13           ; |Block1|Z80_bridge_v2:inst|Decoder1~13           ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~14           ; |Block1|Z80_bridge_v2:inst|Decoder1~14           ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~15           ; |Block1|Z80_bridge_v2:inst|Decoder1~15           ; out              ;
@@ -358,7 +378,9 @@ The following table displays output ports that toggle between 1 and 0 during sim
 ; |Block1|Z80_bridge_v2:inst|Equal3~0              ; |Block1|Z80_bridge_v2:inst|Equal3~0              ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Equal5~0              ; |Block1|Z80_bridge_v2:inst|Equal5~0              ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Equal6~0              ; |Block1|Z80_bridge_v2:inst|Equal6~0              ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Equal7~0              ; |Block1|Z80_bridge_v2:inst|Equal7~0              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal9~0              ; |Block1|Z80_bridge_v2:inst|Equal9~0              ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal10~0             ; |Block1|Z80_bridge_v2:inst|Equal10~0             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal11~0             ; |Block1|Z80_bridge_v2:inst|Equal11~0             ; out0             ;
 +--------------------------------------------------+--------------------------------------------------+------------------+
 
 
@@ -369,7 +391,23 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; Node Name                                         ; Output Port Name                                  ; Output Port Type ;
 +---------------------------------------------------+---------------------------------------------------+------------------+
 ; |Block1|z80_ADDR[21]                              ; |Block1|z80_ADDR[21]                              ; out              ;
+; |Block1|z80_wDATA[5]                              ; |Block1|z80_wDATA[5]                              ; out              ;
+; |Block1|z80_wDATA[3]                              ; |Block1|z80_wDATA[3]                              ; out              ;
+; |Block1|z80_wDATA[2]                              ; |Block1|z80_wDATA[2]                              ; out              ;
+; |Block1|z80_wDATA[1]                              ; |Block1|z80_wDATA[1]                              ; out              ;
 ; |Block1|z80_OE_EN                                 ; |Block1|z80_OE_EN                                 ; pin_out          ;
+; |Block1|GEO_WR_HI[7]                              ; |Block1|GEO_WR_HI[7]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[6]                              ; |Block1|GEO_WR_HI[6]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[5]                              ; |Block1|GEO_WR_HI[5]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[4]                              ; |Block1|GEO_WR_HI[4]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[3]                              ; |Block1|GEO_WR_HI[3]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[2]                              ; |Block1|GEO_WR_HI[2]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[1]                              ; |Block1|GEO_WR_HI[1]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[5]                              ; |Block1|GEO_WR_LO[5]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[3]                              ; |Block1|GEO_WR_LO[3]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[2]                              ; |Block1|GEO_WR_LO[2]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[1]                              ; |Block1|GEO_WR_LO[1]                              ; pin_out          ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[2]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[2]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[1]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[1]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[0]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[0]            ; regout           ;
@@ -377,8 +415,6 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |Block1|Z80_bridge_v2:inst|mem_in_ID              ; |Block1|Z80_bridge_v2:inst|mem_in_ID              ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|PS2_STAT[6]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[6]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_STAT[5]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[5]            ; regout           ;
-; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; regout           ;
-; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|always0~0              ; |Block1|Z80_bridge_v2:inst|always0~0              ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~0   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~0   ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~1   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~1   ; out              ;
@@ -386,7 +422,7 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~3   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~3   ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~4   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~4   ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~5   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~5   ; out              ;
-; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~0     ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~0     ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~3     ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~3     ; out              ;
 ; |Block1|Z80_bridge_v2:inst|always0~6              ; |Block1|Z80_bridge_v2:inst|always0~6              ; out0             ;
@@ -398,7 +434,10 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~5  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~5  ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~0    ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~0    ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~3    ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~3    ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_STAT[1]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[1]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[0]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[0]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~0             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~0             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~1             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~1             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~2             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~2             ; out              ;
@@ -407,7 +446,15 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~5             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~5             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~6             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~6             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~7             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~7             ; out              ;
-; |Block1|Z80_bridge_v2:inst|always0~18             ; |Block1|Z80_bridge_v2:inst|always0~18             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~0             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~0             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~1             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~1             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~2             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~2             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~3             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~3             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~4             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~4             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~5             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~5             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~6             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~6             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~7             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~7             ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~22             ; |Block1|Z80_bridge_v2:inst|always0~22             ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~0           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~0           ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData~36           ; |Block1|Z80_bridge_v2:inst|Z80_rData~36           ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData~37           ; |Block1|Z80_bridge_v2:inst|Z80_rData~37           ; out              ;
@@ -428,7 +475,6 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~4         ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~4         ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~5         ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~5         ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~6         ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~6         ; out              ;
-; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[4]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[4]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[5]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[5]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[6]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[6]            ; regout           ;
@@ -437,6 +483,17 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~17        ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~17        ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~26        ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~26        ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~30        ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~30        ; out              ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[1]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[1]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[2]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[2]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[3]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[3]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[4]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[4]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[5]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[5]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[6]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[6]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[7]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[7]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[1]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[1]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[2]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[2]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[3]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[3]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[5]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[5]           ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[2]   ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[2]   ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[0] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[0] ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[1] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[1] ; regout           ;
@@ -445,12 +502,14 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[0]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[0]  ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[1]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[1]  ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[2]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[2]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[1]         ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[1]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[2]         ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[2]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[3]         ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[3]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[5]         ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[5]         ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[21]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[21]         ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~3             ; |Block1|Z80_bridge_v2:inst|Decoder1~3             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~4             ; |Block1|Z80_bridge_v2:inst|Decoder1~4             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~5             ; |Block1|Z80_bridge_v2:inst|Decoder1~5             ; out              ;
-; |Block1|Z80_bridge_v2:inst|Decoder1~6             ; |Block1|Z80_bridge_v2:inst|Decoder1~6             ; out              ;
-; |Block1|Z80_bridge_v2:inst|Decoder1~7             ; |Block1|Z80_bridge_v2:inst|Decoder1~7             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~8             ; |Block1|Z80_bridge_v2:inst|Decoder1~8             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~9             ; |Block1|Z80_bridge_v2:inst|Decoder1~9             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~10            ; |Block1|Z80_bridge_v2:inst|Decoder1~10            ; out              ;
@@ -467,23 +526,10 @@ The following table displays output ports that do not toggle to 1 during simulat
 ; |Block1|Z80_bridge_v2:inst|Add2~2                 ; |Block1|Z80_bridge_v2:inst|Add2~2                 ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Add3~1                 ; |Block1|Z80_bridge_v2:inst|Add3~1                 ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Add3~2                 ; |Block1|Z80_bridge_v2:inst|Add3~2                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~0                 ; |Block1|Z80_bridge_v2:inst|Add4~0                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~1                 ; |Block1|Z80_bridge_v2:inst|Add4~1                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~2                 ; |Block1|Z80_bridge_v2:inst|Add4~2                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~3                 ; |Block1|Z80_bridge_v2:inst|Add4~3                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~4                 ; |Block1|Z80_bridge_v2:inst|Add4~4                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~5                 ; |Block1|Z80_bridge_v2:inst|Add4~5                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~6                 ; |Block1|Z80_bridge_v2:inst|Add4~6                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~7                 ; |Block1|Z80_bridge_v2:inst|Add4~7                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~8                 ; |Block1|Z80_bridge_v2:inst|Add4~8                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~9                 ; |Block1|Z80_bridge_v2:inst|Add4~9                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~10                ; |Block1|Z80_bridge_v2:inst|Add4~10                ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~11                ; |Block1|Z80_bridge_v2:inst|Add4~11                ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~12                ; |Block1|Z80_bridge_v2:inst|Add4~12                ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Equal0~0               ; |Block1|Z80_bridge_v2:inst|Equal0~0               ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Equal2~0               ; |Block1|Z80_bridge_v2:inst|Equal2~0               ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Equal4~0               ; |Block1|Z80_bridge_v2:inst|Equal4~0               ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Equal9~0               ; |Block1|Z80_bridge_v2:inst|Equal9~0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal13~0              ; |Block1|Z80_bridge_v2:inst|Equal13~0              ; out0             ;
 +---------------------------------------------------+---------------------------------------------------+------------------+
 
 
@@ -494,7 +540,28 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; Node Name                                         ; Output Port Name                                  ; Output Port Type ;
 +---------------------------------------------------+---------------------------------------------------+------------------+
 ; |Block1|z80_ADDR[21]                              ; |Block1|z80_ADDR[21]                              ; out              ;
+; |Block1|z80_wDATA[5]                              ; |Block1|z80_wDATA[5]                              ; out              ;
+; |Block1|z80_wDATA[3]                              ; |Block1|z80_wDATA[3]                              ; out              ;
+; |Block1|z80_wDATA[2]                              ; |Block1|z80_wDATA[2]                              ; out              ;
+; |Block1|z80_wDATA[1]                              ; |Block1|z80_wDATA[1]                              ; out              ;
 ; |Block1|z80_OE_EN                                 ; |Block1|z80_OE_EN                                 ; pin_out          ;
+; |Block1|GEO_WR_HI[7]                              ; |Block1|GEO_WR_HI[7]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[6]                              ; |Block1|GEO_WR_HI[6]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[5]                              ; |Block1|GEO_WR_HI[5]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[4]                              ; |Block1|GEO_WR_HI[4]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[3]                              ; |Block1|GEO_WR_HI[3]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[2]                              ; |Block1|GEO_WR_HI[2]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[1]                              ; |Block1|GEO_WR_HI[1]                              ; pin_out          ;
+; |Block1|GEO_WR_HI[0]                              ; |Block1|GEO_WR_HI[0]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[7]                              ; |Block1|GEO_WR_LO[7]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[6]                              ; |Block1|GEO_WR_LO[6]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[5]                              ; |Block1|GEO_WR_LO[5]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[4]                              ; |Block1|GEO_WR_LO[4]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[3]                              ; |Block1|GEO_WR_LO[3]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[2]                              ; |Block1|GEO_WR_LO[2]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[1]                              ; |Block1|GEO_WR_LO[1]                              ; pin_out          ;
+; |Block1|GEO_WR_LO[0]                              ; |Block1|GEO_WR_LO[0]                              ; pin_out          ;
+; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[2]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[2]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[1]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[1]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[0]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[0]            ; regout           ;
@@ -502,8 +569,6 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |Block1|Z80_bridge_v2:inst|mem_in_ID              ; |Block1|Z80_bridge_v2:inst|mem_in_ID              ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|PS2_STAT[6]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[6]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_STAT[5]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[5]            ; regout           ;
-; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; regout           ;
-; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|always0~0              ; |Block1|Z80_bridge_v2:inst|always0~0              ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~0   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~0   ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~1   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~1   ; out              ;
@@ -511,7 +576,7 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~3   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~3   ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~4   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~4   ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~5   ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc~5   ; out              ;
-; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[4]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~0     ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~0     ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~3     ; |Block1|Z80_bridge_v2:inst|z80_read_port_fc~3     ; out              ;
 ; |Block1|Z80_bridge_v2:inst|always0~6              ; |Block1|Z80_bridge_v2:inst|always0~6              ; out0             ;
@@ -523,7 +588,10 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~5  ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc~5  ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~0    ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~0    ; out              ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~3    ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc~3    ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[3]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[2]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_STAT[1]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[1]            ; regout           ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT[0]            ; |Block1|Z80_bridge_v2:inst|PS2_STAT[0]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~0             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~0             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~1             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~1             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~2             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~2             ; out              ;
@@ -532,7 +600,15 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~5             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~5             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~6             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~6             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~7             ; |Block1|Z80_bridge_v2:inst|PS2_CHAR~7             ; out              ;
-; |Block1|Z80_bridge_v2:inst|always0~18             ; |Block1|Z80_bridge_v2:inst|always0~18             ; out0             ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~0             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~0             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~1             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~1             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~2             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~2             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~3             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~3             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~4             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~4             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~5             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~5             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~6             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~6             ; out              ;
+; |Block1|Z80_bridge_v2:inst|PS2_STAT~7             ; |Block1|Z80_bridge_v2:inst|PS2_STAT~7             ; out              ;
+; |Block1|Z80_bridge_v2:inst|always0~22             ; |Block1|Z80_bridge_v2:inst|always0~22             ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~0           ; |Block1|Z80_bridge_v2:inst|Z80_245_oe~0           ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData~36           ; |Block1|Z80_bridge_v2:inst|Z80_rData~36           ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData~37           ; |Block1|Z80_bridge_v2:inst|Z80_rData~37           ; out              ;
@@ -553,7 +629,6 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~4         ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~4         ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~5         ; |Block1|Z80_bridge_v2:inst|Z80_rData[2]~5         ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~6         ; |Block1|Z80_bridge_v2:inst|Z80_rData[1]~6         ; out              ;
-; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[3]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[4]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[4]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[5]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[5]            ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[6]            ; |Block1|Z80_bridge_v2:inst|PS2_CHAR[6]            ; regout           ;
@@ -562,6 +637,22 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~17        ; |Block1|Z80_bridge_v2:inst|Z80_rData[3]~17        ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~26        ; |Block1|Z80_bridge_v2:inst|Z80_rData[6]~26        ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~30        ; |Block1|Z80_bridge_v2:inst|Z80_rData[7]~30        ; out              ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[0]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[0]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[1]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[1]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[2]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[2]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[3]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[3]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[4]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[4]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[5]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[5]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[6]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[6]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[7]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_HI[7]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[0]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[0]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[1]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[1]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[2]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[2]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[3]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[3]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[4]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[4]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[5]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[5]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[6]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[6]           ; regout           ;
+; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[7]           ; |Block1|Z80_bridge_v2:inst|GEO_WR_LO[7]           ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[2]   ; |Block1|Z80_bridge_v2:inst|z80_write_port_fc[2]   ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[0] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[0] ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[1] ; |Block1|Z80_bridge_v2:inst|z80_write_memory_fc[1] ; regout           ;
@@ -570,12 +661,14 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[0]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[0]  ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[1]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[1]  ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[2]  ; |Block1|Z80_bridge_v2:inst|z80_read_memory_fc[2]  ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[1]         ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[1]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[2]         ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[2]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[3]         ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[3]         ; regout           ;
+; |Block1|Z80_bridge_v2:inst|Z80_wData_r[5]         ; |Block1|Z80_bridge_v2:inst|Z80_wData_r[5]         ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[21]         ; |Block1|Z80_bridge_v2:inst|Z80_addr_r[21]         ; regout           ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~3             ; |Block1|Z80_bridge_v2:inst|Decoder1~3             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~4             ; |Block1|Z80_bridge_v2:inst|Decoder1~4             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~5             ; |Block1|Z80_bridge_v2:inst|Decoder1~5             ; out              ;
-; |Block1|Z80_bridge_v2:inst|Decoder1~6             ; |Block1|Z80_bridge_v2:inst|Decoder1~6             ; out              ;
-; |Block1|Z80_bridge_v2:inst|Decoder1~7             ; |Block1|Z80_bridge_v2:inst|Decoder1~7             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~8             ; |Block1|Z80_bridge_v2:inst|Decoder1~8             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~9             ; |Block1|Z80_bridge_v2:inst|Decoder1~9             ; out              ;
 ; |Block1|Z80_bridge_v2:inst|Decoder1~10            ; |Block1|Z80_bridge_v2:inst|Decoder1~10            ; out              ;
@@ -592,23 +685,10 @@ The following table displays output ports that do not toggle to 0 during simulat
 ; |Block1|Z80_bridge_v2:inst|Add2~2                 ; |Block1|Z80_bridge_v2:inst|Add2~2                 ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Add3~1                 ; |Block1|Z80_bridge_v2:inst|Add3~1                 ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Add3~2                 ; |Block1|Z80_bridge_v2:inst|Add3~2                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~0                 ; |Block1|Z80_bridge_v2:inst|Add4~0                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~1                 ; |Block1|Z80_bridge_v2:inst|Add4~1                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~2                 ; |Block1|Z80_bridge_v2:inst|Add4~2                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~3                 ; |Block1|Z80_bridge_v2:inst|Add4~3                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~4                 ; |Block1|Z80_bridge_v2:inst|Add4~4                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~5                 ; |Block1|Z80_bridge_v2:inst|Add4~5                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~6                 ; |Block1|Z80_bridge_v2:inst|Add4~6                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~7                 ; |Block1|Z80_bridge_v2:inst|Add4~7                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~8                 ; |Block1|Z80_bridge_v2:inst|Add4~8                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~9                 ; |Block1|Z80_bridge_v2:inst|Add4~9                 ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~10                ; |Block1|Z80_bridge_v2:inst|Add4~10                ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~11                ; |Block1|Z80_bridge_v2:inst|Add4~11                ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Add4~12                ; |Block1|Z80_bridge_v2:inst|Add4~12                ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Equal0~0               ; |Block1|Z80_bridge_v2:inst|Equal0~0               ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Equal2~0               ; |Block1|Z80_bridge_v2:inst|Equal2~0               ; out0             ;
 ; |Block1|Z80_bridge_v2:inst|Equal4~0               ; |Block1|Z80_bridge_v2:inst|Equal4~0               ; out0             ;
-; |Block1|Z80_bridge_v2:inst|Equal9~0               ; |Block1|Z80_bridge_v2:inst|Equal9~0               ; out0             ;
+; |Block1|Z80_bridge_v2:inst|Equal13~0              ; |Block1|Z80_bridge_v2:inst|Equal13~0              ; out0             ;
 +---------------------------------------------------+---------------------------------------------------+------------------+
 
 
@@ -625,20 +705,22 @@ The following table displays output ports that do not toggle to 0 during simulat
 Info: *******************************************************************
 Info: Running Quartus II Simulator
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Tue Jul 07 15:29:50 2020
+    Info: Processing started: Sun Aug 02 18:29:19 2020
 Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off Z80_bridge -c Z80_bridge
-Info: Using vector source file "G:/fpga/Projects/GPU/test/Z80_bridge_test/Z80_bridge.vwf"
+Info: Using vector source file "G:/fpga/Projects/GPU/test/Z80_bridge_test/Z80_bridge_GEO.vwf"
 Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
     Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
 Warning: Found clock-sensitive change during active clock edge at time 500.0 ns on register "|Block1|Z80_bridge_v2:inst|Z80_CLKr"
-Warning: Found clock-sensitive change during active clock edge at time 2.5 us on register "|Block1|Z80_bridge_v2:inst|Z80_wData_r[0]"
+Warning: Found clock-sensitive change during active clock edge at time 1.5 us on register "|Block1|Z80_bridge_v2:inst|Z80_wData_r[4]"
+Warning: Found clock-sensitive change during active clock edge at time 1.5 us on register "|Block1|Z80_bridge_v2:inst|Z80_wData_r[6]"
+Warning: Found clock-sensitive change during active clock edge at time 1.5 us on register "|Block1|Z80_bridge_v2:inst|Z80_wData_r[7]"
 Info: Simulation partitioned into 1 sub-simulations
-Info: Simulation coverage is      68.04 %
-Info: Number of transitions in simulation is 21410
-Info: Quartus II Simulator was successful. 0 errors, 2 warnings
+Info: Simulation coverage is      64.20 %
+Info: Number of transitions in simulation is 21362
+Info: Quartus II Simulator was successful. 0 errors, 4 warnings
     Info: Peak virtual memory: 143 megabytes
-    Info: Processing ended: Tue Jul 07 15:29:51 2020
+    Info: Processing ended: Sun Aug 02 18:29:20 2020
     Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Total CPU time (on all processors): 00:00:01
 
 

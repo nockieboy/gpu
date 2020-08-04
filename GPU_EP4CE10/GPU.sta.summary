@@ -3,35 +3,35 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : -4.595
-TNS   : -54.738
+Slack : -6.303
+TNS   : -65.691
 
 Type  : Slow 1200mV 85C Model Setup 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
-Slack : -1.527
-TNS   : -1.769
+Slack : -0.337
+TNS   : -0.587
 
 Type  : Slow 1200mV 85C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 0.279
-TNS   : 0.000
+Slack : -0.298
+TNS   : -3.224
 
 Type  : Slow 1200mV 85C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.316
-TNS   : 0.000
+Slack : -0.145
+TNS   : -0.145
 
 Type  : Slow 1200mV 85C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : -0.101
-TNS   : -0.101
+Slack : -0.112
+TNS   : -0.112
+
+Type  : Slow 1200mV 85C Model Hold 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : 0.183
+TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.394
+Slack : 0.329
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 0.437
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Hold 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
-Slack : 0.444
+Slack : 0.441
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
@@ -43,11 +43,11 @@ Slack : 0.307
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 3.736
+Slack : 3.744
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : 9.736
+Slack : 9.744
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk54m'
@@ -55,35 +55,35 @@ Slack : 9.813
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : -4.002
-TNS   : -46.294
+Slack : -5.541
+TNS   : -56.161
 
 Type  : Slow 1200mV 0C Model Setup 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
-Slack : -1.535
-TNS   : -1.535
+Slack : -0.455
+TNS   : -0.455
 
 Type  : Slow 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 0.518
+Slack : 0.021
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.570
+Slack : 0.582
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : -0.209
-TNS   : -0.209
+Slack : -0.217
+TNS   : -0.217
 
 Type  : Slow 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.345
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 0.394
+Slack : 0.306
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
-Slack : 0.410
+Slack : 0.335
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.407
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
@@ -95,11 +95,11 @@ Slack : 0.351
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 3.715
+Slack : 3.740
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : 9.723
+Slack : 9.740
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk54m'
@@ -107,35 +107,35 @@ Slack : 9.795
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : -2.224
-TNS   : -25.423
+Slack : -3.117
+TNS   : -31.217
 
 Type  : Fast 1200mV 0C Model Setup 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
-Slack : -0.547
-TNS   : -0.547
+Slack : 0.100
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 1.951
+Slack : 1.807
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 2.091
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : 0.026
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 0.178
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[1]'
-Slack : 0.194
+Slack : 2.122
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
-Slack : 0.194
+Slack : -0.009
+TNS   : -0.009
+
+Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 0.021
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.125
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.190
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
@@ -147,7 +147,7 @@ Slack : 1.732
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[0]'
-Slack : 3.766
+Slack : 3.771
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk54m'
@@ -155,7 +155,7 @@ Slack : 9.422
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[2]'
-Slack : 9.774
+Slack : 9.796
 TNS   : 0.000
 
 ------------------------------------------------------------

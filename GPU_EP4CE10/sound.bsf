@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 176 96)
+	(rect 16 16 184 160)
 	(text "sound" (rect 5 0 28 12)(font "Arial" ))
-	(text "inst" (rect 8 64 20 76)(font "Arial" ))
+	(text "inst" (rect 8 128 20 140)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -38,13 +38,34 @@ refer to the applicable agreement for further details.
 		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
-		(pt 160 32)
+		(pt 0 64)
+		(input)
+		(text "data_tx" (rect 0 0 29 12)(font "Arial" ))
+		(text "data_tx" (rect 21 59 50 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "data[8..0]" (rect 0 0 36 12)(font "Arial" ))
+		(text "data[8..0]" (rect 21 75 57 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "reset" (rect 0 0 20 12)(font "Arial" ))
+		(text "reset" (rect 21 91 41 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 168 32)
 		(output)
 		(text "speaker" (rect 0 0 31 12)(font "Arial" ))
-		(text "speaker" (rect 108 27 139 39)(font "Arial" ))
-		(line (pt 160 32)(pt 144 32)(line_width 1))
+		(text "speaker" (rect 116 27 147 39)(font "Arial" ))
+		(line (pt 168 32)(pt 152 32)(line_width 1))
 	)
 	(drawing
-		(rectangle (rect 16 16 144 64)(line_width 1))
+		(rectangle (rect 16 16 152 128)(line_width 1))
 	)
 )

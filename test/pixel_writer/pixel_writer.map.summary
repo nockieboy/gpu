@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Tue Aug 04 18:19:11 2020
+Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
+Revision Name : pixel_writer
+Top-level Entity Name : pixel_writer
+Family : Cyclone III
+Total logic elements : 248
+    Total combinational functions : 176
+    Dedicated logic registers : 129
+Total registers : 129
+Total pins : 121
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

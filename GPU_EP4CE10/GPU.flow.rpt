@@ -1,5 +1,5 @@
 Flow report for GPU
-Tue Jul 07 15:50:02 2020
+Mon Jul 27 16:50:08 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,17 +40,17 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Tue Jul 07 15:50:02 2020       ;
+; Flow Status                        ; Successful - Mon Jul 27 16:49:58 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GPU                                         ;
 ; Top-level Entity Name              ; GPU                                         ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE10E22C7                                ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 8,505 / 10,320 ( 82 % )                     ;
-;     Total combinational functions  ; 6,513 / 10,320 ( 63 % )                     ;
-;     Dedicated logic registers      ; 5,091 / 10,320 ( 49 % )                     ;
-; Total registers                    ; 5141                                        ;
+; Total logic elements               ; 4,643 / 10,320 ( 45 % )                     ;
+;     Total combinational functions  ; 3,670 / 10,320 ( 36 % )                     ;
+;     Dedicated logic registers      ; 2,570 / 10,320 ( 25 % )                     ;
+; Total registers                    ; 2620                                        ;
 ; Total pins                         ; 76 / 92 ( 83 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 335,872 / 423,936 ( 79 % )                  ;
@@ -64,51 +64,45 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/07/2020 15:46:25 ;
+; Start date & time ; 07/27/2020 16:48:42 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; GPU                 ;
 +-------------------+---------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                     ;
-+-----------------------------------------+----------------------------------------+--------------------+-------------+----------------+
-; Assignment Name                         ; Value                                  ; Default Value      ; Entity Name ; Section Id     ;
-+-----------------------------------------+----------------------------------------+--------------------+-------------+----------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION         ; Off                                    ; Auto               ; --          ; --             ;
-; COMPILER_SIGNATURE_ID                   ; 36074246109237.159413318511356         ; --                 ; --          ; --             ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST         ; On                                     ; --                 ; --          ; eda_simulation ;
-; EDA_OUTPUT_DATA_FORMAT                  ; Systemverilog Hdl                      ; --                 ; --          ; eda_simulation ;
-; EDA_SIMULATION_TOOL                     ; ModelSim-Altera (SystemVerilog)        ; <None>             ; --          ; --             ;
-; EDA_TIME_SCALE                          ; 1 ps                                   ; --                 ; --          ; eda_simulation ;
-; FITTER_EFFORT                           ; Standard Fit                           ; Auto Fit           ; --          ; --             ;
-; MAX_CORE_JUNCTION_TEMP                  ; 85                                     ; --                 ; --          ; --             ;
-; MIN_CORE_JUNCTION_TEMP                  ; 0                                      ; --                 ; --          ; --             ;
-; NUM_PARALLEL_PROCESSORS                 ; 2                                      ; --                 ; --          ; --             ;
-; OPTIMIZATION_MODE                       ; High Performance Effort                ; Balanced           ; --          ; --             ;
-; OPTIMIZE_POWER_DURING_FITTING           ; Off                                    ; Normal compilation ; --          ; --             ;
-; OPTIMIZE_POWER_DURING_SYNTHESIS         ; Off                                    ; Normal compilation ; --          ; --             ;
-; OUTPUT_IO_TIMING_FAR_END_VMEAS          ; Half Signal Swing                      ; --                 ; --          ; --             ;
-; OUTPUT_IO_TIMING_FAR_END_VMEAS          ; Half Signal Swing                      ; --                 ; --          ; --             ;
-; OUTPUT_IO_TIMING_NEAR_END_VMEAS         ; Half Vccio                             ; --                 ; --          ; --             ;
-; OUTPUT_IO_TIMING_NEAR_END_VMEAS         ; Half Vccio                             ; --                 ; --          ; --             ;
-; PARTITION_COLOR                         ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL     ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
-; PARTITION_NETLIST_TYPE                  ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
-; PHYSICAL_SYNTHESIS_COMBO_LOGIC          ; On                                     ; Off                ; --          ; --             ;
-; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ; On                                     ; Off                ; --          ; --             ;
-; PHYSICAL_SYNTHESIS_REGISTER_RETIMING    ; On                                     ; Off                ; --          ; --             ;
-; PLACEMENT_EFFORT_MULTIPLIER             ; 4                                      ; 1.0                ; --          ; --             ;
-; POWER_BOARD_THERMAL_MODEL               ; None (CONSERVATIVE)                    ; --                 ; --          ; --             ;
-; POWER_DEFAULT_TOGGLE_RATE               ; 85%                                    ; 12.5%              ; --          ; --             ;
-; POWER_PRESET_COOLING_SOLUTION           ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --                 ; --          ; --             ;
-; REMOVE_DUPLICATE_REGISTERS              ; Off                                    ; On                 ; --          ; --             ;
-; ROUTER_TIMING_OPTIMIZATION_LEVEL        ; MAXIMUM                                ; Normal             ; --          ; --             ;
-; USE_GENERATED_PHYSICAL_CONSTRAINTS      ; Off                                    ; --                 ; --          ; eda_blast_fpga ;
-; VERILOG_INPUT_VERSION                   ; SystemVerilog_2005                     ; Verilog_2001       ; --          ; --             ;
-; VERILOG_SHOW_LMF_MAPPING_MESSAGES       ; Off                                    ; --                 ; --          ; --             ;
-; VHDL_SHOW_LMF_MAPPING_MESSAGES          ; Off                                    ; --                 ; --          ; --             ;
-+-----------------------------------------+----------------------------------------+--------------------+-------------+----------------+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                  ;
++--------------------------------------+----------------------------------------+--------------------+-------------+----------------+
+; Assignment Name                      ; Value                                  ; Default Value      ; Entity Name ; Section Id     ;
++--------------------------------------+----------------------------------------+--------------------+-------------+----------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION      ; Off                                    ; Auto               ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 36074246109237.159586492202516         ; --                 ; --          ; --             ;
+; CYCLONEII_OPTIMIZATION_TECHNIQUE     ; Speed                                  ; Balanced           ; --          ; --             ;
+; FITTER_EFFORT                        ; Fast Fit                               ; Auto Fit           ; --          ; --             ;
+; MAX_CORE_JUNCTION_TEMP               ; 85                                     ; --                 ; --          ; --             ;
+; MIN_CORE_JUNCTION_TEMP               ; 0                                      ; --                 ; --          ; --             ;
+; NUM_PARALLEL_PROCESSORS              ; 2                                      ; --                 ; --          ; --             ;
+; OPTIMIZATION_MODE                    ; High Performance Effort                ; Balanced           ; --          ; --             ;
+; OPTIMIZE_MULTI_CORNER_TIMING         ; Off                                    ; On                 ; --          ; --             ;
+; OPTIMIZE_POWER_DURING_FITTING        ; Off                                    ; Normal compilation ; --          ; --             ;
+; OPTIMIZE_POWER_DURING_SYNTHESIS      ; Off                                    ; Normal compilation ; --          ; --             ;
+; PARTITION_COLOR                      ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
+; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC       ; On                                     ; Off                ; --          ; --             ;
+; PHYSICAL_SYNTHESIS_EFFORT            ; Fast                                   ; Normal             ; --          ; --             ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING ; On                                     ; Off                ; --          ; --             ;
+; PLACEMENT_EFFORT_MULTIPLIER          ; 4                                      ; 1.0                ; --          ; --             ;
+; POWER_BOARD_THERMAL_MODEL            ; None (CONSERVATIVE)                    ; --                 ; --          ; --             ;
+; POWER_DEFAULT_TOGGLE_RATE            ; 85%                                    ; 12.5%              ; --          ; --             ;
+; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --                 ; --          ; --             ;
+; REMOVE_DUPLICATE_REGISTERS           ; Off                                    ; On                 ; --          ; --             ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL     ; MINIMUM                                ; Normal             ; --          ; --             ;
+; USE_GENERATED_PHYSICAL_CONSTRAINTS   ; Off                                    ; --                 ; --          ; eda_blast_fpga ;
+; VERILOG_INPUT_VERSION                ; SystemVerilog_2005                     ; Verilog_2001       ; --          ; --             ;
+; VERILOG_SHOW_LMF_MAPPING_MESSAGES    ; Off                                    ; --                 ; --          ; --             ;
+; VHDL_SHOW_LMF_MAPPING_MESSAGES       ; Off                                    ; --                 ; --          ; --             ;
++--------------------------------------+----------------------------------------+--------------------+-------------+----------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
@@ -116,12 +110,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:08     ; 1.0                     ; 4951 MB             ; 00:01:29                           ;
-; Fitter               ; 00:02:04     ; 1.0                     ; 5334 MB             ; 00:02:56                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 4699 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:09     ; 1.2                     ; 4820 MB             ; 00:00:11                           ;
-; EDA Netlist Writer   ; 00:00:05     ; 1.0                     ; 4669 MB             ; 00:00:04                           ;
-; Total                ; 00:03:29     ; --                      ; --                  ; 00:04:42                           ;
+; Analysis & Synthesis ; 00:00:47     ; 1.0                     ; 4929 MB             ; 00:01:09                           ;
+; Fitter               ; 00:00:22     ; 1.0                     ; 5275 MB             ; 00:00:28                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 4683 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:09     ; 1.2                     ; 4785 MB             ; 00:00:10                           ;
+; Total                ; 00:01:20     ; --                      ; --                  ; 00:01:49                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -134,7 +127,6 @@ refer to the applicable agreement for further details.
 ; Fitter               ; TALOS            ; Windows 10 ; 10.0       ; x86_64         ;
 ; Assembler            ; TALOS            ; Windows 10 ; 10.0       ; x86_64         ;
 ; Timing Analyzer      ; TALOS            ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; TALOS            ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
@@ -145,7 +137,6 @@ quartus_map --read_settings_files=on --write_settings_files=off GPU -c GPU
 quartus_fit --read_settings_files=off --write_settings_files=off GPU -c GPU
 quartus_asm --read_settings_files=off --write_settings_files=off GPU -c GPU
 quartus_sta GPU -c GPU
-quartus_eda --read_settings_files=off --write_settings_files=off GPU -c GPU
 
 
 

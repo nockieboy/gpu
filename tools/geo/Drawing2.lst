@@ -1,0 +1,111 @@
+0000: ; Test Drawing assembly language
+0000: ;
+0000: ; Assembled with 'FWASM.exe'  (C) Brian Guralnick
+0000: ;
+0000: ; OP-Code Instruction structure inside the file 'instr.txt'
+0000: ;
+0000: ; Follow Microchip's PIC16/18 assembler mnemonic
+0000: ;
+0000: ; Compile line            "fwasm drawing.asm"
+0000: ; The output file will be "drawings.bin'
+0000: ; The output file         "drawings.lst' shows the generated opcode and error codes.
+0000: ;
+0000: ; *** THE COMPILER WILL PLACE 8 BYTES of 0x0 AT THE BEGINNING OF THE .BIN FILE
+0000: ;
+0000: ;
+0000: ; Warning, DEFAULT RADDIX IS HEXADECIMAL
+0000: ;
+0000: ; Use d'xxx'        to enter a decimal value
+0000: ; Use b'0101010100' to enter a binary value
+0000: ;
+0000: 
+0000:                       org              0000 
+0000: 
+0000:      start                             
+0000: 
+0000: ; *************************************************************************************
+0000: ; ** Draw a dot at coordinates (250,250) with palette color 15
+0000: ; *************************************************************************************
+0000: ;	set_x		0,d'250'	; set x0 register to 250
+0000: ;	set_y		0,d'250'	; set y0 register to 250
+0000: ;	plot_dot	d'15' 		; plot a dot with palette color 15
+0000: 
+0000: ; *************************************************************************************
+0000: ; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+0000: ; *************************************************************************************
+0000: 80C8                  set_x            	0,d'200'	
+0001: C15E                  set_y            	0,d'350'	
+0002: 9064                  set_x            	1,d'100'	
+0003: D0C8                  set_y            	1,d'200'	
+0004: A12C                  set_x            	2,d'300'	
+0005: E12C                  set_y            	2,d'300'	
+0006: 0B0D                  plot_tri_fill      d'13' 		
+0007: 
+0007: ; *************************************************************************************
+0007: ; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+0007: ; *************************************************************************************
+0007: 8064                  set_x            	0,d'100'	
+0008: C0C8                  set_y            	0,d'200'	
+0009: 90C8                  set_x            	1,d'200'	
+000A: D15E                  set_y            	1,d'350'	
+000B: A12C                  set_x            	2,d'300'	
+000C: E12C                  set_y            	2,d'300'	
+000D: 0B0B                  plot_tri_fill      d'11' 		
+000E:                                        
+000E: ; *************************************************************************************
+000E: ; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+000E: ; *************************************************************************************
+000E: 80C8                  set_x            	0,d'200'	
+000F: C15E                  set_y            	0,d'350' 
+0010: 912C                  set_x            	1,d'300'	
+0011: D12C                  set_y            	1,d'300'	
+0012: A064                  set_x            	2,d'100'	
+0013: E0C8                  set_y            	2,d'200'	
+0014: 0B08                  plot_tri_fill      d'8' 		
+0015: 
+0015: ; *************************************************************************************
+0015: ; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+0015: ; *************************************************************************************
+0015: 812C                  set_x            	0,d'300'	
+0016: C12C                  set_y            	0,d'300' 
+0017: 9064                  set_x            	1,d'100'	
+0018: D0C8                  set_y            	1,d'200'	
+0019: A0C8                  set_x            	2,d'200'	
+001A: E15E                  set_y            	2,d'350'	
+001B: 0B09                  plot_tri_fill      d'9' 		
+001C: 
+001C: ; *************************************************************************************
+001C: ; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+001C: ; *************************************************************************************
+001C: 812C                  set_x            	0,d'300'	
+001D: C12C                  set_y            	0,d'300' 
+001E: 90C8                  set_x            	1,d'200'	
+001F: D15E                  set_y            	1,d'350'	
+0020: A064                  set_x            	2,d'100'	
+0021: E0C8                  set_y            	2,d'200'	
+0022: 0B03                  plot_tri_fill      d'3' 		
+0023: 
+0023: ; *************************************************************************************
+0023: ; ** Draw a line from coordinates (200,200) to (300,300) with palette color 14
+0023: ; *************************************************************************************
+0023: 8064                  set_x            	0,d'100'	
+0024: C0C8                  set_y            	0,d'200'	
+0025: 912C                  set_x            	1,d'300'	
+0026: D12C                  set_y            	1,d'300'	
+0027: A0C8                  set_x            	2,d'200'	
+0028: E15E                  set_y            	2,d'350'	
+0029: 0B0E                  plot_tri_fill      d'14' 		
+002A:                                        
+002A: ; *************************************************************************************
+002A: ; ** Draw a line from coordinates (200,300) to (300,200) with palette color 14
+002A: ; *************************************************************************************
+002A: ;	set_x		0,d'250'	; set x0 register to 200
+002A: ;	set_y		0,d'200'	; set y0 register to 200
+002A: ;	set_x		1,d'200'	; set x1 register to 300
+002A: ;	set_y		1,d'250'	; set y1 register to 300
+002A: ;	set_x		2,d'350'	; set x2 register to 300
+002A: ;	set_y		2,d'350'	; set y2 register to 300
+002A: ;	plot_line       d'1' 		; draw a line with palette color 14
+002A: 
+002A: 
+002A: 

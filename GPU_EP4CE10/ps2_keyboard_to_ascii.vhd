@@ -32,7 +32,7 @@ ENTITY ps2_keyboard_to_ascii IS
       ps2_clk    : IN  STD_LOGIC;                     --clock signal from PS2 keyboard
       ps2_data   : IN  STD_LOGIC;                     --data signal from PS2 keyboard
       ascii_new  : OUT STD_LOGIC;                     --output flag indicating new ASCII value
-      ascii_code : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)); --ASCII value
+      ascii_code : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)); --ASCII value
 END ps2_keyboard_to_ascii;
 
 ARCHITECTURE behavior OF ps2_keyboard_to_ascii IS
@@ -42,6 +42,7 @@ ARCHITECTURE behavior OF ps2_keyboard_to_ascii IS
   SIGNAL ps2_code          : STD_LOGIC_VECTOR(7 DOWNTO 0);          --PS2 code input form ps2_keyboard component
   SIGNAL prev_ps2_code_new : STD_LOGIC := '1';                      --value of ps2_code_new flag on previous clock
   SIGNAL break             : STD_LOGIC := '0';                      --'1' for break code, '0' for make code
+  SIGNAL old_break         : STD_LOGIC := '0';                      --'1' for break code, '0' for make code
   SIGNAL e0_code           : STD_LOGIC := '0';                      --'1' for multi-code commands, '0' for single code commands
   SIGNAL caps_lock         : STD_LOGIC := '0';                      --'1' if caps lock is active, '0' if caps lock is inactive
   SIGNAL control_r         : STD_LOGIC := '0';                      --'1' if right control key is held down, else '0'
@@ -297,17 +298,22 @@ BEGIN
           
           IF(break = '0') THEN  --the code is a make
             state <= output;      --proceed to output state
+				old_break <= '0';
           ELSE                  --code is a break
-            state <= ready;       --return to ready state to await next PS2 code
+				--state     <= ready;       --return to ready state to await next PS2 code
+            state     <= output;       --force output of the break character
+				old_break <= '1';
           END IF;
         
         --output state: verify the code is valid and output the ASCII value
         WHEN output =>
           IF(ascii(7) = '0') THEN            --the PS2 code has an ASCII output
-            ascii_new <= '1';                  --set flag indicating new ASCII output
-            ascii_code <= ascii(6 DOWNTO 0);   --output the ASCII value
+            ascii_new  <= '1';                  --set flag indicating new ASCII output
+            ascii_code(6 DOWNTO 0) <= ascii(6 DOWNTO 0);   --output the ASCII value and break bit
+				ascii_code(7) <= old_break;
           END IF;
           state <= ready;                    --return to ready state to await next PS2 code
+			 old_break <= '0';
 
       END CASE;
     END IF;

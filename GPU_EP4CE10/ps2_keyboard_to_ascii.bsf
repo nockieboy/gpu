@@ -54,8 +54,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 200 48)
 		(output)
-		(text "ascii_code[6..0]" (rect 0 0 61 12)(font "Arial" ))
-		(text "ascii_code[6..0]" (rect 118 43 179 55)(font "Arial" ))
+		(text "ascii_code[7..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "ascii_code[7..0]" (rect 118 43 179 55)(font "Arial" ))
 		(line (pt 200 48)(pt 184 48)(line_width 3))
 	)
 	(parameter

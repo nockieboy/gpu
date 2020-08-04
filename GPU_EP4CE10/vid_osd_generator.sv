@@ -36,10 +36,9 @@ parameter PIPE_DELAY = 11;                // This parameter selects the number o
 parameter HW_REGS_SIZE  = 9;              // default size for hardware register bus - set by HW_REGS parameter in design view
 parameter ADDR_SIZE     = 15;					// 15 = 32KB, 16 = 64KB etc
 parameter NUM_WORDS     = 24576;				// Video RAM up to 5FFFh (default for EP4CE6)
-parameter NUM_LAYERS    = 7;              // This parameter defines the number of used MAGGIE graphics layers.
+parameter NUM_LAYERS    = 7;              // This parameter defines the number of MAGGIE graphics layers.
 parameter PALETTE_ADDR  = (2 ** ADDR_SIZE) - 1024 ;   // Base address where host Z80 may access the palette memory, usually located in the last 1024 bytes of addressable memory
 parameter GPU_RAM_MIF   = "GPU_MIF.mif" ; // MIF file for the main GPU ram.
-
 
 wire   [15:0] host_rd_data_main,host_rd_data_pal;
 assign        host_rd_data_pal[15:8] = 8'd0;
@@ -52,12 +51,12 @@ wire [19:0] GPU_ram_cmd_out[14:0];
 wire [15:0] GPU_ram_data_out[14:0];
 wire [17:0] BART_to_PAL_MIXER[14:0];
 
-
 // **** Create the HV trigger test cursors at output ****
 wire [7:0] red_pc,green_pc,blue_pc;
 wire [7:0] test_cursors;
 assign test_cursors[6:0] = 7'h0;
 assign test_cursors[7]   = HV_triggers_out[0] | HV_triggers_out[1] | HV_triggers_out[2] | HV_triggers_out[3];
+
 // set cursor colour
 assign red   = red_pc   | test_cursors;
 assign green = green_pc | test_cursors;
@@ -155,15 +154,14 @@ endgenerate
 // ****************************************************************************************************************************
 generate
    for (x=0 ; x<NUM_LAYERS ; x=x+1) begin : bart_inst
-bart bart_inst(
-   .clk            ( clk ),
-   .pc_ena         ( pc_ena[3:0] ),
-   .bp_2_rast_cmd  ( maggie_to_bp2r[x] ),
-
-   .cmd_in         ( GPU_ram_cmd_out[x]  ),
-   .ram_byte_in    ( GPU_ram_data_out[x] ),
-
-   .pixel_out      ( BART_to_PAL_MIXER[x] ) );
+		bart bart_inst(
+			.clk            ( clk ),
+			.pc_ena         ( pc_ena[3:0] ),
+			.bp_2_rast_cmd  ( maggie_to_bp2r[x] ),
+			.cmd_in         ( GPU_ram_cmd_out[x]  ),
+			.ram_byte_in    ( GPU_ram_data_out[x] ),
+			.pixel_out      ( BART_to_PAL_MIXER[x] )
+		);
    end
 endgenerate
 // ****************************************************************************************************************************

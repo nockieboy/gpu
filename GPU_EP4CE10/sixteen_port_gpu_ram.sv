@@ -66,8 +66,8 @@ assign      wren_host[3]           = write_ena_host && host_enable ;  // Set por
 assign      w_cmd_mux_in[3][0]     = host_enable ;                    // pipe into the cmd mux of port 4 a the host enable function.       
 assign      w_addr_mux_in[3]       = addr_host_in ;                   // Set port 4 to host address
 assign      data_mux_in[3][7:0]    = data_host_in[7:0] ;              // Set port 4 write data low byte to host data input
-//assign      data_mux_in[3][15:8]   = ena_host_16bit    ? data_host_in[15:8]    : data_host_in[7:0] ; // in 8 bit mode, automatically set upper byte write data to the first 8 bits, in 16 bit mode, set it to the upper 8 bits.
-assign      data_mux_in[3][15:8]   = data_host_in[15:0] ; // When writing in 8 bit mode, make sure the upper byte has a copy of the first 8 bits.
+assign      data_mux_in[3][15:8]   = ena_host_16bit    ? data_host_in[15:8]    : data_host_in[7:0] ; // in 8 bit mode, automatically set upper byte write data to the first 8 bits, in 16 bit mode, set it to the upper 8 bits.
+assign      data_mux_in[3][7:0]    = data_host_in[7:0] ;                                             // When writing in 8 bit mode, make sure the upper byte has a copy of the first 8 bits.
 assign      data_host_out          = cmd_mux_out[3][0] ? data_mux_out[3][15:0] : 16'h0 ;             // set the host read port to port 4 if a hosr_enable read command went in, otherwise return 0
 
 // create a GPU RAM instance

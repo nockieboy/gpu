@@ -1,5 +1,5 @@
 Analysis & Synthesis report for geo
-Sat Jul 04 12:11:35 2020
+Fri Jul 31 20:53:03 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -13,11 +13,19 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |geo|geometry_xy_plotter:inst|geo_sub_func1
-  9. Registers Removed During Synthesis
- 10. General Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Analysis & Synthesis Messages
+  8. Analysis & Synthesis RAM Summary
+  9. Analysis & Synthesis DSP Block Usage Summary
+ 10. State Machine - |geo|geometry_xy_plotter:inst|geo_sub_func1
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Source assignments for geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|altsyncram_esf1:FIFOram
+ 15. Parameter Settings for User Entity Instance: geometry_xy_plotter:inst|scfifo:scfifo_component
+ 16. Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult1
+ 17. Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult0
+ 18. scfifo Parameter Settings by Entity Instance
+ 19. lpm_mult Parameter Settings by Entity Instance
+ 20. Analysis & Synthesis Messages
 
 
 
@@ -43,19 +51,19 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jul 04 12:11:35 2020        ;
+; Analysis & Synthesis Status        ; Successful - Fri Jul 31 20:53:03 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; geo                                          ;
 ; Top-level Entity Name              ; geo                                          ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 612                                          ;
-;     Total combinational functions  ; 507                                          ;
-;     Dedicated logic registers      ; 210                                          ;
-; Total registers                    ; 210                                          ;
-; Total pins                         ; 58                                           ;
+; Total logic elements               ; 1,220                                        ;
+;     Total combinational functions  ; 992                                          ;
+;     Dedicated logic registers      ; 473                                          ;
+; Total registers                    ; 473                                          ;
+; Total pins                         ; 99                                           ;
 ; Total virtual pins                 ; 0                                            ;
-; Total memory bits                  ; 0                                            ;
-; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total memory bits                  ; 8,192                                        ;
+; Embedded Multiplier 9-bit elements ; 4                                            ;
 ; Total PLLs                         ; 0                                            ;
 +------------------------------------+----------------------------------------------+
 
@@ -65,13 +73,15 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                     ; EP3C5F256C8        ;                    ;
+; Device                                                                     ; EP3C5F256C7        ;                    ;
 ; Top-level entity name                                                      ; geo                ; geo                ;
 ; Family name                                                                ; Cyclone III        ; Stratix II         ;
 ; Verilog Show LMF Mapping Messages                                          ; Off                ;                    ;
 ; Verilog Version                                                            ; SystemVerilog_2005 ; Verilog_2001       ;
-; Optimization Technique                                                     ; Area               ; Balanced           ;
+; Optimization Technique                                                     ; Speed              ; Balanced           ;
 ; Use Generated Physical Constraints File                                    ; Off                ;                    ;
+; Auto RAM Replacement                                                       ; Off                ; On                 ;
+; Auto Shift Register Replacement                                            ; Off                ; Auto               ;
 ; PowerPlay Power Optimization                                               ; Off                ; Normal compilation ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
@@ -107,9 +117,7 @@ applicable agreement for further details.
 ; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
 ; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
 ; Auto ROM Replacement                                                       ; On                 ; On                 ;
-; Auto RAM Replacement                                                       ; On                 ; On                 ;
 ; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
-; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
 ; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
 ; Strict RAM Replacement                                                     ; Off                ; Off                ;
 ; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
@@ -153,14 +161,25 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                  ;
-+----------------------------------+-----------------+------------------------------------+-----------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                  ;
-+----------------------------------+-----------------+------------------------------------+-----------------------------------------------+
-; geometry_xy_plotter.sv           ; yes             ; User SystemVerilog HDL File        ; C:/altera/Qdesigns/Geo/geometry_xy_plotter.sv ;
-; geo.bdf                          ; yes             ; User Block Diagram/Schematic File  ; C:/altera/Qdesigns/Geo/geo.bdf                ;
-+----------------------------------+-----------------+------------------------------------+-----------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                 ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                 ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------+
+; geo.bdf                          ; yes             ; User Block Diagram/Schematic File  ; G:/fpga/Projects/GPU/test/Geo/geo.bdf                        ;
+; geometry_xy_plotter.sv           ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Projects/GPU/test/Geo/geometry_xy_plotter.sv         ;
+; pixel_address_generator.sv       ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Projects/GPU/test/Geo/pixel_address_generator.sv     ;
+; scfifo.tdf                       ; yes             ; Megafunction                       ; g:/altera/91sp2/quartus/libraries/megafunctions/scfifo.tdf   ;
+; db/scfifo_3oa1.tdf               ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/Geo/db/scfifo_3oa1.tdf             ;
+; db/a_dpfifo_7r71.tdf             ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/Geo/db/a_dpfifo_7r71.tdf           ;
+; db/altsyncram_esf1.tdf           ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/Geo/db/altsyncram_esf1.tdf         ;
+; db/cmpr_dr8.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/Geo/db/cmpr_dr8.tdf                ;
+; db/cntr_o8b.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/Geo/db/cntr_o8b.tdf                ;
+; db/cntr_597.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/Geo/db/cntr_597.tdf                ;
+; db/cntr_p8b.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/Geo/db/cntr_p8b.tdf                ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                       ; g:/altera/91sp2/quartus/libraries/megafunctions/lpm_mult.tdf ;
+; db/mult_vbt.tdf                  ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/Geo/db/mult_vbt.tdf                ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------+
 
 
 +---------------------------------------------------------+
@@ -168,39 +187,80 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 612       ;
+; Estimated Total logic elements              ; 1,220     ;
 ;                                             ;           ;
-; Total combinational functions               ; 507       ;
+; Total combinational functions               ; 992       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 231       ;
-;     -- 3 input functions                    ; 201       ;
-;     -- <=2 input functions                  ; 75        ;
+;     -- 4 input functions                    ; 419       ;
+;     -- 3 input functions                    ; 455       ;
+;     -- <=2 input functions                  ; 118       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 336       ;
-;     -- arithmetic mode                      ; 171       ;
+;     -- normal mode                          ; 731       ;
+;     -- arithmetic mode                      ; 261       ;
 ;                                             ;           ;
-; Total registers                             ; 210       ;
-;     -- Dedicated logic registers            ; 210       ;
+; Total registers                             ; 473       ;
+;     -- Dedicated logic registers            ; 473       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
-; I/O pins                                    ; 58        ;
+; I/O pins                                    ; 99        ;
+; Total memory bits                           ; 8192      ;
+; Embedded Multiplier 9-bit elements          ; 4         ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 210       ;
-; Total fan-out                               ; 2477      ;
-; Average fan-out                             ; 2.97      ;
+; Maximum fan-out                             ; 489       ;
+; Total fan-out                               ; 5773      ;
+; Average fan-out                             ; 3.43      ;
 +---------------------------------------------+-----------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                      ;
-+-------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+--------------+
-; Compilation Hierarchy Node    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name           ; Library Name ;
-+-------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+--------------+
-; |geo                          ; 507 (0)           ; 210 (0)      ; 0           ; 0            ; 0       ; 0         ; 58   ; 0            ; |geo                          ; work         ;
-;    |geometry_xy_plotter:inst| ; 507 (507)         ; 210 (210)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst ;              ;
-+-------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                 ;
++------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node               ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                           ; Library Name ;
++------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
+; |geo                                     ; 992 (1)           ; 473 (0)      ; 8192        ; 4            ; 0       ; 2         ; 99   ; 0            ; |geo                                                                                                                          ; work         ;
+;    |geometry_xy_plotter:inst|            ; 746 (676)         ; 277 (234)    ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst                                                                                                 ;              ;
+;       |scfifo:scfifo_component|          ; 70 (0)            ; 43 (0)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component                                                                         ; work         ;
+;          |scfifo_3oa1:auto_generated|    ; 70 (0)            ; 43 (0)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated                                              ;              ;
+;             |a_dpfifo_7r71:dpfifo|       ; 70 (41)           ; 43 (17)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo                         ; work         ;
+;                |altsyncram_esf1:FIFOram| ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|altsyncram_esf1:FIFOram ;              ;
+;                |cntr_597:usedw_counter|  ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_597:usedw_counter  ;              ;
+;                |cntr_o8b:rd_ptr_msb|     ; 9 (9)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_o8b:rd_ptr_msb     ; work         ;
+;                |cntr_p8b:wr_ptr|         ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_p8b:wr_ptr         ; work         ;
+;    |pixel_address_generator:inst1|       ; 245 (245)         ; 196 (196)    ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |geo|pixel_address_generator:inst1                                                                                            ;              ;
+;       |lpm_mult:Mult0|                   ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult0                                                                             ;              ;
+;          |mult_vbt:auto_generated|       ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult0|mult_vbt:auto_generated                                                     ;              ;
+;       |lpm_mult:Mult1|                   ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult1                                                                             ;              ;
+;          |mult_vbt:auto_generated|       ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult1|mult_vbt:auto_generated                                                     ;              ;
++------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                        ;
++-------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                                                                                ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++-------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|altsyncram_esf1:FIFOram|ALTSYNCRAM ; M9K  ; Simple Dual Port ; 512          ; 16           ; 512          ; 16           ; 8192 ; None ;
++-------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary        ;
++---------------------------------------+-------------+
+; Statistic                             ; Number Used ;
++---------------------------------------+-------------+
+; Simple Multipliers (9-bit)            ; 0           ;
+; Simple Multipliers (18-bit)           ; 2           ;
+; Embedded Multiplier Blocks            ; --          ;
+; Embedded Multiplier 9-bit elements    ; 4           ;
+; Signed Embedded Multipliers           ; 0           ;
+; Unsigned Embedded Multipliers         ; 2           ;
+; Mixed Sign Embedded Multipliers       ; 0           ;
+; Variable Sign Embedded Multipliers    ; 0           ;
+; Dedicated Input Shift Register Chains ; 0           ;
++---------------------------------------+-------------+
+Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
 
 
 Encoding Type:  One-Hot
@@ -222,11 +282,10 @@ Encoding Type:  One-Hot
 ; geometry_xy_plotter:inst|geo_xdir[1..10] ; Merged with geometry_xy_plotter:inst|geo_xdir[11] ;
 ; geometry_xy_plotter:inst|geo_ydir[1..10] ; Merged with geometry_xy_plotter:inst|geo_ydir[11] ;
 ; geometry_xy_plotter:inst|geo_shape[3]    ; Stuck at GND due to stuck port data_in            ;
-; geometry_xy_plotter:inst|geo_sub_func1~5 ; Lost fanout                                       ;
-; geometry_xy_plotter:inst|geo_sub_func1~6 ; Lost fanout                                       ;
 ; geometry_xy_plotter:inst|geo_sub_func1~7 ; Lost fanout                                       ;
-; geometry_xy_plotter:inst|errd[11]        ; Lost fanout                                       ;
-; Total Number of Removed Registers = 25   ;                                                   ;
+; geometry_xy_plotter:inst|geo_sub_func1~8 ; Lost fanout                                       ;
+; geometry_xy_plotter:inst|geo_sub_func1~9 ; Lost fanout                                       ;
+; Total Number of Removed Registers = 24   ;                                                   ;
 +------------------------------------------+---------------------------------------------------+
 
 
@@ -235,12 +294,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 210   ;
-; Number of registers using Synchronous Clear  ; 28    ;
-; Number of registers using Synchronous Load   ; 26    ;
-; Number of registers using Asynchronous Clear ; 0     ;
+; Total registers                              ; 473   ;
+; Number of registers using Synchronous Clear  ; 4     ;
+; Number of registers using Synchronous Load   ; 80    ;
+; Number of registers using Asynchronous Clear ; 354   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 204   ;
+; Number of registers using Clock Enable       ; 451   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -250,16 +309,180 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
-; 5:1                ; 12 bits   ; 36 LEs        ; 24 LEs               ; 12 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|errd[7]                  ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|errd[11]                 ;
+; 16:1               ; 4 bits    ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[38]       ;
+; 16:1               ; 19 bits   ; 190 LEs       ; 19 LEs               ; 171 LEs                ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[19]       ;
+; 16:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[21]       ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[28]       ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[24]       ;
+; 130:1              ; 24 bits   ; 2064 LEs      ; 48 LEs               ; 2016 LEs               ; Yes        ; |geo|geometry_xy_plotter:inst|max_x[0]                 ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_color[3]   ;
+; 11:1               ; 12 bits   ; 84 LEs        ; 24 LEs               ; 60 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_x[6]                 ;
 ; 133:1              ; 2 bits    ; 176 LEs       ; 8 LEs                ; 168 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|geo_shape[1]             ;
-; 11:1               ; 12 bits   ; 84 LEs        ; 24 LEs               ; 60 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_x[0]                 ;
-; 12:1               ; 12 bits   ; 96 LEs        ; 12 LEs               ; 84 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_y[8]                 ;
-; 72:1               ; 8 bits    ; 384 LEs       ; 8 LEs                ; 376 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_color[1]   ;
+; 12:1               ; 12 bits   ; 96 LEs        ; 12 LEs               ; 84 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_y[3]                 ;
 ; 135:1              ; 2 bits    ; 180 LEs       ; 6 LEs                ; 174 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_func[2]         ;
-; 136:1              ; 12 bits   ; 1080 LEs      ; 48 LEs               ; 1032 LEs               ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_Y[2]  ;
-; 136:1              ; 8 bits    ; 720 LEs       ; 32 LEs               ; 688 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[2]  ;
-; 137:1              ; 4 bits    ; 364 LEs       ; 16 LEs               ; 348 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[10] ;
+; 75:1               ; 4 bits    ; 200 LEs       ; 16 LEs               ; 184 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[10] ;
+; 75:1               ; 8 bits    ; 400 LEs       ; 32 LEs               ; 368 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[0]  ;
+; 75:1               ; 12 bits   ; 600 LEs       ; 48 LEs               ; 552 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_Y[11] ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|geometry_xy_plotter:inst|Add4                     ;
+; 5:1                ; 20 bits   ; 60 LEs        ; 20 LEs               ; 40 LEs                 ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|altsyncram_esf1:FIFOram ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                             ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; OFF   ; -    ; -                                                                                              ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: geometry_xy_plotter:inst|scfifo:scfifo_component ;
++-------------------------+-------------+-------------------------------------------------------+
+; Parameter Name          ; Value       ; Type                                                  ;
++-------------------------+-------------+-------------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                            ;
+; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                          ;
+; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                          ;
+; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                                        ;
+; lpm_width               ; 16          ; Signed Integer                                        ;
+; LPM_NUMWORDS            ; 512         ; Signed Integer                                        ;
+; LPM_WIDTHU              ; 9           ; Signed Integer                                        ;
+; LPM_SHOWAHEAD           ; ON          ; Untyped                                               ;
+; UNDERFLOW_CHECKING      ; ON          ; Untyped                                               ;
+; OVERFLOW_CHECKING       ; ON          ; Untyped                                               ;
+; ALLOW_RWCYCLE_WHEN_FULL ; OFF         ; Untyped                                               ;
+; ADD_RAM_OUTPUT_REGISTER ; ON          ; Untyped                                               ;
+; ALMOST_FULL_VALUE       ; 510         ; Signed Integer                                        ;
+; ALMOST_EMPTY_VALUE      ; 0           ; Untyped                                               ;
+; USE_EAB                 ; ON          ; Untyped                                               ;
+; MAXIMIZE_SPEED          ; 5           ; Untyped                                               ;
+; DEVICE_FAMILY           ; Cyclone III ; Untyped                                               ;
+; OPTIMIZE_FOR_SPEED      ; 9           ; Untyped                                               ;
+; CBXI_PARAMETER          ; scfifo_3oa1 ; Untyped                                               ;
++-------------------------+-------------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult1 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 12          ; Untyped                        ;
+; LPM_WIDTHB                                     ; 16          ; Untyped                        ;
+; LPM_WIDTHP                                     ; 28          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 28          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 6           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; mult_vbt    ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult0 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 12          ; Untyped                        ;
+; LPM_WIDTHB                                     ; 16          ; Untyped                        ;
+; LPM_WIDTHP                                     ; 28          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 28          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 6           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; mult_vbt    ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; scfifo Parameter Settings by Entity Instance                                  ;
++----------------------------+--------------------------------------------------+
+; Name                       ; Value                                            ;
++----------------------------+--------------------------------------------------+
+; Number of entity instances ; 1                                                ;
+; Entity Instance            ; geometry_xy_plotter:inst|scfifo:scfifo_component ;
+;     -- FIFO Type           ; Single Clock                                     ;
+;     -- lpm_width           ; 16                                               ;
+;     -- LPM_NUMWORDS        ; 512                                              ;
+;     -- LPM_SHOWAHEAD       ; ON                                               ;
+;     -- USE_EAB             ; ON                                               ;
++----------------------------+--------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                                       ;
++---------------------------------------+----------------------------------------------+
+; Name                                  ; Value                                        ;
++---------------------------------------+----------------------------------------------+
+; Number of entity instances            ; 2                                            ;
+; Entity Instance                       ; pixel_address_generator:inst1|lpm_mult:Mult1 ;
+;     -- LPM_WIDTHA                     ; 12                                           ;
+;     -- LPM_WIDTHB                     ; 16                                           ;
+;     -- LPM_WIDTHP                     ; 28                                           ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                     ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                           ;
+;     -- USE_EAB                        ; OFF                                          ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                         ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                           ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                           ;
+; Entity Instance                       ; pixel_address_generator:inst1|lpm_mult:Mult0 ;
+;     -- LPM_WIDTHA                     ; 12                                           ;
+;     -- LPM_WIDTHB                     ; 16                                           ;
+;     -- LPM_WIDTHP                     ; 28                                           ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                     ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                           ;
+;     -- USE_EAB                        ; OFF                                          ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                         ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                           ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                           ;
++---------------------------------------+----------------------------------------------+
 
 
 +-------------------------------+
@@ -268,36 +491,91 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sat Jul 04 12:11:31 2020
+    Info: Processing started: Fri Jul 31 20:52:53 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off geo -c geo
-Info: Found 1 design units, including 1 entities, in source file geometry_xy_plotter.sv
-    Info: Found entity 1: geometry_xy_plotter
 Info: Found 1 design units, including 1 entities, in source file geo.bdf
     Info: Found entity 1: geo
+Info: Found 1 design units, including 1 entities, in source file geometry_xy_plotter.sv
+    Info: Found entity 1: geometry_xy_plotter
+Info: Found 1 design units, including 1 entities, in source file pixel_address_generator.sv
+    Info: Found entity 1: pixel_address_generator
 Info: Elaborating entity "geo" for the top level hierarchy
 Info: Elaborating entity "geometry_xy_plotter" for hierarchy "geometry_xy_plotter:inst"
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(56): object "max_x" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(57): object "max_y" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(80): object "geo_mask" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(81): object "geo_paste" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(94): object "geo_sub_func2" assigned a value but never read
-Info (10264): Verilog HDL Case Statement information at geometry_xy_plotter.sv(250): all case item expressions in this case statement are onehot
-Info: 4 registers lost all their fanouts during netlist optimizations. The first 4 are displayed below.
-    Info: Register "geometry_xy_plotter:inst|geo_sub_func1~5" lost all its fanouts during netlist optimizations.
-    Info: Register "geometry_xy_plotter:inst|geo_sub_func1~6" lost all its fanouts during netlist optimizations.
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(64): object "geo_mask" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(65): object "geo_paste" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(77): object "geo_sub_func2" assigned a value but never read
+Info (10264): Verilog HDL Case Statement information at geometry_xy_plotter.sv(324): all case item expressions in this case statement are onehot
+Info: Elaborating entity "scfifo" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component"
+Info: Elaborated megafunction instantiation "geometry_xy_plotter:inst|scfifo:scfifo_component"
+Info: Instantiated megafunction "geometry_xy_plotter:inst|scfifo:scfifo_component" with the following parameter:
+    Info: Parameter "add_ram_output_register" = "ON"
+    Info: Parameter "almost_full_value" = "510"
+    Info: Parameter "intended_device_family" = "Cyclone III"
+    Info: Parameter "lpm_hint" = "RAM_BLOCK_TYPE=M9K"
+    Info: Parameter "lpm_numwords" = "512"
+    Info: Parameter "lpm_showahead" = "ON"
+    Info: Parameter "lpm_type" = "scfifo"
+    Info: Parameter "lpm_width" = "16"
+    Info: Parameter "lpm_widthu" = "9"
+    Info: Parameter "overflow_checking" = "ON"
+    Info: Parameter "underflow_checking" = "ON"
+    Info: Parameter "use_eab" = "ON"
+Info: Found 1 design units, including 1 entities, in source file db/scfifo_3oa1.tdf
+    Info: Found entity 1: scfifo_3oa1
+Info: Elaborating entity "scfifo_3oa1" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_dpfifo_7r71.tdf
+    Info: Found entity 1: a_dpfifo_7r71
+Info: Elaborating entity "a_dpfifo_7r71" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_esf1.tdf
+    Info: Found entity 1: altsyncram_esf1
+Info: Elaborating entity "altsyncram_esf1" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|altsyncram_esf1:FIFOram"
+Info: Found 1 design units, including 1 entities, in source file db/cmpr_dr8.tdf
+    Info: Found entity 1: cmpr_dr8
+Info: Elaborating entity "cmpr_dr8" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cmpr_dr8:almost_full_comparer"
+Info: Elaborating entity "cmpr_dr8" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cmpr_dr8:three_comparison"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_o8b.tdf
+    Info: Found entity 1: cntr_o8b
+Info: Elaborating entity "cntr_o8b" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_o8b:rd_ptr_msb"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_597.tdf
+    Info: Found entity 1: cntr_597
+Info: Elaborating entity "cntr_597" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_597:usedw_counter"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_p8b.tdf
+    Info: Found entity 1: cntr_p8b
+Info: Elaborating entity "cntr_p8b" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_p8b:wr_ptr"
+Info: Elaborating entity "pixel_address_generator" for hierarchy "pixel_address_generator:inst1"
+Warning (10764): Verilog HDL warning at pixel_address_generator.sv(122): converting signed shift amount to unsigned
+Warning (10764): Verilog HDL warning at pixel_address_generator.sv(123): converting signed shift amount to unsigned
+Info: Timing-Driven Synthesis is running
+Info: Inferred 2 megafunctions from design logic
+    Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "pixel_address_generator:inst1|Mult1"
+    Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "pixel_address_generator:inst1|Mult0"
+Info: Elaborated megafunction instantiation "pixel_address_generator:inst1|lpm_mult:Mult1"
+Info: Instantiated megafunction "pixel_address_generator:inst1|lpm_mult:Mult1" with the following parameter:
+    Info: Parameter "LPM_WIDTHA" = "12"
+    Info: Parameter "LPM_WIDTHB" = "16"
+    Info: Parameter "LPM_WIDTHP" = "28"
+    Info: Parameter "LPM_WIDTHR" = "28"
+    Info: Parameter "LPM_WIDTHS" = "1"
+    Info: Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info: Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info: Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info: Parameter "MAXIMIZE_SPEED" = "6"
+Info: Found 1 design units, including 1 entities, in source file db/mult_vbt.tdf
+    Info: Found entity 1: mult_vbt
+Info: 3 registers lost all their fanouts during netlist optimizations. The first 3 are displayed below.
     Info: Register "geometry_xy_plotter:inst|geo_sub_func1~7" lost all its fanouts during netlist optimizations.
-    Info: Register "geometry_xy_plotter:inst|errd[11]" lost all its fanouts during netlist optimizations.
-Warning: Design contains 2 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "rst"
-    Warning (15610): No output dependent on input pin "draw_busy"
-Info: Implemented 672 device resources after synthesis - the final resource count might be different
+    Info: Register "geometry_xy_plotter:inst|geo_sub_func1~8" lost all its fanouts during netlist optimizations.
+    Info: Register "geometry_xy_plotter:inst|geo_sub_func1~9" lost all its fanouts during netlist optimizations.
+Info: Implemented 1345 device resources after synthesis - the final resource count might be different
     Info: Implemented 20 input pins
-    Info: Implemented 38 output pins
-    Info: Implemented 614 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 8 warnings
-    Info: Peak virtual memory: 217 megabytes
-    Info: Processing ended: Sat Jul 04 12:11:35 2020
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Implemented 79 output pins
+    Info: Implemented 1226 logic cells
+    Info: Implemented 16 RAM segments
+    Info: Implemented 4 DSP elements
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 5 warnings
+    Info: Peak virtual memory: 238 megabytes
+    Info: Processing ended: Fri Jul 31 20:53:03 2020
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:10
 
 

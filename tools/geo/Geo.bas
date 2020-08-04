@@ -27,8 +27,18 @@ rem and executing state machines.
 Declare Sub read_palette()                                          : REM loads the GPU palette into memory
 Declare Sub draw_pixel(xp as integer, yp as integer, col as Ubyte)  : REM Draws 1 dot with paleted Color
 Declare Sub drawLine(x1 as integer, y1 as integer, x2 as integer, y2 As Integer, color_val As Ubyte)
+Declare Sub drawFilledTriangle(x1 as integer, y1 as integer, x2 as integer, y2 As Integer, x3 as integer, y3 As Integer, color_val As Ubyte)
 Declare Sub drawEllipse(x1 As integer, y1 As Integer, x2 As integer, y2 As Integer, colour as Integer, filled As Boolean = FALSE)
 Declare Sub func_plot(draw_type as Ubyte, color_type as Ubyte, color_val as Ubyte, dst_mem as integer, sx as integer, sy as integer, dx as integer, dy as integer, tx as integer, ty as integer, zx as integer, zy as integer, mx as integer, my as integer)
+
+Declare Sub setup_linegen_num ( byval i as integer)
+Declare Sub run_linegen_num ( byval i as integer, byval stop_Y_pos as integer, byval color_val as UByte  )
+
+Dim Shared As Integer xa(2),ya(2),xb(2),yb(2)
+Dim Shared As Integer dx(2),dy(2),sx(2),sy(2)
+Dim Shared As Integer magic(2),errd(2)
+Dim Shared As Integer is_done(2)
+Dim Shared As Integer out_y
 
 
 Dim Shared fdat (0 To 1) As Ubyte
@@ -37,12 +47,13 @@ Dim Shared pal_dat_g (0 To 255) As Ubyte
 Dim Shared pal_dat_b (0 To 255) As Ubyte
 dim Shared as integer funcdata12, x0,y0,x1,y1,x2,y2,x3,y3,x4,y4,c1,c2,c3,c4
 dim Shared as integer destmem, srcmem, max_x,max_y, src_width, dest_width
-dim shared as Ubyte   funcdata8,func1,func2,func3, draw_collision, blit_collision
+dim shared as Ubyte   funcdata8,func1,func2,func3, draw_collision, blit_collision, show_pset
 dim shared as string ink
 
 ScreenRes 720,560,16,0,0 : REM open a window a little larger than 640x480
 read_palette(): REM initially load the palette into memory
 
+out_y = 3 : Rem Set y-position of ordering Output
 
 REM *************************************************************
 REM **** Open the 'drawing.bin' file ************
@@ -125,14 +136,7 @@ REM *************************************************************
 REM **** Numerous plotting functions ************
 REM *************************************************************
 
-	if func2=1  Then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,0,0,0,0,max_x,max_y) : rem draw dot
-	if func2=2  then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,0,0,0,0,max_x,max_y) : rem draw line
-	if func2=3  then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,0,0,0,0,max_x,max_y) : rem draw box
-	if func2=4  then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,0,0,0,0,max_x,max_y) : rem draw box filled
-	if func2=5  then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,0,0,0,0,max_x,max_y) : rem draw circle
-	if func2=6  then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,0,0,0,0,max_x,max_y) : rem draw circle filled
-	if func2=7  then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,x2,y2,x3,y3,max_x,max_y) : rem draw oval filled
-	if func2=8  then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,x2,y2,x3,y3,max_x,max_y) : rem draw oval filled
+	if func2>0 and func2<90  then func_plot(func2,1,func3,destmem,x0,y0,x1,y1,x2,y2,x3,y3,max_x,max_y) : rem draw oval filled
 
 REM *************************************************************
 REM **** reset function ************
@@ -190,15 +194,15 @@ locate 62,1
 ? " coord 2ab  (";tx;",";ty;")-(";zx;",";zy;")        "
 ? " x&y limit  (";mx;",";my;")       ";
 
-if draw_type = 1 then                : REM ********* Draw a Dot at sx,sy
+if draw_type = 0 then                : REM ********* Draw a Dot at sx,sy
 	draw_pixel (sx,sy,color_val)
 	end if
 
-if draw_type = 2 then                : REM ********* Draw a Line from (sx,sy)-(dx,dy) (Using Bresenham's Line Algorithm)
+if draw_type = 1 then                : REM ********* Draw a Line from (sx,sy)-(dx,dy) (Using Bresenham's Line Algorithm)
 	drawLine(sx,sy,dx,dy,color_val)
 End if
 
-if draw_type = 3 then                : REM ********* Draw a Box inside area (sx,sy)-(dx,dy)
+if draw_type = 2 then                : REM ********* Draw a Box inside area (sx,sy)-(dx,dy)
 	for x=sx to dx
 		draw_pixel (x,sy,color_val)
 		draw_pixel (x,dy,color_val)
@@ -209,7 +213,7 @@ if draw_type = 3 then                : REM ********* Draw a Box inside area (sx,
 	next y
 End if
 
-if draw_type = 4 then                : REM ********* Draw a filled Box inside area (sx,sy)-(dx,dy)
+if draw_type = 2+8 then                : REM ********* Draw a filled Box inside area (sx,sy)-(dx,dy)
 	for y=sy to dy
 		for x=sx to dx
 			draw_pixel (x,y,color_val)
@@ -217,13 +221,18 @@ if draw_type = 4 then                : REM ********* Draw a filled Box inside ar
 	next y
 end If
 
-If draw_type = 5 Then                : REM ********* Draw a ellipse within Rectangle bounded by sx,sy,dx,dy
+If draw_type = 4 Then                : REM ********* Draw a ellipse within Rectangle bounded by sx,sy,dx,dy
 	drawEllipse(sx, sy, dx, dy, color_val)
 EndIf
 
-If draw_type = 6 Then                : REM ********* Draw a filled ellipse within Rectangle bounded by sx,sy,dx,dy
+If draw_type = 4+8 Then                : REM ********* Draw a filled ellipse within Rectangle bounded by sx,sy,dx,dy
 	drawEllipse(sx, sy, dx, dy, color_val, TRUE)
 EndIf
+
+if draw_type = 3+8 then                : REM ********* Draw a triangle with points (sx,sy),(dx,dy),(tx,ty)
+	drawFilledTriangle(sx,sy,dx,dy,tx,ty,color_val)
+End if
+
 
 REM *************************************************************
 sleep : REM PAUSE for keypress after every plot command
@@ -327,7 +336,7 @@ locate 1,1
     
    While (is_done = False)
       Rem plot(x, y, color)
-      draw_pixel (x,y,color_val):? x,y
+      draw_pixel (x,y,color_val)
 
       Rem Reached the End
       If (x = x1 And y = y1) Then
@@ -378,4 +387,216 @@ REM *************************************************************
 
 Sub draw_pixel(xp as integer, yp as integer, col as Ubyte)
 	PSet ( xp,yp ),rgb( pal_dat_r(col),pal_dat_g(col),pal_dat_b(col) )
+if (show_pset) then ? xp,yp
 end sub
+
+
+Rem *************************************************************
+REM **** Draw filled triangle algorithm ************
+REM *************************************************************
+
+Sub drawFilledTriangle (ByVal x0 as Integer, byval y0 as Integer, byval x1 as Integer, byval y1 as Integer, byval x2 as Integer, byval y2 as Integer, byval color_val As UByte) 
+   
+   Dim As Integer i,raster_Y_pos,raster_X_pos,next_face
+	
+	locate 1,1 : show_pset = 0
+	
+	? y0, : ? y1, : ? y2,
+	
+	If (y0 >= y1 and y1 >= y2 ) Then
+		Locate out_y,1:? "y0>y1>y2", : out_y += 1		
+		xa(0) = x2 : rem LineGen 0 start & end
+		ya(0) = y2
+		xb(0) = x0
+		yb(0) = y0
+		xa(1) = x2 : rem LineGen 1 start & end
+		ya(1) = y2
+		xb(1) = x1
+		yb(1) = y1
+		xa(2) = x1 : rem LineGen 2 start & end
+		ya(2) = y1
+		xb(2) = x0
+		yb(2) = y0
+	ElseIf (y1 >= y2 And y2 >= y0) Then
+		Locate out_y,1:? "y1>y2>y0", : out_y += 1
+		xa(0) = x0 : rem LineGen 0 start & end
+		ya(0) = y0
+		xb(0) = x1
+		yb(0) = y1
+		xa(1) = x0 : rem LineGen 1 start & end
+		ya(1) = y0
+		xb(1) = x2
+		yb(1) = y2
+		xa(2) = x2 : Rem LineGen 2 start & end
+		ya(2) = y2
+		xb(2) = x1
+		yb(2) = y1
+	ElseIf (y2 >= y0 And y0 >= y1) Then
+		Locate out_y,1:? "y2>y0>y1", : out_y += 1
+		xa(0) = x1 : rem LineGen 0 start & end
+		ya(0) = y1
+		xb(0) = x2
+		yb(0) = y2
+		xa(1) = x1 : rem LineGen 1 start & end
+		ya(1) = y1
+		xb(1) = x0
+		yb(1) = y0
+		xa(2) = x0 : rem LineGen 2 start & end
+		ya(2) = y0
+		xb(2) = x2
+		yb(2) = y2
+	ElseIf (y0 >= y2 And y2 >= y1) Then
+		Locate out_y,1:? "y0>y2>y1", : out_y += 1
+		xa(0) = x1 : rem LineGen 0 start & end
+		ya(0) = y1
+		xb(0) = x0
+		yb(0) = y0
+		xa(1) = x1 : rem LineGen 1 start & end
+		ya(1) = y1
+		xb(1) = x2
+		yb(1) = y2
+		xa(2) = x2 : rem LineGen 2 start & end
+		ya(2) = y2
+		xb(2) = x0
+		yb(2) = y0
+	ElseIf (y2 >= y1 And y1 >= y0) Then
+		Locate out_y,1:? "y2>y1>y0", : out_y += 1
+		xa(0) = x0 : rem LineGen 0 start & end
+		ya(0) = y0
+		xb(0) = x2
+		yb(0) = y2
+		xa(1) = x0 : rem LineGen 1 start & end
+		ya(1) = y0
+		xb(1) = x1
+		yb(1) = y1
+		xa(2) = x1 : rem LineGen 2 start & end
+		ya(2) = y1
+		xb(2) = x2
+		yb(2) = y2
+	ElseIf (y1 >= y0 And y0 >= y2) Then
+		Locate out_y,1:? "y1>y0>y2" : out_y += 1
+		xa(0) = x2 : rem LineGen 0 start & end
+		ya(0) = y2
+		xb(0) = x1
+		yb(0) = y1
+		xa(1) = x2 : rem LineGen 1 start & end
+		ya(1) = y2
+		xb(1) = x0
+		yb(1) = y0
+		xa(2) = x0 : rem LineGen 2 start & end
+		ya(2) = y0
+		xb(2) = x1
+		yb(2) = y1
+	EndIf
+  
+	For i = 0 to 2 : Rem Setup all 3 line gens
+        setup_linegen_num ( i )
+	Next i
+
+	REM the integers 'next_face' and 'raster_X_pos' will be used for something.
+
+	next_face = 1
+	
+	run_linegen_num ( 0, ya(0)+1, color_val ) : Rem finish the triangle's first line
+   run_linegen_num ( 1, ya(0)+1, color_val ) : Rem finish the triangle's third line
+
+	If ( yb(0) - ya(0) > 2) Then
+	
+	   For raster_Y_pos = ya(0)+1 to yb(0)-1	
+   	
+    		run_linegen_num ( 0, raster_Y_pos, color_val )   			:REM draw first triangle line until raster_Y_pos
+	    	run_linegen_num ( next_face, raster_Y_pos, color_val )   :REM draw second or third triangle line until raster_Y_pos
+		
+			Rem Only if there are any empty pixels to fill inbetween the 2 triangle edges, raster fill them in
+		
+			If ( (xa(0)+2) <= xa(next_face) ) Then : Rem Check one direction
+			
+	      	For raster_X_pos = xa(0) + 1 to xa(next_face) - 1
+	      	
+	      		draw_pixel ( raster_X_pos, raster_Y_pos, color_val )
+	      	
+	      	Next raster_X_pos
+	      
+			End If	
+		
+			If ( (xa(0)-2) >= xa(next_face) ) Then	: Rem Check opposite direction
+			
+				For raster_X_pos = xa(next_face) + 1 to xa(0) - 1
+				
+					draw_pixel ( raster_X_pos, raster_Y_pos, color_val )
+				
+				Next raster_X_pos
+			
+			End If	
+		
+			Rem If the second triangle line reached it's end, finish second line and switch over to the third triangle line
+			If ( raster_Y_pos = yb(1) ) Then run_linegen_num ( 1, -1, color_val ) : next_face = 2 
+		
+	   Next raster_Y_pos
+   
+   EndIf
+
+   run_linegen_num ( 0, yb(0)+1, color_val ) : Rem finish the triangle's first line
+   run_linegen_num ( 2, yb(0)+1, color_val ) : Rem finish the triangle's third line
+
+	Locate 1,1 : show_pset = 0
+
+End Sub
+
+
+Sub setup_linegen_num ( byval i as integer )
+
+   Rem bounding box's width and height for the three line generators
+   Rem And set the loop's sign
+
+   dx(i) = xb(i) - xa(i)
+   dy(i) = yb(i) - ya(i)
+
+   If (dx(i) < 0) Then
+      dx(i) = -dx(i)
+      sx(i) = -1
+   Else
+      sx(i) = 1
+   End If
+    
+   If (dy(i) > 0) Then
+      dy(i) = -dy(i)
+      sy(i) = 1
+   Else
+      sy(i) = -1
+   End If
+   
+   magic(i)   = 0
+   errd(i)    = dx(i) + dy(i)
+   is_done(i) = 0
+
+End Sub
+
+Sub run_linegen_num ( byval i as integer, byval stop_Y_pos as integer, byval color_val as UByte  )
+
+   While (is_done(i) = 0 and stop_Y_pos<>ya(i) )
+	
+      draw_pixel (xa(i), ya(i), color_val)
+	
+      Rem Reached the End
+      If (xa(i) = xb(i) And ya(i) = yb(i) ) Then
+      	is_done(i) = 1
+      Else
+      	is_done(i) = 0
+      End If
+	
+      Rem Line 1 carried
+      magic(i) = errd(i) shl 1
+      if (magic(i) > dy(i)) Then
+         errd(i) += dy(i)
+         xa(i)    += sx(i)
+      End If
+        
+      if (magic(i) < dx(i)) Then
+         errd(i) += dx(i)
+         ya(i)    += sy(i)
+      End If
+   Wend
+
+End Sub
+
