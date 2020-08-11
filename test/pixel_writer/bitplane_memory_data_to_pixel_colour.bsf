@@ -1,0 +1,113 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 280 208)
+	(text "bitplane_memory_data_to_pixel_colour" (rect 5 0 196 12)(font "Arial" ))
+	(text "inst" (rect 8 176 25 188)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "ram_data_rdy" (rect 0 0 68 12)(font "Arial" ))
+		(text "ram_data_rdy" (rect 21 27 89 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "latched_word[15..0]" (rect 0 0 95 12)(font "Arial" ))
+		(text "latched_word[15..0]" (rect 21 43 116 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "latched_colour[7..0]" (rect 0 0 96 12)(font "Arial" ))
+		(text "latched_colour[7..0]" (rect 21 59 117 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "latched_bpp[3..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "latched_bpp[3..0]" (rect 21 75 105 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "latched_target[3..0]" (rect 0 0 95 12)(font "Arial" ))
+		(text "latched_target[3..0]" (rect 21 91 116 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "immediate_word[15..0]" (rect 0 0 110 12)(font "Arial" ))
+		(text "immediate_word[15..0]" (rect 21 107 131 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "immediate_colour[7..0]" (rect 0 0 112 12)(font "Arial" ))
+		(text "immediate_colour[7..0]" (rect 21 123 133 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "immediate_bpp[3..0]" (rect 0 0 100 12)(font "Arial" ))
+		(text "immediate_bpp[3..0]" (rect 21 139 121 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "immediate_target[3..0]" (rect 0 0 110 12)(font "Arial" ))
+		(text "immediate_target[3..0]" (rect 21 155 131 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
+	)
+	(port
+		(pt 264 32)
+		(output)
+		(text "colour_eq_0" (rect 0 0 59 12)(font "Arial" ))
+		(text "colour_eq_0" (rect 184 27 243 39)(font "Arial" ))
+		(line (pt 264 32)(pt 248 32)(line_width 1))
+	)
+	(port
+		(pt 264 48)
+		(output)
+		(text "source_colour[7..0]" (rect 0 0 94 12)(font "Arial" ))
+		(text "source_colour[7..0]" (rect 149 43 243 55)(font "Arial" ))
+		(line (pt 264 48)(pt 248 48)(line_width 3))
+	)
+	(port
+		(pt 264 64)
+		(output)
+		(text "pixel_colour[15..0]" (rect 0 0 89 12)(font "Arial" ))
+		(text "pixel_colour[15..0]" (rect 154 59 243 71)(font "Arial" ))
+		(line (pt 264 64)(pt 248 64)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 248 176)(line_width 1))
+	)
+)

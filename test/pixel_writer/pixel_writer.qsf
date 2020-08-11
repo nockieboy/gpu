@@ -52,14 +52,17 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name SIMULATION_MODE FUNCTIONAL
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE pixel_writer.vwf
+set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
+set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name OPTIMIZE_POWER_DURING_SYNTHESIS OFF
+set_global_assignment -name SDC_FILE SDC1.sdc
 set_global_assignment -name BDF_FILE pixel_writer.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE geo_pixel_writer.sv
 set_global_assignment -name SYSTEMVERILOG_FILE fifo_3word_0_latency.sv
-set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
-set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL ON
-set_global_assignment -name VECTOR_WAVEFORM_FILE pixel_writer.vwf
-set_global_assignment -name SIMULATION_MODE FUNCTIONAL
-set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE pixel_writer.vwf
 set_global_assignment -name QIP_FILE altsyncram0.qip
 set_global_assignment -name MIF_FILE test.mif
+set_global_assignment -name VECTOR_WAVEFORM_FILE pixel_writer.vwf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

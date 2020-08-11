@@ -1,5 +1,5 @@
 Analysis & Synthesis report for pixel_writer
-Tue Aug 04 20:00:41 2020
+Mon Aug 10 21:26:39 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -13,17 +13,18 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. Removed Registers Triggering Further Register Optimizations
- 10. General Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Source assignments for altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated
- 13. Parameter Settings for User Entity Instance: geo_pixel_writer:inst
- 14. Parameter Settings for User Entity Instance: geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1
- 15. Parameter Settings for User Entity Instance: altsyncram0:inst17|altsyncram:altsyncram_component
- 16. altsyncram Parameter Settings by Entity Instance
- 17. Port Connectivity Checks: "geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1"
- 18. Analysis & Synthesis Messages
+  8. Analysis & Synthesis RAM Summary
+  9. Registers Removed During Synthesis
+ 10. Removed Registers Triggering Further Register Optimizations
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Source assignments for altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated
+ 14. Parameter Settings for User Entity Instance: geo_pixel_writer:inst
+ 15. Parameter Settings for User Entity Instance: geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1
+ 16. Parameter Settings for User Entity Instance: altsyncram0:inst17|altsyncram:altsyncram_component
+ 17. altsyncram Parameter Settings by Entity Instance
+ 18. Port Connectivity Checks: "geo_pixel_writer:inst|bitplane_memory_data_to_pixel_colour:get_pixel_colour_1"
+ 19. Analysis & Synthesis Messages
 
 
 
@@ -49,102 +50,102 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Aug 04 20:00:41 2020        ;
+; Analysis & Synthesis Status        ; Successful - Mon Aug 10 21:26:39 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; pixel_writer                                 ;
 ; Top-level Entity Name              ; pixel_writer                                 ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 250                                          ;
-;     Total combinational functions  ; 176                                          ;
-;     Dedicated logic registers      ; 131                                          ;
-; Total registers                    ; 131                                          ;
-; Total pins                         ; 103                                          ;
+; Total logic elements               ; 482                                          ;
+;     Total combinational functions  ; 345                                          ;
+;     Dedicated logic registers      ; 250                                          ;
+; Total registers                    ; 250                                          ;
+; Total pins                         ; 160                                          ;
 ; Total virtual pins                 ; 0                                            ;
-; Total memory bits                  ; 0                                            ;
+; Total memory bits                  ; 65,536                                       ;
 ; Embedded Multiplier 9-bit elements ; 0                                            ;
 ; Total PLLs                         ; 0                                            ;
 +------------------------------------+----------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                                        ;
-+----------------------------------------------------------------------------+--------------------+--------------------+
-; Option                                                                     ; Setting            ; Default Value      ;
-+----------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                     ; EP3C5F256C7        ;                    ;
-; Top-level entity name                                                      ; pixel_writer       ; pixel_writer       ;
-; Family name                                                                ; Cyclone III        ; Stratix II         ;
-; Optimization Technique                                                     ; Speed              ; Balanced           ;
-; Use Generated Physical Constraints File                                    ; Off                ;                    ;
-; Use smart compilation                                                      ; Off                ; Off                ;
-; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
-; Enable compact report table                                                ; Off                ; Off                ;
-; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
-; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
-; Preserve fewer node names                                                  ; On                 ; On                 ;
-; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
-; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
-; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
-; State Machine Processing                                                   ; Auto               ; Auto               ;
-; Safe State Machine                                                         ; Off                ; Off                ;
-; Extract Verilog State Machines                                             ; On                 ; On                 ;
-; Extract VHDL State Machines                                                ; On                 ; On                 ;
-; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
-; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
-; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
-; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
-; Parallel Synthesis                                                         ; On                 ; On                 ;
-; DSP Block Balancing                                                        ; Auto               ; Auto               ;
-; NOT Gate Push-Back                                                         ; On                 ; On                 ;
-; Power-Up Don't Care                                                        ; On                 ; On                 ;
-; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
-; Remove Duplicate Registers                                                 ; On                 ; On                 ;
-; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
-; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
-; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
-; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
-; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
-; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
-; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
-; Carry Chain Length                                                         ; 70                 ; 70                 ;
-; Auto Carry Chains                                                          ; On                 ; On                 ;
-; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
-; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
-; Auto ROM Replacement                                                       ; On                 ; On                 ;
-; Auto RAM Replacement                                                       ; On                 ; On                 ;
-; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
-; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
-; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
-; Strict RAM Replacement                                                     ; Off                ; Off                ;
-; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
-; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
-; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
-; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
-; Auto Resource Sharing                                                      ; Off                ; Off                ;
-; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
-; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
-; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
-; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
-; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
-; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
-; Show Parameter Settings Tables in Synthesis Report                         ; On                 ; On                 ;
-; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
-; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
-; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
-; HDL message level                                                          ; Level2             ; Level2             ;
-; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
-; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
-; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
-; Clock MUX Protection                                                       ; On                 ; On                 ;
-; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
-; Block Design Naming                                                        ; Auto               ; Auto               ;
-; SDC constraint protection                                                  ; Off                ; Off                ;
-; Synthesis Effort                                                           ; Auto               ; Auto               ;
-; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
-; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
-; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
-; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
-+----------------------------------------------------------------------------+--------------------+--------------------+
++----------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                  ;
++----------------------------------------------------------------------------+--------------+--------------------+
+; Option                                                                     ; Setting      ; Default Value      ;
++----------------------------------------------------------------------------+--------------+--------------------+
+; Device                                                                     ; EP3C5F256C7  ;                    ;
+; Top-level entity name                                                      ; pixel_writer ; pixel_writer       ;
+; Family name                                                                ; Cyclone III  ; Stratix II         ;
+; Optimization Technique                                                     ; Speed        ; Balanced           ;
+; Use Generated Physical Constraints File                                    ; Off          ;                    ;
+; PowerPlay Power Optimization                                               ; Off          ; Normal compilation ;
+; Use smart compilation                                                      ; Off          ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On           ; On                 ;
+; Enable compact report table                                                ; Off          ; Off                ;
+; Restructure Multiplexers                                                   ; Auto         ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off          ; Off                ;
+; Preserve fewer node names                                                  ; On           ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off          ; Off                ;
+; Verilog Version                                                            ; Verilog_2001 ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993    ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto         ; Auto               ;
+; Safe State Machine                                                         ; Off          ; Off                ;
+; Extract Verilog State Machines                                             ; On           ; On                 ;
+; Extract VHDL State Machines                                                ; On           ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off          ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000         ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250          ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On           ; On                 ;
+; Parallel Synthesis                                                         ; On           ; On                 ;
+; DSP Block Balancing                                                        ; Auto         ; Auto               ;
+; NOT Gate Push-Back                                                         ; On           ; On                 ;
+; Power-Up Don't Care                                                        ; On           ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off          ; Off                ;
+; Remove Duplicate Registers                                                 ; On           ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off          ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off          ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off          ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off          ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off          ; Off                ;
+; Ignore SOFT Buffers                                                        ; On           ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off          ; Off                ;
+; Carry Chain Length                                                         ; 70           ; 70                 ;
+; Auto Carry Chains                                                          ; On           ; On                 ;
+; Auto Open-Drain Pins                                                       ; On           ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off          ; Off                ;
+; Auto ROM Replacement                                                       ; On           ; On                 ;
+; Auto RAM Replacement                                                       ; On           ; On                 ;
+; Auto DSP Block Replacement                                                 ; On           ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto         ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On           ; On                 ;
+; Strict RAM Replacement                                                     ; Off          ; Off                ;
+; Allow Synchronous Control Signals                                          ; On           ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off          ; Off                ;
+; Auto RAM Block Balancing                                                   ; On           ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off          ; Off                ;
+; Auto Resource Sharing                                                      ; Off          ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off          ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off          ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off          ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On           ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off          ; Off                ;
+; Timing-Driven Synthesis                                                    ; On           ; On                 ;
+; Show Parameter Settings Tables in Synthesis Report                         ; On           ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off          ; Off                ;
+; Synchronization Register Chain Length                                      ; 2            ; 2                  ;
+; HDL message level                                                          ; Level2       ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off          ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000         ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100          ; 100                ;
+; Clock MUX Protection                                                       ; On           ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off          ; Off                ;
+; Block Design Naming                                                        ; Auto         ; Auto               ;
+; SDC constraint protection                                                  ; Off          ; Off                ;
+; Synthesis Effort                                                           ; Auto         ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On           ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium       ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto         ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On           ; On                 ;
++----------------------------------------------------------------------------+--------------+--------------------+
 
 
 Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
@@ -169,7 +170,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; altsyncram0.v                    ; yes             ; User Wizard-Generated File         ; G:/fpga/Projects/GPU/test/pixel_writer/altsyncram0.v           ;
 ; test.mif                         ; yes             ; User Memory Initialization File    ; G:/fpga/Projects/GPU/test/pixel_writer/test.mif                ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                       ; g:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf ;
-; db/altsyncram_r0n1.tdf           ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/pixel_writer/db/altsyncram_r0n1.tdf  ;
+; db/altsyncram_i0n1.tdf           ; yes             ; Auto-Generated Megafunction        ; G:/fpga/Projects/GPU/test/pixel_writer/db/altsyncram_i0n1.tdf  ;
 +----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------+
 
 
@@ -178,40 +179,54 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 250       ;
+; Estimated Total logic elements              ; 482       ;
 ;                                             ;           ;
-; Total combinational functions               ; 176       ;
+; Total combinational functions               ; 345       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 102       ;
-;     -- 3 input functions                    ; 47        ;
-;     -- <=2 input functions                  ; 27        ;
+;     -- 4 input functions                    ; 224       ;
+;     -- 3 input functions                    ; 69        ;
+;     -- <=2 input functions                  ; 52        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 176       ;
+;     -- normal mode                          ; 345       ;
 ;     -- arithmetic mode                      ; 0         ;
 ;                                             ;           ;
-; Total registers                             ; 131       ;
-;     -- Dedicated logic registers            ; 131       ;
+; Total registers                             ; 250       ;
+;     -- Dedicated logic registers            ; 250       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
-; I/O pins                                    ; 103       ;
+; I/O pins                                    ; 160       ;
+; Total memory bits                           ; 65536     ;
 ; Maximum fan-out node                        ; CLK~input ;
-; Maximum fan-out                             ; 131       ;
-; Total fan-out                               ; 1119      ;
-; Average fan-out                             ; 2.18      ;
+; Maximum fan-out                             ; 266       ;
+; Total fan-out                               ; 2430      ;
+; Average fan-out                             ; 2.61      ;
 +---------------------------------------------+-----------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                  ;
-+-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                       ; Library Name ;
-+-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------+--------------+
-; |pixel_writer                                 ; 176 (0)           ; 131 (2)      ; 0           ; 0            ; 0       ; 0         ; 103  ; 0            ; |pixel_writer                                                             ; work         ;
-;    |geo_pixel_writer:inst|                    ; 176 (59)          ; 129 (23)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst                                       ;              ;
-;       |FIFO_3word_0_latency:input_cmd_fifo_1| ; 117 (117)         ; 106 (106)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1 ; work         ;
-+-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                          ;
++-----------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                                      ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                             ; Library Name ;
++-----------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
+; |pixel_writer                                                   ; 345 (1)           ; 250 (2)      ; 65536       ; 0            ; 0       ; 0         ; 160  ; 0            ; |pixel_writer                                                                                   ; work         ;
+;    |altsyncram0:inst17|                                         ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17                                                                ; work         ;
+;       |altsyncram:altsyncram_component|                         ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17|altsyncram:altsyncram_component                                ;              ;
+;          |altsyncram_i0n1:auto_generated|                       ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated ; work         ;
+;    |geo_pixel_writer:inst|                                      ; 344 (83)          ; 248 (78)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst                                                             ;              ;
+;       |FIFO_3word_0_latency:input_cmd_fifo_1|                   ; 164 (164)         ; 170 (170)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1                       ;              ;
+;       |bitplane_memory_data_to_pixel_colour:get_pixel_colour_1| ; 97 (97)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst|bitplane_memory_data_to_pixel_colour:get_pixel_colour_1     ; work         ;
++-----------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                 ;
++----------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+-------+----------+
+; Name                                                                                         ; Type ; Mode        ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF      ;
++----------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+-------+----------+
+; altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated|ALTSYNCRAM ; AUTO ; Single Port ; 4096         ; 16           ; --           ; --           ; 65536 ; test.mif ;
++----------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+-------+----------+
 
 
 +--------------------------------------------------------------------------------+
@@ -219,24 +234,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------------+----------------------------------------+
 ; Register name                         ; Reason for Removal                     ;
 +---------------------------------------+----------------------------------------+
-; geo_pixel_writer:inst|rd_req_b        ; Stuck at GND due to stuck port data_in ;
 ; geo_pixel_writer:inst|rd_wait_b       ; Stuck at GND due to stuck port data_in ;
+; geo_pixel_writer:inst|rd_req_b        ; Stuck at GND due to stuck port data_in ;
 ; inst3                                 ; Stuck at GND due to stuck port data_in ;
-; inst4                                 ; Lost fanout                            ;
+; inst4                                 ; Stuck at GND due to stuck port data_in ;
 ; Total Number of Removed Registers = 4 ;                                        ;
 +---------------------------------------+----------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                          ;
-+---------------------------------+---------------------------+----------------------------------------+
-; Register name                   ; Reason for Removal        ; Registers Removed due to This Register ;
-+---------------------------------+---------------------------+----------------------------------------+
-; geo_pixel_writer:inst|rd_req_b  ; Stuck at GND              ; inst3                                  ;
-;                                 ; due to stuck port data_in ;                                        ;
-; geo_pixel_writer:inst|rd_wait_b ; Stuck at GND              ; inst4                                  ;
-;                                 ; due to stuck port data_in ;                                        ;
-+---------------------------------+---------------------------+----------------------------------------+
++-----------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                         ;
++--------------------------------+---------------------------+----------------------------------------+
+; Register name                  ; Reason for Removal        ; Registers Removed due to This Register ;
++--------------------------------+---------------------------+----------------------------------------+
+; geo_pixel_writer:inst|rd_req_b ; Stuck at GND              ; inst3, inst4                           ;
+;                                ; due to stuck port data_in ;                                        ;
++--------------------------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -244,39 +257,42 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 131   ;
-; Number of registers using Synchronous Clear  ; 29    ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Total registers                              ; 250   ;
+; Number of registers using Synchronous Clear  ; 7     ;
+; Number of registers using Synchronous Load   ; 8     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 100   ;
+; Number of registers using Clock Enable       ; 239   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_words[1]        ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[3][0]  ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[2][1]  ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[1][4]  ;
-; 4:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[0][19] ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rd_cache_valid                                             ;
-; 6:1                ; 20 bits   ; 80 LEs        ; 20 LEs               ; 60 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rd_cache_addr[4]                                           ;
-; 8:1                ; 24 bits   ; 120 LEs       ; 72 LEs               ; 48 LEs                 ; No         ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|Mux2                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------+
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_words[0]                     ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rd_cache_col[6]                                                         ;
+; 4:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[3][10]              ;
+; 4:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[2][13]              ;
+; 4:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[1][6]               ;
+; 4:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[0][25]              ;
+; 5:1                ; 20 bits   ; 60 LEs        ; 20 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rd_cache_addr[4]                                                        ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rd_cache_valid                                                          ;
+; 8:1                ; 40 bits   ; 200 LEs       ; 120 LEs              ; 80 LEs                 ; No         ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|Mux27                             ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|bitplane_memory_data_to_pixel_colour:get_pixel_colour_1|pixel_colour[7] ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 6 LEs                ; 4 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|bitplane_memory_data_to_pixel_colour:get_pixel_colour_1|pixel_colour[3] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------+
-; Source assignments for altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated ;
-+---------------------------------+--------------------+------+--------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                         ;
-+---------------------------------+--------------------+------+--------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                          ;
-+---------------------------------+--------------------+------+--------------------------------------------+
+; Source assignments for altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated ;
++---------------------------------+-------+------+---------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                      ;
++---------------------------------+-------+------+---------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; OFF   ; -    ; -                                                       ;
++---------------------------------+-------+------+---------------------------------------------------------+
 
 
 +--------------------------------------------------------------------+
@@ -359,7 +375,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN        ; Untyped                           ;
 ; ENABLE_ECC                         ; FALSE                  ; Untyped                           ;
 ; DEVICE_FAMILY                      ; Cyclone III            ; Untyped                           ;
-; CBXI_PARAMETER                     ; altsyncram_r0n1        ; Untyped                           ;
+; CBXI_PARAMETER                     ; altsyncram_i0n1        ; Untyped                           ;
 +------------------------------------+------------------------+-----------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -384,13 +400,13 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+----------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1"                                    ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port             ; Type   ; Severity ; Details                                                                             ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-; data_out[35..20] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "geo_pixel_writer:inst|bitplane_memory_data_to_pixel_colour:get_pixel_colour_1"             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; colour_eq_0 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-------------------------------+
@@ -399,34 +415,31 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Tue Aug 04 20:00:38 2020
+    Info: Processing started: Mon Aug 10 21:26:35 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off pixel_writer -c pixel_writer
 Info: Found 1 design units, including 1 entities, in source file pixel_writer.bdf
     Info: Found entity 1: pixel_writer
-Info: Found 1 design units, including 1 entities, in source file geo_pixel_writer.sv
+Info: Found 2 design units, including 2 entities, in source file geo_pixel_writer.sv
     Info: Found entity 1: geo_pixel_writer
+    Info: Found entity 2: bitplane_memory_data_to_pixel_colour
 Info: Found 1 design units, including 1 entities, in source file fifo_3word_0_latency.sv
     Info: Found entity 1: FIFO_3word_0_latency
 Info: Found 1 design units, including 1 entities, in source file altsyncram0.v
     Info: Found entity 1: altsyncram0
 Info: Elaborating entity "pixel_writer" for the top level hierarchy
 Info: Elaborating entity "geo_pixel_writer" for hierarchy "geo_pixel_writer:inst"
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(81): object "wr_px_collision_counter" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(82): object "rd_px_collision_counter" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(93): object "rd_data_cache" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(94): object "rd_cache_col" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(95): object "rd_cache_bpp" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(96): object "rd_cache_bit" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(98): object "wr_cache_valid" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(100): object "wr_cache_col" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(101): object "wr_cache_bpp" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(102): object "wr_cache_bit" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(106): object "wr_addr_valid" assigned a value but never read
-Warning (10034): Output port "ram_wr_data" at geo_pixel_writer.sv(33) has no driver
-Warning (10034): Output port "collision_rd" at geo_pixel_writer.sv(36) has no driver
-Warning (10034): Output port "collision_wr" at geo_pixel_writer.sv(39) has no driver
-Warning (10034): Output port "next_cmd" at geo_pixel_writer.sv(25) has no driver
-Warning (10034): Output port "wr_ena" at geo_pixel_writer.sv(31) has no driver
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(100): object "last_exec_cmd" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(103): object "wr_px_collision_counter" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(104): object "rd_px_collision_counter" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(126): object "wr_cache_col" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(127): object "wr_cache_bpp" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(128): object "wr_cache_bit" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(139): object "wr_cache_hit" assigned a value but never read
+Warning (10034): Output port "ram_wr_data" at geo_pixel_writer.sv(32) has no driver
+Warning (10034): Output port "collision_rd" at geo_pixel_writer.sv(35) has no driver
+Warning (10034): Output port "collision_wr" at geo_pixel_writer.sv(36) has no driver
+Warning (10034): Output port "wr_ena" at geo_pixel_writer.sv(30) has no driver
+Info: Elaborating entity "bitplane_memory_data_to_pixel_colour" for hierarchy "geo_pixel_writer:inst|bitplane_memory_data_to_pixel_colour:get_pixel_colour_1"
 Info: Elaborating entity "FIFO_3word_0_latency" for hierarchy "geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1"
 Info: Elaborating entity "altsyncram0" for hierarchy "altsyncram0:inst17"
 Info: Elaborating entity "altsyncram" for hierarchy "altsyncram0:inst17|altsyncram:altsyncram_component"
@@ -448,30 +461,12 @@ Info: Instantiated megafunction "altsyncram0:inst17|altsyncram:altsyncram_compon
     Info: Parameter "widthad_a" = "12"
     Info: Parameter "width_a" = "16"
     Info: Parameter "width_byteena_a" = "1"
-Info: Found 1 design units, including 1 entities, in source file db/altsyncram_r0n1.tdf
-    Info: Found entity 1: altsyncram_r0n1
-Info: Elaborating entity "altsyncram_r0n1" for hierarchy "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated"
-Warning: Synthesized away the following node(s):
-    Warning: Synthesized away the following RAM node(s):
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[0]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[1]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[2]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[3]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[4]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[5]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[6]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[7]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[8]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[9]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[10]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[11]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[12]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[13]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[14]"
-        Warning (14320): Synthesized away node "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_r0n1:auto_generated|q_a[15]"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_i0n1.tdf
+    Info: Found entity 1: altsyncram_i0n1
+Info: Elaborating entity "altsyncram_i0n1" for hierarchy "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated"
 Info: Timing-Driven Synthesis is running
 Warning: Output pins are stuck at VCC or GND
-    Warning (13410): Pin "next_cmd" is stuck at GND
+    Warning (13410): Pin "rd_data_rdy_b" is stuck at GND
     Warning (13410): Pin "rd_req_b" is stuck at GND
     Warning (13410): Pin "wr_ena" is stuck at GND
     Warning (13410): Pin "ram_wr_data[15]" is stuck at GND
@@ -506,36 +501,19 @@ Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "collision_wr[2]" is stuck at GND
     Warning (13410): Pin "collision_wr[1]" is stuck at GND
     Warning (13410): Pin "collision_wr[0]" is stuck at GND
-Info: 1 registers lost all their fanouts during netlist optimizations. The first 1 are displayed below.
-    Info: Register "inst4" lost all its fanouts during netlist optimizations.
-Warning: Design contains 19 input pin(s) that do not drive logic
+Warning: Design contains 3 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "ram_mux_busy"
     Warning (15610): No output dependent on input pin "collision_rd_rst"
     Warning (15610): No output dependent on input pin "collision_wr_rst"
-    Warning (15610): No output dependent on input pin "cmd_in[35]"
-    Warning (15610): No output dependent on input pin "cmd_in[34]"
-    Warning (15610): No output dependent on input pin "cmd_in[33]"
-    Warning (15610): No output dependent on input pin "cmd_in[32]"
-    Warning (15610): No output dependent on input pin "cmd_in[31]"
-    Warning (15610): No output dependent on input pin "cmd_in[30]"
-    Warning (15610): No output dependent on input pin "cmd_in[29]"
-    Warning (15610): No output dependent on input pin "cmd_in[28]"
-    Warning (15610): No output dependent on input pin "cmd_in[27]"
-    Warning (15610): No output dependent on input pin "cmd_in[26]"
-    Warning (15610): No output dependent on input pin "cmd_in[25]"
-    Warning (15610): No output dependent on input pin "cmd_in[24]"
-    Warning (15610): No output dependent on input pin "cmd_in[23]"
-    Warning (15610): No output dependent on input pin "cmd_in[22]"
-    Warning (15610): No output dependent on input pin "cmd_in[21]"
-    Warning (15610): No output dependent on input pin "cmd_in[20]"
-Info: Implemented 377 device resources after synthesis - the final resource count might be different
+Info: Implemented 723 device resources after synthesis - the final resource count might be different
     Info: Implemented 46 input pins
-    Info: Implemented 57 output pins
-    Info: Implemented 274 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 90 warnings
+    Info: Implemented 114 output pins
+    Info: Implemented 547 logic cells
+    Info: Implemented 16 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 51 warnings
     Info: Peak virtual memory: 232 megabytes
-    Info: Processing ended: Tue Aug 04 20:00:41 2020
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Processing ended: Mon Aug 10 21:26:39 2020
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:05
 
 
