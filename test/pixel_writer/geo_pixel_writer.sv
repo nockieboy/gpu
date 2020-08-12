@@ -35,11 +35,29 @@ module geo_pixel_writer (
     output logic [7:0]  collision_rd,   // output to 1st read port on Z80_bridge_v2
     output logic [7:0]  collision_wr,   // output to 2nd read port on Z80_bridge_v2
     
-    output logic [15:0] PX_COPY_COLOUR,
-    output logic [15:0] PX_COPY_COLOUR_reg,
-    output logic [7:0]  PX_COPY_COLOUR_opt_reg
+    output logic [15:0] PX_COPY_COLOUR
 
 );
+
+localparam int LUT_shift [256] = '{
+15,14,13,12,11,10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0,  // Shift values for bpp=0, target=0 through 15.
+14,12,10, 8, 6, 4, 2, 0,14,12,10, 8, 6, 4, 2, 0,  // Shift values for bpp=1, target=0 through 15.
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=2, invalid bitplane mode, no shift
+12, 8, 4, 0,12, 8, 4, 0,12, 8, 4, 0,12, 8, 4, 0,  // Shift values for bpp=3, target=0 through 15.
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=4, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=5, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=6, invalid bitplane mode, no shift
+ 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0,  // Shift values for bpp=7, target=0 through 15.
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=8, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=9, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=10, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=11, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=12, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=13, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Shift values for bpp=14, invalid bitplane mode, no shift
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0   // Shift values for bpp=15, target=0 through 15.
+};
+localparam int LUT_mask  [16]  = '{ 1,3,3,15,15,15,15,255,255,255,255,255,255,255,255,65535 };  // mask result bits after shift pixel-1  0=1 bit, 1=2bit, 3=4bit, 7=8bit, 15-16bit.
 
 localparam CMD_IN_NOP              = 0  ;
 localparam CMD_IN_PXWRI            = 1  ;
@@ -54,44 +72,7 @@ localparam CMD_IN_RST_PXPASTE_M    = 11 ;
 parameter bit ZERO_LATENCY         = 1  ; // When set to 1 this will make the read&write commands immediate instead of a clock cycle later
 parameter bit overflow_protection  = 1  ; // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
 parameter bit underflow_protection = 1  ; // Prevents internal position position increment if the fifo is empty
-
-bitplane_memory_data_to_pixel_colour get_pixel_colour_1 (
-	.ram_data_rdy     ( rd_data_rdy_a        ), // use immediate values when HIGH, latched values when LOW
-
-	.latched_word     ( rd_data_cache[15:0]  ), // 16-bit word from the catch
-	.latched_colour   ( rd_cache_col[7:0]    ), // 8-bit cached colour value
-	.latched_bpp      ( rd_cache_bpp[3:0]    ), // cached bits-per-pixel value
-	.latched_target   ( rd_cache_bit[3:0]    ), // cached target word/byte/nybble/crumb/bit
-
-	.immediate_word   ( rd_data_in[15:0]     ), // 16-bit word from GPU RAM
-	.immediate_colour ( colour[7:0]          ), // current colour value
-	.immediate_bpp    ( bpp[3:0]             ), // current bits-per-pixel value
-	.immediate_target ( target[3:0]          ), // current target word/byte/nybble/crumb/bit
-
-	.colour_eq_0      ( PX_COPY_COLOUR_eq0   ), // HIGH when colour = 0
-	.source_colour    ( PX_COPY_COLOUR_opt   ), // fix for low FMAX
-	.pixel_colour     ( PX_COPY_COLOUR       )  // current pixel colour value from above parameters
-);
-
-memory_pixel_bits_editor set_pixel_colour_1 (
-    .ram_data_rdy            ( rd_data_rdy_a       ),
-    .latched_word            ( rd_data_cache[15:0] ),
-    .latched_colour          ( rd_cache_col[7:0]   ),
-    .latched_bpp             ( rd_cache_bpp[3:0]   ),
-    .latched_target          ( rd_cache_bit[3:0]   ),
-    .immediate_word          ( rd_data_in[15:0]    ),
-    .immediate_colour        ( colour[7:0]         ),
-    .immediate_bpp           ( bpp[3:0]            ),
-    .immediate_target        ( target[3:0]         ),
-
-    .paste_enable            (  ),
-    .paste_colour            (  ),
-    .transparent_mask_enable (  ),
-//outputs    
-    .collision_rd_inc        ( collision_rd_inc    ),
-    .collision_wr_inc        ( collision_wr_inc    ),
-    .output_word             (  )
-);
+parameter bit size7_fifo           = 0  ; // sets fifo into 7 word mode.
 
 FIFO_3word_0_latency input_cmd_fifo_1 (  // Zero Latency Command buffer
     .clk              ( clk                  ), // CLK input
@@ -111,13 +92,12 @@ defparam
     input_cmd_fifo_1.zero_latency         = ZERO_LATENCY,
     input_cmd_fifo_1.overflow_protection  = overflow_protection,  // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
     input_cmd_fifo_1.underflow_protection = underflow_protection, // Prevents internal position position increment if the fifo is empty
-    input_cmd_fifo_1.size7_ena            = 0;                    // Set to 0 for 3 words
+    input_cmd_fifo_1.size7_ena            = size7_fifo;           // Set to 0 for 3 words
 
 // FIFO->pixel_writer internal command bus
 logic        pixel_cmd_rdy  ;  // HIGH when data is in FIFO for pixel writer
 logic [39:0] pixel_cmd_data ;  // internal command data bus
 logic        exec_cmd       ;  // HIGH to pick up next command from FIFO
-logic        last_exec_cmd  ;
 //
 // collision saturation counters
 logic [7:0]  wr_px_collision_counter ;
@@ -130,22 +110,24 @@ logic [3:0]  bpp       ;  // bits per pixel for the addressed word
 logic [3:0]  target    ;  // the byte, nybble, crumb or bit we're trying to read/modify
 //
 // cache registers
-logic rd_cache_valid       ;
-logic [19:0] rd_cache_addr ;  // last RD address
-logic [15:0] rd_data_cache ;  // last RD data from RAM
-logic [7:0]  rd_cache_col  ;  // last RD colour data
-logic [3:0]  rd_cache_bpp  ;  // last RD bpp setting
-logic [3:0]  rd_cache_bit  ;  // last RD target value
+logic        rc_valid      ;
+logic [19:0] rc_addr       ;  // last RD address
+logic [15:0] rcd           ;  // last RD data from RAM
+logic [15:0] rd_pix_c_miss ;  // decoded pixel byte for write cache miss
+logic [15:0] rd_pix_c_hit  ;  // decoded pixel byte for write cache hit
+logic [7:0]  rc_colour     ;  // last RD colour data
+logic [3:0]  rc_bpp        ;  // last RD bpp setting
+logic [3:0]  rc_target     ;  // last RD target value
 //
-//logic [15:0] PX_COPY_COLOUR_reg     ;
-logic       PX_COPY_COLOUR_eq0     ;
-logic [7:0] PX_COPY_COLOUR_opt     ;
 //
-logic wr_cache_valid       ;
-logic [19:0] wr_cache_addr ;  // last WR address
-logic [7:0]  wr_cache_col  ;  // last WR colour data
-logic [3:0]  wr_cache_bpp  ;  // last WR bpp setting
-logic [3:0]  wr_cache_bit  ;  // last WR target value
+logic        wc_valid      ;
+logic [19:0] wc_addr       ;  // last WR address
+logic [15:0] wcd           ;  // last WR data from RAM
+logic [15:0] wr_pix_c_miss ;  // decoded pixel byte for write cache miss
+logic [15:0] wr_pix_c_hit  ;  // decoded pixel byte for write cache hit
+logic [7:0]  wc_colour     ;  // last WR colour data
+logic [3:0]  wc_bpp        ;  // last WR bpp setting
+logic [3:0]  wc_target     ;  // last WR target value
 //
 // general logic
 logic rd_addr_valid  ;  // HIGH when new address matches cached address
@@ -160,6 +142,10 @@ logic rd_wait_b      ;  // HIGH whilst waiting for b_channel RD op to complete
 //
 logic rd_cache_hit   ;
 logic wr_cache_hit   ;
+//
+logic write_pixel    ; // high when any write pixel command takes place.
+logic copy_pixel     ; // high when any write pixel command takes place.
+logic wr_ena_ladr    ; // When writing a pixel, this selects whether to use the current command address or the latched write address.
 
 always_comb begin
 
@@ -168,16 +154,28 @@ always_comb begin
     colour[7:0]    = pixel_cmd_data[35:28] ;  // colour data
     bpp[3:0]       = pixel_cmd_data[27:24] ;  // bits per pixel (width)
     target[3:0]    = pixel_cmd_data[23:20] ;  // target bit (sub-word)
-    ram_addr[19:0] = pixel_cmd_data[19:0]  ;  // address of 16-bit word in RAM
+    
+    ram_addr[19:0] = wr_ena_ladr ? wc_addr[19:0] : pixel_cmd_data[19:0] ;  // select the R/W address.
+
+    write_pixel    = (pixel_cmd[3:0] == CMD_IN_PXWRI) || (pixel_cmd[3:0] == CMD_IN_PXWRI_M) || (pixel_cmd[3:0] == CMD_IN_PXPASTE) || (pixel_cmd[3:0] == CMD_IN_PXPASTE_M) ;
+    copy_pixel     = (pixel_cmd[3:0] == CMD_IN_PXCOPY) ;
     
     // logic
-    exec_cmd       = ( ( !(rd_wait_a ) && !(rd_wait_b ) ) && pixel_cmd_rdy ) ;
-    rd_addr_valid  = ( ram_addr == rd_cache_addr )   ;
-    wr_addr_valid  = ( ram_addr == wr_cache_addr )   ;
-    rd_cache_hit   = rd_addr_valid && rd_cache_valid ;
-    wr_cache_hit   = wr_addr_valid && wr_cache_valid ;
-    rd_req_a       = exec_cmd && !rd_cache_hit && ( pixel_cmd[3:0] == CMD_IN_PXCOPY ) && !reset ;
-    
+    exec_cmd       = ( !(rd_wait_a || rd_wait_b) && pixel_cmd_rdy && !(!wr_cache_hit && wr_ena) ) ;
+    rd_addr_valid  = ( pixel_cmd_data[19:0] == rc_addr ) ;
+    wr_addr_valid  = ( pixel_cmd_data[19:0] == wc_addr ) ;
+    rd_cache_hit   = rd_addr_valid && rc_valid ;
+    wr_cache_hit   = wr_addr_valid && wc_valid ;
+ 
+    rd_req_a       = exec_cmd && copy_pixel  && !rd_cache_hit && !reset ;
+    rd_req_b       = exec_cmd && write_pixel && !wr_cache_hit && !reset ;
+
+    wr_pix_c_miss  = rd_data_in & (16'hFFFF ^ (LUT_mask[wc_bpp] << LUT_shift[{wc_bpp,wc_target}])) | ( (wc_colour & LUT_mask[wc_bpp]) << LUT_shift[{wc_bpp,wc_target}] ) ; // Separate out the PX_COPY_COLOUR
+    wr_pix_c_hit   = wcd        & (16'hFFFF ^ (LUT_mask[bpp   ] << LUT_shift[{bpp   ,target   }])) | ( (colour    & LUT_mask[bpp   ]) << LUT_shift[{bpp   ,target   }] ) ; // Separate out the PX_COPY_COLOUR
+
+    rd_pix_c_miss  = ( rd_data_in >> LUT_shift[{rc_bpp,rc_target}]) & LUT_mask[rc_bpp] ; // Separate out the PX_COPY_COLOUR
+    rd_pix_c_hit   = ( rcd        >> LUT_shift[{bpp   ,target   }]) & LUT_mask[bpp   ] ; // Separate out the PX_COPY_COLOUR
+
 end
 
 always_ff @( posedge clk ) begin
@@ -185,462 +183,95 @@ always_ff @( posedge clk ) begin
     if ( reset ) begin
     
         // reset the collision counters
-        rd_px_collision_counter <= 8'b0  ;
-        wr_px_collision_counter <= 8'b0  ;
+        rd_px_collision_counter <= 8'b0 ;
+        wr_px_collision_counter <= 8'b0 ;
         // reset the cache registers
-        rd_cache_addr           <= 20'b0 ;
-        rd_cache_col            <= 8'b0  ;
-        rd_cache_bpp            <= 4'b0  ;
-        rd_cache_bit            <= 4'b0  ;
+        rc_addr     <= 20'b0 ;
+        rc_colour   <= 8'b0  ;
+        rc_bpp      <= 4'b0  ;
+        rc_target   <= 4'b0  ;
         //
-        wr_cache_addr           <= 20'b0 ;
-        wr_cache_col            <= 8'b0  ;
-        wr_cache_bpp            <= 4'b0  ;
-        wr_cache_bit            <= 4'b0  ;
+        wc_addr     <= 20'b0 ;
+        wc_colour   <= 8'b0  ;
+        wc_bpp      <= 4'b0  ;
+        wc_target   <= 4'b0  ;
         //
-        rd_cache_valid          <= 1'b0  ;
-        wr_cache_valid          <= 1'b0  ;
+        rc_valid    <= 1'b0  ;
+        wc_valid    <= 1'b0  ;
         //
-        rd_req_b                <= 1'b0  ;
-        rd_wait_a               <= 1'b0  ;
-        rd_wait_b               <= 1'b0  ;
+        rd_wait_a   <= 1'b0  ;
+        rd_wait_b   <= 1'b0  ;
         //
-
+        wr_ena_ladr <= 1'b0  ; // end write sequence.
+        wr_ena      <= 1'b0  ; // end write sequence.
+        
     end else begin // if reset
 
         if ( collision_rd_rst ) rd_px_collision_counter <= 8'b0 ;   // reset the COPY/READ PIXEL COLLISION counter
         if ( collision_wr_rst ) wr_px_collision_counter <= 8'b0 ;   // reset the WRITE PIXEL COLLISION counter
 
-        if ( exec_cmd ) begin
-
-            case ( pixel_cmd[3:0] )
+        if (rd_data_rdy_b) begin   // If a ram read was returned
         
-                CMD_IN_NOP : begin
-                    // do nothing
-                end
-                
-                CMD_IN_PXWRI : begin
-					
-					// 1 - Read current CMD address, unless cache hit
-					
-					rd_cache_col <= colour ;
-                    rd_cache_bpp <= bpp    ;
-                    rd_cache_bit <= target ;
-                
-                    if ( !rd_cache_valid || !rd_addr_valid ) begin  // check for cache miss on read address
-                        
-                        rd_cache_addr  <= ram_addr ; // cache new address
-                        rd_wait_a      <= 1'b1     ; // hold everything while we wait for data from RAM
-                        rd_cache_valid <= 1'b0     ; // clear cache valid flag in case it wasn't already cleared
+             rd_wait_b    <= 1'b0          ; // Turn off the wait
+             wc_valid     <= 1'b1          ; // Make the cache valid
+             ram_wr_data  <= wr_pix_c_miss ; 
+             wcd          <= wr_pix_c_miss ;
+             wr_ena_ladr  <= 1'b1          ; // initiate a write using the latched address.
+             wr_ena       <= 1'b1          ; // initiate a write using the latched address.
 
-                    end
-                    
-                end
-                
-                CMD_IN_PXWRI_M : begin
-                    
-                end
-                
-                CMD_IN_PXPASTE : begin
-                    
-                end
+        end else if (!wr_cache_hit && exec_cmd && write_pixel ) begin  // If there is a read command with a cache miss,
+        
+             rd_wait_b    <= 1'b1          ; // hold everything while we wait for new data from RAM
+             wc_addr      <= ram_addr      ; // cache new address
+             wc_valid     <= 1'b0          ; // clear cache valid flag in case it wasn't already cleared 
+             wc_colour    <= colour        ; // colour data
+             wc_bpp       <= bpp           ; // bits per pixel (width)
+             wc_target    <= target        ; // target bit (sub-word)
+             wr_ena_ladr  <= 1'b0          ; // end write sequence.
+             wr_ena       <= 1'b0          ; // end write sequence.
 
-                CMD_IN_PXPASTE_M : begin
-                    
-                end
-                
-                CMD_IN_PXCOPY : begin
-                
-                    rd_cache_col   <= colour   ;
-                    rd_cache_bpp   <= bpp      ;
-                    rd_cache_bit   <= target   ;
-                
-                    if ( !rd_cache_valid || !rd_addr_valid ) begin  // check for cache miss on read address
-                        
-                        rd_cache_addr  <= ram_addr ; // cache new address
-                        rd_wait_a      <= 1'b1     ; // hold everything while we wait for data from RAM
-                        rd_cache_valid <= 1'b0     ; // clear cache valid flag in case it wasn't already cleared
-                    
-                    end else begin
-                    
-                    
-                    
-                    end
+        end else if (exec_cmd && write_pixel && wr_cache_hit)  begin
+        
+             ram_wr_data  <= wr_pix_c_hit  ; 
+             wcd          <= wr_pix_c_hit  ;
 
-                end
-                
-                CMD_IN_SETARGB : begin
-                    
-                end
-                
-                CMD_IN_RST_PXWRI_M : begin
-                    
-                end
-                
-                CMD_IN_RST_PXPASTE_M : begin
-                    
-                end
-                
-                default : begin
-                    // do nothing
-                end
-                
-            endcase // case ( pixel_cmd[3:0] )
-            
-        end else begin // !exec_cmd
+             wr_ena_ladr  <= 1'b1          ; // initiate a write using the immediate address.
+             wr_ena       <= 1'b1          ; // initiate a write using the immediate address.
+             
+        end else begin
         
-            if ( rd_data_rdy_a ) begin  // valid data from RAM
-
-                rd_cache_valid <= 1'b1       ;
-                rd_wait_a      <= 1'b0       ;
-                rd_data_cache  <= rd_data_in ;
-                
-            end
-        
-        end // exec)_cmd
-        
-        last_exec_cmd <= exec_cmd ;
-        
-		if ( rd_data_rdy_a || ( exec_cmd && ( pixel_cmd[3:0] == CMD_IN_PXCOPY ) && rd_cache_hit ) ) begin
-        
-			// if pixel color data came in from RAM or was immediately available when the command came in and there was a cache hit
-			PX_COPY_COLOUR_reg      <= PX_COPY_COLOUR     ; // Store pixel color
-			PX_COPY_COLOUR_eq0      <= PX_COPY_COLOUR_eq0 ; // store the color =0
-			PX_COPY_COLOUR_opt_reg  <= PX_COPY_COLOUR_opt ; // store the CMD_COLOR option
-			
-		end else if ( rd_data_rdy_a || ( exec_cmd && ( pixel_cmd[3:0] == CMD_IN_PXWRI ) && rd_cache_hit ) ) begin
-
-			// if pixel color data came in from RAM or was immediately available when the command came in and there was a cache hit
-
-			// 2 - Check if target pixel is 0 - if it is, increment 'rd_px_collision_counter' (and 'wr_px_collision_counter' if write colour isn't transparent 0 in '_M' cmd versions
-			rd_px_collision_counter <= rd_px_collision_counter + collision_rd_inc ;
-			
-			// 3 - Change target bits in word cache and send a write req & new write data
-			
-			// 4 - If copy cache address = write cache address, when write is done, update copy_pixel cache with new data
-			
-			// 5 - Above steps need to set and clear write_busy flag so that a write may take place without a read
-        
+             wr_ena_ladr  <= 1'b0          ; // end write sequence.
+             wr_ena       <= 1'b0          ; // end write sequence.
+             
         end
+
+        if (wr_ena && (wc_addr==rc_addr)) begin     // A written pixel has the same address as the read cache
         
+             rcd            <= ram_wr_data ; // so, we should copy the new writen pixel data into the read cache
+
+        end else if (rd_data_rdy_a) begin   // If a ram read request was returned
+        
+             rd_wait_a      <= 1'b0             ; // Turn off the wait
+             rc_valid       <= 1'b1             ; // Make the cache valid
+             rcd            <= rd_data_in[15:0] ; // store a copy of the returned read data.
+             PX_COPY_COLOUR <= rd_pix_c_miss    ;
+
+        end else if (!rd_cache_hit && exec_cmd && copy_pixel) begin  // If there is a read command with a cache miss,
+        
+             rc_addr        <= ram_addr ; // cache new address
+             rd_wait_a      <= 1'b1     ; // hold everything while we wait for new data from RAM
+             rc_valid       <= 1'b0     ; // clear cache valid flag in case it wasn't already cleared 
+             rc_colour      <= colour   ; // colour data
+             rc_bpp         <= bpp      ; // bits per pixel (width)
+             rc_target      <= target   ; // target bit (sub-word)
+
+        end else if (exec_cmd && copy_pixel && rd_cache_hit) begin
+        
+             PX_COPY_COLOUR     <= rd_pix_c_hit ;
+             
+        end
+
     end // else reset
-
-end
-
-endmodule
-
-/*
- * bitplane_memory_data_to_pixel_colour
- *
- * Combinational-logic module to provide the pixel colour from a given word of
- * data, based on its bits-per-pixel value and thus its targeted word, byte,
- * nybble, crumb or bit as a result.
- *
- * All combinational logic, no clocking or reset.
- *
- * Returns value based on cache hit (latched values), or a cache miss in which
- * case it uses the immediate values.
- *
- */
- 
-module bitplane_memory_data_to_pixel_colour (
-
-// *** INPUTS
-    input logic         ram_data_rdy,
-    input logic  [15:0] latched_word,
-    input logic  [7:0]  latched_colour,
-    input logic  [3:0]  latched_bpp,
-    input logic  [3:0]  latched_target,
-    input logic  [15:0] immediate_word,
-    input logic  [7:0]  immediate_colour,
-    input logic  [3:0]  immediate_bpp,
-    input logic  [3:0]  immediate_target,
-
-// *** OUTPUTS
-	output logic        colour_eq_0,
-	output logic [7:0]  source_colour,
-    output logic [15:0] pixel_colour
-    
-);
-
-// these params are not final - I've just thrown them together for testing
-localparam BPP_16bit = 4'd15;
-localparam BPP_8bit  = 4'd7;
-localparam BPP_4bit  = 4'd3;
-localparam BPP_2bit  = 4'd1;
-localparam BPP_1bit  = 4'd0;
-
-logic [3:0]  source_bpp       ;
-//logic [7:0]  source_colour    ;
-logic [3:0]  source_target    ;
-logic [15:0] source_word      ;
-logic [15:0] int_pixel_colour ;
-
-always_comb begin
-    
-    colour_eq_0   = ( int_pixel_colour == 0 ) ;
-    pixel_colour  = int_pixel_colour ; //* source_colour ; // give the option for the pixel copy command to change the read color to a new larger color
-    
-    // set source data according to RAM read
-    source_bpp    = ( !ram_data_rdy ) ? immediate_bpp    : latched_bpp    ;
-    source_colour = ( !ram_data_rdy ) ? immediate_colour : latched_colour ;
-    source_target = ( !ram_data_rdy ) ? immediate_target : latched_target ;
-    source_word   = (  ram_data_rdy ) ? immediate_word   : latched_word   ;
-    
-    if ( source_bpp[3:0] == BPP_16bit ) begin
-        
-        int_pixel_colour = source_word ;  // not interested in source_target as the whole word is being read in 16-bit mode
-
-    end else if ( source_bpp[3:0] == BPP_8bit ) begin
-    
-        if ( source_target[0] == 0 ) begin // valid source_target values of 0 or 1
-        
-            int_pixel_colour = source_word[15:8] ;
-        
-        end else begin // assume source_target = 1
-        
-            int_pixel_colour = source_word[7:0]  ;
-        
-        end
-
-    end else if ( source_bpp[3:0] == BPP_4bit ) begin
-		
-		if ( source_target[1:0] == 0 ) begin // valid source_target values of 0 to 3
-        
-            int_pixel_colour = source_word[15:12] ;
-        
-        end else if ( source_target[1:0] == 1 ) begin
-        
-            int_pixel_colour = source_word[11:8]  ;
-        
-        end else if ( source_target[1:0] == 2 ) begin
-        
-            int_pixel_colour = source_word[7:4] ;
-        
-        end else begin // assume source_target == 3
-        
-            int_pixel_colour = source_word[3:0]  ;
-        
-        end
-        
-    end else if ( source_bpp[3:0] == BPP_2bit ) begin
-    
-		if ( source_target[2:0] == 0 ) begin // valid source_target values of 0 to 7
-        
-            int_pixel_colour = source_word[15:14] ;
-        
-        end else if ( source_target[2:0] == 1 ) begin
-        
-            int_pixel_colour = source_word[13:12]  ;
-        
-        end else if ( source_target[2:0] == 2 ) begin
-        
-            int_pixel_colour = source_word[11:10] ;
-        
-        end else if ( source_target[2:0] == 3 ) begin
-        
-            int_pixel_colour = source_word[9:8]  ;
-        
-        end else if ( source_target[2:0] == 4 ) begin
-        
-            int_pixel_colour = source_word[7:6] ;
-        
-        end else if ( source_target[2:0] == 5 ) begin
-        
-            int_pixel_colour = source_word[5:4]  ;
-        
-        end else if ( source_target[2:0] == 6 ) begin
-        
-            int_pixel_colour = source_word[3:2] ;
-        
-        end else begin // assume source_target == 7
-        
-            int_pixel_colour = source_word[1:0]  ;
-        
-        end
-
-    end else begin // assume BPP_1bit
-    
-		int_pixel_colour = source_word[ ( ~source_target[3:0] ) ] ;  // only need to return 1 bit
-    
-    end
-    
-end
-
-endmodule
-
-module memory_pixel_bits_editor (
-
-// inputs
-    input logic         ram_data_rdy,
-    input logic  [15:0] latched_word,
-    input logic  [7:0]  latched_colour,
-    input logic  [3:0]  latched_bpp,
-    input logic  [3:0]  latched_target,
-    input logic  [15:0] immediate_word,
-    input logic  [7:0]  immediate_colour,
-    input logic  [3:0]  immediate_bpp,
-    input logic  [3:0]  immediate_target,
-
-    input logic         paste_enable,
-    input logic  [15:0] paste_colour,
-    input logic         transparent_mask_enable,
-    
-// outputs
-    output logic        collision_rd_inc,
-    output logic        collision_wr_inc,
-    output logic [15:0] output_word
-
-);
-
-localparam BPP_16bit = 4'd15;
-localparam BPP_8bit  = 4'd7;
-localparam BPP_4bit  = 4'd3;
-localparam BPP_2bit  = 4'd1;
-localparam BPP_1bit  = 4'd0;
-
-logic [3:0]  source_bpp       ;
-logic [15:0] source_colour    ;
-logic [3:0]  source_target    ;
-logic [15:0] source_word      ;
-logic [15:0] target_colour    ;
-logic        target_colour_0  ;
-logic [15:0] edited_word      ;
-
-always_comb
-
-	source_color[15:8] = 0 ; // Assign 0 to the upper 8 bits of the source color.
-
-    // set source data according to RAM read
-    source_bpp         = ( !ram_data_rdy ) ? immediate_bpp    : latched_bpp    ;
-    source_colour[7:0] = ( !ram_data_rdy ) ? immediate_colour : latched_colour ;
-    source_target      = ( !ram_data_rdy ) ? immediate_target : latched_target ;
-    source_word        = (  ram_data_rdy ) ? immediate_word   : latched_word   ;
-
-    target_colour      = ( paste_enable )  ? paste_colour : source_colour ;
-    target_colour_0    = ( target_colour == 0 ) ;
-    collision_wr_inc   = collision_rd_inc && ( !target_colour_0 || !transparent_mask_enable ) ;
-
-    output_word        = ( transparent_mask_enable && target_colour_0 ) ? source_word : edited_word ; // choose output word based on transparency mask.
-
-	if ( source_bpp[3:0] == BPP_16bit ) begin
-       
-		edited_word      = target_colour              ;
-		collision_rd_inc = ( source_word[15:0] != 0 ) ;
-
-    end else if ( source_bpp[3:0] == BPP_8bit ) begin
-   
-		if (source_target[0]) begin                    // place target color into the first 8 bits and retain the upper 8 bits.
-		
-			edited_word[15:8] = target_colour[7:0]        ;
-			edited_word[7:0]  = source_word[7:0]          ;
-			collision_rd_inc  = ( source_word[15:8] !=0 ) ;
-
-		end else begin                                 // place target color into the upper 8 bits and retain the lower 8 bits.
-		
-			edited_word[7:0]  = target_colour[7:0]        ;
-			edited_word[15:8] = source_word[15:8]         ;
-			collision_rd_inc  = ( source_word[7:0] != 0 ) ;
-			
-		end
-
-	end else if ( source_bpp[3:0] == BPP_4bit ) begin
-		
-		if ( source_target[1:0] == 0 ) begin           // place target color into the first 4 bits and retain the upper 12 bits.
-	
-			edited_word[15:12] = target_colour[3:0]          ;
-			edited_word[11:0]  = source_word[11:0]           ;
-			collision_rd_inc   = ( source_word[15:12] != 0 ) ;
-
-		end else if ( source_target[1:0] == 1 ) begin  // place target color into the second 4 bits and retain the upper 8 bits and lower 4 bits.
-	
-			edited_word[15:12] = source_word[15:12]         ;
-			edited_word[11:8]  = target_colour[3:0]         ;
-			edited_word[7:0]   = source_word[7:0]           ;
-			collision_rd_inc   = ( source_word[11:8] != 0 ) ;
-			
-		end else if ( source_target[1:0] == 2 ) begin  // place target color into the third 4 bits and retain the upper 4 bits and lower 8 bits.
-	
-			edited_word[15:8] = source_word[15:8]         ;
-			edited_word[7:4]  = target_colour[3:0]        ;
-			edited_word[3:0]  = source_word[3:0]          ;
-			collision_rd_inc  = ( source_word[7:4] != 0 ) ;
-			
-		end else begin                                 // place target color into the last 4 bits and retain the lower 12 bits.
-	
-			edited_word[15:4] = source_word[15:4]         ;
-			edited_word[3:0]  = target_colour[3:0]        ;
-			collision_rd_inc  = ( source_word[3:0] != 0 ) ;
-			
-		end
-		
-	end else if ( source_bpp[3:0] == BPP_2bit ) begin
-		
-		if ( source_target[2:0] == 0 ) begin           // place target color into the first 2 bits and retain the upper 14 bits.
-	
-			edited_word[15:14] = target_colour[1:0]          ;
-			edited_word[13:0]  = source_word[13:0]           ;
-			collision_rd_inc   = ( source_word[15:14] != 0 ) ;
-
-		end else if ( source_target[2:0] == 1 ) begin  // place target color into the second 2 bits and retain the upper 12 bits and lower 2 bits.
-	
-			edited_word[15:14] = source_word[15:14]          ;
-			edited_word[13:12] = target_colour[1:0]          ;
-			edited_word[11:0]  = source_word[11:0]           ;
-			collision_rd_inc   = ( source_word[13:12] != 0 ) ;
-			
-		end else if ( source_target[2:0] == 2 ) begin  // place target color into the third 2 bits and retain the upper 10 bits and lower 4 bits.
-	
-			edited_word[15:12] = source_word[15:12]          ;
-			edited_word[11:10] = target_colour[1:0]          ;
-			edited_word[9:0]   = source_word[9:0]            ;
-			collision_rd_inc   = ( source_word[11:10] != 0 ) ;
-			
-		end else if ( source_target[2:0] == 3 ) begin  // place target color into the fourth 2 bits and retain the upper 8 bits and lower 6 bits.
-	
-			edited_word[15:10] = source_word[15:10]        ;
-			edited_word[9:8]   = target_colour[1:0]        ;
-			edited_word[7:0]   = source_word[7:0]          ;
-			collision_rd_inc   = ( source_word[9:8] != 0 ) ;
-			
-		end else if ( source_target[2:0] == 4 ) begin  // place target color into the fifth 2 bits and retain the upper 6 bits and lower 8 bits.
-			
-			edited_word[15:8] = source_word[15:8]         ;
-			edited_word[7:6]  = target_colour[1:0]        ;
-			edited_word[5:0]  = source_word[5:0]          ;
-			collision_rd_inc  = ( source_word[7:6] != 0 ) ;
-
-		end else if ( source_target[2:0] == 5 ) begin  // place target color into the sixth 2 bits and retain the upper 4 bits and lower 10 bits.
-	
-			edited_word[15:6] = source_word[15:6]         ;
-			edited_word[5:4]  = target_colour[1:0]        ;
-			edited_word[3:0]  = source_word[3:0]          ;
-			collision_rd_inc  = ( source_word[5:4] != 0 ) ;
-			
-		end else if ( source_target[2:0] == 6 ) begin  // place target color into the seventh 2 bits and retain the upper 2 bits and lower 12 bits.
-	
-			edited_word[15:4] = source_word[15:4]         ;
-			edited_word[3:2]  = target_colour[1:0]        ;
-			edited_word[1:0]  = source_word[1:0]          ;
-			collision_rd_inc  = ( source_word[3:2] != 0 ) ;
-			
-		end else begin                                 // place target color into the last 2 bits and retain the lower 14 bits.
-	
-			edited_word[15:2] = source_word[15:2]         ;
-			edited_word[1:0]  = target_colour[1:0]        ;
-			collision_rd_inc  = ( source_word[1:0] != 0 ) ;
-			
-		end
-		
-	end else if ( source_bpp[3:0] == BPP_1bit ) begin
-		
-		edited_word[ ( ~source_target[3:0] ) ] = target_colour[0] ;
-		collision_rd_inc = ( source_word[ ( ~source_target[3:0] ) ] != 0 ) ;
-		
-		if ( ~source_target[3:0] != 15 ) edited_word[ 15 : ( ~source_target[3:0] + 1 ) ] = source_word[ 15 : ( ~source_target[3:0] + 1 ) ] ;
-		if ( ~source_target[3:0] != 0 )  edited_word[ ( ~source_target[3:0] - 1 ) : 0 ]  = source_word[ ( ~source_target[3:0] - 1 ) : 0 ]  ;
-
-	end
 
 end
 

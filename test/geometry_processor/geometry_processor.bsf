@@ -20,9 +20,9 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 288 240)
-	(text "geo_pixel_writer" (rect 5 0 82 12)(font "Arial" ))
-	(text "inst" (rect 8 208 25 220)(font "Arial" ))
+	(rect 16 16 256 208)
+	(text "geometry_processor" (rect 5 0 106 12)(font "Arial" ))
+	(text "inst" (rect 8 176 25 188)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -40,15 +40,15 @@ applicable agreement for further details.
 	(port
 		(pt 0 64)
 		(input)
-		(text "cmd_rdy" (rect 0 0 43 12)(font "Arial" ))
-		(text "cmd_rdy" (rect 21 59 64 71)(font "Arial" ))
+		(text "fifo_cmd_ready" (rect 0 0 79 12)(font "Arial" ))
+		(text "fifo_cmd_ready" (rect 21 59 100 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 1))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "cmd_in[39..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "cmd_in[39..0]" (rect 21 75 88 87)(font "Arial" ))
+		(text "fifo_cmd_in[15..0]" (rect 0 0 90 12)(font "Arial" ))
+		(text "fifo_cmd_in[15..0]" (rect 21 75 111 87)(font "Arial" ))
 		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
@@ -80,104 +80,55 @@ applicable agreement for further details.
 		(line (pt 0 144)(pt 16 144)(line_width 1))
 	)
 	(port
-		(pt 0 160)
-		(input)
-		(text "collision_rd_rst" (rect 0 0 73 12)(font "Arial" ))
-		(text "collision_rd_rst" (rect 21 155 94 167)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160)(line_width 1))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "collision_wr_rst" (rect 0 0 74 12)(font "Arial" ))
-		(text "collision_wr_rst" (rect 21 171 95 183)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176)(line_width 1))
-	)
-	(port
-		(pt 272 32)
-		(output)
-		(text "draw_busy" (rect 0 0 53 12)(font "Arial" ))
-		(text "draw_busy" (rect 198 27 251 39)(font "Arial" ))
-		(line (pt 272 32)(pt 256 32)(line_width 1))
-	)
-	(port
-		(pt 272 48)
+		(pt 240 32)
 		(output)
 		(text "rd_req_a" (rect 0 0 42 12)(font "Arial" ))
-		(text "rd_req_a" (rect 209 43 251 55)(font "Arial" ))
-		(line (pt 272 48)(pt 256 48)(line_width 1))
+		(text "rd_req_a" (rect 177 27 219 39)(font "Arial" ))
+		(line (pt 240 32)(pt 224 32)(line_width 1))
 	)
 	(port
-		(pt 272 64)
+		(pt 240 48)
 		(output)
 		(text "rd_req_b" (rect 0 0 42 12)(font "Arial" ))
-		(text "rd_req_b" (rect 209 59 251 71)(font "Arial" ))
-		(line (pt 272 64)(pt 256 64)(line_width 1))
+		(text "rd_req_b" (rect 177 43 219 55)(font "Arial" ))
+		(line (pt 240 48)(pt 224 48)(line_width 1))
 	)
 	(port
-		(pt 272 80)
+		(pt 240 64)
 		(output)
 		(text "wr_ena" (rect 0 0 34 12)(font "Arial" ))
-		(text "wr_ena" (rect 217 75 251 87)(font "Arial" ))
-		(line (pt 272 80)(pt 256 80)(line_width 1))
+		(text "wr_ena" (rect 185 59 219 71)(font "Arial" ))
+		(line (pt 240 64)(pt 224 64)(line_width 1))
 	)
 	(port
-		(pt 272 96)
+		(pt 240 80)
 		(output)
 		(text "ram_addr[19..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "ram_addr[19..0]" (rect 174 91 251 103)(font "Arial" ))
-		(line (pt 272 96)(pt 256 96)(line_width 3))
+		(text "ram_addr[19..0]" (rect 142 75 219 87)(font "Arial" ))
+		(line (pt 240 80)(pt 224 80)(line_width 3))
 	)
 	(port
-		(pt 272 112)
+		(pt 240 96)
 		(output)
 		(text "ram_wr_data[15..0]" (rect 0 0 94 12)(font "Arial" ))
-		(text "ram_wr_data[15..0]" (rect 157 107 251 119)(font "Arial" ))
-		(line (pt 272 112)(pt 256 112)(line_width 3))
+		(text "ram_wr_data[15..0]" (rect 125 91 219 103)(font "Arial" ))
+		(line (pt 240 96)(pt 224 96)(line_width 3))
 	)
 	(port
-		(pt 272 128)
+		(pt 240 112)
 		(output)
 		(text "collision_rd[7..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "collision_rd[7..0]" (rect 171 123 251 135)(font "Arial" ))
-		(line (pt 272 128)(pt 256 128)(line_width 3))
+		(text "collision_rd[7..0]" (rect 139 107 219 119)(font "Arial" ))
+		(line (pt 240 112)(pt 224 112)(line_width 3))
 	)
 	(port
-		(pt 272 144)
+		(pt 240 128)
 		(output)
 		(text "collision_wr[7..0]" (rect 0 0 81 12)(font "Arial" ))
-		(text "collision_wr[7..0]" (rect 170 139 251 151)(font "Arial" ))
-		(line (pt 272 144)(pt 256 144)(line_width 3))
+		(text "collision_wr[7..0]" (rect 138 123 219 135)(font "Arial" ))
+		(line (pt 240 128)(pt 224 128)(line_width 3))
 	)
-	(port
-		(pt 272 160)
-		(output)
-		(text "PX_COPY_COLOUR[15..0]" (rect 0 0 135 12)(font "Arial" ))
-		(text "PX_COPY_COLOUR[15..0]" (rect 116 155 251 167)(font "Arial" ))
-		(line (pt 272 160)(pt 256 160)(line_width 3))
-	)
-	(parameter
-		"ZERO_LATENCY"
-		"1"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"overflow_protection"
-		"1"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"underflow_protection"
-		"1"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"size7_fifo"
-		"0"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
-		(rectangle (rect 16 16 256 208)(line_width 1))
+		(rectangle (rect 16 16 224 176)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 288 -64 388 16))
 )

@@ -1,5 +1,5 @@
 Flow report for pixel_writer
-Mon Aug 10 21:27:18 2020
+Wed Aug 12 10:44:58 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Mon Aug 10 21:27:15 2020        ;
+; Flow Status                        ; Successful - Wed Aug 12 10:44:55 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; pixel_writer                                 ;
 ; Top-level Entity Name              ; pixel_writer                                 ;
@@ -46,11 +46,11 @@ applicable agreement for further details.
 ; Device                             ; EP3C5F256C7                                  ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; N/A                                          ;
-; Total logic elements               ; 422 / 5,136 ( 8 % )                          ;
-;     Total combinational functions  ; 345 / 5,136 ( 7 % )                          ;
-;     Dedicated logic registers      ; 250 / 5,136 ( 5 % )                          ;
-; Total registers                    ; 250                                          ;
-; Total pins                         ; 160 / 183 ( 87 % )                           ;
+; Total logic elements               ; 823 / 5,136 ( 16 % )                         ;
+;     Total combinational functions  ; 750 / 5,136 ( 15 % )                         ;
+;     Dedicated logic registers      ; 291 / 5,136 ( 6 % )                          ;
+; Total registers                    ; 291                                          ;
+; Total pins                         ; 136 / 183 ( 74 % )                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 65,536 / 423,936 ( 15 % )                    ;
 ; Embedded Multiplier 9-bit elements ; 0 / 46 ( 0 % )                               ;
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/10/2020 21:26:35 ;
+; Start date & time ; 08/12/2020 10:44:02 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; pixel_writer        ;
 +-------------------+---------------------+
@@ -74,7 +74,7 @@ applicable agreement for further details.
 +------------------------------------+---------------------------------+--------------------+-------------+----------------+
 ; Assignment Name                    ; Value                           ; Default Value      ; Entity Name ; Section Id     ;
 +------------------------------------+---------------------------------+--------------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID              ; 213398122494286.159709119514556 ; --                 ; --          ; --             ;
+; COMPILER_SIGNATURE_ID              ; 213398122494286.159722544213084 ; --                 ; --          ; --             ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE   ; Speed                           ; Balanced           ; --          ; --             ;
 ; FITTER_EFFORT                      ; Standard Fit                    ; Auto Fit           ; --          ; --             ;
 ; IP_TOOL_NAME                       ; ALTSYNCRAM                      ; --                 ; --          ; --             ;
@@ -98,11 +98,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:03     ; 1.0                     ; 232 MB              ; 00:00:04                           ;
-; Fitter                    ; 00:00:32     ; 1.0                     ; 287 MB              ; 00:00:34                           ;
-; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 241 MB              ; 00:00:04                           ;
-; Assembler                 ; 00:00:01     ; 1.0                     ; 209 MB              ; 00:00:01                           ;
-; Total                     ; 00:00:39     ; --                      ; --                  ; 00:00:42                           ;
+; Analysis & Synthesis      ; 00:00:09     ; 1.0                     ; 233 MB              ; 00:00:08                           ;
+; Fitter                    ; 00:00:39     ; 1.0                     ; 291 MB              ; 00:00:39                           ;
+; TimeQuest Timing Analyzer ; 00:00:05     ; 1.0                     ; 246 MB              ; 00:00:05                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 209 MB              ; 00:00:01                           ;
+; Total                     ; 00:00:53     ; --                      ; --                  ; 00:00:52                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

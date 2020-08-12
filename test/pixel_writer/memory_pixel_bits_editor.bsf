@@ -1,0 +1,141 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 272 272)
+	(text "memory_pixel_bits_editor" (rect 5 0 131 12)(font "Arial" ))
+	(text "inst" (rect 8 240 25 252)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "ram_data_rdy" (rect 0 0 68 12)(font "Arial" ))
+		(text "ram_data_rdy" (rect 21 43 89 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "latched_word[15..0]" (rect 0 0 95 12)(font "Arial" ))
+		(text "latched_word[15..0]" (rect 21 59 116 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "latched_colour[7..0]" (rect 0 0 96 12)(font "Arial" ))
+		(text "latched_colour[7..0]" (rect 21 75 117 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "latched_bpp[3..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "latched_bpp[3..0]" (rect 21 91 105 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "latched_target[3..0]" (rect 0 0 95 12)(font "Arial" ))
+		(text "latched_target[3..0]" (rect 21 107 116 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "immediate_word[15..0]" (rect 0 0 110 12)(font "Arial" ))
+		(text "immediate_word[15..0]" (rect 21 123 131 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "immediate_colour[7..0]" (rect 0 0 112 12)(font "Arial" ))
+		(text "immediate_colour[7..0]" (rect 21 139 133 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "immediate_bpp[3..0]" (rect 0 0 100 12)(font "Arial" ))
+		(text "immediate_bpp[3..0]" (rect 21 155 121 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "immediate_target[3..0]" (rect 0 0 110 12)(font "Arial" ))
+		(text "immediate_target[3..0]" (rect 21 171 131 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "paste_colour[15..0]" (rect 0 0 94 12)(font "Arial" ))
+		(text "paste_colour[15..0]" (rect 21 187 115 199)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 3))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "latched_cmd[3..0]" (rect 0 0 88 12)(font "Arial" ))
+		(text "latched_cmd[3..0]" (rect 21 203 109 215)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 3))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "immediate_cmd[3..0]" (rect 0 0 103 12)(font "Arial" ))
+		(text "immediate_cmd[3..0]" (rect 21 219 124 231)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 3))
+	)
+	(port
+		(pt 256 32)
+		(output)
+		(text "collision_rd_inc" (rect 0 0 74 12)(font "Arial" ))
+		(text "collision_rd_inc" (rect 161 27 235 39)(font "Arial" ))
+		(line (pt 256 32)(pt 240 32)(line_width 1))
+	)
+	(port
+		(pt 256 48)
+		(output)
+		(text "collision_wr_inc" (rect 0 0 75 12)(font "Arial" ))
+		(text "collision_wr_inc" (rect 160 43 235 55)(font "Arial" ))
+		(line (pt 256 48)(pt 240 48)(line_width 1))
+	)
+	(port
+		(pt 256 64)
+		(output)
+		(text "output_word[15..0]" (rect 0 0 90 12)(font "Arial" ))
+		(text "output_word[15..0]" (rect 145 59 235 71)(font "Arial" ))
+		(line (pt 256 64)(pt 240 64)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 240 240)(line_width 1))
+	)
+)
