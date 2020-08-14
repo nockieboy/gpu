@@ -6,6 +6,11 @@
 ' ***** https://www.freebasic.net/
 ' *****
 ' ***** Written By Brian Guralnick. November 2019
+'
+' ***** V1.2 - August 13, 2020
+' ***** Patched ascii display bug where character 0xFF sometimes showed
+' ***** old characters from a previous page refresh.
+'
 ' ***********************************************************************
 
 const  MAX_MEM_ALLOC    = 1048576 '16384 '1048576
@@ -1089,6 +1094,7 @@ color_rg(c, 3       , 1        ):? " HEX   +0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +A +B +
 		next x
 
 		for x=0 to 15
+		locate y*2+5,x*2+57:? "  ";
 		locate y*2+5,x*2+57:? " ";asc_str(read_buffer(z+x));
 		next x
 
