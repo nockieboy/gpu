@@ -235,6 +235,11 @@ refer to the applicable agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
+		"GPU_ZERO_LATENCY"
+		"0"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
 		"overflow_protection"
 		"0"
 		""
@@ -247,6 +252,11 @@ refer to the applicable agreement for further details.
 	(parameter
 		"GEO_FIFO_SIZE_7"
 		"0"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"GEO_ENDIAN_SWAP"
+		"1"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing

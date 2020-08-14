@@ -1,0 +1,16 @@
+Fitter Status : Successful - Thu Aug 13 09:11:56 2020
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : GPU
+Top-level Entity Name : GPU
+Family : Cyclone IV E
+Device : EP4CE10E22C7
+Timing Models : Final
+Total logic elements : 7,869 / 10,320 ( 76 % )
+    Total combinational functions : 6,486 / 10,320 ( 63 % )
+    Dedicated logic registers : 4,159 / 10,320 ( 40 % )
+Total registers : 4209
+Total pins : 76 / 92 ( 83 % )
+Total virtual pins : 0
+Total memory bits : 344,064 / 423,936 ( 81 % )
+Embedded Multiplier 9-bit elements : 4 / 46 ( 9 % )
+Total PLLs : 1 / 2 ( 50 % )

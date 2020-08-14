@@ -1,0 +1,280 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2010 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II
+# Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+# Date created = 00:02:33  November 13, 2019
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		GPU_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE10E22C7
+set_global_assignment -name TOP_LEVEL_ENTITY GPU
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "9.1 SP2"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "00:02:33  NOVEMBER 13, 2019"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
+set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
+set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name SIMULATION_MODE FUNCTIONAL
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE GPU_full_osd.vwf
+set_global_assignment -name DEVICE_FILTER_PACKAGE "ANY QFP"
+#set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
+#set_global_assignment -name TIMING_ANALYZER_DO_CCPP_REMOVAL ON
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVCMOS"
+#set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+#set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+#set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+#set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_location_assignment PIN_23 -to clk54m
+set_location_assignment PIN_112 -to r[3]
+set_location_assignment PIN_114 -to r[2]
+set_location_assignment PIN_115 -to r[1]
+set_location_assignment PIN_119 -to r[0]
+set_location_assignment PIN_103 -to g[3]
+set_location_assignment PIN_104 -to g[2]
+set_location_assignment PIN_105 -to g[1]
+set_location_assignment PIN_106 -to g[0]
+set_location_assignment PIN_85 -to b[3]
+set_location_assignment PIN_86 -to b[2]
+set_location_assignment PIN_87 -to b[1]
+set_location_assignment PIN_98 -to b[0]
+set_location_assignment PIN_80 -to vs
+set_location_assignment PIN_77 -to hs
+set_location_assignment PIN_10 -to uart_txd
+set_location_assignment PIN_11 -to uart_rxd
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to r[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to r[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to r[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to r[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to g[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to g[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to g[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to g[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to b[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to vs
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to hs
+#set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
+set_global_assignment -name AUTO_RAM_RECOGNITION ON
+set_global_assignment -name OPTIMIZE_POWER_DURING_SYNTHESIS OFF
+#set_global_assignment -name ALLOW_REGISTER_RETIMING ON
+set_location_assignment PIN_144 -to 245_OE
+set_location_assignment PIN_143 -to 245_DIR
+set_location_assignment PIN_142 -to Z80_data[0]
+set_location_assignment PIN_141 -to Z80_data[1]
+set_location_assignment PIN_138 -to Z80_data[2]
+set_location_assignment PIN_137 -to Z80_data[3]
+set_location_assignment PIN_136 -to Z80_data[4]
+set_location_assignment PIN_135 -to Z80_data[5]
+set_location_assignment PIN_133 -to Z80_data[6]
+set_location_assignment PIN_132 -to Z80_data[7]
+set_location_assignment PIN_120 -to Z80_CLK
+set_location_assignment PIN_128 -to Z80_M1
+set_location_assignment PIN_126 -to Z80_MREQ
+set_location_assignment PIN_124 -to Z80_RD
+set_location_assignment PIN_125 -to Z80_WR
+set_location_assignment PIN_34 -to Z80_ADDR[0]
+set_location_assignment PIN_38 -to Z80_ADDR[1]
+set_location_assignment PIN_39 -to Z80_ADDR[2]
+set_location_assignment PIN_42 -to Z80_ADDR[3]
+set_location_assignment PIN_43 -to Z80_ADDR[4]
+set_location_assignment PIN_44 -to Z80_ADDR[5]
+set_location_assignment PIN_46 -to Z80_ADDR[6]
+set_location_assignment PIN_49 -to Z80_ADDR[7]
+set_location_assignment PIN_50 -to Z80_ADDR[8]
+set_location_assignment PIN_51 -to Z80_ADDR[9]
+set_location_assignment PIN_52 -to Z80_ADDR[10]
+set_location_assignment PIN_53 -to Z80_ADDR[11]
+set_location_assignment PIN_54 -to Z80_ADDR[12]
+set_location_assignment PIN_55 -to Z80_ADDR[13]
+set_location_assignment PIN_65 -to Z80_ADDR[14]
+set_location_assignment PIN_66 -to Z80_ADDR[15]
+set_location_assignment PIN_67 -to Z80_ADDR[16]
+set_location_assignment PIN_68 -to Z80_ADDR[17]
+set_location_assignment PIN_69 -to Z80_ADDR[18]
+set_location_assignment PIN_70 -to Z80_ADDR[19]
+set_location_assignment PIN_71 -to Z80_ADDR[20]
+set_location_assignment PIN_72 -to Z80_ADDR[21]
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name ROUTER_EFFORT_MULTIPLIER 2
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[0]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[0]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to 245_DIR
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_M1
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_MREQ
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_RD
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_WR
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[1]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[2]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[3]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[4]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[5]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[6]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[7]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[1]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[2]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[3]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[4]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[5]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[6]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[7]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[8]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[9]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[10]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[11]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[12]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[13]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[14]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[15]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[16]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[17]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[18]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[19]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[20]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[21]
+set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_CLK
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[1]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[2]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[3]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[4]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[5]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[6]
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[7]
+set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to 245_OE
+set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to data_en
+set_location_assignment PIN_127 -to Z80_IORQ
+set_location_assignment PIN_3 -to Z80_INT_RQ
+set_location_assignment PIN_75 -to IEI
+set_location_assignment PIN_76 -to IEO
+set_location_assignment PIN_83 -to b[5]
+set_location_assignment PIN_84 -to b[4]
+set_location_assignment PIN_101 -to g[4]
+set_location_assignment PIN_100 -to g[5]
+set_location_assignment PIN_111 -to r[4]
+set_location_assignment PIN_110 -to r[5]
+set_location_assignment PIN_2 -to SPEAKER
+set_location_assignment PIN_60 -to EA_DIR
+set_location_assignment PIN_64 -to EA_OE
+set_location_assignment PIN_113 -to pixel_clk
+set_location_assignment PIN_1 -to RESET_PIN
+set_location_assignment PIN_129 -to Z80_RST
+set_global_assignment -name POWER_USE_PVA ON
+set_global_assignment -name POWER_DEFAULT_TOGGLE_RATE 85%
+set_location_assignment PIN_99 -to vde
+set_location_assignment PIN_30 -to STATUS_LED
+set_global_assignment -name EDA_SIMULATION_TOOL "<None>"
+set_location_assignment PIN_73 -to PS2_CLK
+set_location_assignment PIN_74 -to PS2_DAT
+set_global_assignment -name REMOVE_DUPLICATE_REGISTERS OFF
+set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
+#set_global_assignment -name ALLOW_REGISTER_MERGING ON
+#set_global_assignment -name INFER_RAMS_FROM_RAW_LOGIC ON
+set_global_assignment -name AUTO_ROM_RECOGNITION ON
+set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF
+set_global_assignment -name AUTO_RAM_BLOCK_BALANCING ON
+set_global_assignment -name ALLOW_ANY_RAM_SIZE_FOR_RECOGNITION OFF
+set_global_assignment -name FINAL_PLACEMENT_OPTIMIZATION AUTOMATICALLY
+set_global_assignment -name FITTER_AGGRESSIVE_ROUTABILITY_OPTIMIZATION AUTOMATICALLY
+#set_global_assignment -name PERIPHERY_TO_CORE_PLACEMENT_AND_ROUTING_OPTIMIZATION OFF
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA
+set_global_assignment -name ROUTER_REGISTER_DUPLICATION AUTO
+set_global_assignment -name PLACEMENT_EFFORT_MULTIPLIER 5
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
+set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
+set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
+set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING OFF
+set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
+set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL ON
+set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
+set_instance_assignment -name SETUP_HOLD_TIME_VIOLATION_DETECTION OFF -to "ps2_keyboard_to_ascii:inst7"
+set_global_assignment -name BDF_FILE GPU.bdf
+set_global_assignment -name SDC_FILE SDC1.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE pixel_address_generator.sv
+set_global_assignment -name SYSTEMVERILOG_FILE geometry_xy_plotter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE geo_pixel_writer.sv
+set_global_assignment -name VERILOG_FILE bart.v
+set_global_assignment -name SYSTEMVERILOG_FILE data_mux_geo.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sixteen_port_gpu_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE gpu_quad_port_ram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE fifo_3word_0_latency.sv
+set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
+set_global_assignment -name SYSTEMVERILOG_FILE geometry_processor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Z80_bridge_v2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE vid_osd_generator.sv
+set_global_assignment -name VERILOG_FILE vid_out_stencil.v
+set_global_assignment -name SYSTEMVERILOG_FILE sound.sv
+set_global_assignment -name VERILOG_FILE SYNC_RS232_UART.v
+set_global_assignment -name MIF_FILE GPU_MIF_CE10_10M.mif
+set_global_assignment -name MIF_FILE palette.mif
+set_global_assignment -name SYSTEMVERILOG_FILE sync_generator.sv
+set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
+set_global_assignment -name BDF_FILE raster_trigger_mux.bdf
+set_global_assignment -name SYSTEMVERILOG_FILE palette_mixer.sv
+set_global_assignment -name SYSTEMVERILOG_FILE GPU_HW_Control_Regs.sv
+set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
+set_global_assignment -name BDF_FILE color_sel.bdf
+set_global_assignment -name VERILOG_FILE altpll0.v
+set_global_assignment -name SYSTEMVERILOG_FILE status_LED.sv
+set_global_assignment -name VHDL_FILE ps2_keyboard_to_ascii.vhd
+set_global_assignment -name VHDL_FILE ps2_keyboard.vhd
+set_global_assignment -name VHDL_FILE debounce.vhd
+set_global_assignment -name PRE_MAPPING_RESYNTHESIS ON
+set_global_assignment -name PERIPHERY_TO_CORE_PLACEMENT_AND_ROUTING_OPTIMIZATION AUTO
+set_global_assignment -name ROUTER_LCELL_INSERTION_AND_LOGIC_DUPLICATION ON
+set_global_assignment -name OPTIMIZE_FOR_METASTABILITY OFF
+set_global_assignment -name ALLOW_REGISTER_DUPLICATION ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
+set_global_assignment -name ROUTER_CLOCKING_TOPOLOGY_ANALYSIS ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

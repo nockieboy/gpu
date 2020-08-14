@@ -1,0 +1,31 @@
+Pixel Writer with copy, paste, paste_mask & set_RGB legend:
+
+A = Reset both collision counters.
+
+B = Copy pixel @0x0ABC-2, 16 color = '0xB'
+
+C = Paste_mask 16 color pixel '0xB' to 0x0111-1.
+    Since pixel @0x0111-1 wasn't 0x0 to begin with, collision_rd +1.
+    Since color '0xB' was written into 0x0111-1 which wasn't 0, collision_wr +1.
+
+D = Copy pixel @0x0ABC-3, 16 color = '0x0'.
+
+E = Paste_mask 16 color pixel '0x0' to 0x0111-1.
+    Since pixel @0x0111-1 wasn't 0x0 to begin with, collision_rd +1 again.
+    Since color '0x0' is transparent, 0x0111-1 kept the earlier '0xB'color
+    and collision_wr stayed the same.
+
+F = Normal paste 16 color pixel '0x0' to 0x0111-1.
+    Since pixel @0x0111-1 wasn't 0x0 to begin with, collision_rd +1 again.
+    Normal paste means the color '0x0' was written into 0x0111-1 and since
+    the pixel was originally '0xB', the collision_wr +1.
+
+G = Paste_mask 16 color pixel '0x0' to 0x0111-1.
+    Since pixel @0x0111-1 is 0x0 to begin with, the collision_rd stayed the same.
+    Since color '0x0' is transparent, 0x0111-1 kept the earlier '0x0'color
+    and collision_wr stayed the same.
+
+H = set_rgb = This passes the first 16 bits in the command bus directly into
+    the copy pixel buffer so you may write 16 bit true color RGB pixels
+    using the pixel_paste command afterwards.
+

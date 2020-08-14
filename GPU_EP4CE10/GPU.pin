@@ -74,7 +74,7 @@ Z80_INT_RQ                   : 3         : output : 3.3-V LVCMOS      :         
 GND                          : 4         : gnd    :                   :         :           :                
 VCCINT                       : 5         : power  :                   : 1.2V    :           :                
 ~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 6         : input  : 3.3-V LVCMOS      :         : 1         : N              
-RESERVED_INPUT               : 7         :        :                   :         : 1         :                
+LED_rdx                      : 7         : output : 3.3-V LVCMOS      :         : 1         : N              
 ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 8         : input  : 3.3-V LVCMOS      :         : 1         : N              
 nSTATUS                      : 9         :        :                   :         : 1         :                
 uart_txd                     : 10        : output : 3.3-V LVCMOS      :         : 1         : Y              
@@ -98,7 +98,7 @@ GND                          : 27        : gnd    :                   :         
 RESERVED_INPUT               : 28        :        :                   :         : 2         :                
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 STATUS_LED                   : 30        : output : 3.3-V LVCMOS      :         : 2         : Y              
-LED_txd                      : 31        : output : 3.3-V LVCMOS      :         : 2         : N              
+RESERVED_INPUT               : 31        :        :                   :         : 2         :                
 RESERVED_INPUT               : 32        :        :                   :         : 2         :                
 RESERVED_INPUT               : 33        :        :                   :         : 2         :                
 Z80_ADDR[0]                  : 34        : input  : 3.3-V LVCMOS      :         : 2         : Y              
@@ -188,7 +188,7 @@ VCCIO7                       : 117       : power  :                   : 3.3V    
 GND                          : 118       : gnd    :                   :         :           :                
 r[0]                         : 119       : output : 3.3-V LVCMOS      :         : 7         : Y              
 Z80_CLK                      : 120       : input  : 3.3-V LVCMOS      :         : 7         : Y              
-LED_rdx                      : 121       : output : 3.3-V LVCMOS      :         : 7         : N              
+LED_txd                      : 121       : output : 3.3-V LVCMOS      :         : 7         : N              
 VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
 GND                          : 123       : gnd    :                   :         :           :                
 Z80_RD                       : 124       : input  : 3.3-V LVCMOS      :         : 7         : Y              

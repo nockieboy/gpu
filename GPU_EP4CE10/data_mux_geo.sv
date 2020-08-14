@@ -59,9 +59,11 @@ module data_mux_geo (
 parameter int READ_CLOCK_CYCLES    = 2; // Clock cycles until the ram returns valid read data
 parameter bit REGISTER_GPU_PORT    = 1; // When set to 1 this will improve FMAX at the cost of 1 extra clock cycle on the rd_req.
 parameter bit ZERO_LATENCY         = 1; // When set to 1 this will make the read&write commands immediate instead of a clock cycle later.
+parameter bit GPU_ZERO_LATENCY     = 0; // When set to 1 this will make the read&write commands immediate instead of a clock cycle later for the GPU.
 parameter bit overflow_protection  = 0; // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
 parameter bit underflow_protection = 0; // Prevents internal position position increment if the fifo is empty
 parameter bit GEO_FIFO_SIZE_7      = 0; // Set to 0 for 3 words, set to 1 for 7 words only for the GEOMETRY COMMAND FIFO INPUT
+parameter bit GEO_ENDIAN_SWAP      = 1; // Set to 0 for BIG, set to 1 for SMALL.
 
 logic [1:0]  mux_priority ;
 logic [9:0]  rd_req_dlya, rd_req_dlyb, geo_rd_req_dlya, geo_rd_req_dlyb ;
@@ -81,6 +83,7 @@ logic        gpu_ena_16bit_reg;
 logic	     gpu_wr_ena_reg;
 logic [19:0] gpu_address_reg;
 logic [15:0] gpu_data_out_reg;
+logic [15:0] data_in_geo_swap;
 
 FIFO_3word_0_latency input_cmd_fifo_1 (     // Zero Latency Command buffer.
                       .clk(clk),                                                    // CLK input
@@ -126,7 +129,7 @@ FIFO_3word_0_latency input_cmd_fifo_3 (     // Zero Latency Command buffer.
 
                       .shift_in        ( geo_rd_req_a || geo_rd_req_b || geo_wr_ena ),                           // load a word into the FIFO.
                       .shift_out       ( cmd_c_next ),                                     // shift data out of the FIFO.
-                      .data_in         ( {geo_rd_req_a,geo_rd_req_b,geo_wr_ena,address_geo,data_in_geo} ), // data word input.
+                      .data_in         ( {geo_rd_req_a,geo_rd_req_b,geo_wr_ena,address_geo,data_in_geo_swap} ), // data word input.
 
                       .fifo_not_empty  ( cmd_c_rdy ),                                      // High when there is data available.
                       .fifo_full       ( geo_port_full ),                                  // High when the FIFO is full.
@@ -134,7 +137,7 @@ FIFO_3word_0_latency input_cmd_fifo_3 (     // Zero Latency Command buffer.
                        );
 	defparam
 		input_cmd_fifo_3.bits                 = (1+1+1+20+16),           // The number of bits containing the command.
-		input_cmd_fifo_3.zero_latency         = ZERO_LATENCY,
+		input_cmd_fifo_3.zero_latency         = GPU_ZERO_LATENCY,
 		input_cmd_fifo_3.overflow_protection  = overflow_protection,  // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
 		input_cmd_fifo_3.underflow_protection = underflow_protection, // Prevents internal position position increment if the fifo is empty
 		input_cmd_fifo_3.size7_ena            = GEO_FIFO_SIZE_7;      // Set to 0 for 3 words
@@ -216,7 +219,9 @@ for (int i=0 ; i<8 ; i++) F_ena_16bit[i] =  (i == 4);  // Set 16 bit mode when c
 
  data_out_a   =  gpu_data_in[7:0] ;  // with this line, it is the responsibility of the next module to latch the data when the gpu_rd_rdy_a is high
  data_out_b   =  gpu_data_in[7:0] ;  // with this line, it is the responsibility of the next module to latch the data when the gpu_rd_rdy_b is high
- data_out_geo =  gpu_data_in[15:0] ; // the 16bit memory access for the geometry unit
+
+ data_out_geo     =  GEO_ENDIAN_SWAP ? {gpu_data_in[7:0],gpu_data_in[15:8]} : gpu_data_in[15:0] ; // the 16bit memory access for the geometry unit
+ data_in_geo_swap =  GEO_ENDIAN_SWAP ? {data_in_geo[7:0],data_in_geo[15:8]} : data_in_geo[15:0] ; // the 16bit memory access for the geometry unit
 end // always_comb
 
 always_ff @(posedge clk) begin

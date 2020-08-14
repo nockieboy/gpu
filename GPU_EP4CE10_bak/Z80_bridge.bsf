@@ -1,0 +1,312 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 256 352)
+	(text "Z80_bridge" (rect 5 0 51 12)(font "Arial" ))
+	(text "inst" (rect 8 320 20 332)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "reset" (rect 0 0 20 12)(font "Arial" ))
+		(text "reset" (rect 21 27 41 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "GPU_CLK" (rect 0 0 46 12)(font "Arial" ))
+		(text "GPU_CLK" (rect 21 43 67 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "Z80_CLK" (rect 0 0 42 12)(font "Arial" ))
+		(text "Z80_CLK" (rect 21 59 63 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "Z80_M1n" (rect 0 0 38 12)(font "Arial" ))
+		(text "Z80_M1n" (rect 21 75 59 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "Z80_MREQn" (rect 0 0 57 12)(font "Arial" ))
+		(text "Z80_MREQn" (rect 21 91 78 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "Z80_WRn" (rect 0 0 46 12)(font "Arial" ))
+		(text "Z80_WRn" (rect 21 107 67 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "Z80_RDn" (rect 0 0 42 12)(font "Arial" ))
+		(text "Z80_RDn" (rect 21 123 63 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "Z80_addr[21..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "Z80_addr[21..0]" (rect 21 139 84 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "Z80_wData[7..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "Z80_wData[7..0]" (rect 21 155 88 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "gpu_rData[7..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "gpu_rData[7..0]" (rect 21 171 83 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "gpu_rd_rdy" (rect 0 0 48 12)(font "Arial" ))
+		(text "gpu_rd_rdy" (rect 21 187 69 199)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 1))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "sel_pclk" (rect 0 0 31 12)(font "Arial" ))
+		(text "sel_pclk" (rect 21 203 52 215)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 1))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "sel_nclk" (rect 0 0 31 12)(font "Arial" ))
+		(text "sel_nclk" (rect 21 219 52 231)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 1))
+	)
+	(port
+		(pt 0 240)
+		(input)
+		(text "PS2_RDY" (rect 0 0 44 12)(font "Arial" ))
+		(text "PS2_RDY" (rect 21 235 65 247)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240)(line_width 1))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "PS2_DAT[7..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "PS2_DAT[7..0]" (rect 21 251 84 263)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256)(line_width 3))
+	)
+	(port
+		(pt 0 272)
+		(input)
+		(text "Z80_IORQn" (rect 0 0 51 12)(font "Arial" ))
+		(text "Z80_IORQn" (rect 21 267 72 279)(font "Arial" ))
+		(line (pt 0 272)(pt 16 272)(line_width 1))
+	)
+	(port
+		(pt 0 288)
+		(input)
+		(text "Z80_IEI" (rect 0 0 34 12)(font "Arial" ))
+		(text "Z80_IEI" (rect 21 283 55 295)(font "Arial" ))
+		(line (pt 0 288)(pt 16 288)(line_width 1))
+	)
+	(port
+		(pt 240 32)
+		(output)
+		(text "Z80_245data_dir" (rect 0 0 69 12)(font "Arial" ))
+		(text "Z80_245data_dir" (rect 150 27 219 39)(font "Arial" ))
+		(line (pt 240 32)(pt 224 32)(line_width 1))
+	)
+	(port
+		(pt 240 48)
+		(output)
+		(text "Z80_rData[7..0]" (rect 0 0 64 12)(font "Arial" ))
+		(text "Z80_rData[7..0]" (rect 155 43 219 55)(font "Arial" ))
+		(line (pt 240 48)(pt 224 48)(line_width 3))
+	)
+	(port
+		(pt 240 64)
+		(output)
+		(text "Z80_rData_ena" (rect 0 0 64 12)(font "Arial" ))
+		(text "Z80_rData_ena" (rect 155 59 219 71)(font "Arial" ))
+		(line (pt 240 64)(pt 224 64)(line_width 1))
+	)
+	(port
+		(pt 240 80)
+		(output)
+		(text "Z80_245_oe" (rect 0 0 53 12)(font "Arial" ))
+		(text "Z80_245_oe" (rect 166 75 219 87)(font "Arial" ))
+		(line (pt 240 80)(pt 224 80)(line_width 1))
+	)
+	(port
+		(pt 240 96)
+		(output)
+		(text "gpu_wr_ena" (rect 0 0 49 12)(font "Arial" ))
+		(text "gpu_wr_ena" (rect 170 91 219 103)(font "Arial" ))
+		(line (pt 240 96)(pt 224 96)(line_width 1))
+	)
+	(port
+		(pt 240 112)
+		(output)
+		(text "gpu_rd_req" (rect 0 0 47 12)(font "Arial" ))
+		(text "gpu_rd_req" (rect 172 107 219 119)(font "Arial" ))
+		(line (pt 240 112)(pt 224 112)(line_width 1))
+	)
+	(port
+		(pt 240 128)
+		(output)
+		(text "gpu_addr[19..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "gpu_addr[19..0]" (rect 158 123 219 135)(font "Arial" ))
+		(line (pt 240 128)(pt 224 128)(line_width 3))
+	)
+	(port
+		(pt 240 144)
+		(output)
+		(text "gpu_wdata[7..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "gpu_wdata[7..0]" (rect 157 139 219 151)(font "Arial" ))
+		(line (pt 240 144)(pt 224 144)(line_width 3))
+	)
+	(port
+		(pt 240 160)
+		(output)
+		(text "Z80_INT_REQ" (rect 0 0 66 12)(font "Arial" ))
+		(text "Z80_INT_REQ" (rect 153 155 219 167)(font "Arial" ))
+		(line (pt 240 160)(pt 224 160)(line_width 1))
+	)
+	(port
+		(pt 240 176)
+		(output)
+		(text "Z80_IEO" (rect 0 0 38 12)(font "Arial" ))
+		(text "Z80_IEO" (rect 181 171 219 183)(font "Arial" ))
+		(line (pt 240 176)(pt 224 176)(line_width 1))
+	)
+	(port
+		(pt 240 192)
+		(output)
+		(text "EA_DIR" (rect 0 0 38 12)(font "Arial" ))
+		(text "EA_DIR" (rect 181 187 219 199)(font "Arial" ))
+		(line (pt 240 192)(pt 224 192)(line_width 1))
+	)
+	(port
+		(pt 240 208)
+		(output)
+		(text "EA_OE" (rect 0 0 35 12)(font "Arial" ))
+		(text "EA_OE" (rect 184 203 219 215)(font "Arial" ))
+		(line (pt 240 208)(pt 224 208)(line_width 1))
+	)
+	(port
+		(pt 240 224)
+		(output)
+		(text "SPKR_EN" (rect 0 0 47 12)(font "Arial" ))
+		(text "SPKR_EN" (rect 172 219 219 231)(font "Arial" ))
+		(line (pt 240 224)(pt 224 224)(line_width 1))
+	)
+	(port
+		(pt 240 240)
+		(output)
+		(text "VIDEO_EN" (rect 0 0 51 12)(font "Arial" ))
+		(text "VIDEO_EN" (rect 168 235 219 247)(font "Arial" ))
+		(line (pt 240 240)(pt 224 240)(line_width 1))
+	)
+	(parameter
+		"MEMORY_RANGE"
+		"010"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"MEM_SIZE_BITS"
+		"15"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"BANK_RESPONSE"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"BANK_ID_ADDR"
+		"10111111111111111"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"BANK_ID"
+		"A(9,3,71,80,85,32,69,80,52,67,69,54,0,255,255,255)"
+		""
+		(type "PARAMETER_UNKNOWN")	)
+	(parameter
+		"INT_TYP"
+		"0"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"INT_VEC"
+		"00110000"
+		""
+		(type "PARAMETER_SIGNED_BIN")	)
+	(parameter
+		"IO_DATA"
+		"240"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IO_STAT"
+		"241"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IO_SPKR"
+		"242"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"IO_BLNK"
+		"243"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"data_in"
+		"0"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"data_out"
+		"1"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(drawing
+		(rectangle (rect 16 16 224 320)(line_width 1))
+	)
+	(annotation_block (parameter)(rect 256 -64 356 16))
+)

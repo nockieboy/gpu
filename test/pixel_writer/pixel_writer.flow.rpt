@@ -1,5 +1,5 @@
 Flow report for pixel_writer
-Wed Aug 12 10:44:58 2020
+Fri Aug 14 00:27:42 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,18 +38,18 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Wed Aug 12 10:44:55 2020        ;
+; Flow Status                        ; Successful - Fri Aug 14 00:27:39 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; pixel_writer                                 ;
 ; Top-level Entity Name              ; pixel_writer                                 ;
 ; Family                             ; Cyclone III                                  ;
-; Device                             ; EP3C5F256C7                                  ;
+; Device                             ; EP3C10F256C7                                 ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; N/A                                          ;
-; Total logic elements               ; 823 / 5,136 ( 16 % )                         ;
-;     Total combinational functions  ; 750 / 5,136 ( 15 % )                         ;
-;     Dedicated logic registers      ; 291 / 5,136 ( 6 % )                          ;
-; Total registers                    ; 291                                          ;
+; Total logic elements               ; 1,080 / 10,320 ( 10 % )                      ;
+;     Total combinational functions  ; 999 / 10,320 ( 10 % )                        ;
+;     Dedicated logic registers      ; 329 / 10,320 ( 3 % )                         ;
+; Total registers                    ; 329                                          ;
 ; Total pins                         ; 136 / 183 ( 74 % )                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 65,536 / 423,936 ( 15 % )                    ;
@@ -63,34 +63,42 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/12/2020 10:44:02 ;
+; Start date & time ; 08/14/2020 00:26:35 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; pixel_writer        ;
 +-------------------+---------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                         ;
-+------------------------------------+---------------------------------+--------------------+-------------+----------------+
-; Assignment Name                    ; Value                           ; Default Value      ; Entity Name ; Section Id     ;
-+------------------------------------+---------------------------------+--------------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID              ; 213398122494286.159722544213084 ; --                 ; --          ; --             ;
-; CYCLONEII_OPTIMIZATION_TECHNIQUE   ; Speed                           ; Balanced           ; --          ; --             ;
-; FITTER_EFFORT                      ; Standard Fit                    ; Auto Fit           ; --          ; --             ;
-; IP_TOOL_NAME                       ; ALTSYNCRAM                      ; --                 ; --          ; --             ;
-; IP_TOOL_VERSION                    ; 9.1                             ; --                 ; --          ; --             ;
-; MAX_CORE_JUNCTION_TEMP             ; 85                              ; --                 ; --          ; --             ;
-; MIN_CORE_JUNCTION_TEMP             ; 0                               ; --                 ; --          ; --             ;
-; MISC_FILE                          ; altsyncram0.bsf                 ; --                 ; --          ; --             ;
-; MISC_FILE                          ; altsyncram0_bb.v                ; --                 ; --          ; --             ;
-; NOMINAL_CORE_SUPPLY_VOLTAGE        ; 1.2V                            ; --                 ; --          ; --             ;
-; OPTIMIZE_MULTI_CORNER_TIMING       ; On                              ; Off                ; --          ; --             ;
-; OPTIMIZE_POWER_DURING_FITTING      ; Off                             ; Normal compilation ; --          ; --             ;
-; OPTIMIZE_POWER_DURING_SYNTHESIS    ; Off                             ; Normal compilation ; --          ; --             ;
-; PARTITION_COLOR                    ; 16764057                        ; --                 ; --          ; Top            ;
-; PARTITION_NETLIST_TYPE             ; SOURCE                          ; --                 ; --          ; Top            ;
-; USE_GENERATED_PHYSICAL_CONSTRAINTS ; Off                             ; --                 ; --          ; eda_blast_fpga ;
-+------------------------------------+---------------------------------+--------------------+-------------+----------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                        ;
++---------------------------------------------------+---------------------------------+--------------------+-------------+----------------+
+; Assignment Name                                   ; Value                           ; Default Value      ; Entity Name ; Section Id     ;
++---------------------------------------------------+---------------------------------+--------------------+-------------+----------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION                   ; Off                             ; Auto               ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                             ; 207458820171152.159737919506040 ; --                 ; --          ; --             ;
+; CYCLONEII_OPTIMIZATION_TECHNIQUE                  ; Speed                           ; Balanced           ; --          ; --             ;
+; FITTER_EFFORT                                     ; Standard Fit                    ; Auto Fit           ; --          ; --             ;
+; IP_TOOL_NAME                                      ; ALTSYNCRAM                      ; --                 ; --          ; --             ;
+; IP_TOOL_VERSION                                   ; 9.1                             ; --                 ; --          ; --             ;
+; MAX_CORE_JUNCTION_TEMP                            ; 85                              ; --                 ; --          ; --             ;
+; MIN_CORE_JUNCTION_TEMP                            ; 0                               ; --                 ; --          ; --             ;
+; MISC_FILE                                         ; altsyncram0.bsf                 ; --                 ; --          ; --             ;
+; MISC_FILE                                         ; altsyncram0_bb.v                ; --                 ; --          ; --             ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE                       ; 1.2V                            ; --                 ; --          ; --             ;
+; OPTIMIZE_MULTI_CORNER_TIMING                      ; On                              ; Off                ; --          ; --             ;
+; OPTIMIZE_POWER_DURING_FITTING                     ; Off                             ; Normal compilation ; --          ; --             ;
+; OPTIMIZE_POWER_DURING_SYNTHESIS                   ; Off                             ; Normal compilation ; --          ; --             ;
+; PARTITION_COLOR                                   ; 16764057                        ; --                 ; --          ; Top            ;
+; PARTITION_NETLIST_TYPE                            ; SOURCE                          ; --                 ; --          ; Top            ;
+; PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ; On                              ; Off                ; --          ; --             ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC                    ; On                              ; Off                ; --          ; --             ;
+; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION           ; On                              ; Off                ; --          ; --             ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING              ; On                              ; Off                ; --          ; --             ;
+; PLACEMENT_EFFORT_MULTIPLIER                       ; 4                               ; 1.0                ; --          ; --             ;
+; REMOVE_DUPLICATE_REGISTERS                        ; Off                             ; On                 ; --          ; --             ;
+; ROUTER_REGISTER_DUPLICATION                       ; On                              ; Auto               ; --          ; --             ;
+; USE_GENERATED_PHYSICAL_CONSTRAINTS                ; Off                             ; --                 ; --          ; eda_blast_fpga ;
++---------------------------------------------------+---------------------------------+--------------------+-------------+----------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------+
@@ -98,11 +106,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:09     ; 1.0                     ; 233 MB              ; 00:00:08                           ;
-; Fitter                    ; 00:00:39     ; 1.0                     ; 291 MB              ; 00:00:39                           ;
-; TimeQuest Timing Analyzer ; 00:00:05     ; 1.0                     ; 246 MB              ; 00:00:05                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 209 MB              ; 00:00:01                           ;
-; Total                     ; 00:00:53     ; --                      ; --                  ; 00:00:52                           ;
+; Analysis & Synthesis      ; 00:00:13     ; 1.0                     ; 236 MB              ; 00:00:14                           ;
+; Fitter                    ; 00:00:47     ; 1.0                     ; 283 MB              ; 00:00:47                           ;
+; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 240 MB              ; 00:00:04                           ;
+; Assembler                 ; 00:00:01     ; 1.0                     ; 209 MB              ; 00:00:01                           ;
+; Total                     ; 00:01:04     ; --                      ; --                  ; 00:01:05                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -111,10 +119,10 @@ applicable agreement for further details.
 +---------------------------+------------------+---------------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name       ; OS Version ; Processor type ;
 +---------------------------+------------------+---------------+------------+----------------+
-; Analysis & Synthesis      ; TALOS            ; Windows Vista ; 6.2        ; x86_64         ;
-; Fitter                    ; TALOS            ; Windows Vista ; 6.2        ; x86_64         ;
-; Assembler                 ; TALOS            ; Windows Vista ; 6.2        ; x86_64         ;
-; TimeQuest Timing Analyzer ; TALOS            ; Windows Vista ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; IMPLODER         ; Windows Vista ; 6.1        ; x86_64         ;
+; Fitter                    ; IMPLODER         ; Windows Vista ; 6.1        ; x86_64         ;
+; Assembler                 ; IMPLODER         ; Windows Vista ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; IMPLODER         ; Windows Vista ; 6.1        ; x86_64         ;
 +---------------------------+------------------+---------------+------------+----------------+
 
 

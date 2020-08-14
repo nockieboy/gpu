@@ -810,7 +810,7 @@ applicable agreement for further details.
 	)
 	(parameter
 		"ZERO_LATENCY"
-		"1"
+		"0"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter

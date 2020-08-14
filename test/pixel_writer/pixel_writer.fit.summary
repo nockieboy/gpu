@@ -1,14 +1,14 @@
-Fitter Status : Successful - Wed Aug 12 10:44:51 2020
+Fitter Status : Successful - Fri Aug 14 00:27:36 2020
 Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
 Revision Name : pixel_writer
 Top-level Entity Name : pixel_writer
 Family : Cyclone III
-Device : EP3C5F256C7
+Device : EP3C10F256C7
 Timing Models : Final
-Total logic elements : 823 / 5,136 ( 16 % )
-    Total combinational functions : 750 / 5,136 ( 15 % )
-    Dedicated logic registers : 291 / 5,136 ( 6 % )
-Total registers : 291
+Total logic elements : 1,080 / 10,320 ( 10 % )
+    Total combinational functions : 999 / 10,320 ( 10 % )
+    Dedicated logic registers : 329 / 10,320 ( 3 % )
+Total registers : 329
 Total pins : 136 / 183 ( 74 % )
 Total virtual pins : 0
 Total memory bits : 65,536 / 423,936 ( 15 % )

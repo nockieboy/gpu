@@ -1,0 +1,215 @@
+ -- Copyright (C) 2018  Intel Corporation. All rights reserved.
+ -- Your use of Intel Corporation's design tools, logic functions 
+ -- and other software and tools, and its AMPP partner logic 
+ -- functions, and any output files from any of the foregoing 
+ -- (including device programming or simulation files), and any 
+ -- associated documentation or information are expressly subject 
+ -- to the terms and conditions of the Intel Program License 
+ -- Subscription Agreement, the Intel Quartus Prime License Agreement,
+ -- the Intel FPGA IP License Agreement, or other applicable license
+ -- agreement, including, without limitation, that your use is for
+ -- the sole purpose of programming logic devices manufactured by
+ -- Intel and sold by Intel or its authorized distributors.  Please
+ -- refer to the applicable agreement for further details.
+ -- 
+ -- This is a Quartus Prime output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus Prime input file. This file cannot be used
+ -- to make Quartus Prime pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus Prime help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- DNU           : Do Not Use. This pin MUST NOT be connected.
+ -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.2V).
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ --                  Bank 1:       3.3V
+ --                  Bank 2:       3.3V
+ --                  Bank 3:       3.3V
+ --                  Bank 4:       3.3V
+ --                  Bank 5:       3.3V
+ --                  Bank 6:       3.3V
+ --                  Bank 7:       3.3V
+ --                  Bank 8:       3.3V
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --                  It can also be used to report unused dedicated pins. The connection
+ --                  on the board for unused dedicated pins depends on whether this will
+ --                  be used in a future design. One example is device migration. When
+ --                  using device migration, refer to the device pin-tables. If it is a
+ --                  GND pin in the pin table or if it will not be used in a future design
+ --                  for another purpose the it MUST be connected to GND. If it is an unused
+ --                  dedicated pin, then it can be connected to a valid signal on the board
+ --                  (low, high, or toggling) if that signal is required for a different
+ --                  revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --                  This pin should be connected to GND. It may also be connected  to a
+ --                  valid signal  on the board  (low, high, or toggling)  if that signal
+ --                  is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin. Connect each pin marked GND* directly to GND
+ --                  or leave it unconnected.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
+ -- RESERVED_OUTPUT_DRIVEN_HIGH        : Pin is output driven high.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- Pin directions (input, output or bidir) are based on device operating in user mode.
+ ---------------------------------------------------------------------------------
+
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+CHIP  "GPU"  ASSIGNED TO AN: EP4CE10E22C7
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+RESET_PIN                    : 1         : input  : 3.3-V LVCMOS      :         : 1         : Y              
+SPEAKER                      : 2         : output : 3.3-V LVCMOS      :         : 1         : Y              
+Z80_INT_RQ                   : 3         : output : 3.3-V LVCMOS      :         : 1         : Y              
+GND                          : 4         : gnd    :                   :         :           :                
+VCCINT                       : 5         : power  :                   : 1.2V    :           :                
+~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 6         : input  : 3.3-V LVCMOS      :         : 1         : N              
+RESERVED_INPUT               : 7         :        :                   :         : 1         :                
+~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 8         : input  : 3.3-V LVCMOS      :         : 1         : N              
+nSTATUS                      : 9         :        :                   :         : 1         :                
+uart_txd                     : 10        : output : 3.3-V LVCMOS      :         : 1         : Y              
+uart_rxd                     : 11        : input  : 3.3-V LVCMOS      :         : 1         : Y              
+~ALTERA_DCLK~                : 12        : output : 3.3-V LVCMOS      :         : 1         : N              
+~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 13        : input  : 3.3-V LVCMOS      :         : 1         : N              
+nCONFIG                      : 14        :        :                   :         : 1         :                
+TDI                          : 15        : input  :                   :         : 1         :                
+TCK                          : 16        : input  :                   :         : 1         :                
+VCCIO1                       : 17        : power  :                   : 3.3V    : 1         :                
+TMS                          : 18        : input  :                   :         : 1         :                
+GND                          : 19        : gnd    :                   :         :           :                
+TDO                          : 20        : output :                   :         : 1         :                
+nCE                          : 21        :        :                   :         : 1         :                
+GND                          : 22        : gnd    :                   :         :           :                
+clk54m                       : 23        : input  : 3.3-V LVCMOS      :         : 1         : Y              
+GND+                         : 24        :        :                   :         : 2         :                
+GND+                         : 25        :        :                   :         : 2         :                
+VCCIO2                       : 26        : power  :                   : 3.3V    : 2         :                
+GND                          : 27        : gnd    :                   :         :           :                
+RESERVED_INPUT               : 28        :        :                   :         : 2         :                
+VCCINT                       : 29        : power  :                   : 1.2V    :           :                
+STATUS_LED                   : 30        : output : 3.3-V LVCMOS      :         : 2         : Y              
+RESERVED_INPUT               : 31        :        :                   :         : 2         :                
+RESERVED_INPUT               : 32        :        :                   :         : 2         :                
+RESERVED_INPUT               : 33        :        :                   :         : 2         :                
+Z80_ADDR[0]                  : 34        : input  : 3.3-V LVCMOS      :         : 2         : Y              
+VCCA1                        : 35        : power  :                   : 2.5V    :           :                
+GNDA1                        : 36        : gnd    :                   :         :           :                
+VCCD_PLL1                    : 37        : power  :                   : 1.2V    :           :                
+Z80_ADDR[1]                  : 38        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+Z80_ADDR[2]                  : 39        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+VCCIO3                       : 40        : power  :                   : 3.3V    : 3         :                
+GND                          : 41        : gnd    :                   :         :           :                
+Z80_ADDR[3]                  : 42        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+Z80_ADDR[4]                  : 43        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+Z80_ADDR[5]                  : 44        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+VCCINT                       : 45        : power  :                   : 1.2V    :           :                
+Z80_ADDR[6]                  : 46        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+VCCIO3                       : 47        : power  :                   : 3.3V    : 3         :                
+GND                          : 48        : gnd    :                   :         :           :                
+Z80_ADDR[7]                  : 49        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+Z80_ADDR[8]                  : 50        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+Z80_ADDR[9]                  : 51        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+Z80_ADDR[10]                 : 52        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+Z80_ADDR[11]                 : 53        : input  : 3.3-V LVCMOS      :         : 3         : Y              
+Z80_ADDR[12]                 : 54        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[13]                 : 55        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+VCCIO4                       : 56        : power  :                   : 3.3V    : 4         :                
+GND                          : 57        : gnd    :                   :         :           :                
+LED_txd                      : 58        : output : 3.3-V LVCMOS      :         : 4         : N              
+LED_rdx                      : 59        : output : 3.3-V LVCMOS      :         : 4         : N              
+EA_DIR                       : 60        : output : 3.3-V LVCMOS      :         : 4         : Y              
+VCCINT                       : 61        : power  :                   : 1.2V    :           :                
+VCCIO4                       : 62        : power  :                   : 3.3V    : 4         :                
+GND                          : 63        : gnd    :                   :         :           :                
+EA_OE                        : 64        : output : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[14]                 : 65        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[15]                 : 66        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[16]                 : 67        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[17]                 : 68        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[18]                 : 69        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[19]                 : 70        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[20]                 : 71        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+Z80_ADDR[21]                 : 72        : input  : 3.3-V LVCMOS      :         : 4         : Y              
+PS2_CLK                      : 73        : input  : 3.3-V LVCMOS      :         : 5         : Y              
+PS2_DAT                      : 74        : input  : 3.3-V LVCMOS      :         : 5         : Y              
+IEI                          : 75        : input  : 3.3-V LVCMOS      :         : 5         : Y              
+IEO                          : 76        : output : 3.3-V LVCMOS      :         : 5         : Y              
+hs                           : 77        : output : 3.3-V LVCMOS      :         : 5         : Y              
+VCCINT                       : 78        : power  :                   : 1.2V    :           :                
+GND                          : 79        : gnd    :                   :         :           :                
+vs                           : 80        : output : 3.3-V LVCMOS      :         : 5         : Y              
+VCCIO5                       : 81        : power  :                   : 3.3V    : 5         :                
+GND                          : 82        : gnd    :                   :         :           :                
+b[5]                         : 83        : output : 3.3-V LVCMOS      :         : 5         : Y              
+b[4]                         : 84        : output : 3.3-V LVCMOS      :         : 5         : Y              
+b[3]                         : 85        : output : 3.3-V LVCMOS      :         : 5         : Y              
+b[2]                         : 86        : output : 3.3-V LVCMOS      :         : 5         : Y              
+b[1]                         : 87        : output : 3.3-V LVCMOS      :         : 5         : Y              
+GND+                         : 88        :        :                   :         : 5         :                
+GND+                         : 89        :        :                   :         : 5         :                
+GND+                         : 90        :        :                   :         : 6         :                
+GND+                         : 91        :        :                   :         : 6         :                
+CONF_DONE                    : 92        :        :                   :         : 6         :                
+VCCIO6                       : 93        : power  :                   : 3.3V    : 6         :                
+MSEL0                        : 94        :        :                   :         : 6         :                
+GND                          : 95        : gnd    :                   :         :           :                
+MSEL1                        : 96        :        :                   :         : 6         :                
+MSEL2                        : 97        :        :                   :         : 6         :                
+b[0]                         : 98        : output : 3.3-V LVCMOS      :         : 6         : Y              
+vde                          : 99        : output : 3.3-V LVCMOS      :         : 6         : Y              
+g[5]                         : 100       : output : 3.3-V LVCMOS      :         : 6         : Y              
+g[4]                         : 101       : output : 3.3-V LVCMOS      :         : 6         : Y              
+VCCINT                       : 102       : power  :                   : 1.2V    :           :                
+g[3]                         : 103       : output : 3.3-V LVCMOS      :         : 6         : Y              
+g[2]                         : 104       : output : 3.3-V LVCMOS      :         : 6         : Y              
+g[1]                         : 105       : output : 3.3-V LVCMOS      :         : 6         : Y              
+g[0]                         : 106       : output : 3.3-V LVCMOS      :         : 6         : Y              
+VCCA2                        : 107       : power  :                   : 2.5V    :           :                
+GNDA2                        : 108       : gnd    :                   :         :           :                
+VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                
+r[5]                         : 110       : output : 3.3-V LVCMOS      :         : 7         : Y              
+r[4]                         : 111       : output : 3.3-V LVCMOS      :         : 7         : Y              
+r[3]                         : 112       : output : 3.3-V LVCMOS      :         : 7         : Y              
+pixel_clk                    : 113       : output : 3.3-V LVCMOS      :         : 7         : Y              
+r[2]                         : 114       : output : 3.3-V LVCMOS      :         : 7         : Y              
+r[1]                         : 115       : output : 3.3-V LVCMOS      :         : 7         : Y              
+VCCINT                       : 116       : power  :                   : 1.2V    :           :                
+VCCIO7                       : 117       : power  :                   : 3.3V    : 7         :                
+GND                          : 118       : gnd    :                   :         :           :                
+r[0]                         : 119       : output : 3.3-V LVCMOS      :         : 7         : Y              
+Z80_CLK                      : 120       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+RESERVED_INPUT               : 121       :        :                   :         : 7         :                
+VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
+GND                          : 123       : gnd    :                   :         :           :                
+Z80_RD                       : 124       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+Z80_WR                       : 125       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+Z80_MREQ                     : 126       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+Z80_IORQ                     : 127       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+Z80_M1                       : 128       : input  : 3.3-V LVCMOS      :         : 8         : Y              
+Z80_RST                      : 129       : input  : 3.3-V LVCMOS      :         : 8         : Y              
+VCCIO8                       : 130       : power  :                   : 3.3V    : 8         :                
+GND                          : 131       : gnd    :                   :         :           :                
+Z80_data[7]                  : 132       : bidir  : 3.3-V LVCMOS      :         : 8         : Y              
+Z80_data[6]                  : 133       : bidir  : 3.3-V LVCMOS      :         : 8         : Y              
+VCCINT                       : 134       : power  :                   : 1.2V    :           :                
+Z80_data[5]                  : 135       : bidir  : 3.3-V LVCMOS      :         : 8         : Y              
+Z80_data[4]                  : 136       : bidir  : 3.3-V LVCMOS      :         : 8         : Y              
+Z80_data[3]                  : 137       : bidir  : 3.3-V LVCMOS      :         : 8         : Y              
+Z80_data[2]                  : 138       : bidir  : 3.3-V LVCMOS      :         : 8         : Y              
+VCCIO8                       : 139       : power  :                   : 3.3V    : 8         :                
+GND                          : 140       : gnd    :                   :         :           :                
+Z80_data[1]                  : 141       : bidir  : 3.3-V LVCMOS      :         : 8         : Y              
+Z80_data[0]                  : 142       : bidir  : 3.3-V LVCMOS      :         : 8         : Y              
+245_DIR                      : 143       : output : 3.3-V LVCMOS      :         : 8         : Y              
+245_OE                       : 144       : output : 3.3-V LVCMOS      :         : 8         : Y              
+GND                          : EPAD      :        :                   :         :           :                

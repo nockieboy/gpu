@@ -1,5 +1,5 @@
 Analysis & Synthesis report for geo
-Fri Jul 31 20:53:03 2020
+Thu Aug 13 11:15:54 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -51,16 +51,16 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Jul 31 20:53:03 2020        ;
+; Analysis & Synthesis Status        ; Successful - Thu Aug 13 11:15:53 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; geo                                          ;
 ; Top-level Entity Name              ; geo                                          ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 1,220                                        ;
-;     Total combinational functions  ; 992                                          ;
-;     Dedicated logic registers      ; 473                                          ;
-; Total registers                    ; 473                                          ;
-; Total pins                         ; 99                                           ;
+; Total logic elements               ; 1,246                                        ;
+;     Total combinational functions  ; 1,018                                        ;
+;     Dedicated logic registers      ; 474                                          ;
+; Total registers                    ; 474                                          ;
+; Total pins                         ; 100                                          ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 8,192                                        ;
 ; Embedded Multiplier 9-bit elements ; 4                                            ;
@@ -187,29 +187,29 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 1,220     ;
+; Estimated Total logic elements              ; 1,246     ;
 ;                                             ;           ;
-; Total combinational functions               ; 992       ;
+; Total combinational functions               ; 1018      ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 419       ;
-;     -- 3 input functions                    ; 455       ;
+;     -- 4 input functions                    ; 416       ;
+;     -- 3 input functions                    ; 484       ;
 ;     -- <=2 input functions                  ; 118       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 731       ;
+;     -- normal mode                          ; 757       ;
 ;     -- arithmetic mode                      ; 261       ;
 ;                                             ;           ;
-; Total registers                             ; 473       ;
-;     -- Dedicated logic registers            ; 473       ;
+; Total registers                             ; 474       ;
+;     -- Dedicated logic registers            ; 474       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
-; I/O pins                                    ; 99        ;
+; I/O pins                                    ; 100       ;
 ; Total memory bits                           ; 8192      ;
 ; Embedded Multiplier 9-bit elements          ; 4         ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 489       ;
-; Total fan-out                               ; 5773      ;
-; Average fan-out                             ; 3.43      ;
+; Maximum fan-out                             ; 490       ;
+; Total fan-out                               ; 5852      ;
+; Average fan-out                             ; 3.42      ;
 +---------------------------------------------+-----------+
 
 
@@ -218,16 +218,16 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node               ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                           ; Library Name ;
 +------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |geo                                     ; 992 (1)           ; 473 (0)      ; 8192        ; 4            ; 0       ; 2         ; 99   ; 0            ; |geo                                                                                                                          ; work         ;
-;    |geometry_xy_plotter:inst|            ; 746 (676)         ; 277 (234)    ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst                                                                                                 ;              ;
-;       |scfifo:scfifo_component|          ; 70 (0)            ; 43 (0)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component                                                                         ; work         ;
-;          |scfifo_3oa1:auto_generated|    ; 70 (0)            ; 43 (0)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated                                              ;              ;
-;             |a_dpfifo_7r71:dpfifo|       ; 70 (41)           ; 43 (17)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo                         ; work         ;
+; |geo                                     ; 1018 (1)          ; 474 (0)      ; 8192        ; 4            ; 0       ; 2         ; 100  ; 0            ; |geo                                                                                                                          ; work         ;
+;    |geometry_xy_plotter:inst|            ; 759 (685)         ; 278 (234)    ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst                                                                                                 ;              ;
+;       |scfifo:scfifo_component|          ; 74 (0)            ; 44 (0)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component                                                                         ; work         ;
+;          |scfifo_3oa1:auto_generated|    ; 74 (6)            ; 44 (1)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated                                              ;              ;
+;             |a_dpfifo_7r71:dpfifo|       ; 68 (39)           ; 43 (17)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo                         ; work         ;
 ;                |altsyncram_esf1:FIFOram| ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|altsyncram_esf1:FIFOram ;              ;
 ;                |cntr_597:usedw_counter|  ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_597:usedw_counter  ;              ;
 ;                |cntr_o8b:rd_ptr_msb|     ; 9 (9)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_o8b:rd_ptr_msb     ; work         ;
 ;                |cntr_p8b:wr_ptr|         ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_p8b:wr_ptr         ; work         ;
-;    |pixel_address_generator:inst1|       ; 245 (245)         ; 196 (196)    ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |geo|pixel_address_generator:inst1                                                                                            ;              ;
+;    |pixel_address_generator:inst1|       ; 258 (258)         ; 196 (196)    ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |geo|pixel_address_generator:inst1                                                                                            ;              ;
 ;       |lpm_mult:Mult0|                   ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult0                                                                             ;              ;
 ;          |mult_vbt:auto_generated|       ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult0|mult_vbt:auto_generated                                                     ;              ;
 ;       |lpm_mult:Mult1|                   ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult1                                                                             ;              ;
@@ -294,7 +294,7 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 473   ;
+; Total registers                              ; 474   ;
 ; Number of registers using Synchronous Clear  ; 4     ;
 ; Number of registers using Synchronous Load   ; 80    ;
 ; Number of registers using Asynchronous Clear ; 354   ;
@@ -309,23 +309,21 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
-; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|errd[11]                 ;
-; 16:1               ; 4 bits    ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[38]       ;
-; 16:1               ; 19 bits   ; 190 LEs       ; 19 LEs               ; 171 LEs                ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[19]       ;
-; 16:1               ; 4 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[21]       ;
-; 8:1                ; 4 bits    ; 20 LEs        ; 4 LEs                ; 16 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[28]       ;
-; 9:1                ; 4 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[24]       ;
-; 130:1              ; 24 bits   ; 2064 LEs      ; 48 LEs               ; 2016 LEs               ; Yes        ; |geo|geometry_xy_plotter:inst|max_x[0]                 ;
-; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_color[3]   ;
-; 11:1               ; 12 bits   ; 84 LEs        ; 24 LEs               ; 60 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_x[6]                 ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|errd[0]                  ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[28]       ;
+; 16:1               ; 3 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[36]       ;
+; 4:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[17]       ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[22]       ;
+; 130:1              ; 24 bits   ; 2064 LEs      ; 48 LEs               ; 2016 LEs               ; Yes        ; |geo|geometry_xy_plotter:inst|max_y[4]                 ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_color[6]   ;
+; 11:1               ; 12 bits   ; 84 LEs        ; 24 LEs               ; 60 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_x[9]                 ;
 ; 133:1              ; 2 bits    ; 176 LEs       ; 8 LEs                ; 168 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|geo_shape[1]             ;
-; 12:1               ; 12 bits   ; 96 LEs        ; 12 LEs               ; 84 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_y[3]                 ;
+; 12:1               ; 12 bits   ; 96 LEs        ; 12 LEs               ; 84 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_y[10]                ;
 ; 135:1              ; 2 bits    ; 180 LEs       ; 6 LEs                ; 174 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_func[2]         ;
-; 75:1               ; 4 bits    ; 200 LEs       ; 16 LEs               ; 184 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[10] ;
-; 75:1               ; 8 bits    ; 400 LEs       ; 32 LEs               ; 368 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[0]  ;
+; 75:1               ; 4 bits    ; 200 LEs       ; 16 LEs               ; 184 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[11] ;
+; 75:1               ; 8 bits    ; 400 LEs       ; 32 LEs               ; 368 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[4]  ;
 ; 75:1               ; 12 bits   ; 600 LEs       ; 48 LEs               ; 552 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_Y[11] ;
 ; 3:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|geometry_xy_plotter:inst|Add4                     ;
-; 5:1                ; 20 bits   ; 60 LEs        ; 20 LEs               ; 40 LEs                 ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
 ; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
@@ -491,7 +489,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Fri Jul 31 20:52:53 2020
+    Info: Processing started: Thu Aug 13 11:15:44 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off geo -c geo
 Info: Found 1 design units, including 1 entities, in source file geo.bdf
     Info: Found entity 1: geo
@@ -501,10 +499,16 @@ Info: Found 1 design units, including 1 entities, in source file pixel_address_g
     Info: Found entity 1: pixel_address_generator
 Info: Elaborating entity "geo" for the top level hierarchy
 Info: Elaborating entity "geometry_xy_plotter" for hierarchy "geometry_xy_plotter:inst"
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(64): object "geo_mask" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(65): object "geo_paste" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(77): object "geo_sub_func2" assigned a value but never read
-Info (10264): Verilog HDL Case Statement information at geometry_xy_plotter.sv(324): all case item expressions in this case statement are onehot
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(47): object "CMD_OUT_NOP" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(49): object "CMD_OUT_PXWRI_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(50): object "CMD_OUT_PXPASTE" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(51): object "CMD_OUT_PXPASTE_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(53): object "CMD_OUT_PXCOPY" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(54): object "CMD_OUT_SETARGB" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(96): object "geo_mask" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(97): object "geo_paste" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(110): object "geo_sub_func2" assigned a value but never read
+Info (10264): Verilog HDL Case Statement information at geometry_xy_plotter.sv(333): all case item expressions in this case statement are onehot
 Info: Elaborating entity "scfifo" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component"
 Info: Elaborated megafunction instantiation "geometry_xy_plotter:inst|scfifo:scfifo_component"
 Info: Instantiated megafunction "geometry_xy_plotter:inst|scfifo:scfifo_component" with the following parameter:
@@ -543,8 +547,9 @@ Info: Found 1 design units, including 1 entities, in source file db/cntr_p8b.tdf
     Info: Found entity 1: cntr_p8b
 Info: Elaborating entity "cntr_p8b" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_p8b:wr_ptr"
 Info: Elaborating entity "pixel_address_generator" for hierarchy "pixel_address_generator:inst1"
-Warning (10764): Verilog HDL warning at pixel_address_generator.sv(122): converting signed shift amount to unsigned
-Warning (10764): Verilog HDL warning at pixel_address_generator.sv(123): converting signed shift amount to unsigned
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(83): object "CMD_IN_NOP" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(100): object "CMD_OUT_NOP" assigned a value but never read
+Warning (10763): Verilog HDL warning at pixel_address_generator.sv(180): case statement has overlapping case item expressions with non-constant or don't care bits - unable to check case statement for completeness
 Info: Timing-Driven Synthesis is running
 Info: Inferred 2 megafunctions from design logic
     Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "pixel_address_generator:inst1|Mult1"
@@ -566,16 +571,16 @@ Info: 3 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "geometry_xy_plotter:inst|geo_sub_func1~7" lost all its fanouts during netlist optimizations.
     Info: Register "geometry_xy_plotter:inst|geo_sub_func1~8" lost all its fanouts during netlist optimizations.
     Info: Register "geometry_xy_plotter:inst|geo_sub_func1~9" lost all its fanouts during netlist optimizations.
-Info: Implemented 1345 device resources after synthesis - the final resource count might be different
+Info: Implemented 1371 device resources after synthesis - the final resource count might be different
     Info: Implemented 20 input pins
-    Info: Implemented 79 output pins
-    Info: Implemented 1226 logic cells
+    Info: Implemented 80 output pins
+    Info: Implemented 1251 logic cells
     Info: Implemented 16 RAM segments
     Info: Implemented 4 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 238 megabytes
-    Info: Processing ended: Fri Jul 31 20:53:03 2020
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 12 warnings
+    Info: Peak virtual memory: 236 megabytes
+    Info: Processing ended: Thu Aug 13 11:15:54 2020
     Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:10
+    Info: Total CPU time (on all processors): 00:00:09
 
 

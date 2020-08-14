@@ -143,7 +143,7 @@ set_location_assignment PIN_70 -to Z80_ADDR[19]
 set_location_assignment PIN_71 -to Z80_ADDR[20]
 set_location_assignment PIN_72 -to Z80_ADDR[21]
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
-set_global_assignment -name ROUTER_EFFORT_MULTIPLIER 1.0
+set_global_assignment -name ROUTER_EFFORT_MULTIPLIER 2
 set_instance_assignment -name FAST_INPUT_REGISTER ON -to Z80_ADDR[0]
 set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to Z80_data[0]
 set_instance_assignment -name FAST_OUTPUT_ENABLE_REGISTER ON -to Z80_data[0]
@@ -224,12 +224,12 @@ set_global_assignment -name ALLOW_ANY_RAM_SIZE_FOR_RECOGNITION OFF
 set_global_assignment -name FINAL_PLACEMENT_OPTIMIZATION AUTOMATICALLY
 set_global_assignment -name FITTER_AGGRESSIVE_ROUTABILITY_OPTIMIZATION AUTOMATICALLY
 #set_global_assignment -name PERIPHERY_TO_CORE_PLACEMENT_AND_ROUTING_OPTIMIZATION OFF
-set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION OFF
-set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT FAST
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA
 set_global_assignment -name ROUTER_REGISTER_DUPLICATION AUTO
-set_global_assignment -name PLACEMENT_EFFORT_MULTIPLIER 4
-set_global_assignment -name FITTER_EFFORT "FAST FIT"
-set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MINIMUM
+set_global_assignment -name PLACEMENT_EFFORT_MULTIPLIER 8
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
 set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
 set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
@@ -239,30 +239,42 @@ set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL ON
 set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
 set_instance_assignment -name SETUP_HOLD_TIME_VIOLATION_DETECTION OFF -to "ps2_keyboard_to_ascii:inst7"
 set_global_assignment -name BDF_FILE GPU.bdf
+set_global_assignment -name SDC_FILE SDC1.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE pixel_address_generator.sv
+set_global_assignment -name SYSTEMVERILOG_FILE geometry_xy_plotter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE geo_pixel_writer.sv
+set_global_assignment -name VERILOG_FILE bart.v
 set_global_assignment -name SYSTEMVERILOG_FILE data_mux_geo.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sixteen_port_gpu_ram.sv
 set_global_assignment -name SYSTEMVERILOG_FILE gpu_quad_port_ram.sv
-set_global_assignment -name SDC_FILE SDC1.sdc
-set_global_assignment -name MIF_FILE GPU_MIF_CE10_10M.mif
-set_global_assignment -name MIF_FILE palette.mif
 set_global_assignment -name SYSTEMVERILOG_FILE fifo_3word_0_latency.sv
-set_global_assignment -name VERILOG_FILE vid_out_stencil.v
+set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
+set_global_assignment -name SYSTEMVERILOG_FILE geometry_processor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Z80_bridge_v2.sv
 set_global_assignment -name SYSTEMVERILOG_FILE vid_osd_generator.sv
+set_global_assignment -name VERILOG_FILE vid_out_stencil.v
 set_global_assignment -name SYSTEMVERILOG_FILE sound.sv
 set_global_assignment -name VERILOG_FILE SYNC_RS232_UART.v
+set_global_assignment -name MIF_FILE GPU_MIF_CE10_10M.mif
+set_global_assignment -name MIF_FILE palette.mif
 set_global_assignment -name SYSTEMVERILOG_FILE sync_generator.sv
 set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
 set_global_assignment -name BDF_FILE raster_trigger_mux.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE palette_mixer.sv
-set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
 set_global_assignment -name SYSTEMVERILOG_FILE GPU_HW_Control_Regs.sv
 set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
 set_global_assignment -name BDF_FILE color_sel.bdf
-set_global_assignment -name VERILOG_FILE bart.v
 set_global_assignment -name VERILOG_FILE altpll0.v
 set_global_assignment -name SYSTEMVERILOG_FILE status_LED.sv
 set_global_assignment -name VHDL_FILE ps2_keyboard_to_ascii.vhd
 set_global_assignment -name VHDL_FILE ps2_keyboard.vhd
 set_global_assignment -name VHDL_FILE debounce.vhd
-set_global_assignment -name SYSTEMVERILOG_FILE Z80_bridge_v2.sv
+set_global_assignment -name PRE_MAPPING_RESYNTHESIS ON
+set_global_assignment -name PERIPHERY_TO_CORE_PLACEMENT_AND_ROUTING_OPTIMIZATION AUTO
+set_global_assignment -name ROUTER_LCELL_INSERTION_AND_LOGIC_DUPLICATION ON
+set_global_assignment -name OPTIMIZE_FOR_METASTABILITY OFF
+set_global_assignment -name ALLOW_REGISTER_DUPLICATION ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
+set_global_assignment -name ROUTER_CLOCKING_TOPOLOGY_ANALYSIS ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
