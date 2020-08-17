@@ -1,6 +1,6 @@
-# Microcom GPU
+# uCOM GPU
 
-The aim of this project is to create from scratch a GPU or 'graphics card' for my home-made Microcom computer (details of which will be available on a website sometime in the future!)  This repo is a storage site for the HDL code used to describe the GPU itself and software tools that helped in its development.
+The aim of this project is to create from scratch a GPU or 'graphics card' for my home-made uCOM computer (details of which will be available on a website sometime in the future!)  This repo is a storage site for the HDL code used to describe the GPU itself and software tools that helped in its development.
 
 When completed, the GPU will support text (via a VT100 compatible console) and graphics modes.  The project is currently in development - see [eevBlog](https://www.eevblog.com/forum/fpga/fpga-vga-controller-for-8-bit-computer/new/#new) for the latest developments and to follow along.
 
