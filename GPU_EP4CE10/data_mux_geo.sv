@@ -58,12 +58,31 @@ module data_mux_geo (
 
 parameter int READ_CLOCK_CYCLES    = 2; // Clock cycles until the ram returns valid read data
 parameter bit REGISTER_GPU_PORT    = 1; // When set to 1 this will improve FMAX at the cost of 1 extra clock cycle on the rd_req.
-parameter bit ZERO_LATENCY         = 1; // When set to 1 this will make the read&write commands immediate instead of a clock cycle later.
-parameter bit GPU_ZERO_LATENCY     = 0; // When set to 1 this will make the read&write commands immediate instead of a clock cycle later for the GPU.
-parameter bit overflow_protection  = 0; // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
-parameter bit underflow_protection = 0; // Prevents internal position position increment if the fifo is empty
-parameter bit GEO_FIFO_SIZE_7      = 0; // Set to 0 for 3 words, set to 1 for 7 words only for the GEOMETRY COMMAND FIFO INPUT
+parameter bit REGISTER_INA         = 1; // When set to 1 this will improve FMAX at the cost of 1 extra clock cycle on the rd_req.
+parameter bit REGISTER_INB         = 1; // When set to 1 this will improve FMAX at the cost of 1 extra clock cycle on the rd_req.
 parameter bit GEO_ENDIAN_SWAP      = 1; // Set to 0 for BIG, set to 1 for SMALL.
+
+
+logic        wr_ena_a_m;
+logic        rd_req_a_m;
+logic [19:0] address_a_m;
+logic [7:0]  data_in_a_m;
+logic        wr_ena_a_r;
+logic        rd_req_a_r;
+logic [19:0] address_a_r;
+logic [7:0]  data_in_a_r;
+   
+logic        wr_ena_b_m;
+logic        rd_req_b_m;
+logic [19:0] address_b_m;
+logic [7:0]  data_in_b_m;
+logic        wr_ena_b_r;
+logic        rd_req_b_r;
+logic [19:0] address_b_r;
+logic [7:0]  data_in_b_r;
+
+
+
 
 logic [1:0]  mux_priority ;
 logic [9:0]  rd_req_dlya, rd_req_dlyb, geo_rd_req_dlya, geo_rd_req_dlyb ;
@@ -85,45 +104,38 @@ logic [19:0] gpu_address_reg;
 logic [15:0] gpu_data_out_reg;
 logic [15:0] data_in_geo_swap;
 
-FIFO_3word_0_latency input_cmd_fifo_1 (     // Zero Latency Command buffer.
+
+FIFO_2word_FWFT input_cmd_fifo_1 (     // Zero Latency Command buffer.
                       .clk(clk),                                                    // CLK input
                       .reset(reset),                                                // reset FIFO
 
-                      .shift_in        ( rd_req_a || wr_ena_a ),                    // load a word into the FIFO.
+                      .shift_in        ( rd_req_a_m || wr_ena_a_m ),                    // load a word into the FIFO.
                       .shift_out       ( cmd_a_next ),                              // shift data out of the FIFO.
-                      .data_in         ( {rd_req_a,wr_ena_a,address_a,data_in_a} ), // data word input.
+                      .data_in         ( {rd_req_a_m,wr_ena_a_m,address_a_m,data_in_a_m} ), // data word input.
 
                       .fifo_not_empty  ( cmd_a_rdy ),                                      // High when there is data available.
                       .fifo_full       (),                                                 // High when the FIFO is full.
                       .data_out        ( {F_rd_req[1],F_wr_ena[1],F_address[1],F_data_in[1]} ) // FIFO data word output
                        );
 	defparam
-		input_cmd_fifo_1.bits                 = (1+1+20+8),           // The number of bits containing the command.
-		input_cmd_fifo_1.zero_latency         = ZERO_LATENCY,
-		input_cmd_fifo_1.overflow_protection  = overflow_protection,  // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
-		input_cmd_fifo_1.underflow_protection = underflow_protection, // Prevents internal position position increment if the fifo is empty
-		input_cmd_fifo_1.size7_ena            = 0;                    // Set to 0 for 3 words
+		input_cmd_fifo_1.bits                 = (1+1+20+8);           // The number of bits containing the command.
 
-FIFO_3word_0_latency input_cmd_fifo_2 (     // Zero Latency Command buffer.
+FIFO_2word_FWFT input_cmd_fifo_2 (     // Zero Latency Command buffer.
                       .clk             (clk),                                              // CLK input
                       .reset           (reset),                                            // reset FIFO
 
-                      .shift_in        ( rd_req_b || wr_ena_b ),                           // load a word into the FIFO.
+                      .shift_in        ( rd_req_b_m || wr_ena_b_m ),                           // load a word into the FIFO.
                       .shift_out       ( cmd_b_next ),                                     // shift data out of the FIFO.
-                      .data_in         ( {rd_req_b,wr_ena_b,address_b,data_in_b} ), // data word input.
+                      .data_in         ( {rd_req_b_m,wr_ena_b_m,address_b_m,data_in_b_m} ), // data word input.
 
                       .fifo_not_empty  ( cmd_b_rdy ),                                      // High when there is data available.
                       .fifo_full       (),                                                 // High when the FIFO is full.
                       .data_out        ( {F_rd_req[2],F_wr_ena[2],F_address[2],F_data_in[2]} ) // FIFO data word output
                        );
 	defparam
-		input_cmd_fifo_2.bits                 = (1+1+20+8),           // The number of bits containing the command.
-		input_cmd_fifo_2.zero_latency         = ZERO_LATENCY,
-		input_cmd_fifo_2.overflow_protection  = overflow_protection,  // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
-		input_cmd_fifo_2.underflow_protection = underflow_protection, // Prevents internal position position increment if the fifo is empty
-		input_cmd_fifo_2.size7_ena            = 0;                    // Set to 0 for 3 words
+		input_cmd_fifo_2.bits                 = (1+1+20+8);           // The number of bits containing the command.
 
-FIFO_3word_0_latency input_cmd_fifo_3 (     // Zero Latency Command buffer.
+FIFO_2word_FWFT input_cmd_fifo_3 (     // Zero Latency Command buffer.
                       .clk             (clk),                                              // CLK input
                       .reset           (reset),                                            // reset FIFO
 
@@ -136,19 +148,26 @@ FIFO_3word_0_latency input_cmd_fifo_3 (     // Zero Latency Command buffer.
                       .data_out        ( {F_rd_req[4],F_rd_req_geob,F_wr_ena[4],F_address[4],F_data_inH[4],F_data_in[4]} ) // FIFO data word output
                        );
 	defparam
-		input_cmd_fifo_3.bits                 = (1+1+1+20+16),           // The number of bits containing the command.
-		input_cmd_fifo_3.zero_latency         = GPU_ZERO_LATENCY,
-		input_cmd_fifo_3.overflow_protection  = overflow_protection,  // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
-		input_cmd_fifo_3.underflow_protection = underflow_protection, // Prevents internal position position increment if the fifo is empty
-		input_cmd_fifo_3.size7_ena            = GEO_FIFO_SIZE_7;      // Set to 0 for 3 words
+		input_cmd_fifo_3.bits                 = (1+1+1+20+16);           // The number of bits containing the command.
 
 always_comb begin
+
+wr_ena_a_m  <= REGISTER_INA ? wr_ena_a_r  : wr_ena_a  ; // Select either registered bank A, or direct bank A
+rd_req_a_m  <= REGISTER_INA ? rd_req_a_r  : rd_req_a  ;
+address_a_m <= REGISTER_INA ? address_a_r : address_a ;
+data_in_a_m <= REGISTER_INA ? data_in_a_r : data_in_a ;
+wr_ena_b_m  <= REGISTER_INA ? wr_ena_b_r  : wr_ena_b  ; // Select either registered bank B, or direct bank B
+rd_req_b_m  <= REGISTER_INA ? rd_req_b_r  : rd_req_b  ;
+address_b_m <= REGISTER_INA ? address_b_r : address_b ;
+data_in_b_m <= REGISTER_INA ? data_in_b_r : data_in_b ;
+
+
  gpu_rd_rdy_a  = rd_req_dlya[READ_CLOCK_CYCLES-1+REGISTER_GPU_PORT]; // needs to be high when 2 clock cycles has passed since address_a was sent out
  gpu_rd_rdy_b  = rd_req_dlyb[READ_CLOCK_CYCLES-1+REGISTER_GPU_PORT]; // needs to be high when 2 clock cycles has passed since address_b was sent out
  geo_rd_rdy_a  = geo_rd_req_dlya[READ_CLOCK_CYCLES-1+REGISTER_GPU_PORT]; // needs to be high when 2 clock cycles has passed since geometry address was sent out
  geo_rd_rdy_b  = geo_rd_req_dlyb[READ_CLOCK_CYCLES-1+REGISTER_GPU_PORT]; // needs to be high when 2 clock cycles has passed since geometry address was sent out
 
-//  Priority truth table
+//  Priority ruth table
 //
 //  mux_priority, cmd_a_rdy, cmd_b_rdy, cmd_c_rdy   cmd_#_next
 //          0         0          0          0           0
@@ -180,7 +199,7 @@ always_comb begin
 //
 //          3         0          0          0           0       Note as observed, cmd_c_rdy has no priority whatsoever
 //          3         1          0          0           a       as the other 2 ports are the Z80 & rs232, being so slow
-//          3         0          1          0           b       they're given immediate access on request.  Also note
+//          3         0          1          0           b       their given immediate access on request.  Also note
 //          3         1          1          0           b       that only the GEO unit responds to the FIFO full flag,
 //          3         0          0          1           c       so it is the only one who can actually pause commands
 //          3         1          0          1           a
@@ -219,12 +238,24 @@ for (int i=0 ; i<8 ; i++) F_ena_16bit[i] =  (i == 4);  // Set 16 bit mode when c
 
  data_out_a   =  gpu_data_in[7:0] ;  // with this line, it is the responsibility of the next module to latch the data when the gpu_rd_rdy_a is high
  data_out_b   =  gpu_data_in[7:0] ;  // with this line, it is the responsibility of the next module to latch the data when the gpu_rd_rdy_b is high
+ data_out_geo =  gpu_data_in[15:0] ; // the 16bit memory access for the geometry unit
 
  data_out_geo     =  GEO_ENDIAN_SWAP ? {gpu_data_in[7:0],gpu_data_in[15:8]} : gpu_data_in[15:0] ; // the 16bit memory access for the geometry unit
  data_in_geo_swap =  GEO_ENDIAN_SWAP ? {data_in_geo[7:0],data_in_geo[15:8]} : data_in_geo[15:0] ; // the 16bit memory access for the geometry unit
 end // always_comb
 
 always_ff @(posedge clk) begin
+
+
+wr_ena_a_r  <= wr_ena_a ; // create input registers bank A
+rd_req_a_r  <= rd_req_a ;
+address_a_r <= address_a;
+data_in_a_r <= data_in_a;
+wr_ena_b_r  <= wr_ena_b ; // create input registers bank B
+rd_req_b_r  <= rd_req_b ;
+address_b_r <= address_b;
+data_in_b_r <= data_in_b;
+
 
    rd_req_dlya[9:1]        <= rd_req_dlya[8:0] ;     // delay the read request by the correct amount of clocks matching the 
    rd_req_dlyb[9:1]        <= rd_req_dlyb[8:0] ;     // delay the read request by the correct amount of clocks matching the 

@@ -51,7 +51,7 @@ module pixel_address_generator (
 // |AUX15|                 |----------SOURCE BASE MEMORY ADDRESS---------|
 //
 
-logic [2:0] LUT_bits_to_shift[16] = '{ 4,3,3,2,2,2,2,1,1,1,1,1,1,1,1,0 };  // shift bits/pixel-1  0=1 bit, 1=2bit, 3=4bit, 7=8bit, 15-16bit.
+logic [2:0] LUT_bits_to_shift[0:15] = '{ 4,3,3,2,2,2,2,1,1,1,1,1,1,1,1,0 };  // shift bits/pixel-1  0=1 bit, 1=2bit, 3=4bit, 7=8bit, 15-16bit.
 /*
 localparam CMD_IN_NOP           = 0;
 localparam CMD_IN_PXWRI         = 1;
@@ -117,6 +117,8 @@ logic[3:0]  aux_cmd_in ;
 logic[7:0]  bit_mode ;
 logic[11:0] x ;
 logic[11:0] y ;
+logic[11:0] s2_x ;
+logic[11:0] s2_y ;
 
 // internal registers
 logic[3:0]  dest_bits_per_pixel = 4'b0  ; // how many bits make up one pixel (1-16) - screen mode
@@ -146,11 +148,11 @@ always_comb begin
     x[11:0]         = draw_cmd[11:0]  ;
     
     
-    dest_target_bit[3:0]     = dest_base_address_offset[3:0] ;
-    srce_target_bit[3:0]     = srce_base_address_offset[3:0] ;
+    dest_target_bit[3:0]     = dest_base_address_offset[4:1] ;
+    srce_target_bit[3:0]     = srce_base_address_offset[4:1] ;
     
-    dest_address = dest_base_address[19:0] + ((dest_base_address_offset[19:0] << 1) >> LUT_bits_to_shift[dest_bits_per_pixel[3:0]]);
-    srce_address = srce_base_address[19:0] + ((srce_base_address_offset[19:0] << 1) >> LUT_bits_to_shift[srce_bits_per_pixel[3:0]]);
+    dest_address = dest_base_address[19:0] + (dest_base_address_offset[19:0] >> LUT_bits_to_shift[dest_bits_per_pixel[3:0]]);
+    srce_address = srce_base_address[19:0] + (srce_base_address_offset[19:0] >> LUT_bits_to_shift[srce_bits_per_pixel[3:0]]);
 
     pixel_cmd_rdy = pixel_cmd_reg && !draw_busy;
     
@@ -175,11 +177,13 @@ if (!draw_busy) begin
 s2_draw_cmd_rdy <= draw_cmd_rdy;
 s2_aux_cmd_in   <= aux_cmd_in;
 s2_draw_cmd     <= draw_cmd;
-        
+s2_x            <= x;
+s2_y            <= y;
+
         if ( draw_cmd_rdy ) begin
 
-    dest_base_address_offset <=  y * dest_rast_width[15:0]  + x ; // This calculation will only be ready for the S2 - second stage clock cycle.
-    srce_base_address_offset <=  y * srce_rast_width[15:0]  + x ; // This calculation will only be ready for the S2 - second stage clock cycle.
+    dest_base_address_offset <=  (y * dest_rast_width[15:0]  + x) << 1 ; // This calculation will only be ready for the S2 - second stage clock cycle.
+    srce_base_address_offset <=  (y * srce_rast_width[15:0]  + x) << 1 ; // This calculation will only be ready for the S2 - second stage clock cycle.
 
             case (aux_cmd_in) //  These functions will happen on the first stage clock cycle
                               // no output functions are to take place
@@ -209,71 +213,41 @@ s2_draw_cmd     <= draw_cmd;
         if ( s2_draw_cmd_rdy ) begin
             case (s2_aux_cmd_in) //  These functions will happen on the second stage clock cycle
         
-                CMD_IN_PXWRI : begin   // write pixel with colour, x & y
+                CMD_IN_PXWRI, CMD_IN_PXWRI_M, CMD_IN_PXPASTE, CMD_IN_PXPASTE_M : begin   // write pixel with colour command through pixel paste with mask command.
                     pixel_cmd[0]     <= 1'b0 ;                       // generate address for the pixel
                     pixel_cmd[19:1]  <= dest_address[19:1] ;         // generate address for the pixel
                     pixel_cmd[23:20] <= dest_target_bit[3:0] ;       // which bit to edit in the addressed byte
                     pixel_cmd[27:24] <= dest_bits_per_pixel[3:0] ;   // set bits per pixel for current screen mode
                     pixel_cmd[35:28] <= s2_draw_cmd[31:24] ;          // include colour information
-                    pixel_cmd[39:36] <= CMD_OUT_PXWRI[3:0] ;         // COLOUR, WRITE, NO TRANSPARENCY, NO R/M/W
+                    pixel_cmd[39:36] <= s2_aux_cmd_in ;         // COLOUR, WRITE, NO TRANSPARENCY, NO R/M/W
                     pixel_cmd_reg    <= 1'b1 ;
                 end
-                
-                CMD_IN_PXWRI_M : begin   // write pixel with colour, x & y
-                    pixel_cmd[0]     <= 1'b0 ;                       // generate address for the pixel
-                    pixel_cmd[19:1]  <= dest_address[19:1] ;         // generate address for the pixel
-                    pixel_cmd[23:20] <= dest_target_bit[3:0] ;       // which bit to edit in the addressed byte
-                    pixel_cmd[27:24] <= dest_bits_per_pixel[3:0] ;   // set bits per pixel for current screen mode
-                    pixel_cmd[35:28] <= s2_draw_cmd[31:24] ;            // include colour information
-                    pixel_cmd[39:36] <= CMD_OUT_PXWRI_M[3:0] ;       // COLOUR, WRITE, MASK SET, NO R/M/W
-                    pixel_cmd_reg    <= 1'b1 ;
-                end
-                
-                CMD_IN_PXPASTE : begin   // write pixel with colour, x & y
-                    pixel_cmd[0]     <= 1'b0 ;                       // generate address for the pixel
-                    pixel_cmd[19:1]  <= dest_address[19:1] ;         // generate address for the pixel
-                    pixel_cmd[23:20] <= dest_target_bit[3:0] ;       // which bit to edit in the addressed byte
-                    pixel_cmd[27:24] <= dest_bits_per_pixel[3:0] ;   // set bits per pixel for current screen mode
-                    pixel_cmd[35:28] <= s2_draw_cmd[31:24] ;            // include colour information
-                    pixel_cmd[39:36] <= CMD_OUT_PXPASTE[3:0] ;       // COLOUR, WRITE, NO TRANSPARENCY, NO R/M/W
-                    pixel_cmd_reg    <= 1'b1 ;
-                end
-                
-                CMD_IN_PXPASTE_M : begin   // write pixel with colour, x & y
-                    pixel_cmd[0]     <= 1'b0 ;                      // generate address for the pixel
-                    pixel_cmd[19:1]  <= dest_address[19:1] ;        // generate address for the pixel
-                    pixel_cmd[23:20] <= dest_target_bit[3:0] ;      // which bit to edit in the addressed byte
-                    pixel_cmd[27:24] <= dest_bits_per_pixel[3:0] ;  // set bits per pixel for current screen mode
-                    pixel_cmd[35:28] <= s2_draw_cmd[31:24] ;           // include colour information
-                    pixel_cmd[39:36] <= CMD_OUT_PXPASTE_M[3:0] ;    // COLOUR, WRITE, MASK SET, NO R/M/W
-                    pixel_cmd_reg    <= 1'b1 ;
-                end
-                
+               
                 CMD_IN_PXCOPY : begin   // read pixel with x & y
                     pixel_cmd[0]     <= 1'b0 ;                       // generate address for the pixel
                     pixel_cmd[19:1]  <= srce_address[19:1] ;         // generate address for the pixel
                     pixel_cmd[23:20] <= srce_target_bit[3:0] ;       // which bit to read from the addressed byte
                     pixel_cmd[27:24] <= srce_bits_per_pixel[3:0] ;   // set bits per pixel for current screen mode
                     pixel_cmd[35:28] <= s2_draw_cmd[31:24] ;         // transparent color value used for read pixel collision counter
-                    pixel_cmd[39:36] <= CMD_OUT_PXCOPY[3:0] ;        // NO COLOUR, READ, NO TRANS, NO R/M/W
+                    pixel_cmd[39:36] <= s2_aux_cmd_in ;        // NO COLOUR, READ, NO TRANS, NO R/M/W
                     pixel_cmd_reg    <= 1'b1 ;
                 end
 
                 CMD_IN_SETARGB       : begin
                     pixel_cmd[31:0]  <= s2_draw_cmd[31:0] ;    // pass through first 32-bits of input to output ( Alpha Blend and 24-bit RGB colour data)
-                    pixel_cmd[39:36] <= CMD_OUT_SETARGB[3:0] ;   // pass through command only
+                    pixel_cmd[39:36] <= s2_aux_cmd_in ;   // pass through command only
                     pixel_cmd_reg    <= 1'b1 ;
                 end
                 
                 CMD_IN_RST_PXWRI_M   : begin
                     pixel_cmd[31:0]  <= s2_draw_cmd[31:0] ;          // pass through first 32-bits of input to output ( Alpha Blend and 24-bit RGB colour data)
-                    pixel_cmd[39:36] <= CMD_OUT_RST_PXWRI_M[3:0] ;   // pass through command only
+                    pixel_cmd[39:36] <= s2_aux_cmd_in ;   // pass through command only
                     pixel_cmd_reg    <= 1'b1 ;
                 end
                 
                 CMD_IN_RST_PXPASTE_M : begin
                     pixel_cmd[31:0]  <= s2_draw_cmd[31:0] ;           // pass through first 32-bits of input to output ( Alpha Blend and 24-bit RGB colour data)
-                    pixel_cmd[39:36] <= CMD_OUT_RST_PXPASTE_M[3:0] ;  // pass through command only
+                    pixel_cmd[39:36] <= s2_aux_cmd_in ;  // pass through command only
                     pixel_cmd_reg    <= 1'b1 ;
                 end
                 

@@ -1,41 +1,44 @@
 module geometry_processor (
 
    // inputs
-   input logic         clk,              // System clock
-   input logic         reset,            // Force reset
-   input logic         fifo_cmd_ready,   // 16-bit Data Command Ready signal - connects to the 'strobe' on the selected high.low Z80 bus output port
-   input logic [15:0]  fifo_cmd_in,      // 16-bit Data Command bus          - connects to the 16-bit output port on the Z80 bus
+   input logic clk,                    // System clock
+   input logic reset,                  // Force reset
+   input logic fifo_cmd_ready,         // 16-bit Data Command Ready signal    - connects to the 'strobe' on the selected high.low Z80 bus output port
+   input logic [15:0] fifo_cmd_in,     // 16-bit Data Command bus             - connects to the 16-bit output port on the Z80 bus
 
    // data_mux_geo inputs
-   input logic [15:0]  rd_data_in,       // input from data_out_geo[15:0]
-   input logic         rd_data_rdy_a,    // input from geo_rd_rdy_a
-   input logic         rd_data_rdy_b,    // input from geo_rd_rdy_b
-   input logic         ram_mux_busy,     // input from geo_port_full
+   input logic [15:0] rd_data_in,      // input from data_out_geo[15:0]
+   input logic rd_data_rdy_a,          // input from geo_rd_rdy_a
+   input logic rd_data_rdy_b,          // input from geo_rd_rdy_b
+   input logic ram_mux_busy,           // input from geo_port_full
     
    // data_mux_geo outputs
-   output logic        rd_req_a,         // output to geo_rd_req_a on data_mux_geo
-   output logic        rd_req_b,         // output to geo_rd_req_b on data_mux_geo
-   output logic        wr_ena,           // output to geo_wr_ena   on data_mux_geo
-   output logic [19:0] ram_addr,         // output to address_geo  on data_mux_geo
-   output logic [15:0] ram_wr_data,      // output to data_in_geo  on data_mux_geo
+   output logic rd_req_a,              // output to geo_rd_req_a on data_mux_geo
+   output logic rd_req_b,              // output to geo_rd_req_b on data_mux_geo
+   output logic wr_ena,                // output to geo_wr_ena   on data_mux_geo
+   output logic [19:0] ram_addr,       // output to address_geo  on data_mux_geo
+   output logic [15:0] ram_wr_data,    // output to data_in_geo  on data_mux_geo
     
    // collision saturation counter outputs
-   input  logic        collision_rd_rst, // output to 1st read port on Z80_bridge_v2
-   input  logic        collision_wr_rst, // output to 2nd read port on Z80_bridge_v2
-   output logic [7:0]  collision_rd,     // output to 1st read port on Z80_bridge_v2
-   output logic [7:0]  collision_wr,     // output to 2nd read port on Z80_bridge_v2
+   input  logic        collision_rd_rst,   // output to 1st read port on Z80_bridge_v2
+   input  logic        collision_wr_rst,   // output to 2nd read port on Z80_bridge_v2
+   output logic [7:0]  collision_rd,       // output to 1st read port on Z80_bridge_v2
+   output logic [7:0]  collision_wr,       // output to 2nd read port on Z80_bridge_v2
 
-   output logic        fifo_cmd_busy     // high when input comand FIFO is full
+   output logic        fifo_cmd_busy	    // high when input comand fifo is full
 );
 
-parameter int FIFO_MARGIN         = 32 ; // The number of extra commands the FIFO has room after the 'fifo_cmd_busy' goes high
+parameter int FIFO_MARGIN         = 32 ; // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
+
 
 // wire interconnects for the sub-modules
-logic        draw_busy     ;  
-logic [35:0] draw_cmd      ;
-logic        draw_cmd_rdy  ;
-logic [39:0] pixel_cmd     ;
-logic        pixel_cmd_rdy ;
+logic draw_busy        ;  
+logic [35:0] draw_cmd  ;
+logic draw_cmd_rdy     ;
+logic [35:0] draw_cmd_r; // add a register between the plotter and address generator to improve FMAX
+logic draw_cmd_rdy_r   ; // add a register between the plotter and address generator to improve FMAX
+logic [39:0] pixel_cmd ;
+logic pixel_cmd_rdy    ;
 
 geometry_xy_plotter geoff (
 
@@ -46,21 +49,21 @@ geometry_xy_plotter geoff (
    .fifo_cmd_in    ( fifo_cmd_in    ),
    .draw_busy      ( draw_busy      ),
    //outputs
-   .load_cmd       (                ),   // HIGH when ready to receive next cmd_data[15:0] input
+	.load_cmd       (                ),        // HIGH when ready to receive next cmd_data[15:0] input
    .draw_cmd_rdy   ( draw_cmd_rdy   ),
    .draw_cmd       ( draw_cmd       ),
    .fifo_cmd_busy  ( fifo_cmd_busy  )
    
 );
-defparam geoff.FIFO_MARGIN = FIFO_MARGIN ; // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
+defparam geoff.FIFO_MARGIN = FIFO_MARGIN;  // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
 
 pixel_address_generator paget (
 
     // inputs
     .clk           ( clk           ),
     .reset         ( reset         ),
-    .draw_cmd_rdy  ( draw_cmd_rdy  ),
-    .draw_cmd      ( draw_cmd      ),
+    .draw_cmd_rdy  ( draw_cmd_rdy/*_r*/),
+    .draw_cmd      ( draw_cmd/*_r*/    ),
     .draw_busy     ( draw_busy     ),
     // outputs
     .pixel_cmd_rdy ( pixel_cmd_rdy ),
@@ -90,14 +93,15 @@ pixel_address_generator paget (
     .ram_wr_data      ( ram_wr_data   ),
     .collision_rd     ( collision_rd  ),
     .collision_wr     ( collision_wr  ),
-    .PX_COPY_COLOUR   (               )
+	 .PX_COPY_COLOUR   (               )
 
 );
 
-defparam
-   pixie.ZERO_LATENCY         = 0, // When set to 1 this will make the read&write commands immediate instead of a clock cycle later
-   pixie.overflow_protection  = 0, // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
-   pixie.underflow_protection = 0, // Prevents internal position position increment if the fifo is empty
-   pixie.size7_fifo           = 0; // sets fifo into 7 word mode.
+always_ff @(posedge clk) begin
+if (!draw_busy) begin
+draw_cmd_rdy_r <= draw_cmd_rdy;
+draw_cmd_r     <= draw_cmd;
+end
+end
 
 endmodule

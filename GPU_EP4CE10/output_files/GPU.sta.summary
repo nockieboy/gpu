@@ -1,0 +1,185 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -5.375
+TNS   : -57.706
+
+Type  : Slow 1200mV 85C Model Setup 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : -1.740
+TNS   : -2.013
+
+Type  : Slow 1200mV 85C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : -0.188
+TNS   : -0.619
+
+Type  : Slow 1200mV 85C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.163
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -0.096
+TNS   : -0.096
+
+Type  : Slow 1200mV 85C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.314
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.439
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : 0.449
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 3.841
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Removal 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 3.157
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : -1.285
+TNS   : -14.135
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.307
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 3.579
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 9.743
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk54m'
+Slack : 9.813
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -4.692
+TNS   : -48.783
+
+Type  : Slow 1200mV 0C Model Setup 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : -1.757
+TNS   : -1.757
+
+Type  : Slow 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.131
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.396
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -0.203
+TNS   : -0.203
+
+Type  : Slow 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.312
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.404
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : 0.413
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 4.250
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Removal 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 2.834
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : -1.285
+TNS   : -14.135
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.351
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 3.602
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 9.732
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk54m'
+Slack : 9.795
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : -2.654
+TNS   : -27.245
+
+Type  : Fast 1200mV 0C Model Setup 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : -0.697
+TNS   : -0.697
+
+Type  : Fast 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 1.745
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 1.891
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 0.030
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 0.117
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 0.194
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : 0.199
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 5.789
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Removal 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 1.589
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ps2_keyboard_to_ascii:inst7|ps2_keyboard:ps2_keyboard_0|debounce:debounce_ps2_clk|result'
+Slack : -1.000
+TNS   : -11.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[1]'
+Slack : 1.732
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[0]'
+Slack : 3.734
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk54m'
+Slack : 9.422
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'inst17|altpll_component|auto_generated|pll1|clk[2]'
+Slack : 9.771
+TNS   : 0.000
+
+------------------------------------------------------------

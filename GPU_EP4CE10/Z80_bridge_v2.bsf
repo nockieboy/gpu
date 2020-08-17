@@ -379,11 +379,6 @@ refer to the applicable agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
-		"BANK_ID"
-		"A(9,3,71,80,85,32,69,80,52,67,69,49,48,0,255,255)"
-		""
-		(type "PARAMETER_UNKNOWN")	)
-	(parameter
 		"INT_TYP"
 		"0"
 		""
