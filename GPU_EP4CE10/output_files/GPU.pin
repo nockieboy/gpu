@@ -74,7 +74,7 @@ Z80_INT_RQ                   : 3         : output : 3.3-V LVTTL       :         
 GND                          : 4         : gnd    :                   :         :           :                
 VCCINT                       : 5         : power  :                   : 1.2V    :           :                
 ~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 6         : input  : 3.3-V LVTTL       :         : 1         : N              
-LED_txd                      : 7         : output : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 7         :        :                   :         : 1         :                
 ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 8         : input  : 3.3-V LVTTL       :         : 1         : N              
 nSTATUS                      : 9         :        :                   :         : 1         :                
 uart_txd                     : 10        : output : 3.3-V LVTTL       :         : 1         : Y              
@@ -98,9 +98,9 @@ GND                          : 27        : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : 28        :        :                   :         : 2         :                
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 STATUS_LED                   : 30        : output : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 31        :        :                   :         : 2         :                
+LED_txd                      : 31        : output : 3.3-V LVTTL       :         : 2         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 32        :        :                   :         : 2         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 33        :        :                   :         : 2         :                
+LED_rdx                      : 33        : output : 3.3-V LVTTL       :         : 2         : N              
 Z80_ADDR[0]                  : 34        : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCA1                        : 35        : power  :                   : 2.5V    :           :                
 GNDA1                        : 36        : gnd    :                   :         :           :                
@@ -140,8 +140,8 @@ Z80_ADDR[18]                 : 69        : input  : 3.3-V LVTTL       :         
 Z80_ADDR[19]                 : 70        : input  : 3.3-V LVTTL       :         : 4         : Y              
 Z80_ADDR[20]                 : 71        : input  : 3.3-V LVTTL       :         : 4         : Y              
 Z80_ADDR[21]                 : 72        : input  : 3.3-V LVTTL       :         : 4         : Y              
-PS2_CLK                      : 73        : input  : 3.3-V LVTTL       :         : 5         : Y              
-PS2_DAT                      : 74        : input  : 3.3-V LVTTL       :         : 5         : Y              
+PS2_CLK                      : 73        : bidir  : 3.3-V LVTTL       :         : 5         : Y              
+PS2_DAT                      : 74        : bidir  : 3.3-V LVTTL       :         : 5         : Y              
 IEI                          : 75        : input  : 3.3-V LVTTL       :         : 5         : Y              
 IEO                          : 76        : output : 3.3-V LVTTL       :         : 5         : Y              
 hs                           : 77        : output : 3.3-V LVTTL       :         : 5         : Y              
@@ -188,7 +188,7 @@ VCCIO7                       : 117       : power  :                   : 3.3V    
 GND                          : 118       : gnd    :                   :         :           :                
 r[0]                         : 119       : output : 3.3-V LVTTL       :         : 7         : Y              
 Z80_CLK                      : 120       : input  : 3.3-V LVTTL       :         : 7         : Y              
-LED_rdx                      : 121       : output : 3.3-V LVTTL       :         : 7         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 121       :        :                   :         : 7         :                
 VCCIO7                       : 122       : power  :                   : 3.3V    : 7         :                
 GND                          : 123       : gnd    :                   :         :           :                
 Z80_RD                       : 124       : input  : 3.3-V LVTTL       :         : 7         : Y              

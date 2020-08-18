@@ -53,8 +53,7 @@ module Z80_bridge_v2 (
    output logic RD_PX_CTR_STROBE,// HIGH to clear the COPY READ PIXEL collision counter
    output logic GEO_RD_STAT_STROBE, // HIGH when reading data on GEO_STAT_RD bus
    output logic GEO_WR_STAT_STROBE, // HIGH when sending data on GEO_STAT_WR bus
-   output logic [7:0] GEO_STAT_WR// data bus out to geo unit
-   
+   output logic [7:0] GEO_STAT_WR  // data bus out to geo unit
 );
 
 //
@@ -188,8 +187,8 @@ parameter bit data_out  = 1;        // 245_DIR for data out
 //
 // *******************************************************************************************************
 //
-reg [7:0] PS2_CHAR   = 8'b0 ;        // Stores value to return when PS2_CHAR IO port is queried
-reg [7:0] PS2_STAT   = 8'b0 ;        // Stores value to return when PS2_STATUS IO port is queried
+reg [7:0] PS2_CHAR   = 8'b0 ;       // Stores value to return when PS2_CHAR IO port is queried
+reg [7:0] PS2_STAT   = 8'b0 ;       // Stores value to return when PS2_STATUS IO port is queried
 reg PS2_prev         = 1'b0 ;
 reg [12:0] port_dly  = 13'b0;       // Port delay pipeline delays data output on an IO port read
 reg [7:0] PS2_RDY_r  = 8'b0 ;
@@ -294,15 +293,15 @@ always @(posedge GPU_CLK) begin
    // *******************
 
    if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_DATA[7:0] ) begin  // Z80 is reading PS/2 port
-      Z80_rData  <= PS2_CHAR ;
-      PS2_CHAR   <= 8'b0 ;
-      PS2_STAT   <= 8'b0 ;        // Reset PS2_STAT
+      Z80_rData    <= PS2_CHAR ;
+      PS2_CHAR     <= 8'b0     ;
+      PS2_STAT     <= 8'b0     ; // Reset PS2_STAT
    end
-
-   PS2_RDY_r[7:0] <= {PS2_RDY_r[6:0],PS2_RDY};
+	
+   PS2_RDY_r[7:0] <= { PS2_RDY_r[6:0], PS2_RDY } ;
    
    if (PS2_RDY_r[7:0] == 8'b00001111 ) begin            // valid data on PS2_DAT
-      PS2_CHAR   <= PS2_DAT ;                           // Latch the character into Ps2_char register
+      PS2_CHAR   <= PS2_DAT    ;                        // Latch the character into Ps2_char register
       PS2_STAT   <= { 6'b0, PS2_DAT[7], 1'b1 } ;        // Set PS2_STAT bit 0 to indicate valid data, with bit 2 HIGH for BREAK codes
    end
 

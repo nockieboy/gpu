@@ -32,27 +32,28 @@ parameter int FIFO_MARGIN         = 32 ; // The number of extra commadns the fif
 
 
 // wire interconnects for the sub-modules
-logic draw_busy        ;  
-logic [35:0] draw_cmd  ;
-logic draw_cmd_rdy     ;
-logic [35:0] draw_cmd_r; // add a register between the plotter and address generator to improve FMAX
-logic draw_cmd_rdy_r   ; // add a register between the plotter and address generator to improve FMAX
-logic [39:0] pixel_cmd ;
-logic pixel_cmd_rdy    ;
+logic pix_writer_busy   ;  
+logic pix_adr_busy      ;
+
+logic [35:0] draw_cmd   ;
+logic draw_cmd_rdy      ;
+
+logic [39:0] pixel_cmd  ;
+logic pixel_cmd_rdy     ;
 
 geometry_xy_plotter geoff (
 
    // inputs
-   .clk            ( clk            ),
-   .reset          ( reset          ),
-   .fifo_cmd_ready ( fifo_cmd_ready ),
-   .fifo_cmd_in    ( fifo_cmd_in    ),
-   .draw_busy      ( draw_busy      ),
+   .clk            ( clk             ),
+   .reset          ( reset           ),
+   .fifo_cmd_ready ( fifo_cmd_ready  ),
+   .fifo_cmd_in    ( fifo_cmd_in     ),
+   .draw_busy      ( pix_adr_busy    ),
    //outputs
-	.load_cmd       (                ),        // HIGH when ready to receive next cmd_data[15:0] input
-   .draw_cmd_rdy   ( draw_cmd_rdy   ),
-   .draw_cmd       ( draw_cmd       ),
-   .fifo_cmd_busy  ( fifo_cmd_busy  )
+	.load_cmd       (                 ),        // HIGH when ready to receive next cmd_data[15:0] input
+   .draw_cmd_rdy   ( draw_cmd_rdy    ),
+   .draw_cmd       ( draw_cmd        ),
+   .fifo_cmd_busy  ( fifo_cmd_busy   )
    
 );
 defparam geoff.FIFO_MARGIN = FIFO_MARGIN;  // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
@@ -60,48 +61,41 @@ defparam geoff.FIFO_MARGIN = FIFO_MARGIN;  // The number of extra commadns the f
 pixel_address_generator paget (
 
     // inputs
-    .clk           ( clk           ),
-    .reset         ( reset         ),
-    .draw_cmd_rdy  ( draw_cmd_rdy/*_r*/),
-    .draw_cmd      ( draw_cmd/*_r*/    ),
-    .draw_busy     ( draw_busy     ),
+    .clk           ( clk              ),
+    .reset         ( reset            ),
+    .draw_cmd_rdy  ( draw_cmd_rdy     ),
+    .draw_cmd      ( draw_cmd         ),
+    .draw_busy     ( pix_writer_busy  ),
     // outputs
-    .pixel_cmd_rdy ( pixel_cmd_rdy ),
-    .pixel_cmd     ( pixel_cmd     )
-
+    .pixel_cmd_rdy ( pixel_cmd_rdy    ),
+    .pixel_cmd     ( pixel_cmd        ),
+    .pix_adr_busy  ( pix_adr_busy     )
 );
 
  geo_pixel_writer pixie (
 
     // inputs
-    .clk              ( clk           ),
-    .reset            ( reset         ),
-    .cmd_rdy          ( pixel_cmd_rdy ),
-    .cmd_in           ( pixel_cmd     ),
-    .rd_data_in       ( rd_data_in    ),
-    .rd_data_rdy_a    ( rd_data_rdy_a ),
-    .rd_data_rdy_b    ( rd_data_rdy_b ),
-    .ram_mux_busy     ( ram_mux_busy  ),
+    .clk              ( clk              ),
+    .reset            ( reset            ),
+    .cmd_rdy          ( pixel_cmd_rdy    ),
+    .cmd_in           ( pixel_cmd        ),
+    .rd_data_in       ( rd_data_in       ),
+    .rd_data_rdy_a    ( rd_data_rdy_a    ),
+    .rd_data_rdy_b    ( rd_data_rdy_b    ),
+    .ram_mux_busy     ( ram_mux_busy     ),
     .collision_rd_rst ( collision_rd_rst ),
     .collision_wr_rst ( collision_wr_rst ),
     // outputs
-    .draw_busy        ( draw_busy     ),
-    .rd_req_a         ( rd_req_a      ),
-    .rd_req_b         ( rd_req_b      ),
-    .wr_ena           ( wr_ena        ),
-    .ram_addr         ( ram_addr      ),
-    .ram_wr_data      ( ram_wr_data   ),
-    .collision_rd     ( collision_rd  ),
-    .collision_wr     ( collision_wr  ),
-	 .PX_COPY_COLOUR   (               )
+    .draw_busy        ( pix_writer_busy  ),
+    .rd_req_a         ( rd_req_a         ),
+    .rd_req_b         ( rd_req_b         ),
+    .wr_ena           ( wr_ena           ),
+    .ram_addr         ( ram_addr         ),
+    .ram_wr_data      ( ram_wr_data      ),
+    .collision_rd     ( collision_rd     ),
+    .collision_wr     ( collision_wr     ),
+	 .PX_COPY_COLOUR   (                  )
 
 );
-
-always_ff @(posedge clk) begin
-if (!draw_busy) begin
-draw_cmd_rdy_r <= draw_cmd_rdy;
-draw_cmd_r     <= draw_cmd;
-end
-end
 
 endmodule
