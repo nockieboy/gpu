@@ -124,31 +124,34 @@
 
 
 module ps2_keyboard_interface (
-  clk,
-  reset,
-  ps2_clk,
-  ps2_data,
-  rx_extended,
-  rx_released,
-  rx_shift_key_on,
-  rx_scan_code,
-  rx_ascii,
-  rx_data_ready,       // rx_read_o
-  rx_read,             // rx_read_ack_i
-  tx_data,
-  tx_write,
-  tx_write_ack_o,
-  tx_error_no_keyboard_ack
+
+  input wire       clk,
+  input wire       reset,
+  inout wire       ps2_clk,
+  inout wire       ps2_data,
+  output reg       rx_extended,
+  output reg       rx_released,
+  output wire      rx_shift_key_on,
+  output reg [7:0] rx_scan_code,
+  output reg [6:0] rx_ascii,
+  output reg       rx_data_ready,       // rx_read_o
+  input wire       rx_read,             // rx_read_ack_i
+  input wire [7:0] tx_data,
+  input wire       tx_write,
+  output wire      tx_write_ack_o,
+  output reg       tx_error_no_keyboard_ack,
+  output reg       caps_lock
+  
   );
 
 // Parameters
 
 // The timer value can be up to (2^bits) inclusive.
-parameter TIMER_60USEC_VALUE_PP = 2950; // Number of sys_clks for 60usec.
-parameter TIMER_60USEC_BITS_PP  = 12;   // Number of bits needed for timer
-parameter TIMER_5USEC_VALUE_PP = 186;   // Number of sys_clks for debounce
-parameter TIMER_5USEC_BITS_PP  = 8;     // Number of bits needed for timer
-parameter TRAP_SHIFT_KEYS_PP = 0;       // Default: No shift key trap.
+parameter TIMER_60USEC_VALUE_PP = 2950 ; // Number of sys_clks for 60usec.
+parameter TIMER_60USEC_BITS_PP  = 12   ; // Number of bits needed for timer
+parameter TIMER_5USEC_VALUE_PP  = 186  ; // Number of sys_clks for debounce
+parameter TIMER_5USEC_BITS_PP   = 8    ; // Number of bits needed for timer
+parameter TRAP_SHIFT_KEYS_PP    = 0    ; // Default: No shift key trap.
 
 // State encodings, provided as parameters
 // for flexibility to the one instantiating the module.
@@ -181,47 +184,22 @@ parameter m1_tx_rising_edge_marker = 9;
 parameter m2_rx_data_ready = 1;
 parameter m2_rx_data_ready_ack = 0;
 
-  
-// I/O declarations
-input clk;
-input reset;
-inout ps2_clk;
-inout ps2_data;
-output rx_extended;
-output rx_released;
-output rx_shift_key_on;
-output [7:0] rx_scan_code;
-output [6:0] rx_ascii;
-output rx_data_ready;
-input rx_read;
-input [7:0] tx_data;
-input tx_write;
-output tx_write_ack_o;
-output tx_error_no_keyboard_ack;
-
-reg rx_extended;
-reg rx_released;
-reg [7:0] rx_scan_code;
-reg [6:0] rx_ascii;
-reg rx_data_ready;
-reg tx_error_no_keyboard_ack;
-
 // Internal signal declarations
-wire timer_60usec_done;
-wire timer_5usec_done;
-wire extended;
-wire released;
-wire shift_key_on;
+wire timer_60usec_done ;
+wire timer_5usec_done  ;
+wire extended          ;
+wire released          ;
+wire shift_key_on      ;
 
-                         // NOTE: These two signals used to be one.  They
-                         //       were split into two signals because of
-                         //       shift key trapping.  With shift key
-                         //       trapping, no event is generated externally,
-                         //       but the "hold" data must still be cleared
-                         //       anyway regardless, in preparation for the
-                         //       next scan codes.
-wire rx_output_event;    // Used only to clear: hold_released, hold_extended
-wire rx_output_strobe;   // Used to produce the actual output.
+// NOTE: These two signals used to be one.  They
+//       were split into two signals because of
+//       shift key trapping.  With shift key
+//       trapping, no event is generated externally,
+//       but the "hold" data must still be cleared
+//       anyway regardless, in preparation for the
+//       next scan codes.
+wire rx_output_event  ; // Used only to clear: hold_released, hold_extended
+wire rx_output_strobe ; // Used to produce the actual output.
 
 wire tx_parity_bit;
 wire rx_shifting_done;
@@ -248,7 +226,6 @@ reg ps2_clk_s;        // Synchronous version of this input
 reg ps2_data_s;       // Synchronous version of this input
 reg ps2_clk_hi_z;     // Without keyboard, high Z equals 1 due to pullups.
 reg ps2_data_hi_z;    // Without keyboard, high Z equals 1 due to pullups.
-reg caps_lock;
 
 //--------------------------------------------------------------------------
 // Module code
@@ -261,15 +238,19 @@ assign ps2_data = ps2_data_hi_z?1'bZ:1'b0;
 // spurious state machine transitions.
 always @(posedge clk)
 begin
-  ps2_clk_s <= ps2_clk;
-  ps2_data_s <= ps2_data;
+
+  ps2_clk_s  <= ps2_clk  ;
+  ps2_data_s <= ps2_data ;
+  
 end
 
 // State register
 always @(posedge clk)
 begin : m1_state_register
-  if (reset) m1_state <= m1_rx_clk_h;
-  else m1_state <= m1_next_state;
+
+  if (reset) m1_state <= m1_rx_clk_h   ;
+  else       m1_state <= m1_next_state ;
+  
 end
 
 // State transition logic
@@ -285,11 +266,11 @@ always @(m1_state
 begin : m1_state_logic
 
   // Output signals default to this value, unless changed in a state condition.
-  ps2_clk_hi_z <= 1;
-  ps2_data_hi_z <= 1;
-  tx_error_no_keyboard_ack <= 0;
-  enable_timer_60usec <= 0;
-  enable_timer_5usec <= 0;
+  ps2_clk_hi_z             <= 1 ;
+  ps2_data_hi_z            <= 1 ;
+  tx_error_no_keyboard_ack <= 0 ;
+  enable_timer_60usec      <= 0 ;
+  enable_timer_5usec       <= 0 ;
 
   case (m1_state)
 
@@ -643,13 +624,13 @@ begin
     12'h055 : ascii <= 7'h3d;  // =
     12'h149 : ascii <= 7'h3e;  // >
     12'h14a : ascii <= 7'h3f;  // ?
-	 12'h152 : ascii <= 7'h40;  // @
+    12'h152 : ascii <= 7'h40;  // @
     12'h11c : ascii <= 7'h41;  // A
     12'h132 : ascii <= 7'h42;  // B
     12'h121 : begin
-		if ( ctrl_key ) ascii <= 7'h03; // CTRL-C
-		else ascii <= 7'h43;  // C
-	 end
+      if ( ctrl_key ) ascii <= 7'h03; // CTRL-C
+      else ascii <= 7'h43;  // C
+    end
     12'h123 : ascii <= 7'h44;  // D
     12'h124 : ascii <= 7'h45;  // E
     12'h12b : ascii <= 7'h46;  // F
@@ -680,117 +661,117 @@ begin
     12'h14e : ascii <= 7'h5f;  // _    
     12'h00e : ascii <= 7'h60;  // `
     12'h01c : begin
-		if ( caps_lock ) ascii <= 7'h41;  // A
-		else ascii <= 7'h61;  // a
-	 end
+      if ( caps_lock ) ascii <= 7'h41;  // A
+      else ascii <= 7'h61;  // a
+    end
     12'h032 : begin
-		if ( caps_lock ) ascii <= 7'h42;  // B
-		else ascii <= 7'h62;  // b
-	 end
+      if ( caps_lock ) ascii <= 7'h42;  // B
+      else ascii <= 7'h62;  // b
+    end
     12'h021 : begin
-		if ( ctrl_key ) ascii <= 7'h03; // CTRL-C
-		else begin
-			if ( caps_lock ) ascii <= 7'h43;  // C
-			else ascii <= 7'h63;  // c
-		end
-	 end
+      if ( ctrl_key ) ascii <= 7'h03; // CTRL-C
+      else begin
+         if ( caps_lock ) ascii <= 7'h43;  // C
+         else ascii <= 7'h63;  // c
+      end
+    end
     12'h023 : begin
-		if ( caps_lock ) ascii <= 7'h44;  // D
-		else ascii <= 7'h64;  // d
-	 end
+      if ( caps_lock ) ascii <= 7'h44;  // D
+      else ascii <= 7'h64;  // d
+    end
     12'h024 : begin
-		if ( caps_lock ) ascii <= 7'h45;  // E
-		else ascii <= 7'h65;  // e
-	 end
+      if ( caps_lock ) ascii <= 7'h45;  // E
+      else ascii <= 7'h65;  // e
+    end
     12'h02b : begin
-		if ( caps_lock ) ascii <= 7'h46;  // F
-		else ascii <= 7'h66;  // f
-	 end
+      if ( caps_lock ) ascii <= 7'h46;  // F
+      else ascii <= 7'h66;  // f
+    end
     12'h034 : begin
-		if ( caps_lock ) ascii <= 7'h47;  // G
-		else ascii <= 7'h67;  // g
-	 end
+      if ( caps_lock ) ascii <= 7'h47;  // G
+      else ascii <= 7'h67;  // g
+    end
     12'h033 : begin
-		if ( caps_lock ) ascii <= 7'h48;  // H
-		else ascii <= 7'h68;  // h
-	 end
+      if ( caps_lock ) ascii <= 7'h48;  // H
+      else ascii <= 7'h68;  // h
+    end
     12'h043 : begin
-		if ( caps_lock ) ascii <= 7'h49;  // I
-		else ascii <= 7'h69;  // i
-	 end
+      if ( caps_lock ) ascii <= 7'h49;  // I
+      else ascii <= 7'h69;  // i
+    end
     12'h03b : begin
-		if ( caps_lock ) ascii <= 7'h4a;  // J
-		else ascii <= 7'h6a;  // j
-	 end
+      if ( caps_lock ) ascii <= 7'h4a;  // J
+      else ascii <= 7'h6a;  // j
+    end
     12'h042 : begin
-		if ( caps_lock ) ascii <= 7'h4b;  // K
-		else ascii <= 7'h6b;  // k
-	 end
+      if ( caps_lock ) ascii <= 7'h4b;  // K
+      else ascii <= 7'h6b;  // k
+    end
     12'h04b : begin
-		if ( caps_lock ) ascii <= 7'h4c;  // L
-		else ascii <= 7'h6c;  // l
-	 end
+      if ( caps_lock ) ascii <= 7'h4c;  // L
+      else ascii <= 7'h6c;  // l
+    end
     12'h03a : begin
-		if ( caps_lock ) ascii <= 7'h4d;  // M
-		else ascii <= 7'h6d;  // m
-	 end
+      if ( caps_lock ) ascii <= 7'h4d;  // M
+      else ascii <= 7'h6d;  // m
+    end
     12'h031 : begin
-		if ( caps_lock ) ascii <= 7'h4e;  // N
-		else ascii <= 7'h6e;  // n
-	 end
+      if ( caps_lock ) ascii <= 7'h4e;  // N
+      else ascii <= 7'h6e;  // n
+    end
     12'h044 : begin
-		if ( caps_lock ) ascii <= 7'h4f;  // O
-		else ascii <= 7'h6f;  // o
-	 end
+      if ( caps_lock ) ascii <= 7'h4f;  // O
+      else ascii <= 7'h6f;  // o
+    end
     12'h04d : begin
-		if ( caps_lock ) ascii <= 7'h50;  // P
-		else ascii <= 7'h70;  // p
-	 end
+      if ( caps_lock ) ascii <= 7'h50;  // P
+      else ascii <= 7'h70;  // p
+    end
     12'h015 : begin
-		if ( caps_lock ) ascii <= 7'h51;  // Q
-		else ascii <= 7'h71;  // q
-	 end
+      if ( caps_lock ) ascii <= 7'h51;  // Q
+      else ascii <= 7'h71;  // q
+    end
     12'h02d : begin
-		if ( caps_lock ) ascii <= 7'h52;  // R
-		else ascii <= 7'h72;  // r
-	 end
+      if ( caps_lock ) ascii <= 7'h52;  // R
+      else ascii <= 7'h72;  // r
+    end
     12'h01b : begin
-		if ( caps_lock ) ascii <= 7'h53;  // S
-		else ascii <= 7'h73;  // s
-	 end
+      if ( caps_lock ) ascii <= 7'h53;  // S
+      else ascii <= 7'h73;  // s
+    end
     12'h02c : begin
-		if ( caps_lock ) ascii <= 7'h54;  // T
-		else ascii <= 7'h74;  // t
-	 end
+      if ( caps_lock ) ascii <= 7'h54;  // T
+      else ascii <= 7'h74;  // t
+    end
     12'h03c : begin
-		if ( caps_lock ) ascii <= 7'h55;  // U
-		else ascii <= 7'h75;  // u
-	 end
+      if ( caps_lock ) ascii <= 7'h55;  // U
+      else ascii <= 7'h75;  // u
+    end
     12'h02a : begin
-		if ( caps_lock ) ascii <= 7'h56;  // V
-		else ascii <= 7'h76;  // v
-	 end
+      if ( caps_lock ) ascii <= 7'h56;  // V
+      else ascii <= 7'h76;  // v
+    end
     12'h01d : begin
-		if ( caps_lock ) ascii <= 7'h57;  // W
-		else ascii <= 7'h77;  // w
-	 end
+      if ( caps_lock ) ascii <= 7'h57;  // W
+      else ascii <= 7'h77;  // w
+    end
     12'h022 : begin
-		if ( caps_lock ) ascii <= 7'h58;  // X
-		else ascii <= 7'h78;  // x
-	 end
+      if ( caps_lock ) ascii <= 7'h58;  // X
+      else ascii <= 7'h78;  // x
+    end
     12'h035 : begin
-		if ( caps_lock ) ascii <= 7'h59;  // Y
-		else ascii <= 7'h79;  // y
-	 end
+      if ( caps_lock ) ascii <= 7'h59;  // Y
+      else ascii <= 7'h79;  // y
+    end
     12'h01a : begin
-		if ( caps_lock ) ascii <= 7'h5A;  // Z
-		else ascii <= 7'h7A;  // z
-	 end
+      if ( caps_lock ) ascii <= 7'h5A;  // Z
+      else ascii <= 7'h7A;  // z
+    end
     12'h154 : ascii <= 7'h7b;  // {
-	 12'h15d : ascii <= 7'h7e;  // ~
+    12'h15d : ascii <= 7'h7e;  // ~
     12'h15b : ascii <= 7'h7d;  // }
     12'h10e : ascii <= 7'h7c;  // |
-	 12'h061 : ascii <= 7'h5c;  // backslash
+    12'h061 : ascii <= 7'h5c;  // backslash
     12'h?71 : ascii <= 7'h7f;  // (Delete OR DEL on numeric keypad)
     default : ascii <= 7'h00;  // Used for unlisted characters.
   endcase

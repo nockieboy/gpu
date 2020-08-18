@@ -23,6 +23,7 @@ module Z80_bridge_v2 (
    input logic [7:0] WR_PX_CTR,  // WRITE PIXEL collision counter from pixel_writer
    input logic [7:0] RD_PX_CTR,  // COPY READ PIXEL collision counter from pixel_writer
    input logic [7:0] GEO_STAT_RD,// bit 0 = scfifo's almost full flag, other bits free for other data
+   input logic [7:0] PS2_STATUS,
 
 // **** OUTPUTS ****
    output wire Z80_245data_dir,  // Control level converter direction for data flow - HIGH = A->B (toward Z80)
@@ -54,6 +55,7 @@ module Z80_bridge_v2 (
    output logic GEO_RD_STAT_STROBE, // HIGH when reading data on GEO_STAT_RD bus
    output logic GEO_WR_STAT_STROBE, // HIGH when sending data on GEO_STAT_WR bus
    output logic [7:0] GEO_STAT_WR  // data bus out to geo unit
+
 );
 
 //
@@ -187,17 +189,17 @@ parameter bit data_out  = 1;        // 245_DIR for data out
 //
 // *******************************************************************************************************
 //
-reg [7:0] PS2_CHAR   = 8'b0 ;       // Stores value to return when PS2_CHAR IO port is queried
-reg [7:0] PS2_STAT   = 8'b0 ;       // Stores value to return when PS2_STATUS IO port is queried
-reg PS2_prev         = 1'b0 ;
-reg [12:0] port_dly  = 13'b0;       // Port delay pipeline delays data output on an IO port read
-reg [7:0] PS2_RDY_r  = 8'b0 ;
+reg [7:0]  PS2_CHAR  = 8'b0  ;       // Stores value to return when PS2_CHAR IO port is queried
+reg [7:0]  PS2_STAT  = 8'b0  ;       // Stores value to return when PS2_STATUS IO port is queried
+reg        PS2_prev  = 1'b0  ;
+reg [12:0] port_dly  = 13'b0 ;       // Port delay pipeline delays data output on an IO port read
+reg [7:0]  PS2_RDY_r = 8'b0  ;
 
 always @(posedge GPU_CLK) begin
 
    // Latch and delay the Z80 CLK input for transition edge processing.
-   Z80_CLKr    <= Z80_CLK   ;     // Register delay the Z80_CLK input.
-   Z80_CLKr2   <= Z80_CLKr  ;    // Register delay the Z80_CLK input.
+   Z80_CLKr    <= Z80_CLK   ;  // Register delay the Z80_CLK input.
+   Z80_CLKr2   <= Z80_CLKr  ;  // Register delay the Z80_CLK input.
 
    // Latch bus controls and shift them into the filter pipes.
    Z80_M1n_r   <= Z80_M1n   ;  // Z80 M1 - active LOW
@@ -239,52 +241,70 @@ always @(posedge GPU_CLK) begin
    // end of generate a bydirectional 'hysteresis' counter set to Z80_CLK_FILTER clocks to ensure the stability of each opcode
 
    // delay registers to generate 1 shots for beginning of each bus transaction cycle
-   last_z80_read_opcode  <= z80_read_opcode;
-   last_z80_read_memory  <= z80_read_memory;
-   last_z80_read_port    <= z80_read_port;
-   last_z80_write_memory <= z80_write_memory;
-   last_z80_write_port   <= z80_write_port;
+   last_z80_read_opcode  <= z80_read_opcode  ;
+   last_z80_read_memory  <= z80_read_memory  ;
+   last_z80_read_port    <= z80_read_port    ;
+   last_z80_write_memory <= z80_write_memory ;
+   last_z80_write_port   <= z80_write_port   ;
 
    if ( z80_write_memory_1s && mem_in_bank && mem_in_range ) begin   // pass write request to GPU ram
-      gpu_addr   <= Z80_addr_r[19:0];
-      gpu_wdata  <= Z80_wData_r;
-      gpu_wr_ena <= 1'b1;       // Flag HIGH for 1 clock when reading from GPU RAM
+   
+      gpu_addr   <= Z80_addr_r[19:0] ;
+      gpu_wdata  <= Z80_wData_r      ;
+      gpu_wr_ena <= 1'b1             ; // Flag HIGH for 1 clock when reading from GPU RAM
+      
    end else begin
-      gpu_wr_ena <= 1'b0;       // Flag HIGH for 1 clock when reading from GPU RAM
+   
+      gpu_wr_ena <= 1'b0 ; // Flag HIGH for 1 clock when reading from GPU RAM
+      
    end
 
    if ( z80_read_memory_1s && mem_in_bank && mem_in_range ) begin    // pass read request to GPU ram
+   
       gpu_addr      <= Z80_addr_r[19:0] ;
       gpu_rd_req    <= 1'b1 ;       // Flag HIGH for 1 clock when reading from GPU RAM
+      
    end else begin
+   
       gpu_rd_req    <= 1'b0 ;       // Flag HIGH for 1 clock when reading from GPU RAM
+      
    end
 
    if ( z80_write_port_1s && Z80_addr_r[7:0]==SND_OUT ) begin     // Write_port 1 clock & SPEAKER ENABLE address
+   
       SPKR_EN       <= 1'b1 ;
+      
    end else SPKR_EN <= 1'b0 ; // Enforce SPKR_EN as one-shot
    
    if ( z80_write_port_1s && Z80_addr_r[7:0]==SND_DUR ) begin     // Write_port 1 clock & sound module STOP flag address
+   
       snd_data[8]   <= 1'b0 ;    // bit 8 LOW for STOP register
       snd_data[7:0] <= Z80_wData_r[7:0] ;  // data is ignored
       snd_data_tx   <= 1'b1 ;
+      
    end
    
    if ( z80_write_port_1s && Z80_addr_r[7:0]==SND_TON ) begin     // Write_port 1 clock & sound module TONE register address
+   
       snd_data[8]   <= 1'b1 ;    // bit 8 HIGH for TONE register
       snd_data[7:0] <= Z80_wData_r[7:0] ;
       snd_data_tx   <= 1'b1 ;
+      
    end
    
    // **** Manage IO interface to GEO_UNIT ****
    if ( z80_write_port_1s && Z80_addr_r[7:0]==GEO_LO ) begin     // Write to GEOFF low-byte register
-      GEO_WR_LO     <= Z80_wData_r[7:0] ;
-      GEO_WR_LO_STROBE <= 1'b1 ;                                 // Pulse strobe HIGH to signal to FIFO new data on the bus - wiring to FIFO will decide will STROBE to act upon
+   
+      GEO_WR_LO        <= Z80_wData_r[7:0] ;
+      GEO_WR_LO_STROBE <= 1'b1             ; // Pulse strobe HIGH to signal to FIFO new data on the bus - wiring to FIFO will decide will STROBE to act upon
+      
    end else GEO_WR_LO_STROBE <= 1'b0 ;
    
    if ( z80_write_port_1s && Z80_addr_r[7:0]==GEO_HI ) begin     // Write to GEOFF high-byte register
-      GEO_WR_HI     <= Z80_wData_r[7:0] ;
-      GEO_WR_HI_STROBE <= 1'b1 ;								 // Pulse strobe HIGH to signal to FIFO new data on the bus - wiring to FIFO will decide will STROBE to act upon
+   
+      GEO_WR_HI        <= Z80_wData_r[7:0] ;
+      GEO_WR_HI_STROBE <= 1'b1             ; // Pulse strobe HIGH to signal to FIFO new data on the bus - wiring to FIFO will decide will STROBE to act upon
+      
    end else GEO_WR_HI_STROBE <= 1'b0 ;
    // ***** End of GEO_UNIT IO interface *****
    
@@ -293,51 +313,78 @@ always @(posedge GPU_CLK) begin
    // *******************
 
    if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_DATA[7:0] ) begin  // Z80 is reading PS/2 port
-      Z80_rData    <= PS2_CHAR ;
-      PS2_CHAR     <= 8'b0     ;
-      PS2_STAT     <= 8'b0     ; // Reset PS2_STAT
+   
+      Z80_rData  <= PS2_CHAR ;
+      PS2_CHAR   <= 8'b0     ;
+      PS2_STAT   <= { 3'b0, PS2_STATUS[2:0], PS2_DAT[7], 1'b0 } ; // Reset PS2_STAT
+      
    end
-	
+   
    PS2_RDY_r[7:0] <= { PS2_RDY_r[6:0], PS2_RDY } ;
    
-   if (PS2_RDY_r[7:0] == 8'b00001111 ) begin            // valid data on PS2_DAT
-      PS2_CHAR   <= PS2_DAT    ;                        // Latch the character into Ps2_char register
-      PS2_STAT   <= { 6'b0, PS2_DAT[7], 1'b1 } ;        // Set PS2_STAT bit 0 to indicate valid data, with bit 2 HIGH for BREAK codes
+   if (PS2_RDY_r[7:0] == 8'b00001111 ) begin   // valid data on PS2_DAT
+   
+      PS2_CHAR   <= PS2_DAT ; // Latch the character into Ps2_char register
+      /*
+       * PS2_STAT bits:
+       * 0   - DATA READY
+       * 1   - BREAK CODE
+       * 2   - EXTENDED KEYCODE
+       * 3   - CAPS LOCK
+       * 4   - SHIFT KEY
+       * 5-7 - unused
+       */
+      PS2_STAT   <= { 3'b0, PS2_STATUS[2:0], PS2_DAT[7], 1'b1 } ;
+      
    end
 
    if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_STAT[7:0] ) begin     // Read_port 1 clock & keyboard status address
+   
       Z80_rData  <= PS2_STAT;
+      
    end
    
    if ( ~Z80_RDn_r ) begin  // this section sets the output enable and sends the correct data back to the Z80
+   
       //if (z80_read_opcode) // unused
       if ( z80_read_memory && mem_in_bank && mem_in_range && gpu_rd_rdy ) begin    // if a valid read memory range and the GPU returns a gpu_rd_rdy, send out data
+         
          Z80_rData       <= gpu_rData ;
          Z80_245data_dir <= data_out;
          Z80_rData_ena   <= 1'b1 ;
          Z80_245_oe      <= 1'b0 ;
+         
       end
       if ( z80_read_memory && mem_in_bank && ~mem_in_range ) begin        // memory read outside memory range, but inside the bank.  Return FF.
-      if ( BANK_RESPONSE && mem_in_ID ) begin
-         Z80_rData       <= BANK_ID[Z80_addr_r[3:0]]; // return BANK_ID byte
-      end else begin
-         Z80_rData       <= 8'b11111111 ;             // return 0xFF
-      end
-      Z80_245data_dir <= data_out;
-      Z80_rData_ena   <= 1'b1 ;
-      Z80_245_oe      <= 1'b0 ;
-     end
-      if ( z80_read_port && port_in_range ) begin  // if any read port within range, output the data
-         //Z80_rData       <= Z80_port_rData ; // data for port reads are set above.
+         if ( BANK_RESPONSE && mem_in_ID ) begin
+            
+            Z80_rData       <= BANK_ID[Z80_addr_r[3:0]]; // return BANK_ID byte
+            
+         end else begin
+         
+            Z80_rData       <= 8'b11111111 ;             // return 0xFF
+            
+         end
+         
          Z80_245data_dir <= data_out;
          Z80_rData_ena   <= 1'b1 ;
          Z80_245_oe      <= 1'b0 ;
+      
+      end
+      if ( z80_read_port && port_in_range ) begin  // if any read port within range, output the data
+      
+         Z80_245data_dir <= data_out;
+         Z80_rData_ena   <= 1'b1 ;
+         Z80_245_oe      <= 1'b0 ;
+         
       end // end read port
    end else begin                  // No more read command present, disable sending data on the Z80 bus, ie make GPU Z80 data port an input.
+   
       Z80_rData       <= 8'bzzzzzzzz ;
-      Z80_245data_dir <= data_in ;
-      Z80_rData_ena   <= 1'b0 ;
-      Z80_245_oe      <= 1'b0 ;
+      Z80_245data_dir <= data_in     ;
+      Z80_rData_ena   <= 1'b0        ;
+      Z80_245_oe      <= 1'b0        ;
+      
    end
 
 end // always @(posedge GPU_CLK) begin

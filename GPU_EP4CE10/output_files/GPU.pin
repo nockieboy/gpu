@@ -98,9 +98,9 @@ GND                          : 27        : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : 28        :        :                   :         : 2         :                
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 STATUS_LED                   : 30        : output : 3.3-V LVTTL       :         : 2         : Y              
-LED_txd                      : 31        : output : 3.3-V LVTTL       :         : 2         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 32        :        :                   :         : 2         :                
-LED_rdx                      : 33        : output : 3.3-V LVTTL       :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 31        :        :                   :         : 2         :                
+LED_rdx                      : 32        : output : 3.3-V LVTTL       :         : 2         : N              
+LED_txd                      : 33        : output : 3.3-V LVTTL       :         : 2         : N              
 Z80_ADDR[0]                  : 34        : input  : 3.3-V LVTTL       :         : 2         : Y              
 VCCA1                        : 35        : power  :                   : 2.5V    :           :                
 GNDA1                        : 36        : gnd    :                   :         :           :                
