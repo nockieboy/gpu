@@ -10,8 +10,9 @@ module pixel_address_generator (
 
     // outputs
     output logic       pixel_cmd_rdy,
-    output logic[39:0] pixel_cmd,
-    output logic       pix_adr_busy
+    output logic[39:0] pixel_cmd
+);
+
 // pixel_cmd format:
 // 3     3 3             2 2     2 2     2 1                                     0
 // 9     6 5             8 7     4 3     0 9                                     0
@@ -30,7 +31,6 @@ module pixel_address_generator (
 // BIT is the bit in the addressed word that is the target of the RD/WR operation
 //
     
-);
 
 // 3     3 3             2 2               1     1 1     0 0             0
 // 5     2 1             4 3               5     2 1     8 7             0
@@ -108,8 +108,6 @@ logic [3:0] CMD_OUT_SETARGB       = 7;
 logic [3:0] CMD_OUT_RST_PXWRI_M   = 10;
 logic [3:0] CMD_OUT_RST_PXPASTE_M = 11;
 
-
-
 logic[23:0] dest_base_address_offset ;
 logic[23:0] srce_base_address_offset ;
 logic[23:0] s2_dest_base_address_offset ;
@@ -121,10 +119,6 @@ logic[7:0]  bit_mode ;
 logic[7:0]  s2_bit_mode ;
 logic[11:0] x ;
 logic[11:0] y ;
-logic[11:0] s2_x ;
-logic[11:0] s2_y ;
-logic[11:0] s3_x ;
-logic[11:0] s3_y ;
 
 // internal registers
 logic[3:0]  dest_bits_per_pixel = 4'b0  ; // how many bits make up one pixel (1-16) - screen mode
@@ -143,40 +137,16 @@ logic[19:0] srce_address   = 20'b0 ; // points to first byte in the graphics dis
 logic       s2_draw_cmd_rdy;
 logic[3:0]  s2_aux_cmd_in;
 logic[35:0] s2_draw_cmd;
-logic       s3_draw_cmd_rdy;
-logic[3:0]  s3_aux_cmd_in;
-logic[35:0] s3_draw_cmd;
 
 logic       pixel_cmd_reg;
-logic       draw_cmd_rdy_f;
-logic[35:0] draw_cmd_f;
-
-
-FIFO_2word_FWFT input_cmd_fifo_1 (              // Zero Latency Command buffer
-    .clk              ( clk                  ), // CLK input
-    .reset            ( reset                ), // Reset FIFO
-
-    .shift_in         ( draw_cmd_rdy         ), // Load data into the FIFO
-    .shift_out        ( !draw_busy           ), // Shift data out of the FIFO
-    .data_in          ( draw_cmd[35:0]       ), // Data input from PAGET
-
-    .fifo_not_empty   ( draw_cmd_rdy_f       ), // High when there is data available for the pixel writer
-    .fifo_full        ( pix_adr_busy         ), // High when the FIFO is full - used to tell GEOFF and PAGET to halt until there is room in the FIFO again
-    .data_out         ( draw_cmd_f[35:0]     )  // FIFO data output to pixel writer
-);
-defparam
-    input_cmd_fifo_1.bits  = 36; // The number of bits containing the command
 
 
 always_comb begin
-//draw_cmd_rdy_f = draw_cmd_rdy ; // FIFO bypass
-//draw_cmd_f     = draw_cmd     ; // FIFO bypass
-//pix_adr_busy   = draw_busy    ; // FIFO bypass
 
-    aux_cmd_in[3:0] = draw_cmd_f[35:32] ;
-    bit_mode[7:0]   = draw_cmd_f[31:24] ;   // number of bits per pixel - needs to be sourced from elsewhere (MAGGIE#?)
-    y[11:0]         = draw_cmd_f[23:12] ;
-    x[11:0]         = draw_cmd_f[11:0]  ;
+    aux_cmd_in[3:0] = draw_cmd[35:32] ;
+    bit_mode[7:0]   = draw_cmd[31:24] ;   // number of bits per pixel - needs to be sourced from elsewhere (MAGGIE#?)
+    y[11:0]         = draw_cmd[23:12] ;
+    x[11:0]         = draw_cmd[11:0]  ;
     
     dest_address = dest_base_address[19:0] + (dest_base_address_offset[19:0] >> LUT_bits_to_shift[dest_bits_per_pixel[3:0]]);
     srce_address = srce_base_address[19:0] + (srce_base_address_offset[19:0] >> LUT_bits_to_shift[srce_bits_per_pixel[3:0]]);
@@ -202,11 +172,11 @@ always_ff @(posedge clk or posedge reset) begin
   
 if (!draw_busy) begin
 s2_bit_mode     <= bit_mode;
-s2_draw_cmd_rdy <= draw_cmd_rdy_f;
+s2_draw_cmd_rdy <= draw_cmd_rdy;
 s2_aux_cmd_in   <= aux_cmd_in;
-s2_draw_cmd     <= draw_cmd_f;
+s2_draw_cmd     <= draw_cmd;
 
-        if ( draw_cmd_rdy_f ) begin
+        if ( draw_cmd_rdy ) begin
 
     dest_base_address_offset <=  (y * dest_rast_width[15:0]  + x) << 1 ; // This calculation will only be ready for the S2 - second stage clock cycle.
     srce_base_address_offset <=  (y * srce_rast_width[15:0]  + x) << 1 ; // This calculation will only be ready for the S2 - second stage clock cycle.
@@ -219,21 +189,21 @@ s2_draw_cmd     <= draw_cmd_f;
                               // no output functions are to take place
                 
                 CMD_IN_DSTRWDTH : begin
-                    dest_rast_width[15:0]    <= draw_cmd_f[15:0] ;    // set destination raster image width
+                    dest_rast_width[15:0]    <= draw_cmd[15:0] ;    // set destination raster image width
                     dest_bits_per_pixel[3:0] <= bit_mode[3:0] ;     // set screen mode (bits per pixel)
                 end
                 
                 CMD_IN_SRCRWDTH : begin
-                    srce_rast_width[15:0]    <= draw_cmd_f[15:0] ;    // set source raster image width
+                    srce_rast_width[15:0]    <= draw_cmd[15:0] ;    // set source raster image width
                     srce_bits_per_pixel[3:0] <= bit_mode[3:0] ;     // set screen mode (bits per pixel)
                 end
             
                 CMD_IN_DSTMADDR : begin
-                    dest_base_address[23:0]  <= draw_cmd_f[23:0] ;    // set destination base memory address
+                    dest_base_address[23:0]  <= draw_cmd[23:0] ;    // set destination base memory address
                 end
                 
                 CMD_IN_SRCMADDR : begin
-                    srce_base_address[23:0]  <= draw_cmd_f[23:0] ;    // set source base memory address (even addresses only?)
+                    srce_base_address[23:0]  <= draw_cmd[23:0] ;    // set source base memory address (even addresses only?)
                 end                
             endcase
 

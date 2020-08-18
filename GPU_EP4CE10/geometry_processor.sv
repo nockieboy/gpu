@@ -33,10 +33,13 @@ parameter int FIFO_MARGIN         = 32 ; // The number of extra commadns the fif
 
 // wire interconnects for the sub-modules
 logic pix_writer_busy   ;  
-logic pix_adr_busy      ;
 
 logic [35:0] draw_cmd   ;
 logic draw_cmd_rdy      ;
+logic [35:0] draw_cmd_r ;
+logic draw_cmd_rdy_r    ;
+logic [35:0] draw_cmd_r2;
+logic draw_cmd_rdy_r2   ;
 
 logic [39:0] pixel_cmd  ;
 logic pixel_cmd_rdy     ;
@@ -48,7 +51,7 @@ geometry_xy_plotter geoff (
    .reset          ( reset           ),
    .fifo_cmd_ready ( fifo_cmd_ready  ),
    .fifo_cmd_in    ( fifo_cmd_in     ),
-   .draw_busy      ( pix_adr_busy    ),
+   .draw_busy      ( pix_writer_busy ),
    //outputs
 	.load_cmd       (                 ),        // HIGH when ready to receive next cmd_data[15:0] input
    .draw_cmd_rdy   ( draw_cmd_rdy    ),
@@ -63,13 +66,12 @@ pixel_address_generator paget (
     // inputs
     .clk           ( clk              ),
     .reset         ( reset            ),
-    .draw_cmd_rdy  ( draw_cmd_rdy     ),
-    .draw_cmd      ( draw_cmd         ),
+    .draw_cmd_rdy  ( draw_cmd_rdy_r2  ),
+    .draw_cmd      ( draw_cmd_r2      ),
     .draw_busy     ( pix_writer_busy  ),
     // outputs
     .pixel_cmd_rdy ( pixel_cmd_rdy    ),
-    .pixel_cmd     ( pixel_cmd        ),
-    .pix_adr_busy  ( pix_adr_busy     )
+    .pixel_cmd     ( pixel_cmd        )
 );
 
  geo_pixel_writer pixie (
@@ -97,5 +99,15 @@ pixel_address_generator paget (
 	 .PX_COPY_COLOUR   (                  )
 
 );
+
+
+always @ (posedge clk) begin
+if (!pix_writer_busy) begin
+draw_cmd_rdy_r  <= draw_cmd_rdy;
+draw_cmd_r      <= draw_cmd;
+draw_cmd_rdy_r2 <= draw_cmd_rdy_r;
+draw_cmd_r2     <= draw_cmd_r;
+end
+end
 
 endmodule
