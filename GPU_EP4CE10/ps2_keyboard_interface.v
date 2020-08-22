@@ -585,9 +585,9 @@ assign rx_output_strobe = (rx_shifting_done
 // The entries are listed in ascending order of ASCII value.
 assign shift_key_plus_code = {3'b0,rx_shift_key_on,q[8:1]};
 
-always @(shift_key_plus_code)
+always @( shift_key_plus_code or caps_lock or ctrl_key )
 begin
-  casez (shift_key_plus_code)
+  casez ( shift_key_plus_code )
     12'h?66 : ascii <= 7'h08;  // Backspace ("backspace" key)
     12'h?0d : ascii <= 7'h09;  // Horizontal Tab
     12'h?5a : ascii <= 7'h0d;  // Carriage return ("enter" key)

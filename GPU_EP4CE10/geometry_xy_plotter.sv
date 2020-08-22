@@ -317,95 +317,131 @@ always @(posedge clk or posedge reset) begin
 
             case (geo_shape)    // run a selected geometric drawing engine
 
-                4'd1 : begin    // draw line from (x[0],y[0]) to (x[1],y[1])
+               4'd1 : begin    // draw line from (x[0],y[0]) to (x[1],y[1])
                 
-                    case (geo_sub_func1)    // during the draw line, we have multiple sub-functions to call 1 at a time
-                
-                        4'd0 : begin
-                        
-                               errd            <= dx + dy;
-                               geo_sub_func1   <= 4'd1;                 // set line sub-function to plot line.
-                               
-                        end // geo_sub_func1 = 0 - setup for plot line
-                
-                        4'd1 : begin
-                        
-                            draw_cmd_func        <= CMD_OUT_PXWRI[3:0]; // Set up command to pixel plotter to write a pixel,
-                            draw_cmd_data_color  <= geo_color;          // ... in geo_colour,
-                            draw_cmd_data_word_Y <= geo_y ;             // ... at Y-coordinate,
-                            draw_cmd_data_word_X <= geo_x ;             // ... and X-coordinate.
+                  case (geo_sub_func1)    // during the draw line, we have multiple sub-functions to call 1 at a time
 
-                            if ( ( geo_x >= 0 && geo_x <= max_x ) && (geo_y>=0 && geo_y<=max_y) )
-								draw_cmd_tx  	 <= 1'b1; 				// send command if geo_X&Y are within valid drawing area
-                            else
-								draw_cmd_tx  	 <= 1'b0; 				// otherwise turn off draw command
+                     4'd0 : begin
+                  
+                        errd            <= dx + dy;
+                        geo_sub_func1   <= 4'd1;                 // set line sub-function to plot line.
                             
-                            if ( geo_x == x[1] && geo_y == y[1] ) geo_shape <= 4'd0;   // last pixel - step to last sub_func1 stage, allowing time for this pixel to be written
-                                                                                       // On the next clock, end the drawing-line function
-                                
-                            // increment x,y position
-                            if ((errd << 1) > dy) begin
-                                geo_x   <= geo_x + geo_xdir;
-                                               
-                                if (((errd<<1)+dy) < dx) begin
-                                    geo_y   <= geo_y + geo_ydir;
-                                    errd    <= errd + dx + dy;
-                                end else errd    <= errd + dy;
-                                
-                            end else if ((errd << 1) < dx) begin
-                                errd    <= errd + dx;
-                                geo_y   <= geo_y + geo_ydir;                           
-                            end
-                        
-                        end // geo_sub_func1 = 1 - plot line
-                        
-                    endcase // sub functions of draw line
-                
-                end // geo_shape - draw line
-                
-                4'd2 : begin    // draw a filled rectangle
+                     end // geo_sub_func1 = 0 - setup for plot line
 
-                    if ( geo_y != (y[1] + geo_ydir) ) begin             // Check for bottom (or top, depending on sign of geo_ydir) of rectangle reached
-                        if ( geo_x != (x[1] + geo_xdir) ) begin         // Check for right (or left, depending on sign of geo_xdir) of rectangle reached
-                            draw_cmd_func        <= CMD_OUT_PXWRI[3:0]; // Set up command to pixel plotter to write a pixel,
-                            draw_cmd_data_color  <= geo_color;          // ... in geo_colour,
-                            draw_cmd_data_word_Y <= geo_y ;             // ... at Y-coordinate,
-                            draw_cmd_data_word_X <= geo_x ;             // ... and X-coordinate.
-                            if ( (geo_x >= 0 && geo_x <= max_x) && (geo_y >= 0 && geo_y <= max_y) )
-								draw_cmd_tx  <= 1'b1; // send command if geo_X&Y are within valid drawing area
-                            else
-								draw_cmd_tx  <= 1'b0; // otherwise turn off draw command
-                            
-                            // Now increment (or decrement according to geo_xdir) geo_x to the next pixel.
-                            // If geo_fill is HIGH, step to next X-position to fill the rectangle.
-                            // If geo_x is at the end edge, step past it.
-                            // If geo_y is at start or end (top or bottom edge), step to next X-position to draw the horizontal line.
-                            if (geo_fill || geo_x == x[1] || geo_y == y[0] || geo_y == y[1] )   geo_x <= geo_x + geo_xdir;
-                            // Otherwise, jump to end X-position to draw other edge for non-filled rectangle.
-                            else                                                                geo_x <= x[1];
+                     4'd1 : begin
+                     
+                        draw_cmd_func        <= CMD_OUT_PXWRI[3:0]; // Set up command to pixel plotter to write a pixel,
+                        draw_cmd_data_color  <= geo_color;          // ... in geo_colour,
+                        draw_cmd_data_word_Y <= geo_y ;             // ... at Y-coordinate,
+                        draw_cmd_data_word_X <= geo_x ;             // ... and X-coordinate.
 
-                        end else begin  // geo_x has passed vertical edge
-                            draw_cmd_tx         <= 1'b0;                // do not send a draw cmd this cycle
-                            geo_x               <= x[0];                // reset X to start X-position
-                            geo_y               <= geo_y + geo_ydir;    // increment (or decrement) Y-position for next line
+                        if ( ( geo_x >= 0 && geo_x <= max_x ) && (geo_y>=0 && geo_y<=max_y) )
+                        draw_cmd_tx     <= 1'b1;            // send command if geo_X&Y are within valid drawing area
+                        else
+                        draw_cmd_tx     <= 1'b0;            // otherwise turn off draw command
+
+                        if ( geo_x == x[1] && geo_y == y[1] ) geo_shape <= 4'd0;   // last pixel - step to last sub_func1 stage, allowing time for this pixel to be written
+                                                                                 // On the next clock, end the drawing-line function
+                          
+                        // increment x,y position
+                        if ( ( errd << 1 ) > dy ) begin
+                        
+                          geo_x   <= geo_x + geo_xdir;
+                                         
+                          if ( ( ( errd << 1 ) + dy ) < dx ) begin
+                          
+                              geo_y   <= geo_y + geo_ydir ;
+                              errd    <= errd + dx + dy   ;
+                              
+                          end else begin
+                          
+                              errd    <= errd + dy   ;
+                              
+                          end
+                          
+                        end else if ( ( errd << 1 ) < dx ) begin
+                          errd    <= errd  + dx       ;
+                          geo_y   <= geo_y + geo_ydir ;                           
                         end
-                    end else begin      // geo_y has passed horizontal edge
-                            geo_run             <= 1'b0;                // stop geometry engine - shape completed
-                            draw_cmd_tx         <= 1'b0;                // do not send a draw cmd this cycle
-                    end
-                    
-                end // draw a filled rectangle
 
-                default : begin
+                     end // geo_sub_func1 = 1 - plot line
+                     
+                  endcase // sub functions of draw line
                 
-                    geo_run         <= 1'b0; // no valid drawing engine selected, so stop the geo_run flag.
-                    draw_cmd_tx     <= 1'b0;
+               end // geo_shape - draw line
+             
+               4'd2 : begin    // draw a filled rectangle
+
+                  if ( geo_y != ( y[1] + geo_ydir ) ) begin             // Check for bottom (or top, depending on sign of geo_ydir) of rectangle reached
+                  
+                     if ( geo_x != ( x[1] + geo_xdir ) ) begin         // Check for right (or left, depending on sign of geo_xdir) of rectangle reached
+                     
+                        draw_cmd_func        <= CMD_OUT_PXWRI[3:0]; // Set up command to pixel plotter to write a pixel,
+                        draw_cmd_data_color  <= geo_color;          // ... in geo_colour,
+                        draw_cmd_data_word_Y <= geo_y ;             // ... at Y-coordinate,
+                        draw_cmd_data_word_X <= geo_x ;             // ... and X-coordinate.
+                        
+                        if ( ( geo_x >= 0 && geo_x <= max_x ) && ( geo_y >= 0 && geo_y <= max_y ) ) begin
+                        
+                           draw_cmd_tx  <= 1'b1; // send command if geo_X&Y are within valid drawing area
+                           
+                        end else begin
+                        
+                           draw_cmd_tx  <= 1'b0; // otherwise turn off draw command
+                        
+                        end
+
+                        // Now increment (or decrement according to geo_xdir) geo_x to the next pixel.
+                        // If geo_fill is HIGH, step to next X-position to fill the rectangle.
+                        // If geo_x is at the end edge, step past it.
+                        // If geo_y is at start or end (top or bottom edge), step to next X-position to draw the horizontal line.
+                        if ( geo_fill || geo_x == x[1] || geo_y == y[0] || geo_y == y[1] ) begin
+                        
+                           geo_x <= geo_x + geo_xdir;
+                           
+                        end else begin // Otherwise, jump to end X-position to draw other edge for non-filled rectangle.
+                        
+                           geo_x <= x[1];
+                           
+                        end
+
+                     end else begin  // geo_x has passed vertical edge
+                     
+                        draw_cmd_tx <= 1'b0;                // do not send a draw cmd this cycle
+                        geo_x       <= x[0];                // reset X to start X-position
+                        geo_y       <= geo_y + geo_ydir;    // increment (or decrement) Y-position for next line
+                        
+                     end
+                     
+                  end else begin      // geo_y has passed horizontal edge
+                  
+                     geo_run      <= 1'b0;                // stop geometry engine - shape completed
+                     draw_cmd_tx  <= 1'b0;                // do not send a draw cmd this cycle
+                     
+                  end
                     
-                end
+               end // draw a filled rectangle
+               
+               4'd3 : begin  // draw filled triangle
+               
+               
+               
+               end  // draw filled triangle
+
+               default : begin
+                
+                  geo_run         <= 1'b0; // no valid drawing engine selected, so stop the geo_run flag.
+                  draw_cmd_tx     <= 1'b0;
+                    
+               end
 
             endcase   // run a selected geometric drawing engine
                 
-        end else   draw_cmd_tx <= 1'b0;    // stop transmit output command function//  end of (geo_run) flag
+        end else begin
+        
+           draw_cmd_tx <= 1'b0;    // stop transmit output command function//  end of (geo_run) flag
+         
+        end
     
     end // !draw_busy
 
