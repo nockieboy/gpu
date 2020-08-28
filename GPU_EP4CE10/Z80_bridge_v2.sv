@@ -205,27 +205,27 @@ reg [7:0]  PS2_STAT  = 8'b0  ;       // Stores value to return when PS2_STATUS I
 reg [7:0]  PS2_RDY_r = 8'b0  ;
 
 
-logic Z80_245data_dir ;   // Control level converter direction for data flow - HIGH = A->B (toward Z80)
+logic Z80_245data_dir  ;  // Control level converter direction for data flow - HIGH = A->B (toward Z80)
 logic [7:0]  Z80_rData ;  // Z80 DATA bus to return data from GPU RAM to Z80
 logic Z80_rData_ena ;     // Flag HIGH to write data back to Z80
-logic Z80_245_oe ;        // OE for 245 level translator *** ACTIVE LOW ***
+logic Z80_245_oe  ;       // OE for 245 level translator *** ACTIVE LOW ***
 logic Z80_INT_REQ ;       // Flag HIGH to signal to host for an interrupt request
 logic Z80_IEO ;           // Flag HIGH when GPU is requesting an interrupt to pull IEO LOW
-logic EA_DIR ;            // Controls level converter direction for EA address flow - HIGH = A->B (toward FPGA)
-logic EA_OE ;             // OE for EA address level converter *** ACTIVE LOW ***
-logic Z80_245data_dir_r2 ;   // Control level converter direction for data flow - HIGH = A->B (toward Z80)
+logic EA_DIR  ;           // Controls level converter direction for EA address flow - HIGH = A->B (toward FPGA)
+logic EA_OE   ;           // OE for EA address level converter *** ACTIVE LOW ***
+logic Z80_245data_dir_r2  ;  // Control level converter direction for data flow - HIGH = A->B (toward Z80)
 logic [7:0]  Z80_rData_r2 ;  // Z80 DATA bus to return data from GPU RAM to Z80
 logic Z80_rData_ena_r2 ;     // Flag HIGH to write data back to Z80
-logic Z80_245_oe_r2 ;        // OE for 245 level translator *** ACTIVE LOW ***
+logic Z80_245_oe_r2  ;       // OE for 245 level translator *** ACTIVE LOW ***
 logic Z80_INT_REQ_r2 ;       // Flag HIGH to signal to host for an interrupt request
 logic Z80_IEO_r2 ;           // Flag HIGH when GPU is requesting an interrupt to pull IEO LOW
-logic EA_DIR_r2 ;            // Controls level converter direction for EA address flow - HIGH = A->B (toward FPGA)
-logic EA_OE_r2 ;             // OE for EA address level converter *** ACTIVE LOW ***
-logic PS2_CAPS_LOCK_r ;
+logic EA_DIR_r2  ;           // Controls level converter direction for EA address flow - HIGH = A->B (toward FPGA)
+logic EA_OE_r2   ;           // OE for EA address level converter *** ACTIVE LOW ***
+logic PS2_CAPS_LOCK_r   ;
 logic [7:0] PS2_TX_PIPE ;
 logic PS2_TX_DLY ;
 logic PS2_EE_CMD ;        // 2-byte command flag
-logic [20:0] PS2_TX_TIMER ;
+logic [20:0] PS2_TX_TIMER  ;
 
 always @(posedge GPU_CLK) begin
 
@@ -366,29 +366,51 @@ always @(posedge GPU_CLK) begin
    if ( snd_data_tx ) snd_data_tx <= 1'b0 ; // Enforce snd_data_tx as one-shot
    // *******************
 
-   if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_DATA[7:0] ) begin  // Z80 is reading PS/2 port
+   if ( z80_read_port_1s && Z80_addr_r[7:0] == IO_DATA[7:0] ) begin  // Z80 is reading PS/2 port
    
       Z80_rData  <= PS2_CHAR ;
       PS2_CHAR   <= 8'b0     ;
       PS2_STAT   <= { PS2_STATUS[5:0], PS2_DAT[7], 1'b0 } ; // Reset PS2_STAT
       
    end
+	
+	if ( z80_read_port_1s && Z80_addr_r[7:0] == IO_STAT[7:0] ) begin     // Read_port 1 clock & keyboard status address
+   
+      Z80_rData  <= PS2_STAT;
+      
+   end
+	
+	if ( z80_write_port_1s && Z80_addr_r[7:0] == IO_STAT[7:0] ) begin    // Write to PS/2 STATUS register
+		
+		// User is writing to PS/2 STATUS register.
+		// The data is passed to the PS/2 keyboard to set the Typematic delay and rate.
+		PS2_TX             <= 1'b1             ;
+		PS2_EE_CMD         <= 1'b1             ; // set 2-byte command flag
+		PS2_TX_DAT[7:0]    <= 8'hF3            ; // Set Typematic rate & delay to
+		PS2_TX_PIPE[7:0]   <= Z80_wData_r[7:0] ; // user value:
+		PS2_TX_TIMER[20:0] <= 21'b0            ; // bits 5-6 = Delay (00 = 0.25s up to 11 = 1s), bits 0-4 = Repeat Rate (0x00 = 30 down to 0x1F = 2)
+	
+	end
    
    PS2_RDY_r[7:0] <= { PS2_RDY_r[6:0], PS2_RDY } ;
    
    if (PS2_RDY_r[7:0] == 8'b00001111 ) begin   // valid data on PS2_DAT
    
-      PS2_CHAR   <= PS2_DAT ; // Latch the character into Ps2_char register
-      /*
-       * PS2_STAT bits:
-       * 0   - DATA READY
-       * 1   - BREAK CODE
-       * 2   - EXTENDED KEYCODE
-       * 3   - CAPS LOCK
-       * 4   - SHIFT KEY
-       * 5-7 - unused
-       */
-      PS2_STAT   <= { PS2_STATUS[5:0], PS2_DAT[7], 1'b1 } ;
+		if ( PS2_DAT != 8'hAA ) begin // ignore keyboard self-test reports
+		
+			PS2_CHAR   <= PS2_DAT ; // Latch the character into Ps2_char register
+			/*
+			 * PS2_STAT bits:
+			 * 0   - DATA READY
+			 * 1   - BREAK CODE
+			 * 2   - EXTENDED KEYCODE
+			 * 3   - CAPS LOCK
+			 * 4   - SHIFT KEY
+			 * 5-7 - unused
+			 */
+			PS2_STAT   <= { PS2_STATUS[5:0], PS2_DAT[7], 1'b1 } ;
+		
+		end
       
    end
 	
@@ -444,13 +466,6 @@ always @(posedge GPU_CLK) begin
 		end
 	
 	end
-	
-
-   if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_STAT[7:0] ) begin     // Read_port 1 clock & keyboard status address
-   
-      Z80_rData  <= PS2_STAT;
-      
-   end
    
    if ( ~Z80_RDn_r ) begin  // this section sets the output enable and sends the correct data back to the Z80
    

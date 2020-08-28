@@ -99,6 +99,7 @@ reg signed [11:0]   errd;
 
 logic [15:0] cmd_data;
 logic        fifo_cmd_rdy_n;
+
 scfifo  scfifo_component (
     .sclr        (reset),                    // reset input
     .clock       (clk),                    // system clock
@@ -125,67 +126,95 @@ defparam
     scfifo_component.overflow_checking = "ON",
     scfifo_component.underflow_checking = "ON",
     scfifo_component.use_eab = "ON";
+	 
+/*
+tri_comp Xn_comparator (
 
+	.clk       ( clk ),
+	.in        (     ),
+
+	.in_a_eq_b (     ),
+	.in_a_gt_b (     ),
+	.in_a_lt_b (     )
+	
+);
+
+defparam Xn_comparator.CLOCK_OUTPUT = 0 ;
+
+tri_comp Yn_comparator (
+
+	.clk       ( clk ),
+	.in        (     ),
+
+	.in_a_eq_b (     ),
+	.in_a_gt_b (     ),
+	.in_a_lt_b (     )
+	
+);
+
+defparam Yn_comparator.CLOCK_OUTPUT = 0 ;
+*/
+	 
 always @(posedge clk or posedge reset) begin
 
     if (reset) begin    // reset to defaults
         
         // reset coordinate registers
         for ( integer i = 0; i < 4; i++ ) begin
-            x[i]  <= { 12'b0 };
-            y[i]  <= { 12'b0 };
+            x[i]  <= { 12'b0 } ;
+            y[i]  <= { 12'b0 } ;
         end
-        max_x     <= 12'b0;
-        max_y     <= 12'b0;
+        max_x     <= 12'b0 ;
+        max_y     <= 12'b0 ;
 
         // reset draw command registers
-        draw_cmd_func        <= 4'b0;
-        draw_cmd_data_color  <= 8'b0;
-        draw_cmd_data_word_Y <= 12'b0;
-        draw_cmd_data_word_X <= 12'b0;
-        draw_cmd_tx          <= 1'b0;
+        draw_cmd_func        <= 4'b0  ;
+        draw_cmd_data_color  <= 8'b0  ;
+        draw_cmd_data_word_Y <= 12'b0 ;
+        draw_cmd_data_word_X <= 12'b0 ;
+        draw_cmd_tx          <= 1'b0  ;
 
         // reset geometry sequencer controls
-        geo_shape     <= 4'b0;
-        geo_fill      <= 1'b0;
-        geo_mask      <= 1'b0;
-        geo_paste     <= 1'b0;
-        geo_run       <= 1'b0;
-        geo_color     <= 8'b0;
+        geo_shape     <= 4'b0 ;
+        geo_fill      <= 1'b0 ;
+        geo_mask      <= 1'b0 ;
+        geo_paste     <= 1'b0 ;
+        geo_run       <= 1'b0 ;
+        geo_color     <= 8'b0 ;
         
         // reset geometry counters
-        geo_x         <= 12'b0;
-        geo_y         <= 12'b0;
-        geo_xdir      <= 12'b0;
-        geo_ydir      <= 12'b0;
-        geo_sub_func1 <= 4'b0;
-        geo_sub_func2 <= 4'b0;
-        dx            <= 12'b0;
-        dy            <= 12'b0;
-        errd          <= 12'b0;
+        geo_x         <= 12'b0 ;
+        geo_y         <= 12'b0 ;
+        geo_xdir      <= 12'b0 ;
+        geo_ydir      <= 12'b0 ;
+        geo_sub_func1 <= 4'b0  ;
+        geo_sub_func2 <= 4'b0  ;
+        dx            <= 12'b0 ;
+        dy            <= 12'b0 ;
+        errd          <= 12'b0 ;
 
     end else if (!draw_busy) begin
     
         if ( !fifo_cmd_rdy_n && ~geo_run ) begin  // when the fifo_cmd_rdy_n input is LOW and the geometry unit geo_run is not running, execute the following command input
 
-            casez (command_in)
-                8'b10?????? : x[command_in[5:4]] <= command_data12;
-                8'b11?????? : y[command_in[5:4]] <= command_data12;
+            casez ( command_in )
+                8'b10?????? : x[command_in[5:4]] <= command_data12 ;
+                8'b11?????? : y[command_in[5:4]] <= command_data12 ;
 
                 8'b011111?? : begin // set 24-bit destination screen memory pointer for plotting
-                    draw_cmd_func        <= CMD_OUT_DSTMADDR[3:0];   // sets the output function
-                    draw_cmd_data_color  <= command_data8;           // set screen_mode (bits per pixel)
-                    draw_cmd_data_word_Y <= y[command_in[1:0]];      // sets the upper 12 bits of the destination address
-                    draw_cmd_data_word_X <= x[command_in[1:0]];      // sets the lower 12 bits of the destination address
-                    draw_cmd_tx          <= 1'b1;                    // transmits the command
+                    draw_cmd_func        <= CMD_OUT_DSTMADDR[3:0] ;  // sets the output function
+                    draw_cmd_data_color  <= command_data8         ;  // set screen_mode (bits per pixel)
+                    draw_cmd_data_word_Y <= y[command_in[1:0]]    ;  // sets the upper 12 bits of the destination address
+                    draw_cmd_data_word_X <= x[command_in[1:0]]    ;  // sets the lower 12 bits of the destination address
+                    draw_cmd_tx          <= 1'b1                  ;  // transmits the command
                 end
 
                 8'b011110?? : begin // set 24-bit source screen memory pointer for blitter copy
-                    draw_cmd_func        <= CMD_OUT_SRCMADDR[3:0];   // sets the output function
-                    draw_cmd_data_color  <= command_data8;           // set screen_mode (bits per pixel)
-                    draw_cmd_data_word_Y <= y[command_in[1:0]];      // sets the upper 12 bits of the destination address
-                    draw_cmd_data_word_X <= x[command_in[1:0]];      // sets the lower 12 bits of the destination address
-                    draw_cmd_tx          <= 1'b1;                    // transmits the command
+                    draw_cmd_func        <= CMD_OUT_SRCMADDR[3:0] ;  // sets the output function
+                    draw_cmd_data_color  <= command_data8         ;  // set screen_mode (bits per pixel)
+                    draw_cmd_data_word_Y <= y[command_in[1:0]]    ;  // sets the upper 12 bits of the destination address
+                    draw_cmd_data_word_X <= x[command_in[1:0]]    ;  // sets the lower 12 bits of the destination address
+                    draw_cmd_tx          <= 1'b1                  ;  // transmits the command
                 end
                     
                         
@@ -207,71 +236,71 @@ always @(posedge clk or posedge reset) begin
                 end
                         
                 8'd115 : begin  // set the number of bytes per horizontal line in the destination raster
-                    draw_cmd_func        <= CMD_OUT_DSTRWDTH[3:0];   // sets the output function
-                    draw_cmd_data_color  <= command_data8;           // set bitplane mode (bits per pixel)
-                    draw_cmd_data_word_Y <= y[2];                    // null
-                    draw_cmd_data_word_X <= x[2];                    // sets the lower 12 bits of the destination address
-                    draw_cmd_tx          <= 1'b1;                    // transmits the command
+                    draw_cmd_func        <= CMD_OUT_DSTRWDTH[3:0] ;  // sets the output function
+                    draw_cmd_data_color  <= command_data8 ;          // set bitplane mode (bits per pixel)
+                    draw_cmd_data_word_Y <= y[2] ;                   // null
+                    draw_cmd_data_word_X <= x[2] ;                   // sets the lower 12 bits of the destination address
+                    draw_cmd_tx          <= 1'b1 ;                   // transmits the command
                 end
                     
                 8'd114 : begin  // set the number of bytes per horizontal line in the source raster
-                    draw_cmd_func        <= CMD_OUT_SRCRWDTH[3:0];   // sets the output function
-                    draw_cmd_data_color  <= command_data8;           // set bitplane mode (bits per pixel)
-                    draw_cmd_data_word_Y <= y[2];                    // sets the lower 12 bits of the destination address
-                    draw_cmd_data_word_X <= x[2];                    // null
-                    draw_cmd_tx          <= 1'b1;                    // transmits the command
+                    draw_cmd_func        <= CMD_OUT_SRCRWDTH[3:0] ;  // sets the output function
+                    draw_cmd_data_color  <= command_data8 ;          // set bitplane mode (bits per pixel)
+                    draw_cmd_data_word_Y <= y[2] ;                   // sets the lower 12 bits of the destination address
+                    draw_cmd_data_word_X <= x[2] ;                   // null
+                    draw_cmd_tx          <= 1'b1 ;                   // transmits the command
                 end
                     
                 8'd113 : begin  // set the number of bytes per horizontal line in the destination raster
-                    draw_cmd_func        <= CMD_OUT_DSTRWDTH[3:0];   // sets the output function
-                    draw_cmd_data_color  <= command_data8;           // set bitplane mode (bits per pixel)
-                    draw_cmd_data_word_Y <= y[3];                    // null
-                    draw_cmd_data_word_X <= x[3];                    // sets the lower 12 bits of the destination address
-                    draw_cmd_tx          <= 1'b1;                    // transmits the command
+                    draw_cmd_func        <= CMD_OUT_DSTRWDTH[3:0] ;  // sets the output function
+                    draw_cmd_data_color  <= command_data8 ;          // set bitplane mode (bits per pixel)
+                    draw_cmd_data_word_Y <= y[3] ;                   // null
+                    draw_cmd_data_word_X <= x[3] ;                   // sets the lower 12 bits of the destination address
+                    draw_cmd_tx          <= 1'b1 ;                   // transmits the command
                 end
                     
                 8'd112 : begin  // set the number of bytes per horizontal line in the source raster
-                    draw_cmd_func        <= CMD_OUT_SRCRWDTH[3:0];   // sets the output function
-                    draw_cmd_data_color  <= command_data8;           // set bitplane mode (bits per pixel)
-                    draw_cmd_data_word_Y <= y[3];                    // sets the lower 12 bits of the destination address
-                    draw_cmd_data_word_X <= x[3];                    // null
-                    draw_cmd_tx          <= 1'b1;                    // transmits the command
+                    draw_cmd_func        <= CMD_OUT_SRCRWDTH[3:0] ;  // sets the output function
+                    draw_cmd_data_color  <= command_data8 ;          // set bitplane mode (bits per pixel)
+                    draw_cmd_data_word_Y <= y[3] ;                   // sets the lower 12 bits of the destination address
+                    draw_cmd_data_word_X <= x[3] ;                   // null
+                    draw_cmd_tx          <= 1'b1 ;                   // transmits the command
                 end
 
                     
                 8'd95  : begin
-                    max_x <= x[0];    // set max width & height of screen to x0/y0
-                    max_y <= y[0];
+                    max_x <= x[0] ;    // set max width & height of screen to x0/y0
+                    max_y <= y[0] ;
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
                 8'd94  : begin
-                    max_x <= x[1];    // set max width & height of screen to x1/y1
-                    max_y <= y[1];
+                    max_x <= x[1] ;    // set max width & height of screen to x1/y1
+                    max_y <= y[1] ;
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
                 8'd93  : begin
-                    max_x <= x[2];    // set max width & height of screen to x2/y2
-                    max_y <= y[2];
+                    max_x <= x[2] ;    // set max width & height of screen to x2/y2
+                    max_y <= y[2] ;
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
                 8'd92 : begin
-                    max_x <= x[3];    // set max width & height of screen to x3/y3
-                    max_y <= y[3];
+                    max_x <= x[3] ;    // set max width & height of screen to x3/y3
+                    max_y <= y[3] ;
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
                         
                 8'd91 : begin               // clear the pixel collision counter and sets all 3 transparent mask colors to 1 8-bit color in the source function data
-                    draw_cmd_func        <= CMD_OUT_RST_PXWRI_M[3:0];                   // sets the output funtion
-                    draw_cmd_data_color  <= command_data8;                              // sets the mask color
-                    draw_cmd_data_word_Y <= { command_data8[7:0], command_data8[7:4] }; // sets mask color #2 and 1/2 or #3
-                    draw_cmd_data_word_X <= { command_data8[3:0], command_data8[7:4] }; // sets mask color 1/2 or #3 and #4
+                    draw_cmd_func        <= CMD_OUT_RST_PXWRI_M[3:0] ;                  // sets the output funtion
+                    draw_cmd_data_color  <= command_data8 ;                             // sets the mask color
+                    draw_cmd_data_word_Y <= { command_data8[7:0], command_data8[7:4] } ;// sets mask color #2 and 1/2 or #3
+                    draw_cmd_data_word_X <= { command_data8[3:0], command_data8[7:4] } ;// sets mask color 1/2 or #3 and #4
                     draw_cmd_tx          <= 1'b1;                                       // transmits the command
                 end
                 8'd90 : begin               // clear the blitter copy pixel collision counter
-                    draw_cmd_func        <= CMD_OUT_RST_PXPASTE_M[3:0];                 // sets the output funtion
-                    draw_cmd_data_color  <= command_data8;                              // sets the mask color
-                    draw_cmd_data_word_Y <= { command_data8[7:0], command_data8[7:4] }; // sets mask color #2 and 1/2 or #3
-                    draw_cmd_data_word_X <= { command_data8[3:0], command_data8[7:4] }; // sets mask color 1/2 or #3 and #4
+                    draw_cmd_func        <= CMD_OUT_RST_PXPASTE_M[3:0] ;                // sets the output funtion
+                    draw_cmd_data_color  <= command_data8 ;                             // sets the mask color
+                    draw_cmd_data_word_Y <= { command_data8[7:0], command_data8[7:4] } ;// sets mask color #2 and 1/2 or #3
+                    draw_cmd_data_word_X <= { command_data8[3:0], command_data8[7:4] } ;// sets mask color 1/2 or #3 and #4
                     draw_cmd_tx          <= 1'b1;                                       // transmits the command
                 end
 
@@ -446,5 +475,53 @@ always @(posedge clk or posedge reset) begin
     end // !draw_busy
 
 end //always @(posedge clk)
+
+endmodule
+
+module tri_comp (
+
+// inputs
+	input  logic                    clk,
+	input  logic signed [3:0][11:0] in,
+// outputs
+	output logic        [15:0]      in_a_eq_b,
+	output logic        [15:0]      in_a_gt_b,
+	output logic        [15:0]      in_a_lt_b
+
+);
+
+parameter bit CLOCK_OUTPUT = 0;
+
+always_comb begin
+
+	if ( ~CLOCK_OUTPUT ) begin
+	
+		for (int i = 0 ; i<=15 ; i++) begin
+		
+			in_a_eq_b[i] = ( in[ i[3:2] ] == in[ i[1:0] ] ) ;
+			in_a_gt_b[i] = ( in[ i[3:2] ] >  in[ i[1:0] ] ) ;
+			in_a_lt_b[i] = ( in[ i[3:2] ] <  in[ i[1:0] ] ) ;
+			
+		end
+		
+	end
+
+end
+
+always_ff @( posedge clk ) begin
+
+	if ( CLOCK_OUTPUT ) begin
+	
+		for (int i = 0 ; i<=15 ; i++) begin
+		
+			in_a_eq_b[i] <= ( in[ i[3:2] ] == in[ i[1:0] ] ) ;
+			in_a_gt_b[i] <= ( in[ i[3:2] ] >  in[ i[1:0] ] ) ;
+			in_a_lt_b[i] <= ( in[ i[3:2] ] <  in[ i[1:0] ] ) ;
+			
+		end
+		
+	end
+
+end
 
 endmodule
