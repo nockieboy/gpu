@@ -310,10 +310,10 @@ Sub drawLine (ByVal x0 as Integer, byval y0 as Integer, byval x1 as Integer, byv
 locate 1,1
 
     Rem bounding box's width and height
-    Rem set the loop's sign
     dx = x1 - x0
     dy = y1 - y0
     
+    Rem set the loop's sign
     if (dx < 0) Then
         dx = -dx
         sx = -1
@@ -328,6 +328,7 @@ locate 1,1
         sy = -1
     End If
 
+	 Rem set initial values
     magic = 0
     errd  = dx + dy
     x     = x0

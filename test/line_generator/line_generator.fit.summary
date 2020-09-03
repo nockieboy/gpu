@@ -1,0 +1,16 @@
+Fitter Status : Successful - Thu Sep 03 08:29:35 2020
+Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
+Revision Name : line_generator
+Top-level Entity Name : line_gen
+Family : Cyclone III
+Device : EP3C5F256C7
+Timing Models : Final
+Total logic elements : 434 / 5,136 ( 8 % )
+    Total combinational functions : 400 / 5,136 ( 8 % )
+    Dedicated logic registers : 130 / 5,136 ( 3 % )
+Total registers : 130
+Total pins : 95 / 183 ( 52 % )
+Total virtual pins : 0
+Total memory bits : 0 / 423,936 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 46 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

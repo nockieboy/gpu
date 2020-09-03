@@ -1164,316 +1164,6 @@ SIGNAL("fifo_cmd_busy")
 	PARENT = "";
 }
 
-SIGNAL("geometry_xy_plotter:inst|linegen_start")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|pixel_data_rdy")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|line_complete")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|draw_line")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = BUS;
-	WIDTH = 12;
-	LSB_INDEX = 0;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[11]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[10]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[9]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[8]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[7]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[6]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[5]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[4]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[3]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[2]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[1]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[0]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = BUS;
-	WIDTH = 12;
-	LSB_INDEX = 0;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[11]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[10]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[9]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[8]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[7]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[6]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[5]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[4]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[3]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[2]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[1]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[0]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-}
-
-SIGNAL("divider 672")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = INPUT;
-	PARENT = "";
-}
-
 TRANSITION_LIST("clk")
 {
 	NODE
@@ -1597,8 +1287,8 @@ TRANSITION_LIST("cmd_h[1]")
 		REPEAT = 1;
 		LEVEL 0 FOR 140.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 30.0;
-		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 20.0;
+		LEVEL 1 FOR 20.0;
 		LEVEL 0 FOR 30.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 1770.0;
@@ -1636,7 +1326,9 @@ TRANSITION_LIST("cmd_l[6]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 2000.0;
+		LEVEL 0 FOR 200.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 1780.0;
 	}
 }
 
@@ -1656,7 +1348,9 @@ TRANSITION_LIST("cmd_l[4]")
 		REPEAT = 1;
 		LEVEL 0 FOR 130.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 1860.0;
+		LEVEL 0 FOR 70.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 1780.0;
 	}
 }
 
@@ -1676,9 +1370,7 @@ TRANSITION_LIST("cmd_l[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 280.0;
-		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 1710.0;
+		LEVEL 0 FOR 2000.0;
 	}
 }
 
@@ -1704,9 +1396,9 @@ TRANSITION_LIST("cmd_l[0]")
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 20.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 110.0;
-		LEVEL 1 FOR 20.0;
-		LEVEL 0 FOR 1700.0;
+		LEVEL 0 FOR 40.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 1780.0;
 	}
 }
 
@@ -2476,258 +2168,6 @@ TRANSITION_LIST("fifo_cmd_busy")
 	}
 }
 
-TRANSITION_LIST("geometry_xy_plotter:inst|linegen_start")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|pixel_data_rdy")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|line_complete")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|draw_line")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[11]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[10]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[9]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[8]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[7]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[6]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[5]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[4]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[3]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[2]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[1]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[0]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[11]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[10]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[9]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[8]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[7]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[6]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[5]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[4]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[3]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[2]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[1]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[0]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL U FOR 2000.0;
-	}
-}
-
 DISPLAY_LINE
 {
 	CHANNEL = "clk";
@@ -2816,9 +2256,9 @@ DISPLAY_LINE
 	COMMENT
 	{
 		TIME = 188000;
-		RISE = -80;
-		RUN = 0;
-		TEXT = "Set dest mem pointer to 0x1000";
+		RISE = -77;
+		RUN = -6;
+		TEXT = "Set dest mem pointer";
 		FONT_NAME = "Arial";
 		FONT_SIZE = 8;
 		FONT_STYLE = "Regular";
@@ -2827,20 +2267,9 @@ DISPLAY_LINE
 	COMMENT
 	{
 		TIME = 228600;
-		RISE = -71;
-		RUN = 0;
-		TEXT = "Set max width & height to X[0], Y[0] (10x10)";
-		FONT_NAME = "Arial";
-		FONT_SIZE = 8;
-		FONT_STYLE = "Regular";
-		FONT_COLOR = 0;
-	}
-	COMMENT
-	{
-		TIME = 339000;
 		RISE = -78;
-		RUN = 14;
-		TEXT = "Draw line";
+		RUN = 16;
+		TEXT = "Set max width & height to X[0], Y[0] (90x100)";
 		FONT_NAME = "Arial";
 		FONT_SIZE = 8;
 		FONT_STYLE = "Regular";
@@ -2939,8 +2368,8 @@ DISPLAY_LINE
 	COMMENT
 	{
 		TIME = 137400;
-		RISE = -80;
-		RUN = 0;
+		RISE = 25;
+		RUN = -15;
 		TEXT = "X[2]";
 		FONT_NAME = "Arial";
 		FONT_SIZE = 8;
@@ -2950,78 +2379,12 @@ DISPLAY_LINE
 	COMMENT
 	{
 		TIME = 149000;
-		RISE = -97;
-		RUN = -20;
+		RISE = 24;
+		RUN = 44;
 		TEXT = "Set BPP & raster width from X[2]";
 		FONT_NAME = "Arial";
 		FONT_SIZE = 8;
 		FONT_STYLE = "Regular";
-		FONT_COLOR = 0;
-	}
-	COMMENT
-	{
-		TIME = 207600;
-		RISE = -78;
-		RUN = 0;
-		TEXT = "X[0] = 10";
-		FONT_NAME = "Arial";
-		FONT_SIZE = 8;
-		FONT_STYLE = "Regular";
-		FONT_COLOR = 0;
-	}
-	COMMENT
-	{
-		TIME = 218600;
-		RISE = -79;
-		RUN = 0;
-		TEXT = "Y[0] = 10";
-		FONT_NAME = "Arial";
-		FONT_SIZE = 8;
-		FONT_STYLE = "Regular";
-		FONT_COLOR = 0;
-	}
-	COMMENT
-	{
-		TIME = 267800;
-		RISE = -95;
-		RUN = -14;
-		TEXT = "X[0] = 0";
-		FONT_NAME = "";
-		FONT_SIZE = 0;
-		FONT_STYLE = "";
-		FONT_COLOR = 0;
-	}
-	COMMENT
-	{
-		TIME = 279200;
-		RISE = -94;
-		RUN = -20;
-		TEXT = "Y[0] = 0";
-		FONT_NAME = "";
-		FONT_SIZE = 0;
-		FONT_STYLE = "";
-		FONT_COLOR = 0;
-	}
-	COMMENT
-	{
-		TIME = 289000;
-		RISE = -95;
-		RUN = -18;
-		TEXT = "X[1] = 5";
-		FONT_NAME = "Arial";
-		FONT_SIZE = 8;
-		FONT_STYLE = "Regular";
-		FONT_COLOR = 0;
-	}
-	COMMENT
-	{
-		TIME = 298000;
-		RISE = -95;
-		RUN = -12;
-		TEXT = "Y[1] = 1";
-		FONT_NAME = "";
-		FONT_SIZE = 0;
-		FONT_STYLE = "";
 		FONT_COLOR = 0;
 	}
 }
@@ -3506,19 +2869,10 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|linegen_start";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 64;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
 	CHANNEL = "Copy_1_of_divider 1039";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 65;
+	TREE_INDEX = 64;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
 }
@@ -3528,9 +2882,9 @@ DISPLAY_LINE
 	CHANNEL = "address";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 66;
+	TREE_INDEX = 65;
 	TREE_LEVEL = 0;
-	CHILDREN = 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86;
+	CHILDREN = 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85;
 }
 
 DISPLAY_LINE
@@ -3538,9 +2892,9 @@ DISPLAY_LINE
 	CHANNEL = "address[19]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 67;
+	TREE_INDEX = 66;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3548,9 +2902,9 @@ DISPLAY_LINE
 	CHANNEL = "address[18]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 68;
+	TREE_INDEX = 67;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3558,9 +2912,9 @@ DISPLAY_LINE
 	CHANNEL = "address[17]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 69;
+	TREE_INDEX = 68;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3568,9 +2922,9 @@ DISPLAY_LINE
 	CHANNEL = "address[16]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 70;
+	TREE_INDEX = 69;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3578,9 +2932,9 @@ DISPLAY_LINE
 	CHANNEL = "address[15]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 71;
+	TREE_INDEX = 70;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3588,9 +2942,9 @@ DISPLAY_LINE
 	CHANNEL = "address[14]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 72;
+	TREE_INDEX = 71;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3598,9 +2952,9 @@ DISPLAY_LINE
 	CHANNEL = "address[13]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 73;
+	TREE_INDEX = 72;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3608,9 +2962,9 @@ DISPLAY_LINE
 	CHANNEL = "address[12]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 74;
+	TREE_INDEX = 73;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3618,9 +2972,9 @@ DISPLAY_LINE
 	CHANNEL = "address[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 75;
+	TREE_INDEX = 74;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3628,9 +2982,9 @@ DISPLAY_LINE
 	CHANNEL = "address[10]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 76;
+	TREE_INDEX = 75;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3638,9 +2992,9 @@ DISPLAY_LINE
 	CHANNEL = "address[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 77;
+	TREE_INDEX = 76;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3648,9 +3002,9 @@ DISPLAY_LINE
 	CHANNEL = "address[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 78;
+	TREE_INDEX = 77;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3658,9 +3012,9 @@ DISPLAY_LINE
 	CHANNEL = "address[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 79;
+	TREE_INDEX = 78;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3668,9 +3022,9 @@ DISPLAY_LINE
 	CHANNEL = "address[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 80;
+	TREE_INDEX = 79;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3678,9 +3032,9 @@ DISPLAY_LINE
 	CHANNEL = "address[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 81;
+	TREE_INDEX = 80;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3688,9 +3042,9 @@ DISPLAY_LINE
 	CHANNEL = "address[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 82;
+	TREE_INDEX = 81;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3698,9 +3052,9 @@ DISPLAY_LINE
 	CHANNEL = "address[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 83;
+	TREE_INDEX = 82;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3708,9 +3062,9 @@ DISPLAY_LINE
 	CHANNEL = "address[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 84;
+	TREE_INDEX = 83;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3718,9 +3072,9 @@ DISPLAY_LINE
 	CHANNEL = "address[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 85;
+	TREE_INDEX = 84;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3728,9 +3082,9 @@ DISPLAY_LINE
 	CHANNEL = "address[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 86;
+	TREE_INDEX = 85;
 	TREE_LEVEL = 1;
-	PARENT = 66;
+	PARENT = 65;
 }
 
 DISPLAY_LINE
@@ -3738,9 +3092,9 @@ DISPLAY_LINE
 	CHANNEL = "bit_offset";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 87;
+	TREE_INDEX = 86;
 	TREE_LEVEL = 0;
-	CHILDREN = 88, 89, 90, 91;
+	CHILDREN = 87, 88, 89, 90;
 }
 
 DISPLAY_LINE
@@ -3748,9 +3102,9 @@ DISPLAY_LINE
 	CHANNEL = "bit_offset[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 88;
+	TREE_INDEX = 87;
 	TREE_LEVEL = 1;
-	PARENT = 87;
+	PARENT = 86;
 }
 
 DISPLAY_LINE
@@ -3758,9 +3112,9 @@ DISPLAY_LINE
 	CHANNEL = "bit_offset[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 89;
+	TREE_INDEX = 88;
 	TREE_LEVEL = 1;
-	PARENT = 87;
+	PARENT = 86;
 }
 
 DISPLAY_LINE
@@ -3768,9 +3122,9 @@ DISPLAY_LINE
 	CHANNEL = "bit_offset[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 90;
+	TREE_INDEX = 89;
 	TREE_LEVEL = 1;
-	PARENT = 87;
+	PARENT = 86;
 }
 
 DISPLAY_LINE
@@ -3778,9 +3132,9 @@ DISPLAY_LINE
 	CHANNEL = "bit_offset[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 91;
+	TREE_INDEX = 90;
 	TREE_LEVEL = 1;
-	PARENT = 87;
+	PARENT = 86;
 }
 
 DISPLAY_LINE
@@ -3788,9 +3142,9 @@ DISPLAY_LINE
 	CHANNEL = "bits_per_pixel";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 92;
+	TREE_INDEX = 91;
 	TREE_LEVEL = 0;
-	CHILDREN = 93, 94, 95, 96;
+	CHILDREN = 92, 93, 94, 95;
 }
 
 DISPLAY_LINE
@@ -3798,9 +3152,9 @@ DISPLAY_LINE
 	CHANNEL = "bits_per_pixel[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 93;
+	TREE_INDEX = 92;
 	TREE_LEVEL = 1;
-	PARENT = 92;
+	PARENT = 91;
 }
 
 DISPLAY_LINE
@@ -3808,9 +3162,9 @@ DISPLAY_LINE
 	CHANNEL = "bits_per_pixel[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 94;
+	TREE_INDEX = 93;
 	TREE_LEVEL = 1;
-	PARENT = 92;
+	PARENT = 91;
 }
 
 DISPLAY_LINE
@@ -3818,9 +3172,9 @@ DISPLAY_LINE
 	CHANNEL = "bits_per_pixel[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 95;
+	TREE_INDEX = 94;
 	TREE_LEVEL = 1;
-	PARENT = 92;
+	PARENT = 91;
 }
 
 DISPLAY_LINE
@@ -3828,9 +3182,9 @@ DISPLAY_LINE
 	CHANNEL = "bits_per_pixel[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 96;
+	TREE_INDEX = 95;
 	TREE_LEVEL = 1;
-	PARENT = 92;
+	PARENT = 91;
 }
 
 DISPLAY_LINE
@@ -3838,9 +3192,9 @@ DISPLAY_LINE
 	CHANNEL = "cmd_function";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 97;
+	TREE_INDEX = 96;
 	TREE_LEVEL = 0;
-	CHILDREN = 98, 99, 100, 101;
+	CHILDREN = 97, 98, 99, 100;
 }
 
 DISPLAY_LINE
@@ -3848,9 +3202,9 @@ DISPLAY_LINE
 	CHANNEL = "cmd_function[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 98;
+	TREE_INDEX = 97;
 	TREE_LEVEL = 1;
-	PARENT = 97;
+	PARENT = 96;
 }
 
 DISPLAY_LINE
@@ -3858,9 +3212,9 @@ DISPLAY_LINE
 	CHANNEL = "cmd_function[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 99;
+	TREE_INDEX = 98;
 	TREE_LEVEL = 1;
-	PARENT = 97;
+	PARENT = 96;
 }
 
 DISPLAY_LINE
@@ -3868,9 +3222,9 @@ DISPLAY_LINE
 	CHANNEL = "cmd_function[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 100;
+	TREE_INDEX = 99;
 	TREE_LEVEL = 1;
-	PARENT = 97;
+	PARENT = 96;
 }
 
 DISPLAY_LINE
@@ -3878,9 +3232,9 @@ DISPLAY_LINE
 	CHANNEL = "cmd_function[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 101;
+	TREE_INDEX = 100;
 	TREE_LEVEL = 1;
-	PARENT = 97;
+	PARENT = 96;
 }
 
 DISPLAY_LINE
@@ -3888,9 +3242,9 @@ DISPLAY_LINE
 	CHANNEL = "colour";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 102;
+	TREE_INDEX = 101;
 	TREE_LEVEL = 0;
-	CHILDREN = 103, 104, 105, 106, 107, 108, 109, 110;
+	CHILDREN = 102, 103, 104, 105, 106, 107, 108, 109;
 }
 
 DISPLAY_LINE
@@ -3898,9 +3252,9 @@ DISPLAY_LINE
 	CHANNEL = "colour[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 103;
+	TREE_INDEX = 102;
 	TREE_LEVEL = 1;
-	PARENT = 102;
+	PARENT = 101;
 }
 
 DISPLAY_LINE
@@ -3908,9 +3262,9 @@ DISPLAY_LINE
 	CHANNEL = "colour[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 104;
+	TREE_INDEX = 103;
 	TREE_LEVEL = 1;
-	PARENT = 102;
+	PARENT = 101;
 }
 
 DISPLAY_LINE
@@ -3918,9 +3272,9 @@ DISPLAY_LINE
 	CHANNEL = "colour[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 105;
+	TREE_INDEX = 104;
 	TREE_LEVEL = 1;
-	PARENT = 102;
+	PARENT = 101;
 }
 
 DISPLAY_LINE
@@ -3928,9 +3282,9 @@ DISPLAY_LINE
 	CHANNEL = "colour[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 106;
+	TREE_INDEX = 105;
 	TREE_LEVEL = 1;
-	PARENT = 102;
+	PARENT = 101;
 }
 
 DISPLAY_LINE
@@ -3938,9 +3292,9 @@ DISPLAY_LINE
 	CHANNEL = "colour[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 107;
+	TREE_INDEX = 106;
 	TREE_LEVEL = 1;
-	PARENT = 102;
+	PARENT = 101;
 }
 
 DISPLAY_LINE
@@ -3948,9 +3302,9 @@ DISPLAY_LINE
 	CHANNEL = "colour[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 108;
+	TREE_INDEX = 107;
 	TREE_LEVEL = 1;
-	PARENT = 102;
+	PARENT = 101;
 }
 
 DISPLAY_LINE
@@ -3958,9 +3312,9 @@ DISPLAY_LINE
 	CHANNEL = "colour[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 109;
+	TREE_INDEX = 108;
 	TREE_LEVEL = 1;
-	PARENT = 102;
+	PARENT = 101;
 }
 
 DISPLAY_LINE
@@ -3968,9 +3322,9 @@ DISPLAY_LINE
 	CHANNEL = "colour[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 110;
+	TREE_INDEX = 109;
 	TREE_LEVEL = 1;
-	PARENT = 102;
+	PARENT = 101;
 }
 
 DISPLAY_LINE
@@ -3978,7 +3332,7 @@ DISPLAY_LINE
 	CHANNEL = "pixel_cmd_rdy";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 111;
+	TREE_INDEX = 110;
 	TREE_LEVEL = 0;
 }
 
@@ -3987,304 +3341,7 @@ DISPLAY_LINE
 	CHANNEL = "Copy_2_of_divider 1039";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 112;
-	TREE_LEVEL = 0;
-	IS_DIVIDER = ON;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|draw_line";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 113;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|line_complete";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 114;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|pixel_data_rdy";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 115;
-	TREE_LEVEL = 0;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 116;
-	TREE_LEVEL = 0;
-	CHILDREN = 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[11]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 117;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[10]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 118;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[9]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 119;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[8]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 120;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[7]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 121;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[6]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 122;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[5]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 123;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[4]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 124;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[3]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 125;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[2]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 126;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[1]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 127;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[0]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 128;
-	TREE_LEVEL = 1;
-	PARENT = 116;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 129;
-	TREE_LEVEL = 0;
-	CHILDREN = 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[11]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 130;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[10]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 131;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[9]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 132;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[8]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 133;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[7]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 134;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[6]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 135;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[5]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 136;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[4]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 137;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[3]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 138;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[2]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 139;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[1]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 140;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[0]";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Hexadecimal;
-	TREE_INDEX = 141;
-	TREE_LEVEL = 1;
-	PARENT = 129;
-}
-
-DISPLAY_LINE
-{
-	CHANNEL = "divider 672";
-	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
-	TREE_INDEX = 142;
+	TREE_INDEX = 111;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
 }

@@ -8,7 +8,7 @@ ptn_Child1=Document-0
 ptn_Child1=ViewFrame-0
 [ProjectWorkspace.Frames.ChildFrames.Document-0.ViewFrame-0]
 DocPathName=geometry_processor.sv
-DocumentCLSID={0b720e69-67da-11d0-bf4f-0000c08cb0c0}
+DocumentCLSID={c3a23eae-3ac0-4585-9d3a-6ff07a7a4a81}
 IsChildFrameDetached=False
 IsActiveChildFrame=True
 ptn_Child1=StateMap

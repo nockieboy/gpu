@@ -1,5 +1,5 @@
 Analysis & Synthesis report for geo
-Thu Sep 03 08:32:57 2020
+Thu Aug 13 11:15:54 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -15,7 +15,7 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
   9. Analysis & Synthesis DSP Block Usage Summary
- 10. State Machine - |geo|geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1
+ 10. State Machine - |geo|geometry_xy_plotter:inst|geo_sub_func1
  11. Registers Removed During Synthesis
  12. General Register Statistics
  13. Multiplexer Restructuring Statistics (Restructuring Performed)
@@ -25,8 +25,7 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
  17. Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult0
  18. scfifo Parameter Settings by Entity Instance
  19. lpm_mult Parameter Settings by Entity Instance
- 20. Port Connectivity Checks: "geometry_xy_plotter:inst|line_generator:linegen_1"
- 21. Analysis & Synthesis Messages
+ 20. Analysis & Synthesis Messages
 
 
 
@@ -52,15 +51,15 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Sep 03 08:32:57 2020        ;
+; Analysis & Synthesis Status        ; Successful - Thu Aug 13 11:15:53 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; geo                                          ;
 ; Top-level Entity Name              ; geo                                          ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 1,418                                        ;
-;     Total combinational functions  ; 1,189                                        ;
-;     Dedicated logic registers      ; 507                                          ;
-; Total registers                    ; 507                                          ;
+; Total logic elements               ; 1,246                                        ;
+;     Total combinational functions  ; 1,018                                        ;
+;     Dedicated logic registers      ; 474                                          ;
+; Total registers                    ; 474                                          ;
 ; Total pins                         ; 100                                          ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 8,192                                        ;
@@ -168,7 +167,6 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                 ;
 +----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------+
 ; geo.bdf                          ; yes             ; User Block Diagram/Schematic File  ; G:/fpga/Projects/GPU/test/Geo/geo.bdf                        ;
-; ../tri/line_generator.sv         ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Projects/GPU/test/tri/line_generator.sv              ;
 ; geometry_xy_plotter.sv           ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Projects/GPU/test/Geo/geometry_xy_plotter.sv         ;
 ; pixel_address_generator.sv       ; yes             ; User SystemVerilog HDL File        ; G:/fpga/Projects/GPU/test/Geo/pixel_address_generator.sv     ;
 ; scfifo.tdf                       ; yes             ; Megafunction                       ; g:/altera/91sp2/quartus/libraries/megafunctions/scfifo.tdf   ;
@@ -189,29 +187,29 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 1,418     ;
+; Estimated Total logic elements              ; 1,246     ;
 ;                                             ;           ;
-; Total combinational functions               ; 1189      ;
+; Total combinational functions               ; 1018      ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 478       ;
-;     -- 3 input functions                    ; 583       ;
-;     -- <=2 input functions                  ; 128       ;
+;     -- 4 input functions                    ; 416       ;
+;     -- 3 input functions                    ; 484       ;
+;     -- <=2 input functions                  ; 118       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 862       ;
-;     -- arithmetic mode                      ; 327       ;
+;     -- normal mode                          ; 757       ;
+;     -- arithmetic mode                      ; 261       ;
 ;                                             ;           ;
-; Total registers                             ; 507       ;
-;     -- Dedicated logic registers            ; 507       ;
+; Total registers                             ; 474       ;
+;     -- Dedicated logic registers            ; 474       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 100       ;
 ; Total memory bits                           ; 8192      ;
 ; Embedded Multiplier 9-bit elements          ; 4         ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 523       ;
-; Total fan-out                               ; 6506      ;
-; Average fan-out                             ; 3.40      ;
+; Maximum fan-out                             ; 490       ;
+; Total fan-out                               ; 5852      ;
+; Average fan-out                             ; 3.42      ;
 +---------------------------------------------+-----------+
 
 
@@ -220,17 +218,16 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node               ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                           ; Library Name ;
 +------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |geo                                     ; 1189 (1)          ; 507 (0)      ; 8192        ; 4            ; 0       ; 2         ; 100  ; 0            ; |geo                                                                                                                          ; work         ;
-;    |geometry_xy_plotter:inst|            ; 934 (550)         ; 311 (199)    ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst                                                                                                 ;              ;
-;       |line_generator:linegen_1|         ; 310 (310)         ; 68 (68)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1                                                                        ;              ;
+; |geo                                     ; 1018 (1)          ; 474 (0)      ; 8192        ; 4            ; 0       ; 2         ; 100  ; 0            ; |geo                                                                                                                          ; work         ;
+;    |geometry_xy_plotter:inst|            ; 759 (685)         ; 278 (234)    ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst                                                                                                 ;              ;
 ;       |scfifo:scfifo_component|          ; 74 (0)            ; 44 (0)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component                                                                         ; work         ;
-;          |scfifo_3oa1:auto_generated|    ; 74 (6)            ; 44 (1)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated                                              ; work         ;
+;          |scfifo_3oa1:auto_generated|    ; 74 (6)            ; 44 (1)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated                                              ;              ;
 ;             |a_dpfifo_7r71:dpfifo|       ; 68 (39)           ; 43 (17)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo                         ; work         ;
-;                |altsyncram_esf1:FIFOram| ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|altsyncram_esf1:FIFOram ; work         ;
+;                |altsyncram_esf1:FIFOram| ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|altsyncram_esf1:FIFOram ;              ;
 ;                |cntr_597:usedw_counter|  ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_597:usedw_counter  ;              ;
-;                |cntr_o8b:rd_ptr_msb|     ; 9 (9)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_o8b:rd_ptr_msb     ;              ;
-;                |cntr_p8b:wr_ptr|         ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_p8b:wr_ptr         ;              ;
-;    |pixel_address_generator:inst1|       ; 254 (254)         ; 196 (196)    ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |geo|pixel_address_generator:inst1                                                                                            ;              ;
+;                |cntr_o8b:rd_ptr_msb|     ; 9 (9)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_o8b:rd_ptr_msb     ; work         ;
+;                |cntr_p8b:wr_ptr|         ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_p8b:wr_ptr         ; work         ;
+;    |pixel_address_generator:inst1|       ; 258 (258)         ; 196 (196)    ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |geo|pixel_address_generator:inst1                                                                                            ;              ;
 ;       |lpm_mult:Mult0|                   ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult0                                                                             ;              ;
 ;          |mult_vbt:auto_generated|       ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult0|mult_vbt:auto_generated                                                     ;              ;
 ;       |lpm_mult:Mult1|                   ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult1                                                                             ;              ;
@@ -267,35 +264,29 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 
 
 Encoding Type:  One-Hot
-+--------------------------------------------------------------------------------------+
-; State Machine - |geo|geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1 ;
-+--------------------+-----------------------------------------------------------------+
-; Name               ; geo_sub_func1.0001                                              ;
-+--------------------+-----------------------------------------------------------------+
-; geo_sub_func1.0000 ; 0                                                               ;
-; geo_sub_func1.0001 ; 1                                                               ;
-+--------------------+-----------------------------------------------------------------+
++-------------------------------------------------------------+
+; State Machine - |geo|geometry_xy_plotter:inst|geo_sub_func1 ;
++--------------------+----------------------------------------+
+; Name               ; geo_sub_func1.0001                     ;
++--------------------+----------------------------------------+
+; geo_sub_func1.0000 ; 0                                      ;
+; geo_sub_func1.0001 ; 1                                      ;
++--------------------+----------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                            ;
-+-------------------------------------------------------------------+---------------------------------------------------------------------------+
-; Register name                                                     ; Reason for Removal                                                        ;
-+-------------------------------------------------------------------+---------------------------------------------------------------------------+
-; geometry_xy_plotter:inst|pass_thru_b                              ; Stuck at GND due to stuck port data_in                                    ;
-; geometry_xy_plotter:inst|pass_thru_a                              ; Stuck at GND due to stuck port data_in                                    ;
-; geometry_xy_plotter:inst|line_generator:linegen_1|stop_ypos_en    ; Stuck at GND due to stuck port data_in                                    ;
-; geometry_xy_plotter:inst|line_generator:linegen_1|Y_stop[0..11]   ; Stuck at GND due to stuck port data_in                                    ;
-; geometry_xy_plotter:inst|geo_xdir[1..10]                          ; Merged with geometry_xy_plotter:inst|geo_xdir[11]                         ;
-; geometry_xy_plotter:inst|geo_ydir[1..10]                          ; Merged with geometry_xy_plotter:inst|geo_ydir[11]                         ;
-; geometry_xy_plotter:inst|line_generator:linegen_1|geo_ydir[2..11] ; Merged with geometry_xy_plotter:inst|line_generator:linegen_1|geo_ydir[1] ;
-; geometry_xy_plotter:inst|line_generator:linegen_1|geo_xdir[2..11] ; Merged with geometry_xy_plotter:inst|line_generator:linegen_1|geo_xdir[1] ;
-; geometry_xy_plotter:inst|geo_shape[3]                             ; Stuck at GND due to stuck port data_in                                    ;
-; geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~4 ; Lost fanout                                                               ;
-; geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~5 ; Lost fanout                                                               ;
-; geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~6 ; Lost fanout                                                               ;
-; Total Number of Removed Registers = 59                            ;                                                                           ;
-+-------------------------------------------------------------------+---------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                           ;
++------------------------------------------+---------------------------------------------------+
+; Register name                            ; Reason for Removal                                ;
++------------------------------------------+---------------------------------------------------+
+; geometry_xy_plotter:inst|geo_xdir[1..10] ; Merged with geometry_xy_plotter:inst|geo_xdir[11] ;
+; geometry_xy_plotter:inst|geo_ydir[1..10] ; Merged with geometry_xy_plotter:inst|geo_ydir[11] ;
+; geometry_xy_plotter:inst|geo_shape[3]    ; Stuck at GND due to stuck port data_in            ;
+; geometry_xy_plotter:inst|geo_sub_func1~7 ; Lost fanout                                       ;
+; geometry_xy_plotter:inst|geo_sub_func1~8 ; Lost fanout                                       ;
+; geometry_xy_plotter:inst|geo_sub_func1~9 ; Lost fanout                                       ;
+; Total Number of Removed Registers = 24   ;                                                   ;
++------------------------------------------+---------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -303,43 +294,40 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 507   ;
-; Number of registers using Synchronous Clear  ; 6     ;
-; Number of registers using Synchronous Load   ; 104   ;
-; Number of registers using Asynchronous Clear ; 319   ;
+; Total registers                              ; 474   ;
+; Number of registers using Synchronous Clear  ; 4     ;
+; Number of registers using Synchronous Load   ; 80    ;
+; Number of registers using Asynchronous Clear ; 354   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 460   ;
+; Number of registers using Clock Enable       ; 451   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[28]                  ;
-; 16:1               ; 3 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[37]                  ;
-; 5:1                ; 12 bits   ; 36 LEs        ; 12 LEs               ; 24 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|errd[2]    ;
-; 4:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[15]                  ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[20]                  ;
-; 7:1                ; 12 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[7] ;
-; 7:1                ; 12 bits   ; 48 LEs        ; 12 LEs               ; 36 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_y[3]                            ;
-; 8:1                ; 12 bits   ; 60 LEs        ; 24 LEs               ; 36 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_x[9]                            ;
-; 9:1                ; 12 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[3] ;
-; 8:1                ; 8 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_color[5]              ;
-; 130:1              ; 2 bits    ; 172 LEs       ; 6 LEs                ; 166 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_func[1]                    ;
-; 130:1              ; 24 bits   ; 2064 LEs      ; 48 LEs               ; 2016 LEs               ; Yes        ; |geo|geometry_xy_plotter:inst|max_x[0]                            ;
-; 132:1              ; 2 bits    ; 176 LEs       ; 8 LEs                ; 168 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|geo_shape[2]                        ;
-; 74:1               ; 4 bits    ; 196 LEs       ; 16 LEs               ; 180 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[11]            ;
-; 74:1               ; 8 bits    ; 392 LEs       ; 32 LEs               ; 360 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[0]             ;
-; 74:1               ; 12 bits   ; 588 LEs       ; 48 LEs               ; 540 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_Y[11]            ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|Add4       ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |geo|geometry_xy_plotter:inst|draw_cmd_func                       ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                           ;
-; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                           ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
+; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|errd[0]                  ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[28]       ;
+; 16:1               ; 3 bits    ; 30 LEs        ; 12 LEs               ; 18 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[36]       ;
+; 4:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[17]       ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[22]       ;
+; 130:1              ; 24 bits   ; 2064 LEs      ; 48 LEs               ; 2016 LEs               ; Yes        ; |geo|geometry_xy_plotter:inst|max_y[4]                 ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_color[6]   ;
+; 11:1               ; 12 bits   ; 84 LEs        ; 24 LEs               ; 60 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_x[9]                 ;
+; 133:1              ; 2 bits    ; 176 LEs       ; 8 LEs                ; 168 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|geo_shape[1]             ;
+; 12:1               ; 12 bits   ; 96 LEs        ; 12 LEs               ; 84 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_y[10]                ;
+; 135:1              ; 2 bits    ; 180 LEs       ; 6 LEs                ; 174 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_func[2]         ;
+; 75:1               ; 4 bits    ; 200 LEs       ; 16 LEs               ; 184 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[11] ;
+; 75:1               ; 8 bits    ; 400 LEs       ; 32 LEs               ; 368 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[4]  ;
+; 75:1               ; 12 bits   ; 600 LEs       ; 48 LEs               ; 552 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_Y[11] ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|geometry_xy_plotter:inst|Add4                     ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -495,48 +483,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------+----------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "geometry_xy_plotter:inst|line_generator:linegen_1"                                          ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; busy         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; ypos_stopped ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-
-
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Thu Sep 03 08:32:47 2020
+    Info: Processing started: Thu Aug 13 11:15:44 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off geo -c geo
 Info: Found 1 design units, including 1 entities, in source file geo.bdf
     Info: Found entity 1: geo
-Info: Found 1 design units, including 1 entities, in source file /fpga/projects/gpu/test/tri/line_generator.sv
-    Info: Found entity 1: line_generator
 Info: Found 1 design units, including 1 entities, in source file geometry_xy_plotter.sv
     Info: Found entity 1: geometry_xy_plotter
 Info: Found 1 design units, including 1 entities, in source file pixel_address_generator.sv
     Info: Found entity 1: pixel_address_generator
 Info: Elaborating entity "geo" for the top level hierarchy
 Info: Elaborating entity "geometry_xy_plotter" for hierarchy "geometry_xy_plotter:inst"
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(30): object "CMD_OUT_NOP" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(32): object "CMD_OUT_PXWRI_M" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(33): object "CMD_OUT_PXPASTE" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(34): object "CMD_OUT_PXPASTE_M" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(36): object "CMD_OUT_PXCOPY" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(37): object "CMD_OUT_SETARGB" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(79): object "geo_mask" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(80): object "geo_paste" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(93): object "geo_sub_func1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(94): object "geo_sub_func2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(95): object "dx" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(96): object "dy" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(97): object "errd" assigned a value but never read
-Info (10264): Verilog HDL Case Statement information at geometry_xy_plotter.sv(359): all case item expressions in this case statement are onehot
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(47): object "CMD_OUT_NOP" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(49): object "CMD_OUT_PXWRI_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(50): object "CMD_OUT_PXPASTE" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(51): object "CMD_OUT_PXPASTE_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(53): object "CMD_OUT_PXCOPY" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(54): object "CMD_OUT_SETARGB" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(96): object "geo_mask" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(97): object "geo_paste" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(110): object "geo_sub_func2" assigned a value but never read
+Info (10264): Verilog HDL Case Statement information at geometry_xy_plotter.sv(333): all case item expressions in this case statement are onehot
 Info: Elaborating entity "scfifo" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component"
 Info: Elaborated megafunction instantiation "geometry_xy_plotter:inst|scfifo:scfifo_component"
 Info: Instantiated megafunction "geometry_xy_plotter:inst|scfifo:scfifo_component" with the following parameter:
@@ -574,7 +546,6 @@ Info: Elaborating entity "cntr_597" for hierarchy "geometry_xy_plotter:inst|scfi
 Info: Found 1 design units, including 1 entities, in source file db/cntr_p8b.tdf
     Info: Found entity 1: cntr_p8b
 Info: Elaborating entity "cntr_p8b" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_3oa1:auto_generated|a_dpfifo_7r71:dpfifo|cntr_p8b:wr_ptr"
-Info: Elaborating entity "line_generator" for hierarchy "geometry_xy_plotter:inst|line_generator:linegen_1"
 Info: Elaborating entity "pixel_address_generator" for hierarchy "pixel_address_generator:inst1"
 Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(83): object "CMD_IN_NOP" assigned a value but never read
 Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(100): object "CMD_OUT_NOP" assigned a value but never read
@@ -597,19 +568,19 @@ Info: Instantiated megafunction "pixel_address_generator:inst1|lpm_mult:Mult1" w
 Info: Found 1 design units, including 1 entities, in source file db/mult_vbt.tdf
     Info: Found entity 1: mult_vbt
 Info: 3 registers lost all their fanouts during netlist optimizations. The first 3 are displayed below.
-    Info: Register "geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~4" lost all its fanouts during netlist optimizations.
-    Info: Register "geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~5" lost all its fanouts during netlist optimizations.
-    Info: Register "geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~6" lost all its fanouts during netlist optimizations.
-Info: Implemented 1546 device resources after synthesis - the final resource count might be different
+    Info: Register "geometry_xy_plotter:inst|geo_sub_func1~7" lost all its fanouts during netlist optimizations.
+    Info: Register "geometry_xy_plotter:inst|geo_sub_func1~8" lost all its fanouts during netlist optimizations.
+    Info: Register "geometry_xy_plotter:inst|geo_sub_func1~9" lost all its fanouts during netlist optimizations.
+Info: Implemented 1371 device resources after synthesis - the final resource count might be different
     Info: Implemented 20 input pins
     Info: Implemented 80 output pins
-    Info: Implemented 1426 logic cells
+    Info: Implemented 1251 logic cells
     Info: Implemented 16 RAM segments
     Info: Implemented 4 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 16 warnings
-    Info: Peak virtual memory: 237 megabytes
-    Info: Processing ended: Thu Sep 03 08:32:57 2020
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 12 warnings
+    Info: Peak virtual memory: 236 megabytes
+    Info: Processing ended: Thu Aug 13 11:15:54 2020
     Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:11
+    Info: Total CPU time (on all processors): 00:00:09
 
 

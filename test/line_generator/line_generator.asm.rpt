@@ -1,5 +1,5 @@
-Assembler report for geo
-Thu Sep 03 08:33:52 2020
+Assembler report for line_generator
+Thu Sep 03 08:29:37 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -10,7 +10,7 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: G:/fpga/Projects/GPU/test/Geo/geo.sof
+  5. Assembler Device Options: G:/fpga/Projects/GPU/test/line_generator/line_generator.sof
   6. Assembler Messages
 
 
@@ -37,9 +37,9 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Sep 03 08:33:52 2020 ;
-; Revision Name         ; geo                                   ;
-; Top-level Entity Name ; geo                                   ;
+; Assembler Status      ; Successful - Thu Sep 03 08:29:37 2020 ;
+; Revision Name         ; line_generator                        ;
+; Top-level Entity Name ; line_gen                              ;
 ; Family                ; Cyclone III                           ;
 ; Device                ; EP3C5F256C7                           ;
 +-----------------------+---------------------------------------+
@@ -77,24 +77,24 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+---------------------------------------+
-; Assembler Generated Files             ;
-+---------------------------------------+
-; File Name                             ;
-+---------------------------------------+
-; G:/fpga/Projects/GPU/test/Geo/geo.sof ;
-+---------------------------------------+
++-------------------------------------------------------------+
+; Assembler Generated Files                                   ;
++-------------------------------------------------------------+
+; File Name                                                   ;
++-------------------------------------------------------------+
+; G:/fpga/Projects/GPU/test/line_generator/line_generator.sof ;
++-------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------+
-; Assembler Device Options: G:/fpga/Projects/GPU/test/Geo/geo.sof ;
-+----------------+------------------------------------------------+
-; Option         ; Setting                                        ;
-+----------------+------------------------------------------------+
-; Device         ; EP3C5F256C7                                    ;
-; JTAG usercode  ; 0xFFFFFFFF                                     ;
-; Checksum       ; 0x00152CF3                                     ;
-+----------------+------------------------------------------------+
++---------------------------------------------------------------------------------------+
+; Assembler Device Options: G:/fpga/Projects/GPU/test/line_generator/line_generator.sof ;
++----------------+----------------------------------------------------------------------+
+; Option         ; Setting                                                              ;
++----------------+----------------------------------------------------------------------+
+; Device         ; EP3C5F256C7                                                          ;
+; JTAG usercode  ; 0xFFFFFFFF                                                           ;
+; Checksum       ; 0x000C9B21                                                           ;
++----------------+----------------------------------------------------------------------+
 
 
 +--------------------+
@@ -103,13 +103,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Thu Sep 03 08:33:51 2020
-Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off geo -c geo
+    Info: Processing started: Thu Sep 03 08:29:36 2020
+Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off line_generator -c line_generator
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 210 megabytes
-    Info: Processing ended: Thu Sep 03 08:33:52 2020
+    Info: Peak virtual memory: 208 megabytes
+    Info: Processing ended: Thu Sep 03 08:29:37 2020
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
