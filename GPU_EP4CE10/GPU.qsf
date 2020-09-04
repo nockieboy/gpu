@@ -218,6 +218,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE sound.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sixteen_port_gpu_ram.sv
 set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
 set_global_assignment -name SYSTEMVERILOG_FILE pixel_address_generator.sv
+set_global_assignment -name SYSTEMVERILOG_FILE line_generator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE palette_mixer.sv
 set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
 set_global_assignment -name SYSTEMVERILOG_FILE gpu_quad_port_ram.sv

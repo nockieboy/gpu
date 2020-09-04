@@ -156,28 +156,7 @@ applicable agreement for further details.
 		(text "PX_COPY_COLOUR[15..0]" (rect 116 155 251 167)(font "Arial" ))
 		(line (pt 272 160)(pt 256 160)(line_width 3))
 	)
-	(parameter
-		"ZERO_LATENCY"
-		"1"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"overflow_protection"
-		"1"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"underflow_protection"
-		"1"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"size7_fifo"
-		"0"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
 		(rectangle (rect 16 16 256 208)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 288 -64 388 16))
 )

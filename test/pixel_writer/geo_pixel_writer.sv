@@ -72,14 +72,8 @@ logic [3:0] CMD_IN_SETARGB          = 7  ;
 logic [3:0] CMD_IN_RST_PXWRI_M      = 10 ;
 logic [3:0] CMD_IN_RST_PXPASTE_M    = 11 ;
 
-parameter bit ZERO_LATENCY         = 0  ; // When set to 1 this will make the read&write commands immediate instead of a clock cycle later
-parameter bit overflow_protection  = 1  ; // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
-parameter bit underflow_protection = 1  ; // Prevents internal position position increment if the fifo is empty
-parameter bit size7_fifo           = 0  ; // sets fifo into 7 word mode.
 
-
-
-FIFO_3word_0_latency input_cmd_fifo_1 (  // Zero Latency Command buffer
+FIFO_2word_FWFT input_cmd_fifo_1 (              // Zero Latency Command buffer
     .clk              ( clk                  ), // CLK input
     .reset            ( reset                ), // Reset FIFO
 
@@ -93,11 +87,7 @@ FIFO_3word_0_latency input_cmd_fifo_1 (  // Zero Latency Command buffer
 );
 
 defparam
-    input_cmd_fifo_1.bits                 = 40,                   // The number of bits containing the command
-    input_cmd_fifo_1.zero_latency         = ZERO_LATENCY,
-    input_cmd_fifo_1.overflow_protection  = overflow_protection,  // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
-    input_cmd_fifo_1.underflow_protection = underflow_protection, // Prevents internal position position increment if the fifo is empty
-    input_cmd_fifo_1.size7_ena            = size7_fifo;           // Set to 0 for 3 words
+    input_cmd_fifo_1.bits  = 40; // The number of bits containing the command
 
 // FIFO->pixel_writer internal command bus
 logic        pixel_cmd_rdy  ;  // HIGH when data is in FIFO for pixel writer
@@ -199,8 +189,8 @@ end
 rd_pix_c_miss  = ( rd_data_in >> LUT_shift[{rc_bpp,rc_target}]) & LUT_mask[rc_bpp] ; // Separate out the PX_COPY_COLOUR
 rd_pix_c_hit   = ( rcd        >> LUT_shift[{bpp   ,target   }]) & LUT_mask[bpp   ] ; // Separate out the PX_COPY_COLOUR
 
-colour_sel_miss  = wc_paste_pixel ? PX_COPY_COLOUR : {8'd0,(wc_colour & LUT_mask[wc_bpp])} ; // select between copy buffer color for paste, or immediate color 
-colour_sel_hit   = paste_pixel    ? PX_COPY_COLOUR : {8'd0,(colour    & LUT_mask[bpp   ])} ; // select between copy buffer color for paste, or immediate color 
+colour_sel_miss  = wc_paste_pixel ? (PX_COPY_COLOUR ^ {8'd0,wc_colour}) : {8'd0,(wc_colour & LUT_mask[wc_bpp])} ; // select between copy buffer color for paste XORed with immediate color, or immediate color 
+colour_sel_hit   = paste_pixel    ? (PX_COPY_COLOUR ^ {8'd0,colour   }) : {8'd0,(colour    & LUT_mask[bpp   ])} ; // select between copy buffer color for paste XORed with immediate color, or immediate color 
 
 wr_pix_c_miss  = rd_data_in & (16'hFFFF ^ (LUT_mask[wc_bpp] << LUT_shift[{wc_bpp,wc_target}])) | ( colour_sel_miss << LUT_shift[{wc_bpp,wc_target}] ) ; // Separate out the PX_COPY_COLOUR
 wr_pix_c_hit   = wcd        & (16'hFFFF ^ (LUT_mask[bpp   ] << LUT_shift[{bpp   ,target   }])) | ( colour_sel_hit  << LUT_shift[{bpp   ,target   }] ) ; // Separate out the PX_COPY_COLOUR
@@ -249,9 +239,9 @@ always_ff @( posedge clk ) begin
     end else begin // if reset
 
 
-      if ( collision_rd_rst || (pixel_cmd == CMD_IN_RST_PXWRI_M) ) collision_rd <= 8'b0 ;                 // reset the write pixel READ collision_rd counter
+      if ( collision_rd_rst || (pixel_cmd == CMD_IN_RST_PXWRI_M && exec_cmd) ) collision_rd <= 8'b0 ;                 // reset the write pixel READ collision_rd counter
  else if ((collision_rd != 255) && (collision_rd_inc) )            collision_rd <= collision_rd + 1'b1 ;  // increment collision_rd counter
-      if ( collision_wr_rst || (pixel_cmd == CMD_IN_RST_PXWRI_M) ) collision_wr <= 8'b0 ;                 // reset the write pixel WRITE collision_wr counter
+      if ( collision_wr_rst || (pixel_cmd == CMD_IN_RST_PXWRI_M && exec_cmd) ) collision_wr <= 8'b0 ;                 // reset the write pixel WRITE collision_wr counter
  else if ((collision_wr != 255) && (collision_wr_inc) )            collision_wr <= collision_wr + 1'b1 ;  // increment collision_wr counter
 
 
@@ -302,12 +292,12 @@ always_ff @( posedge clk ) begin
      end else if (wr_ena && (wc_addr==rc_addr) && rc_valid ) begin   // A written pixel has the same address as the read cache
                              rcd                <= ram_wr_data ;     // so, we should copy the new writen pixel data into the read cache
 
-     end else if (rd_data_rdy_a) begin                               // If a ram read request was returned
-                             rd_wait_a          <= 1'b0            ; // Turn off the wait
-                             rc_valid           <= 1'b1            ; // Make the cache valid
-                             rcd                <= rd_data_in[15:0]; // store a copy of the returned read data.
-                             PX_COPY_COLOUR     <= rd_pix_c_miss        ;
-                             PX_COPY_COLOUR_z   <= (rd_pix_c_miss ==0)  ;
+     end else if (rd_data_rdy_a) begin                                                       // If a ram read request was returned
+                             rd_wait_a          <= 1'b0            ;                         // Turn off the wait
+                             rc_valid           <= 1'b1            ;                         // Make the cache valid
+                             rcd                <= rd_data_in[15:0];                         // store a copy of the returned read data.
+                             PX_COPY_COLOUR     <=   rd_pix_c_miss ^ {8'd0,rc_colour}      ; // XOR the read pixel with the PXCOPY cmd's 8 bit color setting.
+                             PX_COPY_COLOUR_z   <= ((rd_pix_c_miss ^ {8'd0,rc_colour}) ==0); // Check for a transparent color 0 pixel.
 
      end else if (!rd_cache_hit && exec_cmd && copy_pixel) begin    // If there is a read command with a cache miss,
                              rc_addr            <= ram_addr  ;      // cache new address
@@ -318,8 +308,8 @@ always_ff @( posedge clk ) begin
                              rc_target          <= target    ;      // target bit (sub-word)
 
      end else if (exec_cmd && copy_pixel && rd_cache_hit) begin
-                             PX_COPY_COLOUR     <= rd_pix_c_hit ;
-                             PX_COPY_COLOUR_z   <= (rd_pix_c_hit == 0) ;
+                             PX_COPY_COLOUR     <=   rd_pix_c_hit ^ {8'd0,colour    }        ;  // XOR the read pixel with the PXCOPY cmd's 8 bit color setting.
+                             PX_COPY_COLOUR_z   <= ((rd_pix_c_hit ^ {8'd0,colour    }) == 0) ;  // Check for a transparent color 0 pixel.
      end
 
  end // else reset

@@ -73,116 +73,116 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 -------------------------------------------------------------------------------------------------------------
 VCCIO8                       : A1        : power  :                   : 2.5V    : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : A2        :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : A3        :        :                   :         : 8         :                
+collision_wr_rst             : A3        : input  : 2.5 V             :         : 8         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : A4        :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : A5        :        :                   :         : 8         :                
+RESET                        : A5        : input  : 2.5 V             :         : 8         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : A6        :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : A7        :        :                   :         : 8         :                
-cmd_bpp[2]                   : A8        : input  : 2.5 V             :         : 8         : N              
-rd_data_in[0]                : A9        : output : 2.5 V             :         : 7         : N              
-PX_COPY_COLOUR[14]           : A10       : output : 2.5 V             :         : 7         : N              
-PX_COPY_COLOUR[5]            : A11       : output : 2.5 V             :         : 7         : N              
-ram_addr[6]                  : A12       : output : 2.5 V             :         : 7         : N              
-ram_wr_data[9]               : A13       : output : 2.5 V             :         : 7         : N              
-rd_data_in[5]                : A14       : output : 2.5 V             :         : 7         : N              
-PX_COPY_COLOUR[10]           : A15       : output : 2.5 V             :         : 7         : N              
+PX_COPY_COLOUR[11]           : A7        : output : 2.5 V             :         : 8         : N              
+ram_wr_data[0]               : A8        : output : 2.5 V             :         : 8         : N              
+ram_wr_data[11]              : A9        : output : 2.5 V             :         : 7         : N              
+rd_req_a                     : A10       : output : 2.5 V             :         : 7         : N              
+collision_rd[7]              : A11       : output : 2.5 V             :         : 7         : N              
+cmd_adr[14]                  : A12       : input  : 2.5 V             :         : 7         : N              
+cmd_adr[4]                   : A13       : input  : 2.5 V             :         : 7         : N              
+collision_rd[5]              : A14       : output : 2.5 V             :         : 7         : N              
+PX_COPY_COLOUR[14]           : A15       : output : 2.5 V             :         : 7         : N              
 VCCIO7                       : A16       : power  :                   : 2.5V    : 7         :                
-collision_rd[4]              : B1        : output : 2.5 V             :         : 1         : N              
+collision_wr[2]              : B1        : output : 2.5 V             :         : 1         : N              
 GND                          : B2        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : B3        :        :                   :         : 8         :                
+collision_wr[5]              : B3        : output : 2.5 V             :         : 8         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : B4        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : B5        :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : B6        :        :                   :         : 8         :                
-PX_COPY_COLOUR[15]           : B7        : output : 2.5 V             :         : 8         : N              
-cmd_color[4]                 : B8        : input  : 2.5 V             :         : 8         : N              
-rd_data_in[2]                : B9        : output : 2.5 V             :         : 7         : N              
-ram_wr_data[3]               : B10       : output : 2.5 V             :         : 7         : N              
-rd_req_a                     : B11       : output : 2.5 V             :         : 7         : N              
-ram_wr_data[10]              : B12       : output : 2.5 V             :         : 7         : N              
-ram_wr_data[1]               : B13       : output : 2.5 V             :         : 7         : N              
-rd_data_in[7]                : B14       : output : 2.5 V             :         : 7         : N              
+PX_COPY_COLOUR[10]           : B6        : output : 2.5 V             :         : 8         : N              
+PX_COPY_COLOUR[12]           : B7        : output : 2.5 V             :         : 8         : N              
+ram_wr_data[4]               : B8        : output : 2.5 V             :         : 8         : N              
+ram_wr_data[6]               : B9        : output : 2.5 V             :         : 7         : N              
+PX_COPY_COLOUR[1]            : B10       : output : 2.5 V             :         : 7         : N              
+collision_rd[6]              : B11       : output : 2.5 V             :         : 7         : N              
+collision_rd[0]              : B12       : output : 2.5 V             :         : 7         : N              
+collision_rd[1]              : B13       : output : 2.5 V             :         : 7         : N              
+ram_mux_busy                 : B14       : input  : 2.5 V             :         : 7         : N              
 GND                          : B15       : gnd    :                   :         :           :                
-rd_data_in[10]               : B16       : output : 2.5 V             :         : 6         : N              
+PX_COPY_COLOUR[7]            : B16       : output : 2.5 V             :         : 6         : N              
 ~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : C1        : input  : 2.5 V             :         : 1         : N              
-collision_rd[2]              : C2        : output : 2.5 V             :         : 1         : N              
+collision_wr[6]              : C2        : output : 2.5 V             :         : 1         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : C3        :        :                   :         : 8         :                
 VCCIO8                       : C4        : power  :                   : 2.5V    : 8         :                
 GND                          : C5        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : C6        :        :                   :         : 8         :                
+rd_data_in[0]                : C6        : output : 2.5 V             :         : 8         : N              
 VCCIO8                       : C7        : power  :                   : 2.5V    : 8         :                
-cmd_adr[19]                  : C8        : input  : 2.5 V             :         : 8         : N              
-rd_data_in[4]                : C9        : output : 2.5 V             :         : 7         : N              
+PX_COPY_COLOUR[0]            : C8        : output : 2.5 V             :         : 8         : N              
+ram_wr_data[14]              : C9        : output : 2.5 V             :         : 7         : N              
 VCCIO7                       : C10       : power  :                   : 2.5V    : 7         :                
-ram_wr_data[6]               : C11       : output : 2.5 V             :         : 7         : N              
+cmd_adr[12]                  : C11       : input  : 2.5 V             :         : 7         : N              
 GND                          : C12       : gnd    :                   :         :           :                
 VCCIO7                       : C13       : power  :                   : 2.5V    : 7         :                
-ram_wr_data[15]              : C14       : output : 2.5 V             :         : 7         : N              
-ram_wr_data[11]              : C15       : output : 2.5 V             :         : 6         : N              
-cmd_target[3]                : C16       : input  : 2.5 V             :         : 6         : N              
-collision_rd[3]              : D1        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : C14       :        :                   :         : 7         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : C15       :        :                   :         : 6         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : C16       :        :                   :         : 6         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : D1        :        :                   :         : 1         :                
 ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : D2        : input  : 2.5 V             :         : 1         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : D3        :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : D4        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : D5        :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : D6        :        :                   :         : 8         :                
+collision_wr[3]              : D4        : output : 2.5 V             :         : 1         : N              
+collision_wr[7]              : D5        : output : 2.5 V             :         : 8         : N              
+collision_wr[1]              : D6        : output : 2.5 V             :         : 8         : N              
 GND                          : D7        : gnd    :                   :         :           :                
-cmd_bpp[3]                   : D8        : input  : 2.5 V             :         : 8         : N              
-cmd_bpp[0]                   : D9        : input  : 2.5 V             :         : 7         : N              
+ram_wr_data[1]               : D8        : output : 2.5 V             :         : 8         : N              
+cmd_target[2]                : D9        : input  : 2.5 V             :         : 7         : N              
 GND                          : D10       : gnd    :                   :         :           :                
-ram_wr_data[4]               : D11       : output : 2.5 V             :         : 7         : N              
-ram_wr_data[8]               : D12       : output : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : D11       :        :                   :         : 7         :                
+collision_rd_rst             : D12       : input  : 2.5 V             :         : 7         : N              
 VCCD_PLL2                    : D13       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : D14       :        :                   :         : 7         :                
-rd_data_in[12]               : D15       : output : 2.5 V             :         : 6         : N              
-ram_wr_data[12]              : D16       : output : 2.5 V             :         : 6         : N              
+collision_rd[2]              : D14       : output : 2.5 V             :         : 7         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : D15       :        :                   :         : 6         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : D16       :        :                   :         : 6         :                
 GND+                         : E1        :        :                   :         : 1         :                
 CLK                          : E2        : input  : 2.5 V             :         : 1         : N              
 VCCIO1                       : E3        : power  :                   : 2.5V    : 1         :                
 GND                          : E4        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : E5        :        :                   :         : 1         :                
+collision_wr[4]              : E5        : output : 2.5 V             :         : 1         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : E6        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : E7        :        :                   :         : 8         :                
-cmd_bpp[1]                   : E8        : input  : 2.5 V             :         : 8         : N              
-rd_data_in[13]               : E9        : output : 2.5 V             :         : 7         : N              
-ram_wr_data[14]              : E10       : output : 2.5 V             :         : 7         : N              
-ram_wr_data[13]              : E11       : output : 2.5 V             :         : 7         : N              
+ram_wr_data[10]              : E8        : output : 2.5 V             :         : 8         : N              
+PX_COPY_COLOUR[13]           : E9        : output : 2.5 V             :         : 7         : N              
+collision_rd[3]              : E10       : output : 2.5 V             :         : 7         : N              
+collision_rd[4]              : E11       : output : 2.5 V             :         : 7         : N              
 GNDA2                        : E12       : gnd    :                   :         :           :                
 GND                          : E13       : gnd    :                   :         :           :                
 VCCIO6                       : E14       : power  :                   : 2.5V    : 6         :                
 GND+                         : E15       :        :                   :         : 6         :                
 GND+                         : E16       :        :                   :         : 6         :                
-collision_rd_rst             : F1        : input  : 2.5 V             :         : 1         : N              
-collision_rd[7]              : F2        : output : 2.5 V             :         : 1         : N              
-collision_rd[5]              : F3        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : F1        :        :                   :         : 1         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : F2        :        :                   :         : 1         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : F3        :        :                   :         : 1         :                
 nSTATUS                      : F4        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : F5        :        :                   :         : 1         :                
-cmd_target[2]                : F6        : input  : 2.5 V             :         : 8         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : F7        :        :                   :         : 8         :                
-cmd_target[0]                : F8        : input  : 2.5 V             :         : 8         : N              
-PX_COPY_COLOUR[11]           : F9        : output : 2.5 V             :         : 7         : N              
-ram_wr_data[7]               : F10       : output : 2.5 V             :         : 7         : N              
-ram_wr_data[5]               : F11       : output : 2.5 V             :         : 7         : N              
+collision_wr[0]              : F5        : output : 2.5 V             :         : 1         : N              
+rd_data_in[4]                : F6        : output : 2.5 V             :         : 8         : N              
+rd_data_in[5]                : F7        : output : 2.5 V             :         : 8         : N              
+ram_wr_data[5]               : F8        : output : 2.5 V             :         : 8         : N              
+cmd_cmd[3]                   : F9        : input  : 2.5 V             :         : 7         : N              
+ram_addr[15]                 : F10       : output : 2.5 V             :         : 7         : N              
+cmd_cmd[2]                   : F11       : input  : 2.5 V             :         : 7         : N              
 VCCA2                        : F12       : power  :                   : 2.5V    :           :                
-rd_data_in[14]               : F13       : output : 2.5 V             :         : 6         : N              
-ram_wr_data[0]               : F14       : output : 2.5 V             :         : 6         : N              
-rd_data_in[1]                : F15       : output : 2.5 V             :         : 6         : N              
+cmd_adr[3]                   : F13       : input  : 2.5 V             :         : 6         : N              
+cmd_adr[15]                  : F14       : input  : 2.5 V             :         : 6         : N              
+cmd_adr[2]                   : F15       : input  : 2.5 V             :         : 6         : N              
 ~ALTERA_nCEO~ / RESERVED_OUTPUT_OPEN_DRAIN : F16       : output : 2.5 V             :         : 6         : N              
-collision_rd[0]              : G1        : output : 2.5 V             :         : 1         : N              
-collision_rd[6]              : G2        : output : 2.5 V             :         : 1         : N              
+PX_COPY_COLOUR[6]            : G1        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G2        :        :                   :         : 1         :                
 VCCIO1                       : G3        : power  :                   : 2.5V    : 1         :                
 GND                          : G4        : gnd    :                   :         :           :                
-collision_rd[1]              : G5        : output : 2.5 V             :         : 1         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G5        :        :                   :         : 1         :                
 VCCINT                       : G6        : power  :                   : 1.2V    :           :                
 VCCINT                       : G7        : power  :                   : 1.2V    :           :                
 VCCINT                       : G8        : power  :                   : 1.2V    :           :                
 VCCINT                       : G9        : power  :                   : 1.2V    :           :                
 VCCINT                       : G10       : power  :                   : 1.2V    :           :                
-rd_data_in[11]               : G11       : output : 2.5 V             :         : 6         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G11       :        :                   :         : 6         :                
 MSEL2                        : G12       :        :                   :         : 6         :                
 GND                          : G13       : gnd    :                   :         :           :                
 VCCIO6                       : G14       : power  :                   : 2.5V    : 6         :                
-rd_data_in[3]                : G15       : output : 2.5 V             :         : 6         : N              
-rd_data_in[8]                : G16       : output : 2.5 V             :         : 6         : N              
+cmd_color[0]                 : G15       : input  : 2.5 V             :         : 6         : N              
+cmd_adr[7]                   : G16       : input  : 2.5 V             :         : 6         : N              
 ~ALTERA_DCLK~                : H1        : output : 2.5 V             :         : 1         : N              
 ~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP : H2        : input  : 2.5 V             :         : 1         : N              
 TCK                          : H3        : input  :                   :         : 1         :                
@@ -197,133 +197,133 @@ VCCINT                       : H11       : power  :                   : 1.2V    
 MSEL1                        : H12       :        :                   :         : 6         :                
 MSEL0                        : H13       :        :                   :         : 6         :                
 CONF_DONE                    : H14       :        :                   :         : 6         :                
-rd_data_in[6]                : H15       : output : 2.5 V             :         : 6         : N              
-rd_data_in[9]                : H16       : output : 2.5 V             :         : 6         : N              
-cmd_adr[5]                   : J1        : input  : 2.5 V             :         : 2         : N              
-cmd_color[0]                 : J2        : input  : 2.5 V             :         : 2         : N              
+ram_addr[14]                 : H15       : output : 2.5 V             :         : 6         : N              
+ram_addr[12]                 : H16       : output : 2.5 V             :         : 6         : N              
+ram_wr_data[7]               : J1        : output : 2.5 V             :         : 2         : N              
+rd_data_in[7]                : J2        : output : 2.5 V             :         : 2         : N              
 nCE                          : J3        :        :                   :         : 1         :                
 TDO                          : J4        : output :                   :         : 1         :                
 TMS                          : J5        : input  :                   :         : 1         :                
-PX_COPY_COLOUR[12]           : J6        : output : 2.5 V             :         : 2         : N              
+rd_data_rdy_b                : J6        : output : 2.5 V             :         : 2         : N              
 GND                          : J7        : gnd    :                   :         :           :                
 GND                          : J8        : gnd    :                   :         :           :                
 GND                          : J9        : gnd    :                   :         :           :                
 GND                          : J10       : gnd    :                   :         :           :                
-rd_data_in[15]               : J11       : output : 2.5 V             :         : 5         : N              
-PX_COPY_COLOUR[8]            : J12       : output : 2.5 V             :         : 5         : N              
-PX_COPY_COLOUR[4]            : J13       : output : 2.5 V             :         : 5         : N              
-PX_COPY_COLOUR[2]            : J14       : output : 2.5 V             :         : 5         : N              
-PX_COPY_COLOUR[1]            : J15       : output : 2.5 V             :         : 5         : N              
-rd_data_rdy_b                : J16       : output : 2.5 V             :         : 5         : N              
-draw_busy                    : K1        : output : 2.5 V             :         : 2         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : K2        :        :                   :         : 2         :                
+cmd_bpp[3]                   : J11       : input  : 2.5 V             :         : 5         : N              
+PX_COPY_COLOUR[2]            : J12       : output : 2.5 V             :         : 5         : N              
+PX_COPY_COLOUR[5]            : J13       : output : 2.5 V             :         : 5         : N              
+cmd_bpp[1]                   : J14       : input  : 2.5 V             :         : 5         : N              
+cmd_bpp[0]                   : J15       : input  : 2.5 V             :         : 5         : N              
+cmd_target[0]                : J16       : input  : 2.5 V             :         : 5         : N              
+cmd_color[4]                 : K1        : input  : 2.5 V             :         : 2         : N              
+cmd_target[3]                : K2        : input  : 2.5 V             :         : 2         : N              
 VCCIO2                       : K3        : power  :                   : 2.5V    : 2         :                
 GND                          : K4        : gnd    :                   :         :           :                
-collision_wr[0]              : K5        : output : 2.5 V             :         : 2         : N              
-rd_req_b                     : K6        : output : 2.5 V             :         : 2         : N              
+ram_wr_data[13]              : K5        : output : 2.5 V             :         : 2         : N              
+rd_data_in[14]               : K6        : output : 2.5 V             :         : 2         : N              
 VCCINT                       : K7        : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : K8        :        :                   :         : 3         :                
-cmd_color[3]                 : K9        : input  : 2.5 V             :         : 4         : N              
-cmd_adr[0]                   : K10       : input  : 2.5 V             :         : 4         : N              
-ram_addr[0]                  : K11       : output : 2.5 V             :         : 5         : N              
-ram_addr[19]                 : K12       : output : 2.5 V             :         : 5         : N              
+rd_data_in[3]                : K8        : output : 2.5 V             :         : 3         : N              
+cmd_color[1]                 : K9        : input  : 2.5 V             :         : 4         : N              
+ram_addr[0]                  : K10       : output : 2.5 V             :         : 4         : N              
+cmd_adr[13]                  : K11       : input  : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : K12       :        :                   :         : 5         :                
 GND                          : K13       : gnd    :                   :         :           :                
 VCCIO5                       : K14       : power  :                   : 2.5V    : 5         :                
-ram_addr[4]                  : K15       : output : 2.5 V             :         : 5         : N              
-ram_addr[8]                  : K16       : output : 2.5 V             :         : 5         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : L1        :        :                   :         : 2         :                
-cmd_adr[16]                  : L2        : input  : 2.5 V             :         : 2         : N              
-cmd_adr[2]                   : L3        : input  : 2.5 V             :         : 2         : N              
-collision_wr[5]              : L4        : output : 2.5 V             :         : 2         : N              
+ram_addr[13]                 : K15       : output : 2.5 V             :         : 5         : N              
+cmd_bpp[2]                   : K16       : input  : 2.5 V             :         : 5         : N              
+rd_data_in[1]                : L1        : output : 2.5 V             :         : 2         : N              
+cmd_adr[19]                  : L2        : input  : 2.5 V             :         : 2         : N              
+rd_data_in[9]                : L3        : output : 2.5 V             :         : 2         : N              
+ram_wr_data[9]               : L4        : output : 2.5 V             :         : 2         : N              
 VCCA1                        : L5        : power  :                   : 2.5V    :           :                
-cmd_adr[18]                  : L6        : input  : 2.5 V             :         : 2         : N              
-cmd_adr[6]                   : L7        : input  : 2.5 V             :         : 3         : N              
-cmd_cmd[3]                   : L8        : input  : 2.5 V             :         : 3         : N              
-cmd_cmd[0]                   : L9        : input  : 2.5 V             :         : 4         : N              
-PX_COPY_COLOUR[7]            : L10       : output : 2.5 V             :         : 4         : N              
-ram_addr[14]                 : L11       : output : 2.5 V             :         : 4         : N              
-ram_addr[13]                 : L12       : output : 2.5 V             :         : 5         : N              
-ram_addr[9]                  : L13       : output : 2.5 V             :         : 5         : N              
-rd_data_rdy_a                : L14       : output : 2.5 V             :         : 5         : N              
-ram_addr[10]                 : L15       : output : 2.5 V             :         : 5         : N              
-ram_addr[11]                 : L16       : output : 2.5 V             :         : 5         : N              
+rd_data_in[6]                : L6        : output : 2.5 V             :         : 2         : N              
+PX_COPY_COLOUR[8]            : L7        : output : 2.5 V             :         : 3         : N              
+ram_wr_data[15]              : L8        : output : 2.5 V             :         : 3         : N              
+cmd_color[5]                 : L9        : input  : 2.5 V             :         : 4         : N              
+cmd_adr[8]                   : L10       : input  : 2.5 V             :         : 4         : N              
+ram_addr[17]                 : L11       : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : L12       :        :                   :         : 5         :                
+rd_data_rdy_a                : L13       : output : 2.5 V             :         : 5         : N              
+cmd_adr[6]                   : L14       : input  : 2.5 V             :         : 5         : N              
+cmd_adr[18]                  : L15       : input  : 2.5 V             :         : 5         : N              
+cmd_adr[16]                  : L16       : input  : 2.5 V             :         : 5         : N              
 GND+                         : M1        :        :                   :         : 2         :                
 GND+                         : M2        :        :                   :         : 2         :                
 VCCIO2                       : M3        : power  :                   : 2.5V    : 2         :                
 GND                          : M4        : gnd    :                   :         :           :                
 GNDA1                        : M5        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : M6        :        :                   :         : 3         :                
-cmd_target[1]                : M7        : input  : 2.5 V             :         : 3         : N              
-cmd_cmd[1]                   : M8        : input  : 2.5 V             :         : 3         : N              
-PX_COPY_COLOUR[9]            : M9        : output : 2.5 V             :         : 4         : N              
-cmd_color[7]                 : M10       : input  : 2.5 V             :         : 4         : N              
-cmd_adr[1]                   : M11       : input  : 2.5 V             :         : 4         : N              
-cmd_adr[4]                   : M12       : input  : 2.5 V             :         : 5         : N              
+PX_COPY_COLOUR[9]            : M6        : output : 2.5 V             :         : 3         : N              
+rd_data_in[2]                : M7        : output : 2.5 V             :         : 3         : N              
+ram_wr_data[3]               : M8        : output : 2.5 V             :         : 3         : N              
+ram_addr[6]                  : M9        : output : 2.5 V             :         : 4         : N              
+cmd_adr[5]                   : M10       : input  : 2.5 V             :         : 4         : N              
+cmd_adr[0]                   : M11       : input  : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : M12       :        :                   :         : 5         :                
 GND                          : M13       : gnd    :                   :         :           :                
 VCCIO5                       : M14       : power  :                   : 2.5V    : 5         :                
 GND+                         : M15       :        :                   :         : 5         :                
 GND+                         : M16       :        :                   :         : 5         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : N1        :        :                   :         : 2         :                
-RESET                        : N2        : input  : 2.5 V             :         : 2         : N              
-collision_wr[1]              : N3        : output : 2.5 V             :         : 3         : N              
+rd_data_in[10]               : N1        : output : 2.5 V             :         : 2         : N              
+PX_COPY_COLOUR[4]            : N2        : output : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : N3        :        :                   :         : 3         :                
 VCCD_PLL1                    : N4        : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : N5        :        :                   :         : 3         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : N6        :        :                   :         : 3         :                
+PX_COPY_COLOUR[15]           : N5        : output : 2.5 V             :         : 3         : N              
+cmd_color[7]                 : N6        : input  : 2.5 V             :         : 3         : N              
 GND                          : N7        : gnd    :                   :         :           :                
-cmd_color[6]                 : N8        : input  : 2.5 V             :         : 3         : N              
-cmd_adr[17]                  : N9        : input  : 2.5 V             :         : 4         : N              
+ram_addr[9]                  : N8        : output : 2.5 V             :         : 3         : N              
+cmd_target[1]                : N9        : input  : 2.5 V             :         : 4         : N              
 GND                          : N10       : gnd    :                   :         :           :                
-PX_COPY_COLOUR[3]            : N11       : output : 2.5 V             :         : 4         : N              
-cmd_adr[13]                  : N12       : input  : 2.5 V             :         : 4         : N              
-PX_COPY_COLOUR[6]            : N13       : output : 2.5 V             :         : 5         : N              
-ram_wr_data[2]               : N14       : output : 2.5 V             :         : 5         : N              
-wr_ena                       : N15       : output : 2.5 V             :         : 5         : N              
-ram_addr[1]                  : N16       : output : 2.5 V             :         : 5         : N              
-collision_wr[2]              : P1        : output : 2.5 V             :         : 2         : N              
-collision_wr[7]              : P2        : output : 2.5 V             :         : 2         : N              
-collision_wr[4]              : P3        : output : 2.5 V             :         : 3         : N              
+cmd_color[3]                 : N11       : input  : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : N12       :        :                   :         : 4         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : N13       :        :                   :         : 5         :                
+ram_addr[19]                 : N14       : output : 2.5 V             :         : 5         : N              
+cmd_adr[1]                   : N15       : input  : 2.5 V             :         : 5         : N              
+cmd_rdy                      : N16       : input  : 2.5 V             :         : 5         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : P1        :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : P2        :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : P3        :        :                   :         : 3         :                
 VCCIO3                       : P4        : power  :                   : 2.5V    : 3         :                
 GND                          : P5        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : P6        :        :                   :         : 3         :                
+ram_wr_data[8]               : P6        : output : 2.5 V             :         : 3         : N              
 VCCIO3                       : P7        : power  :                   : 2.5V    : 3         :                
-cmd_adr[15]                  : P8        : input  : 2.5 V             :         : 3         : N              
-cmd_adr[12]                  : P9        : input  : 2.5 V             :         : 4         : N              
+ram_addr[7]                  : P8        : output : 2.5 V             :         : 3         : N              
+cmd_adr[9]                   : P9        : input  : 2.5 V             :         : 4         : N              
 VCCIO4                       : P10       : power  :                   : 2.5V    : 4         :                
-ram_addr[3]                  : P11       : output : 2.5 V             :         : 4         : N              
+rd_req_b                     : P11       : output : 2.5 V             :         : 4         : N              
 GND                          : P12       : gnd    :                   :         :           :                
 VCCIO4                       : P13       : power  :                   : 2.5V    : 4         :                
-cmd_adr[14]                  : P14       : input  : 2.5 V             :         : 4         : N              
-ram_addr[12]                 : P15       : output : 2.5 V             :         : 5         : N              
-ram_addr[2]                  : P16       : output : 2.5 V             :         : 5         : N              
-collision_wr[6]              : R1        : output : 2.5 V             :         : 2         : N              
+ram_addr[18]                 : P14       : output : 2.5 V             :         : 4         : N              
+cmd_adr[17]                  : P15       : input  : 2.5 V             :         : 5         : N              
+ram_addr[10]                 : P16       : output : 2.5 V             :         : 5         : N              
+ram_wr_data[2]               : R1        : output : 2.5 V             :         : 2         : N              
 GND                          : R2        : gnd    :                   :         :           :                
-collision_wr_rst             : R3        : input  : 2.5 V             :         : 3         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : R4        :        :                   :         : 3         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : R5        :        :                   :         : 3         :                
-cmd_adr[7]                   : R6        : input  : 2.5 V             :         : 3         : N              
-cmd_adr[11]                  : R7        : input  : 2.5 V             :         : 3         : N              
-cmd_adr[10]                  : R8        : input  : 2.5 V             :         : 3         : N              
-cmd_adr[9]                   : R9        : input  : 2.5 V             :         : 4         : N              
-ram_addr[18]                 : R10       : output : 2.5 V             :         : 4         : N              
-cmd_color[2]                 : R11       : input  : 2.5 V             :         : 4         : N              
-ram_mux_busy                 : R12       : input  : 2.5 V             :         : 4         : N              
-ram_addr[5]                  : R13       : output : 2.5 V             :         : 4         : N              
-ram_addr[16]                 : R14       : output : 2.5 V             :         : 4         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : R3        :        :                   :         : 3         :                
+PX_COPY_COLOUR[3]            : R4        : output : 2.5 V             :         : 3         : N              
+rd_data_in[15]               : R5        : output : 2.5 V             :         : 3         : N              
+rd_data_in[8]                : R6        : output : 2.5 V             :         : 3         : N              
+rd_data_in[13]               : R7        : output : 2.5 V             :         : 3         : N              
+ram_addr[11]                 : R8        : output : 2.5 V             :         : 3         : N              
+cmd_color[2]                 : R9        : input  : 2.5 V             :         : 4         : N              
+ram_addr[2]                  : R10       : output : 2.5 V             :         : 4         : N              
+cmd_cmd[1]                   : R11       : input  : 2.5 V             :         : 4         : N              
+ram_addr[8]                  : R12       : output : 2.5 V             :         : 4         : N              
+ram_addr[16]                 : R13       : output : 2.5 V             :         : 4         : N              
+cmd_cmd[0]                   : R14       : input  : 2.5 V             :         : 4         : N              
 GND                          : R15       : gnd    :                   :         :           :                
-ram_addr[7]                  : R16       : output : 2.5 V             :         : 5         : N              
+ram_addr[4]                  : R16       : output : 2.5 V             :         : 5         : N              
 VCCIO3                       : T1        : power  :                   : 2.5V    : 3         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : T2        :        :                   :         : 3         :                
-collision_wr[3]              : T3        : output : 2.5 V             :         : 3         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : T3        :        :                   :         : 3         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : T4        :        :                   :         : 3         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : T5        :        :                   :         : 3         :                
-cmd_adr[3]                   : T6        : input  : 2.5 V             :         : 3         : N              
-cmd_rdy                      : T7        : input  : 2.5 V             :         : 3         : N              
-PX_COPY_COLOUR[0]            : T8        : output : 2.5 V             :         : 3         : N              
-cmd_color[1]                 : T9        : input  : 2.5 V             :         : 4         : N              
-PX_COPY_COLOUR[13]           : T10       : output : 2.5 V             :         : 4         : N              
-cmd_cmd[2]                   : T11       : input  : 2.5 V             :         : 4         : N              
-ram_addr[15]                 : T12       : output : 2.5 V             :         : 4         : N              
-cmd_color[5]                 : T13       : input  : 2.5 V             :         : 4         : N              
-ram_addr[17]                 : T14       : output : 2.5 V             :         : 4         : N              
-cmd_adr[8]                   : T15       : input  : 2.5 V             :         : 4         : N              
+rd_data_in[11]               : T5        : output : 2.5 V             :         : 3         : N              
+rd_data_in[12]               : T6        : output : 2.5 V             :         : 3         : N              
+ram_wr_data[12]              : T7        : output : 2.5 V             :         : 3         : N              
+ram_addr[5]                  : T8        : output : 2.5 V             :         : 3         : N              
+cmd_color[6]                 : T9        : input  : 2.5 V             :         : 4         : N              
+ram_addr[3]                  : T10       : output : 2.5 V             :         : 4         : N              
+ram_addr[1]                  : T11       : output : 2.5 V             :         : 4         : N              
+wr_ena                       : T12       : output : 2.5 V             :         : 4         : N              
+cmd_adr[10]                  : T13       : input  : 2.5 V             :         : 4         : N              
+cmd_adr[11]                  : T14       : input  : 2.5 V             :         : 4         : N              
+draw_busy                    : T15       : output : 2.5 V             :         : 4         : N              
 VCCIO4                       : T16       : power  :                   : 2.5V    : 4         :                

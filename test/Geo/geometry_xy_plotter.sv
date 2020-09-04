@@ -27,6 +27,8 @@ module geometry_xy_plotter (
     //  AUX=15 : Set source mem address,                  : 31:24 bitplane mode : 23:0 hold the source base memory address for read source pixel
 );
 
+parameter int FIFO_MARGIN         = 32 ; // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
+
 logic [3:0] CMD_OUT_NOP           = 0  ;
 logic [3:0] CMD_OUT_PXWRI         = 1  ;
 logic [3:0] CMD_OUT_PXWRI_M       = 2  ;
@@ -113,8 +115,8 @@ scfifo  scfifo_component (
 
 defparam
     scfifo_component.add_ram_output_register = "ON",
-    scfifo_component.almost_full_value       = 510,
-    scfifo_component.intended_device_family  = "Cyclone III",
+    scfifo_component.almost_full_value       = (512 - FIFO_MARGIN),
+    scfifo_component.intended_device_family  = "Cyclone IV",
     scfifo_component.lpm_hint                = "RAM_BLOCK_TYPE=M9K",
     scfifo_component.lpm_numwords            = 512,
     scfifo_component.lpm_showahead           = "ON",
@@ -428,5 +430,53 @@ always @(posedge clk or posedge reset) begin
     end // reset
 
 end //always @(posedge clk)
+
+endmodule
+
+module tri_comp (
+
+// inputs
+	input  logic                    clk,
+	input  logic signed [3:0][11:0] in,
+// outputs
+	output logic        [15:0]      in_a_eq_b,
+	output logic        [15:0]      in_a_gt_b,
+	output logic        [15:0]      in_a_lt_b
+
+);
+
+parameter bit CLOCK_OUTPUT = 0;
+
+always_comb begin
+
+	if ( ~CLOCK_OUTPUT ) begin
+	
+		for (int i = 0 ; i<=15 ; i++) begin
+		
+			in_a_eq_b[i] = ( in[ i[3:2] ] == in[ i[1:0] ] ) ;
+			in_a_gt_b[i] = ( in[ i[3:2] ] >  in[ i[1:0] ] ) ;
+			in_a_lt_b[i] = ( in[ i[3:2] ] <  in[ i[1:0] ] ) ;
+			
+		end
+		
+	end
+
+end
+
+always_ff @( posedge clk ) begin
+
+	if ( CLOCK_OUTPUT ) begin
+	
+		for (int i = 0 ; i<=15 ; i++) begin
+		
+			in_a_eq_b[i] <= ( in[ i[3:2] ] == in[ i[1:0] ] ) ;
+			in_a_gt_b[i] <= ( in[ i[3:2] ] >  in[ i[1:0] ] ) ;
+			in_a_lt_b[i] <= ( in[ i[3:2] ] <  in[ i[1:0] ] ) ;
+			
+		end
+		
+	end
+
+end
 
 endmodule

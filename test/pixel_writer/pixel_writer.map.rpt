@@ -1,5 +1,5 @@
 Analysis & Synthesis report for pixel_writer
-Fri Aug 14 00:26:48 2020
+Sat Aug 15 18:53:40 2020
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -14,15 +14,14 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
-  9. General Register Statistics
- 10. Physical Synthesis Netlist Optimizations
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
  11. Multiplexer Restructuring Statistics (Restructuring Performed)
  12. Source assignments for altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated
- 13. Parameter Settings for User Entity Instance: geo_pixel_writer:inst
- 14. Parameter Settings for User Entity Instance: geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1
- 15. Parameter Settings for User Entity Instance: altsyncram0:inst17|altsyncram:altsyncram_component
- 16. altsyncram Parameter Settings by Entity Instance
- 17. Analysis & Synthesis Messages
+ 13. Parameter Settings for User Entity Instance: geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1
+ 14. Parameter Settings for User Entity Instance: altsyncram0:inst17|altsyncram:altsyncram_component
+ 15. altsyncram Parameter Settings by Entity Instance
+ 16. Analysis & Synthesis Messages
 
 
 
@@ -48,15 +47,15 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Aug 14 00:26:48 2020        ;
+; Analysis & Synthesis Status        ; Successful - Sat Aug 15 18:53:39 2020        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; pixel_writer                                 ;
 ; Top-level Entity Name              ; pixel_writer                                 ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 1,138                                        ;
-;     Total combinational functions  ; 999                                          ;
-;     Dedicated logic registers      ; 329                                          ;
-; Total registers                    ; 329                                          ;
+; Total logic elements               ; 918                                          ;
+;     Total combinational functions  ; 916                                          ;
+;     Dedicated logic registers      ; 232                                          ;
+; Total registers                    ; 232                                          ;
 ; Total pins                         ; 136                                          ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 65,536                                       ;
@@ -73,9 +72,9 @@ applicable agreement for further details.
 ; Device                                                                     ; EP3C10F256C7 ;                    ;
 ; Top-level entity name                                                      ; pixel_writer ; pixel_writer       ;
 ; Family name                                                                ; Cyclone III  ; Stratix II         ;
-; Remove Duplicate Registers                                                 ; Off          ; On                 ;
 ; Optimization Technique                                                     ; Speed        ; Balanced           ;
 ; Use Generated Physical Constraints File                                    ; Off          ;                    ;
+; Auto RAM Replacement                                                       ; Off          ; On                 ;
 ; Auto Shift Register Replacement                                            ; Off          ; Auto               ;
 ; PowerPlay Power Optimization                                               ; Off          ; Normal compilation ;
 ; Use smart compilation                                                      ; Off          ; Off                ;
@@ -100,6 +99,7 @@ applicable agreement for further details.
 ; NOT Gate Push-Back                                                         ; On           ; On                 ;
 ; Power-Up Don't Care                                                        ; On           ; On                 ;
 ; Remove Redundant Logic Cells                                               ; Off          ; Off                ;
+; Remove Duplicate Registers                                                 ; On           ; On                 ;
 ; Ignore CARRY Buffers                                                       ; Off          ; Off                ;
 ; Ignore CASCADE Buffers                                                     ; Off          ; Off                ;
 ; Ignore GLOBAL Buffers                                                      ; Off          ; Off                ;
@@ -112,7 +112,6 @@ applicable agreement for further details.
 ; Auto Open-Drain Pins                                                       ; On           ; On                 ;
 ; Perform WYSIWYG Primitive Resynthesis                                      ; Off          ; Off                ;
 ; Auto ROM Replacement                                                       ; On           ; On                 ;
-; Auto RAM Replacement                                                       ; On           ; On                 ;
 ; Auto DSP Block Replacement                                                 ; On           ; On                 ;
 ; Auto Clock Enable Replacement                                              ; On           ; On                 ;
 ; Strict RAM Replacement                                                     ; Off          ; Off                ;
@@ -164,9 +163,9 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------+
 ; pixel_writer.bdf                 ; yes             ; User Block Diagram/Schematic File  ; C:/altera/Qdesigns/pixel_writer/pixel_writer.bdf               ;
 ; geo_pixel_writer.sv              ; yes             ; User SystemVerilog HDL File        ; C:/altera/Qdesigns/pixel_writer/geo_pixel_writer.sv            ;
-; fifo_3word_0_latency.sv          ; yes             ; User SystemVerilog HDL File        ; C:/altera/Qdesigns/pixel_writer/fifo_3word_0_latency.sv        ;
 ; altsyncram0.v                    ; yes             ; User Wizard-Generated File         ; C:/altera/Qdesigns/pixel_writer/altsyncram0.v                  ;
 ; test.mif                         ; yes             ; User Memory Initialization File    ; C:/altera/Qdesigns/pixel_writer/test.mif                       ;
+; FIFO_2word_FWFT.sv               ; yes             ; User SystemVerilog HDL File        ; C:/altera/Qdesigns/pixel_writer/FIFO_2word_FWFT.sv             ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                       ; c:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf ;
 ; db/altsyncram_i0n1.tdf           ; yes             ; Auto-Generated Megafunction        ; C:/altera/Qdesigns/pixel_writer/db/altsyncram_i0n1.tdf         ;
 +----------------------------------+-----------------+------------------------------------+----------------------------------------------------------------+
@@ -177,43 +176,43 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 1,138     ;
+; Estimated Total logic elements              ; 918       ;
 ;                                             ;           ;
-; Total combinational functions               ; 999       ;
+; Total combinational functions               ; 916       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 783       ;
-;     -- 3 input functions                    ; 111       ;
-;     -- <=2 input functions                  ; 105       ;
+;     -- 4 input functions                    ; 610       ;
+;     -- 3 input functions                    ; 203       ;
+;     -- <=2 input functions                  ; 103       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 985       ;
+;     -- normal mode                          ; 902       ;
 ;     -- arithmetic mode                      ; 14        ;
 ;                                             ;           ;
-; Total registers                             ; 329       ;
-;     -- Dedicated logic registers            ; 329       ;
+; Total registers                             ; 232       ;
+;     -- Dedicated logic registers            ; 232       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 136       ;
 ; Total memory bits                           ; 65536     ;
 ; Maximum fan-out node                        ; CLK~input ;
-; Maximum fan-out                             ; 345       ;
-; Total fan-out                               ; 5120      ;
-; Average fan-out                             ; 3.17      ;
+; Maximum fan-out                             ; 248       ;
+; Total fan-out                               ; 4475      ;
+; Average fan-out                             ; 3.12      ;
 +---------------------------------------------+-----------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                        ;
-+-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                             ; Library Name ;
-+-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
-; |pixel_writer                                 ; 999 (1)           ; 329 (4)      ; 65536       ; 0            ; 0       ; 0         ; 136  ; 0            ; |pixel_writer                                                                                   ; work         ;
-;    |altsyncram0:inst17|                       ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17                                                                ;              ;
-;       |altsyncram:altsyncram_component|       ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17|altsyncram:altsyncram_component                                ; work         ;
-;          |altsyncram_i0n1:auto_generated|     ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated ; work         ;
-;    |geo_pixel_writer:inst|                    ; 998 (855)         ; 325 (155)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst                                                             ;              ;
-;       |FIFO_3word_0_latency:input_cmd_fifo_1| ; 143 (143)         ; 170 (170)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1                       ; work         ;
-+-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                    ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                             ; Library Name ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
+; |pixel_writer                             ; 916 (0)           ; 232 (4)      ; 65536       ; 0            ; 0       ; 0         ; 136  ; 0            ; |pixel_writer                                                                                   ; work         ;
+;    |altsyncram0:inst17|                   ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17                                                                ;              ;
+;       |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17|altsyncram:altsyncram_component                                ; work         ;
+;          |altsyncram_i0n1:auto_generated| ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated ;              ;
+;    |geo_pixel_writer:inst|                ; 916 (831)         ; 228 (146)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst                                                             ;              ;
+;       |FIFO_2word_FWFT:input_cmd_fifo_1|  ; 85 (85)           ; 82 (82)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pixel_writer|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1                            ; work         ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -226,81 +225,112 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+-------+----------+
 
 
++----------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                         ;
++------------------------------------------------------------------------+---------------------------------------------------+
+; Register name                                                          ; Reason for Removal                                ;
++------------------------------------------------------------------------+---------------------------------------------------+
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[0]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[1]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[2]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[3]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[4]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[5]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[6]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[7]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[8]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[9]~en  ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[10]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[11]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[12]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[13]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[14]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[15]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[16]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[17]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[18]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[19]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[20]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[21]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[22]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[23]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[24]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[25]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[26]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[27]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[28]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[29]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[30]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[31]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[32]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[33]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[34]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[35]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[36]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[37]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[38]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[39]~en ; Lost fanout                                       ;
+; geo_pixel_writer:inst|wr_ena                                           ; Merged with geo_pixel_writer:inst|wr_ena_ladr     ;
+; geo_pixel_writer:inst|wcd[15]                                          ; Merged with geo_pixel_writer:inst|ram_wr_data[15] ;
+; geo_pixel_writer:inst|wcd[14]                                          ; Merged with geo_pixel_writer:inst|ram_wr_data[14] ;
+; geo_pixel_writer:inst|wcd[13]                                          ; Merged with geo_pixel_writer:inst|ram_wr_data[13] ;
+; geo_pixel_writer:inst|wcd[12]                                          ; Merged with geo_pixel_writer:inst|ram_wr_data[12] ;
+; geo_pixel_writer:inst|wcd[11]                                          ; Merged with geo_pixel_writer:inst|ram_wr_data[11] ;
+; geo_pixel_writer:inst|wcd[10]                                          ; Merged with geo_pixel_writer:inst|ram_wr_data[10] ;
+; geo_pixel_writer:inst|wcd[9]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[9]  ;
+; geo_pixel_writer:inst|wcd[8]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[8]  ;
+; geo_pixel_writer:inst|wcd[7]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[7]  ;
+; geo_pixel_writer:inst|wcd[6]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[6]  ;
+; geo_pixel_writer:inst|wcd[5]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[5]  ;
+; geo_pixel_writer:inst|wcd[4]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[4]  ;
+; geo_pixel_writer:inst|wcd[3]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[3]  ;
+; geo_pixel_writer:inst|wcd[2]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[2]  ;
+; geo_pixel_writer:inst|wcd[1]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[1]  ;
+; geo_pixel_writer:inst|wcd[0]                                           ; Merged with geo_pixel_writer:inst|ram_wr_data[0]  ;
+; Total Number of Removed Registers = 57                                 ;                                                   ;
++------------------------------------------------------------------------+---------------------------------------------------+
+
+
 +------------------------------------------------------+
 ; General Register Statistics                          ;
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 329   ;
-; Number of registers using Synchronous Clear  ; 25    ;
-; Number of registers using Synchronous Load   ; 1     ;
+; Total registers                              ; 232   ;
+; Number of registers using Synchronous Clear  ; 20    ;
+; Number of registers using Synchronous Load   ; 33    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 298   ;
+; Number of registers using Clock Enable       ; 207   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------+
-; Physical Synthesis Netlist Optimizations                                                ;
-+--------------------------------------------------------+----------+---------------------+
-; Node                                                   ; Action   ; Reason              ;
-+--------------------------------------------------------+----------+---------------------+
-; geo_pixel_writer:inst|Equal9~5                         ; Deleted  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~7                         ; Deleted  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~8                         ; Deleted  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~9                         ; Deleted  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~10                        ; Modified ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~10_RESYN14_BDD15          ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~10_RESYN16_BDD17          ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~10_RESYN18_BDD19          ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~10_RESYN20_BDD21          ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~11                        ; Deleted  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~34                        ; Deleted  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~35                        ; Modified ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~35_RESYN0_BDD1            ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~35_RESYN2_BDD3            ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|Equal9~35_RESYN4_BDD5            ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|Mux21~3                          ; Modified ; Timing optimization ;
-; geo_pixel_writer:inst|Mux21~3_RESYN8_BDD9              ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|PX_COPY_COLOUR_z~0               ; Modified ; Timing optimization ;
-; geo_pixel_writer:inst|PX_COPY_COLOUR_z~0_RESYN10_BDD11 ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|PX_COPY_COLOUR_z~0_RESYN12_BDD13 ; Created  ; Timing optimization ;
-; geo_pixel_writer:inst|always1~16                       ; Modified ; Timing optimization ;
-; geo_pixel_writer:inst|always1~16_RESYN6_BDD7           ; Created  ; Timing optimization ;
-+--------------------------------------------------------+----------+---------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rcd[13]                                                    ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|collision_rd[6]                                            ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|collision_wr[0]                                            ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_words[0]        ;
-; 4:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[3][21] ;
-; 4:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[2][35] ;
-; 4:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[1][28] ;
-; 4:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|fifo_data_reg[0][39] ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|wc_valid                                                   ;
-; 4:1                ; 36 bits   ; 72 LEs        ; 36 LEs               ; 36 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|wc_target[1]                                               ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|collision_wr_inc                                           ;
-; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|wcd[12]                                                    ;
-; 6:1                ; 28 bits   ; 112 LEs       ; 28 LEs               ; 84 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rc_addr[19]                                                ;
-; 6:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|PX_COPY_COLOUR[1]                                          ;
-; 4:1                ; 40 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1|Mux22                ;
-; 3:1                ; 19 bits   ; 38 LEs        ; 38 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftLeft2                                                 ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight2                                                ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight0                                                ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight1                                                ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight2                                                ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight0                                                ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 15 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight1                                                ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 9 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftLeft1                                                 ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight0                                                ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rcd[12]                                     ;
+; 3:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|memory[26] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|collision_rd[4]                             ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|collision_wr[3]                             ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rd_wait_b                                   ;
+; 4:1                ; 36 bits   ; 72 LEs        ; 36 LEs               ; 36 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|wc_addr[7]                                  ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |pixel_writer|geo_pixel_writer:inst|collision_wr_inc                            ;
+; 6:1                ; 36 bits   ; 144 LEs       ; 36 LEs               ; 108 LEs                ; Yes        ; |pixel_writer|geo_pixel_writer:inst|rc_addr[19]                                 ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|ram_wr_data[0]                              ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |pixel_writer|geo_pixel_writer:inst|PX_COPY_COLOUR[15]                          ;
+; 3:1                ; 19 bits   ; 38 LEs        ; 38 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight3                                 ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftLeft0                                  ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight0                                 ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight1                                 ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftLeft1                                  ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight0                                 ;
+; 5:1                ; 5 bits    ; 15 LEs        ; 15 LEs               ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight3                                 ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 9 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight2                                 ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |pixel_writer|geo_pixel_writer:inst|ShiftRight0                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------+
@@ -312,30 +342,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------+-------+------+---------------------------------------------------------+
 
 
-+--------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: geo_pixel_writer:inst ;
-+----------------------+-------+-------------------------------------+
-; Parameter Name       ; Value ; Type                                ;
-+----------------------+-------+-------------------------------------+
-; ZERO_LATENCY         ; 0     ; Unsigned Binary                     ;
-; overflow_protection  ; 1     ; Unsigned Binary                     ;
-; underflow_protection ; 1     ; Unsigned Binary                     ;
-; size7_fifo           ; 0     ; Unsigned Binary                     ;
-+----------------------+-------+-------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1 ;
-+----------------------+-------+---------------------------------------------------------------------------+
-; Parameter Name       ; Value ; Type                                                                      ;
-+----------------------+-------+---------------------------------------------------------------------------+
-; bits                 ; 40    ; Signed Integer                                                            ;
-; zero_latency         ; 0     ; Unsigned Binary                                                           ;
-; overflow_protection  ; 1     ; Unsigned Binary                                                           ;
-; underflow_protection ; 1     ; Unsigned Binary                                                           ;
-; size7_ena            ; 0     ; Unsigned Binary                                                           ;
-+----------------------+-------+---------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1 ;
++----------------+-------+----------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                       ;
++----------------+-------+----------------------------------------------------------------------------+
+; bits           ; 40    ; Signed Integer                                                             ;
++----------------+-------+----------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -424,27 +437,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Fri Aug 14 00:26:35 2020
+    Info: Processing started: Sat Aug 15 18:53:29 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off pixel_writer -c pixel_writer
 Info: Found 1 design units, including 1 entities, in source file pixel_writer.bdf
     Info: Found entity 1: pixel_writer
 Info: Found 1 design units, including 1 entities, in source file geo_pixel_writer.sv
     Info: Found entity 1: geo_pixel_writer
-Info: Found 1 design units, including 1 entities, in source file fifo_3word_0_latency.sv
-    Info: Found entity 1: FIFO_3word_0_latency
 Info: Found 1 design units, including 1 entities, in source file altsyncram0.v
     Info: Found entity 1: altsyncram0
+Info: Found 1 design units, including 1 entities, in source file fifo_2word_fwft.sv
+    Info: Found entity 1: FIFO_2word_FWFT
 Info: Elaborating entity "pixel_writer" for the top level hierarchy
 Info: Elaborating entity "geo_pixel_writer" for hierarchy "geo_pixel_writer:inst"
 Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(61): object "LUT_nmask" assigned a value but never read
 Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(62): object "LUT_pmask" assigned a value but never read
 Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(65): object "CMD_IN_NOP" assigned a value but never read
 Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(73): object "CMD_IN_RST_PXPASTE_M" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(120): object "rc_colour" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at geo_pixel_writer.sv(202): truncated value with size 24 to match size of target (16)
-Warning (10230): Verilog HDL assignment warning at geo_pixel_writer.sv(203): truncated value with size 24 to match size of target (16)
-Info: Elaborating entity "FIFO_3word_0_latency" for hierarchy "geo_pixel_writer:inst|FIFO_3word_0_latency:input_cmd_fifo_1"
-Warning (10027): Verilog HDL or VHDL warning at the fifo_3word_0_latency.sv(65): index expression is not wide enough to address all of the elements in the array
+Warning (10230): Verilog HDL assignment warning at geo_pixel_writer.sv(192): truncated value with size 24 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at geo_pixel_writer.sv(193): truncated value with size 24 to match size of target (16)
+Info: Elaborating entity "FIFO_2word_FWFT" for hierarchy "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1"
 Info: Elaborating entity "altsyncram0" for hierarchy "altsyncram0:inst17"
 Info: Elaborating entity "altsyncram" for hierarchy "altsyncram0:inst17|altsyncram:altsyncram_component"
 Info: Elaborated megafunction instantiation "altsyncram0:inst17|altsyncram:altsyncram_component"
@@ -468,31 +479,98 @@ Info: Instantiated megafunction "altsyncram0:inst17|altsyncram:altsyncram_compon
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_i0n1.tdf
     Info: Found entity 1: altsyncram_i0n1
 Info: Elaborating entity "altsyncram_i0n1" for hierarchy "altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated"
+Warning: Tri-state node(s) do not directly drive top-level pin(s)
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[15]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[16]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[17]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[18]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[19]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[20]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[21]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[22]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[23]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[24]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[25]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[26]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[27]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[28]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[29]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[30]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[31]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[32]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[33]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[34]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[35]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[36]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[37]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[38]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[39]" feeding internal logic into a wire
 Info: Timing-Driven Synthesis is running
-Info: Starting physical synthesis optimizations for speed
-Info: Timing-driven compilation is using the TimeQuest Timing Analyzer
-Info: Reading SDC File: 'SDC1.sdc'
-Critical Warning: The following clock transfers have no clock uncertainty assignment. For more accurate results, apply clock uncertainty assignments or use the derive_clock_uncertainty command.
-    Critical Warning: From CLK (Rise) to CLK (Rise) (setup and hold)
-Info: Detected timing requirements -- optimizing circuit to achieve only the specified requirements
-Info: Found 1 clocks
-    Info:   Period   Clock Name
-    Info: ======== ============
-    Info:    8.000          CLK
-Info: Starting physical synthesis algorithm register retiming
-Info: Physical synthesis algorithm register retiming complete: estimated slack improvement of 0 ps
-Info: Starting physical synthesis algorithm combinational resynthesis using boolean division
-Info: Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 341 ps
-Info: Physical synthesis optimizations for speed complete: elapsed CPU time is 00:00:02
-Info: Implemented 1350 device resources after synthesis - the final resource count might be different
+Info: 40 registers lost all their fanouts during netlist optimizations. The first 40 are displayed below.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[0]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[1]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[2]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[3]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[4]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[5]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[6]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[7]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[8]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[9]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[10]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[11]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[12]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[13]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[14]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[15]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[16]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[17]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[18]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[19]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[20]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[21]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[22]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[23]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[24]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[25]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[26]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[27]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[28]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[29]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[30]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[31]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[32]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[33]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[34]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[35]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[36]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[37]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[38]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[39]~en" lost all its fanouts during netlist optimizations.
+Info: Implemented 1074 device resources after synthesis - the final resource count might be different
     Info: Implemented 46 input pins
     Info: Implemented 90 output pins
-    Info: Implemented 1198 logic cells
+    Info: Implemented 922 logic cells
     Info: Implemented 16 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 236 megabytes
-    Info: Processing ended: Fri Aug 14 00:26:48 2020
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:14
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 47 warnings
+    Info: Peak virtual memory: 229 megabytes
+    Info: Processing ended: Sat Aug 15 18:53:40 2020
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:09
 
 
