@@ -29,7 +29,7 @@ Contains font files for use with the GPU.
 Contains various Quartus II projects (yes, Quartus II - version 9.1) used for simulating and testing components of the project.
 
 #### tools
-Contains the RS232 debugger, written by Brian Guralnick, which is an essential part of the setup and testing for the GPU.
+Contains the RS232 debugger, written by Brian Guralnick, which is an essential part of the setup and testing for the GPU, along with other key tools.
 
 ### Prerequisites
 
