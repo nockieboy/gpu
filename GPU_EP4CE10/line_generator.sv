@@ -1,7 +1,7 @@
 /*
  * LINE GENERATOR MODULE
  *
- * v 0.1.001
+ * v 0.1.002
  *
  */
 
@@ -47,7 +47,7 @@ logic               start                ; // edge-detect for new 'run' signals
 
 always_comb begin
 
-	start = ( !last_run && run ) ; // start goes HIGH for one clock when run goes HIGH
+   start = ( !last_run && run ) ; // start goes HIGH for one clock when run goes HIGH
 
 end
 
@@ -55,8 +55,8 @@ always @( posedge clk ) begin
 
 
     if ( !draw_busy ) begin // draw_busy must be LOW or the line generator won't run
-	
-		last_run <= run ;
+   
+      last_run <= run ;
 
         if ( !run && ( latch_aX != aX || latch_aY != aY || latch_bX != bX || latch_bY != bY ) ) begin
 
@@ -65,19 +65,19 @@ always @( posedge clk ) begin
     
         end
 
-		if ( run && ( pass_thru_a || ( aX == bX && aY == bY ) ) ) begin
+      if ( run && ( pass_thru_a || ( aX == bX && aY == bY ) ) ) begin
 
-			pixel_data_rdy <= 1'b1 ; // valid coordinates at output
-			X_coord        <= aX   ; // pass-through aX value
-			Y_coord        <= aY   ; // pass-through aY value
-			
-			if ( aX == bX && aY == bY ) begin
+         pixel_data_rdy <= 1'b1 ; // valid coordinates at output
+         X_coord        <= aX   ; // pass-through aX value
+         Y_coord        <= aY   ; // pass-through aY value
+         
+         if ( aX == bX && aY == bY ) begin
 
-				line_complete  <= 1'b1 ; // set line_complete flag to let parent module know the line is done
+            line_complete  <= 1'b1 ; // set line_complete flag to let parent module know the line is done
 
-			end
-			
-		end
+         end
+         
+      end
         else
         if ( run && pass_thru_b ) begin
         
@@ -90,22 +90,22 @@ always @( posedge clk ) begin
         if ( start ) begin  // load values and begin drawing the line
         
             // Set latched registers, phase counters and flags
-            geo_sub_func1  <= 4'b0       ; // reset the phase counter
-            ypos_stopped   <= 1'b0       ; // reset ypos_stopped flag
-            line_complete  <= 1'b0       ; // reset line_complete flag
-            draw_line      <= 1'b1       ; // start drawing the line on the next clock cycle
-            busy           <= 1'b1       ; // the line generator is busy from the next cycle
-            pixel_data_rdy <= 1'b0       ; // no valid coordinates next clock cycle
+            geo_sub_func1  <= 4'b0 ; // reset the phase counter
+            ypos_stopped   <= 1'b0 ; // reset ypos_stopped flag
+            line_complete  <= 1'b0 ; // reset line_complete flag
+            draw_line      <= 1'b1 ; // start drawing the line on the next clock cycle
+            busy           <= 1'b1 ; // the line generator is busy from the next cycle
+            pixel_data_rdy <= 1'b0 ; // no valid coordinates next clock cycle
 
             // Initialise starting coordinates and direction for immediate plotting
-            X_coord        <= aX         ; // initialize starting X pixel location
-            Y_coord        <= aY         ; // initialize starting Y pixel location
+            X_coord        <= aX   ; // initialize starting X pixel location
+            Y_coord        <= aY   ; // initialize starting Y pixel location
             
             // latch the coordinates to check for changes later
-            latch_aX       <= aX         ;
-            latch_aY       <= aY         ;
-            latch_bX       <= bX         ;
-            latch_bY       <= bY         ;
+            latch_aX       <= aX   ;
+            latch_aY       <= aY   ;
+            latch_bX       <= bX   ;
+            latch_bY       <= bY   ;
             
             // Set the direction of the counter
             if ( bX < aX )       geo_xdir <= 12'd0 - 12'd1 ; // negative X direction
@@ -127,9 +127,9 @@ always @( posedge clk ) begin
 
                  4'd0 : begin
               
-                    errd            <= dx + dy ; // set errd's starting value
-                    geo_sub_func1   <= 4'd1    ; // set line sub-function to plot line
-                    pixel_data_rdy  <= 1'b1    ; // let the parent module know pixel coordinates are incoming
+                    errd            <= dx + dy  ; // set errd's starting value
+                    geo_sub_func1   <= 4'd1     ; // set line sub-function to plot line
+                    pixel_data_rdy  <= 1'b1     ; // let the parent module know pixel coordinates are incoming
                         
                  end // geo_sub_func1 = 0 - setup for plot line
 
@@ -151,32 +151,32 @@ always @( posedge clk ) begin
                         draw_line      <= 1'b0  ; // last pixel - allow time for this pixel to be written by ending on next clock
                         pixel_data_rdy <= 1'b0  ; // reset pixel_data_rdy flag - no more valid coordinates after this clock
                     
-                    end else begin	// Bresenham's Line Drawing Algorithm
+                    end else begin  // Bresenham's Line Drawing Algorithm
 
                         ypos_stopped   <= 1'b0  ; // let the parent module know the line generator has stopped on ypos
                         draw_line      <= 1'b1  ; // last pixel - allow time for this pixel to be written by ending on next clock
                         pixel_data_rdy <= 1'b1  ; // reset pixel_data_rdy flag - no more valid coordinates after this clock
-                    
-						if ( ( errd << 1 ) > dy ) begin
-						
-						  X_coord <= X_coord + geo_xdir     ; // add increment to X coordinate
-										 
-						  if ( ( ( errd << 1 ) + dy ) < dx ) begin
-						  
-							  Y_coord <= Y_coord + geo_ydir ; // add increment to Y coordinate
-							  errd    <= errd + dx + dy     ; // update errd
-							  
-						  end else errd <= errd + dy        ; // add Y increment to errd
-						  
-						end else if ( ( errd << 1 ) < dx ) begin
-						
-						  errd    <= errd  + dx             ; // add X increment to errd
-						  Y_coord <= Y_coord + geo_ydir     ; // add Y increment to Y coordinate
-						  
-						end
-						
-					end // line drawing algorithm
 
+                        if ( ( errd << 1 ) > dy ) begin
+
+                          X_coord <= X_coord + geo_xdir    ; // add increment to X coordinate
+                                     
+                          if ( ( ( errd << 1 ) + dy ) < dx ) begin
+                          
+                             errd    <= errd + dx + dy     ; // update errd
+									  Y_coord <= Y_coord + geo_ydir ; // add increment to Y coordinate
+                             
+                          end else errd <= errd + dy       ; // add Y increment to errd
+                          
+                        end else if ( ( errd << 1 ) < dx ) begin
+
+                          errd    <= errd  + dx            ; // add X increment to errd
+                          Y_coord <= Y_coord + geo_ydir    ; // add Y increment to Y coordinate
+                          
+                        end
+                        
+                     end // Bresenham's Line Drawing Algorithm
+                           
                  end // geo_sub_func1 = 1 - plot line
                  
               endcase // case geo_sub_func1

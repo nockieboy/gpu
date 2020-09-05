@@ -336,17 +336,17 @@ always @(posedge clk or posedge reset) begin
                // extend_cmd[4] = use the color in the copy/paste buffer.  This one is for drawing in true color mode.
                // extend_cmd[5] = mask enable - when drawing, the mask colours will not be plotted as they are transparent
                     geo_shape[3]         <= 1'b0;               // geo shapes 0 through 7, geo shapes 8 through 15 are for copy & paste.
-                    geo_shape[2:0]       <= command_in[2:0];    // Set which one of shapes 0 through 7 should be drawn.  Shape 0 turns means nothing is being drawn
+                    geo_shape[2:0]       <= command_in[2:0];    // Set which one of shapes 0 through 7 should be drawn.  Shape 0 means nothing is being drawn
                     geo_fill             <= command_in[3];      // Fill enable bit
-                    geo_paste            <= command_in[4];      // used for drawing in true color 16 bit mode
+                    geo_paste            <= command_in[4];      // Used for drawing in true color 16 bit mode
                     geo_mask             <= 1'b0;               // Mask disables when drawing raw geometry shapes
-                    geo_run              <= 1'b1;               // a flag which signifies that a geometric shap drawing engine will begin drawing
-                    geo_color            <= command_data8;      // set the 8bit pen color.
+                    geo_run              <= 1'b1;               // A flag which signifies that a geometric shape drawing engine will begin drawing
+                    geo_color            <= command_data8;      // set the 8-bit pen color
                     
-                    if ( command_in[2:0] == 4'd1 ) linegen_start <= 1'b1 ;
+                    if ( command_in[2:0] == 4'd1 ) linegen_start <= 1'b1 ;  // Start line_generator to draw a line
                     
                     geo_sub_func1        <= 4'b0;               // for geometric engines which have multiple phases, reset the phase counter
-                    geo_sub_func2        <= 4'b0;               // for geometric engines which have 2 dimensional multiple phases, reset the phase counter
+                    geo_sub_func2        <= 4'b0;               // for geometric engines which have 2-dimensional multiple phases, reset the phase counter
                     
                     // Initialize the geometry unit starting coordinates and direction so it can begin plotting immediately
                     geo_x                <= x[0];               // initialize the beginning pixel location
