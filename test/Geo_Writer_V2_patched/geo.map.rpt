@@ -1,0 +1,1012 @@
+Analysis & Synthesis report for geo
+Sat Sep 05 14:42:43 2020
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. Analysis & Synthesis DSP Block Usage Summary
+ 10. State Machine - |geo|geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Source assignments for geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|altsyncram_esf1:FIFOram
+ 15. Source assignments for pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated
+ 16. Parameter Settings for User Entity Instance: geometry_xy_plotter:inst
+ 17. Parameter Settings for User Entity Instance: geometry_xy_plotter:inst|scfifo:scfifo_component
+ 18. Parameter Settings for User Entity Instance: pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1
+ 19. Parameter Settings for User Entity Instance: pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component
+ 20. Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult1
+ 21. Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult0
+ 22. scfifo Parameter Settings by Entity Instance
+ 23. altsyncram Parameter Settings by Entity Instance
+ 24. lpm_mult Parameter Settings by Entity Instance
+ 25. Port Connectivity Checks: "geometry_xy_plotter:inst|line_generator:linegen_1"
+ 26. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Sep 05 14:42:43 2020        ;
+; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
+; Revision Name                      ; geo                                          ;
+; Top-level Entity Name              ; geo                                          ;
+; Family                             ; Cyclone III                                  ;
+; Total logic elements               ; 1,984                                        ;
+;     Total combinational functions  ; 1,719                                        ;
+;     Dedicated logic registers      ; 721                                          ;
+; Total registers                    ; 721                                          ;
+; Total pins                         ; 174                                          ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 73,728                                       ;
+; Embedded Multiplier 9-bit elements ; 4                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C16F484C7       ;                    ;
+; Top-level entity name                                                      ; geo                ; geo                ;
+; Family name                                                                ; Cyclone III        ; Stratix II         ;
+; Verilog Show LMF Mapping Messages                                          ; Off                ;                    ;
+; Verilog Version                                                            ; SystemVerilog_2005 ; Verilog_2001       ;
+; Use Generated Physical Constraints File                                    ; Off                ;                    ;
+; Auto Shift Register Replacement                                            ; Off                ; Auto               ;
+; PowerPlay Power Optimization                                               ; Off                ; Normal compilation ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Show Parameter Settings Tables in Synthesis Report                         ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                     ;
++-------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------------+
+; File Name with User-Entered Path    ; Used in Netlist ; File Type                                             ; File Name with Absolute Path                                               ;
++-------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------------+
+; geo.bdf                             ; yes             ; User Block Diagram/Schematic File                     ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/geo.bdf                    ;
+; geometry_xy_plotter.sv              ; yes             ; User SystemVerilog HDL File                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/geometry_xy_plotter.sv     ;
+; line_generator.sv                   ; yes             ; User SystemVerilog HDL File                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/line_generator.sv          ;
+; pixel_address_generator.sv          ; yes             ; User SystemVerilog HDL File                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/pixel_address_generator.sv ;
+; ../pixel_writer/geo_pixel_writer.sv ; yes             ; User SystemVerilog HDL File                           ; G:/fpga/Projects/GPU/test/pixel_writer/geo_pixel_writer.sv                 ;
+; ../pixel_writer/altsyncram0.v       ; yes             ; User Wizard-Generated File                            ; G:/fpga/Projects/GPU/test/pixel_writer/altsyncram0.v                       ;
+; ../pixel_writer/pixel_writer.bdf    ; yes             ; User Block Diagram/Schematic File                     ; G:/fpga/Projects/GPU/test/pixel_writer/pixel_writer.bdf                    ;
+; ../pixel_writer/FIFO_2word_FWFT.sv  ; yes             ; User SystemVerilog HDL File                           ; G:/fpga/Projects/GPU/test/pixel_writer/FIFO_2word_FWFT.sv                  ;
+; scfifo.tdf                          ; yes             ; Megafunction                                          ; g:/altera/91sp2/quartus/libraries/megafunctions/scfifo.tdf                 ;
+; db/scfifo_9la1.tdf                  ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/scfifo_9la1.tdf         ;
+; db/a_dpfifo_bo71.tdf                ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/a_dpfifo_bo71.tdf       ;
+; db/altsyncram_esf1.tdf              ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/altsyncram_esf1.tdf     ;
+; db/cmpr_dr8.tdf                     ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/cmpr_dr8.tdf            ;
+; db/cntr_o8b.tdf                     ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/cntr_o8b.tdf            ;
+; db/cntr_597.tdf                     ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/cntr_597.tdf            ;
+; db/cntr_p8b.tdf                     ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/cntr_p8b.tdf            ;
+; altsyncram.tdf                      ; yes             ; Megafunction                                          ; g:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf             ;
+; db/altsyncram_i0n1.tdf              ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/altsyncram_i0n1.tdf     ;
+; test.mif                            ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; test.mif                                                                   ;
+; lpm_mult.tdf                        ; yes             ; Megafunction                                          ; g:/altera/91sp2/quartus/libraries/megafunctions/lpm_mult.tdf               ;
+; db/mult_vbt.tdf                     ; yes             ; Auto-Generated Megafunction                           ; G:/fpga/Projects/GPU/test/Geo_Writer_V2_patched/db/mult_vbt.tdf            ;
++-------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 1,984     ;
+;                                             ;           ;
+; Total combinational functions               ; 1719      ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 834       ;
+;     -- 3 input functions                    ; 660       ;
+;     -- <=2 input functions                  ; 225       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 1392      ;
+;     -- arithmetic mode                      ; 327       ;
+;                                             ;           ;
+; Total registers                             ; 721       ;
+;     -- Dedicated logic registers            ; 721       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 174       ;
+; Total memory bits                           ; 73728     ;
+; Embedded Multiplier 9-bit elements          ; 4         ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 753       ;
+; Total fan-out                               ; 9448      ;
+; Average fan-out                             ; 3.35      ;
++---------------------------------------------+-----------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                     ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                           ; Library Name ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
+; |geo                                         ; 1719 (1)          ; 721 (0)      ; 73728       ; 4            ; 0       ; 2         ; 174  ; 0            ; |geo                                                                                                                          ; work         ;
+;    |geometry_xy_plotter:inst|                ; 784 (411)         ; 311 (199)    ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst                                                                                                 ;              ;
+;       |line_generator:linegen_1|             ; 298 (298)         ; 68 (68)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1                                                                        ;              ;
+;       |scfifo:scfifo_component|              ; 75 (0)            ; 44 (0)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component                                                                         ; work         ;
+;          |scfifo_9la1:auto_generated|        ; 75 (7)            ; 44 (1)       ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated                                              ;              ;
+;             |a_dpfifo_bo71:dpfifo|           ; 68 (39)           ; 43 (17)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo                         ; work         ;
+;                |altsyncram_esf1:FIFOram|     ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|altsyncram_esf1:FIFOram ;              ;
+;                |cntr_597:usedw_counter|      ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|cntr_597:usedw_counter  ;              ;
+;                |cntr_o8b:rd_ptr_msb|         ; 9 (9)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|cntr_o8b:rd_ptr_msb     ; work         ;
+;                |cntr_p8b:wr_ptr|             ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|cntr_p8b:wr_ptr         ; work         ;
+;    |pixel_address_generator:inst1|           ; 243 (243)         ; 196 (196)    ; 0           ; 4            ; 0       ; 2         ; 0    ; 0            ; |geo|pixel_address_generator:inst1                                                                                            ;              ;
+;       |lpm_mult:Mult0|                       ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult0                                                                             ;              ;
+;          |mult_vbt:auto_generated|           ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult0|mult_vbt:auto_generated                                                     ;              ;
+;       |lpm_mult:Mult1|                       ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult1                                                                             ;              ;
+;          |mult_vbt:auto_generated|           ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |geo|pixel_address_generator:inst1|lpm_mult:Mult1|mult_vbt:auto_generated                                                     ;              ;
+;    |pixel_writer:inst3|                      ; 691 (0)           ; 214 (4)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|pixel_writer:inst3                                                                                                       ;              ;
+;       |altsyncram0:inst17|                   ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|pixel_writer:inst3|altsyncram0:inst17                                                                                    ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component                                                    ;              ;
+;             |altsyncram_i0n1:auto_generated| ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated                     ; work         ;
+;       |geo_pixel_writer:inst|                ; 691 (606)         ; 210 (128)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|pixel_writer:inst3|geo_pixel_writer:inst                                                                                 ; work         ;
+;          |FIFO_2word_FWFT:input_cmd_fifo_1|  ; 85 (85)           ; 82 (82)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1                                                ;              ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                             ;
++-------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+----------+
+; Name                                                                                                                                ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF      ;
++-------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+----------+
+; geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|altsyncram_esf1:FIFOram|ALTSYNCRAM ; M9K  ; Simple Dual Port ; 512          ; 16           ; 512          ; 16           ; 8192  ; None     ;
+; pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated|ALTSYNCRAM                     ; AUTO ; Single Port      ; 4096         ; 16           ; --           ; --           ; 65536 ; test.mif ;
++-------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+----------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary        ;
++---------------------------------------+-------------+
+; Statistic                             ; Number Used ;
++---------------------------------------+-------------+
+; Simple Multipliers (9-bit)            ; 0           ;
+; Simple Multipliers (18-bit)           ; 2           ;
+; Embedded Multiplier Blocks            ; --          ;
+; Embedded Multiplier 9-bit elements    ; 4           ;
+; Signed Embedded Multipliers           ; 0           ;
+; Unsigned Embedded Multipliers         ; 2           ;
+; Mixed Sign Embedded Multipliers       ; 0           ;
+; Variable Sign Embedded Multipliers    ; 0           ;
+; Dedicated Input Shift Register Chains ; 0           ;
++---------------------------------------+-------------+
+Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------+
+; State Machine - |geo|geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1 ;
++--------------------+-----------------------------------------------------------------+
+; Name               ; geo_sub_func1.0001                                              ;
++--------------------+-----------------------------------------------------------------+
+; geo_sub_func1.0000 ; 0                                                               ;
+; geo_sub_func1.0001 ; 1                                                               ;
++--------------------+-----------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                                    ;
++-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+; Register name                                                                             ; Reason for Removal                                                        ;
++-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[0]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[1]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[2]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[3]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[4]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[5]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[6]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[7]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[8]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[9]~en  ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[10]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[11]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[12]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[13]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[14]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[15]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[16]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[17]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[18]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[19]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[20]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[21]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[22]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[23]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[24]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[25]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[26]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[27]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[28]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[29]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[30]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[31]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[32]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[33]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[34]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[35]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[36]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[37]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[38]~en ; Lost fanout                                                               ;
+; pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[39]~en ; Lost fanout                                                               ;
+; pixel_address_generator:inst1|dest_base_address_offset[0]                                 ; Stuck at GND due to stuck port data_in                                    ;
+; pixel_address_generator:inst1|srce_base_address_offset[0]                                 ; Stuck at GND due to stuck port data_in                                    ;
+; geometry_xy_plotter:inst|pass_thru_b                                                      ; Stuck at GND due to stuck port data_in                                    ;
+; geometry_xy_plotter:inst|pass_thru_a                                                      ; Stuck at GND due to stuck port data_in                                    ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wr_ena                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|wr_ena_ladr          ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[15]                                          ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[15]      ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[14]                                          ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[14]      ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[13]                                          ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[13]      ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[12]                                          ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[12]      ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[11]                                          ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[11]      ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[10]                                          ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[10]      ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[9]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[9]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[8]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[8]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[7]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[7]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[6]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[6]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[5]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[5]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[4]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[4]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[3]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[3]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[2]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[2]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[1]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[1]       ;
+; pixel_writer:inst3|geo_pixel_writer:inst|wcd[0]                                           ; Merged with pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[0]       ;
+; geometry_xy_plotter:inst|geo_xdir[1..10]                                                  ; Merged with geometry_xy_plotter:inst|geo_xdir[11]                         ;
+; geometry_xy_plotter:inst|geo_ydir[1..10]                                                  ; Merged with geometry_xy_plotter:inst|geo_ydir[11]                         ;
+; geometry_xy_plotter:inst|line_generator:linegen_1|geo_ydir[2..11]                         ; Merged with geometry_xy_plotter:inst|line_generator:linegen_1|geo_ydir[1] ;
+; geometry_xy_plotter:inst|line_generator:linegen_1|geo_xdir[2..11]                         ; Merged with geometry_xy_plotter:inst|line_generator:linegen_1|geo_xdir[1] ;
+; pixel_address_generator:inst1|dest_target_bit[3]                                          ; Merged with pixel_address_generator:inst1|dest_base_address_offset[4]     ;
+; pixel_address_generator:inst1|dest_target_bit[2]                                          ; Merged with pixel_address_generator:inst1|dest_base_address_offset[3]     ;
+; pixel_address_generator:inst1|dest_target_bit[1]                                          ; Merged with pixel_address_generator:inst1|dest_base_address_offset[2]     ;
+; pixel_address_generator:inst1|dest_target_bit[0]                                          ; Merged with pixel_address_generator:inst1|dest_base_address_offset[1]     ;
+; pixel_address_generator:inst1|srce_target_bit[3]                                          ; Merged with pixel_address_generator:inst1|srce_base_address_offset[4]     ;
+; pixel_address_generator:inst1|srce_target_bit[2]                                          ; Merged with pixel_address_generator:inst1|srce_base_address_offset[3]     ;
+; pixel_address_generator:inst1|srce_target_bit[1]                                          ; Merged with pixel_address_generator:inst1|srce_base_address_offset[2]     ;
+; pixel_address_generator:inst1|srce_target_bit[0]                                          ; Merged with pixel_address_generator:inst1|srce_base_address_offset[1]     ;
+; geometry_xy_plotter:inst|geo_shape[3]                                                     ; Stuck at GND due to stuck port data_in                                    ;
+; geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~5                         ; Lost fanout                                                               ;
+; geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~6                         ; Lost fanout                                                               ;
+; geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~7                         ; Lost fanout                                                               ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~0                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~1                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~2                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~3                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~4                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~5                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~6                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~7                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~8                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~9                                         ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~10                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~11                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~12                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~13                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~14                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~15                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~16                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~17                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~18                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~19                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~20                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~21                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~22                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~23                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~24                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~25                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~26                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~27                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~28                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~29                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~30                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~31                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~32                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~33                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~34                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~35                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~36                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~37                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~38                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~39                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~40                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~41                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~42                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~43                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~44                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~45                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~46                                        ; Stuck at GND due to stuck port clock                                      ;
+; pixel_address_generator:inst1|LUT_bits_to_shift~47                                        ; Stuck at GND due to stuck port clock                                      ;
+; Total Number of Removed Registers = 161                                                   ;                                                                           ;
++-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 721   ;
+; Number of registers using Synchronous Clear  ; 10    ;
+; Number of registers using Synchronous Load   ; 126   ;
+; Number of registers using Asynchronous Clear ; 319   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 689   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|rcd[8]                                      ;
+; 3:1                ; 40 bits   ; 80 LEs        ; 40 LEs               ; 40 LEs                 ; Yes        ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|memory[34] ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|rd_wait_b                                   ;
+; 4:1                ; 36 bits   ; 72 LEs        ; 36 LEs               ; 36 LEs                 ; Yes        ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|wc_addr[15]                                 ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[29]                                          ;
+; 16:1               ; 4 bits    ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[39]                                          ;
+; 5:1                ; 12 bits   ; 36 LEs        ; 12 LEs               ; 24 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|errd[11]                           ;
+; 4:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[10]                                          ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |geo|pixel_address_generator:inst1|pixel_cmd[25]                                          ;
+; 6:1                ; 36 bits   ; 144 LEs       ; 36 LEs               ; 108 LEs                ; Yes        ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|rc_bpp[2]                                   ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|PX_COPY_COLOUR[3]                           ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ram_wr_data[14]                             ;
+; 7:1                ; 12 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|X_coord[1]                         ;
+; 7:1                ; 12 bits   ; 48 LEs        ; 12 LEs               ; 36 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_y[2]                                                    ;
+; 8:1                ; 12 bits   ; 60 LEs        ; 24 LEs               ; 36 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|geo_x[0]                                                    ;
+; 9:1                ; 12 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|Y_coord[1]                         ;
+; 130:1              ; 24 bits   ; 2064 LEs      ; 48 LEs               ; 2016 LEs               ; Yes        ; |geo|geometry_xy_plotter:inst|max_x[4]                                                    ;
+; 8:1                ; 8 bits    ; 40 LEs        ; 8 LEs                ; 32 LEs                 ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_color[0]                                      ;
+; 130:1              ; 2 bits    ; 172 LEs       ; 6 LEs                ; 166 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_func[1]                                            ;
+; 132:1              ; 2 bits    ; 176 LEs       ; 8 LEs                ; 168 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|geo_shape[2]                                                ;
+; 74:1               ; 4 bits    ; 196 LEs       ; 16 LEs               ; 180 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[8]                                     ;
+; 74:1               ; 8 bits    ; 392 LEs       ; 32 LEs               ; 360 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_X[4]                                     ;
+; 74:1               ; 12 bits   ; 588 LEs       ; 48 LEs               ; 540 LEs                ; Yes        ; |geo|geometry_xy_plotter:inst|draw_cmd_data_word_Y[0]                                     ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|Add4                               ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; No         ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ShiftRight1                                 ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ShiftRight0                                 ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ShiftLeft0                                  ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |geo|geometry_xy_plotter:inst|draw_cmd_func                                               ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                                                   ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                                                   ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ShiftRight1                                 ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ShiftRight0                                 ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ShiftLeft1                                  ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 9 LEs                ; 0 LEs                  ; No         ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ShiftRight1                                 ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |geo|pixel_writer:inst3|geo_pixel_writer:inst|ShiftRight0                                 ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |geo|pixel_address_generator:inst1|Add0                                                   ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |geo|geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|altsyncram_esf1:FIFOram ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                             ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; OFF   ; -    ; -                                                                                              ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated ;
++---------------------------------+-------+------+----------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                         ;
++---------------------------------+-------+------+----------------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; OFF   ; -    ; -                                                                          ;
++---------------------------------+-------+------+----------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: geometry_xy_plotter:inst ;
++----------------+-------+----------------------------------------------+
+; Parameter Name ; Value ; Type                                         ;
++----------------+-------+----------------------------------------------+
+; FIFO_MARGIN    ; 32    ; Signed Integer                               ;
++----------------+-------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: geometry_xy_plotter:inst|scfifo:scfifo_component ;
++-------------------------+-------------+-------------------------------------------------------+
+; Parameter Name          ; Value       ; Type                                                  ;
++-------------------------+-------------+-------------------------------------------------------+
+; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                            ;
+; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                          ;
+; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                          ;
+; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                                        ;
+; lpm_width               ; 16          ; Signed Integer                                        ;
+; LPM_NUMWORDS            ; 512         ; Signed Integer                                        ;
+; LPM_WIDTHU              ; 9           ; Signed Integer                                        ;
+; LPM_SHOWAHEAD           ; ON          ; Untyped                                               ;
+; UNDERFLOW_CHECKING      ; ON          ; Untyped                                               ;
+; OVERFLOW_CHECKING       ; ON          ; Untyped                                               ;
+; ALLOW_RWCYCLE_WHEN_FULL ; OFF         ; Untyped                                               ;
+; ADD_RAM_OUTPUT_REGISTER ; ON          ; Untyped                                               ;
+; ALMOST_FULL_VALUE       ; 480         ; Signed Integer                                        ;
+; ALMOST_EMPTY_VALUE      ; 0           ; Untyped                                               ;
+; USE_EAB                 ; ON          ; Untyped                                               ;
+; MAXIMIZE_SPEED          ; 5           ; Untyped                                               ;
+; DEVICE_FAMILY           ; Cyclone III ; Untyped                                               ;
+; OPTIMIZE_FOR_SPEED      ; 5           ; Untyped                                               ;
+; CBXI_PARAMETER          ; scfifo_9la1 ; Untyped                                               ;
++-------------------------+-------------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1 ;
++----------------+-------+-----------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                          ;
++----------------+-------+-----------------------------------------------------------------------------------------------+
+; bits           ; 40    ; Signed Integer                                                                                ;
++----------------+-------+-----------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component ;
++------------------------------------+------------------------+------------------------------------------------------+
+; Parameter Name                     ; Value                  ; Type                                                 ;
++------------------------------------+------------------------+------------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                      ; Untyped                                              ;
+; AUTO_CARRY_CHAINS                  ; ON                     ; AUTO_CARRY                                           ;
+; IGNORE_CARRY_BUFFERS               ; OFF                    ; IGNORE_CARRY                                         ;
+; AUTO_CASCADE_CHAINS                ; ON                     ; AUTO_CASCADE                                         ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                    ; IGNORE_CASCADE                                       ;
+; WIDTH_BYTEENA                      ; 1                      ; Untyped                                              ;
+; OPERATION_MODE                     ; SINGLE_PORT            ; Untyped                                              ;
+; WIDTH_A                            ; 16                     ; Signed Integer                                       ;
+; WIDTHAD_A                          ; 12                     ; Signed Integer                                       ;
+; NUMWORDS_A                         ; 4096                   ; Signed Integer                                       ;
+; OUTDATA_REG_A                      ; CLOCK0                 ; Untyped                                              ;
+; ADDRESS_ACLR_A                     ; NONE                   ; Untyped                                              ;
+; OUTDATA_ACLR_A                     ; NONE                   ; Untyped                                              ;
+; WRCONTROL_ACLR_A                   ; NONE                   ; Untyped                                              ;
+; INDATA_ACLR_A                      ; NONE                   ; Untyped                                              ;
+; BYTEENA_ACLR_A                     ; NONE                   ; Untyped                                              ;
+; WIDTH_B                            ; 1                      ; Untyped                                              ;
+; WIDTHAD_B                          ; 1                      ; Untyped                                              ;
+; NUMWORDS_B                         ; 1                      ; Untyped                                              ;
+; INDATA_REG_B                       ; CLOCK1                 ; Untyped                                              ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                 ; Untyped                                              ;
+; RDCONTROL_REG_B                    ; CLOCK1                 ; Untyped                                              ;
+; ADDRESS_REG_B                      ; CLOCK1                 ; Untyped                                              ;
+; OUTDATA_REG_B                      ; UNREGISTERED           ; Untyped                                              ;
+; BYTEENA_REG_B                      ; CLOCK1                 ; Untyped                                              ;
+; INDATA_ACLR_B                      ; NONE                   ; Untyped                                              ;
+; WRCONTROL_ACLR_B                   ; NONE                   ; Untyped                                              ;
+; ADDRESS_ACLR_B                     ; NONE                   ; Untyped                                              ;
+; OUTDATA_ACLR_B                     ; NONE                   ; Untyped                                              ;
+; RDCONTROL_ACLR_B                   ; NONE                   ; Untyped                                              ;
+; BYTEENA_ACLR_B                     ; NONE                   ; Untyped                                              ;
+; WIDTH_BYTEENA_A                    ; 1                      ; Signed Integer                                       ;
+; WIDTH_BYTEENA_B                    ; 1                      ; Untyped                                              ;
+; RAM_BLOCK_TYPE                     ; AUTO                   ; Untyped                                              ;
+; BYTE_SIZE                          ; 8                      ; Untyped                                              ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE              ; Untyped                                              ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_WITH_NBE_READ ; Untyped                                              ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_WITH_NBE_READ ; Untyped                                              ;
+; INIT_FILE                          ; test.mif               ; Untyped                                              ;
+; INIT_FILE_LAYOUT                   ; PORT_A                 ; Untyped                                              ;
+; MAXIMUM_DEPTH                      ; 0                      ; Untyped                                              ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS                 ; Untyped                                              ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                 ; Untyped                                              ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS                 ; Untyped                                              ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                 ; Untyped                                              ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN        ; Untyped                                              ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN        ; Untyped                                              ;
+; ENABLE_ECC                         ; FALSE                  ; Untyped                                              ;
+; DEVICE_FAMILY                      ; Cyclone III            ; Untyped                                              ;
+; CBXI_PARAMETER                     ; altsyncram_i0n1        ; Untyped                                              ;
++------------------------------------+------------------------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult1 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 12          ; Untyped                        ;
+; LPM_WIDTHB                                     ; 16          ; Untyped                        ;
+; LPM_WIDTHP                                     ; 28          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 28          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 6           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; mult_vbt    ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: pixel_address_generator:inst1|lpm_mult:Mult0 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 12          ; Untyped                        ;
+; LPM_WIDTHB                                     ; 16          ; Untyped                        ;
+; LPM_WIDTHP                                     ; 28          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 28          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 6           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; mult_vbt    ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; scfifo Parameter Settings by Entity Instance                                  ;
++----------------------------+--------------------------------------------------+
+; Name                       ; Value                                            ;
++----------------------------+--------------------------------------------------+
+; Number of entity instances ; 1                                                ;
+; Entity Instance            ; geometry_xy_plotter:inst|scfifo:scfifo_component ;
+;     -- FIFO Type           ; Single Clock                                     ;
+;     -- lpm_width           ; 16                                               ;
+;     -- LPM_NUMWORDS        ; 512                                              ;
+;     -- LPM_SHOWAHEAD       ; ON                                               ;
+;     -- USE_EAB             ; ON                                               ;
++----------------------------+--------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                                  ;
++-------------------------------------------+-----------------------------------------------------------------------+
+; Name                                      ; Value                                                                 ;
++-------------------------------------------+-----------------------------------------------------------------------+
+; Number of entity instances                ; 1                                                                     ;
+; Entity Instance                           ; pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                                           ;
+;     -- WIDTH_A                            ; 16                                                                    ;
+;     -- NUMWORDS_A                         ; 4096                                                                  ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                                                ;
+;     -- WIDTH_B                            ; 1                                                                     ;
+;     -- NUMWORDS_B                         ; 1                                                                     ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                                ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                          ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                                  ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                             ;
++-------------------------------------------+-----------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                                       ;
++---------------------------------------+----------------------------------------------+
+; Name                                  ; Value                                        ;
++---------------------------------------+----------------------------------------------+
+; Number of entity instances            ; 2                                            ;
+; Entity Instance                       ; pixel_address_generator:inst1|lpm_mult:Mult1 ;
+;     -- LPM_WIDTHA                     ; 12                                           ;
+;     -- LPM_WIDTHB                     ; 16                                           ;
+;     -- LPM_WIDTHP                     ; 28                                           ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                     ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                           ;
+;     -- USE_EAB                        ; OFF                                          ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                         ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                           ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                           ;
+; Entity Instance                       ; pixel_address_generator:inst1|lpm_mult:Mult0 ;
+;     -- LPM_WIDTHA                     ; 12                                           ;
+;     -- LPM_WIDTHB                     ; 16                                           ;
+;     -- LPM_WIDTHP                     ; 28                                           ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                     ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                           ;
+;     -- USE_EAB                        ; OFF                                          ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                         ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                           ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                           ;
++---------------------------------------+----------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "geometry_xy_plotter:inst|line_generator:linegen_1"                                          ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; busy         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; ypos_stopped ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Sat Sep 05 14:42:28 2020
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off geo -c geo
+Info: Found 1 design units, including 1 entities, in source file geo.bdf
+    Info: Found entity 1: geo
+Info: Found 2 design units, including 2 entities, in source file geometry_xy_plotter.sv
+    Info: Found entity 1: geometry_xy_plotter
+    Info: Found entity 2: tri_comp
+Info: Found 1 design units, including 1 entities, in source file line_generator.sv
+    Info: Found entity 1: line_generator
+Info: Found 1 design units, including 1 entities, in source file pixel_address_generator.sv
+    Info: Found entity 1: pixel_address_generator
+Info: Found 1 design units, including 1 entities, in source file /fpga/projects/gpu/test/pixel_writer/geo_pixel_writer.sv
+    Info: Found entity 1: geo_pixel_writer
+Info: Found 1 design units, including 1 entities, in source file /fpga/projects/gpu/test/pixel_writer/fifo_3word_0_latency.sv
+    Info: Found entity 1: FIFO_3word_0_latency
+Info: Found 1 design units, including 1 entities, in source file /fpga/projects/gpu/test/pixel_writer/altsyncram0.v
+    Info: Found entity 1: altsyncram0
+Info: Found 1 design units, including 1 entities, in source file /fpga/projects/gpu/test/pixel_writer/pixel_writer.bdf
+    Info: Found entity 1: pixel_writer
+Info: Found 1 design units, including 1 entities, in source file /fpga/projects/gpu/test/pixel_writer/fifo_2word_fwft.sv
+    Info: Found entity 1: FIFO_2word_FWFT
+Info: Elaborating entity "geo" for the top level hierarchy
+Info: Elaborating entity "geometry_xy_plotter" for hierarchy "geometry_xy_plotter:inst"
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(32): object "CMD_OUT_NOP" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(34): object "CMD_OUT_PXWRI_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(35): object "CMD_OUT_PXPASTE" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(36): object "CMD_OUT_PXPASTE_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(38): object "CMD_OUT_PXCOPY" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(39): object "CMD_OUT_SETARGB" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(81): object "geo_mask" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(82): object "geo_paste" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(95): object "geo_sub_func1" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(96): object "geo_sub_func2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(97): object "dx" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(98): object "dy" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geometry_xy_plotter.sv(99): object "errd" assigned a value but never read
+Info (10264): Verilog HDL Case Statement information at geometry_xy_plotter.sv(361): all case item expressions in this case statement are onehot
+Info: Elaborating entity "scfifo" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component"
+Info: Elaborated megafunction instantiation "geometry_xy_plotter:inst|scfifo:scfifo_component"
+Info: Instantiated megafunction "geometry_xy_plotter:inst|scfifo:scfifo_component" with the following parameter:
+    Info: Parameter "add_ram_output_register" = "ON"
+    Info: Parameter "almost_full_value" = "480"
+    Info: Parameter "intended_device_family" = "Cyclone IV"
+    Info: Parameter "lpm_hint" = "RAM_BLOCK_TYPE=M9K"
+    Info: Parameter "lpm_numwords" = "512"
+    Info: Parameter "lpm_showahead" = "ON"
+    Info: Parameter "lpm_type" = "scfifo"
+    Info: Parameter "lpm_width" = "16"
+    Info: Parameter "lpm_widthu" = "9"
+    Info: Parameter "overflow_checking" = "ON"
+    Info: Parameter "underflow_checking" = "ON"
+    Info: Parameter "use_eab" = "ON"
+Info: Found 1 design units, including 1 entities, in source file db/scfifo_9la1.tdf
+    Info: Found entity 1: scfifo_9la1
+Info: Elaborating entity "scfifo_9la1" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_dpfifo_bo71.tdf
+    Info: Found entity 1: a_dpfifo_bo71
+Info: Elaborating entity "a_dpfifo_bo71" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_esf1.tdf
+    Info: Found entity 1: altsyncram_esf1
+Info: Elaborating entity "altsyncram_esf1" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|altsyncram_esf1:FIFOram"
+Info: Found 1 design units, including 1 entities, in source file db/cmpr_dr8.tdf
+    Info: Found entity 1: cmpr_dr8
+Info: Elaborating entity "cmpr_dr8" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|cmpr_dr8:almost_full_comparer"
+Info: Elaborating entity "cmpr_dr8" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|cmpr_dr8:three_comparison"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_o8b.tdf
+    Info: Found entity 1: cntr_o8b
+Info: Elaborating entity "cntr_o8b" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|cntr_o8b:rd_ptr_msb"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_597.tdf
+    Info: Found entity 1: cntr_597
+Info: Elaborating entity "cntr_597" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|cntr_597:usedw_counter"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_p8b.tdf
+    Info: Found entity 1: cntr_p8b
+Info: Elaborating entity "cntr_p8b" for hierarchy "geometry_xy_plotter:inst|scfifo:scfifo_component|scfifo_9la1:auto_generated|a_dpfifo_bo71:dpfifo|cntr_p8b:wr_ptr"
+Info: Elaborating entity "line_generator" for hierarchy "geometry_xy_plotter:inst|line_generator:linegen_1"
+Warning (10036): Verilog HDL or VHDL warning at line_generator.sv(33): object "stop_ypos_en" assigned a value but never read
+Info: Elaborating entity "pixel_writer" for hierarchy "pixel_writer:inst3"
+Info: Elaborating entity "geo_pixel_writer" for hierarchy "pixel_writer:inst3|geo_pixel_writer:inst"
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(61): object "LUT_nmask" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(62): object "LUT_pmask" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(65): object "CMD_IN_NOP" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at geo_pixel_writer.sv(73): object "CMD_IN_RST_PXPASTE_M" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at geo_pixel_writer.sv(192): truncated value with size 24 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at geo_pixel_writer.sv(193): truncated value with size 24 to match size of target (16)
+Info: Elaborating entity "FIFO_2word_FWFT" for hierarchy "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1"
+Info: Elaborating entity "altsyncram0" for hierarchy "pixel_writer:inst3|altsyncram0:inst17"
+Info: Elaborating entity "altsyncram" for hierarchy "pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component"
+Info: Elaborated megafunction instantiation "pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component"
+Info: Instantiated megafunction "pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component" with the following parameter:
+    Info: Parameter "clock_enable_input_a" = "BYPASS"
+    Info: Parameter "clock_enable_output_a" = "BYPASS"
+    Info: Parameter "init_file" = "test.mif"
+    Info: Parameter "intended_device_family" = "Cyclone III"
+    Info: Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info: Parameter "lpm_type" = "altsyncram"
+    Info: Parameter "numwords_a" = "4096"
+    Info: Parameter "operation_mode" = "SINGLE_PORT"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "outdata_reg_a" = "CLOCK0"
+    Info: Parameter "power_up_uninitialized" = "FALSE"
+    Info: Parameter "read_during_write_mode_port_a" = "NEW_DATA_WITH_NBE_READ"
+    Info: Parameter "read_during_write_mode_port_b" = "NEW_DATA_WITH_NBE_READ"
+    Info: Parameter "widthad_a" = "12"
+    Info: Parameter "width_a" = "16"
+    Info: Parameter "width_byteena_a" = "1"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_i0n1.tdf
+    Info: Found entity 1: altsyncram_i0n1
+Info: Elaborating entity "altsyncram_i0n1" for hierarchy "pixel_writer:inst3|altsyncram0:inst17|altsyncram:altsyncram_component|altsyncram_i0n1:auto_generated"
+Info: Elaborating entity "pixel_address_generator" for hierarchy "pixel_address_generator:inst1"
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(84): object "CMD_IN_NOP" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(101): object "CMD_OUT_NOP" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(102): object "CMD_OUT_PXWRI" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(103): object "CMD_OUT_PXWRI_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(104): object "CMD_OUT_PXPASTE" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(105): object "CMD_OUT_PXPASTE_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(106): object "CMD_OUT_PXCOPY" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(107): object "CMD_OUT_SETARGB" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(108): object "CMD_OUT_RST_PXWRI_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(109): object "CMD_OUT_RST_PXPASTE_M" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pixel_address_generator.sv(119): object "s2_bit_mode" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at pixel_address_generator.sv(184): truncated value with size 16 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at pixel_address_generator.sv(185): truncated value with size 16 to match size of target (4)
+Warning (10763): Verilog HDL warning at pixel_address_generator.sv(188): case statement has overlapping case item expressions with non-constant or don't care bits - unable to check case statement for completeness
+Warning (10030): Net "LUT_bits_to_shift.data_a" at pixel_address_generator.sv(55) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "LUT_bits_to_shift.waddr_a" at pixel_address_generator.sv(55) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "LUT_bits_to_shift.we_a" at pixel_address_generator.sv(55) has no driver or initial value, using a default initial value '0'
+Warning: Tri-state node(s) do not directly drive top-level pin(s)
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[0]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[1]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[2]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[3]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[4]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[5]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[6]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[7]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[8]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[9]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[10]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[11]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[12]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[13]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[14]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[15]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[16]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[17]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[18]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[19]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[20]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[21]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[22]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[23]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[24]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[25]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[26]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[27]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[28]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[29]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[30]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[31]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[32]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[33]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[34]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[35]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[36]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[37]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[38]" feeding internal logic into a wire
+    Warning: Converted tri-state buffer "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[39]" feeding internal logic into a wire
+Info: Found 1 instances of uninferred RAM logic
+    Info: RAM logic "pixel_address_generator:inst1|LUT_bits_to_shift" is uninferred due to inappropriate RAM size
+Info: Inferred 2 megafunctions from design logic
+    Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "pixel_address_generator:inst1|Mult1"
+    Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "pixel_address_generator:inst1|Mult0"
+Info: Elaborated megafunction instantiation "pixel_address_generator:inst1|lpm_mult:Mult1"
+Info: Instantiated megafunction "pixel_address_generator:inst1|lpm_mult:Mult1" with the following parameter:
+    Info: Parameter "LPM_WIDTHA" = "12"
+    Info: Parameter "LPM_WIDTHB" = "16"
+    Info: Parameter "LPM_WIDTHP" = "28"
+    Info: Parameter "LPM_WIDTHR" = "28"
+    Info: Parameter "LPM_WIDTHS" = "1"
+    Info: Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info: Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info: Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info: Parameter "MAXIMIZE_SPEED" = "6"
+Info: Found 1 design units, including 1 entities, in source file db/mult_vbt.tdf
+    Info: Found entity 1: mult_vbt
+Info: Timing-Driven Synthesis is running
+Info: 43 registers lost all their fanouts during netlist optimizations. The first 43 are displayed below.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[0]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[1]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[2]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[3]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[4]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[5]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[6]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[7]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[8]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[9]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[10]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[11]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[12]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[13]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[14]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[15]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[16]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[17]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[18]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[19]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[20]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[21]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[22]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[23]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[24]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[25]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[26]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[27]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[28]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[29]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[30]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[31]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[32]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[33]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[34]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[35]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[36]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[37]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[38]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "pixel_writer:inst3|geo_pixel_writer:inst|FIFO_2word_FWFT:input_cmd_fifo_1|data_out[39]~en" lost all its fanouts during netlist optimizations.
+    Info: Register "geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~5" lost all its fanouts during netlist optimizations.
+    Info: Register "geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~6" lost all its fanouts during netlist optimizations.
+    Info: Register "geometry_xy_plotter:inst|line_generator:linegen_1|geo_sub_func1~7" lost all its fanouts during netlist optimizations.
+Info: Implemented 2243 device resources after synthesis - the final resource count might be different
+    Info: Implemented 20 input pins
+    Info: Implemented 154 output pins
+    Info: Implemented 2033 logic cells
+    Info: Implemented 32 RAM segments
+    Info: Implemented 4 DSP elements
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 78 warnings
+    Info: Peak virtual memory: 240 megabytes
+    Info: Processing ended: Sat Sep 05 14:42:43 2020
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:16
+
+

@@ -1,3 +1,11 @@
+/*
+ *      GEOFF MODULE
+ *  (geometry_xy_plotter)
+ *
+ *       v 0.1.001
+ *
+ */
+
 module geometry_xy_plotter (
     input wire clk,              // System clock
     input wire reset,            // Force reset
@@ -127,17 +135,17 @@ defparam
     scfifo_component.underflow_checking      = "ON",
     scfifo_component.use_eab                 = "ON";
 
-logic linegen_start ;
-logic line_done ;
-logic pass_thru_a ;
-logic pass_thru_b ;
-logic y_stop ;
-logic y_stopped ;
+logic linegen_start       ;
+logic line_done           ;
+logic pass_thru_a         ;
+logic pass_thru_b         ;
+logic y_stop              ;
+logic y_stopped           ;
 logic [11:0] y_stop_coord ;
-logic line_dat_rdy ;
-logic line_gen_running ;
-logic [11:0] gen_x ;
-logic [11:0] gen_y ;
+logic line_dat_rdy        ;
+logic line_gen_running    ;
+logic [11:0] gen_x        ;
+logic [11:0] gen_y        ;
 
 line_generator linegen_1 (
 // inputs
@@ -183,13 +191,13 @@ always @(posedge clk or posedge reset) begin
         draw_cmd_tx          <= 1'b0  ;
 
         // reset geometry sequencer controls
-        geo_shape     <= 4'b0 ;
-        geo_fill      <= 1'b0 ;
-        geo_mask      <= 1'b0 ;
-        geo_paste     <= 1'b0 ;
-        geo_run       <= 1'b0 ;
-        geo_color     <= 8'b0 ;
-        linegen_start <= 1'b0 ;
+        geo_shape     <= 4'b0  ;
+        geo_fill      <= 1'b0  ;
+        geo_mask      <= 1'b0  ;
+        geo_paste     <= 1'b0  ;
+        geo_run       <= 1'b0  ;
+        geo_color     <= 8'b0  ;
+        linegen_start <= 1'b0  ;
         
         // reset geometry counters
         geo_x         <= 12'b0 ;
@@ -228,19 +236,21 @@ always @(posedge clk or posedge reset) begin
                     draw_cmd_tx          <= 1'b1;                    // transmits the command
                 end
                     
-                        
                 8'd119 : begin  //Ignore for now
                     //destmem <= x[11:0][0] * 4096 + y[11:0][0];  // set both source & destination pointers for blitter copy
                     //srcmem  <= x[11:0][1] * 4096 + y[11:0][1];
                 end
+                
                 8'd118 : begin //Ignore for now
                     //destmem <= x[11:0][1] * 4096 + y[11:0][1];  // set both source & destination pointers for blitter copy
                     //srcmem  <= x[11:0][0] * 4096 + y[11:0][0];
                 end
+                
                 8'd117 : begin //Ignore for now
                     //destmem <= x[11:0][2] * 4096 + y[11:0][2];  // set both source & destination pointers for blitter copy
                     //srcmem  <= x[11:0][3] * 4096 + y[11:0][3];
                 end
+                
                 8'd116 : begin //Ignore for now
                     //destmem <= x[11:0][3] * 4096 + y[11:0][3];  // set both source & destination pointers for blitter copy
                     //srcmem  <= x[11:0][2] * 4096 + y[11:0][2];
@@ -284,16 +294,19 @@ always @(posedge clk or posedge reset) begin
                     max_y <= y[0];
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
+                
                 8'd94  : begin
                     max_x <= x[1];    // set max width & height of screen to x1/y1
                     max_y <= y[1];
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
+                
                 8'd93  : begin
                     max_x <= x[2];    // set max width & height of screen to x2/y2
                     max_y <= y[2];
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
+                
                 8'd92 : begin
                     max_x <= x[3];    // set max width & height of screen to x3/y3
                     max_y <= y[3];
@@ -307,6 +320,7 @@ always @(posedge clk or posedge reset) begin
                     draw_cmd_data_word_X <= { command_data8[3:0], command_data8[7:4] }; // sets mask color 1/2 or #3 and #4
                     draw_cmd_tx          <= 1'b1;                                       // transmits the command
                 end
+                
                 8'd90 : begin               // clear the blitter copy pixel collision counter
                     draw_cmd_func        <= CMD_OUT_RST_PXPASTE_M[3:0];                 // sets the output funtion
                     draw_cmd_data_color  <= command_data8;                              // sets the mask color
@@ -364,70 +378,77 @@ always @(posedge clk or posedge reset) begin
 
                 4'd1 : begin    // draw line from (x[0],y[0]) to (x[1],y[1])
                         
-                  draw_cmd_func        <= CMD_OUT_PXWRI[3:0] ;// Set up command to pixel plotter to write a pixel,
-                  draw_cmd_data_color  <= geo_color ;         // ... in geo_colour,
-                  pass_thru_a          <= 1'b0  ;
-                  pass_thru_b          <= 1'b0  ;
-                  draw_cmd_data_word_Y <= gen_y ;             // ... at Y-coordinate,
-                  draw_cmd_data_word_X <= gen_x ;             // ... and X-coordinate.
+				   draw_cmd_func        <= CMD_OUT_PXWRI[3:0] ;// Set up command to pixel plotter to write a pixel,
+				   draw_cmd_data_color  <= geo_color ;         // ... in geo_colour,
+				   pass_thru_a          <= 1'b0  ;
+				   pass_thru_b          <= 1'b0  ;
+				   draw_cmd_data_word_Y <= gen_y ;             // ... at Y-coordinate,
+				   draw_cmd_data_word_X <= gen_x ;             // ... and X-coordinate.
 
-               if ( line_dat_rdy && ( draw_cmd_data_word_X >= 0 && draw_cmd_data_word_X <= max_x ) && ( draw_cmd_data_word_Y >=0 && draw_cmd_data_word_X <= max_y ) )
-                  draw_cmd_tx       <= 1'b1  ;             // send command if geo_X&Y are within valid drawing area
-               else
-                  draw_cmd_tx       <= 1'b0  ;             // otherwise turn off draw command
-               
-               if ( line_done ) begin
-               
-                  geo_shape     <= 4'd0 ; // last pixel
-                  linegen_start <= 1'b0 ; // reset linegen_start
-                  
-               end
+				   if ( line_dat_rdy && ( draw_cmd_data_word_X >= 0 && draw_cmd_data_word_X <= max_x ) && ( draw_cmd_data_word_Y >=0 && draw_cmd_data_word_X <= max_y ) )
+					  draw_cmd_tx       <= 1'b1  ;             // send command if geo_X&Y are within valid drawing area
+				   else
+					  draw_cmd_tx       <= 1'b0  ;             // otherwise turn off draw command
+				   
+				   if ( line_done ) begin
+				   
+					  geo_shape     <= 4'd0 ; // last pixel
+					  linegen_start <= 1'b0 ; // reset linegen_start
+					  
+				   end
                 
                 end // geo_shape - draw line
                 
                 4'd2 : begin    // draw a filled rectangle
 
-                    if ( geo_y != (y[1] + geo_ydir) ) begin             // Check for bottom (or top, depending on sign of geo_ydir) of rectangle reached
-                        if ( geo_x != (x[1] + geo_xdir) ) begin         // Check for right (or left, depending on sign of geo_xdir) of rectangle reached
-                            draw_cmd_func        <= CMD_OUT_PXWRI[3:0]; // Set up command to pixel plotter to write a pixel,
-                            draw_cmd_data_color  <= geo_color;          // ... in geo_colour,
-                            draw_cmd_data_word_Y <= geo_y ;             // ... at Y-coordinate,
-                            draw_cmd_data_word_X <= geo_x ;             // ... and X-coordinate.
+                    if ( geo_y != (y[1] + geo_ydir) ) begin              // Check for bottom (or top, depending on sign of geo_ydir) of rectangle reached
+                    
+                        if ( geo_x != (x[1] + geo_xdir) ) begin          // Check for right (or left, depending on sign of geo_xdir) of rectangle reached
+                        
+                            draw_cmd_func        <= CMD_OUT_PXWRI[3:0] ; // Set up command to pixel plotter to write a pixel,
+                            draw_cmd_data_color  <= geo_color ;          // ... in geo_colour,
+                            draw_cmd_data_word_Y <= geo_y     ;          // ... at Y-coordinate,
+                            draw_cmd_data_word_X <= geo_x     ;          // ... and X-coordinate.
+                            
                             if ( (geo_x >= 0 && geo_x <= max_x) && (geo_y >= 0 && geo_y <= max_y) )
-                        draw_cmd_tx  <= 1'b1; // send command if geo_X&Y are within valid drawing area
+                                draw_cmd_tx  <= 1'b1 ; // send command if geo_X&Y are within valid drawing area
                             else
-                        draw_cmd_tx  <= 1'b0; // otherwise turn off draw command
+                                draw_cmd_tx  <= 1'b0 ; // otherwise turn off draw command
                             
                             // Now increment (or decrement according to geo_xdir) geo_x to the next pixel.
                             // If geo_fill is HIGH, step to next X-position to fill the rectangle.
                             // If geo_x is at the end edge, step past it.
                             // If geo_y is at start or end (top or bottom edge), step to next X-position to draw the horizontal line.
-                            if (geo_fill || geo_x == x[1] || geo_y == y[0] || geo_y == y[1] )   geo_x <= geo_x + geo_xdir;
+                            if (geo_fill || geo_x == x[1] || geo_y == y[0] || geo_y == y[1] )   geo_x <= geo_x + geo_xdir ;
                             // Otherwise, jump to end X-position to draw other edge for non-filled rectangle.
-                            else                                                                geo_x <= x[1];
+                            else                                                                geo_x <= x[1] ;
 
                         end else begin  // geo_x has passed vertical edge
-                            draw_cmd_tx         <= 1'b0;                // do not send a draw cmd this cycle
-                            geo_x               <= x[0];                // reset X to start X-position
-                            geo_y               <= geo_y + geo_ydir;    // increment (or decrement) Y-position for next line
+                        
+                            draw_cmd_tx         <= 1'b0 ;               // do not send a draw cmd this cycle
+                            geo_x               <= x[0] ;               // reset X to start X-position
+                            geo_y               <= geo_y + geo_ydir ;   // increment (or decrement) Y-position for next line
+                            
                         end
                     end else begin      // geo_y has passed horizontal edge
-                            geo_run             <= 1'b0;                // stop geometry engine - shape completed
-                            draw_cmd_tx         <= 1'b0;                // do not send a draw cmd this cycle
+                    
+                            geo_run             <= 1'b0 ;               // stop geometry engine - shape completed
+                            draw_cmd_tx         <= 1'b0 ;               // do not send a draw cmd this cycle
+                            
                     end
                     
                 end // draw a filled rectangle
 
                 default : begin
                 
-                    geo_run         <= 1'b0; // no valid drawing engine selected, so stop the geo_run flag.
-                    draw_cmd_tx     <= 1'b0;
+                    geo_run         <= 1'b0 ; // no valid drawing engine selected, so stop the geo_run flag.
+                    draw_cmd_tx     <= 1'b0 ;
                     
                 end
 
             endcase   // run a selected geometric drawing engine
                 
-        end else   draw_cmd_tx <= 1'b0;    // stop transmit output command function//  end of (geo_run) flag
+        end else   draw_cmd_tx <= 1'b0 ;    // stop transmit output command function//  end of (geo_run) flag
     
     end // !draw_busy
 

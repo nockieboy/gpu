@@ -1,3 +1,10 @@
+/*
+ * LINE GENERATOR MODULE
+ *
+ * v 0.1.001
+ *
+ */
+
 module line_generator (
 // inputs
   input logic                clk,              // 125 MHz pixel clock
@@ -47,16 +54,16 @@ end
 always @( posedge clk ) begin
 
 
-	if ( !draw_busy ) begin // draw_busy must be LOW or the line generator won't run
-		  
+    if ( !draw_busy ) begin // draw_busy must be LOW or the line generator won't run
+	
 		last_run <= run ;
 
-		if ( !run && ( latch_aX != aX || latch_aY != aY || latch_bX != bX || latch_bY != bY ) ) begin
+        if ( !run && ( latch_aX != aX || latch_aY != aY || latch_bX != bX || latch_bY != bY ) ) begin
 
-			// coordinates have changed
-			ypos_stopped   <= 1'b0 ;
-
-		end
+            // coordinates have changed
+            ypos_stopped   <= 1'b0 ;
+    
+        end
 
 		if ( run && ( pass_thru_a || ( aX == bX && aY == bY ) ) ) begin
 
@@ -71,8 +78,8 @@ always @( posedge clk ) begin
 			end
 			
 		end
-		else
-      if ( run && pass_thru_b ) begin
+        else
+        if ( run && pass_thru_b ) begin
         
             pixel_data_rdy <= 1'b1 ; // valid coordinates at output
             X_coord        <= bX   ; // pass-through bX value
@@ -86,8 +93,6 @@ always @( posedge clk ) begin
             geo_sub_func1  <= 4'b0       ; // reset the phase counter
             ypos_stopped   <= 1'b0       ; // reset ypos_stopped flag
             line_complete  <= 1'b0       ; // reset line_complete flag
-            //Y_stop         <= stop_ypos  ; // latch the Y_stop coordinate                     *********************** do not latch, this is an immediate action
-            //stop_ypos_en   <= ena_stop_y ; // latch Y_stop enable                             *********************** do not latch, this is an immediate action
             draw_line      <= 1'b1       ; // start drawing the line on the next clock cycle
             busy           <= 1'b1       ; // the line generator is busy from the next cycle
             pixel_data_rdy <= 1'b0       ; // no valid coordinates next clock cycle
@@ -142,16 +147,15 @@ always @( posedge clk ) begin
                         
                     end else if ( ena_stop_y && Y_coord == stop_ypos ) begin // reached Y_coordinate stop position and we want to stop on Y_pos
                     
-                        ypos_stopped   <= 1'b1 ; // let the parent module know the line generator has stopped on ypos
-                        draw_line      <= 1'b0 ; // last pixel - allow time for this pixel to be written by ending on next clock
-                        pixel_data_rdy <= 1'b0 ; // reset pixel_data_rdy flag - no more valid coordinates after this clock
-                        //busy           <= 1'b0 ; // line generator is no longer busy **********  It's still busy
+                        ypos_stopped   <= 1'b1  ; // let the parent module know the line generator has stopped on ypos
+                        draw_line      <= 1'b0  ; // last pixel - allow time for this pixel to be written by ending on next clock
+                        pixel_data_rdy <= 1'b0  ; // reset pixel_data_rdy flag - no more valid coordinates after this clock
                     
                     end else begin	// Bresenham's Line Drawing Algorithm
 
-                        ypos_stopped   <= 1'b0 ; // let the parent module know the line generator has stopped on ypos
-                        draw_line      <= 1'b1 ; // last pixel - allow time for this pixel to be written by ending on next clock
-                        pixel_data_rdy <= 1'b1 ; // reset pixel_data_rdy flag - no more valid coordinates after this clock
+                        ypos_stopped   <= 1'b0  ; // let the parent module know the line generator has stopped on ypos
+                        draw_line      <= 1'b1  ; // last pixel - allow time for this pixel to be written by ending on next clock
+                        pixel_data_rdy <= 1'b1  ; // reset pixel_data_rdy flag - no more valid coordinates after this clock
                     
 						if ( ( errd << 1 ) > dy ) begin
 						
