@@ -89,8 +89,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 264 128)
 		(output)
-		(text "rx_ascii[7..0]" (rect 0 0 50 12)(font "Arial" ))
-		(text "rx_ascii[7..0]" (rect 193 123 243 135)(font "Arial" ))
+		(text "rx_ascii[6..0]" (rect 0 0 50 12)(font "Arial" ))
+		(text "rx_ascii[6..0]" (rect 193 123 243 135)(font "Arial" ))
 		(line (pt 264 128)(pt 248 128)(line_width 3))
 	)
 	(port

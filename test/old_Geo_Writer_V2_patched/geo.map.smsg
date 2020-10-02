@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at pixel_address_generator.sv(111): always construct contains both blocking and non-blocking assignments

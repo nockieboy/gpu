@@ -149,15 +149,15 @@ set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION OFF
 set_global_assignment -name OPTIMIZE_POWER_DURING_SYNTHESIS OFF
 set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING OFF
 set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE BALANCED
-set_global_assignment -name OPTIMIZATION_MODE BALANCED
-set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL NORMAL
+set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE AREA"
+set_global_assignment -name ROUTER_TIMING_OPTIMIZATION_LEVEL MAXIMUM
 set_global_assignment -name PLACEMENT_EFFORT_MULTIPLIER 1.0
-set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT NORMAL
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA
 set_global_assignment -name MUX_RESTRUCTURE AUTO
 set_global_assignment -name ALLOW_SHIFT_REGISTER_MERGING_ACROSS_HIERARCHIES OFF
 set_global_assignment -name QII_AUTO_PACKED_REGISTERS AUTO
 set_global_assignment -name ROUTER_REGISTER_DUPLICATION AUTO
-set_global_assignment -name FITTER_EFFORT "AUTO FIT"
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION OFF
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
 set_global_assignment -name ROUTER_CLOCKING_TOPOLOGY_ANALYSIS OFF
@@ -218,7 +218,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE sound.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sixteen_port_gpu_ram.sv
 set_global_assignment -name VERILOG_FILE rs232_DEBUGGER.v
 set_global_assignment -name SYSTEMVERILOG_FILE pixel_address_generator.sv
-set_global_assignment -name SYSTEMVERILOG_FILE line_generator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE palette_mixer.sv
 set_global_assignment -name SYSTEMVERILOG_FILE maggie.sv
 set_global_assignment -name SYSTEMVERILOG_FILE gpu_quad_port_ram.sv
@@ -226,6 +225,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE GPU_HW_Control_Regs.sv
 set_global_assignment -name VERILOG_FILE gpu_dual_port_ram_INTEL.v
 set_global_assignment -name SYSTEMVERILOG_FILE geometry_xy_plotter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE geometry_processor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE line_generator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE geo_pixel_writer.sv
 set_global_assignment -name SYSTEMVERILOG_FILE FIFO_2word_FWFT.sv
 set_global_assignment -name SYSTEMVERILOG_FILE data_mux_geo.sv
@@ -236,4 +236,6 @@ set_global_assignment -name VERILOG_FILE altpll0.v
 set_global_assignment -name SDC_FILE SDC1.sdc
 set_global_assignment -name MIF_FILE palette.mif
 set_global_assignment -name MIF_FILE GPU_MIF_CE10_10M.mif
+set_global_assignment -name QIP_FILE functions.qip
+set_global_assignment -name SIP_FILE functions.sip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

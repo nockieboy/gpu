@@ -59,15 +59,15 @@ geometry_xy_plotter geoff (
    .fifo_cmd_busy  ( fifo_cmd_busy   )
    
 );
-defparam geoff.FIFO_MARGIN = FIFO_MARGIN;  // The number of extra commands the fifo has room after the 'fifo_cmd_busy' goes high
+defparam geoff.FIFO_MARGIN = FIFO_MARGIN;  // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
 
 pixel_address_generator paget (
 
     // inputs
     .clk           ( clk              ),
     .reset         ( reset            ),
-    .draw_cmd_rdy  ( draw_cmd_rdy_r2  ),
-    .draw_cmd      ( draw_cmd_r2      ),
+    .draw_cmd_rdy  ( draw_cmd_rdy_r2  ),  // use _r, or _r2 to add a D-Clocked buffer between this section and the plotter.
+    .draw_cmd      ( draw_cmd_r2      ),  // use _r, or _r2 to add a D-Clocked buffer between this section and the plotter.
     .draw_busy     ( pix_writer_busy  ),
     // outputs
     .pixel_cmd_rdy ( pixel_cmd_rdy    ),

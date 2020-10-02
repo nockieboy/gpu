@@ -1,0 +1,178 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 264 224)
+	(text "vid_out_stencil" (rect 5 0 64 12)(font "Arial" ))
+	(text "inst" (rect 8 192 20 204)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "pclk" (rect 0 0 15 12)(font "Arial" ))
+		(text "pclk" (rect 21 27 36 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "reset" (rect 0 0 20 12)(font "Arial" ))
+		(text "reset" (rect 21 43 41 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "pc_ena[3..0]" (rect 0 0 49 12)(font "Arial" ))
+		(text "pc_ena[3..0]" (rect 21 59 70 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "hde_in" (rect 0 0 25 12)(font "Arial" ))
+		(text "hde_in" (rect 21 75 46 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "vde_in" (rect 0 0 27 12)(font "Arial" ))
+		(text "vde_in" (rect 21 91 48 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "hs_in" (rect 0 0 21 12)(font "Arial" ))
+		(text "hs_in" (rect 21 107 42 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "vs_in" (rect 0 0 22 12)(font "Arial" ))
+		(text "vs_in" (rect 21 123 43 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "r_in[RGB_hbit..0]" (rect 0 0 70 12)(font "Arial" ))
+		(text "r_in[RGB_hbit..0]" (rect 21 139 91 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "g_in[RGB_hbit..0]" (rect 0 0 71 12)(font "Arial" ))
+		(text "g_in[RGB_hbit..0]" (rect 21 155 92 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "b_in[RGB_hbit..0]" (rect 0 0 71 12)(font "Arial" ))
+		(text "b_in[RGB_hbit..0]" (rect 21 171 92 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
+		(pt 248 32)
+		(output)
+		(text "hde_out" (rect 0 0 31 12)(font "Arial" ))
+		(text "hde_out" (rect 196 27 227 39)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32)(line_width 1))
+	)
+	(port
+		(pt 248 48)
+		(output)
+		(text "vde_out" (rect 0 0 33 12)(font "Arial" ))
+		(text "vde_out" (rect 194 43 227 55)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48)(line_width 1))
+	)
+	(port
+		(pt 248 64)
+		(output)
+		(text "hs_out" (rect 0 0 27 12)(font "Arial" ))
+		(text "hs_out" (rect 200 59 227 71)(font "Arial" ))
+		(line (pt 248 64)(pt 232 64)(line_width 1))
+	)
+	(port
+		(pt 248 80)
+		(output)
+		(text "vs_out" (rect 0 0 28 12)(font "Arial" ))
+		(text "vs_out" (rect 199 75 227 87)(font "Arial" ))
+		(line (pt 248 80)(pt 232 80)(line_width 1))
+	)
+	(port
+		(pt 248 96)
+		(output)
+		(text "r_out[RGB_hbit..0]" (rect 0 0 76 12)(font "Arial" ))
+		(text "r_out[RGB_hbit..0]" (rect 151 91 227 103)(font "Arial" ))
+		(line (pt 248 96)(pt 232 96)(line_width 3))
+	)
+	(port
+		(pt 248 112)
+		(output)
+		(text "g_out[RGB_hbit..0]" (rect 0 0 77 12)(font "Arial" ))
+		(text "g_out[RGB_hbit..0]" (rect 150 107 227 119)(font "Arial" ))
+		(line (pt 248 112)(pt 232 112)(line_width 3))
+	)
+	(port
+		(pt 248 128)
+		(output)
+		(text "b_out[RGB_hbit..0]" (rect 0 0 77 12)(font "Arial" ))
+		(text "b_out[RGB_hbit..0]" (rect 150 123 227 135)(font "Arial" ))
+		(line (pt 248 128)(pt 232 128)(line_width 3))
+	)
+	(port
+		(pt 248 144)
+		(output)
+		(text "vid_de_out" (rect 0 0 44 12)(font "Arial" ))
+		(text "vid_de_out" (rect 183 139 227 151)(font "Arial" ))
+		(line (pt 248 144)(pt 232 144)(line_width 1))
+	)
+	(port
+		(pt 248 160)
+		(output)
+		(text "vid_clk" (rect 0 0 28 12)(font "Arial" ))
+		(text "vid_clk" (rect 199 155 227 167)(font "Arial" ))
+		(line (pt 248 160)(pt 232 160)(line_width 1))
+	)
+	(parameter
+		"RGB_hbit"
+		"3"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"HS_invert"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"VS_invert"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 232 192)(line_width 1))
+	)
+	(annotation_block (parameter)(rect 264 -64 364 16))
+)

@@ -1,5 +1,5 @@
 Flow report for GPU
-Fri Sep 04 20:52:53 2020
+Fri Oct 02 17:17:12 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,18 +40,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Fri Sep 04 20:52:40 2020       ;
+; Flow Status                        ; Successful - Fri Oct 02 17:17:00 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GPU                                         ;
 ; Top-level Entity Name              ; GPU                                         ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE10E22C7                                ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 8,111 / 10,320 ( 79 % )                     ;
-;     Total combinational functions  ; 6,326 / 10,320 ( 61 % )                     ;
-;     Dedicated logic registers      ; 4,723 / 10,320 ( 46 % )                     ;
-; Total registers                    ; 4804                                        ;
-; Total pins                         ; 74 / 92 ( 80 % )                            ;
+; Total logic elements               ; 9,458 / 10,320 ( 92 % )                     ;
+;     Total combinational functions  ; 7,818 / 10,320 ( 76 % )                     ;
+;     Dedicated logic registers      ; 5,015 / 10,320 ( 49 % )                     ;
+; Total registers                    ; 5096                                        ;
+; Total pins                         ; 76 / 92 ( 83 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 344,064 / 423,936 ( 81 % )                  ;
 ; Embedded Multiplier 9-bit elements ; 4 / 46 ( 9 % )                              ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/04/2020 20:50:07 ;
+; Start date & time ; 10/02/2020 17:13:55 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; GPU                 ;
 +-------------------+---------------------+
@@ -78,13 +78,15 @@ refer to the applicable agreement for further details.
 ; ALLOW_SHIFT_REGISTER_MERGING_ACROSS_HIERARCHIES ; Off                                    ; Auto               ; --          ; --             ;
 ; ALM_REGISTER_PACKING_EFFORT                     ; Low                                    ; Medium             ; --          ; --             ;
 ; AUTO_SHIFT_REGISTER_RECOGNITION                 ; Off                                    ; Auto               ; --          ; --             ;
-; COMPILER_SIGNATURE_ID                           ; 36074246109237.159924900601608         ; --                 ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                           ; 36074246109237.160165523418532         ; --                 ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT                          ; None                                   ; --                 ; --          ; eda_simulation ;
 ; EDA_TIME_SCALE                                  ; 1 ps                                   ; --                 ; --          ; eda_simulation ;
+; FITTER_EFFORT                                   ; Standard Fit                           ; Auto Fit           ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP                          ; 85                                     ; --                 ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP                          ; 0                                      ; --                 ; --          ; --             ;
 ; NOMINAL_CORE_SUPPLY_VOLTAGE                     ; 1.2V                                   ; --                 ; --          ; --             ;
 ; NUM_PARALLEL_PROCESSORS                         ; All                                    ; --                 ; --          ; --             ;
+; OPTIMIZATION_MODE                               ; Aggressive Area                        ; Balanced           ; --          ; --             ;
 ; OPTIMIZE_POWER_DURING_FITTING                   ; Off                                    ; Normal compilation ; --          ; --             ;
 ; OPTIMIZE_POWER_DURING_SYNTHESIS                 ; Off                                    ; Normal compilation ; --          ; --             ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS                  ; Half Signal Swing                      ; --                 ; --          ; --             ;
@@ -94,10 +96,12 @@ refer to the applicable agreement for further details.
 ; PARTITION_COLOR                                 ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
 ; PARTITION_FITTER_PRESERVATION_LEVEL             ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
 ; PARTITION_NETLIST_TYPE                          ; -- (Not supported for targeted family) ; --                 ; --          ; Top            ;
+; PHYSICAL_SYNTHESIS_EFFORT                       ; Extra                                  ; Normal             ; --          ; --             ;
 ; PHYSICAL_SYNTHESIS_REGISTER_RETIMING            ; On                                     ; Off                ; --          ; --             ;
 ; POWER_BOARD_THERMAL_MODEL                       ; None (CONSERVATIVE)                    ; --                 ; --          ; --             ;
 ; POWER_PRESET_COOLING_SOLUTION                   ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --                 ; --          ; --             ;
 ; PROJECT_OUTPUT_DIRECTORY                        ; output_files                           ; --                 ; --          ; --             ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL                ; MAXIMUM                                ; Normal             ; --          ; --             ;
 ; SAVE_DISK_SPACE                                 ; Off                                    ; On                 ; --          ; --             ;
 ; VERILOG_INPUT_VERSION                           ; SystemVerilog_2005                     ; Verilog_2001       ; --          ; --             ;
 ; VERILOG_SHOW_LMF_MAPPING_MESSAGES               ; Off                                    ; --                 ; --          ; --             ;
@@ -109,11 +113,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:05     ; 1.0                     ; 4962 MB             ; 00:01:18                           ;
-; Fitter               ; 00:01:15     ; 1.1                     ; 5703 MB             ; 00:02:08                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4703 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:11     ; 1.4                     ; 4848 MB             ; 00:00:13                           ;
-; Total                ; 00:02:33     ; --                      ; --                  ; 00:03:41                           ;
+; Analysis & Synthesis ; 00:01:12     ; 1.0                     ; 4961 MB             ; 00:01:27                           ;
+; Fitter               ; 00:01:42     ; 1.1                     ; 5681 MB             ; 00:02:55                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 4704 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:10     ; 1.4                     ; 4872 MB             ; 00:00:12                           ;
+; Total                ; 00:03:07     ; --                      ; --                  ; 00:04:36                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
