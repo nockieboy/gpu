@@ -133,7 +133,7 @@ module ps2_keyboard_interface (
   output reg       rx_released,
   output wire      rx_shift_key_on,
   output reg [7:0] rx_scan_code,
-  output reg [6:0] rx_ascii,
+  output reg [7:0] rx_ascii,
   output reg       rx_data_ready,       // rx_read_o
   input wire       rx_read,             // rx_read_ack_i
   input wire [7:0] tx_data,
@@ -216,7 +216,7 @@ reg enable_timer_60usec;
 reg enable_timer_5usec;
 reg [TIMER_60USEC_BITS_PP-1:0] timer_60usec_count;
 reg [TIMER_5USEC_BITS_PP-1:0] timer_5usec_count;
-reg [6:0] ascii;      // "REG" type only because a case statement is used.
+reg [7:0] ascii;      // "REG" type only because a case statement is used.
 reg left_shift_key;
 reg right_shift_key;
 reg ctrl_key;
@@ -471,92 +471,101 @@ end
 assign timer_60usec_done = (timer_60usec_count == (TIMER_60USEC_VALUE_PP - 1));
 
 // This is the 5usec timer counter
-always @(posedge clk)
-begin
-  if (~enable_timer_5usec) timer_5usec_count <= 0;
-  else if (~timer_5usec_done) timer_5usec_count <= timer_5usec_count + 1;
-end
-assign timer_5usec_done = (timer_5usec_count == TIMER_5USEC_VALUE_PP - 1);
+always @(posedge clk) begin
 
+  if (~enable_timer_5usec) timer_5usec_count <= 0 ;
+  else if (~timer_5usec_done) timer_5usec_count <= timer_5usec_count + 1 ;
+  
+end
+
+assign timer_5usec_done = (timer_5usec_count == TIMER_5USEC_VALUE_PP - 1) ;
 
 // Create the signals which indicate special scan codes received.
 // These are the "unlatched versions."
-assign extended = (q[8:1] == `EXTEND_CODE) && rx_shifting_done;
-assign released = (q[8:1] == `RELEASE_CODE) && rx_shifting_done;
+assign extended = ( q[8:1] == `EXTEND_CODE )  && rx_shifting_done ;
+assign released = ( q[8:1] == `RELEASE_CODE ) && rx_shifting_done ;
 
 // Store the special scan code status bits
 // Not the final output, but an intermediate storage place,
 // until the entire set of output data can be assembled.
-always @(posedge clk)
-begin
-  if (reset || rx_output_event)
-  begin
-    hold_extended <= 0;
-    hold_released <= 0;
+always @(posedge clk) begin
+
+  if (reset || rx_output_event) begin
+  
+    hold_extended <= 0 ;
+    hold_released <= 0 ;
+	 
+  end else begin
+  
+    if ( rx_shifting_done && extended ) hold_extended <= 1 ;
+    if ( rx_shifting_done && released ) hold_released <= 1 ;
+	 
   end
-  else
-  begin
-    if (rx_shifting_done && extended) hold_extended <= 1;
-    if (rx_shifting_done && released) hold_released <= 1;
-  end
+  
 end
 
 // Set status of the CTRL key
-always @(posedge clk)
-begin
+always @(posedge clk) begin
+
   if (reset) ctrl_key <= 0;
   else if ((q[8:1] == `LEFT_CTRL) && rx_shifting_done && ~hold_released)
     ctrl_key <= 1;
   else if ((q[8:1] == `LEFT_CTRL) && rx_shifting_done && hold_released)
     ctrl_key <= 0;
+	 
 end
 
 // Set CAPS-LOCK status
-always @(posedge clk)
-begin
+always @(posedge clk) begin
+
   if (reset) caps_lock <= 0;
   else if ((q[8:1] == `CAPS_LOCK_KEY) && rx_shifting_done && ~hold_released)
     caps_lock <= ~caps_lock;
+	 
 end
 
 // These bits contain the status of the two shift keys
-always @(posedge clk)
-begin
+always @(posedge clk) begin
+
   if (reset) left_shift_key <= 0;
   else if ((q[8:1] == `LEFT_SHIFT) && rx_shifting_done && ~hold_released)
     left_shift_key <= 1;
   else if ((q[8:1] == `LEFT_SHIFT) && rx_shifting_done && hold_released)
     left_shift_key <= 0;
+	 
 end
 
-always @(posedge clk)
-begin
+always @(posedge clk) begin
+
   if (reset) right_shift_key <= 0;
   else if ((q[8:1] == `RIGHT_SHIFT) && rx_shifting_done && ~hold_released)
     right_shift_key <= 1;
   else if ((q[8:1] == `RIGHT_SHIFT) && rx_shifting_done && hold_released)
     right_shift_key <= 0;
+	 
 end
 
 assign rx_shift_key_on = left_shift_key || right_shift_key;
 
 // Output the special scan code flags, the scan code and the ascii
-always @(posedge clk)
-begin
-  if (reset)
-  begin
-    rx_extended <= 0;
-    rx_released <= 0;
-    rx_scan_code <= 0;
-    rx_ascii <= 0;
+always @(posedge clk) begin
+
+  if (reset) begin
+  
+    rx_extended  <= 0 ;
+    rx_released  <= 0 ;
+    rx_scan_code <= 0 ;
+    rx_ascii     <= 0 ;
+	 
+  end else if (rx_output_strobe) begin
+  
+    rx_extended  <= hold_extended ;
+    rx_released  <= hold_released ;
+    rx_scan_code <= q[8:1]        ;
+    rx_ascii     <= ascii         ;
+	 
   end
-  else if (rx_output_strobe)
-  begin
-    rx_extended <= hold_extended;
-    rx_released <= hold_released;
-    rx_scan_code <= q[8:1];
-    rx_ascii <= ascii;
-  end
+  
 end
 
 // Store the final rx output data only when all extend and release codes
@@ -585,196 +594,201 @@ assign rx_output_strobe = (rx_shifting_done
 // The entries are listed in ascending order of ASCII value.
 assign shift_key_plus_code = {3'b0,rx_shift_key_on,q[8:1]};
 
-always @(shift_key_plus_code)
+always @( shift_key_plus_code or caps_lock or ctrl_key )
 begin
-  casez (shift_key_plus_code)
-    12'h?66 : ascii <= 7'h08;  // Backspace ("backspace" key)
-    12'h?0d : ascii <= 7'h09;  // Horizontal Tab
-    12'h?5a : ascii <= 7'h0d;  // Carriage return ("enter" key)
-    12'h?76 : ascii <= 7'h1b;  // Escape ("esc" key)
-    12'h?29 : ascii <= 7'h20;  // Space
-    12'h116 : ascii <= 7'h21;  // !
-    12'h11e : ascii <= 7'h22;  // "
-    12'h05d : ascii <= 7'h23;  // #
-    12'h125 : ascii <= 7'h24;  // $
-    12'h12e : ascii <= 7'h25;  // %
-    12'h13d : ascii <= 7'h26;  // &
-    12'h052 : ascii <= 7'h27;  // '
-    12'h146 : ascii <= 7'h28;  // (
-    12'h145 : ascii <= 7'h29;  // )
-    12'h13e : ascii <= 7'h2a;  // *
-    12'h155 : ascii <= 7'h2b;  // +
-    12'h041 : ascii <= 7'h2c;  // ,
-    12'h04e : ascii <= 7'h2d;  // -
-    12'h049 : ascii <= 7'h2e;  // .
-    12'h04a : ascii <= 7'h2f;  // /
-    12'h045 : ascii <= 7'h30;  // 0
-    12'h016 : ascii <= 7'h31;  // 1
-    12'h01e : ascii <= 7'h32;  // 2
-    12'h026 : ascii <= 7'h33;  // 3
-    12'h025 : ascii <= 7'h34;  // 4
-    12'h02e : ascii <= 7'h35;  // 5
-    12'h036 : ascii <= 7'h36;  // 6
-    12'h03d : ascii <= 7'h37;  // 7
-    12'h03e : ascii <= 7'h38;  // 8
-    12'h046 : ascii <= 7'h39;  // 9
-    12'h14c : ascii <= 7'h3a;  // :
-    12'h04c : ascii <= 7'h3b;  // ;
-    12'h141 : ascii <= 7'h3c;  // <
-    12'h055 : ascii <= 7'h3d;  // =
-    12'h149 : ascii <= 7'h3e;  // >
-    12'h14a : ascii <= 7'h3f;  // ?
-    12'h152 : ascii <= 7'h40;  // @
-    12'h11c : ascii <= 7'h41;  // A
-    12'h132 : ascii <= 7'h42;  // B
+  casez ( shift_key_plus_code )
+    12'h?66 : ascii <= 8'h08;  // Backspace ("backspace" key)
+    12'h?0d : ascii <= 8'h09;  // Horizontal Tab
+    12'h?5a : ascii <= 8'h0d;  // Carriage return ("enter" key)
+    12'h?76 : ascii <= 8'h1b;  // Escape ("esc" key)
+    12'h?29 : ascii <= 8'h20;  // Space
+    12'h116 : ascii <= 8'h21;  // !
+    12'h11e : ascii <= 8'h22;  // "
+    12'h05d : ascii <= 8'h23;  // #
+    12'h125 : ascii <= 8'h24;  // $
+    12'h12e : ascii <= 8'h25;  // %
+    12'h13d : ascii <= 8'h26;  // &
+    12'h052 : ascii <= 8'h27;  // '
+    12'h146 : ascii <= 8'h28;  // (
+    12'h145 : ascii <= 8'h29;  // )
+    12'h13e : ascii <= 8'h2a;  // * - 'capital' of this char, 0xAA, is the keyboard 'OK' status
+    12'h155 : ascii <= 8'h2b;  // +
+    12'h041 : ascii <= 8'h2c;  // ,
+    12'h04e : ascii <= 8'h2d;  // -
+    12'h049 : ascii <= 8'h2e;  // .
+    12'h04a : ascii <= 8'h2f;  // /
+    12'h045 : ascii <= 8'h30;  // 0
+    12'h016 : ascii <= 8'h31;  // 1
+    12'h01e : ascii <= 8'h32;  // 2
+    12'h026 : ascii <= 8'h33;  // 3
+    12'h025 : ascii <= 8'h34;  // 4
+    12'h02e : ascii <= 8'h35;  // 5
+    12'h036 : ascii <= 8'h36;  // 6
+    12'h03d : ascii <= 8'h37;  // 7
+    12'h03e : ascii <= 8'h38;  // 8
+    12'h046 : ascii <= 8'h39;  // 9
+    12'h14c : ascii <= 8'h3a;  // :
+    12'h04c : ascii <= 8'h3b;  // ;
+    12'h141 : ascii <= 8'h3c;  // <
+    12'h055 : ascii <= 8'h3d;  // =
+    12'h149 : ascii <= 8'h3e;  // >
+    12'h14a : ascii <= 8'h3f;  // ?
+    12'h152 : ascii <= 8'h40;  // @
+    12'h11c : ascii <= 8'h41;  // A
+    12'h132 : ascii <= 8'h42;  // B
     12'h121 : begin
-      if ( ctrl_key ) ascii <= 7'h03; // CTRL-C
-      else ascii <= 7'h43;  // C
+    if ( ctrl_key ) ascii <= 8'h03; // CTRL-C
+      else ascii <= 8'h43;  // C
     end
-    12'h123 : ascii <= 7'h44;  // D
-    12'h124 : ascii <= 7'h45;  // E
-    12'h12b : ascii <= 7'h46;  // F
-    12'h134 : ascii <= 7'h47;  // G
-    12'h133 : ascii <= 7'h48;  // H
-    12'h143 : ascii <= 7'h49;  // I
-    12'h13b : ascii <= 7'h4a;  // J
-    12'h142 : ascii <= 7'h4b;  // K
-    12'h14b : ascii <= 7'h4c;  // L
-    12'h13a : ascii <= 7'h4d;  // M
-    12'h131 : ascii <= 7'h4e;  // N
-    12'h144 : ascii <= 7'h4f;  // O
-    12'h14d : ascii <= 7'h50;  // P
-    12'h115 : ascii <= 7'h51;  // Q
-    12'h12d : ascii <= 7'h52;  // R
-    12'h11b : ascii <= 7'h53;  // S
-    12'h12c : ascii <= 7'h54;  // T
-    12'h13c : ascii <= 7'h55;  // U
-    12'h12a : ascii <= 7'h56;  // V
-    12'h11d : ascii <= 7'h57;  // W
-    12'h122 : ascii <= 7'h58;  // X
-    12'h135 : ascii <= 7'h59;  // Y
-    12'h11a : ascii <= 7'h5a;  // Z
-    12'h054 : ascii <= 7'h5b;  // [
-    12'h126 : ascii <= 7'h5c;  // backslash
-    12'h05b : ascii <= 7'h5d;  // ]
-    12'h136 : ascii <= 7'h5e;  // ^
-    12'h14e : ascii <= 7'h5f;  // _    
-    12'h00e : ascii <= 7'h60;  // `
+    12'h123 : ascii <= 8'h44;  // D
+    12'h124 : ascii <= 8'h45;  // E
+    12'h12b : ascii <= 8'h46;  // F
+    12'h134 : ascii <= 8'h47;  // G
+    12'h133 : ascii <= 8'h48;  // H
+    12'h143 : ascii <= 8'h49;  // I
+    12'h13b : ascii <= 8'h4a;  // J
+    12'h142 : ascii <= 8'h4b;  // K
+    12'h14b : ascii <= 8'h4c;  // L
+    12'h13a : ascii <= 8'h4d;  // M
+    12'h131 : ascii <= 8'h4e;  // N
+    12'h144 : ascii <= 8'h4f;  // O
+    12'h14d : ascii <= 8'h50;  // P
+    12'h115 : ascii <= 8'h51;  // Q
+    12'h12d : ascii <= 8'h52;  // R
+    12'h11b : ascii <= 8'h53;  // S
+    12'h12c : ascii <= 8'h54;  // T
+    12'h13c : ascii <= 8'h55;  // U
+    12'h12a : ascii <= 8'h56;  // V
+    12'h11d : ascii <= 8'h57;  // W
+    12'h122 : ascii <= 8'h58;  // X
+    12'h135 : ascii <= 8'h59;  // Y
+    12'h11a : ascii <= 8'h5a;  // Z
+    12'h054 : ascii <= 8'h5b;  // [
+    12'h126 : ascii <= 8'h5c;  // backslash
+    12'h05b : ascii <= 8'h5d;  // ]
+    12'h136 : ascii <= 8'h5e;  // ^
+    12'h14e : ascii <= 8'h5f;  // _    
+    12'h00e : ascii <= 8'h60;  // `
     12'h01c : begin
-      if ( caps_lock ) ascii <= 7'h41;  // A
-      else ascii <= 7'h61;  // a
+      if ( caps_lock ) ascii <= 8'h41;  // A
+      else ascii <= 8'h61;  // a
     end
     12'h032 : begin
-      if ( caps_lock ) ascii <= 7'h42;  // B
-      else ascii <= 7'h62;  // b
+      if ( caps_lock ) ascii <= 8'h42;  // B
+      else ascii <= 8'h62;  // b
     end
     12'h021 : begin
-      if ( ctrl_key ) ascii <= 7'h03; // CTRL-C
+      if ( ctrl_key ) ascii <= 8'h03; // CTRL-C
       else begin
-         if ( caps_lock ) ascii <= 7'h43;  // C
-         else ascii <= 7'h63;  // c
+        if ( caps_lock ) ascii <= 8'h43;  // C
+        else ascii <= 8'h63;  // c
       end
     end
     12'h023 : begin
-      if ( caps_lock ) ascii <= 7'h44;  // D
-      else ascii <= 7'h64;  // d
+      if ( caps_lock ) ascii <= 8'h44;  // D
+      else ascii <= 8'h64;  // d
     end
     12'h024 : begin
-      if ( caps_lock ) ascii <= 7'h45;  // E
-      else ascii <= 7'h65;  // e
+      if ( caps_lock ) ascii <= 8'h45;  // E
+      else ascii <= 8'h65;  // e
     end
     12'h02b : begin
-      if ( caps_lock ) ascii <= 7'h46;  // F
-      else ascii <= 7'h66;  // f
+      if ( caps_lock ) ascii <= 8'h46;  // F
+      else ascii <= 8'h66;  // f
     end
     12'h034 : begin
-      if ( caps_lock ) ascii <= 7'h47;  // G
-      else ascii <= 7'h67;  // g
+      if ( caps_lock ) ascii <= 8'h47;  // G
+      else ascii <= 8'h67;  // g
     end
     12'h033 : begin
-      if ( caps_lock ) ascii <= 7'h48;  // H
-      else ascii <= 7'h68;  // h
+      if ( caps_lock ) ascii <= 8'h48;  // H
+      else ascii <= 8'h68;  // h
     end
     12'h043 : begin
-      if ( caps_lock ) ascii <= 7'h49;  // I
-      else ascii <= 7'h69;  // i
+      if ( caps_lock ) ascii <= 8'h49;  // I
+      else ascii <= 8'h69;  // i
     end
     12'h03b : begin
-      if ( caps_lock ) ascii <= 7'h4a;  // J
-      else ascii <= 7'h6a;  // j
+      if ( caps_lock ) ascii <= 8'h4a;  // J
+      else ascii <= 8'h6a;  // j
     end
     12'h042 : begin
-      if ( caps_lock ) ascii <= 7'h4b;  // K
-      else ascii <= 7'h6b;  // k
+      if ( caps_lock ) ascii <= 8'h4b;  // K
+      else ascii <= 8'h6b;  // k
     end
     12'h04b : begin
-      if ( caps_lock ) ascii <= 7'h4c;  // L
-      else ascii <= 7'h6c;  // l
+      if ( caps_lock ) ascii <= 8'h4c;  // L
+      else ascii <= 8'h6c;  // l
     end
     12'h03a : begin
-      if ( caps_lock ) ascii <= 7'h4d;  // M
-      else ascii <= 7'h6d;  // m
+      if ( caps_lock ) ascii <= 8'h4d;  // M
+      else ascii <= 8'h6d;  // m
     end
     12'h031 : begin
-      if ( caps_lock ) ascii <= 7'h4e;  // N
-      else ascii <= 7'h6e;  // n
+      if ( caps_lock ) ascii <= 8'h4e;  // N
+      else ascii <= 8'h6e;  // n
     end
     12'h044 : begin
-      if ( caps_lock ) ascii <= 7'h4f;  // O
-      else ascii <= 7'h6f;  // o
+      if ( caps_lock ) ascii <= 8'h4f;  // O
+      else ascii <= 8'h6f;  // o
     end
     12'h04d : begin
-      if ( caps_lock ) ascii <= 7'h50;  // P
-      else ascii <= 7'h70;  // p
+      if ( caps_lock ) ascii <= 8'h50;  // P
+      else ascii <= 8'h70;  // p
     end
     12'h015 : begin
-      if ( caps_lock ) ascii <= 7'h51;  // Q
-      else ascii <= 7'h71;  // q
+      if ( caps_lock ) ascii <= 8'h51;  // Q
+      else ascii <= 8'h71;  // q
     end
     12'h02d : begin
-      if ( caps_lock ) ascii <= 7'h52;  // R
-      else ascii <= 7'h72;  // r
+      if ( caps_lock ) ascii <= 8'h52;  // R
+      else ascii <= 8'h72;  // r
     end
     12'h01b : begin
-      if ( caps_lock ) ascii <= 7'h53;  // S
-      else ascii <= 7'h73;  // s
+      if ( caps_lock ) ascii <= 8'h53;  // S
+      else ascii <= 8'h73;  // s
     end
     12'h02c : begin
-      if ( caps_lock ) ascii <= 7'h54;  // T
-      else ascii <= 7'h74;  // t
+      if ( caps_lock ) ascii <= 8'h54;  // T
+      else ascii <= 8'h74;  // t
     end
     12'h03c : begin
-      if ( caps_lock ) ascii <= 7'h55;  // U
-      else ascii <= 7'h75;  // u
+      if ( caps_lock ) ascii <= 8'h55;  // U
+      else ascii <= 8'h75;  // u
     end
     12'h02a : begin
-      if ( caps_lock ) ascii <= 7'h56;  // V
-      else ascii <= 7'h76;  // v
+      if ( caps_lock ) ascii <= 8'h56;  // V
+      else ascii <= 8'h76;  // v
     end
     12'h01d : begin
-      if ( caps_lock ) ascii <= 7'h57;  // W
-      else ascii <= 7'h77;  // w
+      if ( caps_lock ) ascii <= 8'h57;  // W
+      else ascii <= 8'h77;  // w
     end
     12'h022 : begin
-      if ( caps_lock ) ascii <= 7'h58;  // X
-      else ascii <= 7'h78;  // x
+      if ( caps_lock ) ascii <= 8'h58;  // X
+      else ascii <= 8'h78;  // x
     end
     12'h035 : begin
-      if ( caps_lock ) ascii <= 7'h59;  // Y
-      else ascii <= 7'h79;  // y
+      if ( caps_lock ) ascii <= 8'h59;  // Y
+      else ascii <= 8'h79;  // y
     end
     12'h01a : begin
-      if ( caps_lock ) ascii <= 7'h5A;  // Z
-      else ascii <= 7'h7A;  // z
+      if ( caps_lock ) ascii <= 8'h5A;  // Z
+      else ascii <= 8'h7A;  // z
     end
-    12'h154 : ascii <= 7'h7b;  // {
-    12'h15d : ascii <= 7'h7e;  // ~
-    12'h15b : ascii <= 7'h7d;  // }
-    12'h10e : ascii <= 7'h7c;  // |
-    12'h061 : ascii <= 7'h5c;  // backslash
-    12'h?71 : ascii <= 7'h7f;  // (Delete OR DEL on numeric keypad)
-    default : ascii <= 7'h00;  // Used for unlisted characters.
+	 12'h0AA : begin
+		ascii <= 8'hAA;
+	 end
+    12'h154 : ascii <= 8'h7b;  // {
+    12'h15d : ascii <= 8'h7e;  // ~
+    12'h15b : ascii <= 8'h7d;  // }
+    12'h10e : ascii <= 8'h7c;  // |
+    12'h061 : ascii <= 8'h5c;  // backslash
+    12'h?71 : ascii <= 8'h7f;  // (Delete OR DEL on numeric keypad)
+    default : ascii <= 8'h00;  // Used for unlisted characters.
+	 
   endcase
+  
 end
 
 

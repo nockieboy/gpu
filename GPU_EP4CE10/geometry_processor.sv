@@ -59,7 +59,7 @@ geometry_xy_plotter geoff (
    .fifo_cmd_busy  ( fifo_cmd_busy   )
    
 );
-defparam geoff.FIFO_MARGIN = FIFO_MARGIN;  // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
+defparam geoff.FIFO_MARGIN = FIFO_MARGIN;  // The number of extra commands the fifo has room after the 'fifo_cmd_busy' goes high
 
 pixel_address_generator paget (
 
@@ -101,13 +101,15 @@ pixel_address_generator paget (
 );
 
 
-always @ (posedge clk ) begin
+always @ (posedge clk) begin
+
 if (!pix_writer_busy) begin
 draw_cmd_rdy_r  <= draw_cmd_rdy;
 draw_cmd_r      <= draw_cmd;
 draw_cmd_rdy_r2 <= draw_cmd_rdy_r;
 draw_cmd_r2     <= draw_cmd_r;
 end
+
 end
 
 endmodule

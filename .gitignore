@@ -1,7 +1,11 @@
 db/
 greybox_tmp/
 incremental_db/
+<<<<<<< HEAD
 **/output_files/
 *.rpt
 *.sof
 *.pof
+=======
+output_files/
+>>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1

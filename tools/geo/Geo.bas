@@ -498,10 +498,17 @@ Sub drawFilledTriangle (ByVal x0 as Integer, byval y0 as Integer, byval x1 as In
 
 	next_face = 1
 	
+<<<<<<< HEAD
 	run_linegen_num ( 0, ya(0)+1, color_val ) : Rem start the triangle's first line
    run_linegen_num ( 1, ya(0)+1, color_val ) : Rem start the triangle's second line
 
 	If ( yb(0) - ya(0) > 2 ) Then :REM If the triangles height is more than 2 pixels
+=======
+	run_linegen_num ( 0, ya(0)+1, color_val ) : Rem finish the triangle's first line
+   run_linegen_num ( 1, ya(0)+1, color_val ) : Rem finish the triangle's third line
+
+	If ( yb(0) - ya(0) > 2) Then
+>>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 	
 	   For raster_Y_pos = ya(0)+1 to yb(0)-1	
    	

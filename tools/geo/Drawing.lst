@@ -97,6 +97,7 @@
 0029: 0B0E                  plot_tri_fill      d'14' 		
 002A:                                        
 002A: ; *************************************************************************************
+<<<<<<< HEAD
 002A: ; ** Draw a circle
 002A: ; *************************************************************************************
 002A: 80FA                  set_x            	0,d'250'	
@@ -117,3 +118,17 @@
 0035: 040A                  plot_ellipse          	   d'10' 		
 0036: 
 0036: 
+=======
+002A: ; ** Draw a line from coordinates (200,300) to (300,200) with palette color 14
+002A: ; *************************************************************************************
+002A: ;	set_x		0,d'250'	; set x0 register to 200
+002A: ;	set_y		0,d'200'	; set y0 register to 200
+002A: ;	set_x		1,d'200'	; set x1 register to 300
+002A: ;	set_y		1,d'250'	; set y1 register to 300
+002A: ;	set_x		2,d'350'	; set x2 register to 300
+002A: ;	set_y		2,d'350'	; set y2 register to 300
+002A: ;	plot_line       d'1' 		; draw a line with palette color 14
+002A: 
+002A: 
+002A: 
+>>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1

@@ -48,7 +48,11 @@ fifo_full         = memory_filled && !shift_out       ; // if the memory is fill
                                                         // in progress, report that the FIFO is full.
 end // always_comb
 
+<<<<<<< HEAD
 always_ff @(posedge clk  or posedge reset ) begin
+=======
+always_ff @(posedge clk) begin
+>>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 if (reset) begin
     memory           <= 0;             // clear the FIFO memory register
     memory_filled    <= 0;             // clear the FIFO memory_filled flag

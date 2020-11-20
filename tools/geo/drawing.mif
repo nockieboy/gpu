@@ -1,5 +1,9 @@
 WIDTH=16;
+<<<<<<< HEAD
 DEPTH=54;
+=======
+DEPTH=42;
+>>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 
 ADDRESS_RADIX=HEX;
 DATA_RADIX=HEX;
@@ -47,6 +51,7 @@ CONTENT BEGIN
     27 : A0D2;
     28 : E0E6;
     29 : B0E;
+<<<<<<< HEAD
     2a : 80FA;
     2b : C0C8;
     2c : 915E;
@@ -59,4 +64,6 @@ CONTENT BEGIN
     33 : D1C2;
     34 : C0C;
     35 : 40A;
+=======
+>>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 END;
