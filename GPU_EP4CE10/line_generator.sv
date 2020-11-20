@@ -43,7 +43,7 @@ busy           = busy_int || run ;                  // immediately make busy fla
 end
 
 
-always_ff @( posedge clk ) begin
+always_ff @( posedge clk  or posedge reset) begin
 
     if ( reset ) begin
     

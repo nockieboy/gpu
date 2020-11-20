@@ -1,5 +1,5 @@
 WIDTH=16;
-DEPTH=42;
+DEPTH=54;
 
 ADDRESS_RADIX=HEX;
 DATA_RADIX=HEX;
@@ -47,4 +47,16 @@ CONTENT BEGIN
     27 : A0D2;
     28 : E0E6;
     29 : B0E;
+    2a : 80FA;
+    2b : C0C8;
+    2c : 915E;
+    2d : D12C;
+    2e : C0C;
+    2f : 40A;
+    30 : 80C8;
+    31 : C17C;
+    32 : 9190;
+    33 : D1C2;
+    34 : C0C;
+    35 : 40A;
 END;

@@ -101,7 +101,7 @@ pixel_address_generator paget (
 );
 
 
-always @ (posedge clk) begin
+always @ (posedge clk ) begin
 if (!pix_writer_busy) begin
 draw_cmd_rdy_r  <= draw_cmd_rdy;
 draw_cmd_r      <= draw_cmd;

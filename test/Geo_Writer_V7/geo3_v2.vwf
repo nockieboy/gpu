@@ -2824,526 +2824,6 @@ SIGNAL("geometry_xy_plotter:inst|blit_height[0]")
 	PARENT = "geometry_xy_plotter:inst|blit_height";
 }
 
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = BUS;
-	WIDTH = 12;
-	LSB_INDEX = 0;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[11]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[10]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[9]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[8]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[7]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[6]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[5]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[4]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[3]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[2]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[1]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_x[0]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = BUS;
-	WIDTH = 12;
-	LSB_INDEX = 0;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[11]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[10]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[9]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[8]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[7]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[6]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[5]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[4]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[3]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[2]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[1]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_dest_y[0]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = BUS;
-	WIDTH = 12;
-	LSB_INDEX = 0;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[11]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[10]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[9]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[8]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[7]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[6]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[5]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[4]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[3]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[2]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[1]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_x[0]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_x";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = BUS;
-	WIDTH = 12;
-	LSB_INDEX = 0;
-	DIRECTION = BURIED;
-	PARENT = "";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[11]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[10]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[9]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[8]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[7]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[6]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[5]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[4]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[3]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[2]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[1]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
-SIGNAL("geometry_xy_plotter:inst|blit_source_y[0]")
-{
-	VALUE_TYPE = NINE_LEVEL_BIT;
-	SIGNAL_TYPE = SINGLE_BIT;
-	WIDTH = 1;
-	LSB_INDEX = -1;
-	DIRECTION = BURIED;
-	PARENT = "geometry_xy_plotter:inst|blit_source_y";
-}
-
 SIGNAL("geometry_xy_plotter:inst|blit_paste_phase")
 {
 	VALUE_TYPE = NINE_LEVEL_BIT;
@@ -4214,6 +3694,1006 @@ SIGNAL("geometry_xy_plotter:inst|poly_plot:plotter|y_end[0]")
 	PARENT = "geometry_xy_plotter:inst|poly_plot:plotter|y_end";
 }
 
+SIGNAL("geometry_xy_plotter:inst|blit_source_x")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 24;
+	LSB_INDEX = 0;
+	DIRECTION = BURIED;
+	PARENT = "";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[23]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[22]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[21]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[20]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[19]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[18]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[17]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[16]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[15]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[14]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[13]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[12]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[11]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[10]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[9]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[8]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_x[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 24;
+	LSB_INDEX = 0;
+	DIRECTION = BURIED;
+	PARENT = "";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[23]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[22]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[21]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[20]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[19]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[18]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[17]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[16]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[15]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[14]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[13]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[12]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[11]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[10]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[9]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[8]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_source_y[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_source_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 24;
+	LSB_INDEX = 0;
+	DIRECTION = BURIED;
+	PARENT = "";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[23]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[22]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[21]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[20]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[19]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[18]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[17]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[16]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[15]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[14]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[13]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[12]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[11]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[10]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[9]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[8]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_x[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_x";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = BUS;
+	WIDTH = 24;
+	LSB_INDEX = 0;
+	DIRECTION = BURIED;
+	PARENT = "";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[23]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[22]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[21]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[20]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[19]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[18]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[17]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[16]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[15]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[14]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[13]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[12]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[11]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[10]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[9]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[8]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[7]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[6]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[5]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[4]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[3]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[2]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[1]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
+SIGNAL("geometry_xy_plotter:inst|blit_dest_y[0]")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = BURIED;
+	PARENT = "geometry_xy_plotter:inst|blit_dest_y";
+}
+
 GROUP("r_data")
 {
 	MEMBERS = "r_data[15]", "r_data[14]", "r_data[13]", "r_data[12]", "r_data[11]", "r_data[10]", "r_data[9]", "r_data[8]", "r_data[7]", "r_data[6]", "r_data[5]", "r_data[4]", "r_data[3]", "r_data[2]", "r_data[1]", "r_data[0]";
@@ -4269,9 +4749,11 @@ TRANSITION_LIST("cmd_h[7]")
 		LEVEL 1 FOR 20.0;
 		LEVEL 0 FOR 20.0;
 		LEVEL 1 FOR 20.0;
-		LEVEL 0 FOR 60.0;
+		LEVEL 0 FOR 20.0;
+		LEVEL 1 FOR 80.0;
+		LEVEL 0 FOR 30.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 190.0;
+		LEVEL 0 FOR 120.0;
 		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 19260.0;
 	}
@@ -4304,7 +4786,15 @@ TRANSITION_LIST("cmd_h[6]")
 		LEVEL 1 FOR 20.0;
 		LEVEL 0 FOR 20.0;
 		LEVEL 1 FOR 20.0;
-		LEVEL 0 FOR 60.0;
+		LEVEL 0 FOR 20.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 40.0;
 		LEVEL 1 FOR 10.0;
 		NODE
 		{
@@ -4312,7 +4802,7 @@ TRANSITION_LIST("cmd_h[6]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 200.0;
+		LEVEL 0 FOR 130.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 10.0;
 		LEVEL 1 FOR 10.0;
@@ -4343,7 +4833,9 @@ TRANSITION_LIST("cmd_h[5]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 30.0;
-		LEVEL 0 FOR 19580.0;
+		LEVEL 0 FOR 50.0;
+		LEVEL 1 FOR 40.0;
+		LEVEL 0 FOR 19490.0;
 	}
 }
 
@@ -4370,9 +4862,13 @@ TRANSITION_LIST("cmd_h[4]")
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 30.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 70.0;
+		LEVEL 0 FOR 30.0;
 		LEVEL 1 FOR 20.0;
-		LEVEL 0 FOR 210.0;
+		LEVEL 0 FOR 20.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 50.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 140.0;
 		LEVEL 1 FOR 20.0;
 		LEVEL 0 FOR 19260.0;
 	}
@@ -4391,9 +4887,9 @@ TRANSITION_LIST("cmd_h[3]")
 		LEVEL 1 FOR 20.0;
 		LEVEL 0 FOR 30.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 150.0;
-		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 19540.0;
+		LEVEL 0 FOR 210.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 19470.0;
 	}
 }
 
@@ -4429,15 +4925,9 @@ TRANSITION_LIST("cmd_h[1]")
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 70.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 100.0;
+		LEVEL 0 FOR 220.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 70.0;
-		NODE
-		{
-			REPEAT = 1;
-			LEVEL 1 FOR 10.0;
-		}
-		LEVEL 0 FOR 19390.0;
+		LEVEL 0 FOR 19350.0;
 	}
 }
 
@@ -4452,7 +4942,11 @@ TRANSITION_LIST("cmd_h[0]")
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 100.0;
 		LEVEL 1 FOR 30.0;
-		LEVEL 0 FOR 480.0;
+		LEVEL 0 FOR 240.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 70.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 150.0;
 		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 19210.0;
 	}
@@ -4524,9 +5018,9 @@ TRANSITION_LIST("cmd_l[4]")
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 40.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 150.0;
+		LEVEL 0 FOR 220.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 19490.0;
+		LEVEL 0 FOR 19420.0;
 	}
 }
 
@@ -4593,7 +5087,9 @@ TRANSITION_LIST("cmd_l[1]")
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 10.0;
 		LEVEL 1 FOR 20.0;
-		LEVEL 0 FOR 390.0;
+		LEVEL 0 FOR 140.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 240.0;
 		LEVEL 1 FOR 20.0;
 		LEVEL 0 FOR 19220.0;
 	}
@@ -4618,7 +5114,9 @@ TRANSITION_LIST("cmd_l[0]")
 		LEVEL 1 FOR 20.0;
 		LEVEL 0 FOR 140.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 180.0;
+		LEVEL 0 FOR 60.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 110.0;
 		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 10.0;
 		LEVEL 1 FOR 10.0;
@@ -4653,11 +5151,13 @@ TRANSITION_LIST("cmd_rdy")
 		LEVEL 1 FOR 50.0;
 		LEVEL 0 FOR 10.0;
 		LEVEL 1 FOR 70.0;
-		LEVEL 0 FOR 30.0;
+		LEVEL 0 FOR 10.0;
 		LEVEL 1 FOR 80.0;
-		LEVEL 0 FOR 50.0;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 80.0;
+		LEVEL 0 FOR 20.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 160.0;
+		LEVEL 0 FOR 120.0;
 		LEVEL 1 FOR 40.0;
 		LEVEL 0 FOR 19210.0;
 	}
@@ -4669,8 +5169,8 @@ TRANSITION_LIST("draw_cmd[35]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 85.0;
-		LEVEL 1 FOR 500.0;
-		LEVEL 0 FOR 19415.0;
+		LEVEL 1 FOR 570.0;
+		LEVEL 0 FOR 19345.0;
 	}
 }
 
@@ -4680,14 +5180,14 @@ TRANSITION_LIST("draw_cmd[34]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 85.0;
-		LEVEL 1 FOR 510.0;
+		LEVEL 1 FOR 580.0;
 		NODE
 		{
 			REPEAT = 63;
 			LEVEL 0 FOR 10.0;
 			LEVEL 1 FOR 10.0;
 		}
-		LEVEL 0 FOR 18145.0;
+		LEVEL 0 FOR 18075.0;
 	}
 }
 
@@ -4700,9 +5200,9 @@ TRANSITION_LIST("draw_cmd[33]")
 		LEVEL 1 FOR 30.0;
 		LEVEL 0 FOR 210.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 220.0;
+		LEVEL 0 FOR 290.0;
 		LEVEL 1 FOR 1310.0;
-		LEVEL 0 FOR 18105.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -4712,7 +5212,7 @@ TRANSITION_LIST("draw_cmd[32]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 325.0;
-		LEVEL 1 FOR 260.0;
+		LEVEL 1 FOR 330.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -4720,7 +5220,7 @@ TRANSITION_LIST("draw_cmd[32]")
 			LEVEL 1 FOR 10.0;
 		}
 		LEVEL 0 FOR 10.0;
-		LEVEL 1 FOR 18145.0;
+		LEVEL 1 FOR 18075.0;
 	}
 }
 
@@ -4777,9 +5277,9 @@ TRANSITION_LIST("draw_cmd[26]")
 		LEVEL 0 FOR 115.0;
 		LEVEL 1 FOR 210.0;
 		LEVEL 0 FOR 40.0;
-		LEVEL 1 FOR 220.0;
+		LEVEL 1 FOR 290.0;
 		LEVEL 0 FOR 1400.0;
-		LEVEL 1 FOR 18015.0;
+		LEVEL 1 FOR 17945.0;
 	}
 }
 
@@ -4791,10 +5291,10 @@ TRANSITION_LIST("draw_cmd[25]")
 		LEVEL 0 FOR 115.0;
 		LEVEL 1 FOR 210.0;
 		LEVEL 0 FOR 40.0;
-		LEVEL 1 FOR 220.0;
+		LEVEL 1 FOR 290.0;
 		LEVEL 0 FOR 1340.0;
 		LEVEL 1 FOR 60.0;
-		LEVEL 0 FOR 18015.0;
+		LEVEL 0 FOR 17945.0;
 	}
 }
 
@@ -4806,12 +5306,12 @@ TRANSITION_LIST("draw_cmd[24]")
 		LEVEL 0 FOR 115.0;
 		LEVEL 1 FOR 210.0;
 		LEVEL 0 FOR 40.0;
-		LEVEL 1 FOR 220.0;
+		LEVEL 1 FOR 290.0;
 		LEVEL 0 FOR 1310.0;
 		LEVEL 1 FOR 30.0;
 		LEVEL 0 FOR 30.0;
 		LEVEL 1 FOR 30.0;
-		LEVEL 0 FOR 18015.0;
+		LEVEL 0 FOR 17945.0;
 	}
 }
 
@@ -4891,14 +5391,14 @@ TRANSITION_LIST("draw_cmd[16]")
 		REPEAT = 1;
 		LEVEL 0 FOR 325.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 230.0;
+		LEVEL 0 FOR 300.0;
 		NODE
 		{
 			REPEAT = 63;
 			LEVEL 1 FOR 10.0;
 			LEVEL 0 FOR 10.0;
 		}
-		LEVEL 1 FOR 18145.0;
+		LEVEL 1 FOR 18075.0;
 	}
 }
 
@@ -4920,9 +5420,9 @@ TRANSITION_LIST("draw_cmd[14]")
 		REPEAT = 1;
 		LEVEL 0 FOR 325.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 860.0;
+		LEVEL 0 FOR 930.0;
 		LEVEL 1 FOR 670.0;
-		LEVEL 0 FOR 18105.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -4933,11 +5433,11 @@ TRANSITION_LIST("draw_cmd[13]")
 		REPEAT = 1;
 		LEVEL 0 FOR 325.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 540.0;
+		LEVEL 0 FOR 610.0;
 		LEVEL 1 FOR 320.0;
 		LEVEL 0 FOR 320.0;
 		LEVEL 1 FOR 350.0;
-		LEVEL 0 FOR 18105.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -4948,7 +5448,7 @@ TRANSITION_LIST("draw_cmd[12]")
 		REPEAT = 1;
 		LEVEL 0 FOR 325.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 380.0;
+		LEVEL 0 FOR 450.0;
 		NODE
 		{
 			REPEAT = 3;
@@ -4956,7 +5456,7 @@ TRANSITION_LIST("draw_cmd[12]")
 			LEVEL 0 FOR 160.0;
 		}
 		LEVEL 1 FOR 190.0;
-		LEVEL 0 FOR 18105.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -5035,7 +5535,7 @@ TRANSITION_LIST("draw_cmd[4]")
 	{
 		REPEAT = 1;
 		LEVEL 0 FOR 115.0;
-		LEVEL 1 FOR 470.0;
+		LEVEL 1 FOR 540.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5043,7 +5543,7 @@ TRANSITION_LIST("draw_cmd[4]")
 			LEVEL 1 FOR 10.0;
 		}
 		LEVEL 0 FOR 10.0;
-		LEVEL 1 FOR 18145.0;
+		LEVEL 1 FOR 18075.0;
 	}
 }
 
@@ -5065,7 +5565,7 @@ TRANSITION_LIST("draw_cmd[2]")
 		REPEAT = 1;
 		LEVEL 0 FOR 325.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 300.0;
+		LEVEL 0 FOR 370.0;
 		NODE
 		{
 			REPEAT = 7;
@@ -5073,7 +5573,7 @@ TRANSITION_LIST("draw_cmd[2]")
 			LEVEL 0 FOR 80.0;
 		}
 		LEVEL 1 FOR 110.0;
-		LEVEL 0 FOR 18105.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -5084,7 +5584,7 @@ TRANSITION_LIST("draw_cmd[1]")
 		REPEAT = 1;
 		LEVEL 0 FOR 325.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 260.0;
+		LEVEL 0 FOR 330.0;
 		NODE
 		{
 			REPEAT = 15;
@@ -5092,7 +5592,7 @@ TRANSITION_LIST("draw_cmd[1]")
 			LEVEL 0 FOR 40.0;
 		}
 		LEVEL 1 FOR 70.0;
-		LEVEL 0 FOR 18105.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -5103,7 +5603,7 @@ TRANSITION_LIST("draw_cmd[0]")
 		REPEAT = 1;
 		LEVEL 0 FOR 325.0;
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 240.0;
+		LEVEL 0 FOR 310.0;
 		NODE
 		{
 			REPEAT = 31;
@@ -5111,7 +5611,7 @@ TRANSITION_LIST("draw_cmd[0]")
 			LEVEL 0 FOR 20.0;
 		}
 		LEVEL 1 FOR 50.0;
-		LEVEL 0 FOR 18105.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -5128,7 +5628,7 @@ TRANSITION_LIST("draw_cmd_rdy")
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 30.0;
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 210.0;
+		LEVEL 0 FOR 280.0;
 		LEVEL 1 FOR 1280.0;
 		LEVEL 0 FOR 30.0;
 		NODE
@@ -5138,7 +5638,7 @@ TRANSITION_LIST("draw_cmd_rdy")
 			LEVEL 0 FOR 20.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18005.0;
+		LEVEL 0 FOR 17935.0;
 	}
 }
 
@@ -5156,8 +5656,8 @@ TRANSITION_LIST("bits_per_pixel[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
-		LEVEL 1 FOR 19385.0;
+		LEVEL 0 FOR 685.0;
+		LEVEL 1 FOR 19315.0;
 	}
 }
 
@@ -5166,8 +5666,8 @@ TRANSITION_LIST("bits_per_pixel[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
-		LEVEL 1 FOR 19385.0;
+		LEVEL 0 FOR 685.0;
+		LEVEL 1 FOR 19315.0;
 	}
 }
 
@@ -5176,8 +5676,8 @@ TRANSITION_LIST("bits_per_pixel[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
-		LEVEL 1 FOR 19385.0;
+		LEVEL 0 FOR 685.0;
+		LEVEL 1 FOR 19315.0;
 	}
 }
 
@@ -5195,7 +5695,7 @@ TRANSITION_LIST("bit_offset[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 695.0;
+		LEVEL 0 FOR 765.0;
 		NODE
 		{
 			REPEAT = 7;
@@ -5203,7 +5703,7 @@ TRANSITION_LIST("bit_offset[2]")
 			LEVEL 0 FOR 80.0;
 		}
 		LEVEL 1 FOR 110.0;
-		LEVEL 0 FOR 18075.0;
+		LEVEL 0 FOR 18005.0;
 	}
 }
 
@@ -5212,7 +5712,7 @@ TRANSITION_LIST("bit_offset[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 655.0;
+		LEVEL 0 FOR 725.0;
 		NODE
 		{
 			REPEAT = 15;
@@ -5220,7 +5720,7 @@ TRANSITION_LIST("bit_offset[1]")
 			LEVEL 0 FOR 40.0;
 		}
 		LEVEL 1 FOR 70.0;
-		LEVEL 0 FOR 18075.0;
+		LEVEL 0 FOR 18005.0;
 	}
 }
 
@@ -5229,7 +5729,7 @@ TRANSITION_LIST("bit_offset[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 635.0;
+		LEVEL 0 FOR 705.0;
 		NODE
 		{
 			REPEAT = 31;
@@ -5237,7 +5737,7 @@ TRANSITION_LIST("bit_offset[0]")
 			LEVEL 0 FOR 20.0;
 		}
 		LEVEL 1 FOR 50.0;
-		LEVEL 0 FOR 18075.0;
+		LEVEL 0 FOR 18005.0;
 	}
 }
 
@@ -5255,7 +5755,7 @@ TRANSITION_LIST("cmd_function[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5263,7 +5763,7 @@ TRANSITION_LIST("cmd_function[2]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5272,9 +5772,9 @@ TRANSITION_LIST("cmd_function[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		LEVEL 1 FOR 1310.0;
-		LEVEL 0 FOR 18075.0;
+		LEVEL 0 FOR 18005.0;
 	}
 }
 
@@ -5283,14 +5783,14 @@ TRANSITION_LIST("cmd_function[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 625.0;
+		LEVEL 0 FOR 695.0;
 		NODE
 		{
 			REPEAT = 63;
 			LEVEL 1 FOR 10.0;
 			LEVEL 0 FOR 10.0;
 		}
-		LEVEL 1 FOR 18115.0;
+		LEVEL 1 FOR 18045.0;
 	}
 }
 
@@ -5299,7 +5799,7 @@ TRANSITION_LIST("address[19]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5307,7 +5807,7 @@ TRANSITION_LIST("address[19]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5316,7 +5816,7 @@ TRANSITION_LIST("address[18]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5324,7 +5824,7 @@ TRANSITION_LIST("address[18]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5333,7 +5833,7 @@ TRANSITION_LIST("address[17]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5341,7 +5841,7 @@ TRANSITION_LIST("address[17]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5350,7 +5850,7 @@ TRANSITION_LIST("address[16]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5358,7 +5858,7 @@ TRANSITION_LIST("address[16]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5367,7 +5867,7 @@ TRANSITION_LIST("address[15]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5375,7 +5875,7 @@ TRANSITION_LIST("address[15]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5384,7 +5884,7 @@ TRANSITION_LIST("address[14]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5392,7 +5892,7 @@ TRANSITION_LIST("address[14]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5401,7 +5901,7 @@ TRANSITION_LIST("address[13]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5409,7 +5909,7 @@ TRANSITION_LIST("address[13]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5418,7 +5918,7 @@ TRANSITION_LIST("address[12]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -5426,7 +5926,7 @@ TRANSITION_LIST("address[12]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5462,8 +5962,8 @@ TRANSITION_LIST("address[8]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 625.0;
-		LEVEL 1 FOR 19375.0;
+		LEVEL 0 FOR 695.0;
+		LEVEL 1 FOR 19305.0;
 	}
 }
 
@@ -5472,7 +5972,7 @@ TRANSITION_LIST("address[7]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 1120.0;
 		NODE
@@ -5482,7 +5982,7 @@ TRANSITION_LIST("address[7]")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 40.0;
-		LEVEL 0 FOR 18075.0;
+		LEVEL 0 FOR 18005.0;
 	}
 }
 
@@ -5491,7 +5991,7 @@ TRANSITION_LIST("address[6]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 480.0;
 		NODE
@@ -5507,7 +6007,7 @@ TRANSITION_LIST("address[6]")
 			LEVEL 0 FOR 10.0;
 			LEVEL 1 FOR 10.0;
 		}
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5516,7 +6016,7 @@ TRANSITION_LIST("address[5]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 160.0;
 		NODE
@@ -5546,7 +6046,7 @@ TRANSITION_LIST("address[5]")
 			LEVEL 0 FOR 10.0;
 			LEVEL 1 FOR 10.0;
 		}
-		LEVEL 0 FOR 18115.0;
+		LEVEL 0 FOR 18045.0;
 	}
 }
 
@@ -5555,7 +6055,7 @@ TRANSITION_LIST("address[4]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 2;
@@ -5604,7 +6104,7 @@ TRANSITION_LIST("address[4]")
 		}
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 40.0;
-		LEVEL 1 FOR 18075.0;
+		LEVEL 1 FOR 18005.0;
 	}
 }
 
@@ -5613,7 +6113,7 @@ TRANSITION_LIST("address[3]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		NODE
 		{
 			REPEAT = 7;
@@ -5621,7 +6121,7 @@ TRANSITION_LIST("address[3]")
 			LEVEL 0 FOR 150.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18255.0;
+		LEVEL 0 FOR 18185.0;
 	}
 }
 
@@ -5630,7 +6130,7 @@ TRANSITION_LIST("address[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		LEVEL 1 FOR 10.0;
 		NODE
 		{
@@ -5640,7 +6140,7 @@ TRANSITION_LIST("address[2]")
 		}
 		LEVEL 0 FOR 80.0;
 		LEVEL 1 FOR 100.0;
-		LEVEL 0 FOR 18075.0;
+		LEVEL 0 FOR 18005.0;
 	}
 }
 
@@ -5649,7 +6149,7 @@ TRANSITION_LIST("address[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		LEVEL 1 FOR 10.0;
 		NODE
 		{
@@ -5659,7 +6159,7 @@ TRANSITION_LIST("address[1]")
 		}
 		LEVEL 0 FOR 40.0;
 		LEVEL 1 FOR 60.0;
-		LEVEL 0 FOR 18075.0;
+		LEVEL 0 FOR 18005.0;
 	}
 }
 
@@ -5722,8 +6222,8 @@ TRANSITION_LIST("colour[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 2015.0;
-		LEVEL 1 FOR 17985.0;
+		LEVEL 0 FOR 2085.0;
+		LEVEL 1 FOR 17915.0;
 	}
 }
 
@@ -5732,9 +6232,9 @@ TRANSITION_LIST("colour[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1955.0;
+		LEVEL 0 FOR 2025.0;
 		LEVEL 1 FOR 60.0;
-		LEVEL 0 FOR 17985.0;
+		LEVEL 0 FOR 17915.0;
 	}
 }
 
@@ -5743,11 +6243,11 @@ TRANSITION_LIST("colour[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 1925.0;
+		LEVEL 0 FOR 1995.0;
 		LEVEL 1 FOR 30.0;
 		LEVEL 0 FOR 30.0;
 		LEVEL 1 FOR 30.0;
-		LEVEL 0 FOR 17985.0;
+		LEVEL 0 FOR 17915.0;
 	}
 }
 
@@ -5756,7 +6256,7 @@ TRANSITION_LIST("pixel_cmd_rdy")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
+		LEVEL 0 FOR 685.0;
 		LEVEL 1 FOR 1280.0;
 		LEVEL 0 FOR 30.0;
 		NODE
@@ -5766,7 +6266,7 @@ TRANSITION_LIST("pixel_cmd_rdy")
 			LEVEL 0 FOR 20.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 17975.0;
+		LEVEL 0 FOR 17905.0;
 	}
 }
 
@@ -5785,8 +6285,12 @@ TRANSITION_LIST("load_cmd")
 		LEVEL 1 FOR 50.0;
 		LEVEL 0 FOR 10.0;
 		LEVEL 1 FOR 70.0;
-		LEVEL 0 FOR 30.0;
-		LEVEL 1 FOR 80.0;
+		NODE
+		{
+			REPEAT = 2;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 80.0;
+		}
 		LEVEL 0 FOR 1300.0;
 		LEVEL 1 FOR 20.0;
 		NODE
@@ -5795,7 +6299,7 @@ TRANSITION_LIST("load_cmd")
 			LEVEL 0 FOR 20.0;
 			LEVEL 1 FOR 10.0;
 		}
-		LEVEL 0 FOR 18035.0;
+		LEVEL 0 FOR 17965.0;
 	}
 }
 
@@ -5939,7 +6443,8 @@ TRANSITION_LIST("r_data[8]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
+		LEVEL 0 FOR 725.0;
+		LEVEL 1 FOR 19275.0;
 	}
 }
 
@@ -5948,7 +6453,17 @@ TRANSITION_LIST("r_data[7]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
+		LEVEL 0 FOR 715.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 1120.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 40.0;
+		LEVEL 0 FOR 17975.0;
 	}
 }
 
@@ -5957,7 +6472,23 @@ TRANSITION_LIST("r_data[6]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
+		LEVEL 0 FOR 715.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 480.0;
+		NODE
+		{
+			REPEAT = 8;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 480.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 18015.0;
 	}
 }
 
@@ -5966,7 +6497,37 @@ TRANSITION_LIST("r_data[5]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
+		LEVEL 0 FOR 715.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 160.0;
+		NODE
+		{
+			REPEAT = 8;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 160.0;
+		NODE
+		{
+			REPEAT = 8;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 160.0;
+		NODE
+		{
+			REPEAT = 8;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 160.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 18015.0;
 	}
 }
 
@@ -5975,7 +6536,56 @@ TRANSITION_LIST("r_data[4]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
+		LEVEL 0 FOR 715.0;
+		NODE
+		{
+			REPEAT = 2;
+			LEVEL 1 FOR 20.0;
+			NODE
+			{
+				REPEAT = 7;
+				LEVEL 0 FOR 10.0;
+				LEVEL 1 FOR 10.0;
+			}
+			LEVEL 0 FOR 20.0;
+			NODE
+			{
+				REPEAT = 7;
+				LEVEL 1 FOR 10.0;
+				LEVEL 0 FOR 10.0;
+			}
+		}
+		LEVEL 1 FOR 20.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 20.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 20.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 20.0;
+		NODE
+		{
+			REPEAT = 6;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 40.0;
+		LEVEL 1 FOR 17975.0;
 	}
 }
 
@@ -5984,7 +6594,15 @@ TRANSITION_LIST("r_data[3]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
+		LEVEL 0 FOR 715.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 150.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18155.0;
 	}
 }
 
@@ -5993,7 +6611,17 @@ TRANSITION_LIST("r_data[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
+		LEVEL 0 FOR 715.0;
+		LEVEL 1 FOR 10.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 80.0;
+			LEVEL 1 FOR 80.0;
+		}
+		LEVEL 0 FOR 80.0;
+		LEVEL 1 FOR 100.0;
+		LEVEL 0 FOR 17975.0;
 	}
 }
 
@@ -6002,7 +6630,17 @@ TRANSITION_LIST("r_data[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
+		LEVEL 0 FOR 715.0;
+		LEVEL 1 FOR 10.0;
+		NODE
+		{
+			REPEAT = 15;
+			LEVEL 0 FOR 40.0;
+			LEVEL 1 FOR 40.0;
+		}
+		LEVEL 0 FOR 40.0;
+		LEVEL 1 FOR 60.0;
+		LEVEL 0 FOR 17975.0;
 	}
 }
 
@@ -6020,7 +6658,15 @@ TRANSITION_LIST("ram_addr[19]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 63;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6029,7 +6675,15 @@ TRANSITION_LIST("ram_addr[18]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 63;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6038,7 +6692,15 @@ TRANSITION_LIST("ram_addr[17]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 63;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6047,7 +6709,15 @@ TRANSITION_LIST("ram_addr[16]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 63;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6056,7 +6726,15 @@ TRANSITION_LIST("ram_addr[15]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 63;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6065,7 +6743,15 @@ TRANSITION_LIST("ram_addr[14]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 63;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6074,7 +6760,15 @@ TRANSITION_LIST("ram_addr[13]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 63;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6083,7 +6777,15 @@ TRANSITION_LIST("ram_addr[12]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 63;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6092,7 +6794,7 @@ TRANSITION_LIST("ram_addr[11]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 20000.0;
 	}
 }
 
@@ -6101,7 +6803,7 @@ TRANSITION_LIST("ram_addr[10]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 20000.0;
 	}
 }
 
@@ -6110,7 +6812,7 @@ TRANSITION_LIST("ram_addr[9]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 20000.0;
 	}
 }
 
@@ -6119,7 +6821,8 @@ TRANSITION_LIST("ram_addr[8]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 705.0;
+		LEVEL 1 FOR 19295.0;
 	}
 }
 
@@ -6128,7 +6831,17 @@ TRANSITION_LIST("ram_addr[7]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 1120.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 40.0;
+		LEVEL 0 FOR 17995.0;
 	}
 }
 
@@ -6137,7 +6850,23 @@ TRANSITION_LIST("ram_addr[6]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 480.0;
+		NODE
+		{
+			REPEAT = 8;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 480.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6146,7 +6875,37 @@ TRANSITION_LIST("ram_addr[5]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 160.0;
+		NODE
+		{
+			REPEAT = 8;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 160.0;
+		NODE
+		{
+			REPEAT = 8;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 160.0;
+		NODE
+		{
+			REPEAT = 8;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 160.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 18035.0;
 	}
 }
 
@@ -6155,7 +6914,56 @@ TRANSITION_LIST("ram_addr[4]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 2;
+			LEVEL 1 FOR 20.0;
+			NODE
+			{
+				REPEAT = 7;
+				LEVEL 0 FOR 10.0;
+				LEVEL 1 FOR 10.0;
+			}
+			LEVEL 0 FOR 20.0;
+			NODE
+			{
+				REPEAT = 7;
+				LEVEL 1 FOR 10.0;
+				LEVEL 0 FOR 10.0;
+			}
+		}
+		LEVEL 1 FOR 20.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 20.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 20.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
+		}
+		LEVEL 0 FOR 20.0;
+		NODE
+		{
+			REPEAT = 6;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 10.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 40.0;
+		LEVEL 1 FOR 17995.0;
 	}
 }
 
@@ -6164,7 +6972,15 @@ TRANSITION_LIST("ram_addr[3]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 10.0;
+			LEVEL 0 FOR 150.0;
+		}
+		LEVEL 1 FOR 10.0;
+		LEVEL 0 FOR 18175.0;
 	}
 }
 
@@ -6173,7 +6989,17 @@ TRANSITION_LIST("ram_addr[2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		LEVEL 1 FOR 10.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 0 FOR 80.0;
+			LEVEL 1 FOR 80.0;
+		}
+		LEVEL 0 FOR 80.0;
+		LEVEL 1 FOR 100.0;
+		LEVEL 0 FOR 17995.0;
 	}
 }
 
@@ -6182,7 +7008,17 @@ TRANSITION_LIST("ram_addr[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 695.0;
+		LEVEL 1 FOR 10.0;
+		NODE
+		{
+			REPEAT = 15;
+			LEVEL 0 FOR 40.0;
+			LEVEL 1 FOR 40.0;
+		}
+		LEVEL 0 FOR 40.0;
+		LEVEL 1 FOR 60.0;
+		LEVEL 0 FOR 17995.0;
 	}
 }
 
@@ -6191,7 +7027,7 @@ TRANSITION_LIST("ram_addr[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL Z FOR 20000.0;
+		LEVEL 0 FOR 20000.0;
 	}
 }
 
@@ -6551,8 +7387,8 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|line_generator:lineg
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 565.0;
-		LEVEL 1 FOR 19435.0;
+		LEVEL 0 FOR 635.0;
+		LEVEL 1 FOR 19365.0;
 	}
 }
 
@@ -6660,8 +7496,8 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|line_generator:lineg
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 565.0;
-		LEVEL 1 FOR 19435.0;
+		LEVEL 0 FOR 635.0;
+		LEVEL 1 FOR 19365.0;
 	}
 }
 
@@ -6931,7 +7767,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|lg_seq_cnt[0][0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 555.0;
+		LEVEL 0 FOR 625.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 1310.0;
 		NODE
@@ -6941,7 +7777,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|lg_seq_cnt[0][0]")
 			LEVEL 0 FOR 20.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18025.0;
+		LEVEL 0 FOR 17955.0;
 	}
 }
 
@@ -6977,7 +7813,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|lg_start[0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 555.0;
+		LEVEL 0 FOR 625.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 1310.0;
 		NODE
@@ -6987,7 +7823,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|lg_start[0]")
 			LEVEL 0 FOR 20.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18025.0;
+		LEVEL 0 FOR 17955.0;
 	}
 }
 
@@ -7213,510 +8049,12 @@ TRANSITION_LIST("geometry_xy_plotter:inst|blit_height[0]")
 	}
 }
 
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[11]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[10]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[9]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[8]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[7]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[6]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[5]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[4]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 575.0;
-		LEVEL 1 FOR 19425.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[3]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[2]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 655.0;
-		NODE
-		{
-			REPEAT = 7;
-			LEVEL 1 FOR 80.0;
-			LEVEL 0 FOR 80.0;
-		}
-		LEVEL 1 FOR 18225.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[1]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
-		NODE
-		{
-			REPEAT = 15;
-			LEVEL 1 FOR 40.0;
-			LEVEL 0 FOR 40.0;
-		}
-		LEVEL 1 FOR 18185.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[0]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 595.0;
-		NODE
-		{
-			REPEAT = 31;
-			LEVEL 1 FOR 20.0;
-			LEVEL 0 FOR 20.0;
-		}
-		LEVEL 1 FOR 18165.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[11]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[10]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[9]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[8]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[7]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[6]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[5]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[4]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 575.0;
-		LEVEL 1 FOR 19425.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[3]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[2]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 1215.0;
-		LEVEL 1 FOR 18785.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[1]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 895.0;
-		LEVEL 1 FOR 320.0;
-		LEVEL 0 FOR 320.0;
-		LEVEL 1 FOR 18465.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[0]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 735.0;
-		NODE
-		{
-			REPEAT = 3;
-			LEVEL 1 FOR 160.0;
-			LEVEL 0 FOR 160.0;
-		}
-		LEVEL 1 FOR 18305.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[11]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[10]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[9]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[8]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[7]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[6]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[5]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[4]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[3]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[2]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 655.0;
-		NODE
-		{
-			REPEAT = 7;
-			LEVEL 1 FOR 80.0;
-			LEVEL 0 FOR 80.0;
-		}
-		LEVEL 1 FOR 18225.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[1]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 615.0;
-		NODE
-		{
-			REPEAT = 15;
-			LEVEL 1 FOR 40.0;
-			LEVEL 0 FOR 40.0;
-		}
-		LEVEL 1 FOR 18185.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[0]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 595.0;
-		NODE
-		{
-			REPEAT = 31;
-			LEVEL 1 FOR 20.0;
-			LEVEL 0 FOR 20.0;
-		}
-		LEVEL 1 FOR 18165.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[11]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[10]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[9]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[8]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[7]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[6]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[5]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[4]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[3]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 20000.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[2]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 1215.0;
-		LEVEL 1 FOR 18785.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[1]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 895.0;
-		LEVEL 1 FOR 320.0;
-		LEVEL 0 FOR 320.0;
-		LEVEL 1 FOR 18465.0;
-	}
-}
-
-TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[0]")
-{
-	NODE
-	{
-		REPEAT = 1;
-		LEVEL 0 FOR 735.0;
-		NODE
-		{
-			REPEAT = 3;
-			LEVEL 1 FOR 160.0;
-			LEVEL 0 FOR 160.0;
-		}
-		LEVEL 1 FOR 18305.0;
-	}
-}
-
 TRANSITION_LIST("geometry_xy_plotter:inst|blit_paste_phase")
 {
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 585.0;
+		LEVEL 0 FOR 655.0;
 		NODE
 		{
 			REPEAT = 63;
@@ -7724,7 +8062,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|blit_paste_phase")
 			LEVEL 0 FOR 10.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18145.0;
+		LEVEL 0 FOR 18075.0;
 	}
 }
 
@@ -7733,9 +8071,9 @@ TRANSITION_LIST("geometry_xy_plotter:inst|blit_running")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 575.0;
+		LEVEL 0 FOR 645.0;
 		LEVEL 1 FOR 1280.0;
-		LEVEL 0 FOR 18145.0;
+		LEVEL 0 FOR 18075.0;
 	}
 }
 
@@ -7744,7 +8082,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|line_generator:lineg
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 565.0;
+		LEVEL 0 FOR 635.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 1310.0;
 		NODE
@@ -7754,7 +8092,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|line_generator:lineg
 			LEVEL 0 FOR 20.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18015.0;
+		LEVEL 0 FOR 17945.0;
 	}
 }
 
@@ -7781,8 +8119,8 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|lg_pause[1]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 555.0;
-		LEVEL 1 FOR 19445.0;
+		LEVEL 0 FOR 625.0;
+		LEVEL 1 FOR 19375.0;
 	}
 }
 
@@ -8016,7 +8354,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|line_generator:lineg
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 555.0;
+		LEVEL 0 FOR 625.0;
 		LEVEL 1 FOR 10.0;
 		LEVEL 0 FOR 1310.0;
 		NODE
@@ -8026,7 +8364,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|line_generator:lineg
 			LEVEL 0 FOR 20.0;
 		}
 		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 18025.0;
+		LEVEL 0 FOR 17955.0;
 	}
 }
 
@@ -8089,9 +8427,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|lg_csel[1][2]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 555.0;
-		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 19435.0;
+		LEVEL 0 FOR 20000.0;
 	}
 }
 
@@ -8109,9 +8445,7 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|lg_csel[1][0]")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL 0 FOR 555.0;
-		LEVEL 1 FOR 10.0;
-		LEVEL 0 FOR 19435.0;
+		LEVEL 0 FOR 20000.0;
 	}
 }
 
@@ -8412,6 +8746,936 @@ TRANSITION_LIST("geometry_xy_plotter:inst|poly_plot:plotter|y_end[0]")
 	}
 }
 
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[23]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[22]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[21]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[20]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[19]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[18]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[17]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[16]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[15]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[14]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 725.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 80.0;
+			LEVEL 0 FOR 80.0;
+		}
+		LEVEL 1 FOR 18155.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[13]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 685.0;
+		NODE
+		{
+			REPEAT = 15;
+			LEVEL 1 FOR 40.0;
+			LEVEL 0 FOR 40.0;
+		}
+		LEVEL 1 FOR 18115.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[12]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 665.0;
+		NODE
+		{
+			REPEAT = 31;
+			LEVEL 1 FOR 20.0;
+			LEVEL 0 FOR 20.0;
+		}
+		LEVEL 1 FOR 18095.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[11]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[10]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[9]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[8]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_x[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[23]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[22]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[21]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[20]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[19]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[18]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[17]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[16]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[15]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[14]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 1285.0;
+		LEVEL 1 FOR 18715.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[13]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 965.0;
+		LEVEL 1 FOR 320.0;
+		LEVEL 0 FOR 320.0;
+		LEVEL 1 FOR 18395.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[12]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 805.0;
+		NODE
+		{
+			REPEAT = 3;
+			LEVEL 1 FOR 160.0;
+			LEVEL 0 FOR 160.0;
+		}
+		LEVEL 1 FOR 18235.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[11]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[10]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[9]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[8]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_source_y[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[23]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[22]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[21]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[20]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[19]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[18]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[17]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[16]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 645.0;
+		LEVEL 1 FOR 19355.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[15]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[14]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 725.0;
+		NODE
+		{
+			REPEAT = 7;
+			LEVEL 1 FOR 80.0;
+			LEVEL 0 FOR 80.0;
+		}
+		LEVEL 1 FOR 18155.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[13]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 685.0;
+		NODE
+		{
+			REPEAT = 15;
+			LEVEL 1 FOR 40.0;
+			LEVEL 0 FOR 40.0;
+		}
+		LEVEL 1 FOR 18115.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[12]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 665.0;
+		NODE
+		{
+			REPEAT = 31;
+			LEVEL 1 FOR 20.0;
+			LEVEL 0 FOR 20.0;
+		}
+		LEVEL 1 FOR 18095.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[11]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[10]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[9]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[8]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_x[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[23]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[22]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[21]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[20]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[19]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[18]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[17]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[16]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 645.0;
+		LEVEL 1 FOR 19355.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[15]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[14]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 1285.0;
+		LEVEL 1 FOR 18715.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[13]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 965.0;
+		LEVEL 1 FOR 320.0;
+		LEVEL 0 FOR 320.0;
+		LEVEL 1 FOR 18395.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[12]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 805.0;
+		NODE
+		{
+			REPEAT = 3;
+			LEVEL 1 FOR 160.0;
+			LEVEL 0 FOR 160.0;
+		}
+		LEVEL 1 FOR 18235.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[11]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[10]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[9]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[8]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[7]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[6]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[5]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[4]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[3]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[2]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[1]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
+TRANSITION_LIST("geometry_xy_plotter:inst|blit_dest_y[0]")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 20000.0;
+	}
+}
+
 DISPLAY_LINE
 {
 	CHANNEL = "clk";
@@ -8653,7 +9917,18 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 453000;
+		TIME = 512298;
+		RISE = -71;
+		RUN = -41;
+		TEXT = "Set Src&Dest Scale";
+		FONT_NAME = "Arial";
+		FONT_SIZE = 8;
+		FONT_STYLE = "Regular";
+		FONT_COLOR = 0;
+	}
+	COMMENT
+	{
+		TIME = 526006;
 		RISE = -58;
 		RUN = -1;
 		TEXT = "Copy XOR#";
@@ -8664,7 +9939,7 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 474100;
+		TIME = 547106;
 		RISE = -76;
 		RUN = -8;
 		TEXT = "X[0] to 4";
@@ -8675,7 +9950,7 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 484500;
+		TIME = 557506;
 		RISE = -57;
 		RUN = -10;
 		TEXT = "Y[0] to 4";
@@ -8686,7 +9961,7 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 494300;
+		TIME = 567306;
 		RISE = -74;
 		RUN = -12;
 		TEXT = "X[1] to 4";
@@ -8697,7 +9972,7 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 504400;
+		TIME = 577406;
 		RISE = -57;
 		RUN = -11;
 		TEXT = "Y[1] to 4";
@@ -8708,7 +9983,7 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 512732;
+		TIME = 585736;
 		RISE = -73;
 		RUN = -2;
 		TEXT = "Blit Mask Ena";
@@ -8719,7 +9994,7 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 529600;
+		TIME = 602606;
 		RISE = -73;
 		RUN = 17;
 		TEXT = "Draw Line";
@@ -8730,7 +10005,7 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 583000;
+		TIME = 624616;
 		RISE = -74;
 		RUN = -8;
 		TEXT = "Blit OFF";
@@ -8741,7 +10016,7 @@ DISPLAY_LINE
 	}
 	COMMENT
 	{
-		TIME = 610400;
+		TIME = 652016;
 		RISE = -73;
 		RUN = 17;
 		TEXT = "Draw Line";
@@ -11496,12 +12771,12 @@ DISPLAY_LINE
 	RADIX = Hexadecimal;
 	TREE_INDEX = 282;
 	TREE_LEVEL = 0;
-	CHILDREN = 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294;
+	CHILDREN = 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306;
 }
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[11]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[23]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 283;
@@ -11511,7 +12786,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[10]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[22]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 284;
@@ -11521,7 +12796,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[9]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[21]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 285;
@@ -11531,7 +12806,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[8]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[20]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 286;
@@ -11541,7 +12816,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[7]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[19]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 287;
@@ -11551,7 +12826,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[6]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[18]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 288;
@@ -11561,7 +12836,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[5]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[17]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 289;
@@ -11571,7 +12846,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[4]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[16]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 290;
@@ -11581,7 +12856,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[3]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[15]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 291;
@@ -11591,7 +12866,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[2]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[14]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 292;
@@ -11601,7 +12876,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[1]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[13]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 293;
@@ -11611,7 +12886,7 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[0]";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[12]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 294;
@@ -11621,12 +12896,252 @@ DISPLAY_LINE
 
 DISPLAY_LINE
 {
-	CHANNEL = "geometry_xy_plotter:inst|blit_source_y";
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
 	TREE_INDEX = 295;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[10]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 296;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[9]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 297;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[8]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 298;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[7]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 299;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[6]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 300;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[5]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 301;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[4]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 302;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[3]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 303;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[2]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 304;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[1]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 305;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_x[0]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 306;
+	TREE_LEVEL = 1;
+	PARENT = 282;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 307;
 	TREE_LEVEL = 0;
-	CHILDREN = 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307;
+	CHILDREN = 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[23]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 308;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[22]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 309;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[21]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 310;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[20]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 311;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[19]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 312;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[18]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 313;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[17]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 314;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[16]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 315;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[15]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 316;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[14]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 317;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[13]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 318;
+	TREE_LEVEL = 1;
+	PARENT = 307;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[12]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 319;
+	TREE_LEVEL = 1;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11634,9 +13149,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 296;
+	TREE_INDEX = 320;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11644,9 +13159,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[10]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 297;
+	TREE_INDEX = 321;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11654,9 +13169,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 298;
+	TREE_INDEX = 322;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11664,9 +13179,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 299;
+	TREE_INDEX = 323;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11674,9 +13189,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 300;
+	TREE_INDEX = 324;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11684,9 +13199,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 301;
+	TREE_INDEX = 325;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11694,9 +13209,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 302;
+	TREE_INDEX = 326;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11704,9 +13219,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 303;
+	TREE_INDEX = 327;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11714,9 +13229,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 304;
+	TREE_INDEX = 328;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11724,9 +13239,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 305;
+	TREE_INDEX = 329;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11734,9 +13249,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 306;
+	TREE_INDEX = 330;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11744,9 +13259,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_source_y[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 307;
+	TREE_INDEX = 331;
 	TREE_LEVEL = 1;
-	PARENT = 295;
+	PARENT = 307;
 }
 
 DISPLAY_LINE
@@ -11754,9 +13269,129 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 308;
+	TREE_INDEX = 332;
 	TREE_LEVEL = 0;
-	CHILDREN = 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320;
+	CHILDREN = 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[23]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 333;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[22]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 334;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[21]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 335;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[20]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 336;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[19]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 337;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[18]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 338;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[17]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 339;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[16]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 340;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[15]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 341;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[14]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 342;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[13]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 343;
+	TREE_LEVEL = 1;
+	PARENT = 332;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[12]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 344;
+	TREE_LEVEL = 1;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11764,9 +13399,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 309;
+	TREE_INDEX = 345;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11774,9 +13409,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[10]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 310;
+	TREE_INDEX = 346;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11784,9 +13419,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 311;
+	TREE_INDEX = 347;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11794,9 +13429,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 312;
+	TREE_INDEX = 348;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11804,9 +13439,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 313;
+	TREE_INDEX = 349;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11814,9 +13449,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 314;
+	TREE_INDEX = 350;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11824,9 +13459,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 315;
+	TREE_INDEX = 351;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11834,9 +13469,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 316;
+	TREE_INDEX = 352;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11844,9 +13479,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 317;
+	TREE_INDEX = 353;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11854,9 +13489,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 318;
+	TREE_INDEX = 354;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11864,9 +13499,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 319;
+	TREE_INDEX = 355;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11874,9 +13509,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_x[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 320;
+	TREE_INDEX = 356;
 	TREE_LEVEL = 1;
-	PARENT = 308;
+	PARENT = 332;
 }
 
 DISPLAY_LINE
@@ -11884,9 +13519,129 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 321;
+	TREE_INDEX = 357;
 	TREE_LEVEL = 0;
-	CHILDREN = 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333;
+	CHILDREN = 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[23]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 358;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[22]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 359;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[21]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 360;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[20]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 361;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[19]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 362;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[18]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 363;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[17]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 364;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[16]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 365;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[15]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 366;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[14]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 367;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[13]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 368;
+	TREE_LEVEL = 1;
+	PARENT = 357;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[12]";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Hexadecimal;
+	TREE_INDEX = 369;
+	TREE_LEVEL = 1;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11894,9 +13649,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 322;
+	TREE_INDEX = 370;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11904,9 +13659,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[10]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 323;
+	TREE_INDEX = 371;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11914,9 +13669,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 324;
+	TREE_INDEX = 372;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11924,9 +13679,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 325;
+	TREE_INDEX = 373;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11934,9 +13689,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 326;
+	TREE_INDEX = 374;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11944,9 +13699,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 327;
+	TREE_INDEX = 375;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11954,9 +13709,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 328;
+	TREE_INDEX = 376;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11964,9 +13719,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 329;
+	TREE_INDEX = 377;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11974,9 +13729,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 330;
+	TREE_INDEX = 378;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11984,9 +13739,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 331;
+	TREE_INDEX = 379;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -11994,9 +13749,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 332;
+	TREE_INDEX = 380;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -12004,9 +13759,9 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_dest_y[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 333;
+	TREE_INDEX = 381;
 	TREE_LEVEL = 1;
-	PARENT = 321;
+	PARENT = 357;
 }
 
 DISPLAY_LINE
@@ -12014,7 +13769,7 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_paste_phase";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 334;
+	TREE_INDEX = 382;
 	TREE_LEVEL = 0;
 }
 
@@ -12023,7 +13778,7 @@ DISPLAY_LINE
 	CHANNEL = "geometry_xy_plotter:inst|blit_running";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 335;
+	TREE_INDEX = 383;
 	TREE_LEVEL = 0;
 }
 
@@ -12032,7 +13787,7 @@ DISPLAY_LINE
 	CHANNEL = "divider 2067";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 336;
+	TREE_INDEX = 384;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
 }
@@ -12042,7 +13797,7 @@ DISPLAY_LINE
 	CHANNEL = "Copy_2_of_divider 1039";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 337;
+	TREE_INDEX = 385;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
 }
@@ -12052,7 +13807,7 @@ DISPLAY_LINE
 	CHANNEL = "draw_busy";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 338;
+	TREE_INDEX = 386;
 	TREE_LEVEL = 0;
 }
 
@@ -12061,7 +13816,7 @@ DISPLAY_LINE
 	CHANNEL = "divider 2385";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 339;
+	TREE_INDEX = 387;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
 }
@@ -12071,7 +13826,7 @@ DISPLAY_LINE
 	CHANNEL = "rd_req_a";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 340;
+	TREE_INDEX = 388;
 	TREE_LEVEL = 0;
 }
 
@@ -12080,7 +13835,7 @@ DISPLAY_LINE
 	CHANNEL = "rd_rdy_a";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 341;
+	TREE_INDEX = 389;
 	TREE_LEVEL = 0;
 }
 
@@ -12089,7 +13844,7 @@ DISPLAY_LINE
 	CHANNEL = "divider 1524";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 342;
+	TREE_INDEX = 390;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
 }
@@ -12099,7 +13854,7 @@ DISPLAY_LINE
 	CHANNEL = "rd_req_b";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 343;
+	TREE_INDEX = 391;
 	TREE_LEVEL = 0;
 }
 
@@ -12108,7 +13863,7 @@ DISPLAY_LINE
 	CHANNEL = "rd_rdy_b";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 344;
+	TREE_INDEX = 392;
 	TREE_LEVEL = 0;
 }
 
@@ -12117,7 +13872,7 @@ DISPLAY_LINE
 	CHANNEL = "divider 1783";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 345;
+	TREE_INDEX = 393;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
 }
@@ -12127,9 +13882,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 346;
+	TREE_INDEX = 394;
 	TREE_LEVEL = 0;
-	CHILDREN = 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366;
+	CHILDREN = 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414;
 }
 
 DISPLAY_LINE
@@ -12137,9 +13892,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[19]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 347;
+	TREE_INDEX = 395;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12147,9 +13902,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[18]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 348;
+	TREE_INDEX = 396;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12157,9 +13912,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[17]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 349;
+	TREE_INDEX = 397;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12167,9 +13922,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[16]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 350;
+	TREE_INDEX = 398;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12177,9 +13932,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[15]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 351;
+	TREE_INDEX = 399;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12187,9 +13942,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[14]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 352;
+	TREE_INDEX = 400;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12197,9 +13952,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[13]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 353;
+	TREE_INDEX = 401;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12207,9 +13962,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[12]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 354;
+	TREE_INDEX = 402;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12217,9 +13972,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 355;
+	TREE_INDEX = 403;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12227,9 +13982,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[10]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 356;
+	TREE_INDEX = 404;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12237,9 +13992,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 357;
+	TREE_INDEX = 405;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12247,9 +14002,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 358;
+	TREE_INDEX = 406;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12257,9 +14012,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 359;
+	TREE_INDEX = 407;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12267,9 +14022,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 360;
+	TREE_INDEX = 408;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12277,9 +14032,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 361;
+	TREE_INDEX = 409;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12287,9 +14042,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 362;
+	TREE_INDEX = 410;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12297,9 +14052,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 363;
+	TREE_INDEX = 411;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12307,9 +14062,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 364;
+	TREE_INDEX = 412;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12317,9 +14072,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 365;
+	TREE_INDEX = 413;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12327,9 +14082,9 @@ DISPLAY_LINE
 	CHANNEL = "ram_addr[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 366;
+	TREE_INDEX = 414;
 	TREE_LEVEL = 1;
-	PARENT = 346;
+	PARENT = 394;
 }
 
 DISPLAY_LINE
@@ -12337,7 +14092,7 @@ DISPLAY_LINE
 	CHANNEL = "wr_ena";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 367;
+	TREE_INDEX = 415;
 	TREE_LEVEL = 0;
 }
 
@@ -12346,9 +14101,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 368;
+	TREE_INDEX = 416;
 	TREE_LEVEL = 0;
-	CHILDREN = 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384;
+	CHILDREN = 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432;
 }
 
 DISPLAY_LINE
@@ -12356,9 +14111,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[15]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 369;
+	TREE_INDEX = 417;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12366,9 +14121,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[14]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 370;
+	TREE_INDEX = 418;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12376,9 +14131,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[13]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 371;
+	TREE_INDEX = 419;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12386,9 +14141,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[12]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 372;
+	TREE_INDEX = 420;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12396,9 +14151,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 373;
+	TREE_INDEX = 421;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12406,9 +14161,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[10]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 374;
+	TREE_INDEX = 422;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12416,9 +14171,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 375;
+	TREE_INDEX = 423;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12426,9 +14181,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 376;
+	TREE_INDEX = 424;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12436,9 +14191,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 377;
+	TREE_INDEX = 425;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12446,9 +14201,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 378;
+	TREE_INDEX = 426;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12456,9 +14211,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 379;
+	TREE_INDEX = 427;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12466,9 +14221,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 380;
+	TREE_INDEX = 428;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12476,9 +14231,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 381;
+	TREE_INDEX = 429;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12486,9 +14241,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 382;
+	TREE_INDEX = 430;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12496,9 +14251,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 383;
+	TREE_INDEX = 431;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12506,9 +14261,9 @@ DISPLAY_LINE
 	CHANNEL = "w_data[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 384;
+	TREE_INDEX = 432;
 	TREE_LEVEL = 1;
-	PARENT = 368;
+	PARENT = 416;
 }
 
 DISPLAY_LINE
@@ -12516,7 +14271,7 @@ DISPLAY_LINE
 	CHANNEL = "divider 2088";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 385;
+	TREE_INDEX = 433;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
 }
@@ -12526,9 +14281,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 386;
+	TREE_INDEX = 434;
 	TREE_LEVEL = 0;
-	CHILDREN = 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402;
+	CHILDREN = 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450;
 }
 
 DISPLAY_LINE
@@ -12536,9 +14291,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[15]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 387;
+	TREE_INDEX = 435;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12546,9 +14301,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[14]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 388;
+	TREE_INDEX = 436;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12556,9 +14311,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[13]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 389;
+	TREE_INDEX = 437;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12566,9 +14321,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[12]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 390;
+	TREE_INDEX = 438;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12576,9 +14331,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 391;
+	TREE_INDEX = 439;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12586,9 +14341,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[10]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 392;
+	TREE_INDEX = 440;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12596,9 +14351,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 393;
+	TREE_INDEX = 441;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12606,9 +14361,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 394;
+	TREE_INDEX = 442;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12616,9 +14371,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 395;
+	TREE_INDEX = 443;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12626,9 +14381,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 396;
+	TREE_INDEX = 444;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12636,9 +14391,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 397;
+	TREE_INDEX = 445;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12646,9 +14401,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 398;
+	TREE_INDEX = 446;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12656,9 +14411,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 399;
+	TREE_INDEX = 447;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12666,9 +14421,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 400;
+	TREE_INDEX = 448;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12676,9 +14431,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 401;
+	TREE_INDEX = 449;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12686,9 +14441,9 @@ DISPLAY_LINE
 	CHANNEL = "r_data[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 402;
+	TREE_INDEX = 450;
 	TREE_LEVEL = 1;
-	PARENT = 386;
+	PARENT = 434;
 }
 
 DISPLAY_LINE
@@ -12696,9 +14451,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 403;
+	TREE_INDEX = 451;
 	TREE_LEVEL = 0;
-	CHILDREN = 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419;
+	CHILDREN = 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467;
 }
 
 DISPLAY_LINE
@@ -12706,9 +14461,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[15]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 404;
+	TREE_INDEX = 452;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12716,9 +14471,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[14]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 405;
+	TREE_INDEX = 453;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12726,9 +14481,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[13]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 406;
+	TREE_INDEX = 454;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12736,9 +14491,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[12]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 407;
+	TREE_INDEX = 455;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12746,9 +14501,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[11]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 408;
+	TREE_INDEX = 456;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12756,9 +14511,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[10]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 409;
+	TREE_INDEX = 457;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12766,9 +14521,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[9]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 410;
+	TREE_INDEX = 458;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12776,9 +14531,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[8]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 411;
+	TREE_INDEX = 459;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12786,9 +14541,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[7]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 412;
+	TREE_INDEX = 460;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12796,9 +14551,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[6]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 413;
+	TREE_INDEX = 461;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12806,9 +14561,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[5]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 414;
+	TREE_INDEX = 462;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12816,9 +14571,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[4]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 415;
+	TREE_INDEX = 463;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12826,9 +14581,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[3]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 416;
+	TREE_INDEX = 464;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12836,9 +14591,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[2]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 417;
+	TREE_INDEX = 465;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12846,9 +14601,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[1]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 418;
+	TREE_INDEX = 466;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12856,9 +14611,9 @@ DISPLAY_LINE
 	CHANNEL = "rd_pxcol[0]";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Hexadecimal;
-	TREE_INDEX = 419;
+	TREE_INDEX = 467;
 	TREE_LEVEL = 1;
-	PARENT = 403;
+	PARENT = 451;
 }
 
 DISPLAY_LINE
@@ -12866,9 +14621,117 @@ DISPLAY_LINE
 	CHANNEL = "divider 227";
 	EXPAND_STATUS = COLLAPSED;
 	RADIX = Binary;
-	TREE_INDEX = 420;
+	TREE_INDEX = 468;
 	TREE_LEVEL = 0;
 	IS_DIVIDER = ON;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
 }
 
 TIME_BAR

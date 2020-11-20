@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Fri Oct 02 01:00:38 2020
+Analysis & Synthesis Status : Successful - Sat Oct 03 16:39:33 2020
 Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
 Revision Name : geo
 Top-level Entity Name : geo
 Family : Cyclone III
-Total logic elements : 2,694
-    Total combinational functions : 2,371
-    Dedicated logic registers : 874
-Total registers : 874
+Total logic elements : 2,884
+    Total combinational functions : 2,513
+    Dedicated logic registers : 998
+Total registers : 998
 Total pins : 174
 Total virtual pins : 0
 Total memory bits : 73,728

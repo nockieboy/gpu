@@ -2,10 +2,10 @@
  *      GEOFF MODULE
  *  (geometry_xy_plotter)
  *
- *       v 0.9. October 1st, 2020
+ *       v 0.95. October 3rd, 2020
  * 
  * Geo-plotter/polyplot, sorter and blitter portions written by Brian Guralnick
- * 
+ * Now inclused 12 bit fractional X&Y zoom and shrink scaling blitter operation.
  *
  */
 
@@ -33,7 +33,7 @@ module geometry_xy_plotter (
 
     //  AUX=12 : Set destination raster width in bytes    : 15:0 holds destination raster image width in #bytes so the proper memory address can be calculated from the X&Y coordinates
     //  AUX=13 : Set source raster width in bytes,        : 15:0 holds source raster image width in #bytes so the proper memory address can be calculated from the X&Y coordinates
-    //  AUX=14 : Set destination mem address,             : 31:24 bitplane mode : 23:0 hold destination base memory addres for write pixel
+    //  AUX=14 : Set destination mem address,             : 31:24 bitplane mode : 23:0 hold destination base memory address for write pixel
     //  AUX=15 : Set source mem address,                  : 31:24 bitplane mode : 23:0 hold the source base memory address for read source pixel
     output wire fifo_cmd_busy     // HIGH when FIFO is full/nearly full
 );
@@ -66,12 +66,14 @@ logic signed [11:0] y[0:3]      ; // 2-dimensional 12-bit register for y0-y3
 logic signed [11:0] max_x       ; // this reg will be both in this module and the memory pixel writer
 logic signed [11:0] max_y       ; // this reg will be both in this module and the memory pixel writer
 
-logic signed [11:0] blit_dest_x       ; // 
-logic signed [11:0] blit_dest_rst_x   ; // 
-logic signed [11:0] blit_dest_y       ; // 
-logic signed [11:0] blit_dest_rst_y   ; // 
-logic signed [11:0] blit_source_x     ; // 
-logic signed [11:0] blit_source_y     ; // 
+logic signed [23:0] blit_dest_x       ; // 
+logic signed [11:0] blit_dest_x_int   ; // 
+logic signed [23:0] blit_dest_rst_x   ; // 
+logic signed [23:0] blit_dest_y       ; // 
+logic signed [11:0] blit_dest_y_int   ; // 
+logic signed [23:0] blit_dest_rst_y   ; // 
+logic signed [23:0] blit_source_x     ; // 
+logic signed [23:0] blit_source_y     ; // 
 logic signed [11:0] blit_source_ofs_x ; // 
 logic signed [11:0] blit_source_ofs_y ; // 
 logic        [11:0] blit_width        ; // this stores how many pixels wide the blitter will copy
@@ -80,7 +82,10 @@ logic               blit_running      ; // high when the blitter is running
 logic               blit_paste_phase  ; // high when the blitter is running
 logic signed [11:0] blit_dxs[0:3]     ; // Holds all the possible blitter starting paste X coordinates depending on selected paste features
 logic signed [11:0] blit_dys[0:3]     ; // Holds all the possible blitter starting paste Y coordinates depending on selected paste features
-
+logic        [12:0] blit_src_scale_x  ; // Holds the X blitter source upscale fraction, IE zoom ratio (4096:blit_src_scale_x), values 4095 through 1, or 4096 for off.
+logic        [12:0] blit_src_scale_y  ; // Holds the Y blitter source upscale fraction, IE zoom ratio (4096:blit_src_scale_y), values 4095 through 1, or 4096 for off.
+logic        [12:0] blit_dest_scale_x ; // Holds the X blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_x:4096), values 4095 through 1, or 4096 for off.
+logic        [12:0] blit_dest_scale_y ; // Holds the Y blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_y:4096), values 4095 through 1, or 4096 for off.
 
 logic [3:0]  draw_cmd_func        ;
 logic [7:0]  draw_cmd_data_color  ;
@@ -140,7 +145,7 @@ logic [7:0]          blit_mask_col     ;
 //************************************************************************************************************************************************
 logic                plot_cmd_rdy       ;
 logic [15:0]         plot_data_pipe     ; // cmd_data pipeline OUT from poly_plot into the blitter
-logic signed  [11:0] plot_pixel_xy[0:1] ; // xy coordinater to plot to
+logic signed  [11:0] plot_pixel_xy[0:1] ; // xy coordinates to plot to
 logic                plot_pixel_ena     ;
 logic [7:0]          plot_pixel_col     ;
 logic                plot_busy          ;
@@ -159,11 +164,15 @@ poly_plot plotter (
     .y_in              ( y               ), // xy[0,1,2,3] registers
 //outputs
     .pixel_ena         ( plot_pixel_ena  ),
-    .pixel_xy          ( plot_pixel_xy   ), // array package of sorted coordinates for the linegen 0&1
-    .pixel_col         ( plot_pixel_col  ), // array package of sorted coordinates for the linegen 0&1
-    .plotter_busy      ( plot_busy       ), // array containing the number of line coordinates for each linegen to run
-    .blit_features_out ( p_blit_features ), // Tells the blitter module to copy & paste a rectangle.
-    .blit_mask_col_out ( p_blit_mask_col )  // Tells the blitter copy pixel function how to transpose the source pixel color
+    .pixel_xy          ( plot_pixel_xy   ),  // array package of sorted coordinates for the linegen 0&1
+    .pixel_col         ( plot_pixel_col  ),  // array package of sorted coordinates for the linegen 0&1
+    .plotter_busy      ( plot_busy       ),  // array containing the number of line coordinates for each linegen to run
+    .blit_features_out ( p_blit_features ),  // Tells the blitter module to copy & paste a rectangle.
+    .blit_mask_col_out ( p_blit_mask_col ),  // Tells the blitter copy pixel function how to transpose the source pixel color
+    .blit_src_scale_x  ( blit_src_scale_x),  // Holds the X blitter source upscale fraction, IE zoom ratio (4096:blit_src_scale_x), values 4095 through 1, or 4096 for off.
+    .blit_src_scale_y  ( blit_src_scale_y),  // Holds the Y blitter source upscale fraction, IE zoom ratio (4096:blit_src_scale_y), values 4095 through 1, or 4096 for off.
+    .blit_dest_scale_x ( blit_dest_scale_x), // Holds the X blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_x:4096), values 4095 through 1, or 4096 for off.
+    .blit_dest_scale_y ( blit_dest_scale_y)  // Holds the Y blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_y:4096), values 4095 through 1, or 4096 for off.
 );
 
 
@@ -190,16 +199,20 @@ always_comb begin
     load_cmd             = !plot_busy  && !fifo_cmd_rdy_n  && !blit_running ;
 
 // Setup all the possible blitter starting X&Y coordinates based on which feature are enabled
-blit_dxs[3] = plot_pixel_xy[0]+blit_width[10:1]  ; // Begining paste X coordinates with Mirror enabled  and Center Paste enabled
-blit_dxs[2] = plot_pixel_xy[0]+blit_width[10:0]  ; // Begining paste X coordinates with Mirror enabled  and Center Paste disabled
-blit_dxs[1] = plot_pixel_xy[0]-blit_width[10:1]  ; // Begining paste X coordinates with Mirror disabled and Center Paste enabled
-blit_dxs[0] = plot_pixel_xy[0]                   ; // Begining paste X coordinates with Mirror disabled and Center Paste disabled
+blit_dxs[3] = plot_pixel_xy[0]+blit_width[10:1]  ; // Beginning paste X coordinates with Mirror enabled  and Center Paste enabled
+blit_dxs[2] = plot_pixel_xy[0]+blit_width[10:0]  ; // Beginning paste X coordinates with Mirror enabled  and Center Paste disabled
+blit_dxs[1] = plot_pixel_xy[0]-blit_width[10:1]  ; // Beginning paste X coordinates with Mirror disabled and Center Paste enabled
+blit_dxs[0] = plot_pixel_xy[0]                   ; // Beginning paste X coordinates with Mirror disabled and Center Paste disabled
 
-blit_dys[3] = plot_pixel_xy[1]+blit_height[10:1] ; // Begining paste Y coordinates with Flip enabled  and Center Paste enabled
-blit_dys[2] = plot_pixel_xy[1]+blit_height[10:0] ; // Begining paste Y coordinates with Flip enabled  and Center Paste disabled
-blit_dys[1] = plot_pixel_xy[1]-blit_height[10:1] ; // Begining paste Y coordinates with Flip disabled and Center Paste enabled
-blit_dys[0] = plot_pixel_xy[1]                   ; // Begining paste Y coordinates with Flip disabled and Center Paste disabled
-    
+blit_dys[3] = plot_pixel_xy[1]+blit_height[10:1] ; // Beginning paste Y coordinates with Flip enabled  and Center Paste enabled
+blit_dys[2] = plot_pixel_xy[1]+blit_height[10:0] ; // Beginning paste Y coordinates with Flip enabled  and Center Paste disabled
+blit_dys[1] = plot_pixel_xy[1]-blit_height[10:1] ; // Beginning paste Y coordinates with Flip disabled and Center Paste enabled
+blit_dys[0] = plot_pixel_xy[1]                   ; // Beginning paste Y coordinates with Flip disabled and Center Paste disabled
+
+// Assign integer only versions of the destination coordinates for the blitter paste coordinates.
+blit_dest_x_int = blit_dest_x[23:12];
+blit_dest_y_int = blit_dest_y[23:12];
+
 end // always_comb
 
 always_ff @(posedge clk or posedge reset) begin
@@ -224,8 +237,8 @@ always_ff @(posedge clk or posedge reset) begin
         blit_source_ofs_y   <= 12'b0 ; // 
         blit_width          <= 12'b0 ; // this stores how many pixels wide the blitter will copy
         blit_height         <= 12'b0 ; // this stores how many pixels high the blitter will copy
-        blit_running        <= 1'b0 ; // high when the blitter is running
-        blit_paste_phase    <= 1'b0 ; // high when the blitter is running
+        blit_running        <= 1'b0 ;  // high when the blitter is running
+        blit_paste_phase    <= 1'b0 ;  // high when the blitter is pasting, low when copying
 
         // reset draw command registers
         draw_cmd_func        <= 4'b0  ;
@@ -248,10 +261,10 @@ always_ff @(posedge clk or posedge reset) begin
 //************************************************************************************************************************************************
 // p_blit_features bitmask features:
 // 0 = Enable blitter         1 = run biltter copying source to output coordinates, 0 = Simple pixel write command
-// 1 = Enable paste mask      1 = Pasting pixels with transparency mask, 0 = Always paste pixels even is the source has the selected transparent color
-// 2 = Enable H-center paste  1 = Offset the paste to the left by half of blit_width, 0 = Use the paste coordinates as the beginning left
+// 1 = Enable paste mask      1 = Paste pixels with transparency mask, 0 = Always paste pixels even if the source pixel is the selected transparent color
+// 2 = Enable H-center paste  1 = Offset the paste to the left by half of blit_width, 0 = Use the paste coordinates as the left margin
 // 3 = Enable Mirror paste    1 = Mirror the output on the X axis.
-// 4 = Enable V-center paste  1 = Offset the paste up by half of blit_height, 0 = Use the paste coordinates as the beginning top of the paste
+// 4 = Enable V-center paste  1 = Offset the paste up by half of blit_height, 0 = Use the paste coordinates as the first line of the paste
 // 5 = Enable Flip paste      1 = Flip the output on the Y axis.
 // 6 = Enable Rotate 90 degree paste  1 = Swaps the X&Y coordinates on the paste.
 // 7 = Enable Rotate 45 degree paste  1 = Increments/decrements the X&Y coordinates on the paste in unison.
@@ -269,101 +282,110 @@ if ( !p_blit_features[0] ) begin // ***** Blitter disabled.
 
 end else begin // ***** Blitter enabled.
 
-        if (!blit_running && plot_pixel_ena ) begin        // Blitter isn't yet running, so, initialize it.
-            blit_running         <= 1'b1;  // Signal blitter running so the poly_plot module knows to wait for the copy/paste.
-            blit_source_x        <= 12'd0; // Clear the source coordinates
-            blit_source_y        <= 12'd0;
-            blit_paste_phase     <= 1'b0;  // Tells the blitter that a copy pixel has been done and ready for a paste pixel
+        if (!blit_running && plot_pixel_ena ) begin   // Blitter isn't yet running, so, initialize it.
+            blit_running         <= 1'b1  ;           // Signal blitter running so the poly_plot module knows to wait for the copy/paste.
+            blit_source_x        <= 24'd0 ;           // Clear the source coordinates
+            blit_source_y        <= 24'd0 ;
+            blit_paste_phase     <= 1'b0  ;           // Tells the blitter that a copy pixel has been done and ready for a paste pixel
 
             // Set the initial destination coordinates based on the Enable center H/V, and mirror/flip blitter features.
-            blit_dest_x          <= blit_dxs[p_blit_features[3:2]] ; // Set the beginning paste X coordinates.
-            blit_dest_rst_x      <= blit_dxs[p_blit_features[3:2]] ; // tells the copy where to reset X during a Y increment
-            blit_dest_y          <= blit_dys[p_blit_features[5:4]] ; // Set the beginning paste Y coordinates.
-            blit_dest_rst_y      <= blit_dys[p_blit_features[5:4]] ; // tells the copy where to reset Y during a X increment when copying with a 90 degree rotation
+            blit_dest_x[23:12]     <= blit_dxs[p_blit_features[3:2]] ; // Set the beginning paste X coordinates.
+            blit_dest_rst_x[23:12] <= blit_dxs[p_blit_features[3:2]] ; // tells the copy where to reset X during a Y increment
+            blit_dest_y[23:12]     <= blit_dys[p_blit_features[5:4]] ; // Set the beginning paste Y coordinates.
+            blit_dest_rst_y[23:12] <= blit_dys[p_blit_features[5:4]] ; // tells the copy where to reset Y during a X increment when copying with a 90 degree rotation
+            // clear the floating point locations
+            blit_dest_x[11:0]      <= 12'd0                          ; // Set the beginning paste X coordinates.
+            blit_dest_rst_x[11:0]  <= 12'd0                          ; // tells the copy where to reset X during a Y increment
+            blit_dest_y[11:0]      <= 12'd0                          ; // Set the beginning paste Y coordinates.
+            blit_dest_rst_y[11:0]  <= 12'd0                          ; // tells the copy where to reset Y during a X increment when copying with a 90 degree rotation
             
          end else if ( blit_running ) begin // Blitter has been setup, now in running mode
 
-            if (!blit_paste_phase) begin // Copy a pixel phase
+         //  Whether reading or writing a pixel, if the destination pixel is inside the valid screen coordinates, enable the draw command TX
+            if ( (blit_dest_x_int >= 0 && blit_dest_x_int < max_x ) && ( blit_dest_y_int >=0 && blit_dest_y_int < max_y ) ) draw_cmd_tx <= 1'b1 ;
+         //  Otherwise stop the draw command TX
+            else                                                                                                            draw_cmd_tx <= 1'b0 ;
 
-                        // Only bother sending the copy pixel command if the destination coordinates are within the allowed max_x/y window
-                        if ( (blit_dest_x >= 0 && blit_dest_x < max_x ) && ( blit_dest_y >=0 && blit_dest_y < max_y ) ) begin
-                        draw_cmd_func        <= CMD_OUT_PXCOPY   ;                  // Copy the source pixel command.
-                        draw_cmd_data_word_X <= blit_source_x + blit_source_ofs_x ; // ... at X-coordinate
-                        draw_cmd_data_word_Y <= blit_source_y + blit_source_ofs_y ; // ... and Y-coordinate
-                        draw_cmd_data_color  <= p_blit_mask_col  ;                  // Copy color pixel transformation  (Read pixel is XORed with this number)   
-                        draw_cmd_tx          <= 1'b1             ;                  // let PAGET know valid pixel data is incoming
-                        end else draw_cmd_tx <= 1'b0             ;                  // Paste coordinates outside border, do not transmit any command
-
-                        blit_paste_phase     <= 1'b1 ; // signal the next step is a paste pixel
-
-            end else begin  // paste the pixel phase
+         // During the first blitter phase, set the output command to the copy pixel coordinates and set the next phase to a paste pixel
+                        if (!blit_paste_phase) begin
+                        draw_cmd_func        <= CMD_OUT_PXCOPY   ;                         // Copy the source pixel command.
+                        draw_cmd_data_word_X <= blit_source_x[23:12] + blit_source_ofs_x ; // ... at X-coordinate
+                        draw_cmd_data_word_Y <= blit_source_y[23:12] + blit_source_ofs_y ; // ... and Y-coordinate
+                        draw_cmd_data_color  <= p_blit_mask_col  ;                         // Copy color pixel transformation  (Read pixel is XORed with this number)   
+                        blit_paste_phase     <= 1'b1 ;                                     // signal the next blitter phase, paste the copied pixel
+                        end
             
-                        // Only bother sending the paste pixel/M command if the destination coordinates are within the allowed max_x/y window
-                        if ( ( blit_dest_x >= 0 && blit_dest_x < max_x ) && ( blit_dest_y >=0 && blit_dest_y < max_y ) ) begin
+         // During the second blitter phase, (PART 1) set the output command to the paste pixel coordinates.
+                        if ( blit_paste_phase) begin
                         draw_cmd_func        <= p_blit_features[1] ? CMD_OUT_PXPASTE_M : CMD_OUT_PXPASTE ; // Write the pixel with the optional paste mask feature
-                        draw_cmd_data_word_X <= blit_dest_x     ;                                          // ... at X-coordinate
-                        draw_cmd_data_word_Y <= blit_dest_y     ;                                          // ... and Y-coordinate
-                        draw_cmd_data_color  <= plot_pixel_col  ;                                          // Second XORed color transformation   
-                        draw_cmd_tx          <= 1'b1            ;                                          // let PAGET know valid pixel data is incoming
-                        end else draw_cmd_tx <= 1'b0            ;                                          // Paste coordinates outside border, do not transmit any command
+                        draw_cmd_data_word_X <= blit_dest_x_int    ;                                       // ... at X-coordinate
+                        draw_cmd_data_word_Y <= blit_dest_y_int    ;                                       // ... and Y-coordinate
+                        draw_cmd_data_color  <= plot_pixel_col     ;                                       // Second XORed color transformation   
+                        draw_cmd_tx          <= 1'b1               ;                                       // let PAGET know valid pixel data is incoming
+                        end
 
-                        blit_paste_phase <= 1'b0 ; // signal the next step is copy pixel
-            
-                        if ( blit_source_x == blit_width && blit_source_y == blit_height ) begin // the copy has reached the blit_width/height
+         // During the second blitter phase, (PART 2), OR when the destination paste pixel coordinates are OUTSIDE the valid screen coordinates,
+         // (this step skipps a clock cycle when addressing pixels off the screen area)
+         // Increment/decrement all the X&Y pointers/coordinates and set the blitter phase back into copy pixel mode.
+         
+         if ( blit_paste_phase || !( (blit_dest_x_int >= 0 && blit_dest_x_int < max_x ) && ( blit_dest_y_int >=0 && blit_dest_y_int < max_y ) ) ) begin
+
+              blit_paste_phase     <= 1'b0 ;  // signal the next blitter phase, copy pixel.
+         
+                        if ( blit_source_x[23:12] == blit_width && blit_source_y[23:12] == blit_height ) begin // the copy has reached the blit_width/height
                         blit_running         <= 1'b0            ; // turn off blitter
-                        end else if ( blit_source_x != blit_width ) begin // width has not been reached, increment the X coordinates
-                                                           blit_source_x <= blit_source_x + 1'd1 ;
+                        end else if ( blit_source_x[23:12] != blit_width ) begin // width has not been reached, increment the X coordinates
+                                                           blit_source_x <= blit_source_x + blit_src_scale_x ;
 
-                                                      if ( p_blit_features[7]) begin                                      ; // Paste with 45 degree rotate begin
-                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + 1'd1 ; // Horizontal mirror off
-                                                           else                       blit_dest_x   <= blit_dest_x - 1'd1 ; // Horizontal mirror on
-                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + 1'd1 ; // Vertical flip off
-                                                           else                       blit_dest_y   <= blit_dest_y - 1'd1 ; // Vertical flip on
+                                                      if ( p_blit_features[7]) begin   // Paste with 45 degree rotate begin
+                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + blit_dest_scale_x ; // Horizontal mirror off
+                                                           else                       blit_dest_x   <= blit_dest_x - blit_dest_scale_x ; // Horizontal mirror on
+                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + blit_dest_scale_y ; // Vertical flip off
+                                                           else                       blit_dest_y   <= blit_dest_y - blit_dest_scale_y ; // Vertical flip on
 
-                                                      end else begin                                                        // no Paste 45 degree rotate begin
-                                                      if (!p_blit_features[6]) begin                                      ; // Paste un-rotated 90 degree
-                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + 1'd1 ; // Horizontal mirror off
-                                                           else                       blit_dest_x   <= blit_dest_x - 1'd1 ; // Horizontal mirror on
-                                                      end else begin                                                        // Paste rotated 90 degrees
-                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + 1'd1 ; // Vertical flip off
-                                                           else                       blit_dest_y   <= blit_dest_y - 1'd1 ; // Vertical flip on
+                                                      end else begin                   // no Paste 45 degree rotate begin
+                                                      if (!p_blit_features[6]) begin   // Paste un-rotated
+                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + blit_dest_scale_x ; // Horizontal mirror off
+                                                           else                       blit_dest_x   <= blit_dest_x - blit_dest_scale_x ; // Horizontal mirror on
+                                                      end else begin                   // Paste rotated 90 degrees
+                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + blit_dest_scale_y ; // Vertical flip off
+                                                           else                       blit_dest_y   <= blit_dest_y - blit_dest_scale_y ; // Vertical flip on
                                                       end
                                                       end  //  no Paste 45 degree rotate end
 
                         end else begin // width has been reached, increment the Y coordinates and reset the X coordinates
-                                                           blit_source_y <= blit_source_y + 1'd1 ;
+                                                           blit_source_y <= blit_source_y + blit_src_scale_y ;
 
-                                                      if ( p_blit_features[7]) begin                                              // Paste with 45 degree rotate begin
-                                                           if ( !p_blit_features[5] ) blit_dest_y     <= blit_dest_rst_y + 1'd1 ; // Vertical flip off
-                                                           else                       blit_dest_y     <= blit_dest_rst_y - 1'd1 ; // Vertical flip on
-                                                           if ( !p_blit_features[5] ) blit_dest_x     <= blit_dest_rst_x - 1'd1 ; // New line return 
-                                                           else                       blit_dest_x     <= blit_dest_rst_x + 1'd1 ; // New line return 
+                                                      if ( p_blit_features[7]) begin  // Paste with 45 degree rotate
+                                                           if ( !p_blit_features[5] ) blit_dest_y     <= blit_dest_rst_y + blit_dest_scale_y ; // Vertical flip off
+                                                           else                       blit_dest_y     <= blit_dest_rst_y - blit_dest_scale_y ; // Vertical flip on
+                                                           if ( !p_blit_features[5] ) blit_dest_x     <= blit_dest_rst_x - blit_dest_scale_x ; // New line return 
+                                                           else                       blit_dest_x     <= blit_dest_rst_x + blit_dest_scale_x ; // New line return 
                                                            
-                                                           if ( !p_blit_features[5] ) blit_dest_rst_x <= blit_dest_rst_x - 1'd1 ; // Modify new line return position 
-                                                           else                       blit_dest_rst_x <= blit_dest_rst_x + 1'd1 ; // Modify new line return position 
-                                                           
+                                                           if ( !p_blit_features[5] ) blit_dest_rst_x <= blit_dest_rst_x - blit_dest_scale_x ; // Modify new line return position 
+                                                           else                       blit_dest_rst_x <= blit_dest_rst_x + blit_dest_scale_x ; // Modify new line return position 
                                                              
-                                                           if ( !p_blit_features[3] ) blit_dest_x     <= blit_dest_rst_x - 1'd1 ; // Horizontal mirror off
-                                                           else                       blit_dest_x     <= blit_dest_rst_x + 1'd1 ; // Horizontal mirror on
-                                                           if ( !p_blit_features[3] ) blit_dest_y     <= blit_dest_rst_y + 1'd1 ; // New line return 
-                                                           else                       blit_dest_y     <= blit_dest_rst_y - 1'd1 ; // New line return 
+                                                           if ( !p_blit_features[3] ) blit_dest_x     <= blit_dest_rst_x - blit_dest_scale_x ; // Horizontal mirror off
+                                                           else                       blit_dest_x     <= blit_dest_rst_x + blit_dest_scale_x ; // Horizontal mirror on
+                                                           if ( !p_blit_features[3] ) blit_dest_y     <= blit_dest_rst_y + blit_dest_scale_y ; // New line return 
+                                                           else                       blit_dest_y     <= blit_dest_rst_y - blit_dest_scale_y ; // New line return 
                                                            
-                                                           if ( !p_blit_features[3] ) blit_dest_rst_y <= blit_dest_rst_y + 1'd1 ; // Modify new line return position 
-                                                           else                       blit_dest_rst_y <= blit_dest_rst_y - 1'd1 ; // Modify new line return position 
+                                                           if ( !p_blit_features[3] ) blit_dest_rst_y <= blit_dest_rst_y + blit_dest_scale_y ; // Modify new line return position 
+                                                           else                       blit_dest_rst_y <= blit_dest_rst_y - blit_dest_scale_y ; // Modify new line return position 
                                                       
-                                                      end else begin                                                        // no Paste 45 degree rotate begin
-                                                      if (!p_blit_features[6]) begin                                      ; // Paste un-rotated 90 degree
-                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + 1'd1 ; // Vertical flip off
-                                                           else                       blit_dest_y   <= blit_dest_y - 1'd1 ; // Vertical flip on
-                                                                                      blit_dest_x   <= blit_dest_rst_x    ; // New line return  
-                                                      end else begin                                                        // Paste rotated 90 degrees
-                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + 1'd1 ; // Horizontal mirror off
-                                                           else                       blit_dest_x   <= blit_dest_x - 1'd1 ; // Horizontal mirror on
-                                                                                      blit_dest_y   <= blit_dest_rst_y    ; // New line return  
+                                                      end else begin                   // Paste horizontal or vertical
+                                                      if (!p_blit_features[6]) begin   // Paste un-rotated
+                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + blit_dest_scale_y ; // Vertical flip off
+                                                           else                       blit_dest_y   <= blit_dest_y - blit_dest_scale_y ; // Vertical flip on
+                                                                                      blit_dest_x   <= blit_dest_rst_x                 ; // New line return  
+                                                      end else begin                   // Paste rotated 90 degrees
+                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + blit_dest_scale_x ; // Horizontal mirror off
+                                                           else                       blit_dest_x   <= blit_dest_x - blit_dest_scale_x ; // Horizontal mirror on
+                                                                                      blit_dest_y   <= blit_dest_rst_y                 ; // New line return  
                                                       end
                                                       end  //  no Paste 45 degree rotate end
 
-                                                           blit_source_x <= 12'd0 ;
+                                                           blit_source_x <= 24'd0 ;
                         end
                         
             end // end of paste pixel phase
@@ -517,9 +539,13 @@ module poly_plot (
     output logic  signed [11:0] pixel_xy [0:1]   , // Destination coordinates
     output logic                plotter_busy     , // The linegens are running
     output logic         [7:0]  blit_features_out, // Defines the blitter module features
-    output logic         [7:0]  blit_mask_col_out  // Tells the blitter copy pixel function how to transpose the source pixel color
+    output logic         [7:0]  blit_mask_col_out, // Tells the blitter copy pixel function how to transpose the source pixel color
                                                    // Remember when writing a pixel/line/un-filled triangle/box/quad, the set color does a second
                                                    // color transpose from the copy pixel to the destination pixel color.
+    output logic        [12:0]  blit_src_scale_x , // Holds the X blitter source upscale fraction, IE zoom ratio (4096:blit_src_scale_x), values 4095 through 1, or 4096 for off.
+    output logic        [12:0]  blit_src_scale_y , // Holds the Y blitter source upscale fraction, IE zoom ratio (4096:blit_src_scale_y), values 4095 through 1, or 4096 for off.
+    output logic        [12:0]  blit_dest_scale_x, // Holds the X blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_x:4096), values 4095 through 1, or 4096 for off.
+    output logic        [12:0]  blit_dest_scale_y  // Holds the Y blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_y:4096), values 4095 through 1, or 4096 for off.
 );
 
 logic [1:0] sort_tri     [0:2];
@@ -532,10 +558,10 @@ poly_sort sorter (
     .x_in        ( x_in      ), // values to sort
     .y_in        ( y_in      ), // values to sort
 //outputs
-    .sort_tri     ( sort_tri     ), // Array containing 8 sorted pointers, 2x2 for linegen 0&1 running 2 seuqneces to generate a filled triangle using xy[0,1,2].
-    .sort_tri_mm  ( sort_tri_mm  ), // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendring using xy[0,1,2].
-    .sort_quad    ( sort_quad    ), // Array containing 8 sorted pointers, 2x2 for linegen 0&1 running 2 seuqneces to generate a filled triangle using xy[3,2,1].
-    .sort_quad_mm ( sort_quad_mm )  // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendring using xy[3,2,1].
+    .sort_tri     ( sort_tri     ), // Array containing 3 sorted pointers, 1 for linegen 0 and 2 sequences for linegen 1 to generate a filled triangle using xy[0,1,2].
+    .sort_tri_mm  ( sort_tri_mm  ), // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendering using xy[0,1,2].
+    .sort_quad    ( sort_quad    ), // Array containing 3 sorted pointers, 1 for linegen 0 and 2 sequences for linegen 1 to generate a filled triangle using xy[1,2,3].
+    .sort_quad_mm ( sort_quad_mm )  // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendering using xy[1,2,3].
 );
 
 logic signed [11:0] lg_out [0:3] ;  // XY output coordinates of all line generators
@@ -545,7 +571,7 @@ logic        [1:0]  lg_start     ;  // Initializes the linegens to begin
 logic        [1:0]  lg_pause     ;  // Freezes the lingen while they are ijn the middle of drawing
 logic        [1:0]  lg_seq_cnt [0:1]  ; // Linegen sequence counters
 logic        [3:0]  lg_csel    [0:3]  ; // Selects which xy[#] coordinates to use for linegen0 A,B - linegen1 A,B
-logic        [3:0]  lg_csel_b  [0:3]  ; // Holds which xy[#] selection will be used for second line to be drawn.
+logic        [3:0]  lg_csel_b  [0:3]  ; // Holds which xy[#] selection will be used for second sequence line to be drawn.
 
 line_generator linegen_0 (
     // inputs
@@ -593,7 +619,7 @@ logic signed [11:0] y_pos             ; // Current raster Y position counter
 logic signed [11:0] y_end             ; // Y raster fill ending position
 logic signed [11:0] x_pos             ; // Current raster X position counter
 logic signed [11:0] x_pos_bk          ; // Restore raster X position after a Y increment.
-logic signed [11:0] x_end             ; // X raster fillending coordinates
+logic signed [11:0] x_end             ; // X raster fill ending coordinates
 logic               rast_fill_pix_rdy ;
 
 always_comb begin
@@ -602,36 +628,40 @@ linegen_busy      = lg_running[0] || lg_running[1] ;
 execute_next_draw = cmd_rdy_in && !blitter_busy && !plotter_busy && !fill_ena ;
 
 // generate selection of the output write pixel port
-pixel_xy[0]       = rast_fill_pix_rdy ? x_pos : (lg_out[{lg_pix_rdy[1],1'b0}]); // select between linegen X coordinates and the x_pos raster fill coordinates
-pixel_xy[1]       = rast_fill_pix_rdy ? y_pos : (lg_out[{lg_pix_rdy[1],1'b1}]);
+pixel_xy[0]       = rast_fill_pix_rdy ? x_pos : (lg_out[{lg_pix_rdy[1],1'b0}]); // select between linegen0&1 X coordinates or the y_pos raster fill coordinates
+pixel_xy[1]       = rast_fill_pix_rdy ? y_pos : (lg_out[{lg_pix_rdy[1],1'b1}]); // select between linegen0&1 Y coordinates or the y_pos raster fill coordinates
 pixel_ena         = lg_pix_rdy[0] || lg_pix_rdy[1] || rast_fill_pix_rdy ;       // output pixel enable
 
 end
 
-always_ff @(posedge clk) begin
+always_ff @(posedge clk or posedge reset) begin
 
     if ( reset ) begin  // Reset only the key controls in the command pipe.
          blit_features_out   <= 0;
          blit_mask_col_out   <= 0;
          lg_seq_cnt[0]       <= 0;
          lg_seq_cnt[1]       <= 0;
-         lg_start[0]         <= 1'b0 ;              // clear the 1-shot linestart
-         lg_start[1]         <= 1'b0 ;              // clear the 1-shot linestart
-         fill_ena            <= 1'b0 ;              // clear the 1-shot linestart
+         lg_start[0]         <= 1'b0 ;              // clear the 1-shot line start
+         lg_start[1]         <= 1'b0 ;              // clear the 1-shot line start
+         fill_ena            <= 1'b0 ;              // clear the 1-shot line start
          rast_fill_pix_rdy   <= 1'd0 ;
+         blit_src_scale_x    <= 13'd4096 ; // Holds the X blitter source upscale fraction, 4096 = 1:1, IE disable.
+         blit_src_scale_y    <= 13'd4096 ; // Holds the Y blitter source upscale fraction, 4096 = 1:1, IE disable.
+         blit_dest_scale_x   <= 13'd4096 ; // Holds the X blitter destination downscale fraction, 4096 = 1:1, IE disable.
+         blit_dest_scale_y   <= 13'd4096 ; // Holds the Y blitter destination downscale fraction, 4096 = 1:1, IE disable.
     end // reset
     else
     if ( enable && !blitter_busy ) begin
 
 if (lg_start[0]) begin
   lg_seq_cnt[0] <= lg_seq_cnt[0]-1'b1; // subtract counter after linegen has been executed
-  lg_start[0]   <= 1'b0 ;              // clear the 1-shot linestart
+  lg_start[0]   <= 1'b0 ;              // clear the 1-shot line start
   lg_csel[0]    <= lg_csel_b[0] ;      // Switch over the xy[#] selection index to the second line's coordinates
   lg_csel[1]    <= lg_csel_b[1] ;      // Switch over the xy[#] selection index to the second line's coordinates
   end
 if (lg_start[1]) begin
   lg_seq_cnt[1] <= lg_seq_cnt[1]-1'b1; // subtract counter after linegen has been executed
-  lg_start[1]   <= 1'b0 ;              // clear the 1-shot linestart
+  lg_start[1]   <= 1'b0 ;              // clear the 1-shot line start
   lg_csel[2]    <= lg_csel_b[2] ;      // Switch over the xy[#] selection index to the second line's coordinates
   lg_csel[3]    <= lg_csel_b[3] ;      // Switch over the xy[#] selection index to the second line's coordinates
   end
@@ -645,6 +675,20 @@ if (execute_next_draw) begin
    
         if (cmd_in[15:8]  == 8'd0) blit_features_out <= cmd_in[7:0]; // Just set the blitter features
    else if (cmd_in[15:8]  == 8'd8) blit_mask_col_out <= cmd_in[7:0]; // Just set the blitter transparency mask color
+   else if (cmd_in[15:8]  == 8'd9) begin                             // Set blitter scale
+      if (cmd_in[0]) begin // enable setting of source scale
+        if ( x_in[0]==0 )  blit_src_scale_x    <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
+        else               blit_src_scale_x    <= {1'b0,x_in[0]}  ; // Otherwize, set the scale factor to 1 through 4095.
+        if ( y_in[0]==0 )  blit_src_scale_y    <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
+        else               blit_src_scale_y    <= {1'b0,y_in[0]}  ; // Otherwize, set the scale factor to 1 through 4095.
+      end
+      if (cmd_in[1]) begin // enable setting of source scale
+        if ( x_in[1]==0 )  blit_dest_scale_x   <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
+        else               blit_dest_scale_x   <= {1'b0,x_in[1]}  ; // Otherwize, set the scale factor to 1 through 4095.
+        if ( y_in[1]==0 )  blit_dest_scale_y   <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
+        else               blit_dest_scale_y   <= {1'b0,y_in[1]}  ; // Otherwize, set the scale factor to 1 through 4095.
+      end
+   end
    else if (cmd_in[15:12] == 4'd0) begin                             // Any other valid plotting draw command
     
         plotter_busy      <= 1 ;           // Tell the rest of the geometry processor that the plotter is going to draw
@@ -657,7 +701,7 @@ if (execute_next_draw) begin
                        lg_csel_b[2'd0]   <= {2'd0,2'd0}   ; // Linegen 0's second line's A coordinate = xy[0]   *un-used
                        lg_csel_b[2'd1]   <= {2'd0,2'd0}   ; // Linegen 0's second line's B coordinate = xy[0]   *un-used
 
-                       lg_seq_cnt[1]     <= {2'd0,2'd0}   ; // Linegen 1 has no line to draw
+                       lg_seq_cnt[1]     <= 2'd0          ; // Linegen 1 has no line to draw
                        lg_csel[2'd2]     <= {2'd0,2'd0}   ; // Linegen 1's first  line's A coordinate = xy[0]   *un-used
                        lg_csel[2'd2]     <= {2'd0,2'd0}   ; // Linegen 1's first  line's B coordinate = xy[0]   *un-used
                        lg_csel_b[2'd3]   <= {2'd0,2'd0}   ; // Linegen 1's second line's A coordinate = xy[0]   *un-used
@@ -670,14 +714,14 @@ if (execute_next_draw) begin
                        lg_pause[1]       <= 1'b1;
                        end
 
-   else if ( cmd_in[10:8] == 3'd2 ) begin            // Draw a line
-                       lg_seq_cnt[0]     <= 2'd1   ; // Linegen 0 has 1 line to draw
+   else if ( cmd_in[10:8] == 3'd2 ) begin                   // Draw a line
+                       lg_seq_cnt[0]     <= 2'd1          ; // Linegen 0 has 1 line to draw
                        lg_csel[2'd0]     <= {2'd0,2'd0}   ; // Linegen 0's first  line's A coordinate = xy[0]
                        lg_csel[2'd1]     <= {2'd1,2'd1}   ; // Linegen 0's first  line's B coordinate = xy[1]
                        lg_csel_b[2'd0]   <= {2'd0,2'd0}   ; // Linegen 0's second line's A coordinate = xy[0]   *un-used
                        lg_csel_b[2'd1]   <= {2'd0,2'd0}   ; // Linegen 0's second line's B coordinate = xy[0]   *un-used
 
-                       lg_seq_cnt[1]     <= {2'd0,2'd0}   ; // Linegen 1 has no line to draw
+                       lg_seq_cnt[1]     <= 2'd0          ; // Linegen 1 has no line to draw
                        lg_csel[2'd2]     <= {2'd0,2'd0}   ; // Linegen 1's first  line's A coordinate = xy[0]   *un-used
                        lg_csel[2'd2]     <= {2'd0,2'd0}   ; // Linegen 1's first  line's B coordinate = xy[0]   *un-used
                        lg_csel_b[2'd3]   <= {2'd0,2'd0}   ; // Linegen 1's second line's A coordinate = xy[0]   *un-used
@@ -807,7 +851,7 @@ if (execute_next_draw) begin
                        if ( y_in[1] > y_in[3] ) begin     ; // Check to see what direction line 2 of 4 would be drawn if it were drawn as a sorted quad and match it
                        lg_csel_b[2'd0]   <= {2'd3,2'd3}   ; // Linegen 0's second line's A coordinate = xy[3]
                        lg_csel_b[2'd1]   <= {2'd1,2'd1}   ; // Linegen 0's second line's B coordinate = xy[1]
-                       end else begin                     ; // Reverse the line drawing direction for line 1 of 4.
+                       end else begin                     ; // Reverse the line drawing direction for line 2 of 4.
                        lg_csel_b[2'd0]   <= {2'd1,2'd1}   ; // Linegen 0's second line's A coordinate = xy[1]
                        lg_csel_b[2'd1]   <= {2'd3,2'd3}   ; // Linegen 0's second line's B coordinate = xy[3]
                        end
@@ -825,7 +869,7 @@ if (execute_next_draw) begin
                        if ( y_in[0] > y_in[2] ) begin     ; // Check to see what direction line 4 of 4 would be drawn if it were drawn as a sorted quad and match it
                        lg_csel_b[2'd2]   <= {2'd2,2'd2}   ; // Linegen 1's second line's A coordinate = xy[2]
                        lg_csel_b[2'd3]   <= {2'd0,2'd0}   ; // Linegen 1's second line's B coordinate = xy[0]
-                       end else begin                     ; // Reverse the line drawing direction for line 3 of 4.
+                       end else begin                     ; // Reverse the line drawing direction for line 4 of 4.
                        lg_csel_b[2'd2]   <= {2'd0,2'd0}   ; // Linegen 1's second line's A coordinate = xy[0]
                        lg_csel_b[2'd3]   <= {2'd2,2'd2}   ; // Linegen 1's second line's B coordinate = xy[2]
                        end
@@ -876,7 +920,7 @@ end // if (execute_next_draw)
   if ( !fill_ena  ) begin // run the 2 linegens in a sequential manner, 1 after the other.
 
 if (!linegen_busy) begin
-      if ( lg_seq_cnt[0]!=0 ) begin  // If there are sequences, first run linegen 0
+      if ( lg_seq_cnt[0]!=0 ) begin      // If there are sequences, first run linegen 0
       lg_start[0]   <= 1'b1;
       lg_pause[0]   <= 1'b0;
       lg_pause[1]   <= 1'b1;
@@ -910,7 +954,7 @@ if (fill_ena)
     if (lg_pause==2'd3) begin                              // If both linegens as paused simultaneously because both of their output Y coordinates
                                                            // sent a coordinate matching the current raster fill coordinate y_pos.
          
-          if (x_pos != x_end) begin                        // if there is a void inbetween the 2 linegen's X coordinates
+          if (x_pos != x_end) begin                        // if there is a void in-between the 2 linegen's X coordinates
                rast_fill_pix_rdy <= 1'b1;                  // Switch output draw pixel coordinates from linegens to fill x&y_pos coordinates
                if (x_pos > x_end ) x_pos <= x_pos - 1'b1;  // inc/dec X fill coordinate.
                else                x_pos <= x_pos + 1'b1;
@@ -936,15 +980,14 @@ if (fill_ena)
                                                  lg_pause[0] <= 1'b1;           // pause linegen 0
                                                  lg_pause[1] <= 1'b0;           // un-pause linegen 1
                                                  x_pos       <= lg_out[2'b00] ; // set the initial X fill coordinate counter
-                                                 x_pos_bk    <= lg_out[2'b00] ; // set the initial X fill coordinate counter
+                                                 x_pos_bk    <= lg_out[2'b00] ; // set the initial X fill coordinate counter backup return position
                                                  end
 
            if (lg_out[2'b11][1:0] == y_pos[1:0] && lg_pix_rdy[1] ) begin        // if linegen 1 outputs a valid Y coordinate matching the y_pos[0]
                                                  lg_pause[1] <= 1'b1;           // pause linegen 1
-                                                 //x_end       <= lg_out[2'b10] ; // set the initial X fill coordinate counter
                                                  
                                                  // This trick eliminates the linegen1's last written pixel from the raster fill by incrementing the x_end position once in the
-                                                 // correct direction only if needed befort the fill algorythm begins which cheks to see if x_pos & x_end are equal befire beginning
+                                                 // correct direction only if needed before the fill algorithm begins which checks to see if x_pos & x_end are equal before beginning
                                                           if (x_pos_bk == lg_out[2'b10] ) x_end       <= lg_out[2'b10]       ;  // Keep equal coordinate
                                                      else if (x_pos_bk <  lg_out[2'b10] ) x_end       <= lg_out[2'b10] - 1'b1;  // inc/dec X fill final coordinate.
                                                      else                                 x_end       <= lg_out[2'b10] + 1'b1;
@@ -979,10 +1022,10 @@ module poly_sort (
     input  logic signed [11:0] x_in [0:3]         , // values to sort
     input  logic signed [11:0] y_in [0:3]         , // values to sort
 //outputs
-    output logic        [1:0]  sort_tri     [0:2] , // Array containing 8 sorted pointers, 2x2 for linegen 0&1 running 2 seuqneces to generate a filled triangle using xy[0,1,2].
-    output logic        [1:0]  sort_tri_mm  [0:1] , // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendring using xy[0,1,2].
-    output logic        [1:0]  sort_quad    [0:2] , // Array containing 8 sorted pointers, 2x2 for linegen 0&1 running 2 seuqneces to generate a filled triangle using xy[3,2,1].
-    output logic        [1:0]  sort_quad_mm [0:1]   // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendring using xy[3,2,1].
+    output logic        [1:0]  sort_tri     [0:2] , // Array containing 3 sorted pointers, 1 for linegen 0 and 2 sequences for linegen 1 to generate a filled triangle using xy[0,1,2].
+    output logic        [1:0]  sort_tri_mm  [0:1] , // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendering using xy[0,1,2].
+    output logic        [1:0]  sort_quad    [0:2] , // Array containing 3 sorted pointers, 1 for linegen 0 and 2 sequences for linegen 1 to generate a filled triangle using xy[1,2,3].
+    output logic        [1:0]  sort_quad_mm [0:1]   // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendering using xy[3,2,1].
 );
 
 always_comb begin
@@ -1023,10 +1066,6 @@ sort_quad_mm[1'b1] = sort_quad[2] ; // Quad minimum Y coordinate
 // Generate the Y order for the sorted triangle
 // ***************************************************
 
-// **** WARNING, if y[0] = y[1], then y[0] takes priority over linegen 0's first coordinate
-// **** WARNING, if y[0] = y[2], then y[0] takes priority over linegen 0's first coordinate
-// Otherwize, when plotting a quadrilateral, 1 face will come out on the wrong side
-
             if ( ( y_in[0] >=  y_in[1] ) && ( y_in[1] >= y_in[2] ) ) begin
                 sort_tri[0] = 2'd2 ;
                 sort_tri[1] = 2'd1 ;
@@ -1060,10 +1099,6 @@ sort_quad_mm[1'b1] = sort_quad[2] ; // Quad minimum Y coordinate
 // ***************************************************        
 // Generate the Y order for the sorted quad
 // *************************************************** 
-
-// **** WARNING, if y[1] = y[3], then y[1] takes priority over linegen 0;s first coordinate
-// **** WARNING, if y[1] = y[2], then y[1] takes priority over linegen 0;s first coordinate
-// Otherwize, when plotting a quadrilateral, 1 face will come out on the wrong side
        
             if ( ( y_in[1] >=  y_in[2] ) && ( y_in[2] >= y_in[3] ) ) begin
                 sort_quad[0] = 2'd3 ;
@@ -1098,4 +1133,3 @@ sort_quad_mm[1'b1] = sort_quad[2] ; // Quad minimum Y coordinate
 
 end
 endmodule
-

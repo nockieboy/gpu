@@ -92,7 +92,6 @@ logic [3:0] CMD_IN_SETARGB       = 7;
 
 logic [3:0] CMD_IN_RST_PXWRI_M   = 10;
 logic [3:0] CMD_IN_RST_PXPASTE_M = 11;
-
 logic [3:0] CMD_IN_DSTRWDTH      = 12;
 logic [3:0] CMD_IN_SRCRWDTH      = 13;
 logic [3:0] CMD_IN_DSTMADDR      = 14;
@@ -104,13 +103,10 @@ logic [3:0] CMD_OUT_PXWRI         = 1;
 logic [3:0] CMD_OUT_PXWRI_M       = 2;
 logic [3:0] CMD_OUT_PXPASTE       = 3;
 logic [3:0] CMD_OUT_PXPASTE_M     = 4;
-
 logic [3:0] CMD_OUT_PXCOPY        = 6;
 logic [3:0] CMD_OUT_SETARGB       = 7;
-
 logic [3:0] CMD_OUT_RST_PXWRI_M   = 10;
 logic [3:0] CMD_OUT_RST_PXPASTE_M = 11;
-
 
 logic[23:0] dest_base_address_offset ;
 logic[23:0] srce_base_address_offset ;

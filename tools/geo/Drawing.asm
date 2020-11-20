@@ -97,15 +97,23 @@ start
 	plot_tri_fill   d'14' 		; y2 > y1 > y0
 	
 ; *************************************************************************************
-; ** Draw a line from coordinates (200,300) to (300,200) with palette color 14
+; ** Draw a circle
 ; *************************************************************************************
-;	set_x		0,d'250'	; set x0 register to 200
-;	set_y		0,d'200'	; set y0 register to 200
-;	set_x		1,d'200'	; set x1 register to 300
-;	set_y		1,d'250'	; set y1 register to 300
-;	set_x		2,d'350'	; set x2 register to 300
-;	set_y		2,d'350'	; set y2 register to 300
-;	plot_line       d'1' 		; draw a line with palette color 14
+	set_x		0,d'250'	; set x0 register to 200
+	set_y		0,d'200'	; set y0 register to 200
+	set_x		1,d'350'	; set x1 register to 300
+	set_y		1,d'300'	; set y1 register to 300
+	plot_ellipse_fill       d'12' 		; draw a filled circle with palette color 12
+	plot_ellipse      	   d'10' 		; draw an circle with palette color 10
 
+; *************************************************************************************
+; ** Draw an ellipse
+; *************************************************************************************
+	set_x		0,d'200'	; set x0 register to 200
+	set_y		0,d'380'	; set y0 register to 200
+	set_x		1,d'400'	; set x1 register to 300
+	set_y		1,d'450'	; set y1 register to 300
+	plot_ellipse_fill       d'12' 		; draw a filled circle with palette color 12
+	plot_ellipse      	   d'10' 		; draw an circle with palette color 10
 
 
