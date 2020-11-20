@@ -19,15 +19,9 @@ set_input_delay  -clock clk54m -min $tH   [get_ports {Z80_CLK Z80_IORQ Z80_M1 Z8
 set_input_delay  -clock clk54m -min $tH   [get_ports {PS2_CLK PS2_DAT uart_rxd RESET_PIN}]
 
 set_output_delay -clock clk54m -max $tCO  [get_ports {Z80_data[*]}]
-<<<<<<< HEAD
 set_output_delay -clock clk54m -max $tCO  [get_ports {OE_245 DIR_245 LED_rdx LED_txd uart_txd PS2_DAT SPEAKER STATUS_LED}]
 set_output_delay -clock clk54m -min $tCOm [get_ports {Z80_data[*]}]
 set_output_delay -clock clk54m -min $tCOm [get_ports {OE_245 DIR_245 LED_rdx LED_txd uart_txd PS2_DAT SPEAKER STATUS_LED}]
-=======
-set_output_delay -clock clk54m -max $tCO  [get_ports {OE_245 DIR_245 uart_txd PS2_DAT SPEAKER STATUS_LED}]
-set_output_delay -clock clk54m -min $tCOm [get_ports {Z80_data[*]}]
-set_output_delay -clock clk54m -min $tCOm [get_ports {OE_245 DIR_245 uart_txd PS2_DAT SPEAKER STATUS_LED}]
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 
 set_output_delay -clock clk54m -max $tCO [get_ports {r[*]}]
 set_output_delay -clock clk54m -max $tCO [get_ports {g[*]}]

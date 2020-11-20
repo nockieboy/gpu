@@ -54,13 +54,7 @@ module Z80_bridge_v2 (
    output logic RD_PX_CTR_STROBE,// HIGH to clear the COPY READ PIXEL collision counter
    output logic GEO_RD_STAT_STROBE, // HIGH when reading data on GEO_STAT_RD bus
    output logic GEO_WR_STAT_STROBE, // HIGH when sending data on GEO_STAT_WR bus
-<<<<<<< HEAD
    output logic [7:0] GEO_STAT_WR  // data bus out to geo unit
-=======
-   output logic [7:0] GEO_STAT_WR,  // data bus out to geo unit
-	output logic PS2_TX,
-	output logic [7:0] PS2_TX_DAT
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 
 );
 
@@ -161,16 +155,6 @@ assign mem_in_range        = (Z80_addr_r[21:19]==MEMORY_RANGE[2:0]) && (Z80_addr
 wire   port_in_range;
 assign port_in_range       = ((Z80_addr_r[7:0] >= IO_DATA[7:0]) && (Z80_addr_r[7:0] <= IO_BLNK[7:0])) ; // You are better off reserving a range of ports
 
-<<<<<<< HEAD
-=======
-// define CAPS LOCK one-shot flags
-wire   CAPS_LOCK_ON;
-assign CAPS_LOCK_ON        = ~PS2_CAPS_LOCK_r && PS2_STATUS[1] ;
-
-wire   CAPS_LOCK_OFF;
-assign CAPS_LOCK_OFF       = PS2_CAPS_LOCK_r && ~PS2_STATUS[1] ;
-
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 //
 // *******************************************************************************************************
 //
@@ -203,16 +187,10 @@ parameter int GEO_HI    = 247;      // IO address for GEOFF HIGH byte
 parameter bit data_in   = 0;        // 245_DIR for data in
 parameter bit data_out  = 1;        // 245_DIR for data out
 //
-<<<<<<< HEAD
-=======
-parameter int PS2_TX_TIMEOUT = 1000000 ;
-//
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 // *******************************************************************************************************
 //
 reg [7:0]  PS2_CHAR  = 8'b0  ;       // Stores value to return when PS2_CHAR IO port is queried
 reg [7:0]  PS2_STAT  = 8'b0  ;       // Stores value to return when PS2_STATUS IO port is queried
-<<<<<<< HEAD
 reg        PS2_prev  = 1'b0  ;
 reg [12:0] port_dly  = 13'b0 ;       // Port delay pipeline delays data output on an IO port read
 reg [7:0]  PS2_RDY_r = 8'b0  ;
@@ -256,53 +234,6 @@ Z80_INT_REQ_r     <= Z80_INT_REQ_r2 ;
 Z80_IEO_r         <= Z80_IEO_r2 ;
 EA_DIR_r          <= EA_DIR_r2 ;
 EA_OE_r           <= EA_OE_r2 ;
-=======
-reg [7:0]  PS2_RDY_r = 8'b0  ;
-
-
-logic Z80_245data_dir  ;  // Control level converter direction for data flow - HIGH = A->B (toward Z80)
-logic [7:0]  Z80_rData ;  // Z80 DATA bus to return data from GPU RAM to Z80
-logic Z80_rData_ena ;     // Flag HIGH to write data back to Z80
-logic Z80_245_oe  ;       // OE for 245 level translator *** ACTIVE LOW ***
-logic Z80_INT_REQ ;       // Flag HIGH to signal to host for an interrupt request
-logic Z80_IEO ;           // Flag HIGH when GPU is requesting an interrupt to pull IEO LOW
-logic EA_DIR  ;           // Controls level converter direction for EA address flow - HIGH = A->B (toward FPGA)
-logic EA_OE   ;           // OE for EA address level converter *** ACTIVE LOW ***
-logic Z80_245data_dir_r2  ;  // Control level converter direction for data flow - HIGH = A->B (toward Z80)
-logic [7:0]  Z80_rData_r2 ;  // Z80 DATA bus to return data from GPU RAM to Z80
-logic Z80_rData_ena_r2 ;     // Flag HIGH to write data back to Z80
-logic Z80_245_oe_r2  ;       // OE for 245 level translator *** ACTIVE LOW ***
-logic Z80_INT_REQ_r2 ;       // Flag HIGH to signal to host for an interrupt request
-logic Z80_IEO_r2 ;           // Flag HIGH when GPU is requesting an interrupt to pull IEO LOW
-logic EA_DIR_r2  ;           // Controls level converter direction for EA address flow - HIGH = A->B (toward FPGA)
-logic EA_OE_r2   ;           // OE for EA address level converter *** ACTIVE LOW ***
-logic PS2_CAPS_LOCK_r   ;
-logic [7:0] PS2_TX_PIPE ;
-logic PS2_TX_DLY ;
-logic PS2_EE_CMD ;        // 2-byte command flag
-logic [20:0] PS2_TX_TIMER  ;
-
-always @(posedge GPU_CLK) begin
-
-	// Double register the outputs to the slow Z80 bus.
-	Z80_245data_dir_r2 <= Z80_245data_dir ;   // Control level converter direction for data flow - HIGH = A->B (toward Z80)
-	Z80_rData_r2       <= Z80_rData       ;  // Z80 DATA bus to return data from GPU RAM to Z80
-	Z80_rData_ena_r2   <= Z80_rData_ena   ;
-	Z80_245_oe_r2      <= Z80_245_oe      ;
-	Z80_INT_REQ_r2     <= Z80_INT_REQ     ;
-	Z80_IEO_r2         <= Z80_IEO         ;
-	EA_DIR_r2          <= EA_DIR          ;
-	EA_OE_r2           <= EA_OE           ;
-	// Triple register the outputs to the slow Z80 bus.
-	Z80_245data_dir_r <= Z80_245data_dir_r2 ;   // Control level converter direction for data flow - HIGH = A->B (toward Z80)
-	Z80_rData_r       <= Z80_rData_r2       ;  // Z80 DATA bus to return data from GPU RAM to Z80
-	Z80_rData_ena_r   <= Z80_rData_ena_r2   ;
-	Z80_245_oe_r      <= Z80_245_oe_r2      ;
-	Z80_INT_REQ_r     <= Z80_INT_REQ_r2     ;
-	Z80_IEO_r         <= Z80_IEO_r2         ;
-	EA_DIR_r          <= EA_DIR_r2          ;
-	EA_OE_r           <= EA_OE_r2           ;
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 
    // Latch and delay the Z80 CLK input for transition edge processing.
    Z80_CLKr    <= Z80_CLK   ;  // Register delay the Z80_CLK input.
@@ -319,12 +250,6 @@ always @(posedge GPU_CLK) begin
    // Latch address and data coming in from Z80.
    Z80_addr_r  <= Z80_addr  ;// uCom 22-bit address bus
    Z80_wData_r <= Z80_wData ;// uCom 8 bit data bus input
-<<<<<<< HEAD
-=======
-	
-	// edge-detect caps-lock key
-	PS2_CAPS_LOCK_r <= PS2_STATUS[1] ;
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 
    // generate a bidirectional 'hysteresis' counter set to Z80_CLK_FILTER clocks to ensure the stability of each opcode
         if (          Z80_RDn_r                                                            ) z80_read_opcode_fc  <= 3'd0;
@@ -425,7 +350,6 @@ always @(posedge GPU_CLK) begin
    if ( snd_data_tx ) snd_data_tx <= 1'b0 ; // Enforce snd_data_tx as one-shot
    // *******************
 
-<<<<<<< HEAD
    if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_DATA[7:0] ) begin  // Z80 is reading PS/2 port
    
       Z80_rData  <= PS2_CHAR ;
@@ -433,39 +357,11 @@ always @(posedge GPU_CLK) begin
       PS2_STAT   <= { 3'b0, PS2_STATUS[2:0], PS2_DAT[7], 1'b0 } ; // Reset PS2_STAT
       
    end
-=======
-   if ( z80_read_port_1s && Z80_addr_r[7:0] == IO_DATA[7:0] ) begin  // Z80 is reading PS/2 port
-   
-      Z80_rData  <= PS2_CHAR ;
-      PS2_CHAR   <= 8'b0     ;
-      PS2_STAT   <= { PS2_STATUS[5:0], PS2_DAT[7], 1'b0 } ; // Reset PS2_STAT
-      
-   end
-	
-	if ( z80_read_port_1s && Z80_addr_r[7:0] == IO_STAT[7:0] ) begin     // Read_port 1 clock & keyboard status address
-   
-      Z80_rData  <= PS2_STAT;
-      
-   end
-	
-	if ( z80_write_port_1s && Z80_addr_r[7:0] == IO_STAT[7:0] ) begin    // Write to PS/2 STATUS register
-		
-		// User is writing to PS/2 STATUS register.
-		// The data is passed to the PS/2 keyboard to set the Typematic delay and rate.
-		PS2_TX             <= 1'b1             ;
-		PS2_EE_CMD         <= 1'b1             ; // set 2-byte command flag
-		PS2_TX_DAT[7:0]    <= 8'hF3            ; // Set Typematic rate & delay to
-		PS2_TX_PIPE[7:0]   <= Z80_wData_r[7:0] ; // user value:
-		PS2_TX_TIMER[20:0] <= 21'b0            ; // bits 5-6 = Delay (00 = 0.25s up to 11 = 1s), bits 0-4 = Repeat Rate (0x00 = 30 down to 0x1F = 2)
-	
-	end
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
    
    PS2_RDY_r[7:0] <= { PS2_RDY_r[6:0], PS2_RDY } ;
    
    if (PS2_RDY_r[7:0] == 8'b00001111 ) begin   // valid data on PS2_DAT
    
-<<<<<<< HEAD
       PS2_CHAR   <= PS2_DAT ; // Latch the character into Ps2_char register
       /*
        * PS2_STAT bits:
@@ -485,78 +381,6 @@ always @(posedge GPU_CLK) begin
       Z80_rData  <= PS2_STAT;
       
    end
-=======
-		if ( PS2_DAT != 8'hAA ) begin // ignore keyboard self-test reports
-		
-			PS2_CHAR   <= PS2_DAT ; // Latch the character into Ps2_char register
-			/*
-			 * PS2_STAT bits:
-			 * 0   - DATA READY
-			 * 1   - BREAK CODE
-			 * 2   - EXTENDED KEYCODE
-			 * 3   - CAPS LOCK
-			 * 4   - SHIFT KEY
-			 * 5-7 - unused
-			 */
-			PS2_STAT   <= { PS2_STATUS[5:0], PS2_DAT[7], 1'b1 } ;
-		
-		end
-      
-   end
-	
-	if ( CAPS_LOCK_ON && ~PS2_TX ) begin
-	
-		// 1-shot CAPS LOCK active
-		PS2_TX             <= 1'b1  ;
-		PS2_EE_CMD         <= 1'b1  ; // set 2-byte command flag
-		PS2_TX_DAT[7:0]    <= 8'hED ;
-		PS2_TX_PIPE[7:0]   <= 8'h04 ; // turn CAPS LOCK light on
-		PS2_TX_TIMER[20:0] <= 21'b0 ;
-	
-	end else if ( CAPS_LOCK_OFF && ~PS2_TX ) begin
-	
-		// 1-shot CAPS LOCK inactive
-		PS2_TX             <= 1'b1  ;
-		PS2_EE_CMD         <= 1'b1  ; // set 2-byte command flag
-		PS2_TX_DAT[7:0]    <= 8'hED ;
-		PS2_TX_PIPE[7:0]   <= 8'h00 ; // turn all lights off
-		PS2_TX_TIMER[20:0] <= 21'b0 ;
-	
-	end
-	
-	if ( PS2_TX || PS2_TX_DLY ) PS2_TX_TIMER[20:0] <= PS2_TX_TIMER[20:0] + 21'b1 ;  // increment PS/2 TX timeout counter
-	
-	if ( PS2_TX_TIMER[20:0] == PS2_TX_TIMEOUT ) begin
-		
-		if ( PS2_EE_CMD && PS2_TX ) begin
-		
-			// first command tx has timed out, but a second (in TX_PIPE) needs to be sent after a delay
-			PS2_TX             <= 1'b0  ;
-			PS2_TX_DLY         <= 1'b1  ;
-			PS2_TX_TIMER[20:0] <= 21'b0 ;
-		
-		end else if ( PS2_EE_CMD ) begin
-		
-			// second command (in TX_PIPE) needs to be sent
-			PS2_TX             <= 1'b1  ;
-			PS2_EE_CMD         <= 1'b0  ;
-			PS2_TX_DLY         <= 1'b0  ;
-			PS2_TX_DAT[7:0]    <= PS2_TX_PIPE[7:0] ;
-			PS2_TX_TIMER[20:0] <= 21'b0 ;
-		
-		end else begin
-			
-			// no commands left to send, tx for current command has timed out, reset
-			PS2_TX             <= 1'b0  ;
-			PS2_TX_DLY         <= 1'b0  ;
-			PS2_TX_DAT[7:0]    <= 8'h00 ;
-			PS2_TX_PIPE[7:0]   <= 8'h00 ;
-			PS2_TX_TIMER[20:0] <= 21'b0 ;
-		
-		end
-	
-	end
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
    
    if ( ~Z80_RDn_r ) begin  // this section sets the output enable and sends the correct data back to the Z80
    

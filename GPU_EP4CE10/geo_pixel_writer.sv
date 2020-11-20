@@ -215,11 +215,7 @@ wr_pix_c_hit_m   = mask_pixel_hit  ? wcd        : wr_pix_c_hit  ; // select pixe
 
 end
 
-<<<<<<< HEAD
 always_ff @( posedge clk or posedge reset) begin
-=======
-always_ff @( posedge clk ) begin
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 
     if ( reset ) begin
         // reset the collision counters
