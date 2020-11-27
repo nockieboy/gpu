@@ -25,3 +25,5 @@ plot_tri          [00000011aaaaaaaa] ; plot_triangle with points (x0,y0),(x1,y1)
 plot_tri_fill     [00001011aaaaaaaa] ; plot_triangle filled with points (x0,y0),(x1,y1),(x2,y2) with color [a]
 plot_ellipse      [00000100aaaaaaaa] ; plot_ellipse with at point (x0,y0) with radius (x1,y1) with color [a]
 plot_ellipse_fill [00001100aaaaaaaa] ; plot_ellipse filled with at point (x0,y0) with radius (x1,y1) with color [a]
+plot_circle       [00000101aaaaaaaa] ; plot_circle at centre (x0,y0) with radius (r) with colour [a]
+plot_circle_fill  [00001101aaaaaaaa] ; plot_circle filled at centre (x0,y0) with radius (r) with colour [a]

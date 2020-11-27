@@ -28,6 +28,7 @@ Declare Sub read_palette()                                          : REM loads 
 Declare Sub draw_pixel(xp as integer, yp as integer, col as Ubyte)  : REM Draws 1 dot with paleted Color
 Declare Sub drawLine(x1 as integer, y1 as integer, x2 as integer, y2 As Integer, color_val As Ubyte)
 Declare Sub drawFilledTriangle(x1 as integer, y1 as integer, x2 as integer, y2 As Integer, x3 as integer, y3 As Integer, color_val As Ubyte)
+Declare Sub drawCircle(x As integer, y As Integer, radius As integer, colour as Integer, filled As Boolean = FALSE)
 Declare Sub drawEllipse(x1 As integer, y1 As Integer, x2 As integer, y2 As Integer, colour as Integer, filled As Boolean = FALSE)
 Declare Sub func_plot(draw_type as Ubyte, color_type as Ubyte, color_val as Ubyte, dst_mem as integer, sx as integer, sy as integer, dx as integer, dy as integer, tx as integer, ty as integer, zx as integer, zy as integer, mx as integer, my as integer)
 
@@ -221,6 +222,10 @@ if draw_type = 2+8 then                : REM ********* Draw a filled Box inside 
 	next y
 end If
 
+if draw_type = 3+8 then                : REM ********* Draw a triangle with points (sx,sy),(dx,dy),(tx,ty)
+	drawFilledTriangle(sx,sy,dx,dy,tx,ty,color_val)
+End If
+
 If draw_type = 4 Then                : REM ********* Draw a ellipse within Rectangle bounded by sx,sy,dx,dy
 	drawEllipse(sx, sy, dx, dy, color_val)
 EndIf
@@ -229,9 +234,13 @@ If draw_type = 4+8 Then                : REM ********* Draw a filled ellipse wit
 	drawEllipse(sx, sy, dx, dy, color_val, TRUE)
 EndIf
 
-if draw_type = 3+8 then                : REM ********* Draw a triangle with points (sx,sy),(dx,dy),(tx,ty)
-	drawFilledTriangle(sx,sy,dx,dy,tx,ty,color_val)
-End if
+If draw_type = 5 Then                : REM ********* Draw a Circle at sx, sy With radius dx
+	drawCircle(sx, sy, dx, color_val)
+EndIf
+
+If draw_type = 5+8 Then                : REM ********* Draw a filled Circle at sx, sy With radius dx
+	drawCircle(sx, sy, dx, color_val, TRUE)
+EndIf
 
 
 REM *************************************************************
@@ -240,16 +249,19 @@ REM *************************************************************
 end Sub
 
 REM *************************************************************
-REM **** Draw Ellipse Using Bresenham's algorithm ************
+REM **** Draw Circle Using Bresenham's algorithm ************
 REM *************************************************************
 
-Sub drawEllipse(ByVal x0 As Integer, ByVal y0 As Integer, ByVal x1 As Integer, ByVal y1 As Integer, ByVal colour as Integer, ByVal filled As Boolean = FALSE)
+Sub drawCircle(ByVal xc As integer, ByVal yc As Integer, ByVal radius As integer, ByVal colour as Integer, ByVal filled As Boolean = FALSE)
+	
+	Dim As Integer x0 = xc - radius, y0 = yc - radius
+	Dim As Integer x1 = xc + radius, y1 = yc + radius
    Dim As Integer a = Abs(x1-x0), b = Abs(y1-y0), b1, x : Rem values of diameter
    Dim As Integer dx = 4*(1-a)*b*b, dy = 4*(b1+1)*a*a : Rem error increment
    Dim As Integer errd = dx + dy + b1 * a * a, e2 : Rem error of 1.step
-
+	
 	b1 = b And 1
-
+	
    if (x0 > x1) then 
    	x0 = x1
    	x1 = x1 + a : Rem if called with swapped points
@@ -261,7 +273,7 @@ Sub drawEllipse(ByVal x0 As Integer, ByVal y0 As Integer, ByVal x1 As Integer, B
    y1 = y0 - b1 : Rem starting pixel
    a = a*(8*a)
    b1 = 8*b*b
-
+	
    While (x0 <= x1)
       draw_pixel(x1, y0, colour) : Rem   I. Quadrant
       draw_pixel(x0, y0, colour) : Rem   II. Quadrant
@@ -287,7 +299,7 @@ Sub drawEllipse(ByVal x0 As Integer, ByVal y0 As Integer, ByVal x1 As Integer, B
        	errd = errd + dx : rem x Step
       End If
    Wend
-  
+  	
    While (y0 - y1 < b)  : Rem too early stop of flat ellipses a=1
        draw_pixel(x0 - 1, y0, colour) : Rem -> finish tip of Ellipse
        y0 = y0 + 1
@@ -296,7 +308,68 @@ Sub drawEllipse(ByVal x0 As Integer, ByVal y0 As Integer, ByVal x1 As Integer, B
        y1 = y1 - 1
        draw_pixel(x1 + 1, y1, colour) 
    Wend
+	
+End Sub
 
+REM *************************************************************
+REM **** Draw Ellipse Using Bresenham's algorithm ************
+REM *************************************************************
+
+Sub drawEllipse(ByVal x0 As Integer, ByVal y0 As Integer, ByVal x1 As Integer, ByVal y1 As Integer, ByVal colour as Integer, ByVal filled As Boolean = FALSE)
+	
+   Dim As Integer a = Abs(x1-x0), b = Abs(y1-y0), b1, x : Rem values of diameter
+   Dim As Integer dx = 4*(1-a)*b*b, dy = 4*(b1+1)*a*a : Rem error increment
+   Dim As Integer errd = dx + dy + b1 * a * a, e2 : Rem error of 1.step
+	
+	b1 = b And 1
+	
+   if (x0 > x1) then 
+   	x0 = x1
+   	x1 = x1 + a : Rem if called with swapped points
+   End If
+   if (y0 > y1) Then
+   	y0 = y1 : Rem .. exchange them
+   End If
+   y0 = y0 + (b + 1) / 2
+   y1 = y0 - b1 : Rem starting pixel
+   a = a*(8*a)
+   b1 = 8*b*b
+	
+   While (x0 <= x1)
+      draw_pixel(x1, y0, colour) : Rem   I. Quadrant
+      draw_pixel(x0, y0, colour) : Rem   II. Quadrant
+      draw_pixel(x0, y1, colour) : Rem   III. Quadrant
+      draw_pixel(x1, y1, colour) : Rem   IV. Quadrant
+      If (filled) Then
+	      For x=x0 to x1
+				draw_pixel (x, y0, colour)
+				draw_pixel (x, y1, colour)
+	      Next x
+      EndIf
+      e2 = 2*errd
+      If (e2 <= dy) Then 
+       	y0 = y0 + 1
+       	y1 = y1 - 1
+       	dy = dy + a
+       	errd = errd + dy : rem  y Step
+      End If 
+      If (e2 >= dx Or 2*errd > dy) Then
+       	x0 = x0 + 1
+       	x1 = x1 - 1
+       	dx = dx + b1
+       	errd = errd + dx : rem x Step
+      End If
+   Wend
+  	
+   While (y0 - y1 < b)  : Rem too early stop of flat ellipses a=1
+       draw_pixel(x0 - 1, y0, colour) : Rem -> finish tip of Ellipse
+       y0 = y0 + 1
+       draw_pixel(x1 + 1, y0, colour) 
+       draw_pixel(x0 - 1, y1, colour)
+       y1 = y1 - 1
+       draw_pixel(x1 + 1, y1, colour) 
+   Wend
+	
 End Sub
 
 REM *************************************************************
@@ -388,7 +461,7 @@ REM *************************************************************
 
 Sub draw_pixel(xp as integer, yp as integer, col as Ubyte)
 	PSet ( xp,yp ),rgb( pal_dat_r(col),pal_dat_g(col),pal_dat_b(col) )
-if (show_pset) then ? xp,yp
+	if (show_pset) then ? xp,yp
 end sub
 
 
@@ -498,17 +571,10 @@ Sub drawFilledTriangle (ByVal x0 as Integer, byval y0 as Integer, byval x1 as In
 
 	next_face = 1
 	
-<<<<<<< HEAD
 	run_linegen_num ( 0, ya(0)+1, color_val ) : Rem start the triangle's first line
    run_linegen_num ( 1, ya(0)+1, color_val ) : Rem start the triangle's second line
 
 	If ( yb(0) - ya(0) > 2 ) Then :REM If the triangles height is more than 2 pixels
-=======
-	run_linegen_num ( 0, ya(0)+1, color_val ) : Rem finish the triangle's first line
-   run_linegen_num ( 1, ya(0)+1, color_val ) : Rem finish the triangle's third line
-
-	If ( yb(0) - ya(0) > 2) Then
->>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1
 	
 	   For raster_Y_pos = ya(0)+1 to yb(0)-1	
    	
