@@ -96,25 +96,6 @@ start
 	set_y		2,d'230'	; set y2 register to 300
 	plot_tri_fill   d'14' 		; y2 > y1 > y0
 	
-; *************************************************************************************
-; ** Draw a circle
-; *************************************************************************************
-	set_x		0,d'250'	; set x0 register to 200
-	set_y		0,d'200'	; set y0 register to 200
-	set_x		1,d'350'	; set x1 register to 300
-	set_y		1,d'300'	; set y1 register to 300
-	plot_ellipse_fill       d'12' 		; draw a filled circle with palette color 12
-	plot_ellipse      	   d'10' 		; draw an circle with palette color 10
-
-; *************************************************************************************
-; ** Draw an ellipse
-; *************************************************************************************
-	set_x		0,d'200'	; set x0 register to 200
-	set_y		0,d'380'	; set y0 register to 200
-	set_x		1,d'400'	; set x1 register to 300
-	set_y		1,d'450'	; set y1 register to 300
-	plot_ellipse_fill       d'12' 		; draw a filled circle with palette color 12
-	plot_ellipse      	   d'10' 		; draw an circle with palette color 10
 
 ; *************************************************************************************
 ; ** Draw a circle, radius 50
@@ -122,9 +103,24 @@ start
 	set_x		0,d'150'	; set x0 register to 150
 	set_y		0,d'180'	; set y0 register to 180
 	set_x		1,d'50'	; set x1 register to 50
+	set_y		1,d'50'	; set y1 register to 50
 	plot_circle_fill        d'09' 		; draw a filled circle with palette color 9
 	plot_circle	      	   d'14' 		; draw an circle with palette color 14
 	set_x		1,d'49'	; set x1 register to 49 (reduce radius by 1)
+	set_y		1,d'49'	; set y1 register to 49 (reduce radius by 1)
 	plot_circle	      	   d'14' 		; draw an circle with palette color 14
 
+; *************************************************************************************
+; ** Draw an ellipse, radius 60,90
+; *************************************************************************************
+	set_x		0,d'350'	; set x0 register to 150
+	set_y		0,d'280'	; set y0 register to 180
+	set_x		1,d'60'	; set x1 register to 60
+	set_y		1,d'90'	; set y1 register to 90
+	plot_circle_fill        d'09' 		; draw a filled circle with palette color 9
+	plot_circle	      	   d'14' 		; draw an circle with palette color 14
+	
+	set_x		1,d'59'	; set x1 register to 59 (reduce radius by 1)
+	set_y		1,d'89'	; set y1 register to 89 (reduce radius by 1)
+	plot_circle	      	   d'14' 		; draw an circle with palette color 14
 

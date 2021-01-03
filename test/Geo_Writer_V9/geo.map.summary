@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Wed Dec 23 02:17:45 2020
+Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
+Revision Name : geo
+Top-level Entity Name : ellipse_generator
+Family : Cyclone III
+Total logic elements : 1,021
+    Total combinational functions : 1,001
+    Dedicated logic registers : 291
+Total registers : 291
+Total pins : 83
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 4
+Total PLLs : 0

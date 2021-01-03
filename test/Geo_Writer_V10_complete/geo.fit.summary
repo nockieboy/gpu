@@ -1,0 +1,16 @@
+Fitter Status : Successful - Thu Dec 24 01:04:41 2020
+Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
+Revision Name : geo
+Top-level Entity Name : geo
+Family : Cyclone III
+Device : EP3C16F484C7
+Timing Models : Final
+Total logic elements : 4,329 / 15,408 ( 28 % )
+    Total combinational functions : 4,091 / 15,408 ( 27 % )
+    Dedicated logic registers : 1,266 / 15,408 ( 8 % )
+Total registers : 1266
+Total pins : 174 / 347 ( 50 % )
+Total virtual pins : 0
+Total memory bits : 73,728 / 516,096 ( 14 % )
+Embedded Multiplier 9-bit elements : 8 / 112 ( 7 % )
+Total PLLs : 0 / 4 ( 0 % )

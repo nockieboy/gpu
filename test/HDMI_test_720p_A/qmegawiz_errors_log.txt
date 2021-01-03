@@ -1,0 +1,10 @@
+
+
+C:/altera/Qdesigns/HDMI_test/alt_pll.v
+
+Dec 26 12AM:24:30>: Error in CNX file format.
+
+Error messages are listed in file
+C:/altera/Qdesigns/HDMI_test/alt_pll.cnxerr.
+
+Can't create the custom megafunction variation file(s)

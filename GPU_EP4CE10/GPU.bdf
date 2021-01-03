@@ -1785,218 +1785,6 @@ refer to the applicable agreement for further details.
 	(annotation_block (parameter)(rect 120 1232 312 1272))
 )
 (symbol
-	(rect 312 224 736 528)
-	(text "vid_osd_generator" (rect 5 0 95 12)(font "Arial" ))
-	(text "inst9" (rect 8 288 31 300)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk_2x" (rect 0 0 31 12)(font "Arial" ))
-		(text "clk_2x" (rect 21 27 52 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "clk_2x_phase" (rect 0 0 67 12)(font "Arial" ))
-		(text "clk_2x_phase" (rect 21 43 88 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 59 35 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "pc_ena[3..0]" (rect 0 0 61 12)(font "Arial" ))
-		(text "pc_ena[3..0]" (rect 21 75 82 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "hde_in" (rect 0 0 31 12)(font "Arial" ))
-		(text "hde_in" (rect 21 91 52 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "vde_in" (rect 0 0 33 12)(font "Arial" ))
-		(text "vde_in" (rect 21 107 54 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "hs_in" (rect 0 0 25 12)(font "Arial" ))
-		(text "hs_in" (rect 21 123 46 135)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "vs_in" (rect 0 0 27 12)(font "Arial" ))
-		(text "vs_in" (rect 21 139 48 151)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144))
-	)
-	(port
-		(pt 0 160)
-		(input)
-		(text "host_clk" (rect 0 0 41 12)(font "Arial" ))
-		(text "host_clk" (rect 21 155 62 167)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "host_wr_ena" (rect 0 0 61 12)(font "Arial" ))
-		(text "host_wr_ena" (rect 21 171 82 183)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176))
-	)
-	(port
-		(pt 0 192)
-		(input)
-		(text "host_addr[19..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "host_addr[19..0]" (rect 21 187 101 199)(font "Arial" ))
-		(line (pt 0 192)(pt 16 192)(line_width 3))
-	)
-	(port
-		(pt 0 208)
-		(input)
-		(text "host_wr_data[15..0]" (rect 0 0 96 12)(font "Arial" ))
-		(text "host_wr_data[15..0]" (rect 21 203 117 215)(font "Arial" ))
-		(line (pt 0 208)(pt 16 208)(line_width 3))
-	)
-	(port
-		(pt 0 224)
-		(input)
-		(text "ena_host_16bit" (rect 0 0 74 12)(font "Arial" ))
-		(text "ena_host_16bit" (rect 21 219 95 231)(font "Arial" ))
-		(line (pt 0 224)(pt 16 224))
-	)
-	(port
-		(pt 0 240)
-		(input)
-		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 0 0 273 12)(font "Arial" ))
-		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 21 235 294 247)(font "Arial" ))
-		(line (pt 0 240)(pt 16 240)(line_width 3))
-	)
-	(port
-		(pt 0 256)
-		(input)
-		(text "HV_triggers_in[47..0]" (rect 0 0 103 12)(font "Arial" ))
-		(text "HV_triggers_in[47..0]" (rect 21 251 124 263)(font "Arial" ))
-		(line (pt 0 256)(pt 16 256)(line_width 3))
-	)
-	(port
-		(pt 424 32)
-		(output)
-		(text "hde_out" (rect 0 0 38 12)(font "Arial" ))
-		(text "hde_out" (rect 371 27 409 39)(font "Arial" ))
-		(line (pt 424 32)(pt 408 32))
-	)
-	(port
-		(pt 424 48)
-		(output)
-		(text "vde_out" (rect 0 0 40 12)(font "Arial" ))
-		(text "vde_out" (rect 370 43 410 55)(font "Arial" ))
-		(line (pt 424 48)(pt 408 48))
-	)
-	(port
-		(pt 424 64)
-		(output)
-		(text "hs_out" (rect 0 0 33 12)(font "Arial" ))
-		(text "hs_out" (rect 376 59 409 71)(font "Arial" ))
-		(line (pt 424 64)(pt 408 64))
-	)
-	(port
-		(pt 424 80)
-		(output)
-		(text "vs_out" (rect 0 0 34 12)(font "Arial" ))
-		(text "vs_out" (rect 375 75 409 87)(font "Arial" ))
-		(line (pt 424 80)(pt 408 80))
-	)
-	(port
-		(pt 424 96)
-		(output)
-		(text "red[7..0]" (rect 0 0 41 12)(font "Arial" ))
-		(text "red[7..0]" (rect 369 91 410 103)(font "Arial" ))
-		(line (pt 424 96)(pt 408 96)(line_width 3))
-	)
-	(port
-		(pt 424 112)
-		(output)
-		(text "green[7..0]" (rect 0 0 53 12)(font "Arial" ))
-		(text "green[7..0]" (rect 359 107 412 119)(font "Arial" ))
-		(line (pt 424 112)(pt 408 112)(line_width 3))
-	)
-	(port
-		(pt 424 128)
-		(output)
-		(text "blue[7..0]" (rect 0 0 46 12)(font "Arial" ))
-		(text "blue[7..0]" (rect 365 123 411 135)(font "Arial" ))
-		(line (pt 424 128)(pt 408 128)(line_width 3))
-	)
-	(port
-		(pt 424 144)
-		(output)
-		(text "host_rd_data[15..0]" (rect 0 0 95 12)(font "Arial" ))
-		(text "host_rd_data[15..0]" (rect 323 139 418 151)(font "Arial" ))
-		(line (pt 424 144)(pt 408 144)(line_width 3))
-	)
-	(port
-		(pt 424 160)
-		(output)
-		(text "HV_triggers_out[47..0]" (rect 0 0 110 12)(font "Arial" ))
-		(text "HV_triggers_out[47..0]" (rect 310 155 420 167)(font "Arial" ))
-		(line (pt 424 160)(pt 408 160)(line_width 3))
-	)
-	(parameter
-		"PIPE_DELAY"
-		"11"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"HW_REGS_SIZE"
-		"HW_REGS"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"ADDR_SIZE"
-		"16"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"NUM_WORDS"
-		"40960"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"NUM_LAYERS"
-		"6"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"PALETTE_ADDR"
-		"40960"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"GPU_RAM_MIF"
-		"GPU_MIF_CE10_10M.mif"
-		""
-		(type "PARAMETER_STRING")	)
-	(drawing
-		(rectangle (rect 16 16 408 288))
-	)
-	(annotation_block (parameter)(rect 352 48 653 200))
-)
-(symbol
 	(rect 384 904 640 1208)
 	(text "data_mux_geo" (rect 5 0 76 12)(font "Arial" ))
 	(text "inst25" (rect 8 288 37 300)(font "Arial" ))
@@ -3777,6 +3565,218 @@ refer to the applicable agreement for further details.
 		(circle (rect 28 4 36 12))
 		(circle (rect 28 68 36 76))
 	)
+)
+(symbol
+	(rect 312 224 736 528)
+	(text "vid_osd_generator" (rect 5 0 95 12)(font "Arial" ))
+	(text "inst9" (rect 8 288 31 300)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk_2x" (rect 0 0 31 12)(font "Arial" ))
+		(text "clk_2x" (rect 21 27 52 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "clk_2x_phase" (rect 0 0 67 12)(font "Arial" ))
+		(text "clk_2x_phase" (rect 21 43 88 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 59 35 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "pc_ena[3..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "pc_ena[3..0]" (rect 21 75 82 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "hde_in" (rect 0 0 31 12)(font "Arial" ))
+		(text "hde_in" (rect 21 91 52 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "vde_in" (rect 0 0 33 12)(font "Arial" ))
+		(text "vde_in" (rect 21 107 54 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "hs_in" (rect 0 0 25 12)(font "Arial" ))
+		(text "hs_in" (rect 21 123 46 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "vs_in" (rect 0 0 27 12)(font "Arial" ))
+		(text "vs_in" (rect 21 139 48 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "host_clk" (rect 0 0 41 12)(font "Arial" ))
+		(text "host_clk" (rect 21 155 62 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "host_wr_ena" (rect 0 0 61 12)(font "Arial" ))
+		(text "host_wr_ena" (rect 21 171 82 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "host_addr[19..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "host_addr[19..0]" (rect 21 187 101 199)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 3))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "host_wr_data[15..0]" (rect 0 0 96 12)(font "Arial" ))
+		(text "host_wr_data[15..0]" (rect 21 203 117 215)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 3))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "ena_host_16bit" (rect 0 0 74 12)(font "Arial" ))
+		(text "ena_host_16bit" (rect 21 219 95 231)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224))
+	)
+	(port
+		(pt 0 240)
+		(input)
+		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 0 0 273 12)(font "Arial" ))
+		(text "GPU_HW_Control_regs[0..2**HW_REGS_SIZE-1][7..0]" (rect 21 235 294 247)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240)(line_width 3))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "HV_triggers_in[47..0]" (rect 0 0 103 12)(font "Arial" ))
+		(text "HV_triggers_in[47..0]" (rect 21 251 124 263)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256)(line_width 3))
+	)
+	(port
+		(pt 424 32)
+		(output)
+		(text "hde_out" (rect 0 0 38 12)(font "Arial" ))
+		(text "hde_out" (rect 371 27 409 39)(font "Arial" ))
+		(line (pt 424 32)(pt 408 32))
+	)
+	(port
+		(pt 424 48)
+		(output)
+		(text "vde_out" (rect 0 0 40 12)(font "Arial" ))
+		(text "vde_out" (rect 370 43 410 55)(font "Arial" ))
+		(line (pt 424 48)(pt 408 48))
+	)
+	(port
+		(pt 424 64)
+		(output)
+		(text "hs_out" (rect 0 0 33 12)(font "Arial" ))
+		(text "hs_out" (rect 376 59 409 71)(font "Arial" ))
+		(line (pt 424 64)(pt 408 64))
+	)
+	(port
+		(pt 424 80)
+		(output)
+		(text "vs_out" (rect 0 0 34 12)(font "Arial" ))
+		(text "vs_out" (rect 375 75 409 87)(font "Arial" ))
+		(line (pt 424 80)(pt 408 80))
+	)
+	(port
+		(pt 424 96)
+		(output)
+		(text "red[7..0]" (rect 0 0 41 12)(font "Arial" ))
+		(text "red[7..0]" (rect 369 91 410 103)(font "Arial" ))
+		(line (pt 424 96)(pt 408 96)(line_width 3))
+	)
+	(port
+		(pt 424 112)
+		(output)
+		(text "green[7..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "green[7..0]" (rect 359 107 412 119)(font "Arial" ))
+		(line (pt 424 112)(pt 408 112)(line_width 3))
+	)
+	(port
+		(pt 424 128)
+		(output)
+		(text "blue[7..0]" (rect 0 0 46 12)(font "Arial" ))
+		(text "blue[7..0]" (rect 365 123 411 135)(font "Arial" ))
+		(line (pt 424 128)(pt 408 128)(line_width 3))
+	)
+	(port
+		(pt 424 144)
+		(output)
+		(text "host_rd_data[15..0]" (rect 0 0 95 12)(font "Arial" ))
+		(text "host_rd_data[15..0]" (rect 323 139 418 151)(font "Arial" ))
+		(line (pt 424 144)(pt 408 144)(line_width 3))
+	)
+	(port
+		(pt 424 160)
+		(output)
+		(text "HV_triggers_out[47..0]" (rect 0 0 110 12)(font "Arial" ))
+		(text "HV_triggers_out[47..0]" (rect 310 155 420 167)(font "Arial" ))
+		(line (pt 424 160)(pt 408 160)(line_width 3))
+	)
+	(parameter
+		"PIPE_DELAY"
+		"11"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"HW_REGS_SIZE"
+		"HW_REGS"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"ADDR_SIZE"
+		"16"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_WORDS"
+		"40960"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"NUM_LAYERS"
+		"5"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"PALETTE_ADDR"
+		"40960"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"GPU_RAM_MIF"
+		"GPU_MIF_CE10_10M.mif"
+		""
+		(type "PARAMETER_STRING")	)
+	(drawing
+		(rectangle (rect 16 16 408 288))
+	)
+	(annotation_block (parameter)(rect 352 48 653 200))
 )
 (connector
 	(pt 1376 1128)

@@ -28,7 +28,7 @@ Declare Sub read_palette()                                          : REM loads 
 Declare Sub draw_pixel(xp as integer, yp as integer, col as Ubyte)  : REM Draws 1 dot with paleted Color
 Declare Sub drawLine(x1 as integer, y1 as integer, x2 as integer, y2 As Integer, color_val As Ubyte)
 Declare Sub drawFilledTriangle(x1 as integer, y1 as integer, x2 as integer, y2 As Integer, x3 as integer, y3 As Integer, color_val As Ubyte)
-Declare Sub drawCircle(x As integer, y As Integer, radius As integer, colour as Integer, filled As Boolean = FALSE)
+Declare Sub drawCircle(x As integer, y As Integer, a As integer, b As integer, colour as Integer, filled As Boolean = FALSE)
 Declare Sub drawEllipse(x1 As integer, y1 As Integer, x2 As integer, y2 As Integer, colour as Integer, filled As Boolean = FALSE)
 Declare Sub func_plot(draw_type as Ubyte, color_type as Ubyte, color_val as Ubyte, dst_mem as integer, sx as integer, sy as integer, dx as integer, dy as integer, tx as integer, ty as integer, zx as integer, zy as integer, mx as integer, my as integer)
 
@@ -235,11 +235,11 @@ If draw_type = 4+8 Then                : REM ********* Draw a filled ellipse wit
 EndIf
 
 If draw_type = 5 Then                : REM ********* Draw a Circle at sx, sy With radius dx
-	drawCircle(sx, sy, dx, color_val)
+	drawCircle(sx, sy, dx, dy, color_val)
 EndIf
 
 If draw_type = 5+8 Then                : REM ********* Draw a filled Circle at sx, sy With radius dx
-	drawCircle(sx, sy, dx, color_val, TRUE)
+	drawCircle(sx, sy, dx, dy, color_val, TRUE)
 EndIf
 
 
@@ -252,63 +252,59 @@ REM *************************************************************
 REM **** Draw Circle Using Bresenham's algorithm ************
 REM *************************************************************
 
-Sub drawCircle(ByVal xc As integer, ByVal yc As Integer, ByVal radius As integer, ByVal colour as Integer, ByVal filled As Boolean = FALSE)
+Sub drawCircle(ByVal xc As integer, ByVal yc As Integer, ByVal a As integer, ByVal b As Integer, ByVal colour as Integer, ByVal filled As Boolean = FALSE)
+
+	Dim As Integer x, y, sigma, xd
+	Dim As Integer a2 = a*a, b2 = b*b, fa2 = 4*a2, fb2 = 4*b2
 	
-	Dim As Integer x0 = xc - radius, y0 = yc - radius
-	Dim As Integer x1 = xc + radius, y1 = yc + radius
-   Dim As Integer a = Abs(x1-x0), b = Abs(y1-y0), b1, x : Rem values of diameter
-   Dim As Integer dx = 4*(1-a)*b*b, dy = 4*(b1+1)*a*a : Rem error increment
-   Dim As Integer errd = dx + dy + b1 * a * a, e2 : Rem error of 1.step
-	
-	b1 = b And 1
-	
-   if (x0 > x1) then 
-   	x0 = x1
-   	x1 = x1 + a : Rem if called with swapped points
-   End If
-   if (y0 > y1) Then
-   	y0 = y1 : Rem .. exchange them
-   End If
-   y0 = y0 + (b + 1) / 2
-   y1 = y0 - b1 : Rem starting pixel
-   a = a*(8*a)
-   b1 = 8*b*b
-	
-   While (x0 <= x1)
-      draw_pixel(x1, y0, colour) : Rem   I. Quadrant
-      draw_pixel(x0, y0, colour) : Rem   II. Quadrant
-      draw_pixel(x0, y1, colour) : Rem   III. Quadrant
-      draw_pixel(x1, y1, colour) : Rem   IV. Quadrant
-      If (filled) Then
-	      For x=x0 to x1
-				draw_pixel (x, y0, colour)
-				draw_pixel (x, y1, colour)
-	      Next x
-      EndIf
-      e2 = 2*errd
-      If (e2 <= dy) Then 
-       	y0 = y0 + 1
-       	y1 = y1 - 1
-       	dy = dy + a
-       	errd = errd + dy : rem  y Step
-      End If 
-      If (e2 >= dx Or 2*errd > dy) Then
-       	x0 = x0 + 1
-       	x1 = x1 - 1
-       	dx = dx + b1
-       	errd = errd + dx : rem x Step
-      End If
+	x=0
+	y=b
+	sigma = 2*b2+a2*(1-2*b)
+   While (b2*x <= a2*y)
+      draw_pixel(xc+x, yc+y, colour) : Rem   I. Quadrant
+      draw_pixel(xc-x, yc+y, colour) : Rem   II. Quadrant
+      draw_pixel(xc+x, yc-y, colour) : Rem   III. Quadrant
+      draw_pixel(xc-x, yc-y, colour) : Rem   IV. Quadrant
+      
+		If (filled) Then
+	      For xd=xc-x to xc+x
+				draw_pixel (xd, yc+y, colour)
+				draw_pixel (xd, yc-y, colour)
+	      Next xd
+		EndIf
+		
+		If (sigma>= 0) Then
+			sigma += fa2*(1-y)
+			y=y-1
+		EndIf
+		sigma = sigma + b2*(4*x+6)
+		x=x+1
+   Wend
+   
+   x=a
+   y=0
+   sigma = 2*a2+b2*(1-2*a)
+   While (a2*y <= b2*x)
+      draw_pixel(xc+x, yc+y, colour) : Rem   I. Quadrant
+      draw_pixel(xc-x, yc+y, colour) : Rem   II. Quadrant
+      draw_pixel(xc+x, yc-y, colour) : Rem   III. Quadrant
+      draw_pixel(xc-x, yc-y, colour) : Rem   IV. Quadrant
+		
+		If (filled) Then
+	      For xd=xc-x to xc+x
+				draw_pixel (xd, yc+y, colour)
+				draw_pixel (xd, yc-y, colour)
+	      Next xd
+		EndIf
+		
+		If (sigma>= 0) Then
+			sigma += fb2*(1-x)
+			x=x-1
+		EndIf
+		sigma = sigma + a2*(4*y+6)
+		y=y+1
    Wend
   	
-   While (y0 - y1 < b)  : Rem too early stop of flat ellipses a=1
-       draw_pixel(x0 - 1, y0, colour) : Rem -> finish tip of Ellipse
-       y0 = y0 + 1
-       draw_pixel(x1 + 1, y0, colour) 
-       draw_pixel(x0 - 1, y1, colour)
-       y1 = y1 - 1
-       draw_pixel(x1 + 1, y1, colour) 
-   Wend
-	
 End Sub
 
 REM *************************************************************

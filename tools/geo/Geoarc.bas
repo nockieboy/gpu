@@ -5,24 +5,20 @@ REM Get the freeBasic compiler at
 REM 
 REM 
 
+Declare Sub draw_pixel(xp as integer, yp as integer, colr as Ubyte, colg as Ubyte, colb as Ubyte)  : REM Draws 1 dot with paleted Color
+Declare Sub drawLine(x1 as integer, y1 as integer, x2 as integer, y2 As Integer, cr As Ubyte, cg As Ubyte, cb As Ubyte)
+Declare Sub draw_ellipse(ByVal xc As integer, ByVal yc As Integer, ByVal a As integer, ByVal b As Integer)
+Declare Sub drawArc (inv As Boolean, quadrant As Integer, a As Integer, b As Integer, xc As Integer, yc As Integer, cr As Integer, cg As Integer, cb As Integer)
+Declare Sub drawArcNEW (inv As Boolean, quadrant As Integer, a As Integer, b As Integer, xc As Integer, yc As Integer, cr As Integer, cg As Integer, cb As Integer)
 
-Declare Sub draw_pixel(xp as integer, yp as integer, col as Ubyte)  : REM Draws 1 dot with paleted Color
-Declare Sub drawLine(x1 as integer, y1 as integer, x2 as integer, y2 As Integer, color_val As Ubyte)
-
-Declare Sub drawLine_arc(x0 As integer, y0 As Integer,x1 as integer, y1 as integer, color_val As Ubyte, arc_ena as Ubyte)
-
-Declare Sub drawEllipse(x1 As integer, y1 As Integer, x2 As integer, y2 As Integer, colour as Integer, filled As Boolean = FALSE)
-
-
-dim Shared as integer mx,mxl,my,myl,mb,mbl,mw,mwl,sx,sy,dx,dy,dz
-dim Shared as integer destmem, srcmem, max_x,max_y, src_width, dest_width
-dim shared as Ubyte   show_pset
-dim shared as string ink
+Dim Shared as Integer mx,mxl,my,myl,mb,mbl,mw,mwl,sx,sy,dx,dy,dz
+Dim Shared as Integer destmem, srcmem, max_x,max_y, src_width, dest_width
+Dim Shared as Ubyte   show_pset
+Dim Shared as String ink
 
 ScreenRes 720,560,16,0,0 : REM open a window a little larger than 640x480
 
-
-REM *************************************************************
+Rem *************************************************************
 REM **** Loop drawing the ellipse using the mouse choordinates **
 REM **** Use the ESC key to quit **
 REM *************************************************************
@@ -30,178 +26,159 @@ REM *************************************************************
 ink=""
 while ink<>chr(27)
 
-	GetMouse mx,my,mw,mb
+   GetMouse mx,my,mw,mb
+   mx=mx-8
+   my=my-8
 	
-	If mx<>mxl or my<>myl or mb<>mbl then
+   If mx<>mxl or my<>myl or mb<>mbl then
+   
+      line (0,0)-(719,559),rgb( 0,0,0 ),BF : rem rem cls fast
+    	
+      sx = 100
+      sy = 500
+      dx = (mx-sx)/2 : if dx<0 then dx=0
+      dy = (sy-my)/2 : if dy<0 then dy=0
+    	
+      REM These coordinates define points P0,P1,P2 for a Bézier curve top left side
+      line (sx,sy)-(mx,my),RGB(64,64,64) 
+      line (sx,sy)-(sx,my),RGB(128,96,64) 
+      line (sx+dx,0)-(sx+dx,sy),RGB(128,96,64) 
+      line (sx,sy)-(mx,sy),RGB(128,96,64) 
+      line (sx,sy-dy)-(560,sy-dy),RGB(128,96,64) 
+      rem Drawline as a line 
+      draw_ellipse (sx,sy,dx,dy) 
+      rem Drawline as an arc
+    	
+      mxl=mx:myl=my:mbl=mb:mw=mwl : rem store old mouse state
+    	
+      color rgb(255,255,255),rgb(0,0,0)
+      locate 69,1
+      ? " coord 1ab  (";sx;",";sy;")-(";dx;",";dy;")        "
+   
+   End if
 	
-		Line (0,0)-(719,559),rgb( 0,0,0 ),BF : rem rem cls fast
-		
-		sx = 320
-		sy = 240
-		dx = mx
-		dy = my
-		
-		' These coordinates define points P0,P1,P2 for a Bézier curve top left side
-		'drawLine (sx,sy,dx,dy, 255) 
-		
-		' Drawline as a line 
-		drawLine_arc (sx,sy,dx,dy, 255, 0) 
-		' Drawline as an arc
-		drawLine_arc (sx,sy,dx,dy, 0  , 1) 
-		
-		mxl=mx:myl=my:mbl=mb:mw=mwl : rem store old mouse state
-		
-		Color rgb(255,255,255),rgb(0,0,0)
-		Locate 62,1
-		? " coord 1ab  (";sx;",";sy;")-(";dx;",";dy;")        "
-		? " width      (";dz;")        ";
-	 
-	End if
-	
-	Sleep 1: ' wait for a keypress before quitting
-	ink=InKey
-	
+   Sleep 1: rem wait for a keypress before quitting
+   ink=InKey
+   
 wend
 end
 
 REM *************************************************************
 REM **** Draw LINE-ARC with the palette color ************
 REM *************************************************************
+Sub draw_ellipse (ByVal xc As integer, ByVal yc As Integer, ByVal a As integer, ByVal b As Integer)
 
-Sub drawLine_arc (byval x0 as Integer, byval y0 as Integer, byval x1 as Integer, byval y1 as integer, byval color_val As UByte, byval arc_ena As UByte)
-	
-   Dim As integer  dx,dy,x,y,sx,sy,errd,magic,dxf,dyf
-   Dim As boolean is_done
-	
-   ' bounding box's width and height
-   ' set the loop's sign
-   dx = (x1 - x0)
-   dy = (y1 - y0)
-	
-   If (dx < 0) Then
-      dx = -dx
-      sx = -1
-   Else
-      sx = 1
-   End If
-	
-   If (dy > 0) Then
-      dy = -dy
-      sy = 1
-   Else
-      sy = -1
-   End If
-	
-   If arc_ena then dy=dy*3 : dx=dx*1
-	
-   magic = 0
-   errd  = dx + dy
-   x     = x0
-   y     = y0
-   is_done = FALSE
-	
-   While (is_done = False)
-   	
-      draw_pixel (x,y,color_val)
-		
-      ' Reached the End
-      If (x <= x1 or y <= y1) Then
-      	is_done = TRUE
-      Else
-      	is_done = FALSE
-      End If
-		
-      ' Loop carried
-      magic = errd * 2
-      if (magic > dy) Then
-		
-         errd += dy
-         x    += sx
-         if (arc_ena) then dy=dy-sy*2
-		
-      End If
-   	
-      if (magic < dx) Then
-		
-         errd += dx
-         y    += sy
-         if (arc_ena) then dx=dx-sx*2
-		
-      End If
-		
-		if inkey<>"" then End
-		
-   Wend
+   Dim As Integer cr, cg, cb=0, quad=2
+    
+   cr=0:cg=255
+   drawArcNEW (FALSE, quad, a, b, xc, yc, cr, cg, cb)
+   cr=255:cg=0
+   drawArcNEW (TRUE, quad, b, a, xc, yc, cr, cg, cb)
 
 End Sub
 
-REM *************************************************************
-REM **** Draw Line Using Bresenham's algorithm ************
-REM *************************************************************
-
-Sub drawLine (ByVal x0 as Integer, byval y0 as Integer, byval x1 as Integer, byval y1 as Integer, byval color_val As UByte) 
-    Dim As integer  dx,dy,x,y,sx,sy,errd,magic
-    Dim As boolean is_done
-
-
-    ' bounding box's width and height
-    ' set the loop's sign
-    dx = x1 - x0
-    dy = y1 - y0
+Sub drawArcNEW (ByVal inv As Boolean, ByVal quadrant As Integer, ByVal Rx As Integer, ByVal Ry As Integer, ByVal xCenter As Integer, ByVal yCenter As Integer, ByVal cr As Integer, ByVal cg As Integer, ByVal cb As Integer)
     
-    if (dx < 0) Then
-        dx = -dx
-        sx = -1
-    Else
-        sx = 1
-    End If
+	Dim As Integer Rx2 = Rx * Rx
+	Dim As Integer Ry2 = Ry * Ry
+	Dim As Integer twoRx2 = 2 * Rx2
+	Dim As Integer twoRy2 = 2 * Ry2
+	Dim As Integer p
+	Dim As Integer x = 0
+	Dim As Integer y = Ry
+	Dim As Integer px = 0
+	Dim As Integer py = twoRx2 * y
+	Dim As Integer yt = 0
     
-    if (dy > 0) Then
-        dy = -dy
-        sy = 1
-    Else
-        sy = -1
-    End If
+	p = ( 0.25 * Rx2) + 0.5    : rem In verilog, round off this guy '(0.25 * Rx2)'
+	p = p + (Ry2 - (Rx2 * Ry)) : rem In verilog, round off this guy '(0.25 * Rx2)'
+	
+	While ((px <= py) and Rx > 1)
+	
+		If yt<=65 then
+			If (inv) then
+				Locate yt+2,1
+			Else
+				Locate yt+2,80
+			EndIf
+			Color rgb(cr,cg,cb) : ? x;" ";y;
+			yt=yt+1
+		EndIf
+		
+		Select Case quadrant
+	  		Case 0
+	   		If (Inv) Then
+					draw_pixel(xCenter+y, yCenter+x, cr, cg, cb) : Rem I. Quadrant
+				Else
+					draw_pixel(xCenter+x, yCenter+y, cr, cg, cb) : Rem I. Quadrant
+	   		EndIf
+	  		Case 1
+	   		If (Inv) Then
+					draw_pixel(xCenter-y, yCenter+x, cr, cg, cb) : Rem II. Quadrant
+				Else
+					draw_pixel(xCenter-x, yCenter+y, cr, cg, cb) : Rem II. Quadrant
+	   		EndIf
+	  		Case 2
+	   		If (Inv) Then
+					draw_pixel(xCenter+y, yCenter-x, cr, cg, cb) : Rem III. Quadrant
+				Else
+					draw_pixel(xCenter+x, yCenter-y, cr, cg, cb) : Rem III. Quadrant
+	   		EndIf
+	  		Case 3
+	   		If (Inv) Then
+					draw_pixel(xCenter-y, yCenter-x, cr, cg, cb) : Rem IV. Quadrant
+				Else
+					draw_pixel(xCenter-x, yCenter-y, cr, cg, cb) : Rem IV. Quadrant
+	   		EndIf
+	  		Case Else
+   			Return
+	  	End Select
+		
+		x  = x + 1
+		px = px + twoRy2
+		
+		If (p <= 0) Then
+			p  = p + ( Ry2 + px )
+		Else 
+			y  = y - 1
+			py = py - twoRx2
+			p  = p + ( Ry2 + px - py )
+		EndIf
+	
+	Wend
 
-    magic = 0
-    errd  = dx + dy
-    x     = x0
-    y     = y0
-    is_done = FALSE
-    
-   While (is_done = False)
+
+	Rem *************************************************************
+	Rem *** Complete line if it is not on the last pixel
+	Rem *************************************************************
+	If y<2 Then
 		
-      draw_pixel (x,y,color_val)
+		y=0
+		For x=x to Rx
 		
-      ' Reached the End
-      If (x = x1 And y = y1) Then
-      	is_done = TRUE
-      Else
-      	is_done = FALSE
-      End If
+			If yt<=65 then
+				If (inv) then
+					Locate yt+2,1
+				Else
+					Locate yt+2,80
+				EndIf
+				Color rgb(cr,cg,255) : ? x;" ";y;
+				yt=yt+1
+			EndIf
+			
+			If (Inv)     then  draw_pixel(xCenter+y, yCenter-x, cr, cg, 255) : Rem III. Quadrant
+			If (Not Inv) then  draw_pixel(xCenter+x, yCenter-y, cr, cg, 255) : Rem III. Quadrant
 		
-      ' Loop carried
-      magic = errd shl 1
-      if (magic > dy) Then
-         errd += dy
-         x    += sx
-      End If
-        
-      if (magic < dx) Then
-         errd += dx
-         y    += sy
-      End If
-      
-   Wend
+		Next x
+		
+	EndIf
 
 End Sub
-
 
 
 REM *************************************************************
 REM **** Draw a dot with the palette color ************
 REM *************************************************************
-
-Sub draw_pixel(xp as integer, yp as integer, col as Ubyte)
-	PSet ( xp,yp ),rgb( 255,255,col )
+Sub draw_pixel(xp as integer, yp as integer, colr as Ubyte, colg as Ubyte, colb as Ubyte)
+    PSet ( xp,yp ),rgb( colr,colg,colb )
 end sub

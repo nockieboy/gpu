@@ -1,0 +1,133 @@
+Send command 0x8020H        ; set X[0] to 32
+Send command 0xC032H        ; set Y[0] to 50  y0>y1
+Send command 0x9040H        ; set X[1] to 64
+Send command 0xD028H        ; set Y[1] to 40
+Send command 0xA01CH        ; set X[2] to 28
+Send command 0xE041H        ; set Y[2] to 65  y2>y3
+Send command 0xB03AH        ; set X[3] to 58
+Send command 0xF03CH        ; set Y[3] to 60
+Send command 0x0BFFH        ; draw filled quadrilateral
+Send command 0x0DFFH        ; draw filled quadrilateral
+Send command 0x05FFH        ; draw quadrilateral
+
+
+Foward test
+// xy[0] -L0f- xy[1]
+//   |           |       L#f means the linegen# running the first lg_csel coordinates
+//  L1s         L0s
+//   |           |       L#s means the linegen# running the second lg_csel_b coordinates
+// xy[2] -l1f- xy[3]
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+5-a 5-0 0-a  5-a 5-f f-a   5-0 5-f f-a 0-a
+    L1  L4       L2  L3    L1  L2  L3  L4
+
+Send command 0x0E037H       ; set Y[2] to 55  y2<y3 was 0x41
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+5-a 5-0 0-a  5-f 5-a a-f   5-0 5-f a-f 0-a
+    L1  L4   L2      L3    L1  L2  L3  L4
+
+
+Send command 0x0C023H       ; set Y[0] to 35  y0<y1
+Send command 0x0E041H       ; set Y[2] to 65  y2>y3
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+0-a 0-5 5-a  5-a 5-f f-a   0-5 5-f f-a 0-a
+    L1  L4       L2  L3    L1  L2  L3  L4
+
+
+
+Mirror test
+// xy[0] -L0f- xy[1]
+//   |           |       L#f means the linegen# running the first lg_csel coordinates
+//  L1s         L0s
+//   |           |       L#s means the linegen# running the second lg_csel_b coordinates
+// xy[2] -l1f- xy[3]
+Send command 0x9040H        ; set X[1] to 64
+Send command 0xD028H        ; set Y[1] to 40
+Send command 0x8020H        ; set X[0] to 32
+Send command 0xC032H        ; set Y[0] to 50  y0>y1
+Send command 0xB03AH        ; set X[3] to 58
+Send command 0xF03CH        ; set Y[3] to 60
+Send command 0xA01CH        ; set X[2] to 28
+Send command 0xE041H        ; set Y[2] to 65  y2>y3
+Send command 0x0BFFH        ; draw filled quadrilateral
+Send command 0x0DFFH        ; draw filled quadrilateral
+Send command 0x05FFH        ; draw quadrilateral
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+0-a 0-5 5-a  5-f 5-a a-f   0-5 5-f a-f 0-a
+L4  L1       L2      L3    L1  L2  L3  L4
+
+Send command 0x0E037H       ; set Y[2] to 55  y2<y3 was 0x41
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+0-a 0-5 5-a  5-a 5-f f-a   0-5 5-f f-a 0-a
+L4  L1           L2  L3    L1  L2  L3  L4
+
+Flip test
+// xy[0] -L0f- xy[1]
+//   |           |       L#f means the linegen# running the first lg_csel coordinates
+//  L1s         L0s
+//   |           |       L#s means the linegen# running the second lg_csel_b coordinates
+// xy[2] -l1f- xy[3]
+Send command 0xA01CH        ; set X[2] to 28
+Send command 0xE041H        ; set Y[2] to 65  y2>y3
+Send command 0xB03AH        ; set X[3] to 58
+Send command 0xF03CH        ; set Y[3] to 60
+Send command 0x8020H        ; set X[0] to 32
+Send command 0xC032H        ; set Y[0] to 50  y0>y1
+Send command 0x9040H        ; set X[1] to 64
+Send command 0xD028H        ; set Y[1] to 40
+Send command 0x0BFFH        ; draw filled quadrilateral
+Send command 0x0DFFH        ; draw filled quadrilateral
+Send command 0x05FFH        ; draw quadrilateral
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+a-0 a-5 5-0  f-5 f-a a-5   5-0 f-5 f-a a-0
+L4      L1   L2  L3        L1  L2  L3  L4
+
+Send command 0x0E037H       ; set Y[2] to 55  y2<y3 was 0x41
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+a-5 a-0 0-5  f-5 f-a a-5   0-5 f-5 f-a a-0
+    L4  L1   L2  L3        L1  L2  L3  L4
+
+
+Flip & mirror test
+// xy[0] -L0f- xy[1]
+//   |           |       L#f means the linegen# running the first lg_csel coordinates
+//  L1s         L0s
+//   |           |       L#s means the linegen# running the second lg_csel_b coordinates
+// xy[2] -l1f- xy[3]
+Send command 0xB03AH        ; set X[3] to 58
+Send command 0xF03CH        ; set Y[3] to 60
+Send command 0xA01CH        ; set X[2] to 28
+Send command 0xE041H        ; set Y[2] to 65  y2>y3
+Send command 0x9040H        ; set X[1] to 64
+Send command 0xD028H        ; set Y[1] to 40
+Send command 0x8020H        ; set X[0] to 32
+Send command 0xC032H        ; set Y[0] to 50  y0>y1
+Send command 0x0BFFH        ; draw filled quadrilateral
+Send command 0x0DFFH        ; draw filled quadrilateral
+Send command 0x05FFH        ; draw quadrilateral
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+a-5 a-0 0-5  a-5 a-f f-5   0-5 5-f a-f 0-a
+    L4x L1       L3  L2x   L1  L2x L3  L4x
+
+Send command 0x0E037H       ; set Y[2] to 55  y2<y3 was 0x41
+
+Tri#1        Tri#2         Outline
+f02 f01 f12  f13 f12 f23   d01 d13 d32 d20
+a-0 a-5 5-0  a-5 a-f f-5   5-0 5-f a-f 0-a
+L4x     L1       L3  L2x   L1  L2x L3  L4x
