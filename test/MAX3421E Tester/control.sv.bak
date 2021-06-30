@@ -1,0 +1,8 @@
+module control (
+
+	input gpx,
+	input m_int
+
+);
+
+endmodule

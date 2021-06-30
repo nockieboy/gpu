@@ -11,6 +11,10 @@ module geometry_processor (
    input logic rd_data_rdy_a,          // input from geo_rd_rdy_a
    input logic rd_data_rdy_b,          // input from geo_rd_rdy_b
    input logic ram_mux_busy,           // input from geo_port_full
+	
+	// H&V video enable/sync input for WAIT_interupt command
+	input logic hse,
+	input logic vse,
     
    // data_mux_geo outputs
    output logic rd_req_a,              // output to geo_rd_req_a on data_mux_geo
@@ -41,8 +45,12 @@ logic draw_cmd_rdy_r    ;
 logic [35:0] draw_cmd_r2;
 logic draw_cmd_rdy_r2   ;
 
-logic [39:0] pixel_cmd  ;
-logic pixel_cmd_rdy     ;
+logic [39:0] pixel_cmd    ;
+logic pixel_cmd_rdy       ;
+logic [39:0] pixel_cmd_r  ;
+logic pixel_cmd_rdy_r     ;
+logic [39:0] pixel_cmd_r2 ;
+logic pixel_cmd_rdy_r2    ;
 
 geometry_xy_plotter geoff (
 
@@ -52,6 +60,8 @@ geometry_xy_plotter geoff (
    .fifo_cmd_ready ( fifo_cmd_ready  ),
    .fifo_cmd_in    ( fifo_cmd_in     ),
    .draw_busy      ( pix_writer_busy ),
+   .hse            ( hse             ),
+   .vse            ( vse             ),
    //outputs
 	.load_cmd       (                 ),        // HIGH when ready to receive next cmd_data[15:0] input
    .draw_cmd_rdy   ( draw_cmd_rdy    ),
@@ -59,28 +69,30 @@ geometry_xy_plotter geoff (
    .fifo_cmd_busy  ( fifo_cmd_busy   )
    
 );
-defparam geoff.FIFO_MARGIN = FIFO_MARGIN;  // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
+defparam geoff.FIFO_MARGIN   = FIFO_MARGIN,  // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high
+         geoff.USE_ALTERA_IP = 1 ;
 
 pixel_address_generator paget (
 
     // inputs
     .clk           ( clk              ),
     .reset         ( reset            ),
-    .draw_cmd_rdy  ( draw_cmd_rdy_r2  ),  // use _r, or _r2 to add a D-Clocked buffer between this section and the plotter.
-    .draw_cmd      ( draw_cmd_r2      ),  // use _r, or _r2 to add a D-Clocked buffer between this section and the plotter.
+    .draw_cmd_rdy  ( draw_cmd_rdy_r2   ),  // use _r, or _r2 to add a D-Clocked buffer between this section and the plotter.
+    .draw_cmd      ( draw_cmd_r2       ),  // use _r, or _r2 to add a D-Clocked buffer between this section and the plotter.
     .draw_busy     ( pix_writer_busy  ),
     // outputs
     .pixel_cmd_rdy ( pixel_cmd_rdy    ),
     .pixel_cmd     ( pixel_cmd        )
 );
+defparam paget.USE_ALTERA_IP = 1 ;
 
  geo_pixel_writer pixie (
 
     // inputs
     .clk              ( clk              ),
     .reset            ( reset            ),
-    .cmd_rdy          ( pixel_cmd_rdy    ),
-    .cmd_in           ( pixel_cmd        ),
+    .cmd_rdy          ( pixel_cmd_rdy_r2 && !pix_writer_busy   ),
+    .cmd_in           ( pixel_cmd_r2        ),
     .rd_data_in       ( rd_data_in       ),
     .rd_data_rdy_a    ( rd_data_rdy_a    ),
     .rd_data_rdy_b    ( rd_data_rdy_b    ),
@@ -107,6 +119,10 @@ draw_cmd_rdy_r  <= draw_cmd_rdy;
 draw_cmd_r      <= draw_cmd;
 draw_cmd_rdy_r2 <= draw_cmd_rdy_r;
 draw_cmd_r2     <= draw_cmd_r;
+pixel_cmd_rdy_r <= pixel_cmd_rdy;
+pixel_cmd_r     <= pixel_cmd;
+pixel_cmd_rdy_r2 <= pixel_cmd_rdy_r;
+pixel_cmd_r2     <= pixel_cmd_r;
 end
 end
 

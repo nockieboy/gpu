@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/afi_mux_ddr3_ddrx.v"
+   type="VERILOG"
+   library="m0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_clock_pair_generator.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_read_valid_selector.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_addr_cmd_datapath.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_reset.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_acv_ldc.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_memphy.sv"
+   type="SYSTEM_VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_reset_sync.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_new_io_pads.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_fr_cycle_shifter.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_fr_cycle_extender.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_read_datapath.sv"
+   type="SYSTEM_VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_write_datapath.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_core_shadow_registers.sv"
+   type="SYSTEM_VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_simple_ddio_out.sv"
+   type="SYSTEM_VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_phy_csr.sv"
+   type="SYSTEM_VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_iss_probe.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_addr_cmd_pads.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_flop_mem.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0.sv"
+   type="SYSTEM_VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_p0_altdqdqs.v"
+   type="VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/altdq_dqs2_acv_cyclonev.sv"
+   type="SYSTEM_VERILOG"
+   library="p0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_pll0.sv"
+   type="SYSTEM_VERILOG"
+   library="pll0" />
+ <file
+   path="TEST_DDR3_sim/TEST_DDR3/TEST_DDR3_0002.v"
+   type="VERILOG"
+   library="TEST_DDR3" />
+ <file path="TEST_DDR3_sim/TEST_DDR3.v" type="VERILOG" />
+ <topLevel name="TEST_DDR3" />
+ <deviceFamily name="cyclonev" />
+ <modelMap controllerPath="TEST_DDR3" modelPath="TEST_DDR3" />
+</simPackage>

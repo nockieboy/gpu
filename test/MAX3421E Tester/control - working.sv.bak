@@ -1,0 +1,154 @@
+/*
+ * Simple USB interface control module to test the MAX3421E USB chip
+ *
+ * J.Nock 2021
+ */
+
+module control (
+
+   input logic        clk,
+   input logic        reset,     // active LOW
+   input logic        gpx,
+   input logic        m_int,
+   input logic  [7:0] rx_data,
+   input logic        done,
+   input logic        KEY1,      // user buttons, active LOW
+   input logic        KEY2,
+   input logic        KEY3,
+   input logic        KEY4,
+   
+   output logic       start,
+   output logic [7:0] tx_data,
+   
+   output logic [7:0] LED_1,     // EasyFPGA-specific 7-segment display to
+   output logic [7:0] LED_2,     // show read values from SPI
+	output logic       LED_3		// USB connection detection LED
+
+);
+
+parameter int max_cmds                 = 32                ; // maximum command_queue length
+parameter int num_init_cmds            = 2                 ; // no. of initial commands in queue
+parameter int init_cmds[num_init_cmds] = '{ 8'h00, 8'h00 } ;
+
+logic [7:0] rx_buff1   = 8'b0   ;
+logic [7:0] rx_buff2   = 8'b0   ;
+logic [3:0] cur_cmd    = 0      ; // current command in pipeline (max 16)
+logic       old_done   = 1'b0   ; // edge-detect for done signal
+logic       tx_done    = 1'b0   ; // tx_done flag so commands is only sent once
+logic       buff_swtch = 1'b0   ; // when buff_swtch is HIGH, record Rx'd data (this ignores data Rx'd during CMD transmission)
+
+logic       old_int    = 1'b0   ;
+logic [7:0] cmd_queue[max_cmds] ;
+logic       num_queue  = 0      ;
+logic       int_req    = 1'b0   ;
+logic       conn_LED   = 1'b1   ; // LOW to light LED for connection events
+
+wire        int_edge   = ( !old_int && m_int ) ; // int_req goes HIGH on posedge of m_int
+
+always @( posedge clk ) begin
+
+	LED_1   <= rx_buff1 ;
+	LED_2   <= rx_buff2 ;
+	LED_3   <= conn_LED ;
+	old_int <= m_int    ; // update m_int edge detector
+	
+	if ( int_edge ) begin // interrupt posedge detected
+	
+		//int_req <= 1'b1 ; // set int_req flag
+		
+	end
+   
+   if ( !KEY1 || !reset || !gpx ) begin
+      
+		cmd_queue   <= commands ;
+		num_queue   <= num_cmds ;
+      old_done    <= 1'b0  ;
+      rx_buff1    <= 8'b0  ;
+		rx_buff2    <= 8'b0  ;
+      cur_cmd     <= 3'b0  ;
+      tx_done     <= 1'b0  ;
+      tx_data     <= 8'b0  ;
+      start       <= 1'b0  ;
+      
+   end
+	else if ( int_req && tx_done ) begin // MAX3421E is requested our attention and we're not transmitting on SPI
+	
+		int_req <= 1'b0 ; // reset int_req flag
+		
+		/* TODO:
+		 * 1) Read R25
+		 * 2) Check bits we want to action (b5 initially for CONDETIRQ)
+		 * 3) Update an LED on the dev board
+		 */
+		
+		conn_LED <= !conn_LED ; // Switch on/off the LED to show an event was detected
+		
+		// 4) Write a 1 to b5 in R25 to ack the int
+		/*cmd_queue[0] <= 202   ; // Write to R25
+		cmd_queue[1] <= 32    ; // Set b5 (CONDETIRQ) to 1 to reset it
+		num_queue    <= 2     ; // 2 commands in the queue
+		cur_cmd      <= 3'b0  ;
+      tx_done     <= 1'b0  ;*/
+	
+	end
+   else begin // reset & gpx HIGH
+		// Buffer RX'd data if done goes HIGH,
+		// otherwise keep old_done LOW
+		if ( old_done && !done ) begin // negedge detected for done signal
+			
+			if ( buff_swtch ) begin
+			
+				rx_buff1 <= rx_data  ; // buffer the received data
+				rx_buff2 <= rx_buff1 ;
+				
+			end
+			old_done   <= 1'b0        ;
+			buff_swtch <= !buff_swtch ;
+			
+			if ( cur_cmd < ( num_queue ) ) begin
+				
+				tx_done <= 1'b0 ; // reset tx_done to send next byte
+				
+			end
+			else begin // EOL
+				
+				tx_data  <= 8'b0 ; // end of transmission - last byte sent
+				tx_done  <= 1'b1 ; // one-shot stays high to prevent more bytes being
+				cur_cmd  <= 3'b0 ; // transmitted but everything else is reset
+				start    <= 1'b0 ;
+				
+			end
+			
+		end
+		else begin
+			
+			old_done  <= done    ;
+			
+		end
+		
+		if ( !tx_done && ( cur_cmd < num_queue ) ) begin // if cmd hasn't been sent already and cmd isn't 0
+			
+			tx_data  <= cmd_queue[cur_cmd] ;
+			start    <= 1'b1               ;
+			tx_done  <= 1'b1               ;
+			cur_cmd  <= cur_cmd + 1'b1     ;
+			
+		end
+		else if ( !tx_done && ( cur_cmd == num_queue ) ) begin // reached end of commands array
+			
+			tx_data  <= 8'b0 ;
+			start    <= 1'b0 ;
+			cur_cmd  <= 3'b0 ;
+			
+		end
+		else begin
+			
+			start    <= 1'b0   ; // make start a one-clk pulse
+			
+		end
+	
+	end // reset & gpx high
+   
+end
+
+endmodule

@@ -9,16 +9,22 @@
  *
  */
 
-module geometry_xy_plotter (
-    input wire clk,               // System clock
-    input wire reset,             // Force reset
-    input wire fifo_cmd_ready,    // 16-bit Data Command Ready signal
-    input wire [15:0] fifo_cmd_in,// 16-bit Data Command bus
-    input wire draw_busy,         // HIGH when pixel writer is busy, so geometry plotter will pause before sending any new pixels
+module geometry_xy_plotter #(
+parameter int FIFO_MARGIN         = 32, // The number of extra commands the fifo has room after the 'fifo_cmd_busy' goes high
+parameter bit USE_ALTERA_IP       = 1   // Slecets if Altera's SCFIFO should be used, or Brian's FIFO_2word_FWFT.sv
+)(
+    input logic clk,               // System clock
+    input logic reset,             // Force reset
+    input logic fifo_cmd_ready,    // 16-bit Data Command Ready signal
+    input logic [15:0] fifo_cmd_in,// 16-bit Data Command bus
+    input logic draw_busy,         // HIGH when pixel writer is busy, so geometry plotter will pause before sending any new pixels
+
+    input logic hse,                // Usually the HSE signal for H-Wait pause until specific line number.  Internally increments on the falling edge.
+    input logic vse,                // Usually the HSE signal for V-Wait pause until specified number of frames.  Internally increments on the falling edge.
     
-    output wire load_cmd,         // HIGH when ready to receive next cmd_data[15:0] input
-    output wire draw_cmd_rdy,     // Pulsed HIGH when data on draw_cmd[15:0] is ready to send to the pixel writer module
-    output wire [35:0] draw_cmd,  // Bits [35:32] hold AUX function number 0-15:
+    output logic load_cmd,         // HIGH when ready to receive next cmd_data[15:0] input
+    output logic draw_cmd_rdy,     // Pulsed HIGH when data on draw_cmd[15:0] is ready to send to the pixel writer module
+    output logic [35:0] draw_cmd,  // Bits [35:32] hold AUX function number 0-15:
     //  AUX=0  : Do nothing
     //  AUX=1  : Write pixel,                             : 31:24 color         : 23:12 Y coordinates : 11:0 X coordinates
     //  AUX=2  : Write pixel with color 0 mask,           : 31:24 color         : 23:12 Y coordinates : 11:0 X coordinates
@@ -35,19 +41,20 @@ module geometry_xy_plotter (
     //  AUX=13 : Set source raster width in bytes,        : 15:0 holds source raster image width in #bytes so the proper memory address can be calculated from the X&Y coordinates
     //  AUX=14 : Set destination mem address,             : 31:24 bitplane mode : 23:0 hold destination base memory address for write pixel
     //  AUX=15 : Set source mem address,                  : 31:24 bitplane mode : 23:0 hold the source base memory address for read source pixel
-    output wire fifo_cmd_busy     // HIGH when FIFO is full/nearly full
+    output wire  fifo_cmd_busy,     // HIGH when FIFO is full/nearly full
+    output logic processing         // needed for simulatior to know if there is internal pixel drawing.
 );
 
-parameter int FIFO_MARGIN         = 32 ; // The number of extra commands the fifo has room after the 'fifo_cmd_busy' goes high
+logic plot_busy = 0;
 
-logic [3:0] CMD_OUT_NOP           = 0  ;
+//logic [3:0] CMD_OUT_NOP           = 0  ;
 logic [3:0] CMD_OUT_PXWRI         = 1  ;
-logic [3:0] CMD_OUT_PXWRI_M       = 2  ;
+//logic [3:0] CMD_OUT_PXWRI_M       = 2  ;
 logic [3:0] CMD_OUT_PXPASTE       = 3  ;
 logic [3:0] CMD_OUT_PXPASTE_M     = 4  ;
 
 logic [3:0] CMD_OUT_PXCOPY        = 6  ;
-logic [3:0] CMD_OUT_SETARGB       = 7  ;
+//logic [3:0] CMD_OUT_SETARGB       = 7  ;
 
 logic [3:0] CMD_OUT_RST_PXWRI_M   = 10 ;
 logic [3:0] CMD_OUT_RST_PXPASTE_M = 11 ;
@@ -57,14 +64,14 @@ logic [3:0] CMD_OUT_SRCRWDTH      = 13 ;
 logic [3:0] CMD_OUT_DSTMADDR      = 14 ;
 logic [3:0] CMD_OUT_SRCMADDR      = 15 ;
 
-logic [7:0]  command_in     ;
-logic [11:0] command_data12 ;
-logic [7:0]  command_data8  ;
+logic [7:0]  command_in     = 0 ;
+logic [11:0] command_data12 = 0 ;
+logic [7:0]  command_data8  = 0 ;
 
-logic signed [11:0] x[0:3]      ; // 2-dimensional 12-bit register for x0-x3
-logic signed [11:0] y[0:3]      ; // 2-dimensional 12-bit register for y0-y3
-logic signed [11:0] max_x       ; // this reg will be both in this module and the memory pixel writer
-logic signed [11:0] max_y       ; // this reg will be both in this module and the memory pixel writer
+logic signed [11:0] x[0:3]      = '{0,0,0,0} ; // 2-dimensional 12-bit register for x0-x3
+logic signed [11:0] y[0:3]      = '{0,0,0,0} ; // 2-dimensional 12-bit register for y0-y3
+logic signed [11:0] max_x       = 0 ; // this reg will be both in this module and the memory pixel writer
+logic signed [11:0] max_y       = 0 ; // this reg will be both in this module and the memory pixel writer
 
 logic signed [23:0] blit_dest_x       ; // 
 logic signed [11:0] blit_dest_x_int   ; // 
@@ -87,17 +94,46 @@ logic        [12:0] blit_src_scale_y  ; // Holds the Y blitter source upscale fr
 logic        [12:0] blit_dest_scale_x ; // Holds the X blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_x:4096), values 4095 through 1, or 4096 for off.
 logic        [12:0] blit_dest_scale_y ; // Holds the Y blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_y:4096), values 4095 through 1, or 4096 for off.
 
-logic [3:0]  draw_cmd_func        ;
-logic [7:0]  draw_cmd_data_color  ;
-logic [11:0] draw_cmd_data_word_Y ;
-logic [11:0] draw_cmd_data_word_X ;
-logic        draw_cmd_tx = 1'b0   ;
+logic [3:0]  draw_cmd_func        = 0 ;
+logic [7:0]  draw_cmd_data_color  = 0 ;
+logic [11:0] draw_cmd_data_word_Y = 0 ;
+logic [11:0] draw_cmd_data_word_X = 0 ;
+logic        draw_cmd_tx          = 0 ;
+
+
+//************************************************************************************************************************************************
+// Source command coordinate sorting and interpretation pipe.
+//************************************************************************************************************************************************
+//logic                sort_cmd_rdy      = 0 ;
+//logic [15:0]         sort_data_pipe    = 0 ;         // cmd_data pipeline OUT from poly_sort into geo_xy_plotter
+//logic signed  [11:0] sort_coords[0:15] = '{16{0}} ; // array package of sorted coordinates for the linegen
+//logic signed  [11:0] sort_y_range[0:1] = '{0,0};     // array package of defining the starting and ending Y coordinates for a filled polygon
+//logic [1:0]          lg_seq_size[0:1]  = '{0,0};
+//logic                lg_fill           = 0 ;
+//logic                draw_shape        = 0 ;
+//logic [7:0]          blit_features     = 0 ;
+//logic [7:0]          blit_mask_col     = 0 ;
+
+
+//logic                plot_cmd_rdy       = 0 ;
+//logic [15:0]         plot_data_pipe     = 0 ;      // cmd_data pipeline OUT from poly_plot into the blitter
+logic signed  [11:0] plot_pixel_xy[0:1]     ; // xy coordinates to plot to
+logic                plot_pixel_ena         ;
+logic [7:0]          plot_pixel_col         ;
+//logic                plot_busy              ;
+logic [7:0]          p_blit_features        ;
+logic [7:0]          p_blit_mask_col        ;
+
 
 //************************************************************************************************************************************************
 // Source command fifo
 //************************************************************************************************************************************************
 logic [15:0] cmd_data       ;
 logic        fifo_cmd_rdy_n ;
+
+generate
+if (USE_ALTERA_IP) begin  // **** USE Altera's IP SCFIFO.
+
 
 scfifo  scfifo_component (
     .sclr        (reset),                                     // reset input
@@ -126,33 +162,43 @@ defparam
     scfifo_component.underflow_checking      = "ON",
     scfifo_component.use_eab                 = "ON";
 
-//************************************************************************************************************************************************
-// Source command coordinate sorting and interpretation pipe.
-//************************************************************************************************************************************************
-logic                sort_cmd_rdy      ;
-logic [15:0]         sort_data_pipe    ; // cmd_data pipeline OUT from poly_sort into geo_xy_plotter
-logic signed  [11:0] sort_coords[0:15] ; // array package of sorted coordinates for the linegen
-logic signed  [11:0] sort_y_range[0:1] ; // array package of defining the starting and ending Y coordinates for a filled polygon
-logic [1:0]          lg_seq_size[0:1]  ;
-logic                lg_fill           ;
-logic                draw_shape        ;
-logic [7:0]          blit_features     ;
-logic [7:0]          blit_mask_col     ;
+end else begin  
+// (USE_ALTERA_IP) is disabled, use Brian G's FIFO_2word_FWFT.sv.
 
+logic fifo_cmd_rdy_p;
+
+//FIFO_3word_0_latency
+FIFO_2word_FWFT #(
+      .bits                  (16)                   // The number of bits containing the command
+//    .zero_latency          (0),
+//    .overflow_protection   (1),  // Prevents internal write position and writing if the fifo is full past the 1 extra reserve word
+//    .underflow_protection  (1),  // Prevents internal position position increment if the fifo is empty
+//    .size7_ena             (1)   // Set to 0 for 3 words
+
+) input_cmd_fifo_1 (              // Zero Latency Command buffer
+
+    .clk              ( clk                    ), // CLK input
+    .reset            ( reset                  ), // Reset FIFO
+
+    .shift_in         ( fifo_cmd_ready         ), // Load data into the FIFO
+    .shift_out        ( load_cmd && !draw_busy ), // Shift data out of the FIFO
+    .data_in          ( fifo_cmd_in            ), // Data input from PAGET
+
+    .fifo_not_empty   ( fifo_cmd_rdy_p         ), // High when there is data available for the pixel writer
+    .fifo_full        ( fifo_cmd_busy          ), // High when the FIFO is full - used to tell GEOFF and PAGET to halt until there is room in the FIFO again
+    .data_out         ( cmd_data[15:0]         )  // FIFO data output to pixel writer
+);
+
+assign fifo_cmd_rdy_n = !fifo_cmd_rdy_p;
+end
+
+endgenerate
 
 //************************************************************************************************************************************************
 // Geometry XY line plotter.
 //************************************************************************************************************************************************
-logic                plot_cmd_rdy       ;
-logic [15:0]         plot_data_pipe     ; // cmd_data pipeline OUT from poly_plot into the blitter
-logic signed  [11:0] plot_pixel_xy[0:1] ; // xy coordinates to plot to
-logic                plot_pixel_ena     ;
-logic [7:0]          plot_pixel_col     ;
-logic                plot_busy          ;
-logic [7:0]          p_blit_features    ;
-logic [7:0]          p_blit_mask_col    ;
 
-poly_plot plotter (
+poly_plot #(.USE_ALTERA_IP(USE_ALTERA_IP)) plotter (
 // inputs
     .clk               ( clk             ),
     .reset             ( reset           ),
@@ -162,6 +208,8 @@ poly_plot plotter (
     .cmd_in            ( cmd_data        ), // ** cmd_data pipeline input from FIFO
     .x_in              ( x               ), // xy[0,1,2,3] registers
     .y_in              ( y               ), // xy[0,1,2,3] registers
+    .hse               ( hse             ), // horizontal video enable
+    .vse               ( vse             ), // vertical video enable
 //outputs
     .pixel_ena         ( plot_pixel_ena  ),
     .pixel_xy          ( plot_pixel_xy   ),  // array package of sorted coordinates for the linegen 0&1
@@ -200,18 +248,20 @@ always_comb begin
 
 // Setup all the possible blitter starting X&Y coordinates based on which feature are enabled
 blit_dxs[3] = plot_pixel_xy[0]+blit_width[10:1]  ; // Beginning paste X coordinates with Mirror enabled  and Center Paste enabled
-blit_dxs[2] = plot_pixel_xy[0]+blit_width[10:0]  ; // Beginning paste X coordinates with Mirror enabled  and Center Paste disabled
+blit_dxs[2] = plot_pixel_xy[0]                   ; // Beginning paste X coordinates with Mirror enabled  and Center Paste disabled
 blit_dxs[1] = plot_pixel_xy[0]-blit_width[10:1]  ; // Beginning paste X coordinates with Mirror disabled and Center Paste enabled
 blit_dxs[0] = plot_pixel_xy[0]                   ; // Beginning paste X coordinates with Mirror disabled and Center Paste disabled
 
 blit_dys[3] = plot_pixel_xy[1]+blit_height[10:1] ; // Beginning paste Y coordinates with Flip enabled  and Center Paste enabled
-blit_dys[2] = plot_pixel_xy[1]+blit_height[10:0] ; // Beginning paste Y coordinates with Flip enabled  and Center Paste disabled
+blit_dys[2] = plot_pixel_xy[1]                   ; // Beginning paste Y coordinates with Flip enabled  and Center Paste disabled
 blit_dys[1] = plot_pixel_xy[1]-blit_height[10:1] ; // Beginning paste Y coordinates with Flip disabled and Center Paste enabled
 blit_dys[0] = plot_pixel_xy[1]                   ; // Beginning paste Y coordinates with Flip disabled and Center Paste disabled
 
 // Assign integer only versions of the destination coordinates for the blitter paste coordinates.
 blit_dest_x_int = blit_dest_x[23:12];
 blit_dest_y_int = blit_dest_y[23:12];
+
+processing = plot_busy || blit_running ;
 
 end // always_comb
 
@@ -231,6 +281,7 @@ always_ff @(posedge clk or posedge reset) begin
         blit_dest_x         <= 12'b0 ; // 
         blit_dest_rst_x     <= 12'b0 ; // 
         blit_dest_y         <= 12'b0 ; // 
+        blit_dest_rst_y     <= 12'b0 ; // 
         blit_source_x       <= 12'b0 ; // 
         blit_source_y       <= 12'b0 ; // 
         blit_source_ofs_x   <= 12'b0 ; // 
@@ -246,7 +297,6 @@ always_ff @(posedge clk or posedge reset) begin
         draw_cmd_data_word_Y <= 12'b0 ;
         draw_cmd_data_word_X <= 12'b0 ;
         draw_cmd_tx          <= 1'b0  ;
-        
         
     end else if (!draw_busy) begin  // Everything must PAUSE if the incoming draw_busy signal from the pixel_writer is high
      
@@ -321,7 +371,7 @@ end else begin // ***** Blitter enabled.
                         draw_cmd_data_word_X <= blit_dest_x_int    ;                                       // ... at X-coordinate
                         draw_cmd_data_word_Y <= blit_dest_y_int    ;                                       // ... and Y-coordinate
                         draw_cmd_data_color  <= plot_pixel_col     ;                                       // Second XORed color transformation   
-                        draw_cmd_tx          <= 1'b1               ;                                       // let PAGET know valid pixel data is incoming
+                        draw_cmd_tx          <= !( blit_source_x[23:12] == blit_width || blit_source_y[23:12] == blit_height ); // Corrects from drawing 1 extra line or pixel during zoomed drawings.  Let PAGET know valid pixel data is incoming
                         end
 
          // During the second blitter phase, (PART 2), OR when the destination paste pixel coordinates are OUTSIDE the valid screen coordinates,
@@ -338,51 +388,75 @@ end else begin // ***** Blitter enabled.
                                                            blit_source_x <= blit_source_x + blit_src_scale_x ;
 
                                                       if ( p_blit_features[7]) begin   // Paste with 45 degree rotate begin
-                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + blit_dest_scale_x ; // Horizontal mirror off
-                                                           else                       blit_dest_x   <= blit_dest_x - blit_dest_scale_x ; // Horizontal mirror on
-                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + blit_dest_scale_y ; // Vertical flip off
-                                                           else                       blit_dest_y   <= blit_dest_y - blit_dest_scale_y ; // Vertical flip on
-
+                                                        if ( !p_blit_features[6] ) begin // paste with rotate 90 degree off 
+                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + (blit_dest_scale_x>>1) ; // Horizontal mirror off
+                                                           else                       blit_dest_x   <= blit_dest_x - (blit_dest_scale_x>>1) ; // Horizontal mirror on
+                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + (blit_dest_scale_y>>1) ; // Vertical flip off
+                                                           else                       blit_dest_y   <= blit_dest_y - (blit_dest_scale_y>>1) ; // Vertical flip on
+                                                        end else begin                   // paste with rotate 90 degree ON
+                                                           if (  p_blit_features[5] ) blit_dest_y   <= blit_dest_y + (blit_dest_scale_y>>1) ; // Horizontal mirror off
+                                                           else                       blit_dest_y   <= blit_dest_y - (blit_dest_scale_y>>1) ; // Horizontal mirror on
+                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + (blit_dest_scale_x>>1) ; // Vertical flip off
+                                                           else                       blit_dest_x   <= blit_dest_x - (blit_dest_scale_x>>1) ; // Vertical flip on
+                                                        end
                                                       end else begin                   // no Paste 45 degree rotate begin
-                                                      if (!p_blit_features[6]) begin   // Paste un-rotated
+                                                        if ( !p_blit_features[6] ) begin // paste with rotate 90 degree off 
                                                            if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + blit_dest_scale_x ; // Horizontal mirror off
                                                            else                       blit_dest_x   <= blit_dest_x - blit_dest_scale_x ; // Horizontal mirror on
-                                                      end else begin                   // Paste rotated 90 degrees
-                                                           if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + blit_dest_scale_y ; // Vertical flip off
-                                                           else                       blit_dest_y   <= blit_dest_y - blit_dest_scale_y ; // Vertical flip on
-                                                      end
+                                                        end else begin                   // paste with rotate 90 degree ON
+                                                           if (  p_blit_features[5] ) blit_dest_y   <= blit_dest_y + blit_dest_scale_y ; // Horizontal mirror off
+                                                           else                       blit_dest_y   <= blit_dest_y - blit_dest_scale_y ; // Horizontal mirror on
+                                                        end
                                                       end  //  no Paste 45 degree rotate end
 
                         end else begin // width has been reached, increment the Y coordinates and reset the X coordinates
                                                            blit_source_y <= blit_source_y + blit_src_scale_y ;
 
                                                       if ( p_blit_features[7]) begin  // Paste with 45 degree rotate
-                                                           if ( !p_blit_features[5] ) blit_dest_y     <= blit_dest_rst_y + blit_dest_scale_y ; // Vertical flip off
-                                                           else                       blit_dest_y     <= blit_dest_rst_y - blit_dest_scale_y ; // Vertical flip on
-                                                           if ( !p_blit_features[5] ) blit_dest_x     <= blit_dest_rst_x - blit_dest_scale_x ; // New line return 
-                                                           else                       blit_dest_x     <= blit_dest_rst_x + blit_dest_scale_x ; // New line return 
+                                                        if ( !p_blit_features[6] ) begin // paste with rotate 90 degree off 
+                                                           if ( !p_blit_features[3] ) blit_dest_y     <= blit_dest_rst_y + (blit_dest_scale_y>>1) ; // Vertical flip off
+                                                           else                       blit_dest_y     <= blit_dest_rst_y - (blit_dest_scale_y>>1) ; // Vertical flip on
+                                                           if ( !p_blit_features[3] ) blit_dest_x     <= blit_dest_rst_x - (blit_dest_scale_x>>1) ; // New line return 
+                                                           else                       blit_dest_x     <= blit_dest_rst_x + (blit_dest_scale_x>>1) ; // New line return 
                                                            
-                                                           if ( !p_blit_features[5] ) blit_dest_rst_x <= blit_dest_rst_x - blit_dest_scale_x ; // Modify new line return position 
-                                                           else                       blit_dest_rst_x <= blit_dest_rst_x + blit_dest_scale_x ; // Modify new line return position 
+                                                           if ( !p_blit_features[3] ) blit_dest_rst_x <= blit_dest_rst_x - (blit_dest_scale_x>>1) ; // Modify new line return position 
+                                                           else                       blit_dest_rst_x <= blit_dest_rst_x + (blit_dest_scale_x>>1) ; // Modify new line return position 
                                                              
-                                                           if ( !p_blit_features[3] ) blit_dest_x     <= blit_dest_rst_x - blit_dest_scale_x ; // Horizontal mirror off
-                                                           else                       blit_dest_x     <= blit_dest_rst_x + blit_dest_scale_x ; // Horizontal mirror on
-                                                           if ( !p_blit_features[3] ) blit_dest_y     <= blit_dest_rst_y + blit_dest_scale_y ; // New line return 
-                                                           else                       blit_dest_y     <= blit_dest_rst_y - blit_dest_scale_y ; // New line return 
+                                                           if ( !p_blit_features[5] ) blit_dest_x     <= blit_dest_rst_x - (blit_dest_scale_x>>1) ; // Horizontal mirror off
+                                                           else                       blit_dest_x     <= blit_dest_rst_x + (blit_dest_scale_x>>1) ; // Horizontal mirror on
+                                                           if ( !p_blit_features[5] ) blit_dest_y     <= blit_dest_rst_y + (blit_dest_scale_y>>1) ; // New line return 
+                                                           else                       blit_dest_y     <= blit_dest_rst_y - (blit_dest_scale_y>>1) ; // New line return 
                                                            
-                                                           if ( !p_blit_features[3] ) blit_dest_rst_y <= blit_dest_rst_y + blit_dest_scale_y ; // Modify new line return position 
-                                                           else                       blit_dest_rst_y <= blit_dest_rst_y - blit_dest_scale_y ; // Modify new line return position 
-                                                      
-                                                      end else begin                   // Paste horizontal or vertical
-                                                      if (!p_blit_features[6]) begin   // Paste un-rotated
+                                                           if ( !p_blit_features[5] ) blit_dest_rst_y <= blit_dest_rst_y + (blit_dest_scale_y>>1) ; // Modify new line return position 
+                                                           else                       blit_dest_rst_y <= blit_dest_rst_y - (blit_dest_scale_y>>1) ; // Modify new line return position 
+                                                        end else begin                   // paste with rotate 90 degree ON
+                                                           if (  p_blit_features[5] ) blit_dest_x     <= blit_dest_rst_x + (blit_dest_scale_x>>1) ; // Vertical flip off
+                                                           else                       blit_dest_x     <= blit_dest_rst_x - (blit_dest_scale_x>>1) ; // Vertical flip on
+                                                           if (  p_blit_features[5] ) blit_dest_y     <= blit_dest_rst_y - (blit_dest_scale_y>>1) ; // New line return 
+                                                           else                       blit_dest_y     <= blit_dest_rst_y + (blit_dest_scale_y>>1) ; // New line return 
+                                                           
+                                                           if (  p_blit_features[5] ) blit_dest_rst_y <= blit_dest_rst_y - (blit_dest_scale_y>>1) ; // Modify new line return position 
+                                                           else                       blit_dest_rst_y <= blit_dest_rst_y + (blit_dest_scale_y>>1) ; // Modify new line return position 
+                                                             
+                                                           if ( !p_blit_features[3] ) blit_dest_y     <= blit_dest_rst_y - (blit_dest_scale_y>>1) ; // Horizontal mirror off
+                                                           else                       blit_dest_y     <= blit_dest_rst_y + (blit_dest_scale_y>>1) ; // Horizontal mirror on
+                                                           if ( !p_blit_features[3] ) blit_dest_x     <= blit_dest_rst_x + (blit_dest_scale_x>>1) ; // New line return 
+                                                           else                       blit_dest_x     <= blit_dest_rst_x - (blit_dest_scale_x>>1) ; // New line return 
+                                                           
+                                                           if ( !p_blit_features[3] ) blit_dest_rst_x <= blit_dest_rst_x + (blit_dest_scale_x>>1) ; // Modify new line return position 
+                                                           else                       blit_dest_rst_x <= blit_dest_rst_x - (blit_dest_scale_x>>1) ; // Modify new line return position 
+                                                        end
+
+                                                      end else begin                     // Paste horizontal or vertical
+                                                        if ( !p_blit_features[6] ) begin // paste with rotate 90 degree off 
                                                            if ( !p_blit_features[5] ) blit_dest_y   <= blit_dest_y + blit_dest_scale_y ; // Vertical flip off
                                                            else                       blit_dest_y   <= blit_dest_y - blit_dest_scale_y ; // Vertical flip on
                                                                                       blit_dest_x   <= blit_dest_rst_x                 ; // New line return  
-                                                      end else begin                   // Paste rotated 90 degrees
-                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + blit_dest_scale_x ; // Horizontal mirror off
-                                                           else                       blit_dest_x   <= blit_dest_x - blit_dest_scale_x ; // Horizontal mirror on
+                                                        end else begin                   // paste with rotate 90 degree ON
+                                                           if ( !p_blit_features[3] ) blit_dest_x   <= blit_dest_x + blit_dest_scale_x ; // Vertical flip off
+                                                           else                       blit_dest_x   <= blit_dest_x - blit_dest_scale_x ; // Vertical flip on
                                                                                       blit_dest_y   <= blit_dest_rst_y                 ; // New line return  
-                                                      end
+                                                        end 
                                                       end  //  no Paste 45 degree rotate end
 
                                                            blit_source_x <= 24'd0 ;
@@ -399,9 +473,15 @@ end else begin // end of plot_busy
          
             casez (command_in)
              
-                8'b10?????? : x[command_in[5:4]] <= command_data12 ;
+                8'b10?????? : begin
+                              x[command_in[5:4]] <= command_data12 ;
+                              draw_cmd_tx        <= 1'b0           ; // No command to transmit
+                              end
                 
-                8'b11?????? : y[command_in[5:4]] <= command_data12 ;
+                8'b11?????? : begin
+                              y[command_in[5:4]] <= command_data12 ;
+                              draw_cmd_tx        <= 1'b0           ; // No command to transmit
+                              end
                 
                 8'b011111?? : begin // set 24-bit destination screen memory pointer for plotting
                     draw_cmd_func        <= CMD_OUT_DSTMADDR[3:0]  ; // sets the output function
@@ -422,11 +502,13 @@ end else begin // end of plot_busy
                  8'b0111011? : begin  // Sets the blitter source offset X&Y position with x/y[2&3]
                     blit_source_ofs_x    <= x[{1'b1,command_in[0]}]     ; // sets the upper 12 bits of the destination address
                     blit_source_ofs_y    <= y[{1'b1,command_in[0]}]     ; // sets the lower 12 bits of the destination address
+                    draw_cmd_tx          <= 1'b0                        ; // do not transmits the command
                 end
 
                  8'b0111010? : begin  // Sets the blitter copy width and height with x/y[2&3]
                     blit_width           <= x[{1'b1,command_in[0]}]     ; // sets the upper 12 bits of the destination address
                     blit_height          <= y[{1'b1,command_in[0]}]     ; // sets the lower 12 bits of the destination address
+                    draw_cmd_tx          <= 1'b0                        ; // do not transmits the command
                 end
               
                 8'd115 : begin  // set the number of bytes per horizontal line in the destination raster
@@ -464,24 +546,28 @@ end else begin // end of plot_busy
                 8'd95  : begin
                     max_x <= x[0] ;    // set max width & height of screen to x0/y0
                     max_y <= y[0] ;
+                    draw_cmd_tx          <= 1'b0                        ; // do not transmits the command
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
                 
                 8'd94  : begin
                     max_x <= x[1] ;    // set max width & height of screen to x1/y1
                     max_y <= y[1] ;
+                    draw_cmd_tx          <= 1'b0                        ; // do not transmits the command
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
                 
                 8'd93  : begin
                     max_x <= x[2] ; // set max width & height of screen to x2/y2
                     max_y <= y[2] ;
+                    draw_cmd_tx          <= 1'b0                        ; // do not transmits the command
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
                 
                 8'd92 : begin
                     max_x <= x[3] ; // set max width & height of screen to x3/y3
                     max_y <= y[3] ;
+                    draw_cmd_tx          <= 1'b0                        ; // do not transmits the command
                     //********************  no command to be set......draw_cmd_tx <= 1'b1;
                 end
                         
@@ -523,7 +609,7 @@ endmodule
  * renders lines and fills
  *
  */
-module poly_plot (
+module poly_plot #(parameter bit USE_ALTERA_IP = 1) (
 // inputs
     input logic                 clk              ,
     input logic                 reset            ,
@@ -531,8 +617,11 @@ module poly_plot (
     input logic                 blitter_busy     , // When high, pause the linegens
     input logic                 cmd_rdy_in       ,
     input logic          [15:0] cmd_in           ,
-    input logic   signed [11:0] x_in [0:3]       , // values to plot
-    input logic   signed [11:0] y_in [0:3]       , // values to plot
+    input wire    signed [11:0] x_in [0:3]       , // values to plot
+    input wire    signed [11:0] y_in [0:3]       , // values to plot
+    
+    input logic                 hse              , // horizontal video enable
+    input logic                 vse              , // vertical video enable
 //outputs
     output logic                pixel_ena        ,
     output logic         [7:0]  pixel_col        ,
@@ -548,14 +637,14 @@ module poly_plot (
     output logic        [12:0]  blit_dest_scale_y  // Holds the Y blitter destination downscale fraction, IE zoom ratio (blit_dest_scale_y:4096), values 4095 through 1, or 4096 for off.
 );
 
-logic [1:0] sort_tri     [0:2];
-logic [1:0] sort_tri_mm  [0:1];
-logic [1:0] sort_quad    [0:2];
-logic [1:0] sort_quad_mm [0:1];
+logic [1:0] sort_tri     [0:2]  ;
+logic [1:0] sort_tri_mm  [0:1]  ;
+logic [1:0] sort_quad    [0:2]  ;
+logic [1:0] sort_quad_mm [0:1]  ;
 
-logic       draw_ellipse      ; // When high, line_gen0 will be switched to the ellipse generator.
-logic       ellipse_filled    ; // When high, ellipse generator will do a horizontal raster fill.
-logic [1:0] ellipse_quadrant  ; // selects 1 of 4 quadrants for the ellipse to draw.
+logic       draw_ellipse     = 0  ; // When high, line_gen0 will be switched to the ellipse generator.
+logic       ellipse_filled   = 0  ; // When high, ellipse generator will do a horizontal raster fill.
+logic [1:0] ellipse_quadrant = 0  ; // selects 1 of 4 quadrants for the ellipse to draw.
 
 poly_sort sorter (
 // inputs
@@ -568,16 +657,16 @@ poly_sort sorter (
     .sort_quad_mm ( sort_quad_mm )  // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendering using xy[1,2,3].
 );
 
-logic signed [11:0] lg_out [0:3] ;  // XY output coordinates of all line generators
-logic        [1:0]  lg_running   ;  // Flags stating which linegens are running
-logic        [1:0]  lg_pix_rdy   ;  // Flags which linegens have ready pixels
-logic        [1:0]  lg_start     ;  // Initializes the linegens to begin
-logic        [1:0]  lg_pause     ;  // Freezes the lingen while they are ijn the middle of drawing
-logic        [1:0]  lg_seq_cnt [0:1]  ; // Linegen sequence counters
-logic        [3:0]  lg_csel    [0:3]  ; // Selects which xy[#] coordinates to use for linegen0 A,B - linegen1 A,B
-logic        [3:0]  lg_csel_b  [0:3]  ; // Holds which xy[#] selection will be used for second sequence line to be drawn.
+logic signed [11:0] lg_out [0:3]                 ;  // XY output coordinates of all line generators
+logic        [1:0]  lg_running                   ;  // Flags stating which linegens are running
+logic        [1:0]  lg_pix_rdy                   ;  // Flags which linegens have ready pixels
+logic        [1:0]  lg_start          = 0        ;  // Initializes the linegens to begin
+logic        [1:0]  lg_pause          = 0        ;  // Freezes the lingen while they are ijn the middle of drawing
+logic        [1:0]  lg_seq_cnt [0:1]  = '{2{0}}  ; // Linegen sequence counters
+logic        [3:0]  lg_csel    [0:3]  = '{4{0}}  ; // Selects which xy[#] coordinates to use for linegen0 A,B - linegen1 A,B
+logic        [3:0]  lg_csel_b  [0:3]  = '{4{0}}  ; // Holds which xy[#] selection will be used for second sequence line to be drawn.
 
-gen_sel_line_ellipse linegen_0 (
+gen_sel_line_ellipse #(.USE_ALTERA_IP(USE_ALTERA_IP)) linegen_0 (
     // inputs
     .clk            ( clk                ), // 125 MHz pixel clock
     .reset          ( reset              ), // asynchronous reset
@@ -618,21 +707,33 @@ line_generator linegen_1 (
     .line_complete  (                    )  // HIGH when line is completed
 );
 
-logic               execute_next_draw ; // goes high only when ready to accept a new command
-logic               linegen_busy      ; // 
-logic               fill_ena          ; // 
+logic               execute_next_draw = 0 ; // goes high only when ready to accept a new command
+logic               linegen_busy      = 0 ; // 
+logic               fill_ena          = 0 ; // 
 
-logic signed [11:0] y_pos             ; // Current raster Y position counter
-logic signed [11:0] y_end             ; // Y raster fill ending position
-logic signed [11:0] x_pos             ; // Current raster X position counter
-logic signed [11:0] x_pos_bk          ; // Restore raster X position after a Y increment.
-logic signed [11:0] x_end             ; // X raster fill ending coordinates
-logic               rast_fill_pix_rdy ;
+logic signed [11:0] y_pos             = 0 ; // Current raster Y position counter
+logic signed [11:0] y_end             = 0 ; // Y raster fill ending position
+logic signed [11:0] x_pos             = 0 ; // Current raster X position counter
+logic signed [11:0] x_pos_bk          = 0 ; // Restore raster X position after a Y increment.
+logic signed [11:0] x_end             = 0 ; // X raster fill ending coordinates
+logic               rast_fill_pix_rdy = 0 ;
+
+// Wait for frame or video line logic regs
+logic         wait_int             = 1'b0  ;
+logic [1:0]   hse_reg              = 2'b0  ;
+logic [1:0]   vse_reg              = 2'b0  ;
+logic         hs_dec1              = 1'b0  ;
+logic [3:0]   vw_counter           = 4'd0  ;
+logic [10:0]  hw_position          = 11'd0 ;
+logic [10:0]  v_position           = 11'd0 ;
+logic [7:0]   hw_pos_lat           = 8'd0  ;
+logic [1:0]   int_kill             = 2'd0  ;
+
 
 always_comb begin
 // generate drawing processing busy flags
 linegen_busy      = lg_running[0] || lg_running[1] ;
-execute_next_draw = cmd_rdy_in && !blitter_busy && !plotter_busy && !fill_ena ;
+execute_next_draw = cmd_rdy_in && !blitter_busy && !plotter_busy && !fill_ena ;//&& !wait_int;
 
 // generate selection of the output write pixel port
 pixel_xy[0]       = rast_fill_pix_rdy ? x_pos : (lg_out[{lg_pix_rdy[1],1'b0}]); // select between linegen0&1 X coordinates or the y_pos raster fill coordinates
@@ -641,7 +742,7 @@ pixel_ena         = lg_pix_rdy[0] || lg_pix_rdy[1] || rast_fill_pix_rdy ;       
 
 end
 
-always_ff @(posedge clk or posedge reset) begin
+always_ff @(posedge clk /* or posedge reset */) begin
 
     if ( reset ) begin  // Reset only the key controls in the command pipe.
          blit_features_out   <= 0;
@@ -658,9 +759,50 @@ always_ff @(posedge clk or posedge reset) begin
          blit_dest_scale_y   <= 13'd4096 ; // Holds the Y blitter destination downscale fraction, 4096 = 1:1, IE disable.
          draw_ellipse        <= 1'b0     ; // Select between line_generator and ellipse_generator.
          ellipse_quadrant    <= 2'd0     ; // Select which quadrant the ellipse will draw.
+
+        wait_int             <= 1'b0 ;
+        hse_reg              <= 2'd0 ;
+        vse_reg              <= 2'd0 ;
+        hs_dec1              <= 1'b0 ;
+        vw_counter[3:0]      <= 4'd0 ;
+        hw_position[10:0]    <= 11'd0 ;
+        v_position[10:0]     <= 11'd0 ;
+        hw_pos_lat[7:0]      <= 8'd0 ;
+        int_kill             <= 2'd0;
+        plotter_busy         <= 1'd0 ;
+        pixel_col            <= 0;
+        blit_features_out    <= 0;
+
+
     end // reset
     else
-    if ( enable && !blitter_busy ) begin
+
+// Wait for any set horizontal line number hw_position after set number of vw_counter.
+// If hw_position is never reached for 2 consecutive vertical syncs, int_kill is decremented to 0.
+hse_reg[1:0] <= {hse_reg[0],hse};
+vse_reg[1:0] <= {vse_reg[0],vse};
+
+     if          (vse_reg == 2'b10)  begin
+                                     v_position  <= 11'd0 ;                           // clear the vertical position
+                                     if (int_kill!=2'd0) int_kill <= int_kill - 1'd1; // decrement the wait killer
+     end else if (hse_reg == 2'b10)  begin
+                                                                                v_position  <= v_position + 1'b1 ;  // increment the vertical position
+                                          if (hw_position != v_position)        hs_dec1     <= 1'b0;                // clear the single incrementr
+                                     else if (hw_position == v_position && !hs_dec1) begin
+                                                                                if (vw_counter != 4'd0) vw_counter <= vw_counter - 1'b1 ; // decrement the vertical wait counter at end of display frame
+                                                                                hs_dec1  <= 1'b1;
+                                                                                int_kill <= 2'd2; // reset the wait timer killer
+                                                                                end
+                                     end
+
+if (wait_int) begin // When waiting
+
+  if ( (vw_counter == 4'd0) || (int_kill == 2'd0) ) begin // if vw_counter has reached 0 or int_kill has reached 0
+                          wait_int     <= 1'b0 ; // End vertical or horizontal wait
+                          plotter_busy <= 1'd0 ; // Tell the rest of the geometry processor that the plotter ready
+                          end
+end else
+  if ( enable && !blitter_busy ) begin
 
 if (lg_start[0]) begin
   lg_seq_cnt[0] <= lg_seq_cnt[0]-1'b1; // subtract counter after linegen has been executed
@@ -682,10 +824,22 @@ if (lg_start[1]) begin
 
 if (execute_next_draw) begin
 
-        if (cmd_in[15:8]  == 8'd0) blit_features_out <= cmd_in[7:0]; // Just set the blitter features
-   else if (cmd_in[15:8]  == 8'd7) ellipse_quadrant  <= cmd_in[1:0]; // Set which ellipse quadrant to render.
-   else if (cmd_in[15:8]  == 8'd8) blit_mask_col_out <= cmd_in[7:0]; // Just set the blitter transparency mask color
-   else if (cmd_in[15:8]  == 8'd9) begin                             // Set blitter scale
+        if (cmd_in[15:8]  == 8'd0)  blit_features_out <= cmd_in[7:0]; // Just set the blitter features
+   else if (cmd_in[15:8]  == 8'd7)  begin
+                                              if (cmd_in[7:2]==6'd0) ellipse_quadrant  <= cmd_in[1:0]; // Set which ellipse quadrant to render.
+                                              if (cmd_in[7]) begin
+                                                             vw_counter[3:0]   <= cmd_in[3:0]; // Set the number of vertical frames to wait for.
+                                                             if (cmd_in[3:0]!=4'd0) begin
+                                                                                    wait_int           <= 1'd1 ; // Turn on the wait for vertical frames
+                                                                                    plotter_busy       <= 1'd1 ; // Tell the rest of the geometry processor that the plotter is just busy
+                                                                                    int_kill           <= 2'd2; // reset the wait timer killer
+                                                                                    hw_position[10:0]  <= hw_pos_lat[7:0] << cmd_in[5:4] ;
+                                                                                    end
+                                                             end
+                                    end
+   else if (cmd_in[15:8]  == 8'd15) hw_pos_lat[7:0]   <= cmd_in[7:0]; // Set the wait for horizontal lines after display ends.
+   else if (cmd_in[15:8]  == 8'd8)  blit_mask_col_out <= cmd_in[7:0]; // Just set the blitter transparency mask color
+   else if (cmd_in[15:8]  == 8'd9)  begin                             // Set blitter scale
       if (cmd_in[0]) begin // enable setting of source scale
         if ( x_in[0]==0 )  blit_src_scale_x    <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
         else               blit_src_scale_x    <= {1'b0,x_in[0]}  ; // Otherwize, set the scale factor to 1 through 4095.
@@ -1051,7 +1205,7 @@ endmodule
  *
  */
 
-module gen_sel_line_ellipse (
+module gen_sel_line_ellipse #(parameter bit USE_ALTERA_IP = 1) (
 // inputs
   input logic                clk,              // 125 MHz pixel clock
   input logic                reset,            // asynchronous reset
@@ -1072,6 +1226,12 @@ module gen_sel_line_ellipse (
   output logic               pixel_data_rdy,   // HIGH when coordinate outputs are valid
   output logic               line_complete     // HIGH when line is completed
 );
+
+logic               b [0:1]        ;
+logic               rdy [0:1]      ;
+logic               complete [0:1] ;
+logic signed [11:0] xc [0:1]       ;
+logic signed [11:0] yc [0:1]       ;
 
 
 line_generator sel_linegen  (
@@ -1094,7 +1254,7 @@ line_generator sel_linegen  (
 );
 
 
-ellipse_generator sel_ellipsegen (
+ellipse_generator #(.USE_ALTERA_IP(USE_ALTERA_IP)) sel_ellipsegen (
     // inputs
     .clk              ( clk                ), // 125 MHz pixel clock
     .reset            ( reset              ), // asynchronous reset
@@ -1115,11 +1275,6 @@ ellipse_generator sel_ellipsegen (
     .ellipse_complete ( complete[1]        )  // HIGH when line is completed
 );
 
-logic               b [0:1]        ;
-logic               rdy [0:1]      ;
-logic               complete [0:1] ;
-logic signed [11:0] xc [0:1]       ;
-logic signed [11:0] yc [0:1]       ;
 
 always_comb begin
     busy            = b[0]        || b[1]        ; //  high when either module is busy
@@ -1143,8 +1298,8 @@ endmodule
 
 module poly_sort (
 // inputs
-    input  logic signed [11:0] x_in [0:3]         , // values to sort
-    input  logic signed [11:0] y_in [0:3]         , // values to sort
+    input  wire  signed [11:0] x_in [0:3]         , // values to sort
+    input  wire  signed [11:0] y_in [0:3]         , // values to sort
 //outputs
     output logic        [1:0]  sort_tri     [0:2] , // Array containing 3 sorted pointers, 1 for linegen 0 and 2 sequences for linegen 1 to generate a filled triangle using xy[0,1,2].
     output logic        [1:0]  sort_tri_mm  [0:1] , // Array containing 2 sorted pointers for the triangle's min Y coordinate and max Y coordinate when rendering using xy[0,1,2].
@@ -1154,37 +1309,6 @@ module poly_sort (
 
 always_comb begin
 
-// *********************************************************************
-// Copy the Y sort to the correct line generators for a filled triangle
-// *********************************************************************
-//   xy[0]
-//    ***
-//    *  LG1f        f = first of 2 lines to draw
-//    *    ** 
-//   LG0f   xy[1]
-//    *    **
-//    *  LG1s        s = second of 2 lines to draw
-//    ***
-//   xy[2]           LG0 only draws 1 line
-//
-sort_tri_mm[1'b0] = sort_tri[0] ; // Triangle minimum Y coordinate
-sort_tri_mm[1'b1] = sort_tri[2] ; // Triangle minimum Y coordinate
-
-// *********************************************************************
-// Copy the Y sort to the correct line generators for a filled quad
-// *********************************************************************
-//   xy[1]
-//    ***
-//    *  LG1f        f = first of 2 lines to draw
-//    *    ** 
-//   LG0f   xy[2]
-//    *    **
-//    *  LG1s        s = second of 2 lines to draw
-//    ***
-//   xy[3]           LG0 only draws 1 line
-//
-sort_quad_mm[1'b0] = sort_quad[0] ; // Quad minimum Y coordinate
-sort_quad_mm[1'b1] = sort_quad[2] ; // Quad minimum Y coordinate
 
 // ***************************************************
 // Generate the Y order for the sorted triangle
@@ -1254,6 +1378,39 @@ sort_quad_mm[1'b1] = sort_quad[2] ; // Quad minimum Y coordinate
                 sort_quad[1] = 2'd1 ;
                 sort_quad[2] = 2'd2 ;
             end
+
+
+// *********************************************************************
+// Copy the Y sort to the correct line generators for a filled triangle
+// *********************************************************************
+//   xy[0]
+//    ***
+//    *  LG1f        f = first of 2 lines to draw
+//    *    ** 
+//   LG0f   xy[1]
+//    *    **
+//    *  LG1s        s = second of 2 lines to draw
+//    ***
+//   xy[2]           LG0 only draws 1 line
+//
+sort_tri_mm[1'b0] = sort_tri[0] ; // Triangle minimum Y coordinate
+sort_tri_mm[1'b1] = sort_tri[2] ; // Triangle minimum Y coordinate
+
+// *********************************************************************
+// Copy the Y sort to the correct line generators for a filled quad
+// *********************************************************************
+//   xy[1]
+//    ***
+//    *  LG1f        f = first of 2 lines to draw
+//    *    ** 
+//   LG0f   xy[2]
+//    *    **
+//    *  LG1s        s = second of 2 lines to draw
+//    ***
+//   xy[3]           LG0 only draws 1 line
+//
+sort_quad_mm[1'b0] = sort_quad[0] ; // Quad minimum Y coordinate
+sort_quad_mm[1'b1] = sort_quad[2] ; // Quad minimum Y coordinate
 
 end
 endmodule

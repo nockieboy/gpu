@@ -1,0 +1,13 @@
+module music (
+	input clk,
+	output speaker
+);
+
+// create 16-bit binary counter
+reg [15:0] counter;
+always @(posedge clk) counter <= counter+1;
+
+// use MSB of counter to drive speaker
+assign speaker = counter[15];
+
+endmodule

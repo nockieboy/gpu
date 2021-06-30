@@ -89,8 +89,8 @@ reg          Z80_M1n_r,          // Z80 M1 - active LOW
              Z80_MREQn_r,        // Z80 MREQ - active LOW
              Z80_WRn_r,          // Z80 WR - active LOW
              Z80_RDn_r,          // Z80 RD - active LOW
-             Z80_IORQn_r,        // Z80 IOPORT - active LOW
-             Z80_IEI_r;
+             Z80_IORQn_r;        // Z80 IOPORT - active LOW
+             //Z80_IEI_r;
 reg   [21:0] Z80_addr_r;         // uCom 22-bit address bus
 reg   [7:0]  Z80_wData_r;        // uCom 8 bit data bus input
 
@@ -153,7 +153,7 @@ assign mem_in_range        = (Z80_addr_r[21:19]==MEMORY_RANGE[2:0]) && (Z80_addr
 
 // define the GPU access ports range
 wire   port_in_range;
-assign port_in_range       = ((Z80_addr_r[7:0] >= IO_DATA[7:0]) && (Z80_addr_r[7:0] <= IO_BLNK[7:0])) ; // You are better off reserving a range of ports
+assign port_in_range       = ((Z80_addr_r[7:0] >= IO_DATA[7:0]) && (Z80_addr_r[7:0] <= FIFO_STAT[7:0])) ; // You are better off reserving a range of ports
 
 //
 // *******************************************************************************************************
@@ -181,18 +181,19 @@ parameter int SND_TON   = 244;      // IO address for TONE register in sound mod
 parameter int SND_DUR   = 245;      // IO address for DURATION register in sound module
 parameter int GEO_LO    = 246;      // IO address for GEOFF LOW byte
 parameter int GEO_HI    = 247;      // IO address for GEOFF HIGH byte
+parameter int FIFO_STAT = 248;      // IO address for GPU FIFO status on bit 0 - remaining bits free for other data
 //
 // Direction control for DATA BUS level converter
 //
-parameter bit data_in   = 0;        // 245_DIR for data in
-parameter bit data_out  = 1;        // 245_DIR for data out
+parameter bit data_in   = 0  ;      // 245_DIR for data in
+parameter bit data_out  = 1  ;      // 245_DIR for data out
 //
 // *******************************************************************************************************
 //
-reg [7:0]  PS2_CHAR  = 8'b0  ;       // Stores value to return when PS2_CHAR IO port is queried
-reg [7:0]  PS2_STAT  = 8'b0  ;       // Stores value to return when PS2_STATUS IO port is queried
-reg        PS2_prev  = 1'b0  ;
-reg [12:0] port_dly  = 13'b0 ;       // Port delay pipeline delays data output on an IO port read
+reg [7:0]  PS2_CHAR  = 8'b0  ;      // Stores value to return when PS2_CHAR IO port is queried
+reg [7:0]  PS2_STAT  = 8'b0  ;      // Stores value to return when PS2_STATUS IO port is queried
+//reg        PS2_prev  = 1'b0  ;
+//reg [12:0] port_dly  = 13'b0 ;       // Port delay pipeline delays data output on an IO port read
 reg [7:0]  PS2_RDY_r = 8'b0  ;
 
 
@@ -216,24 +217,24 @@ logic EA_OE_r2 ;             // OE for EA address level converter *** ACTIVE LOW
 
 always @(posedge GPU_CLK) begin
 
-// Double register the outputs to the slow Z80 bus.
-Z80_245data_dir_r2 <= Z80_245data_dir ;   // Control level converter direction for data flow - HIGH = A->B (toward Z80)
-Z80_rData_r2       <= Z80_rData ;  // Z80 DATA bus to return data from GPU RAM to Z80
-Z80_rData_ena_r2   <= Z80_rData_ena ;
-Z80_245_oe_r2      <= Z80_245_oe ;
-Z80_INT_REQ_r2     <= Z80_INT_REQ ;
-Z80_IEO_r2         <= Z80_IEO ;
-EA_DIR_r2          <= EA_DIR ;
-EA_OE_r2           <= EA_OE ;
-// Triple register the outputs to the slow Z80 bus.
-Z80_245data_dir_r <= Z80_245data_dir_r2 ;   // Control level converter direction for data flow - HIGH = A->B (toward Z80)
-Z80_rData_r       <= Z80_rData_r2 ;  // Z80 DATA bus to return data from GPU RAM to Z80
-Z80_rData_ena_r   <= Z80_rData_ena_r2 ;
-Z80_245_oe_r      <= Z80_245_oe_r2 ;
-Z80_INT_REQ_r     <= Z80_INT_REQ_r2 ;
-Z80_IEO_r         <= Z80_IEO_r2 ;
-EA_DIR_r          <= EA_DIR_r2 ;
-EA_OE_r           <= EA_OE_r2 ;
+	// Double register the outputs to the slow Z80 bus.
+	Z80_245data_dir_r2 <= Z80_245data_dir ;   // Control level converter direction for data flow - HIGH = A->B (toward Z80)
+	Z80_rData_r2       <= Z80_rData ;  // Z80 DATA bus to return data from GPU RAM to Z80
+	Z80_rData_ena_r2   <= Z80_rData_ena ;
+	Z80_245_oe_r2      <= Z80_245_oe ;
+	Z80_INT_REQ_r2     <= Z80_INT_REQ ;
+	Z80_IEO_r2         <= Z80_IEO ;
+	EA_DIR_r2          <= EA_DIR ;
+	EA_OE_r2           <= EA_OE ;
+	// Triple register the outputs to the slow Z80 bus.
+	Z80_245data_dir_r <= Z80_245data_dir_r2 ;   // Control level converter direction for data flow - HIGH = A->B (toward Z80)
+	Z80_rData_r       <= Z80_rData_r2 ;  // Z80 DATA bus to return data from GPU RAM to Z80
+	Z80_rData_ena_r   <= Z80_rData_ena_r2 ;
+	Z80_245_oe_r      <= Z80_245_oe_r2 ;
+	Z80_INT_REQ_r     <= Z80_INT_REQ_r2 ;
+	Z80_IEO_r         <= Z80_IEO_r2 ;
+	EA_DIR_r          <= EA_DIR_r2 ;
+	EA_OE_r           <= EA_OE_r2 ;
 
    // Latch and delay the Z80 CLK input for transition edge processing.
    Z80_CLKr    <= Z80_CLK   ;  // Register delay the Z80_CLK input.
@@ -245,7 +246,7 @@ EA_OE_r           <= EA_OE_r2 ;
    Z80_WRn_r   <= Z80_WRn   ;  // Z80 WR - active LOW
    Z80_RDn_r   <= Z80_RDn   ;  // Z80 RD - active LOW
    Z80_IORQn_r <= Z80_IORQn ;  // Z80 IORQ - active low
-   Z80_IEI_r   <= Z80_IEI   ;
+   //Z80_IEI_r   <= Z80_IEI   ;
 
    // Latch address and data coming in from Z80.
    Z80_addr_r  <= Z80_addr  ;// uCom 22-bit address bus
@@ -376,9 +377,15 @@ EA_OE_r           <= EA_OE_r2 ;
       
    end
 
-   if ( z80_read_port_1s && Z80_addr_r[7:0]==IO_STAT[7:0] ) begin     // Read_port 1 clock & keyboard status address
+   if ( z80_read_port_1s && Z80_addr_r[7:0] == IO_STAT[7:0] ) begin     // Read_port 1 clock & keyboard status address
    
       Z80_rData  <= PS2_STAT;
+      
+   end
+	
+	if ( z80_read_port_1s && Z80_addr_r[7:0] == FIFO_STAT[7:0] ) begin   // Read_port 1 clock & GPU status
+   
+      Z80_rData  <= GEO_STAT_RD ;
       
    end
    

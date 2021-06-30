@@ -1,0 +1,61 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dG:/fpga/Projects/GPU/test/Ellipse_Generator_Testbench_V2
+vellipse_generator
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1612188741
+!i10b 1
+!s100 N9Eh_;>dU`]]V9ZznEPVa2
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I6K<iWDW6cK17LB?DZF<cI0
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1610568684
+8ellipse_generator.sv
+Fellipse_generator.sv
+!i122 2
+L0 10 384
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1612188741.000000
+!s107 ellipse_generator.sv|
+!s90 -reportprogress|300|-sv|-work|work|ellipse_generator.sv|
+!i113 1
+Z7 o-sv -work work
+Z8 tCvgOpt 0
+vellipse_generator_tb
+R1
+R2
+!i10b 1
+!s100 L4<mW_8OOmzL;R6I0SK?B2
+R3
+Imoma5WP@l[5XW?NMGXUP62
+R4
+S1
+R0
+w1611864772
+8ellipse_generator_tb.sv
+Fellipse_generator_tb.sv
+!i122 3
+L0 36 466
+R5
+r1
+!s85 0
+31
+R6
+!s107 ellipse_generator_tb.sv|
+!s90 -reportprogress|300|-sv|-work|work|ellipse_generator_tb.sv|
+!i113 1
+R7
+R8

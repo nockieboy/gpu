@@ -1,0 +1,66 @@
+Ellipse draw function table.
+For a draw comand to be accepted, it must have the 'at' symbol (SHIFT 2) in front of it.
+Example:
+
+[at]COMMAND_STRING <arg> <arg> <arg> ...
+
+***Removing the [at] symbol means the command is ignored and it is treated as text comments.
+Multiple commands are allowed on one line so long as each command has an [at] symbol in front of it.
+
+******************************************************************************************************************
+Commands:
+
+Generates a results log file.
+[at]LOG_FILE  <FILE_NAME>       (No spaces allowed in file name).
+[at]END_LOG_FILE                 Forcefully closes/ends the log file
+
+
+Run the 'ellipse_henerator.sv' DUT:
+
+[at]DRAW_ELLI  <filled> <quadrant> <X_center> <Y_center> <X_radius> <Y_radius> <color byte>
+                Filled   = 0-1.
+                Quadrant = 0-3 to draw 1 of 4 quadrant.
+                Quadrant = 4   to draw all 4 quadrants.
+
+
+[at]SAVE_BMP <FILE_NAME>   > Saves a BMP picture.  (No spaces allowed in file name)
+[at]CLR_BMP <color byte>   > Clears bitmap memory to a set byte.
+
+[at]RESET                  > Sends a reset to the ellipse generator
+
+[at]STOP                   > Stops the script processing/simulation.  Click on 'run -all' or
+                             type 'run -all' in transcript to continue script after the stop command.
+
+[at]END                    > Ends the script processing/simulation.
+
+*****************************************************************************************************************
+
+**** Initialize a log file which records all the executed commands with their results.
+@LOG_FILE ellipse_generated_results.txt
+
+**** Clear the BMP's bitmap memory to a chosen color byte.
+@CLR_BMP 0
+
+**** Send a reset to the ellipse_generator.sv module.
+@RESET
+
+**** Draw some ellipses...
+@DRAW_ELLI 0 0   0   0  15  15 255
+@DRAW_ELLI 0 0   0   0  25  25 127
+@DRAW_ELLI 0 0   0   0  50  50 255
+@DRAW_ELLI 1 1  75  75  50  50 192
+
+Draw a full filled ellipse centered at 50x50  with radius 25 25.
+@DRAW_ELLI 1 4  50  50  25  25 255
+
+Draw a full filled ellipse centered at 150x150  with radius 125 25.
+@DRAW_ELLI 1 4 150 150 125  25 100
+@DRAW_ELLI 0 4 150 150  25 125 255 Draw a full ellipse 150 150 25 125
+@DRAW_ELLI 0 4 550 550 225 325 255
+@DRAW_ELLI 0 4 550 550 425 225 220
+
+**** Save the BMP's bitmap memory into a picture file.
+@SAVE_BMP ellipse_generated_bitmap.bmp
+
+**** End/stop the simulation  (Optional)
+@END

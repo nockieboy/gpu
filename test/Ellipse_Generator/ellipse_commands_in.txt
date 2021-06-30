@@ -1,0 +1,45 @@
+Ellipse draw function table.
+For a draw comand to be accepted, it must have an 'at' symbol in front of it.
+
+Filled   = 0,1           - Tells the ellipse generator if it should do a raster fill.
+Quadrant = 0,1,2,3       - Tells the ellipse generator which 1 of the 4 quadrants to draw.
+Xc       = [-2048..2047] - Specifies the X center coordinate of the ellipse.
+Yc       = [-2048..2047] - Specifies the Y center coordinate of the ellipse.
+Xr       = [0..1023]     - Specifies the X radius of the ellipse.
+Yr       = [0..1023]     - Specifies the Y radius of the ellipse.
+Color    = [0..255]      - Draw color in generated bitmap, 0=black, 255=100% white.
+
+Full command:
+[at]Filled,Quadrant,Xc,Yc,Xr,Yr,color
+
+***Warning, there are no checks, there needs to be 6 numbers after the [at] symbol.
+***Removing the [at] symbol means the command is ignored and trreated as text comments.
+
+@0,0,0,0,15,15,255
+@0,0,0,0,25,25,127
+@0,0,0,0,50,50,255
+@1,1,75,75,50,50,192
+
+Draw a full filled ellipse centered at 50x50, with radius 25,25.
+@1,0,50,50,25,25,255
+@1,1,50,50,25,25,255
+@1,2,50,50,25,25,255
+@1,3,50,50,25,25,255
+
+Draw a full filled ellipse centered at 150x150, with radius 125,25.
+@1,0,150,150,125,25,100 @1,1,150,150,125,25,100 @1,2,150,150,125,25,100 @1,3,150,150,125,25,100
+
+@0,0,150,150,25,125,255 Draw a full ellipse 150,150,25,125
+@0,1,150,150,25,125,255
+@0,2,150,150,25,125,255
+@0,3,150,150,25,125,255
+
+@0,0,550,550,225,325,255
+@0,1,550,550,225,325,255
+@0,2,550,550,225,325,255
+@0,3,550,550,225,325,255
+
+@0,0,550,550,425,225,220
+@0,1,550,550,425,225,220
+@0,2,550,550,425,225,220
+@0,3,550,550,425,225,220

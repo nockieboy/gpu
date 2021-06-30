@@ -1,0 +1,35 @@
+module r_bank ( 
+						input wire rst,
+						input wire clk,
+						input wire we,
+						input wire [7:0] addr_in,
+						input wire [7:0] data_in,
+
+						output reg  [7:0] mem[256]  );
+
+
+ 
+  integer i;
+ 
+  always @ (posedge clk) begin
+  
+  if (rst) begin
+
+	mem[0] <= 8'hAA;
+	mem[1] <= 8'hBB;
+	mem[2] <= 8'hCC;
+	mem[3] <= 8'hDD;
+
+    for (i = 4; i < 32; i = i + 1) begin
+		mem[i] <= 8'h0;
+    end
+		
+	end else begin
+  
+		if (we)
+		mem[addr_in] <= data_in;
+		end
+
+	end
+
+endmodule

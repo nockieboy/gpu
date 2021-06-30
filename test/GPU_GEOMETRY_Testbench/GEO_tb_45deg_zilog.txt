@@ -1,0 +1,114 @@
+******************************************************************************************************************
+8-biy GPU Full Geometry unit test-bench command list.
+
+Written by Brian Guralnick.
+Feb 01, 2021.
+
+This file contains a command list to drive Nockieboy's
+8-bit GPU Geometry processor section.
+
+******************************************************************************************************************
+
+For a comand to be accepted, it must have the 'at' symbol (SHIFT 2) in front of it.
+Example:
+
+[at]COMMAND_STRING <arg> <arg> <arg> ...
+
+***Removing the [at] symbol means the command is ignored and it is treated as text comments.
+Multiple commands are allowed on one line so long as each command has an [at] symbol in front of it.
+
+******************************************************************************************************************
+Commands: (*** No spaces allowed in any <FILE_NAME>)
+
+[at]LOG_FILE  <FILE_NAME>            > Generates a results log file.         (No spaces allowed in file name).
+[at]END_LOG_FILE                     > Forcefully closes/ends the log file.
+[at]STOP                             > Stops the script processing/simulation.  Click on 'run -all' to continue script after the stop command.
+[at]END                              > Ends the script processing/simulation. (You may now paint/set youw own manual controls in the waveform view and run -all)
+
+[at]LOAD_GPU_RAM <file_name.bin>     > Reads a binary file, up to 1 megabyte, into the GEO pixel-writer memory.  
+[at]SAVE_GPU_RAM <file_name.bin>     > Saves GEO pixel-writer 1 megabyte memory into a binary file.
+[at]CLR_GPU_RAM                      > Clears the GPU memory
+
+[at]CLR_BMP      <color_byte>        > Clears the test geometry_plotter bitmap memory to a set byte.  (This is not the pixel writer)
+
+[at]SAVE_GEO_BMP   <FILE_NAME> <width> <height> <1=B&W>            > Saves a 256 color BMP picture of the geometry_plotter's output, NOT GPU Ram. Max 2048x2048.  <1=B&W> or 0 for dummy 256 color palette
+[at]SAVE_PIXIE_BMP <FILE_NAME> <src/dest> <width> <height> <1=B&W> > Saves a 256 color BMP picture of the pixie-writer system GPU memory. SET_PAGET settings must be set & PIXIE must be enabled prior to draw commands.  <1=B&W> or 0 for dummy 256 color palette
+
+[at]RESET                            > Sends a reset to the geometry unit.
+[at]ENA_PIXIE <0/1>                  > Enables/disables pixel writer.  (Pixel writer is disabled by default)
+[at]WAIT_IDLE <0/1>                  > Waits for the all processes to finish whatever they are currently doing before running next command. IE 1 command at a time.
+
+[at]SEND_CMD <h0000-hFFFF>           > send a raw command, 16 bit hex value
+
+[at]SET_XY  <x/y> <0..3> <decimal>                             > Sets 12 bit register X or Y with 12 bit decimal value 0-4095, basically calls SEND_CMD with the right value.
+[at]SET_PAGET <src/dest> <base_address_hex> <width> <depth>    > Sets PAGET's (pixel address generator) source/dest   memory address, image width, color depth in bits/pixel = (1/2/4/8/16).
+[at]SET_MAX_XY <x>   <y>                                       > Sets the maximum destination XY resolution.
+
+[at]DRAW PIXEL <X>   <Y>   <c>                                          > Draws a dot at coordinates [XY], c=color(0..255)
+[at]DRAW LINE  <aX>  <aY>  <bX>  <bY>  <c>                              > Draws a line from coordinates a[XY] to b[XY].
+[at]DRAW BOX   <aX>  <aY>  <bX>  <bY>  <c>   <f>                        > Draws a box from top left a[XY] to bottom right b[XY] coordinates. f=fill(0/1)
+[at]DRAW TRI   <aX>  <aY>  <bX>  <bY>  <cX>  <cY>  <c>   <f>            > Draws a triangle with coordinates [abc][XY].
+[at]DRAW QUAD  <tlX> <tlY> <trX> <trY> <brX> <brY> <blX> <blY> <c> <f>  > Draws a quadrilateral, tl=Top Left, tr=Top Right, br=Bottom Right, bl=Bottom Left.
+[at]DRAW ELLI  <Xc>  <Yc>  <Xr>  <Yr>  <c>   <q>   <f>                  > Draws an ellipse. Q=Quadrant.
+                fill     = 0/1
+                Quadrant = 0-3 to draw 1 of 4 quadrants.
+                Quadrant = 4   to draw all 4 quadrants.
+
+**** BLITTER must have PAGET (SRCE/DEST) set to function.
+
+[at]BLIT TCOL  <transparent_color>         > [0.255]  Selects which color in the source image will be transparent when doing a paste when paste mask is enabled.
+[at]BLIT POS   <px> <py> <width> <height>  > Sets the source image top left pixel position (px,py) and the copy (width,height) in pixels.
+[at]BLIT SCALE <usX> <usY> <dsX> <dsY>     > Sets blitter scale, us=upsample   float X/Y zooms up the SRCE image copy input   1.000000 to 4095.00000. (12 bit granularity)
+                                                                 ds=downsample float X/Y shrinks  the DEST image paste output 1.000000 to 0.000245.   (12 bit granularity)
+
+[at]BLIT CONFIG  <ena>  <mask> <h-centp> <mirror> <v-centp> <flip> <r90>  <r45>
+
+         ena       = blitter off/on             1 = blitter on when writing pixels.
+                                                0 = blitter off when writing pixels.
+         mask      = Transparancy mask enable.  1 = source transparent color pixels will not paste pixels onto destination, IE those colors are transparent.
+                                                0 = Every pixel from the source will paste onto the destination.
+         h-centp   = horizontal center paste.   1 = Offset the paste to the left by half of blit_width.
+                                                0 = Use the paste coordinates as the beginning left.
+         mirror    = Horizontal mirror paste.   1 = Mirror the output on the X axis.
+                                                0 = Off.
+         v-centp   = Vertical center paste.     1 = Offset the paste up by half of blit_height
+                                                0 = Use the paste coordinates as the beginning top of the paste
+         flip      = Vertical flip paste.       1 = Vertically flip the output on the Y axis.
+                                                0 = Off
+         r90       = Enable Rotate 90 degree.   1 = Swaps the X&Y coordinates on the paste.
+         r45       = Enable Rotate 45 degree.   1 = Increments/decrements the X&Y coordinates on the paste in unison.
+
+*****************************************************************************************************************
+
+
+**** Initialize a log file which records all the executed commands with their results.
+@LOG_FILE GEO_tb_command_results.txt
+@WAIT_IDLE 1   // Will automatically wait until the last drawing command finishes before issuing a new command,
+
+**** Clear the BMP's bitmap memory to a chosen color byte.
+@CLR_BMP 0     // Make the geometry_plotter's test bitmap background black.
+
+**** Send a reset to the ellipse_generator.sv module.
+@RESET
+@ENA_PIXIE 1   Enable/Disable pixel writer, IE only run the geometry_ploter.sv & PAGET
+@LOAD_GPU_RAM  Zilog_640x360.bin
+
+@SET_MAX_XY  800 600             Sets the pixel writer coordinate XY limits.
+@SET_PAGET  srce 000000 640 8    Set the source/copy bitmap to 520 pixels, 8 bit color, basically the Font_520x78-20x39-8bit.bin image format
+@SET_PAGET  dest 080000 800 8    Set bitmap witdh to 640 pixels, 8 bits per pixel, current font memory.
+
+@BLIT CONFIG   1 0 0 0 0 0 0 1         Enable blitter, no transparency, 45 degree rotate.
+@BLIT SCALE    1 1 1 1                 Highest quality 45 degree zoom is all 100% size, It is better to 45 at 1:1, then do a zoom separate
+@BLIT TCOL     0                       Set blitter's source image transparent color.
+
+@BLIT POS      0     0       640    360
+@DRAW PIXEL    320   40      0
+DRAW PIXEL     100   360     0
+
+@SAVE_PIXIE_BMP GEO_PIXIE_RAM_DEST_001.bmp dest 800 600 1  **** Pixie GPU memory using PAGET's dest pointers, B&W mode.
+@SAVE_PIXIE_BMP GEO_PIXIE_RAM_SRCE_001.bmp srce 640 360 1  **** Font memory Pixie GPU memory using PAGET's srce pointers, B&W mode.
+
+
+
+**** End/stop the simulation  (Optional)
+@END
