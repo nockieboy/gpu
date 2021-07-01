@@ -1,0 +1,1020 @@
+<html>
+<body>
+<h1 align="center">DECA MAX10 Board Configuration</h1>
+<br />
+<br />
+<h2 align="left">Pin Assignments:</h2>
+<ul>
+<a href="#CLOCK"><li>CLOCK</li></a>
+<br />
+<a href="#KEY"><li>KEY</li></a>
+<br />
+<a href="#LED"><li>LED</li></a>
+<br />
+<a href="#CapSense Button"><li>CapSense Button</li></a>
+<br />
+<a href="#Audio"><li>Audio</li></a>
+<br />
+<a href="#Flash"><li>Flash</li></a>
+<br />
+<a href="#G-Sensor"><li>G-Sensor</li></a>
+<br />
+<a href="#HDMI-TX"><li>HDMI-TX</li></a>
+<br />
+<a href="#Light Sensor"><li>Light Sensor</li></a>
+<br />
+<a href="#Ethernet"><li>Ethernet</li></a>
+<br />
+<a href="#Power Monitor"><li>Power Monitor</li></a>
+<br />
+<a href="#Humidity and Temperature Sensor"><li>Humidity and Temperature Sensor</li></a>
+<br />
+<a href="#MicroSD Card"><li>MicroSD Card</li></a>
+<br />
+<a href="#SW"><li>SW</li></a>
+<br />
+<a href="#Board Temperature Sensor"><li>Board Temperature Sensor</li></a>
+<br />
+<a href="#USB"><li>USB</li></a>
+<br />
+</ul>
+<br />
+<br />
+<br />
+<h2 align="left">Pin Assignment Table:</h2>
+<h2><a name="CLOCK"></a></h2><table border="3">
+<caption  align="left">CLOCK</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">ADC_CLK_10</td>
+   <td align="left">M9</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">MAX10_CLK1_50</td>
+   <td align="left">M8</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">MAX10_CLK2_50</td>
+   <td align="left">P11</td>
+   <td align="left">input </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="KEY"></a></h2><table border="3">
+<caption  align="left">KEY</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">KEY[0]</td>
+   <td align="left">H21</td>
+   <td align="left">input </td>
+   <td align="left">1.5 V Schmitt Trigger</td>
+</tr>
+<tr>
+   <td align="left">KEY[1]</td>
+   <td align="left">H22</td>
+   <td align="left">input </td>
+   <td align="left">1.5 V Schmitt Trigger</td>
+</tr>
+</table>
+<h2><a name="LED"></a></h2><table border="3">
+<caption  align="left">LED</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">LED[0]</td>
+   <td align="left">C7</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">LED[1]</td>
+   <td align="left">C8</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">LED[2]</td>
+   <td align="left">A6</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">LED[3]</td>
+   <td align="left">B7</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">LED[4]</td>
+   <td align="left">C4</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">LED[5]</td>
+   <td align="left">A5</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">LED[6]</td>
+   <td align="left">B4</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">LED[7]</td>
+   <td align="left">C5</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+</table>
+<h2><a name="CapSense Button"></a></h2><table border="3">
+<caption  align="left">CapSense Button</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">CAP_SENSE_I2C_SCL</td>
+   <td align="left">AB2</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">CAP_SENSE_I2C_SDA</td>
+   <td align="left">AB3</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="Audio"></a></h2><table border="3">
+<caption  align="left">Audio</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">AUDIO_BCLK</td>
+   <td align="left">R14</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_DIN_MFP1</td>
+   <td align="left">P15</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_DOUT_MFP2</td>
+   <td align="left">P18</td>
+   <td align="left">input </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_GPIO_MFP5</td>
+   <td align="left">M22</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_MCLK</td>
+   <td align="left">P14</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_MISO_MFP4</td>
+   <td align="left">N21</td>
+   <td align="left">input </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_RESET_n</td>
+   <td align="left">M21</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_SCLK_MFP3</td>
+   <td align="left">P19</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_SCL_SS_n</td>
+   <td align="left">P20</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_SDA_MOSI</td>
+   <td align="left">P21</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_SPI_SELECT</td>
+   <td align="left">N22</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">AUDIO_WCLK</td>
+   <td align="left">R15</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+</table>
+<h2><a name="Flash"></a></h2><table border="3">
+<caption  align="left">Flash</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">FLASH_DATA[0]</td>
+   <td align="left">P12</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">FLASH_DATA[1]</td>
+   <td align="left">V4</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">FLASH_DATA[2]</td>
+   <td align="left">V5</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">FLASH_DATA[3]</td>
+   <td align="left">P10</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">FLASH_DCLK</td>
+   <td align="left">R12</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">FLASH_NCSO</td>
+   <td align="left">R10</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">FLASH_RESET_n</td>
+   <td align="left">W10</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="G-Sensor"></a></h2><table border="3">
+<caption  align="left">G-Sensor</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">GSENSOR_PD</td>
+   <td align="left">AB5</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">GSENSOR_ST</td>
+   <td align="left">AA5</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="HDMI-TX"></a></h2><table border="3">
+<caption  align="left">HDMI-TX</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">HDMI_I2C_SCL</td>
+   <td align="left">C10</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_I2C_SDA</td>
+   <td align="left">B15</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_I2S[0]</td>
+   <td align="left">A9</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_I2S[1]</td>
+   <td align="left">A11</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_I2S[2]</td>
+   <td align="left">A8</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_I2S[3]</td>
+   <td align="left">B8</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_LRCLK</td>
+   <td align="left">A10</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_MCLK</td>
+   <td align="left">A7</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_SCLK</td>
+   <td align="left">D12</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_CLK</td>
+   <td align="left">D6</td>
+   <td align="left">output</td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[0]</td>
+   <td align="left">C18</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[1]</td>
+   <td align="left">D17</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[2]</td>
+   <td align="left">C17</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[3]</td>
+   <td align="left">C19</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[4]</td>
+   <td align="left">D14</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[5]</td>
+   <td align="left">B19</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[6]</td>
+   <td align="left">D13</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[7]</td>
+   <td align="left">A19</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[8]</td>
+   <td align="left">C14</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[9]</td>
+   <td align="left">A17</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[10]</td>
+   <td align="left">B16</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[11]</td>
+   <td align="left">C15</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[12]</td>
+   <td align="left">A14</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[13]</td>
+   <td align="left">A15</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[14]</td>
+   <td align="left">A12</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[15]</td>
+   <td align="left">A16</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[16]</td>
+   <td align="left">A13</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[17]</td>
+   <td align="left">C16</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[18]</td>
+   <td align="left">C12</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[19]</td>
+   <td align="left">B17</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[20]</td>
+   <td align="left">B12</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[21]</td>
+   <td align="left">B14</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[22]</td>
+   <td align="left">A18</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_D[23]</td>
+   <td align="left">C13</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_DE</td>
+   <td align="left">C9</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_HS</td>
+   <td align="left">B11</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_INT</td>
+   <td align="left">B10</td>
+   <td align="left">input </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">HDMI_TX_VS</td>
+   <td align="left">C11</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+</table>
+<h2><a name="Light Sensor"></a></h2><table border="3">
+<caption  align="left">Light Sensor</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">LIGHT_I2C_SCL</td>
+   <td align="left">Y8</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">LIGHT_I2C_SDA</td>
+   <td align="left">AA8</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">LIGHT_INT</td>
+   <td align="left">AA9</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="Ethernet"></a></h2><table border="3">
+<caption  align="left">Ethernet</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">NET_COL</td>
+   <td align="left">R4</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_CRS</td>
+   <td align="left">P5</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_MDC</td>
+   <td align="left">R5</td>
+   <td align="left">output</td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_MDIO</td>
+   <td align="left">N8</td>
+   <td align="left">inout </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_PCF_EN</td>
+   <td align="left">V9</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">NET_RESET_n</td>
+   <td align="left">R3</td>
+   <td align="left">output</td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_RXD[0]</td>
+   <td align="left">P8</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_RXD[1]</td>
+   <td align="left">R7</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_RXD[2]</td>
+   <td align="left">U4</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_RXD[3]</td>
+   <td align="left">U5</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_RX_CLK</td>
+   <td align="left">T6</td>
+   <td align="left">output</td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_RX_DV</td>
+   <td align="left">P4</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_RX_ER</td>
+   <td align="left">V1</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_TXD[0]</td>
+   <td align="left">U2</td>
+   <td align="left">output</td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_TXD[1]</td>
+   <td align="left">W1</td>
+   <td align="left">output</td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_TXD[2]</td>
+   <td align="left">N9</td>
+   <td align="left">output</td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_TXD[3]</td>
+   <td align="left">W2</td>
+   <td align="left">output</td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_TX_CLK</td>
+   <td align="left">T5</td>
+   <td align="left">input </td>
+   <td align="left">2.5 V</td>
+</tr>
+<tr>
+   <td align="left">NET_TX_EN</td>
+   <td align="left">P3</td>
+   <td align="left">output</td>
+   <td align="left">2.5 V</td>
+</tr>
+</table>
+<h2><a name="Power Monitor"></a></h2><table border="3">
+<caption  align="left">Power Monitor</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">PMONITOR_ALERT</td>
+   <td align="left">Y4</td>
+   <td align="left">input </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">PMONITOR_I2C_SCL</td>
+   <td align="left">Y3</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">PMONITOR_I2C_SDA</td>
+   <td align="left">Y1</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="Humidity and Temperature Sensor"></a></h2><table border="3">
+<caption  align="left">Humidity and Temperature Sensor</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">RH_TEMP_DRDY_n</td>
+   <td align="left">AB9</td>
+   <td align="left">input </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">RH_TEMP_I2C_SCL</td>
+   <td align="left">Y10</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">RH_TEMP_I2C_SDA</td>
+   <td align="left">AA10</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="MicroSD Card"></a></h2><table border="3">
+<caption  align="left">MicroSD Card</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">SD_CLK</td>
+   <td align="left">T20</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_CMD</td>
+   <td align="left">T21</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_CMD_DIR</td>
+   <td align="left">U22</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_D0_DIR</td>
+   <td align="left">T22</td>
+   <td align="left">output</td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_D123_DIR</td>
+   <td align="left">U21</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_DAT[0]</td>
+   <td align="left">R18</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_DAT[1]</td>
+   <td align="left">T18</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_DAT[2]</td>
+   <td align="left">T19</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_DAT[3]</td>
+   <td align="left">R20</td>
+   <td align="left">inout </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_FB_CLK</td>
+   <td align="left">R22</td>
+   <td align="left">input </td>
+   <td align="left">1.5 V</td>
+</tr>
+<tr>
+   <td align="left">SD_SEL</td>
+   <td align="left">P13</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="SW"></a></h2><table border="3">
+<caption  align="left">SW</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">SW[0]</td>
+   <td align="left">J21</td>
+   <td align="left">input </td>
+   <td align="left">1.5 V Schmitt Trigger</td>
+</tr>
+<tr>
+   <td align="left">SW[1]</td>
+   <td align="left">J22</td>
+   <td align="left">input </td>
+   <td align="left">1.5 V Schmitt Trigger</td>
+</tr>
+</table>
+<h2><a name="Board Temperature Sensor"></a></h2><table border="3">
+<caption  align="left">Board Temperature Sensor</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">TEMP_CS_n</td>
+   <td align="left">AB4</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">TEMP_SC</td>
+   <td align="left">AA1</td>
+   <td align="left">output</td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+<tr>
+   <td align="left">TEMP_SIO</td>
+   <td align="left">Y2</td>
+   <td align="left">inout </td>
+   <td align="left">3.3-V LVTTL</td>
+</tr>
+</table>
+<h2><a name="USB"></a></h2><table border="3">
+<caption  align="left">USB</caption>
+<br />
+<br />
+<tr>
+   <th align="left" bgcolor="Khaki">Name</th>
+   <th align="left" bgcolor="Khaki">Location</th>
+   <th align="left" bgcolor="Khaki">Direction</th>
+   <th align="left" bgcolor="Khaki">Standard</th>
+</tr>
+<tr>
+   <td align="left">USB_CLKIN</td>
+   <td align="left">H11</td>
+   <td align="left">input </td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">USB_CS</td>
+   <td align="left">J11</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DATA[0]</td>
+   <td align="left">E12</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DATA[1]</td>
+   <td align="left">E13</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DATA[2]</td>
+   <td align="left">H13</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DATA[3]</td>
+   <td align="left">E14</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DATA[4]</td>
+   <td align="left">H14</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DATA[5]</td>
+   <td align="left">D15</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DATA[6]</td>
+   <td align="left">E15</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DATA[7]</td>
+   <td align="left">F15</td>
+   <td align="left">inout </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_DIR</td>
+   <td align="left">J13</td>
+   <td align="left">input </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_FAULT_n</td>
+   <td align="left">D8</td>
+   <td align="left">input </td>
+   <td align="left">1.2 V</td>
+</tr>
+<tr>
+   <td align="left">USB_NXT</td>
+   <td align="left">H12</td>
+   <td align="left">input </td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_RESET_n</td>
+   <td align="left">E16</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+<tr>
+   <td align="left">USB_STP</td>
+   <td align="left">J12</td>
+   <td align="left">output</td>
+   <td align="left">1.8 V</td>
+</tr>
+</table>
+</html>
+</body>
