@@ -1,0 +1,9 @@
+[submodule "GPU_DECA_TEST/BrianHG-DDR3-Controller"]
+	path = GPU_DECA_TEST/BrianHG-DDR3-Controller
+	url = https://github.com/nockieboy/BrianHG-DDR3-Controller.git
+[submodule "test/BrianHG-DDR3-Controller"]
+	path = test/BrianHG-DDR3-Controller
+	url = https://github.com/nockieboy/BrianHG-DDR3-Controller.git
+[submodule "BrianHG-DDR3-Controller"]
+	path = BrianHG-DDR3-Controller
+	url = https://github.com/nockieboy/BrianHG-DDR3-Controller.git

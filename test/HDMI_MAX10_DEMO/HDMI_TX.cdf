@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(10M50DAF484ES) Path("G:/fpga/DECA/Demonstrations/HDMI_TX/") File("HDMI_TX.sof") MfrSpec(OpMask(1));
+		Device PartName(10M50DAF484ES) Path("D:/FPGA/Projects/GPU/test/HDMI_MAX10_DEMO/") File("HDMI_TX.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

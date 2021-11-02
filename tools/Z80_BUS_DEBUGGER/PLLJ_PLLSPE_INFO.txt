@@ -1,0 +1,10 @@
+PLL_Name	sys_pll:u_sys_pll|altpll:altpll_component|sys_pll_altpll:auto_generated|pll1
+PLLJITTER	0
+PLLSPEmax	84
+PLLSPEmin	-53
+
+PLL_Name	vpg:u_vpg|pll:u_pll|altpll:altpll_component|pll_altpll:auto_generated|pll1
+PLLJITTER	2
+PLLSPEmax	84
+PLLSPEmin	-53
+
