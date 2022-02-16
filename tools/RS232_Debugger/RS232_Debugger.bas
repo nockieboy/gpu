@@ -13,10 +13,10 @@
 '
 ' ***********************************************************************
 
-const  MAX_MEM_ALLOC    = 1048576 '16384 '1048576
+const  MAX_MEM_ALLOC    = 1048576   '16384 '1048576
 const  COM_CACHE        = 2048: REM number of allowed sequential bytes to be sent and received. FOR FTDI FT232 serial cables, use 2048.  1/2 their fifo size.
 const  COM_PRE_TIMEOUT  = 2   : REM time in ms to wait for flush to take effect
-const  COM_POST_TIMEOUT = 20  : REM time in ms to wait for GPU to respond before considering an error
+const  COM_POST_TIMEOUT = 5  : REM 20 time in ms to wait for GPU to respond before considering an error
 const  COM_FLUSH        = 0   : REM 1 = send 272 null characters before every command  0 = high speed
 const  COM_WAIT         = 0   : REM 1 = wait and flush an characters in the PC's RDX before beginning to transmit
 const  COM_VERBOSE      = 0   : REM 1= print all com transaction debug information, 2 = print mouse coordinates and keypresses
@@ -57,6 +57,7 @@ Declare Sub save_dialog()
 Declare Sub load_dialog()
 Declare Sub save_mif()
 Declare Sub save_mif16()
+Declare Sub save_mif32()
 Declare Sub file_dialog( i as string, fn as string )
 Declare Sub edit16( i as integer )
 Declare Sub enter16( i as integer )
@@ -156,7 +157,7 @@ function px99999(byval i As Integer) As String
 end function
 
 dim Shared as string   ink, stemp, cmd_write, cmd_write_page, cmd_saddr, cmd_read, cmd_read_page, cmd_reset, cmd_null16, cmd_prefix, com_num, cmd_setp, com_port
-dim Shared as ubyte    ser_byte
+dim Shared as ubyte    ser_byte,ENDIAN
 dim Shared as integer  gpu_addr, gpu_addr_now, ser_rxbuf, x, y, z, c, hp, undobase, MAX_MEM
 dim shared as integer  mx,my,mb,mw,mwl,mbl,mwd,mcx1,mcy1,mcz,mcx2,mcy2,mcx,mcy, edit_mode, edit_pos
 dim shared as integer  m2cx1,m2cy1,m2cz,m2cx2,m2cy2,m2cx,m2cy,edit_col
@@ -263,7 +264,7 @@ locate 52,1:
 ? "Keys: PGUP & PGDN & Arrows = Scroll Up / Down    Home & End = Top and Bottom of memory"
 ? "                +CTRL+     = Scroll faster              ESC = Quit"
 ? "                       [r] = re-read entire GPU ram     [w] = write entire GPU ram"
-?
+? "                       [e] = Swap Endian "
 ? "      Click mouse to select either hex numbers or ASCII text.  Use +/-, Wheel mouse,"
 ? "      click on the the binary bits or decimal #, or type to edit the memory."
 ? "      [CTRL-z] To undo changes. Hit ENTER/RMB/ESC to exit editing memory.";
@@ -275,12 +276,13 @@ locate 41,60:?"CTRL -S Save Debug_quick_file2"
 locate 42,60:?"CTRL -L Load Debug_quick_file2"
 locate 43,60:?"[l] Load Binary"
 locate 44,60:?"[s] Save Binary"
-locate 46,60:?"[m] Save Quartus .mif file"
-locate 47,60:?"[M] Save 16bit Quartus .mif"
 
-locate 48,60:?"CTRL -R RESET GPU"
-locate 49,60:?"CTRL -O Open RS232 com port"
-locate 50,60:?"CTRL -C Close RS232 com port"
+locate 45,60:?"[q]    Save 8  bit Quartus .mif"
+locate 46,60:?"[Q]    Save 16 bit Quartus .mif"
+locate 47,60:?"CTRL-Q Save 32 bit Quartus .mif"
+locate 48,60:?"CTRL-R RESET GPU"
+locate 49,60:?"CTRL-O Open RS232 com port"
+locate 50,60:?"CTRL-C Close RS232 com port"
 
 
 for y=0 to 8
@@ -288,7 +290,9 @@ color_rg(1,y+62,1 ):? ,,,"  ";
 color_rg(2,y+62,45):? ,,,"      ";
 next y
 
-
+color rgb(255,255,255),rgb(0,0,255)
+if ENDIAN=0 then locate 1,58:? "    Little Endian   ";
+if ENDIAN=1 then locate 1,58:? "      Big Endian    ";
 color rgb(224,224,224),rgb(0,0,0)
 
 
@@ -315,13 +319,22 @@ if edit_mode = 0 then
 	if z  = 12 then load_file("Debug_quick_file2.bin",0,MAX_MEM)
 	if z  = 19 then save_file("Debug_quick_file2.bin",0,MAX_MEM)
 
-	if ink="l" then put_undo():load_dialog()
-	if ink="s" then            save_dialog()
-	if ink="m" then            save_mif()
-	if ink="M" then            save_mif16()
+	if ink="l" then   put_undo():load_dialog()
+	if ink="s" then              save_dialog()
+	if ink="q" then              save_mif()
+	if ink="Q" then              save_mif16()
+	if z  = 17 then              save_mif32()
 
 	if ink="r" then            read_gpu_all(0,MAX_MEM)
 	if ink="w" then            write_gpu_all(0,MAX_MEM)
+
+	if ink="e" then
+                                    ENDIAN = ENDIAN xor 1
+                                    color rgb(255,255,255),rgb(0,0,255)
+                                    if ENDIAN=0 then locate 1,58:? "    Little Endian   ";
+                                    if ENDIAN=1 then locate 1,58:? "      Big Endian    ";
+                                    color rgb(224,224,224),rgb(0,0,0)
+                                    endif
 
 
 	if asc(mid(ink,1,1))=3   then close_com()
@@ -343,7 +356,7 @@ if edit_mode = 0 then
 	if asc(mid(ink,2,1))=145 then gpu_addr=gpu_addr+64
 
         z= asc(mid(ink,1,1))
-        if z=26  then get_undo()
+        if z=26  then get_undo():write_gpu(gpu_addr,256)
 	if z=18  then for x=0 to 32:? #1,cmd_null16; :next x: ?#1,cmd_reset;  :  REM Reset the GPU
 
 
@@ -418,10 +431,19 @@ end sub
 
 
 Sub edit16( i as integer )
-	x = read_buffer(int(mcz/2)*2)*256 + read_buffer(int(mcz/2)*2+1)
+
+if ENDIAN=1 then
+	x = read_buffer(int(mcz/2)*2+0)*256 + read_buffer(int(mcz/2)*2+1)
 	x=x+i:x=x and 65535
-	read_buffer(int(mcz/2)*2) = int(x/256)
+	read_buffer(int(mcz/2)*2+0) = int(x/256)
 	read_buffer(int(mcz/2)*2+1) = x and 255
+else
+	x = read_buffer(int(mcz/2)*2+1)*256 + read_buffer(int(mcz/2)*2+0)
+	x=x+i:x=x and 65535
+	read_buffer(int(mcz/2)*2+1) = int(x/256)
+	read_buffer(int(mcz/2)*2+0) = x and 255
+endif
+
 end sub
 
 
@@ -533,7 +555,8 @@ if d_filename<>"" then
 
 	for x=d_membase to d_membase+int(d_memsize/2)-1
 
-		?#2, mifpos;" : ";int(read_buffer(x*2+1)*256+read_buffer(x*2+0));";"
+		if ENDIAN=1 then ?#2, mifpos;" : ";int(read_buffer(x*2+1)*256+read_buffer(x*2+0));";"
+		if ENDIAN=0 then ?#2, mifpos;" : ";int(read_buffer(x*2+0)*256+read_buffer(x*2+1));";"
 
 	mifpos=mifpos + 1
 	next x
@@ -542,21 +565,39 @@ if d_filename<>"" then
 	close #2
 
 end if
-
 box(0)
+end sub
 
-open "HW_regs.txt" for output as 2
-?#2,"Hardware regs ="
+Sub save_mif32()
+dim as integer mifpos
+file_dialog("Save a Quartus .mif (Memory Initialization File):",".mif")
 
-for y=0 to 7
-?#2,"A(";
-for x=0 to 30
-?#2,read_buffer(y*32+x);",";
-next x
-?#2,read_buffer(y*32+x);")"
-next y
+if d_filename<>"" then
 
-close #2
+	OPEN d_filename FOR OUTPUT AS #2
+	PRINT #2, "-- Generated by BrianHG's RS232_Debugger hex editor."
+	PRINT #2, ""
+	PRINT #2, "WIDTH=32;"
+	PRINT #2, "DEPTH=";int(d_memsize/4);";"
+	PRINT #2, ""
+	PRINT #2, "ADDRESS_RADIX=UNS;"
+	PRINT #2, "DATA_RADIX=UNS;"
+	PRINT #2, ""
+	PRINT #2, "CONTENT BEGIN"
+
+	for x=d_membase to d_membase+int(d_memsize/4)-1
+
+		if ENDIAN=1 then ?#2, mifpos;" : ";int(read_buffer(x*4+3)*16777216+read_buffer(x*4+2)*65536+read_buffer(x*4+1)*256+read_buffer(x*4+0));";"
+		if ENDIAN=0 then ?#2, mifpos;" : ";int(read_buffer(x*4+0)*16777216+read_buffer(x*4+1)*65536+read_buffer(x*4+2)*256+read_buffer(x*4+3));";"
+
+	mifpos=mifpos + 1
+	next x
+
+	PRINT #2, "END;"
+	close #2
+
+end if
+box(0)
 end sub
 
 
@@ -1275,7 +1316,8 @@ color_rg(z, 0       , 0        ):? " ";read_buffer(mcz);"  ";
 
 z=3:if edit_col=5 then z=7
 color_rg(z, 42      , 27       ):? "16bit Decimal :";
-y = read_buffer(int(mcz/2)*2)*256 + read_buffer(int(mcz/2)*2+1)
+if ENDIAN=1 then y = read_buffer(int(mcz/2)*2+0)*256 + read_buffer(int(mcz/2)*2+1)
+if ENDIAN=0 then y = read_buffer(int(mcz/2)*2+1)*256 + read_buffer(int(mcz/2)*2+0)
 z=0:if edit_col=5 then z=7
 color_rg(z, 0       , 0        ):? y;"     ";
 

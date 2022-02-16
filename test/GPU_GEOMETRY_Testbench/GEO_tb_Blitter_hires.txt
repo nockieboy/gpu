@@ -1,5 +1,5 @@
 ******************************************************************************************************************
-8-biy GPU Full Geometry unit test-bench command list.
+8-bit GPU Full Geometry unit test-bench command list.
 
 Written by Brian Guralnick.
 Feb 01, 2021.
@@ -9,7 +9,7 @@ This file contains a command list to drive Nockieboy's
 
 ******************************************************************************************************************
 
-For a comand to be accepted, it must have the 'at' symbol (SHIFT 2) in front of it.
+For a command to be accepted, it must have the 'at' symbol (SHIFT 2) in front of it.
 Example:
 
 [at]COMMAND_STRING <arg> <arg> <arg> ...
@@ -23,7 +23,7 @@ Commands: (*** No spaces allowed in any <FILE_NAME>)
 [at]LOG_FILE  <FILE_NAME>            > Generates a results log file.         (No spaces allowed in file name).
 [at]END_LOG_FILE                     > Forcefully closes/ends the log file.
 [at]STOP                             > Stops the script processing/simulation.  Click on 'run -all' to continue script after the stop command.
-[at]END                              > Ends the script processing/simulation. (You may now paint/set youw own manual controls in the waveform view and run -all)
+[at]END                              > Ends the script processing/simulation. (You may now paint/set your own manual controls in the waveform view and run -all)
 
 [at]LOAD_GPU_RAM <file_name.bin>     > Reads a binary file, up to 1 megabyte, into the GEO pixel-writer memory.  
 [at]SAVE_GPU_RAM <file_name.bin>     > Saves GEO pixel-writer 1 megabyte memory into a binary file.
@@ -65,7 +65,7 @@ Commands: (*** No spaces allowed in any <FILE_NAME>)
 
          ena       = blitter off/on             1 = blitter on when writing pixels.
                                                 0 = blitter off when writing pixels.
-         mask      = Transparancy mask enable.  1 = source transparent color pixels will not paste pixels onto destination, IE those colors are transparent.
+         mask      = Transparency mask enable.  1 = source transparent color pixels will not paste pixels onto destination, IE those colors are transparent.
                                                 0 = Every pixel from the source will paste onto the destination.
          h-centp   = horizontal center paste.   1 = Offset the paste to the left by half of blit_width.
                                                 0 = Use the paste coordinates as the beginning left.
@@ -95,7 +95,7 @@ Commands: (*** No spaces allowed in any <FILE_NAME>)
 
 @SET_MAX_XY  640 480             Sets the pixel writer coordinate XY limits.
 @SET_PAGET  srce 000000 8   1    Set the source/copy bitmap to 8 pixels, 1 bit color, basically the font_vga_8x16.bin image format
-@SET_PAGET  dest 001000 640 8    Set bitmap witdh to 320 pixels, 8 bits per pixel, current font memory.
+@SET_PAGET  dest 001000 640 8    Set bitmap width to 320 pixels, 8 bits per pixel, current font memory.
 
 @BLIT CONFIG   1 1 0 0 0 0 0 0       Enable blitter with transparency.
 @BLIT TCOL     0                     Set blitter's source image transparent color.

@@ -1,0 +1,37 @@
+Log file requested in 'Z80_cmd_stimulus.txt' at line#  36.
+
+Line#  37, Sending a reset to the Z80_bus module.
+Line#  39, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 15562.5 ns INFO: Write memory address (00000000) with data (00).
+Line#  40, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 15937.5 ns INFO: Write memory address (00000001) with data (01).
+Line#  41, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 16312.5 ns INFO: Write memory address (00000002) with data (02).
+Line#  42, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 16687.5 ns INFO: Write memory address (00000003) with data (03).
+Line#  43, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 17062.5 ns INFO: Write memory address (00000004) with data (04).
+Line#  44, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 17437.5 ns INFO: Write memory address (00000005) with data (05).
+Line#  45, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 17812.5 ns INFO: Write memory address (00000006) with data (06).
+Line#  46, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 18187.5 ns INFO: Write memory address (00000007) with data (07).
+Line#  47, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 18562.5 ns INFO: Write memory address (0000000e) with data (0e).
+Line#  48, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 18937.5 ns INFO: Write memory address (0000000f) with data (0f).
+Line#  49, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 19312.5 ns INFO: Write memory address (00000014) with data (14).
+Line#  50, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 19687.5 ns INFO: Write memory address (00000015) with data (15).
+Line#  51, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 20062.5 ns INFO: Write memory address (00000016) with data (16).
+Line#  52, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 20437.5 ns INFO: Write memory address (00000017) with data (17).
+Line#  53, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 20812.5 ns INFO: Write memory address (00000010) with data (10).
+Line#  54, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 21187.5 ns INFO: Write memory address (00000020) with data (20).
+Line#  55, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 21562.5 ns INFO: Write memory address (00000030) with data (30).
+Line#  56, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 21937.5 ns INFO: Write memory address (00000040) with data (40).
+Line#  57, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 22312.5 ns INFO: Write memory address (00000050) with data (50).
+Line#  58, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 22687.5 ns INFO: Write memory address (00001110) with data (bb).
+Line#  59, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 23062.5 ns INFO: Write memory address (00002210) with data (cc).
+Line#  60, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 23437.5 ns INFO: Write memory address (00003310) with data (dd).
+Line#  61, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 24375.0 ns INFO: Read memory address (00000010) returns data (10).
+Line#  62, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 25000.0 ns INFO: Read memory address (00001110) returns data (bb).
+Line#  63, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 25625.0 ns INFO: Read memory address (00002210) returns data (cc).
+Line#  64, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 26125.0 ns INFO: Read memory address (00003310) returns data (dd).
+Line#  65, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 26500.0 ns INFO: Read memory address (00003310) returns data (dd).
+Line#  66, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 26875.0 ns INFO: Read memory address (00003310) returns data (dd).
+Line#  67, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 27375.0 ns INFO: Read Instruction Opcode memory address (00003310) returns data (dd).
+Line#  68, Z80_Bus_Interface_to_DDR3_tb.tx_z80_cmd: at time 27875.0 ns INFO: Read IO port (000000f8) returns data (00).
+Line#  69, @END command at line number   69.
+
+End of command source ASCII file 'Z80_cmd_stimulus.txt'.
+  69 lines processed.

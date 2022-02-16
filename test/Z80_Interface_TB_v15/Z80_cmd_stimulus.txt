@@ -1,0 +1,87 @@
+******************************************************************************************************************
+Z80_cmd_stimulus test-bench command list.
+
+Written by Brian Guralnick.
+October 7, 2021.
+
+******************************************************************************************************************
+
+For a command to be accepted, it must have the 'at' symbol (SHIFT 2) in front of it.
+Example:
+
+[at]COMMAND_STRING <arg> <arg> <arg> ...
+
+***Removing the [at] symbol means the command is ignored and it is treated as text comments.
+Multiple commands are allowed on one line so long as each command has an [at] symbol in front of it.
+
+******************************************************************************************************************
+Commands: (*** No spaces allowed in any <FILE_NAME>)
+
+[at]LOG_FILE  <FILE_NAME>            > Generates a results log file.         (No spaces allowed in file name).
+[at]END_LOG_FILE                     > Forcefully closes/ends the log file.
+[at]STOP                             > Stops the script processing/simulation.  Click on 'run -all' to continue script after the stop command.
+[at]END                              > Ends the script processing/simulation. (You may now paint/set your own manual controls in the waveform view and run -all)
+
+[at]RESET                            > Hard Resets the system
+
+
+[at]CMD RI    <16'hex ADDR>              > Simulated Z80 will perform a read  Instruction OP-Code memory at the specified ADDR. 
+[at]CMD RM    <16'hex ADDR>              > Simulated Z80 will perform a read  memory at the specified ADDR. 
+[at]CMD WM    <16'hex ADDR> <8'hex DATA> > Simulated Z80 will perform a write memory at the specified ADDR with the specified DATA. 
+
+[at]CMD RP    < 8'hex PORT>              > Simulated Z80 will perform a read  port at the specified PORT. 
+[at]CMD WP    < 8'hex PORT> <8'hex DATA> > Simulated Z80 will perform a write port at the specified PORT with the specified DATA. 
+
+
+@LOG_FILE Z80_cmd_stimulus_log.txt
+@RESET
+
+@CMD WM 0000 00     Write to memory address
+@CMD WM 0001 01     Write to memory address
+@CMD WM 0002 02     Write to memory address
+@CMD WM 0003 03     Write to memory address
+@CMD WM 0004 04     Write to memory address
+@CMD WM 0005 05     Write to memory address
+@CMD WM 0006 06     Write to memory address
+@CMD WM 0007 07     Write to memory address
+@CMD WM 000E 0E     Write to memory address
+@CMD WM 000F 0F     Write to memory address
+@CMD WM 0014 14     Write to memory address
+@CMD WM 0015 15     Write to memory address
+@CMD WM 0016 16     Write to memory address
+@CMD WM 0017 17     Write to memory address
+@CMD WM 0010 10     Write to memory address
+@CMD WM 0020 20     Write to memory address
+@CMD WM 0030 30     Write to memory address
+@CMD WM 0040 40     Write to memory address
+@CMD WM 0050 50     Write to memory address
+@CMD WM 1110 BB     Write to memory address
+@CMD WM 2210 CC     Write to memory address
+@CMD WM 3310 DD     Write to memory address
+@CMD RM 0010        Read  memory address
+@CMD RM 1110        Read  memory address
+@CMD RM 2210        Read  memory address
+@CMD RM 3310        Read  memory address
+@CMD RM 3310        Read  memory address
+@CMD RM 3310        Read  memory address
+@CMD RI 3310        Read  Instruction OP-Code memory
+@CMD RP 00F8        Read  port - Fifo Status.
+@END
+@CMD WM 0020 BB     Write to memory address
+@CMD RM 0020        Read  memory address
+@CMD WM 0020 AA     Write to memory address
+@CMD WP 00F6 88     Write port - Geo-low-byte.
+@CMD RM 0010        Read  memory address
+@CMD RM 1110        Read  memory address
+@CMD RM 2210        Read  memory address
+@CMD RM 3310        Read  memory address
+@CMD RM 3310        Read  memory address
+@CMD RM 3310        Read  memory address
+@CMD RM 0010        Read  memory address
+@CMD RM 1110        Read  memory address
+@CMD RM 2210        Read  memory address
+@CMD RM 3310        Read  memory address
+@CMD RM 3310        Read  memory address
+@CMD RM 3310        Read  memory address
+
+@END

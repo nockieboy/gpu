@@ -5,6 +5,7 @@ if {[file exists work]} {
 vlib work
 vmap work work
 vlog -sv -work work {FIFO_2word_FWFT.sv}
+vlog -sv -work work {BrianHG_DDR3_FIFOs.sv}
 vlog -sv -work work {line_generator.sv}
 vlog -sv -work work {ellipse_generator.sv}
 vlog -sv -work work {geometry_xy_plotter.sv}

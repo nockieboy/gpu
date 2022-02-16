@@ -1,5 +1,5 @@
 ******************************************************************************************************************
-8-biy GPU Full Geometry unit test-bench command list.
+8-bit GPU Full Geometry unit test-bench command list.
 
 Written by Brian Guralnick.
 Feb 01, 2021.
@@ -9,7 +9,7 @@ This file contains a command list to drive Nockieboy's
 
 ******************************************************************************************************************
 
-For a comand to be accepted, it must have the 'at' symbol (SHIFT 2) in front of it.
+For a command to be accepted, it must have the 'at' symbol (SHIFT 2) in front of it.
 Example:
 
 [at]COMMAND_STRING <arg> <arg> <arg> ...
@@ -23,7 +23,7 @@ Commands: (*** No spaces allowed in any <FILE_NAME>)
 [at]LOG_FILE  <FILE_NAME>            > Generates a results log file.         (No spaces allowed in file name).
 [at]END_LOG_FILE                     > Forcefully closes/ends the log file.
 [at]STOP                             > Stops the script processing/simulation.  Click on 'run -all' to continue script after the stop command.
-[at]END                              > Ends the script processing/simulation. (You may now paint/set youw own manual controls in the waveform view and run -all)
+[at]END                              > Ends the script processing/simulation. (You may now paint/set your own manual controls in the waveform view and run -all)
 
 [at]LOAD_GPU_RAM <file_name.bin>     > Reads a binary file, up to 1 megabyte, into the GEO pixel-writer memory.  
 [at]SAVE_GPU_RAM <file_name.bin>     > Saves GEO pixel-writer 1 megabyte memory into a binary file.
@@ -65,7 +65,7 @@ Commands: (*** No spaces allowed in any <FILE_NAME>)
 
          ena       = blitter off/on             1 = blitter on when writing pixels.
                                                 0 = blitter off when writing pixels.
-         mask      = Transparancy mask enable.  1 = source transparent color pixels will not paste pixels onto destination, IE those colors are transparent.
+         mask      = Transparency mask enable.  1 = source transparent color pixels will not paste pixels onto destination, IE those colors are transparent.
                                                 0 = Every pixel from the source will paste onto the destination.
          h-centp   = horizontal center paste.   1 = Offset the paste to the left by half of blit_width.
                                                 0 = Use the paste coordinates as the beginning left.
@@ -91,17 +91,28 @@ Commands: (*** No spaces allowed in any <FILE_NAME>)
 **** Send a reset to the ellipse_generator.sv module.
 @RESET
 @ENA_PIXIE 1   Enable/Disable pixel writer, IE only run the geometry_ploter.sv & PAGET
+
+
+
+********************************************************************************************************************
+Begin the text blitter test with a screen blit carriage return / Line Feed
+********************************************************************************************************************
+
 @LOAD_GPU_RAM  font_vga_8x16.bin
+@SET_PAGET     srce 000000 8   1       Set the source/copy bitmap to 8 pixels, 1 bit color, basically the font_vga_8x16.bin image format
 
-@SET_MAX_XY  640 480             Sets the pixel writer coordinate XY limits.
-@SET_PAGET  srce 000000 8   1    Set the source/copy bitmap to 8 pixels, 1 bit color, basically the font_vga_8x16.bin image format
-@SET_PAGET  dest 00A000 640 8    Set bitmap witdh to 320 pixels, 8 bits per pixel, current font memory.
 
-@BLIT CONFIG   1 1 0 0 0 0 0 0   Enable blitter with transparency.
-@BLIT TCOL     0                 Set blitter's source image transparent color.
+@SET_PAGET     dest 005000 680 8       Set the destination bitmap width to 680 pixels, 8 bits per pixel beginning at address $005000.
+@SET_MAX_XY    680 460                 Sets the pixel writer coordinate XY limits.
 
+@BLIT SCALE    1.0   1.0   1.0   1.0   Disable Zoom.
+@BLIT CONFIG   1 1 0 0 0 0 0 0         Enable blitter with transparency.
+@BLIT TCOL     0                       Set blitter's source image transparent color.
+
+
+*** Print 'Brian' on line 1.
 @BLIT POS      0     1056   8     16   Select character 'B', 66*16Y=1056 pixels in the 8x4096 font bitmap, copy 8x16 image.
-@DRAW PIXEL    0     0      194       Draw at 0,0, with blitter configured, this means the letter 'B'
+@DRAW PIXEL    0     0      194        Draw at 0,0, with blitter configured, this means the letter 'B'
 @BLIT POS      0     1824   8     16
 @DRAW PIXEL    8     0      204
 @BLIT POS      0     1680   8     16
@@ -111,6 +122,53 @@ Commands: (*** No spaces allowed in any <FILE_NAME>)
 @BLIT POS      0     1760   8     16
 @DRAW PIXEL    32    0      214
 
+**** Print 'Lxx' on line 1 through 14.
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 016 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 016 255 ; @BLIT POS 0 0784 8 16  @DRAW PIXEL 16 016 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 032 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 032 255 ; @BLIT POS 0 0800 8 16  @DRAW PIXEL 16 032 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 048 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 048 255 ; @BLIT POS 0 0816 8 16  @DRAW PIXEL 16 048 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 064 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 064 255 ; @BLIT POS 0 0832 8 16  @DRAW PIXEL 16 064 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 080 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 080 255 ; @BLIT POS 0 0848 8 16  @DRAW PIXEL 16 080 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 096 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 096 255 ; @BLIT POS 0 0864 8 16  @DRAW PIXEL 16 096 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 112 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 112 255 ; @BLIT POS 0 0880 8 16  @DRAW PIXEL 16 112 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 128 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 128 255 ; @BLIT POS 0 0896 8 16  @DRAW PIXEL 16 128 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 144 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 08 144 255 ; @BLIT POS 0 0912 8 16  @DRAW PIXEL 16 144 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 160 255 ; @BLIT POS 0 0784 8 16  @DRAW PIXEL 08 160 255 ; @BLIT POS 0 0768 8 16  @DRAW PIXEL 16 160 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 176 255 ; @BLIT POS 0 0784 8 16  @DRAW PIXEL 08 176 255 ; @BLIT POS 0 0784 8 16  @DRAW PIXEL 16 176 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 192 255 ; @BLIT POS 0 0784 8 16  @DRAW PIXEL 08 192 255 ; @BLIT POS 0 0800 8 16  @DRAW PIXEL 16 192 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 208 255 ; @BLIT POS 0 0784 8 16  @DRAW PIXEL 08 208 255 ; @BLIT POS 0 0816 8 16  @DRAW PIXEL 16 208 255 
+@BLIT POS 0 1216 8 16  @DRAW PIXEL 00 224 255 ; @BLIT POS 0 0784 8 16  @DRAW PIXEL 08 224 255 ; @BLIT POS 0 0832 8 16  @DRAW PIXEL 16 224 255 
+
+** Save first bitmap.
+@SAVE_PIXIE_BMP GEO_print_before_crlf_blit.bmp dest 680 460   0 **** Pixie GPU memory using PAGET's dest pointers
+
+** Set blitter to match the output screen, IE copy from screen to screen.
+@SET_PAGET     srce 005000 680  8      Set the source/copy bitmap match the DEST settings of 680 pixels, 8 bits per pixel beginning at address $005000.
+@BLIT SCALE    1.0   1.0   1.0   1.0   Disable Zoom.
+@BLIT CONFIG   1 0 0 0 0 0 0 0         Enable blitter *** WITHOUT TRANSPARENCY ***.
+@BLIT TCOL     0                       Set blitter's source image transparent color.
+
+@BLIT POS      0 16 680 444            Grab the section of the SRCE bitmap 0x16 - 319x239.
+@DRAW PIXEL    0  0  0                 Paint the blitter source at coordinates 0x0, with a color offset of 0.
+
+** Save second bitmap.
+@SAVE_PIXIE_BMP GEO_print_after_crlf_blit.bmp  dest 680 460   0 **** Pixie GPU memory using PAGET's dest pointers
+
+** Clear the bottom line of text.
+@BLIT CONFIG   0 0 0 0 0 0 0 0         Disable blitter.
+@DRAW BOX      0 444 679 459 0 1       Draw a black filled box on the bottom line of text
+
+** Save third bitmap.
+@SAVE_PIXIE_BMP GEO_print_after_clear_boxfill.bmp  dest 680 460   0 **** Pixie GPU memory using PAGET's dest pointers
+
+
+**** End/stop the simulation  (Optional)
+@END
+
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+Old demo functions.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
 @BLIT CONFIG   1 1 0 0 0 0 1 1         Enable blitter with transparency, 90 & 45 degree rotate.
 @BLIT SCALE    25.0  25.0   1.0  1.0   Zoom image 25x, 0.5x. (Extra up, then downsample needed for 45 degree rotate to fill in checkerboard).
 
@@ -128,12 +186,3 @@ Commands: (*** No spaces allowed in any <FILE_NAME>)
 @BLIT POS      1     149   6     6           select the circle spot in the font, use as a paint brush.
 @DRAW PIXEL    20    20    254               Draw at 20,20 the circle spot of the font
 @DRAW ELLI     115   220   11    11  254 4 0 Draw an ellipse using the circle spot of the font as a paint brush.
-
-
-@SAVE_PIXIE_BMP GEO_PIXIE_RAM_DEST_001.bmp dest 320 240   0 **** Pixie GPU memory using PAGET's dest pointers
-@SAVE_PIXIE_BMP GEO_PIXIE_RAM_SRCE_001.bmp srce 8   4096  0 **** Font memory Pixie GPU memory using PAGET's srce pointers
-
-
-
-**** End/stop the simulation  (Optional)
-@END

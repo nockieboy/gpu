@@ -5,13 +5,13 @@
  *       v 0.95. October 3rd, 2020
  * 
  * Geo-plotter/polyplot, sorter and blitter portions written by Brian Guralnick
- * Now inclused 12 bit fractional X&Y zoom and shrink scaling blitter operation.
+ * Now includes 12 bit fractional X&Y zoom and shrink scaling blitter operation.
  *
  */
 
 module geometry_xy_plotter #(
 parameter int FIFO_MARGIN         = 32, // The number of extra commands the fifo has room after the 'fifo_cmd_busy' goes high
-parameter bit USE_ALTERA_IP       = 1   // Slecets if Altera's SCFIFO should be used, or Brian's FIFO_2word_FWFT.sv
+parameter bit USE_ALTERA_IP       = 1   // Selects if Altera's SCFIFO should be used, or Brian's FIFO_2word_FWFT.sv
 )(
     input logic clk,               // System clock
     input logic reset,             // Force reset
@@ -42,7 +42,7 @@ parameter bit USE_ALTERA_IP       = 1   // Slecets if Altera's SCFIFO should be 
     //  AUX=14 : Set destination mem address,             : 31:24 bitplane mode : 23:0 hold destination base memory address for write pixel
     //  AUX=15 : Set source mem address,                  : 31:24 bitplane mode : 23:0 hold the source base memory address for read source pixel
     output wire  fifo_cmd_busy,     // HIGH when FIFO is full/nearly full
-    output logic processing         // needed for simulatior to know if there is internal pixel drawing.
+    output logic processing         // needed for simulator to know if there is internal pixel drawing.
 );
 
 logic plot_busy;
@@ -375,7 +375,7 @@ end else begin // ***** Blitter enabled.
                         end
 
          // During the second blitter phase, (PART 2), OR when the destination paste pixel coordinates are OUTSIDE the valid screen coordinates,
-         // (this step skipps a clock cycle when addressing pixels off the screen area)
+         // (this step skips a clock cycle when addressing pixels off the screen area)
          // Increment/decrement all the X&Y pointers/coordinates and set the blitter phase back into copy pixel mode.
          
          if ( blit_paste_phase || !( (blit_dest_x_int >= 0 && blit_dest_x_int < max_x ) && ( blit_dest_y_int >=0 && blit_dest_y_int < max_y ) ) ) begin
@@ -572,7 +572,7 @@ end else begin // end of plot_busy
                 end
                         
                 8'd91 : begin               // clear the pixel collision counter and sets all 3 transparent mask colors to 1 8-bit color in the source function data
-                    draw_cmd_func        <= CMD_OUT_RST_PXWRI_M[3:0]                   ; // sets the output funtion
+                    draw_cmd_func        <= CMD_OUT_RST_PXWRI_M[3:0]                   ; // sets the output function
                     draw_cmd_data_color  <= command_data8                              ; // sets the mask color
                     draw_cmd_data_word_Y <= { command_data8[7:0], command_data8[7:4] } ; // sets mask color #2 and 1/2 or #3
                     draw_cmd_data_word_X <= { command_data8[3:0], command_data8[7:4] } ; // sets mask color 1/2 or #3 and #4
@@ -580,7 +580,7 @@ end else begin // end of plot_busy
                 end
                 
                 8'd90 : begin               // clear the blitter copy pixel collision counter
-                    draw_cmd_func        <= CMD_OUT_RST_PXPASTE_M[3:0]                 ; // sets the output funtion
+                    draw_cmd_func        <= CMD_OUT_RST_PXPASTE_M[3:0]                 ; // sets the output function
                     draw_cmd_data_color  <= command_data8                              ; // sets the mask color
                     draw_cmd_data_word_Y <= { command_data8[7:0], command_data8[7:4] } ; // sets mask color #2 and 1/2 or #3
                     draw_cmd_data_word_X <= { command_data8[3:0], command_data8[7:4] } ; // sets mask color 1/2 or #3 and #4
@@ -842,15 +842,15 @@ if (execute_next_draw) begin
    else if (cmd_in[15:8]  == 8'd9)  begin                             // Set blitter scale
       if (cmd_in[0]) begin // enable setting of source scale
         if ( x_in[0]==0 )  blit_src_scale_x    <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
-        else               blit_src_scale_x    <= {1'b0,x_in[0]}  ; // Otherwize, set the scale factor to 1 through 4095.
+        else               blit_src_scale_x    <= {1'b0,x_in[0]}  ; // Otherwise, set the scale factor to 1 through 4095.
         if ( y_in[0]==0 )  blit_src_scale_y    <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
-        else               blit_src_scale_y    <= {1'b0,y_in[0]}  ; // Otherwize, set the scale factor to 1 through 4095.
+        else               blit_src_scale_y    <= {1'b0,y_in[0]}  ; // Otherwise, set the scale factor to 1 through 4095.
       end
       if (cmd_in[1]) begin // enable setting of source scale
         if ( x_in[1]==0 )  blit_dest_scale_x   <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
-        else               blit_dest_scale_x   <= {1'b0,x_in[1]}  ; // Otherwize, set the scale factor to 1 through 4095.
+        else               blit_dest_scale_x   <= {1'b0,x_in[1]}  ; // Otherwise, set the scale factor to 1 through 4095.
         if ( y_in[1]==0 )  blit_dest_scale_y   <= 13'd4096        ; // If the register is 0, turn off scale factor by using 4096
-        else               blit_dest_scale_y   <= {1'b0,y_in[1]}  ; // Otherwize, set the scale factor to 1 through 4095.
+        else               blit_dest_scale_y   <= {1'b0,y_in[1]}  ; // Otherwise, set the scale factor to 1 through 4095.
       end
    end
    else if (cmd_in[15:12] == 4'd0) begin                             // Any other valid plotting draw command

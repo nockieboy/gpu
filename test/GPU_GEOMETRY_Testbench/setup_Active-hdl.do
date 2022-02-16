@@ -2,6 +2,7 @@ vlib work
 vmap work work
 setactivelib work
 vlog -sv2k12 -dbg -work work {FIFO_2word_FWFT.sv}
+vlog -sv2k12 -dbg -work work {BrianHG_DDR3_FIFOs.sv}
 vlog -sv2k12 -dbg -work work {line_generator.sv}
 vlog -sv2k12 -dbg -work work {ellipse_generator.sv}
 vlog -sv2k12 -dbg -work work {geometry_xy_plotter.sv}

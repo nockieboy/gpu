@@ -1,37 +1,38 @@
 module geometry_processor (
 
    // inputs
-   input logic clk,                    // System clock
-   input logic reset,                  // Force reset
-   input logic fifo_cmd_ready,         // 16-bit Data Command Ready signal    - connects to the 'strobe' on the selected high.low Z80 bus output port
-   input logic [15:0] fifo_cmd_in,     // 16-bit Data Command bus             - connects to the 16-bit output port on the Z80 bus
+   input logic          clk,                // System clock
+   input logic          reset,              // Force reset
+   input logic          fifo_cmd_ready,     // 16-bit Data Command Ready signal - connects to the 'strobe' on the selected high.low Z80 bus output port
+   input logic [15:0]   fifo_cmd_in,        // 16-bit Data Command bus          - connects to the 16-bit output port on the Z80 bus
 
    // data_mux_geo inputs
-   input logic [15:0] rd_data_in,      // GEO read data for the read/modify/write pixel channel.
-   input logic [15:0] rd_data_in_C,    // GEO read data for the COPY pixel channel.
-   input logic rd_data_rdy_C,          // GEO read data ready for the COPY pixel channel.
-   input logic rd_data_rdy,            // GEO read data ready for the read/modify/write pixel channel.
-   input logic ram_mux_busy,           // input from geo_port_full
+   input logic [15:0]   rd_data_in,         // GEO read data for the read/modify/write pixel channel.
+   input logic [15:0]   rd_data_in_C,       // GEO read data for the COPY pixel channel.
+   input logic          rd_data_rdy_C,      // GEO read data ready for the COPY pixel channel.
+   input logic          rd_data_rdy,        // GEO read data ready for the read/modify/write pixel channel.
+   input logic          ram_mux_busy,       // input from geo_port_full
     
-    // H&V video enable/sync input for WAIT_interupt command
-    input logic hse,
-    input logic vse,
+   // H&V video enable/sync input for WAIT_interupt command
+   input logic          hse,
+   input logic          vse,
     
    // data_mux_geo outputs
-   output logic rd_req_C,              // GEO read request for the COPY pixel channel.
-   output logic rd_req,                // GEO read request for the read/modify/write pixel channel.
-   output logic wr_ena,                // output to geo_wr_ena   on data_mux_geo
-   output logic [19:0] ram_addr,       // output to address_geo  on data_mux_geo
-   output logic [19:0] ram_addr_C,     // output to address_geo  on data_mux_geo
-   output logic [15:0] ram_wr_data,    // output to data_in_geo  on data_mux_geo
+   output logic         rd_req_C,           // GEO read request for the COPY pixel channel.
+   output logic         rd_req,             // GEO read request for the read/modify/write pixel channel.
+   output logic         wr_ena,             // output to geo_wr_ena   on data_mux_geo
+   output logic [19:0]  ram_addr,           // output to address_geo  on data_mux_geo
+   output logic [19:0]  ram_addr_C,         // output to address_geo  on data_mux_geo
+   output logic [15:0]  ram_wr_data,        // output to data_in_geo  on data_mux_geo
     
    // collision saturation counter outputs
-   input  logic        collision_rd_rst,   // output to 1st read port on Z80_bridge_v2
-   input  logic        collision_wr_rst,   // output to 2nd read port on Z80_bridge_v2
-   output logic [7:0]  collision_rd,       // output to 1st read port on Z80_bridge_v2
-   output logic [7:0]  collision_wr,       // output to 2nd read port on Z80_bridge_v2
+   input  logic         collision_rd_rst,   // output to 1st read port on Z80_bridge_v2
+   input  logic         collision_wr_rst,   // output to 2nd read port on Z80_bridge_v2
+   output logic [7:0]   collision_rd,       // output to 1st read port on Z80_bridge_v2
+   output logic [7:0]   collision_wr,       // output to 2nd read port on Z80_bridge_v2
 
-   output logic        fifo_cmd_busy        // high when input comand fifo is full
+   output logic         fifo_cmd_busy       // high when input comand fifo is full
+   
 );
 
 parameter int FIFO_MARGIN         = 32 ; // The number of extra commadns the fifo has room after the 'fifo_cmd_busy' goes high

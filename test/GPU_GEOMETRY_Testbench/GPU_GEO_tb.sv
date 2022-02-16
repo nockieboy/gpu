@@ -1,7 +1,7 @@
 /*
  * GPU_GEO_tb.sv, for ModelSim and ***NEW Active-HDL.
  *
- * Features control from a source ascii text file script,
+ * Features control from a source ASCII text file script,
  * and a 256 color .BMP picture file generator.
  * Tested on free Altera ModelSim 10 & 20.  Built in parameter
  * (USE_ALTERA_IP) when disabled prevents the use of any Altera specific IP functions.
@@ -10,7 +10,7 @@
  *
  * v 0.6.001   Feb 01, 2021
  *
- * To setup simulation, Start Modelsim, The goto 'File - Change Directory' and select this files directory. 
+ * To setup simulation, Start Modelsim, Then go to 'File - Change Directory' and select this files directory. 
  * Then in the transcript, type:
  * do setup_ms.do
  * (or if you want to enable the Altera megafunction IP, LPM_MULT & SCFIFO)
@@ -27,7 +27,7 @@
  *
  *
  *****************************************************************************
- * For Active-HDL (Comes with Lattice Diamond FPGA developement enviroment.)
+ * For Active-HDL (Comes with Lattice Diamond FPGA development environment.)
  *****************************************************************************
  *
  * Go to 'File - New / Design'
@@ -45,7 +45,7 @@
  *     the simulation will be located in the main 'GPU_GEO_tb' folder.
  *
  * Active-HDL does not support the changing of a string in a .sv file,
- * so to run the different tb ascii script demos, you need to copy the:
+ * so to run the different tb ASCII script demos, you need to copy the:
  *
  * GEO_tb_art.txt
  * GEO_tb_Blitter.txt
@@ -60,11 +60,14 @@
 
 `timescale 1 ns/ 1 ns // 1 ns steps, 1 ns precision.
 
+`include "GEO_typedef.h"
+
+
 module GPU_GEO_tb 
 #(
 parameter int BITS_RES                  = 12,
 parameter bit USE_ALTERA_IP             = 0,
-parameter int PIXIE_MEM_ADR             = 20
+parameter int PIXIE_MEM_ADR             = 24
 )();
 string TB_COMMAND_SCRIPT_FILE = "GEO_tb_command_list.txt";	 // Choose one of the following strings...
 //string TB_COMMAND_SCRIPT_FILE = "GEO_tb_art.txt";
@@ -86,7 +89,7 @@ logic                     GEOFF_draw_cmd_rdy;
 logic [35:0]              GEOFF_draw_cmd;
 
 logic                     PAGET_cmd_rdy;
-logic [39:0]              PAGET_cmd;
+pw_cmd_bus                PAGET_cmd;
 
 logic                     PIXIE_busy;
 logic                     PIXIE_rd_req_a,PIXIE_rd_req_b,PIXIE_wr_ena;
@@ -99,11 +102,11 @@ logic [15:0]              RAM_data_read;                      // ram block read 
 logic                     PIXIE_col_rd_rst,PIXIE_col_wr_rst;  // PIXIE read/write collision detect reset
 logic [7:0]               PIXIE_col_rd,PIXIE_col_wr ;
 
-string                Script_CMD  = "" ; // Message line in wavefrom
+string                Script_CMD  = "" ; // Message line in waveform
 logic [12:0]          Script_LINE = 0  ; // Message line in waveform
 logic                 ENA_PIXIE   = 0  ;
 
-logic unsigned [23:0] PAGER_base_adr[0:1]   = '{0,0}; // srce/dest base address.
+logic unsigned [31:0] PAGER_base_adr[0:1]   = '{0,0}; // srce/dest base address.
 logic unsigned [23:0] PAGER_base_width[0:1] = '{0,0}; // srce/dest bitmap width.
 logic unsigned [ 7:0] PAGER_base_depth[0:1] = '{0,0}; // srce/dest bitmap depth.
 
@@ -114,11 +117,11 @@ wire unsigned [11:0] GEOFF_cmd_x     = GEOFF_draw_cmd[11:0 ];
 localparam bit [3:0] CMD_DRAW = 1;
 
 
-wire unsigned [3:0]  PAGET_cmd_cmd   = PAGET_cmd[39:36];
-wire unsigned [7:0]  PAGET_cmd_color = PAGET_cmd[35:28];
-wire unsigned [3:0]  PAGET_cmd_depth = PAGET_cmd[27:24];
-wire unsigned [3:0]  PAGET_cmd_bit   = PAGET_cmd[23:20];
-wire unsigned [19:0] PAGET_cmd_addr  = PAGET_cmd[19:0 ];
+wire unsigned [3:0]  PAGET_cmd_cmd   = PAGET_cmd.cmd;
+wire unsigned [7:0]  PAGET_cmd_color = PAGET_cmd.color;
+wire unsigned [3:0]  PAGET_cmd_depth = PAGET_cmd.depth;
+wire unsigned [3:0]  PAGET_cmd_bit   = PAGET_cmd.bitpos;
+wire unsigned [31:0] PAGET_cmd_addr  = PAGET_cmd.addr;
 
 logic GEOFF_busy_internal;
 
@@ -173,19 +176,23 @@ geo_pixel_writer DUT_PIXIE (
     .reset            ( reset            ),
     .cmd_rdy          ( PAGET_cmd_rdy && ENA_PIXIE && !PIXIE_busy ),
     .cmd_in           ( PAGET_cmd        ),
+
     .rd_data_in       ( RAM_data_read    ),
-    .rd_data_rdy_a    ( RAM_data_rdy_a   ),
-    .rd_data_rdy_b    ( RAM_data_rdy_b   ),
+    .rd_data_in_C     ( RAM_data_read    ),
+
+    .rd_data_rdy      ( RAM_data_rdy_a   ),
+    .rd_data_rdy_C    ( RAM_data_rdy_b   ),
     .ram_mux_busy     ( RAM_ctl_busy     ),
     .collision_rd_rst ( PIXIE_col_rd_rst ),
     .collision_wr_rst ( PIXIE_col_wr_rst ),
 
     // outputs
     .draw_busy        ( PIXIE_busy       ),
-    .rd_req_a         ( PIXIE_rd_req_a   ),
-    .rd_req_b         ( PIXIE_rd_req_b   ),
+    .rd_req           ( PIXIE_rd_req_a   ),
+    .rd_req_C         ( PIXIE_rd_req_b   ),
     .wr_ena           ( PIXIE_wr_ena     ),
     .ram_addr         ( PIXIE_ram_addr   ),
+    .ram_addr_C       (                  ),
     .ram_wr_data      ( PIXIE_ram_wr_data),
     .collision_rd     ( PIXIE_col_rd     ),
     .collision_wr     ( PIXIE_col_wr     ),
@@ -199,8 +206,8 @@ geo_pixel_writer DUT_PIXIE (
 // ***********************************************************************************************************
 // Setup global bitmap size and logic memory array.
 //
-localparam BMP_WIDTH  = 1024;
-localparam BMP_HEIGHT = 1024;
+localparam BMP_WIDTH  = 2048;
+localparam BMP_HEIGHT = 1536;
 logic [7:0] bitmap [0:BMP_WIDTH-1][0:BMP_HEIGHT-1];
 logic       BW_BMP = 0;     // set to 1 for 256 shades of grey BMP.
 //
@@ -214,7 +221,7 @@ logic       BW_BMP = 0;     // set to 1 for 256 shades of grey BMP.
 logic [15:0]                GPU_RAM [0:((2**(PIXIE_MEM_ADR-1))-1)] = '{(2**(PIXIE_MEM_ADR-1)){0}}; // This is all the ram.
 logic [(PIXIE_MEM_ADR-1):0] GPU_RAM_adr_in   = 0;
 logic [(PIXIE_MEM_ADR-1):0] GPU_RAM_adr_rd   = 0;
-logic [(PIXIE_MEM_ADR-1):0] GPU_RAM_data_in  = 0;
+logic [15:0]                GPU_RAM_data_in  = 0;
 logic                       GPU_RAM_we       = 0;
 logic                       gpu_ram_rdreq_a  = 0;
 logic                       gpu_ram_rdreq_b  = 0;
@@ -240,7 +247,7 @@ initial
 begin 
 clk              = 1'b1;
 reset            = 1'b1;  // apply reset
-WDT_COUNTER      = WDT_RESET_TIME  ; // Set the initial incativity timer to maximum so that the code lateron wont immideately stop the simulation.
+WDT_COUNTER      = WDT_RESET_TIME  ; // Set the initial inactivity timer to maximum so that the code later-on wont immediately stop the simulation.
 TB_cmd_ena       = 0;
 TB_cmd_in        = 0;
 hse              = 0;
@@ -341,12 +348,12 @@ end
 // ***********************************************************************************************************
 // ***********************************************************************************************************
 //
-// End of testbench.
+// End of test-bench.
 //
 // Next, 'task' programs:
 //
 // save_bmp_256( "bmp_file_name.bmp" , <bw_nocolor> );      // saves a 256 color BMP picture.
-// execute_ascii_file("<source file name">);                // Executes the command ascii file, decodes the '@' command string
+// execute_ascii_file("<source file name">);                // Executes the command ASCII file, decodes the '@' command string
 //
 // draw_ellipse(*src, *dest, fill, first quad, end quad);     // reads source file for coordinates, then runs the ellipse generator
 // clear_bitmap(integer xs, integer ys, byte unsigned color); // clears the logic array bitmap to byte 'color'
@@ -363,7 +370,7 @@ end
 // ***********************************************************************************************************
 // ***********************************************************************************************************
 // ***********************************************************************************************************
-// Simple 256 color BMP save algorythm.
+// Simple 256 color BMP save algorithm.
 // To call task:
 //
 // save_bmp_256( "bmp_file_name.bmp" , <bw_nocolor>, <xsize>, <ysize>, use_pixie, pixie_dest );
@@ -372,10 +379,10 @@ end
 // If (bw_nocolor=0), the result bitmap will have a dummy color palette.
 //
 // 
-// logic array 'bitmap' must be declared at the top of the testbench module like this:
+// logic array 'bitmap' must be declared at the top of the test-bench module like this:
 // logic   [7:0] bitmap [0:BMP_WIDTH-1][0:BMP_HEIGHT-1];
 //
-// When rendering into the array 'bitmap', it is recomended you use range checks such as:
+// When rendering into the array 'bitmap', it is recommended you use range checks such as:
 //
 // if (X_coord>=0 && Y_coord>=0 && X_coord<BMP_WIDTH && Y_coord<BMP_HEIGHT) bitmap[X_coord][Y_coord] = draw_color;
 // 
@@ -453,9 +460,9 @@ endtask
 // ***********************************************************************************************************
 // ***********************************************************************************************************
 // ***********************************************************************************************************
-// task execute_ascii_file(<"source ascii file name">);
+// task execute_ascii_file(<"source ASCII file name">);
 // 
-// Opens the ascii file and scans for the '@' symbol.
+// Opens the ASCII file and scans for the '@' symbol.
 // After each '@' symbol, a string is read as a command function.
 // Each function then goes through a 'case(command_in)' which then executes the appropriate function.
 //
@@ -510,7 +517,7 @@ if (! $feof(fin_pointer) && fin_pointer!=0) begin  // if not end of source file 
 
   "BLIT"        : blit(fin_pointer,fout_pointer,line_number);       // Executes blitter functions.
 
-  "VWAIT"       : vwait(fin_pointer,fout_pointer,line_number);      // Executes the wait interupt function.
+  "VWAIT"       : vwait(fin_pointer,fout_pointer,line_number);      // Executes the wait interrupt function.
 
   "SEND_CMD"    : begin
                  r = $fscanf(fin_pointer,"%h",z);
@@ -636,7 +643,7 @@ if (! $feof(fin_pointer) && fin_pointer!=0) begin  // if not end of source file 
                        fout_pointer = 0;
                    end
 
-  "STOP"       :  begin // force a temposry stop.
+  "STOP"       :  begin // force a temporary stop.
                   $sformat(message_string,"@%s command at line number %d.\nType 'Run -All' to continue.",command_in,13'(line_number));
                   $display("%s",message_string);
                   if (fout_pointer!=0) $fwrite(fout_pointer,"%s",message_string);
@@ -655,7 +662,7 @@ if (! $feof(fin_pointer) && fin_pointer!=0) begin  // if not end of source file 
                   end
 
   default      :  begin // Unknown command
-                  $sformat(message_string,"Source ascii file '%s' has an unknown command '@%s' at line number %d.\nProcessign stopped due to error.\n",source_file_name,command_in,13'(line_number));
+                  $sformat(message_string,"Source ASCII file '%s' has an unknown command '@%s' at line number %d.\nProcessign stopped due to error.\n",source_file_name,command_in,13'(line_number));
                   $display("%s",message_string);
                   if (fout_pointer!=0) $fwrite(fout_pointer,"%s",message_string);
                   $stop;
@@ -669,7 +676,7 @@ end// while not eof
 
 // Finished reading source file.  Close files and stop.
 wait_idle();
-$sformat(message_string,"\nEnd of command source ascii file '%s'.\n%d lines processed.\n",source_file_name,13'(line_number));
+$sformat(message_string,"\nEnd of command source ASCII file '%s'.\n%d lines processed.\n",source_file_name,13'(line_number));
 $display("%s",message_string);
 $fclose(fin_pointer);
 if (fout_pointer!=0) $fwrite(fout_pointer,"%s",message_string);
@@ -873,8 +880,8 @@ begin
    if (dest!=0) $fwrite(dest,"%s\n",msg);
 
 
-set_xy(1,2,PAGER_base_adr[sd][23:12]  ,msg, ln,dest);  // Store base address in XY[2]
-set_xy(0,2,PAGER_base_adr[sd][11:0 ]  ,msg, ln,dest);
+set_xy(1,2,PAGER_base_adr[sd][31:20]  ,msg, ln,dest);  // Store base address ***DIVIDED BY 256****  in XY[2]
+set_xy(0,2,PAGER_base_adr[sd][19:8 ]  ,msg, ln,dest);
 set_xy(1,3,PAGER_base_width[sd][23:12],msg, ln,dest);  // Store bitmap width in XY[3]
 set_xy(0,3,PAGER_base_width[sd][11:0 ],msg, ln,dest);
 
@@ -882,7 +889,7 @@ send_cmd({5'b01111,1'(sd),2'(2),8'(PAGER_base_depth[sd]-1)},msg,ln,dest);  // Se
 send_cmd({8'(112+sd),           8'(PAGER_base_depth[sd]-1)},msg,ln,dest);  // Send set paget width   using XY[3], includes bits/pixel depth
 
 //cmd_null( "" ); // Waits a clock & Leaves a clear space on the waveform
-if (dest!=0) $fwrite(dest,"\n"); // Add a carrige return.
+if (dest!=0) $fwrite(dest,"\n"); // Add a carriage return.
 
 end
 endtask
@@ -1031,7 +1038,7 @@ if (fill)    send_cmd({4'(0),1'(fill),3'(3),8'(color)},msg,ln,dest);  // 3=draw 
 endcase
 
 //cmd_null( "" ); // Waits a clock & Leaves a clear space on the waveform
-if (dest!=0) $fwrite(dest,"\n"); // Add a carrige return.
+if (dest!=0) $fwrite(dest,"\n"); // Add a carriage return.
 
 end
 endtask
@@ -1147,7 +1154,7 @@ logic [3:0]  LUT_shift [0:255]       ;
 logic [15:0] LUT_mask  [0:15]        ;  // mask result bits after shift pixel-1  0=1 bit, 1=2bit, 3=4bit, 7=8bit, 15-16bit.
 
 logic unsigned [7:0] color_gain [0:15] ;     // Amplifies the color number of lower bitplane displays
-logic unsigned [(PIXIE_MEM_ADR-1):0] raddr;
+logic unsigned [(PIXIE_MEM_ADR+1):0] raddr;
 logic unsigned [3:0] sb ;
 
 
@@ -1302,7 +1309,7 @@ case (func[0]) // only analyze the first letter of the shape string.
 endcase
 
 //cmd_null( "" ); // Waits a clock & Leaves a clear space on the waveform
-if (dest!=0) $fwrite(dest,"\n"); // Add a carrige return.
+if (dest!=0) $fwrite(dest,"\n"); // Add a carriage return.
 
 end
 endtask

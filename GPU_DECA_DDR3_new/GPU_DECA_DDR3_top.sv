@@ -155,140 +155,140 @@ parameter bit        SMART_BANK                  = 0        // 1=ON, 0=OFF, With
 // ********** DECA Board's IOs.
 // *****************************************************************************************************************
 
-    //////////// CLOCK //////////
-    input                           ADC_CLK_10,
-    input                           MAX10_CLK1_50,
-    input                           MAX10_CLK2_50,
+   //////////// CLOCK //////////
+   input                ADC_CLK_10,
+   input                MAX10_CLK1_50,
+   input                MAX10_CLK2_50,
 
-    //////////// KEY //////////
-    input              [1:0]        KEY,
+   //////////// KEY //////////
+   input          [1:0] KEY,
 
-    //////////// LED //////////
-    output logic       [7:0]        LED,
+   //////////// LED //////////
+   output logic   [7:0] LED,
 
-    //////////// CapSense Button //////////
-    inout                           CAP_SENSE_I2C_SCL,
-    inout                           CAP_SENSE_I2C_SDA,
+   //////////// CapSense Button //////////
+   inout                CAP_SENSE_I2C_SCL,
+   inout                CAP_SENSE_I2C_SDA,
 
-    //////////// Audio //////////
-    inout                           AUDIO_BCLK,
-    output                          AUDIO_DIN_MFP1,
-    input                           AUDIO_DOUT_MFP2,
-    inout                           AUDIO_GPIO_MFP5,
-    output                          AUDIO_MCLK,
-    input                           AUDIO_MISO_MFP4,
-    inout                           AUDIO_RESET_n,
-    output                          AUDIO_SCL_SS_n,
-    output                          AUDIO_SCLK_MFP3,
-    inout                           AUDIO_SDA_MOSI,
-    output                          AUDIO_SPI_SELECT,
-    inout                           AUDIO_WCLK,
+   //////////// Audio //////////
+   inout                AUDIO_BCLK,
+   output               AUDIO_DIN_MFP1,
+   input                AUDIO_DOUT_MFP2,
+   inout                AUDIO_GPIO_MFP5,
+   output               AUDIO_MCLK,
+   input                AUDIO_MISO_MFP4,
+   inout                AUDIO_RESET_n,
+   output               AUDIO_SCL_SS_n,
+   output               AUDIO_SCLK_MFP3,
+   inout                AUDIO_SDA_MOSI,
+   output               AUDIO_SPI_SELECT,
+   inout                AUDIO_WCLK,
 
-    //////////// Flash //////////
-    inout              [3:0]        FLASH_DATA,
-    output                          FLASH_DCLK,
-    output                          FLASH_NCSO,
-    output                          FLASH_RESET_n,
+   //////////// Flash //////////
+   inout          [3:0] FLASH_DATA,
+   output               FLASH_DCLK,
+   output               FLASH_NCSO,
+   output               FLASH_RESET_n,
 
-    //////////// G-Sensor //////////
-    output                          G_SENSOR_CS_n,
-    input                           G_SENSOR_INT1,
-    input                           G_SENSOR_INT2,
-    inout                           G_SENSOR_SCLK,
-    inout                           G_SENSOR_SDI,
-    inout                           G_SENSOR_SDO,
+   //////////// G-Sensor //////////
+   output               G_SENSOR_CS_n,
+   input                G_SENSOR_INT1,
+   input                G_SENSOR_INT2,
+   inout                G_SENSOR_SCLK,
+   inout                G_SENSOR_SDI,
+   inout                G_SENSOR_SDO,
 
-    //////////// HDMI-TX //////////
-    inout                           HDMI_I2C_SCL,
-    inout                           HDMI_I2C_SDA,
-    inout              [3:0]        HDMI_I2S,
-    inout                           HDMI_LRCLK,
-    inout                           HDMI_MCLK,
-    inout                           HDMI_SCLK,
-    output                          HDMI_TX_CLK,
-    output            [23:0]        HDMI_TX_D,
-    output                          HDMI_TX_DE,
-    output                          HDMI_TX_HS,
-    input                           HDMI_TX_INT,
-    output                          HDMI_TX_VS,
+   //////////// HDMI-TX //////////
+   inout                HDMI_I2C_SCL,
+   inout                HDMI_I2C_SDA,
+   inout          [3:0] HDMI_I2S,
+   inout                HDMI_LRCLK,
+   inout                HDMI_MCLK,
+   inout                HDMI_SCLK,
+   output               HDMI_TX_CLK,
+   output        [23:0] HDMI_TX_D,
+   output               HDMI_TX_DE,
+   output               HDMI_TX_HS,
+   input                HDMI_TX_INT,
+   output               HDMI_TX_VS,
 
-    //////////// Light Sensor //////////
-    output                          LIGHT_I2C_SCL,
-    inout                           LIGHT_I2C_SDA,
-    inout                           LIGHT_INT,
+   //////////// Light Sensor //////////
+   output               LIGHT_I2C_SCL,
+   inout                LIGHT_I2C_SDA,
+   inout                LIGHT_INT,
 
-    //////////// MIPI //////////
-    output                          MIPI_CORE_EN,
-    output                          MIPI_I2C_SCL,
-    inout                           MIPI_I2C_SDA,
-    input                           MIPI_LP_MC_n,
-    input                           MIPI_LP_MC_p,
-    input              [3:0]        MIPI_LP_MD_n,
-    input              [3:0]        MIPI_LP_MD_p,
-    input                           MIPI_MC_p,
-    output                          MIPI_MCLK,
-    input              [3:0]        MIPI_MD_p,
-    output                          MIPI_RESET_n,
-    output                          MIPI_WP,
+   //////////// MIPI //////////
+   output               MIPI_CORE_EN,
+   output               MIPI_I2C_SCL,
+   inout                MIPI_I2C_SDA,
+   input                MIPI_LP_MC_n,
+   input                MIPI_LP_MC_p,
+   input          [3:0] MIPI_LP_MD_n,
+   input          [3:0] MIPI_LP_MD_p,
+   input                MIPI_MC_p,
+   output               MIPI_MCLK,
+   input          [3:0] MIPI_MD_p,
+   output               MIPI_RESET_n,
+   output               MIPI_WP,
 
-    //////////// Ethernet //////////
-    input                           NET_COL,
-    input                           NET_CRS,
-    output                          NET_MDC,
-    inout                           NET_MDIO,
-    output                          NET_PCF_EN,
-    output                          NET_RESET_n,
-    input                           NET_RX_CLK,
-    input                           NET_RX_DV,
-    input                           NET_RX_ER,
-    input              [3:0]        NET_RXD,
-    input                           NET_TX_CLK,
-    output                          NET_TX_EN,
-    output             [3:0]        NET_TXD,
+   //////////// Ethernet //////////
+   input                NET_COL,
+   input                NET_CRS,
+   output               NET_MDC,
+   inout                NET_MDIO,
+   output               NET_PCF_EN,
+   output               NET_RESET_n,
+   input                NET_RX_CLK,
+   input                NET_RX_DV,
+   input                NET_RX_ER,
+   input          [3:0] NET_RXD,
+   input                NET_TX_CLK,
+   output               NET_TX_EN,
+   output         [3:0] NET_TXD,
 
-    //////////// Power Monitor //////////
-    input                           PMONITOR_ALERT,
-    output                          PMONITOR_I2C_SCL,
-    inout                           PMONITOR_I2C_SDA,
+   //////////// Power Monitor //////////
+   input                PMONITOR_ALERT,
+   output               PMONITOR_I2C_SCL,
+   inout                PMONITOR_I2C_SDA,
 
-    //////////// Humidity and Temperature Sensor //////////
-    input                           RH_TEMP_DRDY_n,
-    output                          RH_TEMP_I2C_SCL,
-    inout                           RH_TEMP_I2C_SDA,
+   //////////// Humidity and Temperature Sensor //////////
+   input                RH_TEMP_DRDY_n,
+   output               RH_TEMP_I2C_SCL,
+   inout                RH_TEMP_I2C_SDA,
 
-    //////////// MicroSD Card //////////
-    output                          SD_CLK,
-    inout                           SD_CMD,
-    output                          SD_CMD_DIR,
-    output                          SD_D0_DIR,
-    inout                           SD_D123_DIR,
-    inout              [3:0]        SD_DAT,
-    input                           SD_FB_CLK,
-    output                          SD_SEL,
+   //////////// MicroSD Card //////////
+   output               SD_CLK,
+   inout                SD_CMD,
+   output               SD_CMD_DIR,
+   output               SD_D0_DIR,
+   inout                SD_D123_DIR,
+   inout          [3:0] SD_DAT,
+   input                SD_FB_CLK,
+   output               SD_SEL,
 
-    //////////// SW //////////
-    input              [1:0]        SW,
+   //////////// SW //////////
+   input          [1:0] SW,
 
-    //////////// Board Temperature Sensor //////////
-    output                          TEMP_CS_n,
-    output                          TEMP_SC,
-    inout                           TEMP_SIO,
+   //////////// Board Temperature Sensor //////////
+   output               TEMP_CS_n,
+   output               TEMP_SC,
+   inout                TEMP_SIO,
 
-    //////////// USB //////////
-    input                           USB_CLKIN,
-    output                          USB_CS,
-    inout              [7:0]        USB_DATA,
-    input                           USB_DIR,
-    input                           USB_FAULT_n,
-    input                           USB_NXT,
-    output                          USB_RESET_n,
-    output                          USB_STP,
+   //////////// USB //////////
+   input                USB_CLKIN,
+   output               USB_CS,
+   inout          [7:0] USB_DATA,
+   input                USB_DIR,
+   input                USB_FAULT_n,
+   input                USB_NXT,
+   output               USB_RESET_n,
+   output               USB_STP,
 
-    //////////// BBB Conector //////////
-    input                           BBB_PWR_BUT,
-    input                           BBB_SYS_RESET_n,
-    inout             [43:0]        GPIO0_D,
-    inout             [22:0]        GPIO1_D,
+   //////////// BBB Conector //////////
+   input                BBB_PWR_BUT,
+   input                BBB_SYS_RESET_n,
+   inout         [43:0] GPIO0_D,
+   inout         [22:0] GPIO1_D,
 
 
 // *****************************************************************************************************************
@@ -446,24 +446,40 @@ wire [7:0]  collision_wr ;
 // ***************************************************************************************************************
 // *** Set default address buffer values for those not normally controlled by the GPU ****************************
 // ***************************************************************************************************************
-assign   GPIO0_D[32]      = 0 ; // HI_OE - LOW to enable
-assign   GPIO0_D[33]      = 1 ; // HI_DIR - HIGH for A>B direction (to FPGA)
-assign   GPIO0_D[42]      = 0 ; // LO_OE - LOW to enable
-assign   GPIO0_D[43]      = 1 ; // LO_DIR - HIGH for A>B direction (to FPGA)
+assign  GPIO0_D[32]            = 0 ; // HI_OE - LOW to enable
+assign  GPIO0_D[33]            = 1 ; // HI_DIR - HIGH for A>B direction (to FPGA)
+assign  GPIO0_D[42]            = 0 ; // LO_OE - LOW to enable
+assign  GPIO0_D[43]            = 1 ; // LO_DIR - HIGH for A>B direction (to FPGA)
+
 // Set default values for unused Control Bus Outputs
-assign   GPIO0_D[9]       = 0 ; // WR output
-assign   GPIO0_D[10]      = 0 ; // M_REQ output
-assign   GPIO0_D[11]      = 0 ; // RD output
-assign   GPIO0_D[12]      = 0 ; // BUS_REQ output
-assign   GPIO0_D[13]      = 0 ; // IO_REQ output
+assign  GPIO0_D[9]             = 0 ; // WR output
+assign  GPIO0_D[10]            = 0 ; // M_REQ output
+assign  GPIO0_D[11]            = 0 ; // RD output
+assign  GPIO0_D[12]            = 0 ; // BUS_REQ output
+assign  GPIO0_D[13]            = 0 ; // IO_REQ output
+
+// 
+assign CMD_raddr           [2] = CMD_waddr[2] ; // Read address 2 shares write address 2.
+assign CMD_wmask           [2] = 3 ;            // Make sure write enable is there for the first 16 bits.
+
+assign CMD_read_vector_in  [1] = 0 ;
+assign CMD_read_vector_in  [2] = 0 ;
+assign CMD_read_vector_in  [3] = 0 ;
+
+assign CMD_R_priority_boost[1] = 0 ;
+assign CMD_W_priority_boost[1] = 0 ;
+assign CMD_R_priority_boost[2] = 0 ;
+assign CMD_W_priority_boost[2] = 0 ;
+assign CMD_R_priority_boost[3] = 0 ;
+assign CMD_R_priority_boost[4] = 0 ; // The boost feature on read channel 4 is not being used.
 
 // ***************************************************************************************************************
 // *** RESET CIRCUIT *********************************************************************************************
 // ***************************************************************************************************************
-reg reset      ;
-reg DFF_inst8  ;
-reg DFF_inst26 ;
-reg DFF_inst41 ;
+reg reset          ;
+reg DFF_inst8      ;
+reg DFF_inst26     ;
+reg DFF_inst41     ;
 
 wire geo_reset     ;
 wire reset_line    ;
@@ -505,37 +521,35 @@ end
 // ***************************************************************************************************************
 Z80_Bus_Interface #(
 
-// Z80 bus timing settings.
+   // Z80 bus timing settings.
    .READ_PORT_CLK_POS     ( 2       ), // Number of Z80_CLK cycles before the bus interface responds to a Read Port command.
    .WRITE_PORT_CLK_POS    ( 2       ), // Number of Z80_CLK cycles before the bus interface samples the Write Port command's data.
 
-// 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read before asserting the WAIT during a Read Memory cycle.
-// Use 0 for an instant guaranteed 'WAIT' every read.  (Safest for Read Instruction Opcode cycle.)
-// Use 2 for compatibility with waiting for a BrianHG_DDR3 read cache hit before asserting the 'WAIT'.
+   // 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read before asserting the WAIT during a Read Memory cycle.
+   // Use 0 for an instant guaranteed 'WAIT' every read.  (Safest for Read Instruction Opcode cycle.)
+   // Use 2 for compatibility with waiting for a BrianHG_DDR3 read cache hit before asserting the 'WAIT'.
 
    .Z80_DELAY_WAIT_RI     ( 3       ), // 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read_ready before asserting the WAIT during a Read Instruction Opcode cycle.
    .Z80_DELAY_WAIT_RM     ( 3       ), // 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read_ready before asserting the WAIT during a Read Memory cycle.
    .Z80_WAIT_QUICK_OFF    ( 1       ), // 0 (Default) = WAIT is turned off only during a low Z80_CLK.  1 = WAIT is turned off as soon as a read_ready is received.
 
-// Direction control for DATA BUS level converter
+   // Direction control for DATA BUS level converter
    .data_in               ( 1'b0    ), // Direction controls for 74LVC245 buffers - hardware dependent!
    .data_out              ( 1'b1    ), // Direction controls for 74LVC245 buffers - hardware dependent!
 
-   .BANK_ID               ( '{9,3,71,80,85,32,77,65,88,49,48,0,255,255,255,255} ),  // The BANK_ID data to return ('GPU MAX10')
-   //.BANK_ID_ADDR          ( 17'b10111111111111111 ),                                // Address to return BANK_ID data from
-   .BANK_ID_ADDR          ( GPU_MEM-16 ),  // Address to return BANK_ID data from
+   .BANK_ID               ( '{9,3,71,80,85,32,77,65,88,49,48,0,255,255,255,255} ), // The BANK_ID data to return ('GPU MAX10')
+   .BANK_ID_ADDR          ( GPU_MEM-16 ), // Address to return BANK_ID data from
    .BANK_RESPONSE         ( 1       ), // 1 - respond to reads at BANK_ID_ADDR with BANK_ID data, 0 - ignore reads to that address
    .MEM_SIZE_BYTES        ( GPU_MEM ), // Specifies size of GPU RAM available to host (anything above this returns $FF or $7E)
    .MEMORY_RANGE          ( 3'b010  ), // Z80_addr[21:19] == 3'b010 targets the 512KB 'window' at 0x100000-0x17FFFF (Socket 3 on the uCom)
    .INT_TYP               ( 0       ), // 0 = polled (IO), 1 = interrupt.
    .INT_VEC               ( 48      ), // INTerrupt VECtor to be passed to host in event of an interrupt acknowledge.
 
-
-// Read IO port addresses range.
+   // Read IO port addresses range.
    .READ_PORT_BEGIN       ( 240     ), // Sets the beginning port number which can be read.
    .READ_PORT_END         ( 249     ), // Sets the ending    port number which can be read.
 
-// ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
+   // ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
    .IO_DATA               ( 240     ), // IO address for keyboard data polling.
    .IO_STAT               ( 241     ), // IO address for keyboard status polling.
    .SND_OUT               ( 242     ), // IO address for speaker/audio output enable.
@@ -545,7 +559,7 @@ Z80_Bus_Interface #(
    .GEO_LO                ( 246     ), // IO address for GEOFF LOW byte.
    .GEO_HI                ( 247     ), // IO address for GEOFF HIGH byte.
    .FIFO_STAT             ( 248     )  // IO address for GPU FIFO status on bit 0 - remaining bits free for other data.
-// ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
+   // ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
 
 ) Z80_BRIDGE (
 
@@ -574,6 +588,10 @@ Z80_Bus_Interface #(
    .Z80_WAIT          ( GPIO0_D[8]     ), // Active HIGH, signals to Z80 to WAIT.
    .Z80_RDn           ( GPIO1_D[4]     ), // Z80 RD goes LOW to signal a Z80 ReaD operation.
    .Z80_WRn           ( GPIO1_D[5]     ), // Z80 WR goes LOW when Z80 is performing a WRite operation.
+   // Additional Control bus inputs (uCOM/DECA interface v3 upwards)
+   .Z80_INTACKn       ( GPIO1_D[2]     ), // INPUT from Z80 - LOW when Z80 acknowledges an INTerrupt
+   .Z80_INT_INn       ( GPIO1_D[1]     ), // INPUT from Z80 - LOW when a peripheral device is requesting an INTerrupt
+   .Z80_WAIT_INn      ( GPIO1_D[0]     ), // INPUT from Z80 - LOW when a peripheral devices is delaying a memory or IO operation
 
    // Data bus (8-bit)
    .Z80_DATA          ({ GPIO1_D[11], GPIO1_D[12], GPIO1_D[13], GPIO1_D[14], GPIO1_D[15], GPIO1_D[16], GPIO1_D[17], GPIO1_D[18] }),
@@ -660,10 +678,75 @@ Z80_Bus_Interface #(
 
 );
 
-assign CMD_read_vector_in  [1]                      = 0 ;
-assign CMD_R_priority_boost[1]                      = 0 ;
-assign CMD_W_priority_boost[1]                      = 0 ;
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// *** SIDNEY ****************************************************************************************************
+// *** SD Interface **********************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+wire           SD_RD_RDY ; // HIGH when a read is completed             - connect to BRIDGETTE
+wire           SD_BF_RDY ; // HIGH when DDR3 block buffer is available  - connect to BRIDGETTE
+wire  [31:0]   SD_SECTOR ; // 32-bit value for target Sector on SD card - connect to BRIDGETTE
+logic          SD_RD_RQ  ; // HIGH when a read is requested             - connect to BRIDGETTE
+wire  [ 7:0]   SD_STATUS ; // SD Interface status byte                  - connect to BRIDGETTE
 
+wire  [ 3:0]   SID_STATE ; // Current state machine value
+wire  [ 1:0]   SDTYPE    ; // Detected SD card type
+
+assign SD_STATUS = '{ 1'b0, SDTYPE, SID_STATE, SD_RD_RDY } ; // assign status values
+
+SDInterface #(
+   // parameters
+   .DDR3_BUFFER_ADDR ( 12'd256 )  // set DDR3 buffer location to page 2 of GPU RAM
+
+) Sidney (
+   // Inputs
+   .CLK_100      ( CMD_CLK     ), // 100MHz system clock
+   .RESET        ( geo_reset   ), // reset signal
+   .RD_REQ       ( SD_RD_RQ    ), // HIGH for read request
+   .SECTOR       ( SD_SECTOR   ), // target sector
+
+   // Outputs
+   .CARDTYPE     ( SDTYPE      ), // 2-bit value for SD card type - 0 = Unknown, 1 = SDv1.1 , 2 = SDv2 , 3 = SDHCv2
+   .RD_RDY       ( SD_RD_RDY   ), // signals when DDR3 SD block buffer is ready to be read by host
+   .SD_BUSY      ( SD_BF_RDY   ), // signals SD interface is busy
+   .SIDSTATE     ( SID_STATE   ), // 4-bit value showing current state of SID's state machine
+
+   // These signals connect to physical SD bus
+   .SD_CLK       ( SD_CLK      ), // clock signal to SD card
+   .SD_CMD       ( SD_CMD      ), // bi-dir command line to SD card
+   .SD_DATA      ( SD_DAT      ), // bi-dir data bus to SD card
+
+   // These signals handle the SN74AVCA406L and are specific to the DECA board
+   .SD_CMD_DIR   ( SD_CMD_DIR  ), // HIGH = TO SD card, LOW = FROM SD card
+   .SD_D0_DIR    ( SD_D0_DIR   ), // HIGH = TO SD card, LOW = FROM SD card
+   .SD_D123_DIR  ( SD_D123_DIR ), // HIGH = TO SD card, LOW = FROM SD card
+   .SD_SEL       ( SD_SEL      ), // Voltage select - HIGH = 1.8V, LOW = 3.3V
+
+   // DDR3 input connections
+   .DDR3_BUSY    (             ), // HIGH when DDR3 is busy
+   .DDR3_RD_RDY  (             ), // data from DDR3 is ready
+   .DDR3_RD_DATA (             ), // read data from DDR3
+
+    // DDR3 output connections
+   .DDR3_WR_REQ  (             ), // HIGH signals write request to DDR3 Controller
+   .DDR3_WR_ADDR (             ), // 9-bit address bus for *cache RAM* address - this is aligned to final DDR3 address by top-level module
+   .DDR3_WR_DATA (             )  // 128-bit data bus
+
+);
+
+// TODO: move into BRIDGETTE as part of the IO control section when ready
+always @( posedge DDR3_CLK_50 or posedge geo_reset ) begin
+   if ( geo_reset ) begin
+      SD_RD_RQ = 1'b0 ;
+   end else begin
+      if ( SD_RD_RDY ) begin     // make a read request unless RESET is high or a read has completed
+         SD_RD_RQ = 1'b0 ;
+      end else begin
+         SD_RD_RQ = 1'b1 ;
+      end
+   end
+end
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -713,18 +796,6 @@ geometry_processor   GEOFF(
 );
    defparam GEOFF.FIFO_MARGIN = 32;
 
-assign CMD_raddr           [2] = CMD_waddr[2] ; // Read address 2 shares write address 2.
-assign CMD_wmask           [2] = 3 ;            // Make sure write enable is there for the first 16 bits.
-
-assign CMD_read_vector_in  [2] = 0 ;
-assign CMD_read_vector_in  [3] = 0 ;
-
-assign CMD_R_priority_boost[2] = 0 ;
-assign CMD_W_priority_boost[2] = 0 ;
-assign CMD_R_priority_boost[3] = 0 ;
-
-
-
 logic [31:0] rnd_out      ;
 logic [3:0]  CMD_xpos     ;
 logic        CMD_vid_xena ;
@@ -767,9 +838,6 @@ BrianHG_display_rmem #(
    .VID_ypos_out        ( CMD_ypos              )     // Output the display Y line buffer 1 or 2.
                         
 );
-
-assign CMD_R_priority_boost[4] = 0; // The boost feature on read channel 1 is not being used.
-
 
 
 // *****************************************************************
@@ -1036,10 +1104,10 @@ assign NET_RESET_n      = 0 ;
 assign NET_TX_EN        = 0 ;
 assign PMONITOR_I2C_SCL = 0 ;
 assign RH_TEMP_I2C_SCL  = 0 ;
-assign SD_CLK           = 0 ;
-assign SD_CMD_DIR       = 0 ;
-assign SD_D0_DIR        = 0 ;
-assign SD_SEL           = 0 ;
+//assign SD_CLK           = 0 ;
+//assign SD_CMD_DIR       = 0 ;
+//assign SD_D0_DIR        = 0 ;
+//assign SD_SEL           = 0 ;
 assign TEMP_CS_n        = 1 ;
 assign TEMP_SC          = 0 ;
 assign USB_CS           = 0 ;

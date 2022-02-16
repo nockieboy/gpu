@@ -67,7 +67,7 @@ always_ff @( posedge clk  or posedge reset) begin
 
         if ( run ) begin  // load values and begin drawing the line
 
-            // Initialise starting coordinates and direction for immediate plotting
+            // Initialize starting coordinates and direction for immediate plotting
             X_coord            <= aX   ; // initialize starting X pixel location
             Y_coord            <= aY   ; // initialize starting Y pixel location
             lat_bX             <= bX   ; // latch the destination coordinates

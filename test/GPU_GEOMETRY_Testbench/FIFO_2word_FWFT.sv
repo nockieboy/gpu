@@ -43,7 +43,7 @@ always_comb begin
 source            = memory_filled ? memory : data_in  ; // A Mux which selects the source of the next value for the 'data_out' register.
 source_ready      = memory_filled ? 1'b1   : shift_in ; // A Mux which selects the source of the next value for the 'data_out_ready' register.
 
-fifo_not_empty    = data_out_ready                    ; // the data_out register has data ready to be recieved.
+fifo_not_empty    = data_out_ready                    ; // the data_out register has data ready to be received.
 fifo_full         = memory_filled && !shift_out       ; // if the memory is filled and currently there is no shift_out
                                                         // in progress, report that the FIFO is full.
 end // always_comb
@@ -52,7 +52,7 @@ always_ff @(posedge clk  or posedge reset ) begin
 if (reset) begin
     memory           <= 0;             // clear the FIFO memory register
     memory_filled    <= 0;             // clear the FIFO memory_filled flag
-    data_out         <= (bits)'(0);    // clear the data_out register, when simulationg, show that the data out hs no valid data
+    data_out         <= (bits)'(0);    // clear the data_out register, when simulating, show that the data out hs no valid data
     data_out_ready   <= 0;             // clear the data_out ready register
     end else begin
 

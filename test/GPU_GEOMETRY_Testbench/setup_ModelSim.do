@@ -1,6 +1,7 @@
 vlib work
 vmap work work
 vlog -sv17compat -work work {FIFO_2word_FWFT.sv}
+vlog -sv17compat -work work {BrianHG_DDR3_FIFOs.sv}
 vlog -sv17compat -work work {line_generator.sv}
 vlog -sv17compat -work work {ellipse_generator.sv}
 vlog -sv17compat -work work {geometry_xy_plotter.sv}

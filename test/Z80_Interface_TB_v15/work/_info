@@ -1,0 +1,531 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/FPGA/Projects/GPU/test/Z80_Interface_TB_v15
+valtera_gpio_lite
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1639409636
+!i10b 1
+!s100 [9]6nm>n3=ABiG]K[ZBFW2
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IYblo68=k>gR@<Sj;mW6e>0
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+Z5 w1638205199
+Z6 8BrianHG_DDR3/altera_gpio_lite.sv
+Z7 FBrianHG_DDR3/altera_gpio_lite.sv
+!i122 12
+L0 942 261
+Z8 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z9 !s108 1639409636.000000
+Z10 !s107 BrianHG_DDR3/altera_gpio_lite.sv|
+Z11 !s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/altera_gpio_lite.sv|
+!i113 1
+Z12 o-sv -work work
+Z13 tCvgOpt 0
+valtgpio_one_bit
+R1
+R2
+!i10b 1
+!s100 ^6C3fHG>e722a_`3nFFOA0
+R3
+IEOGeiPFSeREQcDhDf@aLk3
+R4
+S1
+R0
+R5
+R6
+R7
+!i122 12
+L0 16 925
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vBHG_FIFO_shifter_2clock_FWFT
+R1
+R2
+!i10b 1
+!s100 f3oElVVb9aGg0QhS@@iE32
+R3
+IbR`b3=5Ym8H6YagTMm6`73
+R4
+S1
+R0
+R5
+Z14 8BrianHG_DDR3/BrianHG_DDR3_FIFOs.sv
+Z15 FBrianHG_DDR3/BrianHG_DDR3_FIFOs.sv
+!i122 15
+L0 70 61
+R8
+r1
+!s85 0
+31
+R9
+Z16 !s107 BrianHG_DDR3/BrianHG_DDR3_FIFOs.sv|
+Z17 !s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/BrianHG_DDR3_FIFOs.sv|
+!i113 1
+R12
+R13
+n@b@h@g_@f@i@f@o_shifter_2clock_@f@w@f@t
+vBHG_FIFO_shifter_FWFT
+R1
+R2
+!i10b 1
+!s100 D2n`z^2KHFVRi9cG;N1RC3
+R3
+I?;ei8me3eSLNHEzNYKcMe1
+R4
+S1
+R0
+R5
+R14
+R15
+!i122 15
+L0 17 50
+R8
+r1
+!s85 0
+31
+R9
+R16
+R17
+!i113 1
+R12
+R13
+n@b@h@g_@f@i@f@o_shifter_@f@w@f@t
+vBHG_FIFO_X_shifter
+R1
+R2
+!i10b 1
+!s100 =T87PRXQ?:QAd>meFF3hU1
+R3
+I9Pzk4QYL1=NL6hFL_7Lg^2
+R4
+S1
+R0
+R5
+R14
+R15
+!i122 15
+L0 132 66
+R8
+r1
+!s85 0
+31
+R9
+R16
+R17
+!i113 1
+R12
+R13
+n@b@h@g_@f@i@f@o_@x_shifter
+vBHG_FIFO_Xword_FWFT
+R1
+R2
+!i10b 1
+!s100 `[m29cD`aDa>HeaSgK=Mo1
+R3
+IUVU<iCVe3kkf=fMdJNP110
+R4
+S1
+R0
+R5
+R14
+R15
+!i122 15
+L0 210 83
+R8
+r1
+!s85 0
+31
+R9
+R16
+R17
+!i113 1
+R12
+R13
+n@b@h@g_@f@i@f@o_@xword_@f@w@f@t
+vBrianHG_DDR3_CMD_SEQUENCER
+R1
+R2
+!i10b 1
+!s100 5M?@kEd_ZNozI1EKFD6mU0
+R3
+Ig7i47bYBNkE3XQ4=BGa0z1
+R4
+S1
+R0
+R5
+8BrianHG_DDR3/BrianHG_DDR3_CMD_SEQUENCER.sv
+FBrianHG_DDR3/BrianHG_DDR3_CMD_SEQUENCER.sv
+!i122 16
+L0 38 490
+R8
+r1
+!s85 0
+31
+R9
+!s107 BrianHG_DDR3/BrianHG_DDR3_CMD_SEQUENCER.sv|
+!s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/BrianHG_DDR3_CMD_SEQUENCER.sv|
+!i113 1
+R12
+R13
+n@brian@h@g_@d@d@r3_@c@m@d_@s@e@q@u@e@n@c@e@r
+vBrianHG_DDR3_COMMANDER_v15
+R1
+R2
+!i10b 1
+!s100 2nKWkWo7klZGh[K^7=HGL0
+R3
+I^RR[o@RI3DkJRCJ4DcHhZ3
+R4
+S1
+R0
+R5
+Z18 8BrianHG_DDR3/BrianHG_DDR3_COMMANDER_v15.sv
+Z19 FBrianHG_DDR3/BrianHG_DDR3_COMMANDER_v15.sv
+!i122 19
+L0 41 900
+R8
+r1
+!s85 0
+31
+R9
+Z20 !s107 BrianHG_DDR3/BrianHG_DDR3_COMMANDER_v15.sv|
+Z21 !s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/BrianHG_DDR3_COMMANDER_v15.sv|
+!i113 1
+R12
+R13
+n@brian@h@g_@d@d@r3_@c@o@m@m@a@n@d@e@r_v15
+vBrianHG_DDR3_CONTROLLER_v15_top
+R1
+R2
+!i10b 1
+!s100 5XObQ6k=7Ha?gOKAnNZA03
+R3
+I]X_6:7W`J=UXi_Fo3IKFZ0
+R4
+S1
+R0
+R5
+8BrianHG_DDR3/BrianHG_DDR3_CONTROLLER_v15_top.sv
+FBrianHG_DDR3/BrianHG_DDR3_CONTROLLER_v15_top.sv
+!i122 20
+L0 124 474
+R8
+r1
+!s85 0
+31
+R9
+!s107 BrianHG_DDR3/BrianHG_DDR3_CONTROLLER_v15_top.sv|
+!s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/BrianHG_DDR3_CONTROLLER_v15_top.sv|
+!i113 1
+R12
+R13
+n@brian@h@g_@d@d@r3_@c@o@n@t@r@o@l@l@e@r_v15_top
+vBrianHG_DDR3_GEN_tCK
+R1
+R2
+!i10b 1
+!s100 08ZiJlVTSm3OM?QV:Zo`:1
+R3
+I>6gg8oCm2fU<ZAC3am5G31
+R4
+S1
+R0
+R5
+8BrianHG_DDR3/BrianHG_DDR3_GEN_tCK.sv
+FBrianHG_DDR3/BrianHG_DDR3_GEN_tCK.sv
+!i122 13
+L0 54 409
+R8
+r1
+!s85 0
+31
+R9
+!s107 BrianHG_DDR3/BrianHG_DDR3_GEN_tCK.sv|
+!s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/BrianHG_DDR3_GEN_tCK.sv|
+!i113 1
+R12
+R13
+n@brian@h@g_@d@d@r3_@g@e@n_t@c@k
+vBrianHG_DDR3_IO_PORT_ALTERA
+R1
+R2
+!i10b 1
+!s100 J?Wz0_cIecP7P8ZR:Li600
+R3
+Iem=WieD:oA[;EccIL[V_b2
+R4
+S1
+R0
+R5
+8BrianHG_DDR3/BrianHG_DDR3_IO_PORT_ALTERA.sv
+FBrianHG_DDR3/BrianHG_DDR3_IO_PORT_ALTERA.sv
+!i122 17
+L0 23 645
+R8
+r1
+!s85 0
+31
+R9
+!s107 BrianHG_DDR3/BrianHG_DDR3_IO_PORT_ALTERA.sv|
+!s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/BrianHG_DDR3_IO_PORT_ALTERA.sv|
+!i113 1
+R12
+R13
+n@brian@h@g_@d@d@r3_@i@o_@p@o@r@t_@a@l@t@e@r@a
+vBrianHG_DDR3_PHY_SEQ
+R1
+R2
+!i10b 1
+!s100 _3z6@?HPj8`O=JAfH^fjE3
+R3
+IggKZ6>T:OSO^9R08mYOe23
+R4
+S1
+R0
+R5
+8BrianHG_DDR3/BrianHG_DDR3_PHY_SEQ.sv
+FBrianHG_DDR3/BrianHG_DDR3_PHY_SEQ.sv
+!i122 18
+L0 51 1281
+R8
+r1
+!s85 0
+31
+R9
+!s107 BrianHG_DDR3/BrianHG_DDR3_PHY_SEQ.sv|
+!s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/BrianHG_DDR3_PHY_SEQ.sv|
+!i113 1
+R12
+R13
+n@brian@h@g_@d@d@r3_@p@h@y_@s@e@q
+vBrianHG_DDR3_PLL
+R1
+R2
+!i10b 1
+!s100 9EU4GZK^]=_gRZ1ghM[zT3
+R3
+IOU]3HddAibo>YBWS:GU:=2
+R4
+S1
+R0
+w1638205200
+8BrianHG_DDR3/BrianHG_DDR3_PLL.sv
+FBrianHG_DDR3/BrianHG_DDR3_PLL.sv
+!i122 14
+L0 24 615
+R8
+r1
+!s85 0
+31
+R9
+!s107 BrianHG_DDR3/BrianHG_DDR3_PLL.sv|
+!s90 -reportprogress|300|-sv|-work|work|BrianHG_DDR3/BrianHG_DDR3_PLL.sv|
+!i113 1
+R12
+R13
+n@brian@h@g_@d@d@r3_@p@l@l
+vDDR3_CMD_DECODE_BYTE
+R1
+R2
+!i10b 1
+!s100 Kk_Be44?ifi^IZO]2W1Wd3
+R3
+I4Nee1[b8M4kYh8EV@oIAG3
+R4
+S1
+R0
+R5
+R18
+R19
+!i122 19
+L0 1627 27
+R8
+r1
+!s85 0
+31
+R9
+R20
+R21
+!i113 1
+R12
+R13
+n@d@d@r3_@c@m@d_@d@e@c@o@d@e_@b@y@t@e
+vDDR3_CMD_ENCODE_BYTE
+R1
+R2
+!i10b 1
+!s100 `QTmbm<7_[WzLPFHDe22n2
+R3
+II[=zVBFNX^:16RE4aB[:m1
+R4
+S1
+R0
+R5
+R18
+R19
+!i122 19
+L0 1586 32
+R8
+r1
+!s85 0
+31
+R9
+R20
+R21
+!i113 1
+R12
+R13
+n@d@d@r3_@c@m@d_@e@n@c@o@d@e_@b@y@t@e
+vDDR3_MUX
+R1
+R2
+!i10b 1
+!s100 c;fE0aZhl25YXUc8>FTg62
+R3
+I?Q3LY:cg]abJ^mjzZXC=63
+R4
+S1
+R0
+R5
+R18
+R19
+!i122 19
+L0 963 216
+R8
+r1
+!s85 0
+31
+R9
+R20
+R21
+!i113 1
+R12
+R13
+n@d@d@r3_@m@u@x
+vDDR3_RW_CACHE
+R1
+R2
+!i10b 1
+!s100 ;H][H[>c^?6z`iUEl53j=3
+R3
+I2eo;NCZzCQNJTmDOS7MIA1
+R4
+S1
+R0
+R5
+R18
+R19
+!i122 19
+L0 1200 370
+R8
+r1
+!s85 0
+31
+R9
+R20
+R21
+!i113 1
+R12
+R13
+n@d@d@r3_@r@w_@c@a@c@h@e
+vHW_Regs
+R1
+R2
+!i10b 1
+!s100 R^m4jQK<;8oX;@@KLKIRC0
+R3
+Ij1C<DL3Bg_8]UC0Z62hWJ2
+R4
+S1
+R0
+w1639409432
+8HW_Regs.sv
+FHW_Regs.sv
+!i122 21
+L0 12 90
+R8
+r1
+!s85 0
+31
+R9
+!s107 HW_Regs.sv|
+!s90 -reportprogress|300|-sv|-work|work|HW_Regs.sv|
+!i113 1
+R12
+R13
+n@h@w_@regs
+vZ80_Bus_Interface
+R1
+Z22 !s110 1639409637
+!i10b 1
+!s100 ikg@jSHiU:;cQheHmMY0h2
+R3
+IklV0bRXX39MmcJS>cl5=[2
+R4
+S1
+R0
+w1638369495
+8Z80_Bus_Interface.sv
+FZ80_Bus_Interface.sv
+!i122 22
+L0 14 514
+R8
+r1
+!s85 0
+31
+R9
+!s107 Z80_Bus_Interface.sv|
+!s90 -reportprogress|300|-sv|-work|work|Z80_Bus_Interface.sv|
+!i113 1
+R12
+R13
+n@z80_@bus_@interface
+vZ80_Bus_Interface_to_DDR3_tb
+R1
+R22
+!i10b 1
+!s100 <95gNe7k^Hf93O]HZ@5Mj0
+R3
+IfL`JPVnGLcH1cO^ALOEL_2
+R4
+S1
+R0
+w1639335614
+8Z80_Bus_Interface_to_DDR3_tb.sv
+FZ80_Bus_Interface_to_DDR3_tb.sv
+FBrianHG_DDR3/ddr3.v
+FBrianHG_DDR3\4096Mb_ddr3_parameters.vh
+!i122 23
+L0 65 4600
+R8
+r1
+!s85 0
+31
+!s108 1639409637.000000
+!s107 BrianHG_DDR3\4096Mb_ddr3_parameters.vh|BrianHG_DDR3/ddr3.v|Z80_Bus_Interface_to_DDR3_tb.sv|
+!s90 -reportprogress|300|-sv|-work|work|Z80_Bus_Interface_to_DDR3_tb.sv|
+!i113 1
+R12
+R13
+n@z80_@bus_@interface_to_@d@d@r3_tb

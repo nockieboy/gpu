@@ -2,7 +2,7 @@
  * ELLIPSE GENERATOR MODULE (ELLIE)
  *
  * v 0.5.001   Jan 13, 2021
- * Now with horizontal fill comand.
+ * Now with horizontal fill command.
  * FMAX = 125.9 MHz compiled balanced optimized with 35 bit integer core.
  *
  */
@@ -11,7 +11,7 @@ module ellipse_generator
 #(
 parameter  int  BITS_RES            = 12,            // Coordinates IO port bits. 12 = -2048 to +2047
 parameter  int  BITS_RAD            = BITS_RES - 1,  // Bits for internal maximum radius.  Since the radius is positive only,
-parameter  bit  USE_ALTERA_IP       = 1              // Slecets if Altera's LPM_MULT should be used.
+parameter  bit  USE_ALTERA_IP       = 1              // Selects if Altera's LPM_MULT should be used.
 )
 (
 // inputs
@@ -21,8 +21,8 @@ parameter  bit  USE_ALTERA_IP       = 1              // Slecets if Altera's LPM_
   input logic                        run,              // HIGH to draw / run the unit
   input logic         [1:0]          quadrant,         // specifies which quadrant of the ellipse to draw
   input logic                        ellipse_filled,   // X-filling when drawing an ellipse.
-  input logic  signed [BITS_RES-1:0] Xc,               // 12-bit X-coordinate for centre of ellipse
-  input logic  signed [BITS_RES-1:0] Yc,               // 12-bit Y-coordinate for centre of ellipse
+  input logic  signed [BITS_RES-1:0] Xc,               // 12-bit X-coordinate for center of ellipse
+  input logic  signed [BITS_RES-1:0] Yc,               // 12-bit Y-coordinate for center of ellipse
   input logic  signed [BITS_RES-1:0] Xr,               // 12-bit X-radius - Width of ellipse
   input logic  signed [BITS_RES-1:0] Yr,               // 12-bit Y-radius - height of ellipse
   input logic                        ena_pause,        // set HIGH to pause ELLIE while it is drawing
@@ -208,13 +208,13 @@ casez ( sub_function )
     4'd0 : begin // geo_sub_func==0 is the idle state where we wait for the 'run' to be asserted
    
       if ( run ) begin  // load values and begin drawing the ellipse
-         // Initialise starting coordinates and direction for immediate plotting
+         // Initialize starting coordinates and direction for immediate plotting
          quadrant_latch <= quadrant ; // latch which of the 4 quadrants will be drawn
 
-         if ( ( Xr == 0 ) && ( Yr == 0 ) ) begin // Drawing only a single centre point
+         if ( ( Xr == 0 ) && ( Yr == 0 ) ) begin // Drawing only a single center point
 
-            x                  <= 0    ; // initialise starting X pixel location *** Switch to X_coord <=
-            y                  <= 0    ; // initialise starting Y pixel location *** Switch to Y_coord <=
+            x                  <= 0    ; // initialize starting X pixel location *** Switch to X_coord <=
+            y                  <= 0    ; // initialize starting Y pixel location *** Switch to Y_coord <=
             pixel_data_rdy_int <= 1'b0  ; // set pixel_data_rdy_int flag
             ellipse_complete   <= 1'b0  ; // make sure ellipse_complete is set
             sub_function       <= 4'd9  ; // Special case to pass the center coordinates
@@ -281,7 +281,7 @@ casez ( sub_function )
      alu_mult_b[BITS_RAD*2-1:0]          <= alu_mult_y[BITS_RAD*2-1:0] ;
 
      // Begin the initial preparation of 'p' -> p = ( 0.25 * Rx2) + 0.5 
-     ry2                                 <= (BITS_RAD*2)'((alu_mult_y[BITS_RAD*2-1:0] + 2) >> 2) ; // Computes rx2/4 with rounding, use px as the tempoary register
+     ry2                                 <= (BITS_RAD*2)'((alu_mult_y[BITS_RAD*2-1:0] + 2) >> 2) ; // Computes rx2/4 with rounding, use px as the temporary register
      px                                  <= 0     ;                                 // Clear temp reg px
 
      sub_function                        <= sub_function + 1'd1  ;                  // advance the sub_funcion to the next step
@@ -384,9 +384,9 @@ if (((y<2) || draw_flat) && x <= xrr ) begin // If any line remains to be drawn
     end
     
 
-    default : begin                // we are in an undefines function state,
+    default : begin                // we are in an undefined function state,
     sub_function       <= 4'd0  ;  // so, reset the function state to 0
-    draw_line          <= 1'b0  ;  // and make sure we diable the draw_line flag
+    draw_line          <= 1'b0  ;  // and make sure we disable the draw_line flag
     pixel_data_rdy_int <= 1'b0  ; // reset pixel_data_rdy_int flag - no more valid coordinates after this clock
     sub_function       <= 4'd0  ; // reset the phase counter
     ellipse_complete   <= 1'b1  ;

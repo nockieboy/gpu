@@ -68,9 +68,13 @@ module Z80_Bus_Interface #(
 (* useioff = 1 *) output logic         Z80_WAIT,          // Flag HIGH to pull Z80's WAIT line LOW
 (* useioff = 1 *) input  logic         Z80_RDn,           // Z80 RD   - active LOW
 (* useioff = 1 *) input  logic         Z80_WRn,           // Z80 WR   - active LOW
-   
+// additional control inputs (uCOM/DECA Interface v3 upwards)
+(* useioff = 1 *) input  logic         Z80_INTACKn,       // LOW when Z80 acknowledges an INTerrupt
+(* useioff = 1 *) input  logic         Z80_INT_INn,       // LOW when a peripheral device is requesting an INTerrupt
+(* useioff = 1 *) input  logic         Z80_WAIT_INn,      // LOW when a peripheral device is delaying a memory or IO operation
+// bidirectional data bus
 (* useioff = 1 *) inout  logic  [7:0]  Z80_DATA,          // Z80 DATA bus IO
-
+// INTerrupt daisy-chain controls
 (* useioff = 1 *) input  logic         Z80_IEI,           // if HIGH, Z80_bridge can request interrupt immediately
 (* useioff = 1 *) output logic         Z80_INT_REQ,       // Flag HIGH to signal to host for an interrupt request
 (* useioff = 1 *) output logic         Z80_IEO,           // Flag HIGH when GPU is requesting an interrupt to pull IEO LOW
