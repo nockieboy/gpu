@@ -1,0 +1,187 @@
+
+Interface Report:
+=================
+
+Block Name : versatile_fifo_dptam_dw
+Date       : Tue Apr 21 10:24:26 2009
+
+
+Ports that are candidates for global sharing:
+---------------------------------------------
+
+
+    Fanout  Type      Direction  Name 
+    -------------------------------------------------------------------
+
+
+
+Port Interface:
+---------------
+
+
+    Fanout  Type      Direction  Name 
+    -------------------------------------------------------------------
+
+    4       INT_NET   INPUT      Port        : adr_a[0]
+
+    4       INT_NET   INPUT      Port        : adr_a[1]
+
+    4       INT_NET   INPUT      Port        : adr_a[2]
+
+    4       INT_NET   INPUT      Port        : adr_a[3]
+
+    4       INT_NET   INPUT      Port        : adr_a[4]
+
+    4       INT_NET   INPUT      Port        : adr_a[5]
+
+    4       INT_NET   INPUT      Port        : adr_a[6]
+
+    4       INT_NET   INPUT      Port        : adr_a[7]
+
+    4       INT_NET   INPUT      Port        : adr_a[8]
+
+    4       INT_NET   INPUT      Port        : adr_a[9]
+
+    4       INT_NET   INPUT      Port        : adr_a[10]
+
+    4       INT_NET   INPUT      Port        : adr_b[0]
+
+    4       INT_NET   INPUT      Port        : adr_b[1]
+
+    4       INT_NET   INPUT      Port        : adr_b[2]
+
+    4       INT_NET   INPUT      Port        : adr_b[3]
+
+    4       INT_NET   INPUT      Port        : adr_b[4]
+
+    4       INT_NET   INPUT      Port        : adr_b[5]
+
+    4       INT_NET   INPUT      Port        : adr_b[6]
+
+    4       INT_NET   INPUT      Port        : adr_b[7]
+
+    4       INT_NET   INPUT      Port        : adr_b[8]
+
+    4       INT_NET   INPUT      Port        : adr_b[9]
+
+    4       INT_NET   INPUT      Port        : adr_b[10]
+
+    4       INT_NET   INPUT      Port        : clk_a
+
+    4       INT_NET   INPUT      Port        : clk_b
+
+    1       INT_NET   INPUT      Port        : d_a[0]
+                                 Instance    : ram_tile_I_1/U_7_0
+
+    1       INT_NET   INPUT      Port        : d_a[1]
+                                 Instance    : ram_tile_I_1/U_8_0
+
+    1       INT_NET   INPUT      Port        : d_a[2]
+                                 Instance    : ram_tile_0_I_1/U_7_0
+
+    1       INT_NET   INPUT      Port        : d_a[3]
+                                 Instance    : ram_tile_0_I_1/U_8_0
+
+    1       INT_NET   INPUT      Port        : d_a[4]
+                                 Instance    : ram_tile_1_I_1/U_7_0
+
+    1       INT_NET   INPUT      Port        : d_a[5]
+                                 Instance    : ram_tile_1_I_1/U_8_0
+
+    1       INT_NET   INPUT      Port        : d_a[6]
+                                 Instance    : ram_tile_2_I_1/U_7_0
+
+    1       INT_NET   INPUT      Port        : d_a[7]
+                                 Instance    : ram_tile_2_I_1/U_8_0
+
+    1       INT_NET   INPUT      Port        : d_b[0]
+                                 Instance    : ram_tile_I_1/U_7_0
+
+    1       INT_NET   INPUT      Port        : d_b[1]
+                                 Instance    : ram_tile_I_1/U_8_0
+
+    1       INT_NET   INPUT      Port        : d_b[2]
+                                 Instance    : ram_tile_0_I_1/U_7_0
+
+    1       INT_NET   INPUT      Port        : d_b[3]
+                                 Instance    : ram_tile_0_I_1/U_8_0
+
+    1       INT_NET   INPUT      Port        : d_b[4]
+                                 Instance    : ram_tile_1_I_1/U_7_0
+
+    1       INT_NET   INPUT      Port        : d_b[5]
+                                 Instance    : ram_tile_1_I_1/U_8_0
+
+    1       INT_NET   INPUT      Port        : d_b[6]
+                                 Instance    : ram_tile_2_I_1/U_7_0
+
+    1       INT_NET   INPUT      Port        : d_b[7]
+                                 Instance    : ram_tile_2_I_1/U_8_0
+
+    1       INT_NET   OUTPUT     Port        : q_a[0]
+                                 Instance    : ram_tile_I_1/U_1_0
+
+    1       INT_NET   OUTPUT     Port        : q_a[1]
+                                 Instance    : ram_tile_I_1/U_3_0
+
+    1       INT_NET   OUTPUT     Port        : q_a[2]
+                                 Instance    : ram_tile_0_I_1/U_1_0
+
+    1       INT_NET   OUTPUT     Port        : q_a[3]
+                                 Instance    : ram_tile_0_I_1/U_3_0
+
+    1       INT_NET   OUTPUT     Port        : q_a[4]
+                                 Instance    : ram_tile_1_I_1/U_1_0
+
+    1       INT_NET   OUTPUT     Port        : q_a[5]
+                                 Instance    : ram_tile_1_I_1/U_3_0
+
+    1       INT_NET   OUTPUT     Port        : q_a[6]
+                                 Instance    : ram_tile_2_I_1/U_1_0
+
+    1       INT_NET   OUTPUT     Port        : q_a[7]
+                                 Instance    : ram_tile_2_I_1/U_3_0
+
+    1       INT_NET   OUTPUT     Port        : q_b[0]
+                                 Instance    : ram_tile_I_1/U_0_0
+
+    1       INT_NET   OUTPUT     Port        : q_b[1]
+                                 Instance    : ram_tile_I_1/U_2_0
+
+    1       INT_NET   OUTPUT     Port        : q_b[2]
+                                 Instance    : ram_tile_0_I_1/U_0_0
+
+    1       INT_NET   OUTPUT     Port        : q_b[3]
+                                 Instance    : ram_tile_0_I_1/U_2_0
+
+    1       INT_NET   OUTPUT     Port        : q_b[4]
+                                 Instance    : ram_tile_1_I_1/U_0_0
+
+    1       INT_NET   OUTPUT     Port        : q_b[5]
+                                 Instance    : ram_tile_1_I_1/U_2_0
+
+    1       INT_NET   OUTPUT     Port        : q_b[6]
+                                 Instance    : ram_tile_2_I_1/U_0_0
+
+    1       INT_NET   OUTPUT     Port        : q_b[7]
+                                 Instance    : ram_tile_2_I_1/U_2_0
+
+    1       INT_NET   INPUT      Port        : we_a
+                                 Instance    : we_a_RNIA08
+
+    1       INT_NET   INPUT      Port        : we_b
+                                 Instance    : we_b_RNIB08
+
+-----------------------------------------------------------------------------------------------------------
+
+    Types:
+    ------
+      PAD_NET : The port is driving a PAD pin.
+      CLK_NET : The port is driving only clock pins of instances.
+      INT_NET : The port is driving other type of pins.
+      NC_NET  : The port is floating.
+
+    Globals:
+    --------
+      Int Globals : <Number of internal globals the port is driving>
+      Global net  : YES if a port is driven by a global net
