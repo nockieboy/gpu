@@ -1,0 +1,63 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/FPGA/Projects/GPU/test/Z80_Interface_TB_v16
+vZ80_Bus_Interface
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1649459079
+!i10b 1
+!s100 MnSg>MGAzVPYFk=dF3?Q_0
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I1U7@G>?jRzk5FkJ@7Z14D1
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1649458859
+8Z80_Bus_Interface.sv
+FZ80_Bus_Interface.sv
+!i122 2
+L0 14 681
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1649459079.000000
+!s107 Z80_Bus_Interface.sv|
+!s90 -reportprogress|300|-sv|-work|work|Z80_Bus_Interface.sv|
+!i113 1
+Z7 o-sv -work work
+Z8 tCvgOpt 0
+n@z80_@bus_@interface
+vZ80_Bus_Interface_tb
+R1
+R2
+!i10b 1
+!s100 n?R0fMHD6Fn9XdGN2CE7K2
+R3
+IdTE[W[V_`FoMdb8RYdgk=2
+R4
+S1
+R0
+w1649458981
+8Z80_Bus_Interface_tb.sv
+FZ80_Bus_Interface_tb.sv
+!i122 3
+L0 44 1124
+R5
+r1
+!s85 0
+31
+R6
+!s107 Z80_Bus_Interface_tb.sv|
+!s90 -reportprogress|300|-sv|-work|work|Z80_Bus_Interface_tb.sv|
+!i113 1
+R7
+R8
+n@z80_@bus_@interface_tb

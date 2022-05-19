@@ -1,0 +1,43 @@
+******************************************************************************************************************
+Z80_cmd_stimulus test-bench command list.
+
+Written by Brian Guralnick.
+October 7, 2021.
+
+******************************************************************************************************************
+
+For a command to be accepted, it must have the 'at' symbol (SHIFT 2) in front of it.
+Example:
+
+[at]COMMAND_STRING <arg> <arg> <arg> ...
+
+***Removing the [at] symbol means the command is ignored and it is treated as text comments.
+Multiple commands are allowed on one line so long as each command has an [at] symbol in front of it.
+
+******************************************************************************************************************
+Commands: (*** No spaces allowed in any <FILE_NAME>)
+
+[at]LOG_FILE  <FILE_NAME>            > Generates a results log file.         (No spaces allowed in file name).
+[at]END_LOG_FILE                     > Forcefully closes/ends the log file.
+[at]STOP                             > Stops the script processing/simulation.  Click on 'run -all' to continue script after the stop command.
+[at]END                              > Ends the script processing/simulation. (You may now paint/set your own manual controls in the waveform view and run -all)
+
+[at]RESET                            > Hard Resets the system
+
+
+[at]CMD RI    <16'hex ADDR>              > Simulated Z80 will perform a read  Instruction OP-Code memory at the specified ADDR. 
+[at]CMD RM    <16'hex ADDR>              > Simulated Z80 will perform a read  memory at the specified ADDR. 
+[at]CMD WM    <16'hex ADDR> <8'hex DATA> > Simulated Z80 will perform a write memory at the specified ADDR with the specified DATA. 
+
+[at]CMD RP    < 8'hex PORT>              > Simulated Z80 will perform a read  port at the specified PORT. 
+[at]CMD WP    < 8'hex PORT> <8'hex DATA> > Simulated Z80 will perform a write port at the specified PORT with the specified DATA. 
+
+
+@LOG_FILE Z80_cmd_stimulus_log.txt
+@RESET
+
+@CMD WP 00F2 24     Write address to SD_ADDR
+@CMD RP 00F0        Read  port - SD_DATA
+@END
+
+@END

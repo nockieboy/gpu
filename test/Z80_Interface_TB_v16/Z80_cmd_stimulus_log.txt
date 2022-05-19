@@ -1,0 +1,9 @@
+Log file requested in 'Z80_cmd_stimulus.txt' at line#  36.
+
+Line#  37, Sending a reset to the Z80_bus module.
+Line#  39, Z80_Bus_Interface_tb.tx_z80_cmd: at time 812.5 ns INFO: Write IO port (000000f2) with data (24).
+Line#  40, Z80_Bus_Interface_tb.tx_z80_cmd: at time 1750.0 ns INFO: Read IO port (000000f0) returns data (00).
+Line#  41, @END command at line number   41.
+
+End of command source ASCII file 'Z80_cmd_stimulus.txt'.
+  41 lines processed.
