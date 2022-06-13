@@ -1,11 +1,25 @@
+/*
+    SDReader
+    v2.0 by nockieboy
+
+    This is based upon *this project* by *this person* (update these).
+
+    Modified to separate initialisation from reading to optimise block reads.
+    The module starts by INITialising the SD card and getting its RCA and card type. These
+    are used by SDWriter as well, so need to be obtained.  The SD card is then deselected,
+    placing it in Standby-State.
+    Subsequent reads (or writes) select the SD card with CMD7, perform their transaction,
+    then de-select the card with DESEL, putting the card back into Standy-State.
+
+*/
+
 module SDReader # (
-    parameter  CLK_DIV = 1, // when clk = 0~25MHz   , set CLK_DIV to 0,
+    parameter  CLK_DIV = 1  // when clk = 0~25MHz   , set CLK_DIV to 0,
                             // when clk = 25~50MHz  , set CLK_DIV to 1,
                             // when clk = 50~100MHz , set CLK_DIV to 2,
                             // when clk = 100~200MHz, set CLK_DIV to 3,
                             // when clk = 200~400MHz, set CLK_DIV to 4,
                             // ......
-    parameter  SIMULATION = 0
 ) (
     // clock
     input  logic        clk,
@@ -24,8 +38,10 @@ module SDReader # (
     // show card status
     output logic [ 1:0] card_type,
     output logic [ 3:0] card_stat,
+    output logic [15:0] rca,
     
     // user read sector command interface
+    input  logic [ 1:0] MODE,           // 0 = INIT, 1 = READ, 2 = WRITE
     input  logic        rstart, 
     input  logic [31:0] rsector_no,
     output logic        rbusy,
@@ -43,10 +59,10 @@ module SDReader # (
     output  logic       SD_SEL
 );
 
-localparam  SLOWCLKDIV = SIMULATION ? 16'd1   : ( (16'd1<<CLK_DIV)*16'd35 ) ;
-localparam  FASTCLKDIV = SIMULATION ? 16'd0   : ( (16'd1<<CLK_DIV) )        ;
-localparam  CMDTIMEOUT = SIMULATION ? 15'd100 : 15'd500   ; // according to SD datasheet, Ncr(max) = 64 clock cycles, so 500 cycles is enough
-localparam  DATTIMEOUT = SIMULATION ? 'd200   : 'd1000000 ; // according to SD datasheet, 1ms is enough to wait for DAT result, here, we set timeout to 1000000 clock cycles = 80ms (when SDCLK=12.5MHz)
+localparam  SLOWCLKDIV = ( 16'd1 << CLK_DIV ) * 16'd35 ;
+localparam  FASTCLKDIV = ( 16'd1 << CLK_DIV )          ;
+localparam  CMDTIMEOUT = 15'd500   ; // SD datasheet: Ncr(max) = 64 clock cycles, so 500 cycles is enough
+localparam  DATTIMEOUT = 'd1000000 ; // SD datasheet: 1ms is enough to wait for DAT result, here, we set timeout to 1000000 clock cycles = 80ms (when SDCLK=12.5MHz)
 
 // DECA SD direction controls - HIGH for writes to SD card, LOW for reads from SD card
 assign  SD_CMD_DIR  = sdcmdoe ;
@@ -63,7 +79,6 @@ logic           start       = 1'b0   ;
 logic   [  5:0] cmd         = '0     ;
 logic   [ 15:0] clkdiv      = 16'd50 ;
 logic   [ 15:0] precycles   = '0     ;
-logic   [ 15:0] rca         = '0     ;
 logic   [ 31:0] rsectoraddr = '0     ;
 logic   [ 31:0] arg         = '0     ;
 logic   [ 31:0] ridx        = 0      ;
@@ -74,7 +89,8 @@ logic           syntaxerr            ;
 //logic           sdcmdoe, sdcmdout    ;
 logic           sdclkl      = 1'b0   ;
 
-enum { CMD0, CMD8, CMD55_41, ACMD41, CMD2, CMD3, CMD7, CMD16, IDLE, READING, READING2 } sdstate = CMD0 ;
+//       0     1      2         3      4    5     6      7      8      9       A      B      C        D
+enum { CMD0, CMD8, CMD55_41, ACMD41, CMD2, CMD3, CMD7, CMD7F, CMD16, CMD17, ENDSEL, IDLE, READING, READING2 } sdstate = CMD0 ;
 enum { UNKNOWN, SDv1, SDv2, SDHCv2, SDv1Maybe } cardtype = UNKNOWN ;
 enum { RWAIT, RDURING, RTAIL, RDONE, RTIMEOUT } rstate   = RWAIT   ;
 
@@ -127,7 +143,7 @@ always @(posedge clk or negedge rst_n) begin
         set_cmd(0)            ;
         rdone       = 1'b0    ;
         rsectoraddr ='0       ;
-        sdstate     = CMD0    ;
+        sdstate     = CMD0    ; // default state at power-up
         cardtype    = UNKNOWN ;
         rca         = '0      ;
     end else begin
@@ -139,8 +155,8 @@ always @(posedge clk or negedge rst_n) begin
                 sdstate = READING ;
             end
             else if ( rstate == RDONE ) begin
-                rdone   = 1'b1 ;
-                sdstate = IDLE ;
+                rdone   = 1'b1   ;
+                sdstate = ENDSEL ; // deselect card at end of read
             end
         end else if ( busy ) begin
             if ( done ) begin
@@ -148,26 +164,34 @@ always @(posedge clk or negedge rst_n) begin
                     CMD0    :   sdstate = CMD8 ;
                     CMD8    :   begin
                                     if ( timeout ) begin
-                                        cardtype = SDv1Maybe ;
-                                        sdstate  = CMD55_41  ;
+                                        cardtype <= SDv1Maybe ;
+                                        sdstate   = CMD55_41  ;
                                     end else if ( ~syntaxerr && resparg[7:0] == 8'hAA ) sdstate  = CMD55_41  ;
                                 end
                     CMD55_41:   if ( ~timeout && ~syntaxerr ) sdstate = ACMD41 ;
                     ACMD41  :   begin
                                     if( ~timeout && ~syntaxerr && resparg[31] ) begin
-                                        cardtype = (cardtype==SDv1Maybe) ? SDv1 : (resparg[30] ? SDHCv2 : SDv2) ;
-                                        sdstate  = CMD2      ;
+                                        cardtype <= (cardtype==SDv1Maybe) ? SDv1 : (resparg[30] ? SDHCv2 : SDv2) ;
+                                        sdstate   = CMD2      ;
                                     end else sdstate  = CMD55_41  ;
                                 end
                     CMD2    :   if ( ~timeout && ~syntaxerr ) sdstate = CMD3;
                     CMD3    :   begin
                                     if ( ~timeout && ~syntaxerr ) begin
-                                        rca     = resparg[31:16] ;
+                                        rca    <= resparg[31:16] ;
                                         sdstate = CMD7           ;
                                     end
                                 end
-                    CMD7    :   if ( ~timeout && ~syntaxerr ) sdstate = CMD16;
-                    CMD16   :   if ( ~timeout && ~syntaxerr ) sdstate = IDLE;
+                    CMD7    :   if ( ~timeout && ~syntaxerr ) begin
+                                    sdstate = CMD16 ; // INIT
+                                end
+                    CMD7F   :   if ( ~timeout && ~syntaxerr ) begin
+                                    sdstate = CMD17 ; // READ
+                                end
+                    CMD16   :   if ( ~timeout && ~syntaxerr ) begin
+                                    sdstate = ENDSEL; // deselect card at end of init
+                                end
+                    ENDSEL  :   sdstate = IDLE ;
                     READING :   begin
                                     if ( ~timeout && ~syntaxerr ) sdstate = READING2   ;
                                     else set_cmd(1, 128 , FASTCLKDIV, 17, rsectoraddr) ;
@@ -182,13 +206,16 @@ always @(posedge clk or negedge rst_n) begin
                 ACMD41  :   set_cmd( 1, 20    , SLOWCLKDIV, 41, 'hC0100000  ) ; // SEND_OP_COND
                 CMD2    :   set_cmd( 1, 20    , SLOWCLKDIV,  2, 'h00000000  ) ; // ALL_SEND_CID
                 CMD3    :   set_cmd( 1, 20    , SLOWCLKDIV,  3, 'h00000000  ) ; // SEND_RELATIVE_ADDR
-                CMD7    :   set_cmd( 1, 20    , SLOWCLKDIV,  7, {rca,16'h0} ) ; // SELECT/DESELECT_CARD
+                CMD7    :   set_cmd( 1, 20    , SLOWCLKDIV,  7, {rca,16'h0} ) ; // SELECT CARD
+                CMD7F   :   set_cmd( 1, 20    , FASTCLKDIV,  7, {rca,16'h0} ) ; // SELECT CARD FAST CLOCK
                 CMD16   :   set_cmd( 1, 99999 , FASTCLKDIV, 16, 'h00000200  ) ; // SET_BLOCKLEN
-                IDLE    :   if ( rstart & ~rbusy ) begin 
-                                rsectoraddr = ( cardtype == SDHCv2 ) ? rsector_no : ( rsector_no*512 );
-                                set_cmd ( 1, 32 , FASTCLKDIV, 17, rsectoraddr ) ; // READ_SINGLE_BLOCK
-                                sdstate = READING ;
-                            end
+                CMD17   :   begin
+                    rsectoraddr = ( cardtype == SDHCv2 ) ? rsector_no : ( rsector_no*512 );
+                    set_cmd ( 1, 32 , FASTCLKDIV, 17, rsectoraddr ) ; // READ_SINGLE_BLOCK
+                    sdstate = READING ;
+                end
+                ENDSEL  :   set_cmd( 1, 20    , FASTCLKDIV,  7, 'h00000000 ) ; // DESELECT ALL CARDS
+                IDLE    :   if ( rstart & ~rbusy ) sdstate = CMD7F ; // start RD off with SD card select
             endcase
         end
     end
@@ -198,12 +225,12 @@ always @( posedge clk or negedge rst_n ) begin
 
     if ( ~rst_n ) begin
 
-        sdclkl  <= 1'b0 ;
-        rstate  = RWAIT ;
-        outreq  = 1'b0  ;
-        ridx    = '0    ;
         outaddr = '0    ;
         outbyte = '0    ;
+        outreq  = 1'b0  ;
+        ridx    = '0    ;
+        rstate  = RWAIT ;
+        sdclkl  <= 1'b0 ;
 
     end else begin
 

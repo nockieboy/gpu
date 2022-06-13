@@ -55,54 +55,64 @@ always @ (posedge clk or negedge rst_n)
         response= '0;
         {busy,done,timeout,syntaxerr}= '0;
     end else begin
-        if(busy) begin
-            if(done) {busy,done,timeout,syntaxerr} = '0;
-        end else if(start) begin
-            clkdivlatch = clkdiv;
-            precyclesr = precycles>2 ? precycles : 16'd2;
-            request.pre  = '1;  request.st   = 2'b01;  request.cmd  = cmd;  request.arg  = arg;  request.crc  = '0;  request.stop = '1;
-            busy    = '1;
-            {done,timeout,syntaxerr} = '0;
+        if ( busy ) begin
+            if ( done ) { busy, done, timeout, syntaxerr } = '0 ;
         end
-        if(clkcnt==0) begin
-            clkdivr = {16'h0, clkdivlatch};
-            if(precyclesr>0) begin
-                precycler = precyclesr; reqcycler = 52;  rescycler = 135; waitcycle = TIMEOUT_CYCLES+16'd2;
-                precyclesr=  '0;
+        else if ( start ) begin
+            clkdivlatch  = clkdiv ;
+            precyclesr   = precycles > 2 ? precycles : 16'd2 ; // minimum of 2 precycles
+            request.pre  = '1     ;
+            request.st   = 2'b01  ;
+            request.cmd  = cmd    ;
+            request.arg  = arg    ;
+            request.crc  = '0     ;
+            request.stop = '1     ;
+            busy         = '1     ;
+            { done, timeout, syntaxerr } = '0 ;
+        end
+        if( clkcnt == 0 ) begin
+            clkdivr = { 16'h0, clkdivlatch } ;
+            if ( precyclesr > 0 ) begin
+                precycler  = precyclesr             ;
+                reqcycler  = 52                     ;
+                rescycler  = 135                    ;
+                precyclesr =  '0                    ;
+                waitcycle  = TIMEOUT_CYCLES + 16'd2 ;
             end
         end
-        if(clkcnt == clkdivr) begin
-            {sdclk, sdcmdoe, sdcmdout} = 3'b001;
-            if(precycler>0)
-                precycler--;
-            else if(reqcycler>0) begin
-                reqcycler--;
-                {sdcmdoe,sdcmdout} = {1'b1,request[reqcycler]};
-                if(reqcycler>=8 && reqcycler<48) CalcCrc7(request.crc, sdcmdout);
+        if ( clkcnt == clkdivr ) begin
+            { sdclk, sdcmdoe, sdcmdout } = 3'b001;
+            if ( precycler > 0 )
+                precycler-- ;
+            else if ( reqcycler > 0 ) begin
+                reqcycler-- ;
+                { sdcmdoe, sdcmdout } = { 1'b1, request[reqcycler] } ;
+                if ( reqcycler >= 8 && reqcycler < 48) CalcCrc7( request.crc, sdcmdout ) ;
             end
-        end else if(clkcnt == 2*clkdivr+1) begin
-            sdclk = 1'b1;
-            if(precycler==0 && reqcycler==0) begin
-                if(waitcycle>TIMEOUT_CYCLES)
-                    waitcycle--;
-                else if(waitcycle>0) begin
-                    waitcycle--;
-                    if(~sdcmdin)
-                        waitcycle = 0;
-                    else if(waitcycle==0) begin
-                        rescycler = 0;
-                        {done,timeout} = '1;
+        end else if ( clkcnt == 2*clkdivr + 1 ) begin
+            sdclk = 1'b1 ;
+            if ( precycler == 0 && reqcycler == 0 ) begin
+                if ( waitcycle > TIMEOUT_CYCLES )
+                    waitcycle-- ;
+                else if ( waitcycle > 0 ) begin
+                    waitcycle-- ;
+                    if ( ~sdcmdin )
+                        waitcycle = 0 ;
+                    else if ( waitcycle == 0 ) begin
+                        rescycler = 0 ;
+                        { done, timeout } = '1 ;
                     end
-                end else if(rescycler>0) begin
-                    rescycler--;
-                    response[rescycler] = sdcmdin;
-                    if(rescycler==0) begin
-                        done    = '1;
-                        if(response_t || (response_cmd!=request.cmd && response_cmd!=6'h3f && response_cmd!=6'h0) )  syntaxerr=1'b1;
+                end else if ( rescycler > 0 ) begin
+                    rescycler-- ;
+                    response[rescycler] = sdcmdin ;
+                    if ( rescycler == 0 ) begin
+                        done    = '1 ;
+                        if ( response_t || ( response_cmd != request.cmd && response_cmd != 6'h3f && response_cmd != 6'h0 ) )  syntaxerr = 1'b1 ;
                     end
                 end
             end
         end
-        clkcnt = (clkcnt<2*clkdivr+1) ? clkcnt+1 : 0;
+        clkcnt = ( clkcnt < 2*clkdivr + 1 ) ? clkcnt + 1 : 0 ;
     end
+    
 endmodule

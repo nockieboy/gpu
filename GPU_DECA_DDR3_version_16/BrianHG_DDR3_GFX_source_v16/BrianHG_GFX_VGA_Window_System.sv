@@ -85,7 +85,7 @@ parameter int        PAL_WORDS                = (256*32/PORT_CACHE_BITS)*SDI_LAY
 parameter int        PAL_ADR_SHIFT            = 0,                        // Use 0 for off.  If PAL_BITS is made 32 and PORT_CACHE_BITS is truly 128bits, then use 2.
                                                                           // *** Optionally make each 32 bit palette entry skip a x^2 number of bytes
                                                                           // so that we can use a minimal single M9K block for a 32bit palette.
-                                                                          // Use 0 is you just want to write 32 bit data to a direct address from 0 to 255.
+                                                                          // Use 0 if you just want to write 32 bit data to a direct address from 0 to 255.
                                                                           // *** This is a saving measure for those who want to use a single M9K block of ram
                                                                           // for the palette, yet still interface with the BrianHG_DDR3 'TAP_xxx' port which
                                                                           // may be 128 or 256 bits wide.  The goal is to make the minimal single 256x32 M9K blockram
@@ -299,28 +299,28 @@ logic                mix_VS_out          ;
 // ------------------------------------------------------------------------------------------
 // MN# = Mode xCLK_DIVIDER(-1) Required VID_CLK frequency.
 // ------------------------------------------------------------------------------------------
-// 0   = 480p      x1           27.00 MHz=60p or  54.00 MHz=120p or 108.00 MHz=240p
-// 0   = 480p      x2           54.00 MHz=60p or 108.00 MHz=120p or 216.00 MHz=240p
-// 0   = 480p      x4          108.00 MHz=60p or 216.00 MHz=120p
-// 0   = 480p      x8          216.00 MHz=60p
-// 1   = 720p      x1           74.25 MHz=60p or 148.50 MHz=120p or 297.00 MHz=240p
-// 1   = 720p      x2          148.50 MHz=60p or 297.00 MHz=120p
-// 1   = 720p      x4          297.00 MHz=60p
-// 2   = 1440x960  x1          108.00 MHz=60p or 216.00 MHz=120p
-// 2   = 1440x960  x2          216.00 MHz=60p
-// 3   = 1280x1024 x1          108.00 MHz=60p or 216.00 MHz=120p
-// 3   = 1280x1024 x2          216.00 MHz=60p
-// 4   = 1080p     x1          148.50 MHz=60p or  74.25 MHz=30p
-// 4   = 1080p     x2          297.00 MHz=60p or 148.50 MHz=30p
-// 4   = 1080p     x4        too fast MHz=60p or 297.00 MHz=30p
+// 0   = 480p      x1           27.00 MHz=60Hz or  54.00 MHz=120Hz or 108.00 MHz=240Hz
+// 0   = 480p      x2           54.00 MHz=60Hz or 108.00 MHz=120Hz or 216.00 MHz=240Hz
+// 0   = 480p      x4          108.00 MHz=60Hz or 216.00 MHz=120Hz
+// 0   = 480p      x8          216.00 MHz=60Hz
+// 1   = 720p      x1           74.25 MHz=60Hz or 148.50 MHz=120Hz or 297.00 MHz=240Hz
+// 1   = 720p      x2          148.50 MHz=60Hz or 297.00 MHz=120Hz
+// 1   = 720p      x4          297.00 MHz=60Hz
+// 2   = 1440x960  x1          108.00 MHz=60Hz or 216.00 MHz=120Hz
+// 2   = 1440x960  x2          216.00 MHz=60Hz
+// 3   = 1280x1024 x1          108.00 MHz=60Hz or 216.00 MHz=120Hz
+// 3   = 1280x1024 x2          216.00 MHz=60Hz
+// 4   = 1080p     x1          148.50 MHz=60Hz or  74.25 MHz=30Hz
+// 4   = 1080p     x2          297.00 MHz=60Hz or 148.50 MHz=30Hz
+// 4   = 1080p     x4        too fast MHz=60Hz or 297.00 MHz=30Hz
 // ------------------------------------------------------------------------------------------
 // Special modes / Spare slots...
 // ------------------------------------------------------------------------------------------
 // 5   = 
 // 6   = 
-// 7   = ***480p   x5          148.50 MHz=60p, x4=75Hz, x6=50hz. ***** Special non-standard 480p operating on the 148.5MHz clock.
-//                                                               ***** If you want the 'OFFICIAL' standard 480p, then use mode
-//                                                               ***** #0 with a source clock of 27/54/108/216 MHz & properly set divider.
+// 7   = ***480p   x5          148.50 MHz=60Hz, x4=75Hz, x6=50Hz. ***** Special non-standard 480p operating on the 148.5MHz clock.
+//                                                                ***** If you want the 'OFFICIAL' standard 480p, then use mode
+//                                                                ***** #0 with a source clock of 27/54/108/216 MHz & properly set divider.
 //
 //                                                            0     1     2     3     4     5     6     7
 localparam bit [HC_BITS-1:0] VID_h_total        [0:7] = '{  858, 1650, 1716, 1688, 2200,  858,  858,  940} ;
@@ -707,8 +707,8 @@ end
 always_ff @(posedge VID_CLK_2x) begin 
 vtc0        <= vidtclk;
 vtc1        <= vtc0;
-vtc2        <= vtc1;
-PIXEL_CLK   <= !vtc1 ^ vtc2 ; // Select between direct clock and divided clock.
+vtc2        <= !vtc0 ^ vtc1 ; // Select between direct clock and divided clock.
+PIXEL_CLK   <=  vtc2        ; // Select between direct clock and divided clock.
 
 mix1_RGBA   <= mix2_RGBA   ;
 mix1_VENA   <= mix2_VENA   ;

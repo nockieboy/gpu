@@ -6,6 +6,7 @@ incremental_db/
 *.rpt
 *.sof
 *.pof
+*.bmp
 =======
 output_files/
 >>>>>>> e95a3e278b115b0ea9f980c63d48b6bfbcc232d1

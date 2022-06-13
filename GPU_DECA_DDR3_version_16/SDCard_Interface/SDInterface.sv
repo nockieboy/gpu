@@ -7,7 +7,7 @@
 // TODO: Handle write requests to the SD card.
 
 module SDInterface #(
-    parameter int          CLK_DIV     = 3,      // clock divider
+    parameter int          CLK_DIV     = 2,      // clock divider
     parameter int          BUFFER_ADDR = 'h5000, // default DDR3 buffer location
     parameter bit  [  1:0] OP_INIT     = 0,
     parameter bit  [  1:0] OP_READ     = 1,
@@ -54,8 +54,9 @@ wire    [3:0] sd_state    ;
 wire          DDR3_rd_ena /* synthesis keep */ ;
 wire          cache_wren  /* synthesis keep */ ;
 wire    [3:0] wr_ptr      /* synthesis keep */ ; // pointer to current byte in cache
+wire  [  7:0] wr_dat      ; // byte to send to SDWriter
 
-wire          wr_ena     ;
+wire          wr_ena, crcok, timeout ;
 wire          rd_sd_clk,  rd_cmd_in,  rd_cmd_oe,  rd_cmd_out,  rd_req, rd_ready /* synthesis keep */ ;
 wire          wr_sd_clk,  wr_cmd_in,  wr_cmd_oe,  wr_cmd_out,  wr_req, byte_req /* synthesis keep */ ;
 wire          rd_sd_data, rd_cmd_dir, rd_d0_dir,  rd_d123_dir, rd_sel, sdr_busy /* synthesis keep */ ;
@@ -74,23 +75,20 @@ logic         cache_full ; // HIGH when 16-byte cache is full  (RD ops)
 logic         rEna       ; // HIGH whilst rData is being sent
 logic [  3:0] data_ptr   ; // pointer to current byte in cache
 logic [  7:0] SD_dat     ; // byte read from SDReader to write to DDR3 buffer
-logic [  7:0] wr_dat     ; // byte to send to SDWriter
 logic [  8:0] buf_ptr    ; // 512-byte buffer address pointer
+logic [ 15:0] rca        ; // RCA for initialised card
 logic [127:0] data_cache ; // temporary 16-byte storage to be written to DDR3 or SD
 
-//                          1          2          4        1
-//assign SD_STATUS    = { rdrdy_flag, cardtype, sd_state, sd_busy } ;
-assign SD_STATUS    = { rdrdy_flag, cardtype, sdw_busy, wr_done, 2'b00, SD_BUSY } ;
+//     SD_STATUS bits       7         6-5         4        3       2       1       0
+assign SD_STATUS    = { rdrdy_flag, cardtype, sdw_busy, wr_done, crcok, timeout, SD_BUSY } ;
 assign CARDTYPE     = cardtype                   ;
 assign SIDSTATE     = sd_state                   ;
 assign SD_BUSY      = sdr_busy || sdw_busy       ;
 // operation request triggers
 //assign ini_req     = ( ENABLE && MODE == OP_INIT  )    ; // pulses HIGH when an INIT  request is made
 assign wr_ena      = ( MODE == OP_WRITE  )       ;
-assign rd_req      = ( ENABLE && ~wr_ena )       ; // pulses HIGH when an READ  request is made
-assign wr_req      = ( ENABLE && wr_ena  )       ; // pulses HIGH when an WRITE request is made
-//assign rd_req       = ( !BUSY && !WR_ENA ) ? ENABLE : 1'b0 ; // only pass rd_req if interface isn't busy
-//assign wr_req       = ( !BUSY && WR_ENA  ) ? ENABLE : 1'b0 ; // only pass wr_req if interface isn't busy
+assign rd_req      = ( ENABLE && ~wr_ena )       ; // pulses HIGH when a READ  request is made
+assign wr_req      = ( ENABLE && wr_ena  )       ; // pulses HIGH when a WRITE request is made
 
 // DDR3 Read Request
 assign DDR3_rd_ena  = DDR3_req && cache_mpty && !DDR3_busy ; // Set the write enable.
@@ -135,7 +133,9 @@ SDReader #(
     // status and information
     .card_type   ( cardtype    ), // 0=Unknown, 1=SDv1.1 , 2=SDv2 , 3=SDHCv2
     .card_stat   ( sd_state    ), // current state of SDReader's state machine
+    .rca         ( rca         ), // Relative Card Address obtained by SDReader
     // user read sector command interface
+    .MODE        ( MODE        ), // 0 = INIT, 1 = READ, 2 = WRITE
     .rstart      ( rd_req      ), // rstart HIGH starts read operation
     .rsector_no  ( SECTOR      ), // target sector to read in SDcard
     .rbusy       ( sdr_busy    ), // signals read is ongoing or complete
@@ -150,7 +150,7 @@ SDReader #(
     .SD_D123_DIR ( rd_d123_dir ), // HIGH = TO SD card, LOW = FROM SD card
     .SD_SEL      ( rd_sel      )  // SD socket select
 );
-/*
+
 SDWriter #(
     .CLK_DIV     ( CLK_DIV     )  // because clk=100MHz, CLK_DIV is set to 2 - see SDReader.sv for detail
 ) SDWriter_inst(
@@ -165,8 +165,12 @@ SDWriter #(
     // user write sector command interface
     .wstart      ( wstart      ), // pulse high to start write op
     .wsector_no  ( SECTOR      ), // user-supplied sector address
+    .cardtype    ( cardtype    ),
+    .rca         ( rca         ),
     .wbusy       ( sdw_busy    ),
     .wdone       ( wr_done     ),
+    .crc_ok      ( crcok       ),
+    .wtimeout    ( timeout     ), // HIGH when a WRITE has timed out waiting for CRC response
     // sector data input interface
     .bytePtr     ( wr_ptr      ),
     .wbyte       ( wr_dat      ), // byte to write to SD card
@@ -176,7 +180,7 @@ SDWriter #(
     .SD_D123_DIR ( wr_d123_dir ), // HIGH = TO SD card, LOW = FROM SD card
     .SD_SEL      ( wr_sel      )
 );
-*/
+
 always @( posedge CLK ) begin
 
     if ( RESET ) begin
@@ -213,7 +217,7 @@ always @( posedge CLK ) begin
         WR_DONE    <= 1'b0   ; // Reset WR_DONE flag
         wr_op      <= 1'b1   ; // Enable WR op
     // *****************************************
-    // *************** READ OP *****************
+    // *********** BYTESTREAMREADER ************
     // *****************************************
     end else if ( rd_op ) begin
         if ( !rd_ready && cache_full && !DDR3_busy ) begin // 16-byte cache is full
@@ -234,7 +238,7 @@ always @( posedge CLK ) begin
         end
     end
     // ******************************************
-    // *************** WRITE OP *****************
+    // *********** BYTESTREAMWRITER *************
     // ******************************************
     else if ( wr_op ) begin
         if ( cache_mpty && !CMD_R_sent ) begin // WR cache is empty, perform a DDR3 read
@@ -247,7 +251,7 @@ always @( posedge CLK ) begin
             else begin
                 first_row  <= 1'b0 ;
             end
-            if (!last_cache) begin
+            if ( !last_cache ) begin
                 DDR3_req   <= 1'b1 ; // fire off a read request
                 CMD_R_sent <= 1'b1 ; // flag that a RD has been requested
             end
@@ -257,13 +261,15 @@ always @( posedge CLK ) begin
             cache_mpty <= 1'b0         ; // cache no longer empty
             DDR3_req   <= 1'b0         ;
             CMD_R_sent <= 1'b0         ; // no longer waiting for a RD result
-            if (!wstarted) begin
-                wstart   <= 1'b1 ;
-                wstarted <= 1'b1 ;
+            if ( !wstarted ) begin
+                wstart   <= 1'b1 ; // start the WR transaction
+                wstarted <= 1'b1 ; // ensure that wstart is HIGH only once during the WR transaction
             end
         end
         else if ( !cache_mpty && !end_wr_op ) begin // SDWriter requesting another byte
-            wr_dat <= data_cache[(15-wr_ptr)*8+:8] ; // make correct byte available according to wr_ptr
+            DDR3_req <= 1'b0                         ;
+            wr_dat    = data_cache[(15-wr_ptr)*8+:8] ; // make correct byte available according to wr_ptr
+            wstart   <= 1'b0                         ;
             if ( wr_ptr == 15 ) begin
                 lbl <= 1'b1 ;
                 if ( !lbl && !last_cache ) begin
@@ -275,10 +281,8 @@ always @( posedge CLK ) begin
             end else begin
                 lbl <= 1'b0 ;
             end
-            wstart     <= 1'b0   ;
-            DDR3_req   <= 1'b0   ;
         end
-        else if ( end_wr_op ) begin // end of 512-byte write op
+        else if ( end_wr_op && !SD_BUSY ) begin // end of 512-byte write op
             BUSY       <= 1'b0   ;
             data_cache <= 128'b0 ;
             end_wr_op  <= 1'b0   ;

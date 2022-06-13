@@ -50,6 +50,10 @@ parameter int        PAL_BASE_ADDR           = 32'h00001000,     // Assuming 32 
 parameter int        TILE_BYTES              = 65536,            // Number of bytes reserved for the TILE/FONT memory.  We will use 64k, IE it is possible to make a 16x16x8bpp 256 character font.
 parameter int        TILE_BASE_ADDR          = 32'h00004000,     // 
 
+parameter int        LINE_BUFFER_WORDS       = 512,              // 256 minimum, larger multiples of 2 like 512 or 1024 helps improve sequential bursts.
+                                                                 // Note that internally, this figure is divided between the SDI_LAYERS parameter and multiplied
+                                                                 // by the PDI_LAYERS parameter.
+
 // ************************************************************************************************************************************
 // ****************  BrianHG_DDR3 setup.
 // ************************************************************************************************************************************
@@ -63,11 +67,11 @@ parameter bit        BHG_EXTRA_SPEED         = 1,                // Use '1' for 
 // ****************  System clock generation and operation.
 // ************************************************************************************************************************************
 parameter int        CLK_KHZ_IN              = 50000,            // PLL source input clock frequency in KHz.
-parameter int        CLK_IN_MULT             = 24,               // Multiply factor to generate the DDR MTPS speed divided by 2.
+parameter int        CLK_IN_MULT             = 32,               // Multiply factor to generate the DDR MTPS speed divided by 2.
 parameter int        CLK_IN_DIV              = 4,                // Divide factor.  When CLK_KHZ_IN is 25000,50000,75000,100000,125000,150000, use 2,4,6,8,10,12.
 parameter int        DDR_TRICK_MTPS_CAP      = 600,              // 0=off, Set a false PLL DDR data rate for the compiler to allow FPGA overclocking.  ***DO NOT USE.
                                                                 
-parameter string     INTERFACE_SPEED         = "Half",           // Either "Full", "Half", or "Quarter" speed for the user interface clock.
+parameter string     INTERFACE_SPEED         = "Quarter",        // Either "Full", "Half", or "Quarter" speed for the user interface clock.
                                                                  // This will effect the controller's interface CMD_CLK output port frequency.
 
 // ************************************************************************************************************************************
@@ -118,7 +122,7 @@ parameter int        PORT_ADDR_SIZE          = (DDR3_WIDTH_ADDR + DDR3_WIDTH_BAN
 //    1 - BRIDGETTE
 //    2 - GEOFF (R/W)
 //    3 - GEOFF (R only)
-//    4 - HW_REGS
+//    4 - BrianHG_GFX_VGA_Window_System_DDR3_REGS
 //    5 - SID
 //
 parameter int        PORT_TOTAL              = 6,                // Set the total number of DDR3 controller write ports, 1 to 4 max.
@@ -226,7 +230,7 @@ parameter bit [1:0]  PORT_PRIORITY     [0:15] = '{  3,  2,  0,  0,  2,  0,  0,  
                                                 // port's request matches the current page, the higher priority port will take
                                                 // precedence and force the RAM controller to leave the current page.
 
-parameter int        PORT_READ_STACK   [0:15] = '{ 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16},
+parameter int        PORT_READ_STACK   [0:15] = '{ 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24},
                                                 // Sets the size of the intermediate read command request stack.
                                                 // 16 through 32, default = 20
                                                 // The size of the number of read commands built up in advance while the read channel waits
@@ -242,6 +246,22 @@ parameter bit [8:0]  PORT_W_CACHE_TOUT [0:15] = '{256,256,256,256,256,256,256,25
                                                 // 256 = Wait up to 256 CMD_CLK clock cycles since the previous write req.
                                                 //       to the same 'PORT_CACHE_BITS' bit block before writing to ram.  Write reqs outside
                                                 //       the current 'PORT_CACHE_BITS' bit cache block clears the timer and forces an immediate write.
+
+
+parameter bit    PORT_R_CACHE_TOUT_ENA [0:15] = '{  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1},
+                                                // A 0 will direct the read cache to indefinitely keep its contents valid until a new read address is
+                                                // requested outside the the current cache contents.  Recommended for very slow read cycles where you may
+                                                // manually read outside the current cached address if you wish to re-read from the DDR3.
+                                                // A 1 will use the automatic timeout setting below to automatically clear the read cache address.
+parameter bit [8:0]  PORT_R_CACHE_TOUT [0:15] = '{256,256,256,256,  0,256,256,256,256,256,256,256,256,256,256,256},
+                                                // A timeout for the read cache to consider its contents stale.
+                                                // 0   = Always read from DDR3, or no read caching.
+                                                // 256 = Wait up to 256 CMD_CLK clock cycles since the previous read req before considering the cached read stale.
+
+parameter bit        PORT_R_WDT_ENA    [0:15] = '{  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1},
+                                                // A 1 will automatically detect an impossible skipped/missing read command due to multiport cache collision
+                                                // between a read input CMD_ena and output CMD_read_ready, unfreezing this potential situation.
+
 
 parameter bit        PORT_CACHE_SMART  [0:15] = '{  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1},  
                                                 // When enabled, if an existing read cache exists at the same write request address,
@@ -493,10 +513,10 @@ logic                         CMD_priority_boost  [0:PORT_TOTAL-1];  // Boosts t
 // which may be accessed by all the multiple write ports.
 // This port is synchronous to the CMD_CLK.
 // **************************************************************************************
-logic                         TAP_WRITE_ENA ;
-logic [PORT_ADDR_SIZE-1:0]    TAP_ADDR      ;
-logic [PORT_CACHE_BITS-1:0]   TAP_WDATA     ;
-logic [PORT_CACHE_BITS/8-1:0] TAP_WMASK     ;
+logic                         TAP_WRITE_ENA, rTAP_WRITE_ENA = 0 ;
+logic [PORT_ADDR_SIZE-1:0]    TAP_ADDR     , rTAP_ADDR      = 0 ;
+logic [PORT_CACHE_BITS-1:0]   TAP_WDATA    , rTAP_WDATA     = 0 ;
+logic [PORT_CACHE_BITS/8-1:0] TAP_WMASK    , rTAP_WMASK     = 0 ;
 
 // ***********************************************************************************************************************************************************
 // ***********************************************************************************************************************************************************
@@ -514,7 +534,7 @@ logic [PORT_CACHE_BITS/8-1:0] TAP_WMASK     ;
 // ***********************************************************************************************************************************************************
 // ***********************************************************************************************************************************************************
 // ***********************************************************************************************************************************************************
-BrianHG_DDR3_CONTROLLER_v15_top #(.FPGA_VENDOR         (FPGA_VENDOR       ),   .FPGA_FAMILY        (FPGA_FAMILY       ),   .INTERFACE_SPEED    (INTERFACE_SPEED ),
+BrianHG_DDR3_CONTROLLER_v16_top #(.FPGA_VENDOR         (FPGA_VENDOR       ),   .FPGA_FAMILY        (FPGA_FAMILY       ),   .INTERFACE_SPEED    (INTERFACE_SPEED ),
                                   .BHG_OPTIMIZE_SPEED  (BHG_OPTIMIZE_SPEED),   .BHG_EXTRA_SPEED    (BHG_EXTRA_SPEED   ),
                                   .CLK_KHZ_IN          (CLK_KHZ_IN        ),   .CLK_IN_MULT        (CLK_IN_MULT       ),   .CLK_IN_DIV         (CLK_IN_DIV      ),
 
@@ -532,6 +552,7 @@ BrianHG_DDR3_CONTROLLER_v15_top #(.FPGA_VENDOR         (FPGA_VENDOR       ),   .
                                   .PORT_R_DATA_WIDTH   (PORT_R_DATA_WIDTH ),   .PORT_W_DATA_WIDTH  (PORT_W_DATA_WIDTH ),
                                   .PORT_PRIORITY       (PORT_PRIORITY     ),   .PORT_READ_STACK    (PORT_READ_STACK   ),
                                   .PORT_CACHE_SMART    (PORT_CACHE_SMART  ),   .PORT_W_CACHE_TOUT  (PORT_W_CACHE_TOUT ),
+                                  .PORT_R_CACHE_TOUT   (PORT_R_CACHE_TOUT ),   .PORT_R_WDT_ENA     (PORT_R_WDT_ENA    ),   .PORT_R_CACHE_TOUT_ENA (PORT_R_CACHE_TOUT_ENA),
                                   .PORT_MAX_BURST      (PORT_MAX_BURST    ),   .PORT_DREG_READ     (PORT_DREG_READ    ),   .SMART_BANK         (SMART_BANK       )
 
 ) DDR3 (
@@ -1097,10 +1118,9 @@ assign CMD_priority_boost  [3] = 0;
 
 wire VID_CLK,VID_CLK_2x ;
 
-BrianHG_GFX_PLL_i50_o216_o297  VGA_PLL (
+BrianHG_GFX_PLL_i50_o297  VGA_PLL (
 .CLK_IN_50      ( CLK_IN        ),
 .RESET          ( RST_IN        ),
-.SEL_297        (               ),         // For the switched output, low = 216MHz or high = 297MHz.
 .CLK_SWITCH     ( VID_CLK_2x    ),         // 216.0/297.0 MHz out.
 .CLK_SWITCH_50  ( VID_CLK       ),         // 108.0/148.5 MHz out.
 .CLK_54         (               ),         // 54 MHz out. - Used to generate an exact 48KHz I2S audio as it can divide evenly into that frequency.
@@ -1114,6 +1134,14 @@ wire        VOUT_DE    ;
 wire        VOUT_HS    ;
 wire        VOUT_VS    ;
 
+// **** Add a register delay for the 'TAP' controls to aid in achieving FMAX.
+always_ff @(posedge CMD_CLK) begin 
+rTAP_WRITE_ENA <= TAP_WRITE_ENA ;
+rTAP_ADDR      <= TAP_ADDR      ;
+rTAP_WDATA     <= TAP_WDATA     ;
+rTAP_WMASK     <= TAP_WMASK     ;
+end
+
 BrianHG_GFX_VGA_Window_System_DDR3_REGS #(
 
 .HWREG_BASE_ADDRESS     ( HWREG_BASE_ADDRESS          ), // The first address where the HW REG controls are located for window layer 0
@@ -1124,7 +1152,7 @@ BrianHG_GFX_VGA_Window_System_DDR3_REGS #(
 .PORT_CACHE_BITS        ( PORT_CACHE_BITS             ),
 .PDI_LAYERS             ( PDI_LAYERS                  ),
 .SDI_LAYERS             ( SDI_LAYERS                  ),
-.LBUF_WORDS             ( 256                         ),
+.LBUF_WORDS             ( LINE_BUFFER_WORDS           ),
 .ENABLE_TILE_MODE       ( ENABLE_TILE_MODE            ),
 .SKIP_TILE_DELAY        ( SKIP_TILE_DELAY             ),   // Skip horizontal compensation delay due to disabled tile mode features.  Only necessary for multiple PDI_LAYERS with mixed tile enable options.
 .TILE_BASE_ADDR         ( TILE_BASE_ADDR              ),
@@ -1155,10 +1183,10 @@ BrianHG_GFX_VGA_Window_System_DDR3_REGS #(
 .CMD_read_ready         ( CMD_read_ready      [4] ),
 .CMD_rdata              ( CMD_read_data       [4] ), 
 .CMD_read_vector_rx     ( CMD_read_vector_out [4] ), // Contains the destination line buffer address.  ***_rx to avoid confusion, IE: the DDR3's read vector results drives this port.
-.TAP_wena               ( TAP_WRITE_ENA           ),
-.TAP_waddr              ( TAP_ADDR                ),
-.TAP_wdata              ( TAP_WDATA               ),
-.TAP_wmask              ( TAP_WMASK               ),
+.TAP_wena               ( rTAP_WRITE_ENA          ),
+.TAP_waddr              ( rTAP_ADDR               ),
+.TAP_wdata              ( rTAP_WDATA              ),
+.TAP_wmask              ( rTAP_WMASK              ),
 
 .CMD_VID_hena           ( CMD_VID_hena            ), // Horizontal Video Enable in the CMD_CLK domain.
 .CMD_VID_vena           ( CMD_VID_vena            ), // Vertical   Video Enable in the CMD_CLK domain.

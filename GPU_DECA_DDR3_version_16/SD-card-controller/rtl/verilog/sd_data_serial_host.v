@@ -228,7 +228,7 @@ begin: FSM_OUT
                 if (transf_cnt == 0 && byte_alignment_reg == 2'b11 && bus_4bit_reg) begin
                     rd <= 1;
                 end
-                else if (transf_cnt == 1) begin
+                else if (transf_cnt == 1) begin // pull SD_DAT LOW to signal start of transfer
                     crc_rst <= 0;
                     crc_en <= 1;
                     if (bus_4bit_reg) begin
@@ -247,10 +247,10 @@ begin: FSM_OUT
                     end
                     else begin
                         last_din <= {3'h7, data_in[31-(byte_alignment_reg << 3)]};
-                        crc_in <= {3'h7, data_in[31-(byte_alignment_reg << 3)]};
+                        crc_in   <= {3'h7, data_in[31-(byte_alignment_reg << 3)]};
                     end
-                    DAT_oe_o <= 1;
-                    DAT_dat_o <= bus_4bit_reg ? 4'h0 : 4'he;
+                    DAT_oe_o   <= 1;
+                    DAT_dat_o  <= bus_4bit_reg ? 4'h0 : 4'he;
                     data_index <= bus_4bit_reg ? {2'b00, byte_alignment_reg, 1'b1} : {byte_alignment_reg, 3'b001};
                 end
                 else if ((transf_cnt >= 2) && (transf_cnt <= data_cycles+1)) begin
@@ -296,7 +296,7 @@ begin: FSM_OUT
                 end
                 else if (transf_cnt == data_cycles+18) begin
                     DAT_oe_o <= 1;
-                    DAT_dat_o <= 4'hf;
+                    DAT_dat_o <= 4'hf; // stop bit
                 end
                 else if (transf_cnt >= data_cycles+19) begin
                     DAT_oe_o <= 0;

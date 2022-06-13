@@ -79,9 +79,8 @@ set_output_delay -clock [get_clocks {*DDR3_PLL5*clk[4]}] -min $tCOm [get_ports {
 set_output_delay -clock [get_clocks {*DDR3_PLL5*clk[4]}] -max $tCO  [get_ports {LED[*]}]
 set_output_delay -clock [get_clocks {*DDR3_PLL5*clk[4]}] -min $tCOm [get_ports {LED[*]}]
 
-set_output_delay -clock [get_clocks {*DDR3_PLL5*clk[4]}] -max $tCO  [get_ports {HDMI*}]
-set_output_delay -clock [get_clocks {*DDR3_PLL5*clk[4]}] -min $tCOm [get_ports {HDMI*}]
-
+set_output_delay -clock [get_clocks {*VGA_SW_216_297*clk[0]}] -max $tCO  [get_ports {HDMI*}]
+set_output_delay -clock [get_clocks {*VGA_SW_216_297*clk[0]}] -min $tCOm [get_ports {HDMI*}]
 
 #**************************************************************
 # Set Clock Groups
@@ -100,35 +99,27 @@ set_false_path -from [get_clocks {VGA_PLL*}] -to [get_clocks {MAX10_CLK1_50}]
 set_false_path -from [get_clocks {MAX10_CLK1_50}] -to [get_clocks {VGA_PLL*}]
 
 # Separate the fake generated I2C clock output from the CLK_IN 50 MHz source.
-set_false_path -from [get_clocks {*DDR3_PLL5*clk[4]}] -to [get_clocks {u_I2C_HDMI_Config|mI2C_CTRL_CLK|q}]
-set_false_path -from [get_clocks {u_I2C_HDMI_Config|mI2C_CTRL_CLK|q}] -to [get_clocks {*DDR3_PLL5*clk[4]}]
+set_false_path -from [get_clocks {*}] -to [get_clocks {u_I2C_HDMI_Config|mI2C_CTRL_CLK|q}]
+set_false_path -from [get_clocks {u_I2C_HDMI_Config|mI2C_CTRL_CLK|q}] -to [get_clocks {*}]
 
 # Optional: Separate the reset and low frequency inputs on the CLK_IN 50Mhz from the core.
 set_false_path -from [get_clocks {MAX10_CLK1_50}] -to [get_clocks {*DDR3_PLL5*clk[4]}]
 set_false_path -from [get_clocks {*DDR3_PLL5*clk[4]}] -to [get_clocks {MAX10_CLK1_50}]
 
-# The HW_REGS go all over the place and they are not timing important as they control static setting ports.
-set_false_path -from {*VGA_HWREGS|HW_REGS*} -to {*}
 
 #**************************************************************
 # Set Multicycle Path
 #**************************************************************
 
-# The HW_REGS go all over the place and they are not timing important as they control static setting ports.
-# multicycle is safer than falsepath in that is at least guarantees signal arrival within the set time/number of clock cycles.
-#set_multicycle_path -setup -end -from  {*VGA_HWREGS|HW_REGS*} -to {*} 2
-#set_multicycle_path -from              {*VGA_HWREGS|HW_REGS*} -to {*} -hold -end 1
-
-#set_multicycle_path -setup -end -from  [get_clocks {*DDR3_PLL5*}] -to [get_clocks {VGA_PLL*}]    2
-#set_multicycle_path -from              [get_clocks {*DDR3_PLL5*}] -to [get_clocks {VGA_PLL*}]    -hold -end 1
-#set_multicycle_path -setup -end -from  [get_clocks {VGA_PLL*}]    -to [get_clocks {*DDR3_PLL5*}] 2
-#set_multicycle_path -from              [get_clocks {VGA_PLL*}]    -to [get_clocks {*DDR3_PLL5*}] -hold -end 1
+# The BHG_VGA_HWREGS go all over the place and cross clock domains, but, they are not timing important as they control static or once every V-Sync graphic setting.
+# multicycle is safer than set_false_path since it guarantees data arrival within the set number of clock cycles instead of any random amount of time.
+set_multicycle_path -setup -end -from  {*BHG_VGA_HWREGS|HW_REGS*} -to {*} 2
+set_multicycle_path -from              {*BHG_VGA_HWREGS|HW_REGS*} -to {*} -hold -end 1
 
 
 #**************************************************************
 # Set Maximum Delay
 #**************************************************************
-
 
 
 #**************************************************************

@@ -39,12 +39,7 @@ parameter int        LBUF_BITS                = PORT_CACHE_BITS,          // The
 parameter int        LBUF_WORDS               = 256,                      // The total number of 'CMD_line_buf_wdata' words of memory.
                                                                           // Anything less than 256 will still use the same minimum M9K/M10K blocks.
                                                                           // Only use factors of 2, IE: 256/512/1024...
-parameter int        MAX_BURST                = LBUF_WORDS/4/SDI_LAYERS,  // Generic maximum burst length.  IE: A burst will not be called unless this many free words exist inside the line buffer memory.
-parameter int        MAX_BURST_1st            = (MAX_BURST/4),            // In a multi-window system, this defines the maximum read burst size per window after the H-reset period
-                                                                          // allowing all the window buffers to gain a minimal amount of graphic data before running full length bursts.
-                                              
-                                              
-                                              
+
 parameter bit        ENABLE_TILE_MODE   [0:7] = '{1,0,0,0,0,0,0,0},       // Enable font/tile memory mode.  This is for all SDI_LAYERs within 1 array entry for each PDI_LAYERs.
                                                                           // If only 1 line buffer module will have tiles enabled to allow coalescing of all the available font memory
                                                                           // into one huge chunk, use only the first line-buffer module as the base-address will increment based
@@ -208,7 +203,7 @@ HW_Regs #(
     .RST16_PARAM_SIZE   (8               ), // Number of default values
     .RST32_PARAM_SIZE   (1               ), // Number of default values
 
-    .RESET_VALUES_8     ('{  {HWREG_BASE_ADDRESS+16'h001F, 8'b00010001},      // VIDEO_MODE & Clock divider, 720p / divide by 2.
+    .RESET_VALUES_8     ('{  {HWREG_BASE_ADDRESS+16'h001F, 8'b01000000},      // VIDEO_MODE & Clock divider, 1080p / divide by 1.
                              {HWREG_BASE_ADDRESS+16'h001A, 8'h00      },      // Global system 24 bit color background color RED
                              {HWREG_BASE_ADDRESS+16'h001B, 8'h00      },      // Global system 24 bit color background color GREEN
                              {HWREG_BASE_ADDRESS+16'h001C, 8'h00      },      // Global system 24 bit color background color BLUE
@@ -333,8 +328,6 @@ BrianHG_GFX_VGA_Window_System #(
 .ENABLE_PDI_layer_swap ( ENABLE_PDI_layer_swap ), // Use 0 to bypass the parallel layer swapping logic
 .LBUF_BITS             ( LBUF_BITS             ),
 .LBUF_WORDS            ( LBUF_WORDS            ),
-.MAX_BURST             ( MAX_BURST             ),
-.MAX_BURST_1st         ( MAX_BURST_1st         ),
 .ENABLE_TILE_MODE      ( ENABLE_TILE_MODE      ),
 .SKIP_TILE_DELAY       ( SKIP_TILE_DELAY       ),
 .TILE_BASE_ADDR        ( TILE_BASE_ADDR        ),
