@@ -2,12 +2,13 @@
     SDReader
     v2.0 by nockieboy
 
-    This is based upon *this project* by *this person* (update these).
+    This HDL is based upon *this project* by *this person* (update these).
 
     Modified to separate initialisation from reading to optimise block reads.
     The module starts by INITialising the SD card and getting its RCA and card type. These
     are used by SDWriter as well, so need to be obtained.  The SD card is then deselected,
     placing it in Standby-State.
+
     Subsequent reads (or writes) select the SD card with CMD7, perform their transaction,
     then de-select the card with DESEL, putting the card back into Standy-State.
 

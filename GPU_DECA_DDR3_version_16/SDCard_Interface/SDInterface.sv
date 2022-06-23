@@ -1,10 +1,9 @@
-// SD Interface v0.2
+// SD Interface v1.0
 //
 // by nockieboy, November 2021-22
 //
-// Connects the SD modules to the rest of the GPU.
+// Connects the SD modules to the rest of the GPU and provides init/read/write functions.
 //
-// TODO: Handle write requests to the SD card.
 
 module SDInterface #(
     parameter int          CLK_DIV     = 2,      // clock divider
@@ -51,16 +50,17 @@ module SDInterface #(
 wire    [1:0] cardtype    ;
 wire          CMD_rd_req  ; // pulses HIGH to initiate DDR3 read
 wire    [3:0] sd_state    ;
-wire          DDR3_rd_ena /* synthesis keep */ ;
-wire          cache_wren  /* synthesis keep */ ;
-wire    [3:0] wr_ptr      /* synthesis keep */ ; // pointer to current byte in cache
-wire  [  7:0] wr_dat      ; // byte to send to SDWriter
+wire          DDR3_rd_ena ;
+wire          cache_wren  ;
+wire    [7:0] wr_dat      ; // byte to send to SDWriter
+wire    [3:0] wr_ptr      ; // pointer to current byte in cache
+wire    [3:0] wr_sd_data  ;
 
-wire          wr_ena, crcok, timeout ;
-wire          rd_sd_clk,  rd_cmd_in,  rd_cmd_oe,  rd_cmd_out,  rd_req, rd_ready /* synthesis keep */ ;
-wire          wr_sd_clk,  wr_cmd_in,  wr_cmd_oe,  wr_cmd_out,  wr_req, byte_req /* synthesis keep */ ;
-wire          rd_sd_data, rd_cmd_dir, rd_d0_dir,  rd_d123_dir, rd_sel, sdr_busy /* synthesis keep */ ;
-wire          wr_sd_data, wr_cmd_dir, wr_d0_dir,  wr_d123_dir, wr_sel, sdw_busy /* synthesis keep */ ;
+wire          wr_ena,     crcok,      timeout ;
+wire          rd_sd_clk,  rd_cmd_in,  rd_cmd_oe,   rd_cmd_out,  rd_req, rd_ready ;
+wire          wr_sd_clk,  wr_cmd_in,  wr_cmd_oe,   wr_cmd_out,  wr_req, byte_req ;
+wire          rd_sd_data, rd_cmd_dir, rd_d0_dir,   rd_d123_dir, rd_sel, sdr_busy ;
+wire          wr_cmd_dir, wr_dir,     wr_d123_dir, sdw_busy,    wr_sel           ;
 
 logic         end_wr_op, first_row, lbl, wstart, wstarted ;
 logic         CMD_R_sent ; // HIGH when a RD request to DDR3 has been made
@@ -107,14 +107,15 @@ assign DDR3_ena     = DDR3_wr_ena || DDR3_rd_ena ; // Write full 128-bits.
 // *********************************************************************************
 // Multiplex direction controls from SDReader and SDWriter modules according to
 // whether a read or write is taking place.  Defaults to read settings.
-assign SD_CLK      = wr_ena ? wr_sd_clk   : rd_sd_clk   ;
-assign SD_SEL      = wr_ena ? wr_sel      : rd_sel      ;
-assign SD_CMD_DIR  = wr_ena ? wr_cmd_dir  : rd_cmd_dir  ;
-assign SD_D0_DIR   = wr_ena ? wr_d0_dir   : rd_d0_dir   ;
-assign SD_D123_DIR = wr_ena ? wr_d123_dir : rd_d123_dir ;
+//                     IF        TRUE          FALSE
+assign SD_CLK      = wr_ena ? wr_sd_clk  : rd_sd_clk  ;
+assign SD_SEL      = wr_ena ? wr_sel     : rd_sel     ;
+assign SD_CMD_DIR  = wr_ena ? wr_cmd_dir : rd_cmd_dir ;
+assign SD_D0_DIR   = wr_ena ? wr_dir     : rd_d0_dir  ;
+assign SD_D123_DIR = wr_ena ? wr_dir     : rd_d0_dir  ;
 // Bidir ports direction controls for sub-modules
-assign SD_DATA     = wr_ena ? wr_sd_data  : 4'bzzzz     ;
 assign rd_sd_data  = SD_DATA ;
+assign SD_DATA     = ( wr_ena && wr_dir ) ? wr_sd_data : 4'bzzzz    ;
 assign SD_CMD      = wr_ena ? ( ( wr_cmd_oe ) ? wr_cmd_out : 1'bz ) : ( ( rd_cmd_oe ) ? rd_cmd_out : 1'bz ) ;
 assign rd_cmd_in   = SD_CMD ;
 assign wr_cmd_in   = SD_CMD ;
@@ -161,7 +162,8 @@ SDWriter #(
     .sdcmdin     ( wr_cmd_in   ), 
     .sdcmdout    ( wr_cmd_out  ), 
     .sdcmdoe     ( wr_cmd_oe   ), 
-    .sddat       ( wr_sd_data  ),
+    .sddat_i     ( rd_sd_data  ),
+    .sddat_o     ( wr_sd_data  ),
     // user write sector command interface
     .wstart      ( wstart      ), // pulse high to start write op
     .wsector_no  ( SECTOR      ), // user-supplied sector address
@@ -176,8 +178,7 @@ SDWriter #(
     .wbyte       ( wr_dat      ), // byte to write to SD card
     // these signals are direction controls specific to the DECA board
     .SD_CMD_DIR  ( wr_cmd_dir  ), // HIGH = TO SD card, LOW = FROM SD card
-    .SD_D0_DIR   ( wr_d0_dir   ), // HIGH = TO SD card, LOW = FROM SD card
-    .SD_D123_DIR ( wr_d123_dir ), // HIGH = TO SD card, LOW = FROM SD card
+    .sd_oe_en    ( wr_dir      ), // HIGH = TO SD card, LOW = FROM SD card
     .SD_SEL      ( wr_sel      )
 );
 

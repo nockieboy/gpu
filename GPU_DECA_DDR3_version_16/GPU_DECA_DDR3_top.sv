@@ -30,8 +30,8 @@ module GPU_DECA_DDR3_top #(
 parameter int        GPU_MEM                 = 524288,           // Defines total video RAM, including 1KB palette
 
 parameter string     ENDIAN                  = "Little",            // Endian for 8bit addressing access.
-parameter bit [3:0]  PDI_LAYERS              = 4,                   // Number of parallel window layers.
-parameter bit [3:0]  SDI_LAYERS              = 4,                   // Number of sequential window layers.
+parameter bit [3:0]  PDI_LAYERS              = 1,                   // Number of parallel window layers.
+parameter bit [3:0]  SDI_LAYERS              = 1,                   // Number of sequential window layers.
 parameter bit        ENABLE_TILE_MODE  [0:7] = '{1,0,0,0,0,0,0,0},  // Enable tile mode for each PDI_LAYER from 0 to 7.
                                                                     // TILES are available to all SDI_LAYERS of an enabled PDI_LAYER.
                                                                     // Each tile enabled PDI_LAYER will use it's own dedicated FPGA blockram.
@@ -697,12 +697,12 @@ Z80_Bus_Interface #(
    .INT_VEC               ( 48      ), // INTerrupt VECtor to be passed to host in event of an interrupt acknowledge.
 
 // ************** Read IO port addresses range. **************
-   .READ_PORT_BEGIN       ( 240     ), // Sets the beginning port number which can be read.
+   .READ_PORT_BEGIN       ( 56      ), // Sets the beginning port number which can be read.
    .READ_PORT_END         ( 251     ), // Sets the ending    port number which can be read.
 
 // ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
    .SD_SECTOR             ( 241     ), // IO address for SD interface's 32-bit Sector Address pipe.
-   .SD_RDWR               ( 242     ), // IO address to initiate SD RD/WR.
+   .SD_MODE               ( 242     ), // IO address to initiate SD RD/WR.
    .SD_ARG_PTR            ( 243     ), // IO address to set/read ARG_PTR value.
    .IO_BLNK               ( 244     ), // IO address for BLANK signal to video DAC.
    .GEO_LO                ( 246     ), // IO address for GEOFF LOW byte.

@@ -32,9 +32,9 @@ module Z80_Bus_Interface #(
    parameter bit        data_in            = 0,     // 245_DIR for data in
    parameter bit        data_out           = 1,     // 245_DIR for data out
 
-   parameter            MEMORY_RANGE       = 3'b010,              // Z80_addr[21:19] == 3'b010 targets the 512KB 'window' at 0x100000-0x17FFFF (Socket 3 on the uCom)
-   parameter            MEM_SIZE_BYTES     = 196608,              // Specifies maximum size for the GPU RAM (anything above this returns $FF) (Default: 40960)
-   parameter            BANK_RESPONSE      = 1,                   // 1 - respond to reads at BANK_ID_ADDR with appropriate data, 0 - ignore reads to that address
+   parameter            MEMORY_RANGE       = 3'b010, // Z80_addr[21:19] == 3'b010 targets the 512KB 'window' at 0x100000-0x17FFFF (Socket 3 on the uCom)
+   parameter            MEM_SIZE_BYTES     = 196608, // Specifies maximum size for the GPU RAM (anything above this returns $FF) (Default: 40960)
+   parameter            BANK_RESPONSE      = 1,      // 1 - respond to reads at BANK_ID_ADDR with appropriate data, 0 - ignore reads to that address
    parameter            BANK_ID_ADDR       = 15'b111111111111111, // Address to respond to BANK_ID queries with data (lowest 4 bits left off)
    parameter bit [7:0]  BANK_ID     [0:15] = '{9,3,71,80,85,32,69,80,52,67,69,49,48,0,255,255},  // The BANK_ID data to return
 
@@ -43,22 +43,36 @@ module Z80_Bus_Interface #(
    parameter int        INT_VEC            = 'h30,  // INTerrupt VECtor to be passed to host in event of an interrupt acknowledge
 
 // Read IO port addresses range.
-   parameter bit [7:0]  READ_PORT_BEGIN    = 240,   // Sets the beginning port number which can be read.
+   parameter bit [7:0]  READ_PORT_BEGIN    = 56,    // Sets the beginning port number which can be read.
    parameter bit [7:0]  READ_PORT_END      = 251,   // Sets the ending    port number which can be read.
 
 // ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
-   //parameter bit [7:0]  SD_CMD_L           = 243,   // IO address for SD interface Command register low-byte
-   //parameter bit [7:0]  SD_CMD_H           = 244,   // IO address for SD interface Command register high-byte
-   parameter bit [7:0]  SD_DATA            = 240,   // IO address for 32-bit SD DATA register pipe
-   parameter bit [7:0]  SD_SECTOR          = 241,   // IO address for SD interface 32-bit Sector address pipe
-   parameter bit [7:0]  SD_RDWR            = 242,   // IO address for SD interface RD/WR
-   parameter bit [7:0]  SD_ARG_PTR         = 243,   // IO address to set/read ARG_PTR value
-   parameter bit [7:0]  IO_BLNK            = 244,   // IO address for BLANK signal to video DAC
-   parameter bit [7:0]  GEO_LO             = 246,   // IO address for GEOFF LOW byte
-   parameter bit [7:0]  GEO_HI             = 247,   // IO address for GEOFF HIGH byte
-   parameter bit [7:0]  FIFO_STAT          = 248,   // IO address for GPU FIFO status on bit 0 - remaining bits free for other data
-   parameter bit [7:0]  GPU_MMU_L          = 250,   // IO address for the GPU MMU's lower 8-bits of the upper 12-bits of the DDR3 address bus
-   parameter bit [7:0]  GPU_MMU_H          = 251    // IO address for the GPU MMU's upper 4-bits of the upper 12-bits of the DDR3 address bus
+   //parameter bit [7:0]  SD_CMD_L           = 243,   // IO addr: SD interface Command register low-byte
+   //parameter bit [7:0]  SD_CMD_H           = 244,   // IO addr: SD interface Command register high-byte
+   //
+   // MMU Interface IO ports
+   //
+   parameter bit [7:0]  MMU_A0             = 'h38,   // IO addr: SD STATUS register R-only
+   parameter bit [7:0]  MMU_A1             = 'h39,   // IO addr: SD STATUS register R-only
+   parameter bit [7:0]  MMU_A2             = 'h3A,   // IO addr: SD STATUS register R-only
+   parameter bit [7:0]  MMU_A3             = 'h3B,   // IO addr: SD STATUS register R-only
+   parameter bit [7:0]  MMU_EN             = 'h3C,   // IO addr: SD STATUS register R-only
+   // 
+   // SD Interface IO Ports
+   // 
+   parameter bit [7:0]  SD_STATUS          = 240,   // IO addr: SD STATUS register R-only
+   parameter bit [7:0]  SD_SECTOR          = 241,   // IO addr: SD SECTOR address pipe - R/W (indexed by ARG_PTR)
+   parameter bit [7:0]  SD_MODE            = 242,   // IO addr: SD operation trigger - W-only
+   parameter bit [7:0]  SD_ARG_PTR         = 243,   // IO addr: SD ARG_PTR - R/W
+   // 
+   // FPGA GPU IO Ports
+   // 
+   parameter bit [7:0]  IO_BLNK            = 244,   // IO addr: BLANK signal to video DAC
+   parameter bit [7:0]  GEO_LO             = 246,   // IO addr: GEOFF LOW byte
+   parameter bit [7:0]  GEO_HI             = 247,   // IO addr: GEOFF HIGH byte
+   parameter bit [7:0]  FIFO_STAT          = 248,   // IO addr: GPU FIFO status on bit 0 - remaining bits free for other data
+   parameter bit [7:0]  GPU_MMU_L          = 250,   // IO addr: the GPU MMU's lower 8-bits of the upper 12-bits of the DDR3 address bus
+   parameter bit [7:0]  GPU_MMU_H          = 251    // IO addr: the GPU MMU's upper 4-bits of the upper 12-bits of the DDR3 address bus
 // ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
 
 )(
@@ -117,16 +131,8 @@ module Z80_Bus_Interface #(
                                                          // number is within parameter READ_PORT_BEGIN and READ_PORT_END.
 
 // ***************************************************************************************************
-// **** Wishbone Master for SD interface (SID)
+// **** SD interface (SID)
 // ***************************************************************************************************
-//    output logic [7:0]  m_wb_adr_o,
-/*    input  logic [31:0] m_wb_dat_i,
-    output logic [3:0]  m_wb_sel_o, // WISHBONE byte select input [3:0] (indicates where valid data is expected on the dat_i or dat_o bus)
-    output logic        m_wb_we_o,
-    output logic        m_wb_cyc_o,
-    output logic        m_wb_stb_o, 
-    input  logic        m_wb_ack_i, */
-
     output logic [31:0] SD_sector,
     output logic        SD_op_ena,  // signals to SID that an operation is requested
     output logic  [1:0] SD_wr_ena,  // sets SID to init, read or write mode
@@ -176,15 +182,12 @@ logic    [7:0] READ_PORT_DATA    [0:255] ; // The array [port_number] will be se
 //reg [12:0] port_dly    = 13'b0 ; // Port delay pipeline delays data output on an IO port read
 reg  [7:0]  GPU_MMU_LO  = 8'b0   ; // Lower 8-bits of the upper 12-bits of the DDR3 address bus
 reg  [7:0]  GPU_MMU_HI  = 8'b0   ; // Upper 4-bits of the upper 12-bits of the DDR3 address bus
-//wire [7:0]  SD_ADDRESS;//  = 8'b0   ; // SD register being addressed
-//wire [31:0] SD_COMMAND;//  = 32'b0  ; // Value to RD/WR SD interface's 32-bit COMMAND register
-//reg  [31:0] SD_SECTOR   = 32'b0  ; // Value to RD/WR SD interface's 32-bit SECTOR address
 reg  [7:0]  ARG_PTR     = 8'b0   ; // 2-bit pointer to current byte in 32-bit SD_SECTOR
-//reg  [2:0]  wb_STATE    = 3'b000 ; // Wishbone transceiver state machine register
-//reg         wb_RQ_SEND  = 1'b0   ; // Wishbone write request flag
-//reg         wb_RQ_READ  = 1'b0   ; // Wishbone read request flag
-//reg         wb_DAT_RDY  = 1'b0   ; // Data ready flag
-//reg  [31:0] wb_DATA_IN  = 32'b0  ; // Data latch for incoming Wishbone data
+reg  [7:0]  MMU_AREA0   = 8'hFF /* synthesis keep */ ; // 
+reg  [7:0]  MMU_AREA1   = 8'h01 /* synthesis keep */ ; // 
+reg  [7:0]  MMU_AREA2   = 8'h02 /* synthesis keep */ ; // 
+reg  [7:0]  MMU_AREA3   = 8'h03 /* synthesis keep */ ; // 
+reg  [7:0]  MMU_ENABLE  = 8'h00 /* synthesis keep */ ; // 
 
 // *****************************************************************
 // *****************************************************************
@@ -195,27 +198,26 @@ reg  [7:0]  ARG_PTR     = 8'b0   ; // 2-bit pointer to current byte in 32-bit SD
 // *****************************************************************
 // Z80 Write port assignments
 // *****************************************************************
-assign  GEO_WR_LO_STROBE = WRITE_PORT_STROBE[GEO_LO]     ;
-assign  GEO_WR_LO        = WRITE_PORT_DATA  [GEO_LO]     ;
-assign  GEO_WR_HI_STROBE = WRITE_PORT_STROBE[GEO_HI]     ;
-assign  GEO_WR_HI        = WRITE_PORT_DATA  [GEO_HI]     ;
-//assign  SD_ADDRESS       = WRITE_PORT_DATA  [SD_ADDR]    ;
-//assign  SD_COMMAND[ 7:0] = WRITE_PORT_DATA  [SD_CMD_L]   ;
-//assign  SD_COMMAND[15:8] = WRITE_PORT_DATA  [SD_CMD_H]   ;
-//assign  ARG_PTR[7:0]     = WRITE_PORT_DATA  [SD_ARG_PTR] ;
+assign  GEO_WR_LO_STROBE = WRITE_PORT_STROBE[GEO_LO] ;
+assign  GEO_WR_LO        = WRITE_PORT_DATA  [GEO_LO] ;
+assign  GEO_WR_HI_STROBE = WRITE_PORT_STROBE[GEO_HI] ;
+assign  GEO_WR_HI        = WRITE_PORT_DATA  [GEO_HI] ;
 
 // *****************************************************************
 // Z80 Read port assignments
 // *****************************************************************
-assign  GEO_STAT_RD_STROBE         = READ_PORT_STROBE [FIFO_STAT] ;
-assign  READ_PORT_DATA[FIFO_STAT]  = GEO_STAT_RD                  ;
-//assign  READ_PORT_DATA[SD_ADDR]    = SD_ADDRESS[7:0]              ;
-//assign  READ_PORT_DATA[SD_CMD_L]   = SD_COMMAND[7:0]              ;
-//assign  READ_PORT_DATA[SD_CMD_H]   = SD_COMMAND[15:8]             ;
-assign  READ_PORT_DATA[SD_ARG_PTR] = ARG_PTR[7:0]                 ;
-assign  READ_PORT_DATA[GPU_MMU_L]  = GPU_MMU_LO                   ;
-assign  READ_PORT_DATA[GPU_MMU_H]  = GPU_MMU_HI                   ;
-assign  READ_PORT_DATA[SD_DATA]    = SD_status[7:0]               ;
+assign  GEO_STAT_RD_STROBE         = READ_PORT_STROBE[FIFO_STAT] ;
+assign  READ_PORT_DATA[FIFO_STAT]  = GEO_STAT_RD                 ;
+assign  READ_PORT_DATA[SD_ARG_PTR] = ARG_PTR   [7:0]             ;
+assign  READ_PORT_DATA[GPU_MMU_L]  = GPU_MMU_LO                  ;
+assign  READ_PORT_DATA[GPU_MMU_H]  = GPU_MMU_HI                  ;
+assign  READ_PORT_DATA[SD_STATUS]  = SD_status [7:0]             ;
+// MMU Tracking
+assign  READ_PORT_DATA[MMU_A0]     = MMU_AREA0 [7:0]             ;
+assign  READ_PORT_DATA[MMU_A1]     = MMU_AREA1 [7:0]             ;
+assign  READ_PORT_DATA[MMU_A2]     = MMU_AREA2 [7:0]             ;
+assign  READ_PORT_DATA[MMU_A3]     = MMU_AREA3 [7:0]             ;
+assign  READ_PORT_DATA[MMU_EN]     = MMU_ENABLE[7:0]             ;
 
 always_comb begin
 
@@ -336,7 +338,7 @@ wire wait_filter = Z80_M1n_r ? zwait_timer[Z80_DELAY_WAIT_RM] : zwait_timer[Z80_
 // Generate the wait signal as fast as possible, asynchronously.
 always_comb begin
 
-    if ( !Z80_CLK || Z80_WAIT_QUICK_OFF )  Z80_WAIT <= (wait_enable && wait_filter) ;             // Allow the Z80_WAIT to be SET and CLEARED while the un-registered Z80_CLK is low.
+    if ( !Z80_CLK || Z80_WAIT_QUICK_OFF )  Z80_WAIT <= (wait_enable && wait_filter)             ; // Allow the Z80_WAIT to be SET and CLEARED while the un-registered Z80_CLK is low.
     else                                   Z80_WAIT <= (wait_enable && wait_filter) || Z80_WAIT ; // Otherwise set and hold Z80_WAIT.
 
 end
@@ -362,19 +364,26 @@ always_ff @( posedge CMD_CLK ) begin
 
     if ( reset ) begin
 
-        Z80_CK_POS          <= 0           ; // Reset the bus phase clock counter.
-        Z80_245data_dir     <= data_in     ; // Set the 245 to send data from the Z80 to the FPGA.
-        Z80_245_oe          <= 1'b1        ; // Disable 245 OE
-        Z80_fpga_data_oe    <= 1'b0        ; // set the FPGA Z80_data bidirectional IO port to HI-Z.
-        CMD_R_sent          <= 0           ;
-        CMD_W_sent          <= 0           ;
-        READ_PORT_ACK       <= 0           ; // Clear any active strobes
-        READ_PORT_STROBE    <= 0           ; // Clear any active strobes
-        WRITE_PORT_STROBE   <= 0           ; // Clear any active strobes
-        SD_op_ena           <= 0           ; // Clear any SD interface enable
-        SD_wr_ena           <= 2'b0        ; // Clear any SD interface write enable
-        GPU_MMU_LO          <= 8'b0        ; // Reset GPU MMU LOW  register
-        GPU_MMU_HI          <= 8'b0        ; // Reset GPU MMU HIGH register
+        ARG_PTR           <= 8'b0    ; // Reset ARG_PTR value
+        CMD_R_sent        <= 0       ;
+        CMD_W_sent        <= 0       ;
+        MMU_AREA0         <=  'hFF   ;
+        MMU_AREA1         <=  'h01   ;
+        MMU_AREA2         <=  'h02   ;
+        MMU_AREA3         <=  'h03   ;
+        MMU_ENABLE        <=  'h00   ;
+        GPU_MMU_LO        <= 8'b0    ; // Reset GPU MMU LOW  register
+        GPU_MMU_HI        <= 8'b0    ; // Reset GPU MMU HIGH register
+        READ_PORT_ACK     <= 0       ; // Clear any active strobes
+        READ_PORT_STROBE  <= 0       ; // Clear any active strobes
+        SD_op_ena         <= 0       ; // Clear any SD interface enable
+        SD_wr_ena         <= 2'b0    ; // Clear any SD interface write enable
+        SD_sector         <= 32'b0   ; // Reset SD sector address register
+        WRITE_PORT_STROBE <= 0       ; // Clear any active strobes
+        Z80_CK_POS        <= 0       ; // Reset the bus phase clock counter.
+        Z80_245data_dir   <= data_in ; // Set the 245 to send data from the Z80 to the FPGA.
+        Z80_245_oe        <= 1'b1    ; // Disable 245 OE
+        Z80_fpga_data_oe  <= 1'b0    ; // set the FPGA Z80_data bidirectional IO port to HI-Z.
 
     end else begin
 
@@ -518,7 +527,7 @@ always_ff @( posedge CMD_CLK ) begin
                     ARG_PTR[1:0] <= Z80_wData_r[1:0] ;
 
                 end
-                else if ( Z80_addr_r[7:0] == SD_RDWR && !SD_busy ) begin
+                else if ( Z80_addr_r[7:0] == SD_MODE && !SD_busy ) begin
 
                     SD_wr_ena    <= Z80_wData_r[1:0] ; // INIT = 0, RD = 1, WR = 2
                     SD_op_ena    <= 1                ; // trigger SD interface op
@@ -539,6 +548,13 @@ always_ff @( posedge CMD_CLK ) begin
         end // (!z80_op_nop)
         
         // MMU writes
+        if (WRITE_PORT_STROBE[MMU_A0]) MMU_AREA0  <= WRITE_PORT_DATA[MMU_A0] ;
+        if (WRITE_PORT_STROBE[MMU_A1]) MMU_AREA1  <= WRITE_PORT_DATA[MMU_A1] ;
+        if (WRITE_PORT_STROBE[MMU_A2]) MMU_AREA2  <= WRITE_PORT_DATA[MMU_A2] ;
+        if (WRITE_PORT_STROBE[MMU_A3]) MMU_AREA3  <= WRITE_PORT_DATA[MMU_A3] ;
+        if (WRITE_PORT_STROBE[MMU_EN]) MMU_ENABLE <= WRITE_PORT_DATA[MMU_EN] ;
+
+        // GPU MMU writes
         if (WRITE_PORT_STROBE[GPU_MMU_L]) GPU_MMU_LO <= WRITE_PORT_DATA[GPU_MMU_L] ;
         if (WRITE_PORT_STROBE[GPU_MMU_H]) GPU_MMU_HI <= WRITE_PORT_DATA[GPU_MMU_H] ;
 
