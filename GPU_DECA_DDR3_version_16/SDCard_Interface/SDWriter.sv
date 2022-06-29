@@ -27,6 +27,7 @@ module SDWriter # (
     input  logic [31:0] wsector_no,     // user-supplied sector address
     input  logic [ 1:0] cardtype,
     input  logic [15:0] rca,
+    input  logic        bus_4bit,       // HIGH for 4-bit SD interface, LOW for 1-bit
     output logic        wbusy,
     output logic        wdone,
     output logic        crc_ok,

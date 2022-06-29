@@ -17,7 +17,7 @@ module SDInterface #(
     // interface <-> Bridgette
     input  logic           ENABLE,         // HIGH for RD/WR request
     //input  logic           WR_ENA,         // HIGH for write request
-    input  logic   [  1:0] MODE,           // 1 = READ, 2 = WRITE
+    input  logic   [  1:0] MODE,           // 0 = INIT 1-bit mode, 1 = READ, 2 = WRITE, 3 = INIT 4-bit mode
     input  logic   [ 31:0] SECTOR,         // sector number to read/write
     output logic           WR_DONE,        // HIGH when write is complete
     output logic           SD_BUSY,        // HIGH when interface is busy
@@ -55,11 +55,10 @@ wire          cache_wren  ;
 wire    [7:0] wr_dat      ; // byte to send to SDWriter
 wire    [3:0] wr_ptr      ; // pointer to current byte in cache
 wire    [3:0] wr_sd_data  ;
-
-wire          wr_ena,     crcok,      timeout ;
-wire          rd_sd_clk,  rd_cmd_in,  rd_cmd_oe,   rd_cmd_out,  rd_req, rd_ready ;
+wire          wr_ena,     crcok,      timeout,     bus_4bit                      ;
+wire          rd_sd_clk,  rd_cmd_in,  rd_cmd_oe,   rd_cmd_out,  rd_req, rd_ready /* synthesis keep */;
 wire          wr_sd_clk,  wr_cmd_in,  wr_cmd_oe,   wr_cmd_out,  wr_req, byte_req ;
-wire          rd_sd_data, rd_cmd_dir, rd_d0_dir,   rd_d123_dir, rd_sel, sdr_busy ;
+wire          rd_cmd_dir, rd_d0_dir,  rd_d123_dir, rd_sel,      sdr_busy         ;
 wire          wr_cmd_dir, wr_dir,     wr_d123_dir, sdw_busy,    wr_sel           ;
 
 logic         end_wr_op, first_row, lbl, wstart, wstarted ;
@@ -85,7 +84,7 @@ assign CARDTYPE     = cardtype                   ;
 assign SIDSTATE     = sd_state                   ;
 assign SD_BUSY      = sdr_busy || sdw_busy       ;
 // operation request triggers
-//assign ini_req     = ( ENABLE && MODE == OP_INIT  )    ; // pulses HIGH when an INIT  request is made
+//assign ini_req     = ( ENABLE && ( MODE == 0 || MODE == 3 ) ) ; // pulses HIGH when an INIT  request is made
 assign wr_ena      = ( MODE == OP_WRITE  )       ;
 assign rd_req      = ( ENABLE && ~wr_ena )       ; // pulses HIGH when a READ  request is made
 assign wr_req      = ( ENABLE && wr_ena  )       ; // pulses HIGH when a WRITE request is made
@@ -114,8 +113,7 @@ assign SD_CMD_DIR  = wr_ena ? wr_cmd_dir : rd_cmd_dir ;
 assign SD_D0_DIR   = wr_ena ? wr_dir     : rd_d0_dir  ;
 assign SD_D123_DIR = wr_ena ? wr_dir     : rd_d0_dir  ;
 // Bidir ports direction controls for sub-modules
-assign rd_sd_data  = SD_DATA ;
-assign SD_DATA     = ( wr_ena && wr_dir ) ? wr_sd_data : 4'bzzzz    ;
+assign SD_DATA     = ( wr_ena && wr_dir ) ? wr_sd_data : 4'bzzzz ;
 assign SD_CMD      = wr_ena ? ( ( wr_cmd_oe ) ? wr_cmd_out : 1'bz ) : ( ( rd_cmd_oe ) ? rd_cmd_out : 1'bz ) ;
 assign rd_cmd_in   = SD_CMD ;
 assign wr_cmd_in   = SD_CMD ;
@@ -130,17 +128,18 @@ SDReader #(
     .sdcmdin     ( rd_cmd_in   ), 
     .sdcmdout    ( rd_cmd_out  ), 
     .sdcmdoe     ( rd_cmd_oe   ), 
-    .sddat       ( rd_sd_data  ), 
+    .sddat       ( SD_DATA     ), 
     // status and information
     .card_type   ( cardtype    ), // 0=Unknown, 1=SDv1.1 , 2=SDv2 , 3=SDHCv2
     .card_stat   ( sd_state    ), // current state of SDReader's state machine
     .rca         ( rca         ), // Relative Card Address obtained by SDReader
     // user read sector command interface
-    .MODE        ( MODE        ), // 0 = INIT, 1 = READ, 2 = WRITE
+    .MODE        ( MODE        ), // 0 = INIT 1-bit, 1 = READ, 2 = WRITE, 3 = INIT 4-bit
     .rstart      ( rd_req      ), // rstart HIGH starts read operation
     .rsector_no  ( SECTOR      ), // target sector to read in SDcard
     .rbusy       ( sdr_busy    ), // signals read is ongoing or complete
     .rdone       ( rd_ready    ), // signals read is complete
+    .bus_4bit    ( bus_4bit    ), // HIGH for 4-bit SD interface, LOW for 1-bit
     // sector data output interface
     .outreq      ( cache_wren  ), // HIGH whilst data is received from SD card (for each byte?)
     .outaddr     (             ), // cache address to be written to
@@ -148,7 +147,6 @@ SDReader #(
     // bus direction controls
     .SD_CMD_DIR  ( rd_cmd_dir  ), // HIGH = TO SD card, LOW = FROM SD card
     .SD_D0_DIR   ( rd_d0_dir   ), // HIGH = TO SD card, LOW = FROM SD card
-    .SD_D123_DIR ( rd_d123_dir ), // HIGH = TO SD card, LOW = FROM SD card
     .SD_SEL      ( rd_sel      )  // SD socket select
 );
 
@@ -162,13 +160,14 @@ SDWriter #(
     .sdcmdin     ( wr_cmd_in   ), 
     .sdcmdout    ( wr_cmd_out  ), 
     .sdcmdoe     ( wr_cmd_oe   ), 
-    .sddat_i     ( rd_sd_data  ),
+    .sddat_i     ( SD_DATA     ),
     .sddat_o     ( wr_sd_data  ),
     // user write sector command interface
     .wstart      ( wstart      ), // pulse high to start write op
     .wsector_no  ( SECTOR      ), // user-supplied sector address
     .cardtype    ( cardtype    ),
     .rca         ( rca         ),
+    .bus_4bit    ( bus_4bit    ), // HIGH for 4-bit SD interface, LOW for 1-bit
     .wbusy       ( sdw_busy    ),
     .wdone       ( wr_done     ),
     .crc_ok      ( crcok       ),
@@ -202,11 +201,13 @@ always @( posedge CLK ) begin
         wstarted   <= 1'b0   ;
     end else if ( rd_req ) begin // new read request received
         buf_ptr    <= 'h1F0  ; // buf_ptr starts at 0 - 16
-        BUSY       <= 1'b1   ;
-        data_ptr   <=  'hF   ; // DATA ALIGNMENT TESTING
+        data_ptr   <=  'hF   ; // 
         rdrdy_flag <= 1'b0   ; 
         WR_DONE    <= 1'b0   ; 
-        rd_op      <= 1'b1   ; // Enable RD op
+        if ( MODE == 1 ) begin // only update as busy and enable a rd_op if a read is being performed
+            BUSY  <= 1'b1 ;
+            rd_op <= 1'b1 ; // Enable RD op
+        end
     end else if ( wr_req ) begin // new write request received
         buf_ptr    <= 'h000  ; // buf_ptr offset for first row
         CMD_R_sent <= 1'b0   ;
