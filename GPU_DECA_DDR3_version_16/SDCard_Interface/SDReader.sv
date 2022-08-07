@@ -22,6 +22,7 @@
         rstart && MODE=3 - inits the SD card in 4-bit mode.
 
     SDReader stays in the assigned data transfer mode (1- or 4-bit) until it is changed.
+    The chosen data transfer mode applies to the SDWriter module as well.
 */
 
 module SDReader # (
@@ -81,7 +82,7 @@ assign  SD_D0_DIR   = 1'b0      ; // read-only
 // SD interface voltage - DECA-specific ******* THIS CAN BE MODIFIED SO 1.8V CARDS ARE SUPPORTED ********
 assign  SD_SEL      = 1'b0      ; // LOW = 3.3V, HIGH = 1.8V
 
-wire    [  2:0] rlsb        = 3'd7 - ridx[2:0] /* synthesis keep */;
+wire    [  2:0] rlsb = 3'd7 - ridx[2:0] ;
 
 logic           bus_set              ;
 logic           start       = 1'b0   ;
@@ -95,7 +96,6 @@ logic   [ 31:0] resparg              ;
 logic   [127:0] resparg_long         ;
 logic           busy, done, timeout  ;
 logic           syntaxerr            ;
-//logic           sdcmdoe, sdcmdout    ;
 logic           sdclkl      = 1'b0   ;
 
 //       0     1      2         3       4      5     6      7     8      9      A      B      C      D       E        F
@@ -303,7 +303,6 @@ always @( posedge clk or negedge rst_n ) begin
                         outreq  = 1          ;
                         outaddr = ridx[11:3] ;
                     end
-                    //if ( ( ++ridx ) >= 512*8 ) begin
                     if ( ridx >= 512*8 ) begin
                         rstate = RTAIL ;
                         ridx   = 0     ;
@@ -313,7 +312,6 @@ always @( posedge clk or negedge rst_n ) begin
                 RTAIL:  begin
                     if ( bus_4bit ) ridx = ridx + 4 ;
                     else            ridx = ridx + 1 ;
-                    //if ( ( ++ridx ) >= 8*8 ) begin
                     if ( ridx >= 8*8 ) begin
                         rstate = RDONE ;
                     end

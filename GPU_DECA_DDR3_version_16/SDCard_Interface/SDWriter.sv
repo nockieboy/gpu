@@ -4,12 +4,11 @@
 //
 
 module SDWriter # (
-    parameter   CLK_DIV = 1,    // when clk = 0~25MHz   , set CLK_DIV to 0,
+    parameter   CLK_DIV = 1     // when clk = 0~25MHz   , set CLK_DIV to 0,
                                 // when clk = 25~50MHz  , set CLK_DIV to 1,
                                 // when clk = 50~100MHz , set CLK_DIV to 2,
                                 // when clk = 100~200MHz, set CLK_DIV to 3,
                                 // when clk = 200~400MHz, set CLK_DIV to 4, etc...
-    parameter   WIDTH   = 1     // SD interface width (1 or 4)
 ) (
     // clock
     input  logic        clk,
@@ -41,18 +40,19 @@ module SDWriter # (
     output logic        SD_SEL
 );
 
-localparam       SLOWCLKDIV  = (16'd1<<CLK_DIV)*16'd35 ;
-localparam       FASTCLKDIV  =  16'd1<<CLK_DIV         ;
-localparam       CMDTIMEOUT  = 15'd500   ; // according to SD datasheet, Ncr(max) = 64 clock cycles, so 500 cycles is enough
-localparam       DATTIMEOUT  = 'd1000000 ; // according to SD datasheet, 1ms is enough to wait for DAT result, here, we set timeout to 1000000 clock cycles = 80ms (when SDCLK=12.5MHz)
+localparam SLOWCLKDIV  = (16'd1<<CLK_DIV)*16'd35 ;
+localparam FASTCLKDIV  =  16'd1<<CLK_DIV         ;
+localparam CMDTIMEOUT  = 15'd500   ; // according to SD datasheet, Ncr(max) = 64 clock cycles, so 500 cycles is enough
+localparam DATTIMEOUT  = 'd1000000 ; // according to SD datasheet, 1ms is enough to wait for DAT result, here, we set timeout to 1000000 clock cycles = 80ms (when SDCLK=12.5MHz)
 
 // DECA SD direction controls - HIGH for writes to SD card, LOW for reads from SD card
 assign  SD_CMD_DIR     = sdcmdoe      ;
 // SD interface voltage - DECA-specific ******* THIS CAN BE MODIFIED SO 1.8V CARDS ARE SUPPORTED ********
 assign  SD_SEL         = 1'b0         ; // LOW = 3.3V, HIGH = 1.8V
 
-wire    [  2:0] rlsb = 3'd7-widx[2:0] ; // bit pointer for byte being written (counts from 7 to 0)
-wire    [ 15:0] crc_out [3:0]         ;
+wire    [  2:0] rlsb = 3'd7-widx[2:0] /* synthesis keep */ ; // bit pointer for byte being written (counts from 7 to 0)
+wire    [ 15:0] crc_out [3:0]        ;
+wire            end_of_byte          ; // HIGH when last bit or nybble in byte is reached
 
 logic           start       = 1'b0   ;
 logic   [  5:0] cmd         = '0     ;
@@ -89,8 +89,9 @@ localparam SDv1    = 2'b01 ;
 localparam SDv2    = 2'b10 ;
 localparam SDHCv2  = 2'b11 ;
 //
-assign bytePtr  = widx[6:3]       ; // point bytePtr at the correct byte in the 16-byte cache
-assign wbusy    = (sdstate!=IDLE) ;
+assign end_of_byte = bus_4bit ? ( rlsb == 3'd3 ) : ( rlsb == 3'd0 ) ;
+assign bytePtr     = widx[6:3]       ; // point bytePtr at the correct byte in the 16-byte cache
+assign wbusy       = (sdstate!=IDLE) ;
 //
 // Instantiate an SDCmdCtrl instance, using implicit named port connections,
 // which are automatically connected to wires/ports of same name with equivalent data types.
@@ -131,7 +132,7 @@ endtask
 // Instantiate CRC generators for the required number of lanes in the SD interface
 genvar i ;
 generate
-    for ( i = 0 ; i < WIDTH ; i = i + 1 ) begin: CRC_16_gen
+    for ( i = 0 ; i < 4 ; i = i + 1 ) begin: CRC_16_gen
         sd_crc_16 CRC_16_i ( crc_in[i], crc_en, sdclk, crc_rst, crc_out[i] ) ;
     end
 endgenerate
@@ -239,7 +240,7 @@ always @( posedge clk or negedge rst_n ) begin : ByteWriter
             crc_rst     <= 1'b0    ;
             crc_s       <= 7'b0    ;
             crc_status  <= 3'h7    ;
-            data_cycles <= 512*8   ;
+            data_cycles <= bus_4bit ? (512 << 1) : (512 << 3) ; // data_cycles = 1,024 4-bit, 4,096 1-bit
             sb_idx      <= 0       ;
             sddat_o     <= 4'hF    ; 
             sd_oe_en    <= 1'b1    ; // set direction to write
@@ -266,7 +267,7 @@ always @( posedge clk or negedge rst_n ) begin : ByteWriter
                     end else begin
                         if ( sb_idx == 1 ) begin
                             crc_rst   <= 1'b1  ;
-                            sddat_o   <= 4'hE  ; // send START bit
+                            sddat_o   <= bus_4bit ? 4'h0 : 4'hE ; // send START bit
                             writebyte <= wbyte ; // pull the first byte ready for transmission
                             wstate     = W_DAT ; // 
                         end else begin
@@ -279,22 +280,46 @@ always @( posedge clk or negedge rst_n ) begin : ByteWriter
                 end
 
                 W_DAT: begin  // wstate 1
-                    // Write 512 bytes, bit by bit
+                    // Write 512 bytes, bit by bit / nybble by nybble depending on bus_4bit
                     crc_rst <= 1'b0     ;
-                    widx    <= widx + 1 ; 
-                    if ( rlsb == 3'd0 && widx != data_cycles ) begin // Reached last bit in the byte
+                    widx    <= ( bus_4bit ? widx + 4 : widx + 1 ) ; 
+                    if ( end_of_byte && widx != data_cycles ) begin // Reached last bit in the byte
                         updateByte <= 2 ; // set clock delay for writebyte update
                     end
                     if ( widx == data_cycles ) begin // Last bit of data payload - widx = 0x1000
-                        crc_c     <= 15                              ; // set CRC bit counter
-                        crc_en    <= 1'b0                            ; // disable CRC calculation
-                        sddat_o   <= { 3'h7, crc_out[0][crc_c - 1] } ; // write first bit of CRC
-                        writebyte <= 8'b0                            ;
-                        wstate     = W_CRC                           ; 
+                        crc_c  <= bus_4bit ? 3 : 15    ; // set CRC bit counter
+                        crc_en <= 1'b0                 ; // disable CRC calculation
+                        if ( bus_4bit ) begin // write first nybble of CRC
+                            sddat_o <= {
+                                crc_out[3][crc_c-1],
+                                crc_out[2][crc_c-1],
+                                crc_out[1][crc_c-1],
+                                crc_out[0][crc_c-1]
+                            };
+                        end else begin
+                            sddat_o <= { 3'h7, crc_out[0][crc_c-1] } ; // write first bit of CRC
+                        end
+                        writebyte  <= 8'b0                ;
+                        wstate      = W_CRC               ; 
                     end else begin
-                        crc_en    <= 1'b1                            ; // enable CRC calculation
-                        crc_in    <= { 3'h7, writebyte[rlsb] }       ; // write bit to CRC
-                        sddat_o   <= { 3'h7, writebyte[rlsb] }       ; // write one bit at a time
+                        crc_en <= 1'b1 ; // enable CRC calculation
+                        if (bus_4bit) begin
+                            crc_in  <= {
+                                writebyte[rlsb-0],
+                                writebyte[rlsb-1],
+                                writebyte[rlsb-2],
+                                writebyte[rlsb-3]
+                            };
+                            sddat_o <= {
+                                writebyte[rlsb-0],
+                                writebyte[rlsb-1],
+                                writebyte[rlsb-2],
+                                writebyte[rlsb-3]
+                            };
+                        end else begin
+                            crc_in  <= { 3'h7, writebyte[rlsb] } ; // write bit to CRC
+                            sddat_o <= { 3'h7, writebyte[rlsb] } ; // write one bit at a time
+                        end
                     end
                 end
 
@@ -303,13 +328,21 @@ always @( posedge clk or negedge rst_n ) begin : ByteWriter
                     crc_en  <= 1'b0         ; 
                     crc_rst <= 1'b0         ;
                     crc_c   <= crc_c - 5'h1 ;
-                    widx    <= widx + 1     ; 
+                    //widx    <= bus_4bit ? (widx + 4) : (widx + 1) ; 
+                    widx    <= widx + 1 ; 
                     if ( crc_c == 0 ) begin // widx = 4,113 (0x1011)
                         sddat_o  <= 4'hF  ; // send 'STOP' bit
-                        sd_oe_en <= 1'b0  ; // set SD data to READ direction
+                        sd_oe_en <= 1'b1  ; // 
                         wstate    = W_END ;
                     end else begin // widx = 4,097-4,112 (0x1001 - 0x1010)
-                        sddat_o  <= { 3'h7, crc_out[0][crc_c - 1] } ;
+                        if ( bus_4bit ) begin
+                            sddat_o <= {
+                                crc_out[3][crc_c-1],
+                                crc_out[2][crc_c-1],
+                                crc_out[1][crc_c-1],
+                                crc_out[0][crc_c-1]
+                            };
+                        end else sddat_o <= { 3'h7, crc_out[0][crc_c-1] } ;
                     end
                 end
 
@@ -333,14 +366,14 @@ always @( posedge clk or negedge rst_n ) begin : ByteWriter
                 end
 
                 W_BUSY: begin
-                    crc_rst    <= 1'b0  ;
-                    crc_status <= 3'b0  ;
-                    sd_oe_en <= 1'b0 ; // set SD data to READ direction
+                    crc_rst    <= 1'b0 ;
+                    crc_status <= 3'b0 ;
+                    sd_oe_en   <= 1'b0 ; // set SD data to READ direction
                     if (crc_s[6:4] == 3'b010) crc_ok <= 1 ;
                     else                      crc_ok <= 0 ;
                     if ( sddat_i[0] ) begin // wait for DAT0 to go HIGH
-                        wstate      = WDONE ; // tell CMD_Controller that we're done here
-                        crc_c      <= 0     ;
+                        wstate = WDONE ; // tell CMD_Controller that we're done here
+                        crc_c <= 0     ;
                     end
                 end
 

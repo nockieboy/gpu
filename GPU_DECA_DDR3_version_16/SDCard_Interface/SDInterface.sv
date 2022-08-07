@@ -20,9 +20,6 @@ module SDInterface #(
     input  logic   [  1:0] MODE,           // 0 = INIT 1-bit mode, 1 = READ, 2 = WRITE, 3 = INIT 4-bit mode
     input  logic   [ 31:0] SECTOR,         // sector number to read/write
     output logic           WR_DONE,        // HIGH when write is complete
-    output logic           SD_BUSY,        // HIGH when interface is busy
-    output logic   [  3:0] SIDSTATE,       // current state machine value
-    output logic   [  1:0] CARDTYPE,       // SD card type
     output logic           BUSY,           // HIGH when SDInterface is busy
     output logic   [  7:0] SD_STATUS,      // aggregated SD RD status byte of above 4 outputs
     // SD phy connections
@@ -55,8 +52,8 @@ wire          cache_wren  ;
 wire    [7:0] wr_dat      ; // byte to send to SDWriter
 wire    [3:0] wr_ptr      ; // pointer to current byte in cache
 wire    [3:0] wr_sd_data  ;
-wire          wr_ena,     crcok,      timeout,     bus_4bit                      ;
-wire          rd_sd_clk,  rd_cmd_in,  rd_cmd_oe,   rd_cmd_out,  rd_req, rd_ready /* synthesis keep */;
+wire          wr_ena,     crcok,      timeout,     bus_4bit,    sd_busy          ;
+wire          rd_sd_clk,  rd_cmd_in,  rd_cmd_oe,   rd_cmd_out,  rd_req, rd_ready ;
 wire          wr_sd_clk,  wr_cmd_in,  wr_cmd_oe,   wr_cmd_out,  wr_req, byte_req ;
 wire          rd_cmd_dir, rd_d0_dir,  rd_d123_dir, rd_sel,      sdr_busy         ;
 wire          wr_cmd_dir, wr_dir,     wr_d123_dir, sdw_busy,    wr_sel           ;
@@ -78,11 +75,9 @@ logic [  8:0] buf_ptr    ; // 512-byte buffer address pointer
 logic [ 15:0] rca        ; // RCA for initialised card
 logic [127:0] data_cache ; // temporary 16-byte storage to be written to DDR3 or SD
 
-//     SD_STATUS bits       7         6-5         4        3       2       1       0
-assign SD_STATUS    = { rdrdy_flag, cardtype, sdw_busy, wr_done, crcok, timeout, SD_BUSY } ;
-assign CARDTYPE     = cardtype                   ;
-assign SIDSTATE     = sd_state                   ;
-assign SD_BUSY      = sdr_busy || sdw_busy       ;
+//     SD_STATUS bits      7         6-5         4        3       2       1       0
+assign SD_STATUS   = { rdrdy_flag, cardtype, sdw_busy, wr_done, crcok, timeout, sd_busy } ;
+assign sd_busy     = sdr_busy || sdw_busy        ;
 // operation request triggers
 //assign ini_req     = ( ENABLE && ( MODE == 0 || MODE == 3 ) ) ; // pulses HIGH when an INIT  request is made
 assign wr_ena      = ( MODE == OP_WRITE  )       ;
@@ -284,7 +279,7 @@ always @( posedge CLK ) begin
                 lbl <= 1'b0 ;
             end
         end
-        else if ( end_wr_op && !SD_BUSY ) begin // end of 512-byte write op
+        else if ( end_wr_op && !sd_busy ) begin // end of 512-byte write op
             BUSY       <= 1'b0   ;
             data_cache <= 128'b0 ;
             end_wr_op  <= 1'b0   ;

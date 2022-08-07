@@ -1,0 +1,131 @@
+m255
+K4
+z2
+!s11e MIXED_VERSIONS
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/FPGA/Projects/GPU/test/PSG
+vclock_strobe
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+!s110 1658836291
+!i10b 1
+!s100 nlKLT599[]>PQTk7mDohT0
+!s11b Dg1SIo80bB@j0V0VzS_@n1
+IQDDY_XI_HdgIngDbUA9KS1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1658670413
+8clock_strobe.sv
+Fclock_strobe.sv
+!i122 3
+L0 11 35
+Z3 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z4 !s108 1658836291.000000
+!s107 clock_strobe.sv|
+!s90 -reportprogress|300|-sv|-work|work|clock_strobe.sv|
+!i113 1
+Z5 o-sv -work work
+Z6 tCvgOpt 0
+vpsg_tb
+R1
+DXx4 work 14 psg_tb_sv_unit 0 22 Di2XL^2dNbLYRDGOne<Rj2
+Z7 !s110 1658836292
+R2
+r1
+!s85 0
+!i10b 1
+!s100 dR8f8;MhE828]HgIGIc2Q3
+IPn[>glC:m5QZF6aJJe7Hc1
+!s105 psg_tb_sv_unit
+S1
+R0
+Z8 w1658836205
+Z9 8psg_tb.sv
+Z10 Fpsg_tb.sv
+!i122 5
+L0 8 89
+R3
+31
+Z11 !s108 1658836292.000000
+!s107 psg_tb.sv|
+Z12 !s90 -reportprogress|300|-sv|-work|work|psg_tb.sv|
+!i113 1
+R5
+R6
+Xpsg_tb_sv_unit
+R1
+R7
+VDi2XL^2dNbLYRDGOne<Rj2
+r1
+!s85 0
+!i10b 1
+!s100 G=d:bXmzU:QMGoc_^eKOM0
+IDi2XL^2dNbLYRDGOne<Rj2
+!i103 1
+S1
+R0
+R8
+R9
+R10
+!i122 5
+L0 3 0
+R3
+31
+R11
+Z13 !s107 psg_tb.sv|
+R12
+!i113 1
+R5
+R6
+Eym2149_audio
+Z14 w1657039331
+Z15 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z16 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z17 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 4
+R0
+Z18 8ym2149_audio.vhd
+Z19 Fym2149_audio.vhd
+l0
+L154 1
+VH@KKbg:L8J]zN0e=b_o6B0
+!s100 <9]cRzT7B0f3G@I?jl1l33
+Z20 OV;C;2020.1;71
+31
+R7
+!i10b 1
+R4
+Z21 !s90 -reportprogress|300|-93|-work|work|ym2149_audio.vhd|
+Z22 !s107 ym2149_audio.vhd|
+!i113 1
+Z23 o-93 -work work
+Z24 tExplicit 1 CvgOpt 0
+Artl
+R15
+R16
+R17
+DEx4 work 12 ym2149_audio 0 22 H@KKbg:L8J]zN0e=b_o6B0
+!i122 4
+l376
+L175 1009
+VjLR46nSoeeI8aCiN8XUhj1
+!s100 ED1I4`b1<gLRHUzzz`<Df2
+R20
+31
+R7
+!i10b 1
+R4
+R21
+R22
+!i113 1
+R23
+R24

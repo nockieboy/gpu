@@ -534,57 +534,61 @@ logic [PORT_CACHE_BITS/8-1:0] TAP_WMASK    , rTAP_WMASK     = 0 ;
 // ***********************************************************************************************************************************************************
 // ***********************************************************************************************************************************************************
 // ***********************************************************************************************************************************************************
-BrianHG_DDR3_CONTROLLER_v16_top #(.FPGA_VENDOR         (FPGA_VENDOR       ),   .FPGA_FAMILY        (FPGA_FAMILY       ),   .INTERFACE_SPEED    (INTERFACE_SPEED ),
-                                  .BHG_OPTIMIZE_SPEED  (BHG_OPTIMIZE_SPEED),   .BHG_EXTRA_SPEED    (BHG_EXTRA_SPEED   ),
-                                  .CLK_KHZ_IN          (CLK_KHZ_IN        ),   .CLK_IN_MULT        (CLK_IN_MULT       ),   .CLK_IN_DIV         (CLK_IN_DIV      ),
+BrianHG_DDR3_CONTROLLER_v16_top #(
 
-                                  .DDR3_CK_MHZ         (DDR3_CK_MHZ       ),   .DDR3_SPEED_GRADE   (DDR3_SPEED_GRADE  ),   .DDR3_SIZE_GB       (DDR3_SIZE_GB    ),
-                                  .DDR3_WIDTH_DQ       (DDR3_WIDTH_DQ     ),   .DDR3_NUM_CHIPS     (DDR3_NUM_CHIPS    ),   .DDR3_NUM_CK        (DDR3_NUM_CK     ),
-                                  .DDR3_WIDTH_ADDR     (DDR3_WIDTH_ADDR   ),   .DDR3_WIDTH_BANK    (DDR3_WIDTH_BANK   ),   .DDR3_WIDTH_CAS     (DDR3_WIDTH_CAS  ),
-                                  .DDR3_WIDTH_DM       (DDR3_WIDTH_DM     ),   .DDR3_WIDTH_DQS     (DDR3_WIDTH_DQS    ),   .DDR3_ODT_RTT       (DDR3_ODT_RTT    ),
-                                  .DDR3_RZQ            (DDR3_RZQ          ),   .DDR3_TEMP          (DDR3_TEMP         ),   .DDR3_WDQ_PHASE     (DDR3_WDQ_PHASE  ), 
-                                  .DDR3_RDQ_PHASE      (DDR3_RDQ_PHASE    ),   .DDR3_MAX_REF_QUEUE (DDR3_MAX_REF_QUEUE),   .IDLE_TIME_uSx10    (IDLE_TIME_uSx10 ),
-                                  .SKIP_PUP_TIMER      (SKIP_PUP_TIMER    ),   .BANK_ROW_ORDER     (BANK_ROW_ORDER    ),   .DDR_TRICK_MTPS_CAP (DDR_TRICK_MTPS_CAP),
+   .FPGA_VENDOR         (FPGA_VENDOR       ),   .FPGA_FAMILY        (FPGA_FAMILY       ),   .INTERFACE_SPEED    (INTERFACE_SPEED ),
+   .BHG_OPTIMIZE_SPEED  (BHG_OPTIMIZE_SPEED),   .BHG_EXTRA_SPEED    (BHG_EXTRA_SPEED   ),
+   .CLK_KHZ_IN          (CLK_KHZ_IN        ),   .CLK_IN_MULT        (CLK_IN_MULT       ),   .CLK_IN_DIV         (CLK_IN_DIV      ),
 
-                                  .PORT_ADDR_SIZE      (PORT_ADDR_SIZE    ),
-                                  .PORT_MLAYER_WIDTH   (PORT_MLAYER_WIDTH ),
-                                  .PORT_TOTAL          (PORT_TOTAL        ),   .PORT_VECTOR_SIZE   (PORT_VECTOR_SIZE  ),   .PORT_TOGGLE_INPUT  (PORT_TOGGLE_INPUT),
-                                  .PORT_R_DATA_WIDTH   (PORT_R_DATA_WIDTH ),   .PORT_W_DATA_WIDTH  (PORT_W_DATA_WIDTH ),
-                                  .PORT_PRIORITY       (PORT_PRIORITY     ),   .PORT_READ_STACK    (PORT_READ_STACK   ),
-                                  .PORT_CACHE_SMART    (PORT_CACHE_SMART  ),   .PORT_W_CACHE_TOUT  (PORT_W_CACHE_TOUT ),
-                                  .PORT_R_CACHE_TOUT   (PORT_R_CACHE_TOUT ),   .PORT_R_WDT_ENA     (PORT_R_WDT_ENA    ),   .PORT_R_CACHE_TOUT_ENA (PORT_R_CACHE_TOUT_ENA),
-                                  .PORT_MAX_BURST      (PORT_MAX_BURST    ),   .PORT_DREG_READ     (PORT_DREG_READ    ),   .SMART_BANK         (SMART_BANK       )
+   .DDR3_CK_MHZ         (DDR3_CK_MHZ       ),   .DDR3_SPEED_GRADE   (DDR3_SPEED_GRADE  ),   .DDR3_SIZE_GB       (DDR3_SIZE_GB    ),
+   .DDR3_WIDTH_DQ       (DDR3_WIDTH_DQ     ),   .DDR3_NUM_CHIPS     (DDR3_NUM_CHIPS    ),   .DDR3_NUM_CK        (DDR3_NUM_CK     ),
+   .DDR3_WIDTH_ADDR     (DDR3_WIDTH_ADDR   ),   .DDR3_WIDTH_BANK    (DDR3_WIDTH_BANK   ),   .DDR3_WIDTH_CAS     (DDR3_WIDTH_CAS  ),
+   .DDR3_WIDTH_DM       (DDR3_WIDTH_DM     ),   .DDR3_WIDTH_DQS     (DDR3_WIDTH_DQS    ),   .DDR3_ODT_RTT       (DDR3_ODT_RTT    ),
+   .DDR3_RZQ            (DDR3_RZQ          ),   .DDR3_TEMP          (DDR3_TEMP         ),   .DDR3_WDQ_PHASE     (DDR3_WDQ_PHASE  ), 
+   .DDR3_RDQ_PHASE      (DDR3_RDQ_PHASE    ),   .DDR3_MAX_REF_QUEUE (DDR3_MAX_REF_QUEUE),   .IDLE_TIME_uSx10    (IDLE_TIME_uSx10 ),
+   .SKIP_PUP_TIMER      (SKIP_PUP_TIMER    ),   .BANK_ROW_ORDER     (BANK_ROW_ORDER    ),   .DDR_TRICK_MTPS_CAP (DDR_TRICK_MTPS_CAP),
+
+   .PORT_ADDR_SIZE      (PORT_ADDR_SIZE    ),
+   .PORT_MLAYER_WIDTH   (PORT_MLAYER_WIDTH ),
+   .PORT_TOTAL          (PORT_TOTAL        ),   .PORT_VECTOR_SIZE   (PORT_VECTOR_SIZE  ),   .PORT_TOGGLE_INPUT  (PORT_TOGGLE_INPUT),
+   .PORT_R_DATA_WIDTH   (PORT_R_DATA_WIDTH ),   .PORT_W_DATA_WIDTH  (PORT_W_DATA_WIDTH ),
+   .PORT_PRIORITY       (PORT_PRIORITY     ),   .PORT_READ_STACK    (PORT_READ_STACK   ),
+   .PORT_CACHE_SMART    (PORT_CACHE_SMART  ),   .PORT_W_CACHE_TOUT  (PORT_W_CACHE_TOUT ),
+   .PORT_R_CACHE_TOUT   (PORT_R_CACHE_TOUT ),   .PORT_R_WDT_ENA     (PORT_R_WDT_ENA    ),   .PORT_R_CACHE_TOUT_ENA (PORT_R_CACHE_TOUT_ENA),
+   .PORT_MAX_BURST      (PORT_MAX_BURST    ),   .PORT_DREG_READ     (PORT_DREG_READ    ),   .SMART_BANK         (SMART_BANK       )
 
 ) DDR3 (
 
-                                  // *** Interface Reset, Clocks & Status. ***
-                                  .RST_IN               (RST_IN               ),                   .RST_OUT              (RST_OUT              ),
-                                  .CLK_IN               (CLK_IN               ),                   .CMD_CLK              (CMD_CLK              ),
-                                  .DDR3_READY           (DDR3_READY           ),                   .SEQ_CAL_PASS         (SEQ_CAL_PASS         ),
-                                  .PLL_LOCKED           (PLL_LOCKED           ),                   .DDR3_CLK             (DDR3_CLK             ),
-                                  .DDR3_CLK_50          (DDR3_CLK_50          ),                   .DDR3_CLK_25          (DDR3_CLK_25          ),
+   // *** Interface Reset, Clocks & Status. ***
+   .RST_IN               (RST_IN              ), .RST_OUT              (RST_OUT             ),
+   .CLK_IN               (CLK_IN              ), .CMD_CLK              (CMD_CLK             ),
+   .DDR3_READY           (DDR3_READY          ), .SEQ_CAL_PASS         (SEQ_CAL_PASS        ),
+   .PLL_LOCKED           (PLL_LOCKED          ), .DDR3_CLK             (DDR3_CLK            ),
+   .DDR3_CLK_50          (DDR3_CLK_50         ), .DDR3_CLK_25          (DDR3_CLK_25         ),
 
-                                  // *** DDR3 Commander functions ***
-                                  .CMD_busy             (CMD_busy            ),                    .CMD_ena              (CMD_ena             ),
-                                  .CMD_write_ena        (CMD_write_ena       ),                    .CMD_addr             (CMD_addr            ),
-                                  .CMD_wdata            (CMD_wdata           ),                    .CMD_wmask            (CMD_wmask           ),
-                                  .CMD_read_vector_in   (CMD_read_vector_in  ),                    .CMD_priority_boost   (CMD_priority_boost  ),
+   // *** DDR3 Commander functions ***
+   .CMD_busy             (CMD_busy            ), .CMD_ena              (CMD_ena             ),
+   .CMD_write_ena        (CMD_write_ena       ), .CMD_addr             (CMD_addr            ),
+   .CMD_wdata            (CMD_wdata           ), .CMD_wmask            (CMD_wmask           ),
+   .CMD_read_vector_in   (CMD_read_vector_in  ), .CMD_priority_boost   (CMD_priority_boost  ),
 
-                                  .CMD_read_ready       (CMD_read_ready      ),                    .CMD_read_data        (CMD_read_data       ),
-                                  .CMD_read_vector_out  (CMD_read_vector_out ),
+   .CMD_read_ready       (CMD_read_ready      ), .CMD_read_data        (CMD_read_data       ),
+   .CMD_read_vector_out  (CMD_read_vector_out ),
 
-                                  // *** DDR3 Ram Chip IO Pins ***           
-                                  .DDR3_CK_p  (DDR3_CK_p  ),    .DDR3_CK_n  (DDR3_CK_n  ),     .DDR3_CKE     (DDR3_CKE     ),     .DDR3_CS_n (DDR3_CS_n ),
-                                  .DDR3_RAS_n (DDR3_RAS_n ),    .DDR3_CAS_n (DDR3_CAS_n ),     .DDR3_WE_n    (DDR3_WE_n    ),     .DDR3_ODT  (DDR3_ODT  ),
-                                  .DDR3_A     (DDR3_A     ),    .DDR3_BA    (DDR3_BA    ),     .DDR3_DM      (DDR3_DM      ),     .DDR3_DQ   (DDR3_DQ   ),
-                                  .DDR3_DQS_p (DDR3_DQS_p ),    .DDR3_DQS_n (DDR3_DQS_n ),     .DDR3_RESET_n (DDR3_RESET_n ),
+   // *** DDR3 Ram Chip IO Pins ***           
+   .DDR3_CK_p  (DDR3_CK_p  ),    .DDR3_CK_n  (DDR3_CK_n  ),     .DDR3_CKE     (DDR3_CKE     ),     .DDR3_CS_n (DDR3_CS_n ),
+   .DDR3_RAS_n (DDR3_RAS_n ),    .DDR3_CAS_n (DDR3_CAS_n ),     .DDR3_WE_n    (DDR3_WE_n    ),     .DDR3_ODT  (DDR3_ODT  ),
+   .DDR3_A     (DDR3_A     ),    .DDR3_BA    (DDR3_BA    ),     .DDR3_DM      (DDR3_DM      ),     .DDR3_DQ   (DDR3_DQ   ),
+   .DDR3_DQS_p (DDR3_DQS_p ),    .DDR3_DQS_n (DDR3_DQS_n ),     .DDR3_RESET_n (DDR3_RESET_n ),
 
-                                  // debug IO
-                                  .RDCAL_data (RDCAL_data ),    .reset_phy (DB232_rx3[7]),     .reset_cmd    (DB232_rx3[6]),
+   // debug IO
+   .RDCAL_data (RDCAL_data ),    .reset_phy (DB232_rx3[7]),     .reset_cmd    (DB232_rx3[6]),
 
-                                  // Write data TAP port.
-                                  .TAP_WRITE_ENA (TAP_WRITE_ENA ), .TAP_ADDR      (TAP_ADDR      ),
-                                  .TAP_WDATA     (TAP_WDATA     ), .TAP_WMASK     (TAP_WMASK     ) );
+   // Write data TAP port.
+   .TAP_WRITE_ENA (TAP_WRITE_ENA ), .TAP_ADDR      (TAP_ADDR      ),
+   .TAP_WDATA     (TAP_WDATA     ), .TAP_WMASK     (TAP_WMASK     )
+
+);
 
 // ***********************************************************************************************************************************************************
 // ***********************************************************************************************************************************************************
@@ -613,12 +617,16 @@ assign   GPIO0_D[12]      = 0 ; // BUS_REQ output
 assign   GPIO0_D[13]      = 0 ; // IO_REQ output
 
 // ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
 // *** RESET CIRCUIT *********************************************************************************************
 // ***************************************************************************************************************
-reg reset      ;
-reg DFF_inst8  ;
-reg DFF_inst26 ;
-reg DFF_inst41 ;
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+logic reset      ;
+logic DFF_inst8  ;
+logic DFF_inst26 ;
+logic DFF_inst41 ;
 
 wire geo_reset     ;
 wire reset_line    ;
@@ -626,17 +634,13 @@ wire RESET_Z80     ;
 wire INV_RESET_DFF ;
 
 exp   b2v_inst4(
-
    .in  ( DFF_inst8     ),
    .out ( INV_RESET_DFF )
-   
 );
 
 exp   b2v_inst23(
-
    .in  ( DFF_inst41 ),
    .out ( RESET_Z80  )
-   
 );
 
 assign geo_reset  = DFF_inst26 ;
@@ -655,6 +659,12 @@ end
 assign CMD_read_vector_in  [1] = 0 ;
 assign CMD_priority_boost  [1] = 0 ;
 
+// Wires from Z80 to PSG.
+wire        [  3:0] psg_addr   ;
+wire        [  7:0] psg_data_i ;
+wire        [  7:0] psg_data_o ;
+wire                psg_wr_en  ;
+
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -671,7 +681,7 @@ Z80_Bus_Interface #(
 
 // ************** Z80 bus timing settings. **************
    .READ_PORT_CLK_sPOS    ( 0       ), // Number of Z80_CLK cycles before the bus interface responds to a Read Port command.
-   .READ_PORT_CLK_aPOS    ( 2       ), // Number of Z80_CLK cycles before the bus interface responds to a Read Port command.
+   .READ_PORT_CLK_aPOS    ( 2       ), // Number of Z80_CLK cycles before the bus must have valid data in response to a Read Port command.
    .WRITE_PORT_CLK_POS    ( 2       ), // Number of Z80_CLK cycles before the bus interface samples the Write Port command's data.
 
 // 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read before asserting the WAIT during a Read Memory cycle.
@@ -697,19 +707,26 @@ Z80_Bus_Interface #(
    .INT_VEC               ( 48      ), // INTerrupt VECtor to be passed to host in event of an interrupt acknowledge.
 
 // ************** Read IO port addresses range. **************
+// READ_PORT_BEGIN is set so low to catch MMU IO calls (38h-3Ch)
    .READ_PORT_BEGIN       ( 56      ), // Sets the beginning port number which can be read.
    .READ_PORT_END         ( 251     ), // Sets the ending    port number which can be read.
 
 // ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
+   .PSG_LATCH             ( 238     ), // IO addr: PSG LATCH register R/W - write latches register, read returns data
+   .PSG_WRITE             ( 239     ), // IO addr: PSG WRITE port W-only - write data only
+   //
+   .SD_STATUS             ( 240     ), // IO address for SD interface's STATUS byte.
    .SD_SECTOR             ( 241     ), // IO address for SD interface's 32-bit Sector Address pipe.
    .SD_MODE               ( 242     ), // IO address to initiate SD RD/WR.
    .SD_ARG_PTR            ( 243     ), // IO address to set/read ARG_PTR value.
-   .IO_BLNK               ( 244     ), // IO address for BLANK signal to video DAC.
+   //
+   .VID_EN                ( 244     ), // IO address for BLANK signal to video DAC.
+   .GPU_RNG               ( 245     ), // IO address for random number generator.
    .GEO_LO                ( 246     ), // IO address for GEOFF LOW byte.
    .GEO_HI                ( 247     ), // IO address for GEOFF HIGH byte.
    .FIFO_STAT             ( 248     ), // IO address for GPU FIFO status on bit 0 - remaining bits free for other data.
-   .GPU_MMU_L             ( 250     ), // IO address for the GPU MMU's lower 8-bits of the upper 12-bits of the DDR3 address bus.
-   .GPU_MMU_H             ( 251     )  // IO address for the GPU MMU's upper 4-bits of the upper 12-bits of the DDR3 address bus.
+   .GPU_ML                ( 250     ), // IO address for the GPU MMU's lower 8-bits of the upper 12-bits of the DDR3 address bus.
+   .GPU_MH                ( 251     )  // IO address for the GPU MMU's upper 4-bits of the upper 12-bits of the DDR3 address bus.
 // ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
 
 ) BRIDGETTE (
@@ -797,13 +814,26 @@ Z80_Bus_Interface #(
    .m_wb_cyc_o       ( h_cyc_o    ), // WISHBONE cycle output
    .m_wb_stb_o       ( h_stb_o    ), // WISHBONE strobe output
    .m_wb_ack_i       ( h_ack_i    ), // WISHBONE acknowledge input
-/**/
+*/
+
+// ***************************************************************************************************
+// **** SD Card Interface ****************************************************************************
+// ***************************************************************************************************
    .SD_sector        ( sd_sector   ), // 32-bit sector address
    .SD_op_ena        ( sd_op_req   ), // SD transaction request signal
    .SD_wr_ena        ( sd_wr_ena   ), // read/write signal (LOW - read, HIGH - write)
    .SD_status        ( sd_RD_sta   ), // 8-bit SD interface status data
    .SD_busy          ( sdi_busy    ),
-/**/
+
+
+// ***************************************************************************************************
+// **** PSG Audio Interface **************************************************************************
+// ***************************************************************************************************
+   .psg_addr         ( psg_addr    ), // address of selected PSG register
+   .psg_data_o       ( psg_data_i  ), // data out TO PSG
+   .psg_wr_en        ( psg_wr_en   ), // write enable TO PSG
+   .psg_data_i       ( psg_data_o  ), // data in FROM PSG
+
 // ***************************************************************************************************
 // ***************************************************************************************************
 // ***************************************************************************************************
@@ -813,7 +843,7 @@ Z80_Bus_Interface #(
 // ***************************************************************************************************
 
    // *** Enable/Disable video output port.
-   .VIDEO_EN          (      ), // Active HIGH, enables video output.
+   .VIDEO_EN          (               ), // Active HIGH, enables video output.
 
    // 2D accelerated Geometry unit IO access.
    .GEO_STAT_RD       ( geo_stat_rd   ), // 8-bit data_mux_geo STATUS bus.  bit 0 = scfifo-almost-full flag, other bits free for other data.
@@ -850,9 +880,6 @@ wire  [7:0] sd_RD_sta   ; // SD status
 wire [31:0] sd_sector   ;
 wire        sdi_busy    ;
 
-//wire [3:0]  sd_data_in  ; // data FROM SD card
-//wire [3:0]  sd_data_out ; // data TO SD card
-
 // Set default signals for SD <-> DDR3 bus
 assign CMD_read_vector_in  [5] = 0 ;
 assign CMD_priority_boost  [5] = 0 ;
@@ -872,9 +899,6 @@ SDInterface #(
    .MODE         ( sd_wr_ena   ), // HIGH for write request
    .SECTOR       ( sd_sector ), // sector number to read/write
    //    output to Bridgette
-   .SD_BUSY      (             ),
-   .SIDSTATE     (             ),
-   .CARDTYPE     (             ),
    .BUSY         ( sdi_busy    ), // HIGH when interface is busy read/writing
    .SD_STATUS    ( sd_RD_sta   ), // aggregated SD status byte
    // SD phy connections
@@ -899,135 +923,56 @@ SDInterface #(
 
 );
 
-/*
-wire        sd_clk      ;
-wire        sd_dat_oe_o ;
-wire [3:0]  sd_data_in  ; // data FROM SD card
-wire [3:0]  sd_data_out ; // data TO SD card
-wire        sd_cmd_oe_o ;
-wire        sd_cmd_in   ; // command FROM SD card
-wire        sd_cmd_out  ; // command TO SD card
-wire        int_cmd     ;
-wire        int_data    ;
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// *** ARYA ******************************************************************************************************
+// *** YM2149 PSG Interface **************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+localparam DDR3_CLK_HZ = (CLK_KHZ_IN*CLK_IN_MULT/CLK_IN_DIV*1000); // Calculate the DDR3 hz speed.
+localparam CMD_CLK_HZ  = INTERFACE_SPEED[0]=="Q" ? DDR3_CLK_HZ/4 :
+                         INTERFACE_SPEED[0]=="q" ? DDR3_CLK_HZ/4 : DDR3_CLK_HZ/2 ; // Generate the correct CMD_CLK_HZ.
+//
+logic                i2s_data   ;
 
-// Host/SID WISHBONE interconnects
-wire [7:0]  h_wb_adr    ; // Wishbone addr interconnect - Bridgette TO Sid
-wire [31:0] h_wb_dat_o  ; // Wishbone data interconnect - Bridgette TO Sid
-wire [3:0]  h_sel_o     ; // Wishbone sel interconnect  - Bridgette TO Sid
-wire        h_we_o      ; // Wishbone wire interconnect - Bridgette TO Sid
-wire        h_cyc_o     ; // Wishbone wire interconnect - Bridgette TO Sid
-wire        h_stb_o     ; // Wishbone wire interconnect - Bridgette TO Sid
-wire [31:0] h_wb_dat_i  ; // Wishbone data interconnect - Sid TO Bridgette
-wire        h_ack_i     ; // Wishbone wire interconnect - Sid TO Bridgette
+YM2149_PSG_system #(
 
-// SID/DDR3 WISHBONE interconnects
-wire [31:0] d_wb_adr    ; // Wishbone addr interconnect - Sid TO DDR3
-wire [31:0] d_wb_dat_o  ; // Wishbone data interconnect - Sid TO DDR3
-wire [3:0]  d_sel_o     ; // Wishbone sel interconnect  - Sid TO DDR3
-wire [2:0]  d_cti_o     ; // Wishbone sel interconnect  - Sid TO DDR3
-wire [1:0]  d_bte_o     ; // Wishbone sel interconnect  - Sid TO DDR3
-wire        d_we_o      ; // Wishbone wire interconnect - Sid TO DDR3
-wire        d_cyc_o     ; // Wishbone wire interconnect - Sid TO DDR3
-wire        d_stb_o     ; // Wishbone wire interconnect - Sid TO DDR3
-wire [31:0] d_wb_dat_i  ; // Wishbone data interconnect - DDR3 TO Sid
-wire        d_ack_i     ; // Wishbone wire interconnect - DDR3 TO Sid
+   .CLK_IN_HZ      ( CMD_CLK_HZ ), // Calculated input clock frequency
+   .CLK_PSG_HZ     (    1789000 ), // Desired PSG clock frequency (Hz)
+   .I2S_DAC_HZ     (      48000 ), // Desired I2S clock frequency (Hz)
+   .DAC_BITS       (          8 ), // PSG DAC bit precision, 8 through 14 bits, the higher the bits, the higher the dynamic range.
+   .LPFILTER_DEPTH (          4 )  // 2=flat to 10khz, 4=flat to 5khz, 6=getting muffled, 8=no treble.
 
+) ARYA (
 
-// Clock signal to SD card
-assign SD_CLK      = sd_clk ;
+   .clk            (    CMD_CLK ),
+   .reset          (     ~reset ),
+   .addr           (   psg_addr ), // register address
+   .data           ( psg_data_i ), // data IN to PSG
+   .wr_n           ( !psg_wr_en ), // data/addr valid
 
-// Infer tri-states for SD_DAT & SD_CMD
-assign SD_DAT      = sd_dat_oe_o ? sd_data_out : 4'bZZZZ ; // Bidir IO bus for SD data
-assign SD_CMD      = sd_cmd_oe_o ? sd_cmd_out  : 1'bZ    ; // Bidir IO bus for SD data
-assign sd_data_in  = SD_DAT ;
-assign sd_cmd_in   = SD_CMD ;
-
-// DECA SD direction controls - HIGH for writes to SD card, LOW for reads from SD card
-assign SD_D0_DIR   = sd_dat_oe_o ; 
-assign SD_D123_DIR = sd_dat_oe_o ; 
-assign SD_CMD_DIR  = sd_cmd_oe_o ;
-
-// SD interface voltage - DECA-specific ******* THIS CAN BE MODIFIED SO 1.8V CARDS ARE SUPPORTED ********
-assign SD_SEL      = 1'b0 ; // LOW = 3.3V, HIGH = 1.8V
-
-sdc_controller SID (
-
-   // WISHBONE common
-   .wb_clk_i     ( CMD_CLK    ), // WISHBONE clock input
-   .wb_rst_i     ( reset      ), // WISHBONE reset input
-    // WISHBONE slave <- FROM BRIDGETTE
-   .wb_dat_i     ( h_wb_dat_o ), // WISHBONE data input [31:0]
-   .wb_dat_o     ( h_wb_dat_i ), // WISHBONE data output [31:0]
-   .wb_adr_i     ( h_wb_adr   ), // WISHBONE address input [7:0] (only r/w registers, so only 8 bits needed)
-   .wb_sel_i     ( h_sel_o    ), // WISHBONE byte select input [3:0] (indicates where valid data is expected on the dat_i or dat_o bus)
-   .wb_we_i      ( h_we_o     ), // WISHBONE write enable input
-   .wb_cyc_i     ( h_cyc_o    ), // WISHBONE cycle input
-   .wb_stb_i     ( h_stb_o    ), // WISHBONE strobe input
-   .wb_ack_o     ( h_ack_i    ), // WISHBONE acknowledge output
-   // WISHBONE master -> TO DDR3_wb_interface
-   .m_wb_adr_o   ( d_wb_adr   ), // Address output [31:0]
-   .m_wb_sel_o   ( d_sel_o    ), // Select output [3:0] (indicates where valid data is on the dat_i or dat_o bus)
-   .m_wb_we_o    ( d_we_o     ), // Write enable output - asserted if current local bus cycle is a WRITE
-   .m_wb_dat_i   ( d_wb_dat_i ), // Data input [31:0] from DDR3_wb_interface
-   .m_wb_dat_o   ( d_wb_dat_o ), // Data output [31:0] to DDR3_wb_interface
-   .m_wb_cyc_o   ( d_cyc_o    ), // Cycle output - asserted when valid bus cycle is in progress
-   .m_wb_stb_o   ( d_stb_o    ), // Strobe output - indicates valid data transfer cycle
-   .m_wb_ack_i   ( d_ack_i    ), // Acknowledge input - indicates normal termination of a bus cycle
-   .m_wb_cti_o   ( d_cti_o    ), // Cycle Type Identifier. Always 3'b000
-   .m_wb_bte_o   ( d_bte_o    ), // Burst Type Extension. Always 2'b00.
-    //SD BUS
-   .sd_cmd_dat_i ( sd_cmd_in   ), // Command in from SDcard 
-   .sd_cmd_out_o ( sd_cmd_out  ), // Command out to SDcard
-   .sd_cmd_oe_o  ( sd_cmd_oe_o ), // SD Card tristate CMD Output enable (Connects on the SoC TopLevel)
-    //card_detect,
-   .sd_dat_dat_i ( sd_data_in  ), // Data in from SDcard [3:0]
-   .sd_dat_out_o ( sd_data_out ), // Data out to SDcard [3:0]
-   .sd_dat_oe_o  ( sd_dat_oe_o ), // SD Card tristate Data Output enable (Connects on the SoC TopLevel)
-   .sd_clk_o_pad ( sd_clk      ), // Divided CLK output from SD interface to SD card
-   .sd_clk_i_pad ( CMD_CLK     ), // 125 MHz clock signal from FPGA (requires a /5 clock divider setting)
-   .int_cmd      ( int_cmd     ), // Interrupt - CMD transaction finished
-   .int_data     ( int_data    )  // Interrupt - DATA transaction finished
+   .dout           ( psg_data_o ), // PSG data output
+   .i2s_sclk       (  HDMI_SCLK ), // I2S serial bit clock output
+   .i2s_lrclk      ( HDMI_LRCLK ), // I2S L/R output
+   .i2s_data       (   i2s_data ), // I2S serial audio out
+   .sound          (            )  // parallel   audio out
 
 );
 
-// Set default DDR3 bus signals for DDR3_WB_Interface
-assign CMD_read_vector_in  [5] = 0 ;
-assign CMD_priority_boost  [5] = 0 ;
-
-// ***************************************************************************************************************
-// ***************************************************************************************************************
-// ***** SID Wishbone <-> DDR3 interface *************************************************************************
-// ***************************************************************************************************************
-// ***************************************************************************************************************
-DDR3_wb_interface DDR3_WB_Interface (
-
-    .CLK             ( CMD_CLK    ), // System clock - shared between WB and DDR3, so no clock-domain X-ing.
-    .RST             ( reset      ), // Global reset signal
-    // Wishbone ports to/from SID
-    .adr_i           ( d_wb_adr   ), // Address input [31:0]
-    .sel_i           ( d_sel_o    ), // Select input [3:0] (indicates where valid data is on the dat_i or dat_o bus)
-    .we_i            ( d_we_o     ), // Write enable input - asserted if current local bus cycle is a WRITE
-    .dat_i           ( d_wb_dat_o ), // Data input [31:0]
-    .cyc_i           ( d_cyc_o    ), // Cycle input - asserted when valid bus cycle is in progress
-    .stb_i           ( d_stb_o    ), // Strobe input - indicates valid data transfer cycle
-    .cti_i           ( d_cti_o    ), // Cycle Type Identifier. Always 3'b000
-    .bte_i           ( d_bte_o    ), // Burst Type Extension. Always 2'b00.
-    .dat_o           ( d_wb_dat_i ), // Data output [31:0]
-    .ack_o           ( d_ack_i    ), // Acknowledge output - indicates normal termination of a bus cycle
-    // Connections to DDR3
-    .CMD_busy        ( CMD_busy       [5] ), // High when DDR3 RD/WR req is not allowed to take place.
-    .CMD_ena         ( CMD_ena        [5] ), // Flag HIGH for at least 1 clock when reading/writing to DDR3 RAM.
-    .CMD_addr        ( CMD_addr       [5] ), // WB requested address.
-    .CMD_write_ena   ( CMD_write_ena  [5] ), // Flag HIGH for 1 CMD_CLK when writing to RAM.
-    .CMD_write_data  ( CMD_wdata      [5] ), // Data from WB to be written into RAM.
-    .CMD_write_mask  ( CMD_wmask      [5] ), // Write data enable mask to RAM.
-    .CMD_read_ready  ( CMD_read_ready [5] ), // One-shot signal from mux or DDR3_Controller that data is ready.
-    .CMD_read_data   ( CMD_read_data  [5] )  // Read Data from RAM to be sent to WB.
-
-);
-*/
-
-wire CMD_VID_hena,CMD_VID_vena;
+// Wire all 4 stereo channels together.
+// We must BLAST that incredible YM2149 sound on every speaker possible so that we are bathed in its infinite beauty!
+assign HDMI_I2S[0] = i2s_data ; // (front left and right)
+assign HDMI_I2S[1] = i2s_data ; // (rear left and right)
+assign HDMI_I2S[2] = i2s_data ; // (Front Center and Sub-woofer)
+assign HDMI_I2S[3] = i2s_data ; // (side left and right)
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -1045,6 +990,7 @@ wire CMD_VID_hena,CMD_VID_vena;
 // ***************************************************************************************************************
 assign geo_stat_rd[7:1] = 7'b0000000 ;
 wire   CMD_read_ena2 ;
+wire   CMD_VID_hena, CMD_VID_vena    ;
 
 geometry_processor   GEOFF(
 
@@ -1105,8 +1051,7 @@ assign CMD_priority_boost  [3] = 0;
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // *** BrianHG_GFX_VGA_Window_System_DDR3_REGS *******************************************************************
-// *** Multi-window BrianHG_DDR3 Video Graphics Adapter. *********************************************************
-// *** BEGIN...  *************************************************************************************************
+// *** Multi-window BrianHG_DDR3 Video Graphics Adapter **********************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -1116,16 +1061,18 @@ assign CMD_priority_boost  [3] = 0;
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 
-wire VID_CLK,VID_CLK_2x ;
+wire AUD_CLK54, VID_CLK, VID_CLK_2x ;
 
 BrianHG_GFX_PLL_i50_o297  VGA_PLL (
-.CLK_IN_50      ( CLK_IN        ),
-.RESET          ( RST_IN        ),
-.CLK_SWITCH     ( VID_CLK_2x    ),         // 216.0/297.0 MHz out.
-.CLK_SWITCH_50  ( VID_CLK       ),         // 108.0/148.5 MHz out.
-.CLK_54         (               ),         // 54 MHz out. - Used to generate an exact 48KHz I2S audio as it can divide evenly into that frequency.
-.CLK_7425       (               ),         // 74.25 MHz out.
-.LOCKED         (               )
+
+   .CLK_IN_50      ( CLK_IN     ),
+   .RESET          ( RST_IN     ),
+   .CLK_SWITCH     ( VID_CLK_2x ), // 216.0/297.0 MHz out.
+   .CLK_SWITCH_50  ( VID_CLK    ), // 108.0/148.5 MHz out.
+   .CLK_54         ( AUD_CLK54  ), // 54 MHz out. - Used to generate an exact 48KHz I2S audio as it can divide evenly into that frequency.
+   .CLK_7425       (            ), // 74.25 MHz out.
+   .LOCKED         (            )
+
 );
 
 wire [31:0] VOUT_RGBA  ;
@@ -1135,79 +1082,82 @@ wire        VOUT_HS    ;
 wire        VOUT_VS    ;
 
 // **** Add a register delay for the 'TAP' controls to aid in achieving FMAX.
-always_ff @(posedge CMD_CLK) begin 
-rTAP_WRITE_ENA <= TAP_WRITE_ENA ;
-rTAP_ADDR      <= TAP_ADDR      ;
-rTAP_WDATA     <= TAP_WDATA     ;
-rTAP_WMASK     <= TAP_WMASK     ;
+always_ff @(posedge CMD_CLK) begin
+
+   rTAP_WRITE_ENA <= TAP_WRITE_ENA ;
+   rTAP_ADDR      <= TAP_ADDR      ;
+   rTAP_WDATA     <= TAP_WDATA     ;
+   rTAP_WMASK     <= TAP_WMASK     ;
+
 end
 
 BrianHG_GFX_VGA_Window_System_DDR3_REGS #(
 
-.HWREG_BASE_ADDRESS     ( HWREG_BASE_ADDRESS          ), // The first address where the HW REG controls are located for window layer 0
-.HWREG_BASE_ADDR_LSWAP  ( HWREG_BASE_ADDR_LSWAP       ),
-.ENDIAN                 ( ENDIAN                      ), // **** Read source code for parameter definitions.
-.PORT_ADDR_SIZE         ( PORT_ADDR_SIZE              ),
-.PORT_VECTOR_SIZE       ( PORT_VECTOR_SIZE            ),
-.PORT_CACHE_BITS        ( PORT_CACHE_BITS             ),
-.PDI_LAYERS             ( PDI_LAYERS                  ),
-.SDI_LAYERS             ( SDI_LAYERS                  ),
-.LBUF_WORDS             ( LINE_BUFFER_WORDS           ),
-.ENABLE_TILE_MODE       ( ENABLE_TILE_MODE            ),
-.SKIP_TILE_DELAY        ( SKIP_TILE_DELAY             ),   // Skip horizontal compensation delay due to disabled tile mode features.  Only necessary for multiple PDI_LAYERS with mixed tile enable options.
-.TILE_BASE_ADDR         ( TILE_BASE_ADDR              ),
-.TILE_WORDS             ( TILE_BYTES/PORT_CACHE_BITS*8),
-//.TILE_MIF_FILE          ( TILE_MIF_FILE               ),  = "VGA_FONT_8x16_mono32.mif", //*******DAMN ALTERA STRING BUG!!!! 
-.ENABLE_PALETTE         ( ENABLE_PALETTE              ),
-.SKIP_PALETTE_DELAY     ( SKIP_PALETTE_DELAY          ),   // Skip horizontal compensation delay due to disabled palette.  Only necessary for multiple PDI_LAYERS with mixed palette enable options.
-.PAL_BASE_ADDR          ( PAL_BASE_ADDR               ),
-.PAL_ADR_SHIFT          ( 0                           ),
-//.PAL_MIF_FILE           ( PAL_MIF_FILE                ),   = "VGA_PALETTE_RGBA32.mif", //*******DAMN ALTERA STRING BUG!!!!
-.OPTIMIZE_TW_FMAX       ( BHG_EXTRA_SPEED             ),
-.OPTIMIZE_PW_FMAX       ( BHG_EXTRA_SPEED             )
+   .HWREG_BASE_ADDRESS     ( HWREG_BASE_ADDRESS          ), // The first address where the HW REG controls are located for window layer 0
+   .HWREG_BASE_ADDR_LSWAP  ( HWREG_BASE_ADDR_LSWAP       ),
+   .ENDIAN                 ( ENDIAN                      ), // **** Read source code for parameter definitions.
+   .PORT_ADDR_SIZE         ( PORT_ADDR_SIZE              ),
+   .PORT_VECTOR_SIZE       ( PORT_VECTOR_SIZE            ),
+   .PORT_CACHE_BITS        ( PORT_CACHE_BITS             ),
+   .PDI_LAYERS             ( PDI_LAYERS                  ),
+   .SDI_LAYERS             ( SDI_LAYERS                  ),
+   .LBUF_WORDS             ( LINE_BUFFER_WORDS           ),
+   .ENABLE_TILE_MODE       ( ENABLE_TILE_MODE            ),
+   .SKIP_TILE_DELAY        ( SKIP_TILE_DELAY             ),   // Skip horizontal compensation delay due to disabled tile mode features.  Only necessary for multiple PDI_LAYERS with mixed tile enable options.
+   .TILE_BASE_ADDR         ( TILE_BASE_ADDR              ),
+   .TILE_WORDS             ( TILE_BYTES/PORT_CACHE_BITS*8),
+   //.TILE_MIF_FILE          ( TILE_MIF_FILE               ),  = "VGA_FONT_8x16_mono32.mif", //*******DAMN ALTERA STRING BUG!!!! 
+   .ENABLE_PALETTE         ( ENABLE_PALETTE              ),
+   .SKIP_PALETTE_DELAY     ( SKIP_PALETTE_DELAY          ),   // Skip horizontal compensation delay due to disabled palette.  Only necessary for multiple PDI_LAYERS with mixed palette enable options.
+   .PAL_BASE_ADDR          ( PAL_BASE_ADDR               ),
+   .PAL_ADR_SHIFT          ( 0                           ),
+   //.PAL_MIF_FILE           ( PAL_MIF_FILE                ),   = "VGA_PALETTE_RGBA32.mif", //*******DAMN ALTERA STRING BUG!!!!
+   .OPTIMIZE_TW_FMAX       ( BHG_EXTRA_SPEED             ),
+   .OPTIMIZE_PW_FMAX       ( BHG_EXTRA_SPEED             )
 
 ) BHG_VGASYS_HWREGS (
 
-.CMD_RST                ( RST_OUT                 ), // CMD section reset.
-.CMD_CLK                ( CMD_CLK                 ), // System CMD RAM clock.
-.CMD_DDR3_ready         ( DDR3_READY              ), // Enables display and DDR3 reading of data.
+   .CMD_RST                ( RST_OUT                 ), // CMD section reset.
+   .CMD_CLK                ( CMD_CLK                 ), // System CMD RAM clock.
+   .CMD_DDR3_ready         ( DDR3_READY              ), // Enables display and DDR3 reading of data.
 
-.CMD_busy               ( CMD_busy            [4] ), // Only send out commands when DDR3 is not busy.
-.CMD_ena                ( CMD_ena             [4] ), // Transmit a DDR3 command.
-.CMD_write_ena          ( CMD_write_ena       [4] ), // Send a write data command. *** Not in use.
-.CMD_wdata              ( CMD_wdata           [4] ), // Write data.                *** Not in use.
-.CMD_wmask              ( CMD_wmask           [4] ), // Write mask.                *** Not in use.
-.CMD_addr               ( CMD_addr            [4] ), // DDR3 memory address in byte form.
-.CMD_read_vector_tx     ( CMD_read_vector_in  [4] ), // Contains the destination line buffer address.  ***_tx to avoid confusion, IE: Send this port to the DDR3's read vector input.
-.CMD_priority_boost     ( CMD_priority_boost  [4] ), // Boost the read command above everything else including DDR3 refresh. *** Not in use.
-.CMD_read_ready         ( CMD_read_ready      [4] ),
-.CMD_rdata              ( CMD_read_data       [4] ), 
-.CMD_read_vector_rx     ( CMD_read_vector_out [4] ), // Contains the destination line buffer address.  ***_rx to avoid confusion, IE: the DDR3's read vector results drives this port.
-.TAP_wena               ( rTAP_WRITE_ENA          ),
-.TAP_waddr              ( rTAP_ADDR               ),
-.TAP_wdata              ( rTAP_WDATA              ),
-.TAP_wmask              ( rTAP_WMASK              ),
+   .CMD_busy               ( CMD_busy            [4] ), // Only send out commands when DDR3 is not busy.
+   .CMD_ena                ( CMD_ena             [4] ), // Transmit a DDR3 command.
+   .CMD_write_ena          ( CMD_write_ena       [4] ), // Send a write data command. *** Not in use.
+   .CMD_wdata              ( CMD_wdata           [4] ), // Write data.                *** Not in use.
+   .CMD_wmask              ( CMD_wmask           [4] ), // Write mask.                *** Not in use.
+   .CMD_addr               ( CMD_addr            [4] ), // DDR3 memory address in byte form.
+   .CMD_read_vector_tx     ( CMD_read_vector_in  [4] ), // Contains the destination line buffer address.  ***_tx to avoid confusion, IE: Send this port to the DDR3's read vector input.
+   .CMD_priority_boost     ( CMD_priority_boost  [4] ), // Boost the read command above everything else including DDR3 refresh. *** Not in use.
+   .CMD_read_ready         ( CMD_read_ready      [4] ),
+   .CMD_rdata              ( CMD_read_data       [4] ), 
+   .CMD_read_vector_rx     ( CMD_read_vector_out [4] ), // Contains the destination line buffer address.  ***_rx to avoid confusion, IE: the DDR3's read vector results drives this port.
+   .TAP_wena               ( rTAP_WRITE_ENA          ),
+   .TAP_waddr              ( rTAP_ADDR               ),
+   .TAP_wdata              ( rTAP_WDATA              ),
+   .TAP_wmask              ( rTAP_WMASK              ),
 
-.CMD_VID_hena           ( CMD_VID_hena            ), // Horizontal Video Enable in the CMD_CLK domain.
-.CMD_VID_vena           ( CMD_VID_vena            ), // Vertical   Video Enable in the CMD_CLK domain.
+   .CMD_VID_hena           ( CMD_VID_hena            ), // Horizontal Video Enable in the CMD_CLK domain.
+   .CMD_VID_vena           ( CMD_VID_vena            ), // Vertical   Video Enable in the CMD_CLK domain.
 
-.VID_RST                ( RST_IN                  ), // Video output pixel clock's reset.
-.VID_CLK                ( VID_CLK                 ), // Reference PLL clock.
-.VID_CLK_2x             ( VID_CLK_2x              ), // Reference PLL clock.
-.PIXEL_CLK              ( VOUT_CLK                ), // Pixel output clock.
-.RGBA                   ( VOUT_RGBA               ), // 32 bit Video picture data output: Reg, Green, Blue, Alpha-Blend
-.VENA_out               ( VOUT_DE                 ), // High during active video.
-.HS_out                 ( VOUT_HS                 ), // Horizontal sync output.
-.VS_out                 ( VOUT_VS                 )  // Vertical sync output.
+   .VID_RST                ( RST_IN                  ), // Video output pixel clock's reset.
+   .VID_CLK                ( VID_CLK                 ), // Reference PLL clock.
+   .VID_CLK_2x             ( VID_CLK_2x              ), // Reference PLL clock.
+   .PIXEL_CLK              ( VOUT_CLK                ), // Pixel output clock.
+   .RGBA                   ( VOUT_RGBA               ), // 32 bit Video picture data output: Reg, Green, Blue, Alpha-Blend
+   .VENA_out               ( VOUT_DE                 ), // High during active video.
+   .HS_out                 ( VOUT_HS                 ), // Horizontal sync output.
+   .VS_out                 ( VOUT_VS                 )  // Vertical sync output.
+
 );
 
 assign HDMI_TX_CLK      = VOUT_CLK;
 assign HDMI_TX_DE       = VOUT_DE ;
 assign HDMI_TX_HS       = VOUT_HS ;
 assign HDMI_TX_VS       = VOUT_VS ;
-assign HDMI_TX_D[23:16] = VOUT_RGBA[31:24]  ;// DB232_rx0[0] ? VOUT_RGBA[31:24] : VOUT_RGBA[23:16] ;
-assign HDMI_TX_D[15:8]  = VOUT_RGBA[23:16]  ;// DB232_rx0[0] ? VOUT_RGBA[23:16] : VOUT_RGBA[15:8] ;
-assign HDMI_TX_D[7:0]   = VOUT_RGBA[15:8]   ;// DB232_rx0[0] ? VOUT_RGBA[15:8]  : VOUT_RGBA[7:0]  ;
+assign HDMI_TX_D[23:16] = VOUT_RGBA[31:24]  ; // DB232_rx0[0] ? VOUT_RGBA[31:24] : VOUT_RGBA[23:16] ;
+assign HDMI_TX_D[15:8]  = VOUT_RGBA[23:16]  ; // DB232_rx0[0] ? VOUT_RGBA[23:16] : VOUT_RGBA[15:8] ;
+assign HDMI_TX_D[7:0]   = VOUT_RGBA[15:8]   ; // DB232_rx0[0] ? VOUT_RGBA[15:8]  : VOUT_RGBA[7:0]  ;
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -1217,9 +1167,7 @@ assign HDMI_TX_D[7:0]   = VOUT_RGBA[15:8]   ;// DB232_rx0[0] ? VOUT_RGBA[15:8]  
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
-// *** BrianHG_GFX_VGA_Window_System_DDR3_REGS *******************************************************************
-// *** Multi-window BrianHG_DDR3 Video Graphics Adapter. *********************************************************
-// *** END...  ***************************************************************************************************
+// *** HDMI Config & Interface ***********************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -1228,37 +1176,24 @@ assign HDMI_TX_D[7:0]   = VOUT_RGBA[15:8]   ;// DB232_rx0[0] ? VOUT_RGBA[15:8]  
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
-
-// HDMI I2C configuration.
+// HDMI I2C configuration
 logic RST_IN_c50 = 0 ;
-always @(posedge CLK_IN) RST_IN_c50 <= RST_IN;
 
-I2C_HDMI_Config u_I2C_HDMI_Config (
+always @(posedge CLK_IN) RST_IN_c50 <= RST_IN ;
 
-   .iCLK(CLK_IN),
-   .iRST_N(!RST_IN_c50),
-   .I2C_SCLK(HDMI_I2C_SCL),
-   .I2C_SDAT(HDMI_I2C_SDA),
-   .HDMI_TX_INT(HDMI_TX_INT)
+I2C_HDMI_Config #(
+
+   .IMODE         ( 16'haf16     )  // 16'haf14 = DVI / 16'haf16 = HDMI
+
+) u_I2C_HDMI_Config (
+
+   .iCLK          ( CLK_IN       ),
+   .iRST_N        ( !RST_IN_c50  ),
+   .I2C_SCLK      ( HDMI_I2C_SCL ),
+   .I2C_SDAT      ( HDMI_I2C_SDA ),
+   .HDMI_TX_INT   ( HDMI_TX_INT  )
    
 );
-
-/*
-// Audio PLL clock generator.
-sys_pll u_sys_pll (
-   .inclk0(CLK_IN),
-   .areset(RST_IN),
-   .c0(pll_1536k) );
-
-// HDMI Audio test tone generator.
-AUDIO_IF u_AVG(
-   .clk(pll_1536k),
-   .reset_n(!RST_IN),
-   .sclk(HDMI_SCLK),
-   .lrclk(HDMI_LRCLK),
-   .i2s(HDMI_I2S) );
-*/
-
 
 // ********************************************************************************************
 // ********************************************************************************************
@@ -1293,10 +1228,10 @@ logic [7:0]                    DB232_rx3      ;
 // ******************************************************************************************************
 rs232_debugger #(
 
-   .CLK_IN_HZ(CLK_KHZ_IN*CLK_IN_MULT/CLK_IN_DIV*250),
-   .BAUD_RATE(921600),
-   .ADDR_SIZE(RS232_MEM_ADR_SIZE),
-   .READ_REQ_1CLK(0)
+   .CLK_IN_HZ     ( CLK_KHZ_IN*CLK_IN_MULT/CLK_IN_DIV*250 ),
+   .BAUD_RATE     ( 921600                                ),
+   .ADDR_SIZE     ( RS232_MEM_ADR_SIZE                    ),
+   .READ_REQ_1CLK ( 0                                     )
    
 ) rs232_debug (
 
@@ -1432,6 +1367,5 @@ assign TEMP_SC          = 0 ;
 assign USB_CS           = 0 ;
 assign USB_RESET_n      = 0 ;
 assign USB_STP          = 0 ;
-
 
 endmodule
