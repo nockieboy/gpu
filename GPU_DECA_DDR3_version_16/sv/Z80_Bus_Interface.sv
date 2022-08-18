@@ -183,7 +183,8 @@ module Z80_Bus_Interface #(
 );
 
 // until the legacy ports are removed, this needs to be a wire outside the IO ports.
-logic    [7:0] READ_PORT_DATA    [0:255] ; // The array [port_number] will be sent to the Z80 during a port read so long as the read port
+// Inactive read ports should default to 0xFF return value.
+logic    [7:0] READ_PORT_DATA [0:255] = '{ default: 8'hFF } ; // The array [port_number] will be sent to the Z80 during a port read so long as the read port
 
 // *******************************************************************************************************
 // ********************** Settings and IO ports for features *********************************************

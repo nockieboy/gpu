@@ -312,19 +312,29 @@ parameter bit        SMART_BANK         = 0     // 1=ON, 0=OFF, With SMART_BANK 
     inout                           CAP_SENSE_I2C_SCL,
     inout                           CAP_SENSE_I2C_SDA,
 
-    //////////// Audio //////////
-    inout                           AUDIO_BCLK,
-    output                          AUDIO_DIN_MFP1,
-    input                           AUDIO_DOUT_MFP2,
-    inout                           AUDIO_GPIO_MFP5,
-    output                          AUDIO_MCLK,
-    input                           AUDIO_MISO_MFP4,
-    inout                           AUDIO_RESET_n,
-    output                          AUDIO_SCL_SS_n,
-    output                          AUDIO_SCLK_MFP3,
-    inout                           AUDIO_SDA_MOSI,
-    output                          AUDIO_SPI_SELECT,
-    inout                           AUDIO_WCLK,
+	//////////// Audio //////////
+                                                  // VCC_AUD_IO -> 6  IOVDD -> 1.5v
+                                                  // VCC_AUD    -> 26 LDOIN -> 3.3v
+                                                  //               29 DVDD  -> Internal LDO + decoupling caps.
+                                                  //               24 AVDD  -> Internal LDO + decoupling caps.
+                                                  //
+                                                  //  LOL   pin 22 and LOR   pin 23 drive the line out jack.
+                                                  //  IN2_L pin 15 and IN2_R pin 16 drive the line in jack.
+                                                  //
+	output		          		AUDIO_MCLK,       //   *** 1 MCLK
+	output		          		AUDIO_BCLK,       //   *** 2 BCLK
+	output		          		AUDIO_WCLK,       //   *** 3 WCLK
+	output		          		AUDIO_DIN_MFP1,   //   *** 4 DIN /MFP1
+	input 		          		AUDIO_DOUT_MFP2,  //   *** 5 DOUT/MFP2
+	output		          		AUDIO_SCLK_MFP3,  //   *** 8 SCLK/MFP3
+
+	inout   	          		AUDIO_SCL_SS_n,   //   *** 9  SCL/SS_n   2k-pullup
+	inout   	          		AUDIO_SDA_MOSI,   //   *** 10 SDA/MOSI   2k-pullup
+
+	input 		          		AUDIO_MISO_MFP4,  //   *** 11 MISO/MFP4
+	output		          		AUDIO_SPI_SELECT, //   *** 12 SPI_SELECT    -> make low for I2C.
+	output 		          		AUDIO_RESET_n,    //   *** 31 RESET_n
+	inout 		          		AUDIO_GPIO_MFP5,  //   *** 32 GPIO_MFP5
 
     //////////// Flash //////////
     inout              [3:0]        FLASH_DATA,
@@ -941,7 +951,7 @@ localparam DDR3_CLK_HZ = (CLK_KHZ_IN*CLK_IN_MULT/CLK_IN_DIV*1000); // Calculate 
 localparam CMD_CLK_HZ  = INTERFACE_SPEED[0]=="Q" ? DDR3_CLK_HZ/4 :
                          INTERFACE_SPEED[0]=="q" ? DDR3_CLK_HZ/4 : DDR3_CLK_HZ/2 ; // Generate the correct CMD_CLK_HZ.
 //
-logic                i2s_data   ;
+wire            s0_bclk,s0_wclk,s0_data;
 
 YM2149_PSG_system #(
 
@@ -960,19 +970,35 @@ YM2149_PSG_system #(
    .wr_n           ( !psg_wr_en ), // data/addr valid
 
    .dout           ( psg_data_o ), // PSG data output
-   .i2s_sclk       (  HDMI_SCLK ), // I2S serial bit clock output
-   .i2s_lrclk      ( HDMI_LRCLK ), // I2S L/R output
-   .i2s_data       (   i2s_data ), // I2S serial audio out
+   .i2s_sclk       (    s0_bclk ), // I2S serial bit clock output
+   .i2s_lrclk      (    s0_wclk ), // I2S L/R output
+   .i2s_data       (    s0_data ), // I2S serial audio out
    .sound          (            )  // parallel   audio out
 
 );
 
 // Wire all 4 stereo channels together.
 // We must BLAST that incredible YM2149 sound on every speaker possible so that we are bathed in its infinite beauty!
-assign HDMI_I2S[0] = i2s_data ; // (front left and right)
-assign HDMI_I2S[1] = i2s_data ; // (rear left and right)
-assign HDMI_I2S[2] = i2s_data ; // (Front Center and Sub-woofer)
-assign HDMI_I2S[3] = i2s_data ; // (side left and right)
+// ***********************************************************************************************************************************************
+// Copy audio bus...
+// ***********************************************************************************************************************************************
+(*preserve*)    logic s1_bclk,s1_wclk,s1_data; // Force separate reg buffers for the 2 audio I2S ports
+(*preserve*)    logic s2_bclk,s2_wclk,s2_data; // located on different sides of the FPGA.
+
+                always @(posedge CMD_CLK) {s1_bclk,s1_wclk,s1_data} <= {s0_bclk,s0_wclk,s0_data};
+                always @(posedge CMD_CLK) {s2_bclk,s2_wclk,s2_data} <= {s0_bclk,s0_wclk,s0_data};
+
+                 // Wire the DECA's HDMI transmitter's I2S audio port.
+                assign HDMI_SCLK      =  s1_bclk ;
+                assign HDMI_LRCLK     =  s1_wclk ;
+                assign HDMI_I2S[3:0]  = {s1_data,s1_data,s1_data,s1_data};
+                
+                // Wire the DECA's audio codec port.
+                assign AUDIO_BCLK     =  s2_bclk ;
+                assign AUDIO_WCLK     =  s2_wclk ; // Don't forget to edit the I2C registers when using a different MCLK frequency.
+                assign AUDIO_DIN_MFP1 =  s2_data ;
+
+                assign AUDIO_MCLK     =  1'b0    ; // TLV320AIC3254 should be programmed to use its PLL to run off of the I2S_BCLK.
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -1176,24 +1202,174 @@ assign HDMI_TX_D[7:0]   = VOUT_RGBA[15:8]   ; // DB232_rx0[0] ? VOUT_RGBA[15:8] 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
-// HDMI I2C configuration
-logic RST_IN_c50 = 0 ;
+wire  HDMI_RESET  ;
 
-always @(posedge CLK_IN) RST_IN_c50 <= RST_IN ;
+localparam            HDMI_TABLE_len                       = 34 ; // Optional, length of init table.
+localparam bit [16:0] HDMI_TABLE_data [0:HDMI_TABLE_len-1] = '{   // Optional, init LUT data.  17'h {1'function,8'register_address,8'write_data},...
+                                                        // ADV7513 HDMI transmitter setup.
 
-I2C_HDMI_Config #(
+                                                        17'h1_02FF,  //  Delay for 255 millisecond.
+                                                        17'h1_0072,  //  4 Set ADV7513 HDMI transmitter's device address.
+                                                                     //    Program ADV7513 HDMI transmitter's registers.
+                                                        17'h0_9803,  //Must be set to 0x03 for proper operation
+                                                        17'h0_0100,  //Set 'N' value at 6144
+                                                        17'h0_0218,  //Set 'N' value at 6144
+                                                        17'h0_0300,  //Set 'N' value at 6144
+                                                        17'h0_1470,  // Set Ch count in the channel status to 8.
+                                                        17'h0_1520,  //Input 444 (RGB or YCrCb) with Separate Syncs, 48kHz fs
+                                                        17'h0_1630,  //Output format 444, 24-bit input
+                                                        17'h0_1846,  //Disable CSC
+                                                        17'h0_4080,  //General control packet enable
+                                                        17'h0_4110,  //Power down control
+                                                        17'h0_49A8,  //Set dither mode - 12-to-10 bit
+                                                        17'h0_5510,  //Set RGB in AVI infoframe
+                                                        17'h0_5608,  //Set active format aspect
+                                                        17'h0_96F6,  //Set interrup
+                                                        17'h0_7307,  //Info frame Ch count to 8
+                                                        17'h0_761f,  //Set speaker allocation for 8 channels
+                                                        17'h0_9803,  //Must be set to 0x03 for proper operation
+                                                        17'h0_9902,  //Must be set to Default Value
+                                                        17'h0_9ae0,  //Must be set to 0b1110000
+                                                        17'h0_9c30,  //PLL filter R1 value
+                                                        17'h0_9d61,  //Set clock divide
+                                                        17'h0_a2a4,  //Must be set to 0xA4 for proper operation
+                                                        17'h0_a3a4,  //Must be set to 0xA4 for proper operation
+                                                        17'h0_a504,  //Must be set to Default Value
+                                                        17'h0_ab40,  //Must be set to Default Value
+                                                        17'h0_af16,  //Select HDMI mode
+                                                        17'h0_ba60,  //No clock delay
+                                                        17'h0_d1ff,  //Must be set to Default Value
+                                                        17'h0_de10,  //Must be set to Default for proper operation
+                                                        17'h0_e460,  //Must be set to Default Value
+                                                        17'h0_fa7d,  //Nbr of times to look for good phase
 
-   .IMODE         ( 16'haf16     )  // 16'haf14 = DVI / 16'haf16 = HDMI
+                                                        17'h1_0101   //  Allow loop the reprogramming since the ADV7513 monitor HPD doesn't always work.
+                                                        };
 
-) u_I2C_HDMI_Config (
+// ***********************************************************************************************************************************************
+// Instantiate BHG_I2C_init_RS232_debugger.
+// ***********************************************************************************************************************************************
+    BHG_I2C_init_RS232_debugger #(  .CLK_IN_KHZ     ( CMD_CLK_HZ/1000    ),  // Source  clk_in  frequency in KHz, typically at least 8x the desired I2C rate.
+                                    .I2C_KHZ        ( 100                ),  // Desired clk_out frequency in KHz.
+                                    .RS232_BAUD     ( 921600             ),  // Desired RS232 baud rate.
+                                    .TRI_I2C_scl    ( 0                  ),  // 0=I2C_clk & data output is tri-stated when inactive. 1=I2C_clk is always output enabled.
+                                    .TX_TABLE_len   ( HDMI_TABLE_len     ),  // Optional, length of init table.
+                                    .TX_TABLE_data  ( HDMI_TABLE_data    )   // Optional, init LUT data.
+                      ) I2C_HDMI (
+                                    .clk_in         ( CMD_CLK            ),  // System source clock.
+                                    .rst_in         ( RST_OUT || (HDMI_RESET /*&& !HDMI_TX_INT*/)),  // Synchronous reset.
+                                    .rst_out        ( HDMI_RESET         ),  // I2C sequencer generated reset output option.
+                                    .I2C_ack_error  (                    ),  // Goes high when the I2C slave device does not return an ACK.
+                                    .I2C_scl        ( HDMI_I2C_SCL       ),  // I2C clock, bidirectional pin.
+                                    .I2C_sda        ( HDMI_I2C_SDA       ),  // I2C data, bidirectional pin.
+                                    .RS232_rxd      (                    ),  // RS232 input, receive from terminal.
+                                    .RS232_txd      (                    )); // RS232 output, transmit to terminal.
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// I2C initialize TLV320AIC3254.
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
 
-   .iCLK          ( CLK_IN       ),
-   .iRST_N        ( !RST_IN_c50  ),
-   .I2C_SCLK      ( HDMI_I2C_SCL ),
-   .I2C_SDAT      ( HDMI_I2C_SDA ),
-   .HDMI_TX_INT   ( HDMI_TX_INT  )
-   
-);
+localparam            TLV320A_TABLE_len                          = 36 ; // Optional, length of init table.
+localparam bit [16:0] TLV320A_TABLE_data [0:TLV320A_TABLE_len-1] = '{   // Optional, init LUT data.  17'h {1'function,8'register_address,8'write_data},...
+                                                        // TLV320AIC3254 audio codec setup for headphone playback.
+
+                                                        17'h1_0100,  //  1 Set rst_out low.
+                                                        17'h1_0101,  //  2 Set rst_out high.
+                                                        17'h1_0202,  //  3 Delay for 2 millisecond. 
+
+                                                        17'h1_0030,  //  4 Set TLV320AIC3254 audio codec's device address.
+                                                                     //    Program TLV320AIC3254 audio codec's registers.
+
+                                                        17'h0_0000,  //   5    Page 0.
+                                                        17'h0_0101,  //   6  # Soft reset.
+                                                        17'h1_0202,  //   7    Delay for 2 millisecond. 
+
+                                                                      //  PLL Setup
+                                                        17'h0_0407,  //   8    = pll s=bclk, codec_clkin=PLL 
+                                                        17'h0_0594,  //   9    = pll on, pll_p=1 pll_r=4
+                                                        17'h0_0607,  //  10    =pll_j = 7
+
+                                                        17'h0_0b87,   // 11  # ndac powered up and  = 7
+                                                        17'h0_0c82,   // 12  # mdac powered up = 2.
+                                                        17'h0_0d00,   // 13  # Program the OSR of DAC to 128
+                                                        17'h0_0e80,   // 14  
+                                                        17'h0_1b30,   // 15  # Set the word length of Audio Interface to 32bits PTM_P4
+                                                        17'h0_3c08,   // 16  # Set the DAC Mode to PRB_P8
+
+                                                        17'h0_0001,   // 17  # Select Page 1
+
+                                                        17'h0_0100,   // 18 Deca setup - *USE Crude AVdd in presence of external AVdd supply or before powering up internal AVdd LDO
+                                                        17'h0_0221,   // 19  DECA setup - Avdd LDO is on set to 1.77v.
+
+                                                        17'h0_7b01,   // 20  # Set the REF charging time to 40ms
+                                                        17'h0_1425,   // 21  # HP soft stepping settings for optimal pop performance at power up Rpop used is 6k with N = 6 and soft step = 20usec. This should work with 47uF coupling capacitor. Can try N=5,6 or 7 time constants as well. Trade-off delay vs “pop” sound.
+                                                        17'h0_0a00,   // 22  # Set the Input Common Mode to 0.9V and Output Common Mode for Headphone to Input Common Mode
+
+                                                        17'h0_0c08,   // 23  # Route Left DAC to HPL
+                                                        17'h0_0d08,   // 24  # Route Right DAC to HPR
+
+                                                        17'h0_0e08,   // 25  # Route Left DAC to LOL
+                                                        17'h0_0f08,   // 26  # Route Right DAC to LOR
+
+                                                        17'h0_0300,   // 27  # Set the DAC PTM mode to PTM_P3/4
+                                                        17'h0_0400,   // 28  
+
+                                                        17'h0_1000,   // 29  # Set the HPL gain to 0dB
+                                                        17'h0_1100,   // 30  # Set the HPR gain to 0dB
+
+                                                        17'h0_1200,   // 31  # Set the LOL gain to 0dB
+                                                        17'h0_1300,   // 32  # Set the LOR gain to 0dB
+
+
+                                                        17'h0_093C,   // 33  # Power up HPL,HPR,LOL,LOR drivers   //17'h0_0930,   // 26  # Power up HPL and HPR drivers
+
+                                                        17'h0_0000,   // 34  # select Page 0, Wait for 2.5 sec for soft stepping to take effect Else read Page 1, Register 63d, D(7:6). When = “11” soft-stepping is complete Select Page 0
+                                                        17'h0_3fd6,   // 35  # Power up the Left and Right DAC Channels with route the Left Audio digital data to Left Channel DAC and Right Audio digital data to Right Channel DAC
+                                                        17'h0_4000    // 36  # Unmute the DAC digital volume control
+                                                        };
+
+// ***********************************************************************************************************************************************
+// Instantiate BHG_I2C_init_RS232_debugger.
+// ***********************************************************************************************************************************************
+
+    BHG_I2C_init_RS232_debugger #(  .CLK_IN_KHZ     ( CMD_CLK_HZ/1000    ),  // Source  clk_in  frequency in KHz, typically at least 8x the desired I2C rate.
+                                    .I2C_KHZ        ( 100                ),  // Desired clk_out frequency in KHz.
+                                    .RS232_BAUD     ( 921600             ),  // Desired RS232 baud rate.
+                                    .TRI_I2C_scl    ( 0                  ),  // 0=I2C_clk & data output is tri-stated when inactive. 1=I2C_clk is always output enabled.
+                                    .TX_TABLE_len   ( TLV320A_TABLE_len  ),  // Optional, length of init table.
+                                    .TX_TABLE_data  ( TLV320A_TABLE_data )   // Optional, init LUT data.
+                   ) I2C_TLV320A (
+                                    .clk_in         ( CMD_CLK            ),  // System source clock.
+                                    .rst_in         ( RST_OUT            ),  // Synchronous reset.
+                                    .rst_out        ( AUDIO_RESET_n      ),  // I2C sequencer generated reset output option.
+                                    .I2C_ack_error  (                    ),  // Goes high when the I2C slave device does not return an ACK.
+                                    .I2C_scl        ( AUDIO_SCL_SS_n     ),  // I2C clock, bidirectional pin.
+                                    .I2C_sda        ( AUDIO_SDA_MOSI     ),  // I2C data, bidirectional pin.
+                                    .RS232_rxd      (                    ),  // RS232 input, receive from terminal.
+                                    .RS232_txd      (                    )); // RS232 output, transmit to terminal.
+
+assign AUDIO_SPI_SELECT = 0 ; // make low for I2C.
+
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
+// ***********************************************************************************************************************************************
 
 // ********************************************************************************************
 // ********************************************************************************************
@@ -1337,11 +1513,11 @@ end
 
 //assign HDMI_TX_D        = 0 ;
 assign NET_TXD          = 0 ;
-assign AUDIO_DIN_MFP1   = 0 ;
-assign AUDIO_MCLK       = 0 ;
-assign AUDIO_SCL_SS_n   = 0 ;
+//assign AUDIO_DIN_MFP1   = 0 ;
+//assign AUDIO_MCLK       = 0 ;
+//assign AUDIO_SCL_SS_n   = 0 ;
 assign AUDIO_SCLK_MFP3  = 0 ;
-assign AUDIO_SPI_SELECT = 0 ;
+//assign AUDIO_SPI_SELECT = 0 ;
 assign FLASH_DCLK       = 0 ;
 assign FLASH_NCSO       = 0 ;
 assign FLASH_RESET_n    = 0 ;

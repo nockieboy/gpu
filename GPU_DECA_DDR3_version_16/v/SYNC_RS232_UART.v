@@ -1,5 +1,6 @@
 // *****************************************************************
-// *** SYNC_RS232_UART.v V1.0, November 22, 2019
+// *** SYNC_RS232_UART.v V1.1, Aug 13, 2022
+// *** v1.1 - patched simulation startup bug.
 // ***
 // *** This transceiver follows slight baud timing errors introduced
 // *** by the external host interface's clock making the TDX output
@@ -12,34 +13,35 @@
 // *** Well commented for educational purposes.
 // *****************************************************************
 
-module sync_rs232_uart ( 
-	input  wire       clk,            // System clock
-	input  wire       rxd,            // RS232 serial input data pin
-	output reg        rx_rdy,         // Pulsed high for 1 system clock when the received 8 bit data byte is ready
-	output reg  [7:0] rx_data,        // Received 8 bit data byte.
+module sync_rs232_uart #(
+// Setup parameters
+parameter CLK_IN_HZ    = 50000000,    // Set to system input clock frequency
+parameter BAUD_RATE    = 921600       // Set to desired baud rate
+)( 
+	input  wire       clk,                       // System clock
+	input  wire       rxd,                       // RS232 serial input data pin
+	output reg        rx_rdy         =1'b0,      // Pulsed high for 1 system clock when the received 8 bit data byte is ready
+	output reg  [7:0] rx_data        =8'd0,      // Received 8 bit data byte.
 	
-	input  wire       ena_tx,         // Signals the transmitter to latch the 8 bit data and begin transmitting
-	input  wire [7:0] tx_data,        // 8 bit data byte input to be transmitted
-	output reg        txd,            // RS232 serial output data pin
-	output reg        tx_busy,        // High when transmitter is busy.  Low when you may load a byte to transmit
+	input  wire       ena_tx,                    // Signals the transmitter to latch the 8 bit data and begin transmitting
+	input  wire [7:0] tx_data,                   // 8 bit data byte input to be transmitted
+	output reg        txd             =1'b0,     // RS232 serial output data pin
+	output reg        tx_busy         =1'b0,     // High when transmitter is busy.  Low when you may load a byte to transmit
 	
-	output reg        rx_sample_pulse // For debugging RXD errors only.  This is an output test pulse
-	                                  // aligned to when the receiver has sampled the RXD input.
+	output reg        rx_sample_pulse =1'b0      // For debugging RXD errors only.  This is an output test pulse
+	                                             // aligned to when the receiver has sampled the RXD input.
   ) ;
 
-// Setup parameters
-parameter CLK_IN_HZ    = 50000000;    // Set to system input clock frequency
-parameter BAUD_RATE    = 921600;      // Set to desired baud rate
 
 localparam RX_PERIOD    = (CLK_IN_HZ / BAUD_RATE) -1 ; // Set's a reference counter size for each transmitted/received serial data bit
 localparam TX_PERIOD    = (CLK_IN_HZ / BAUD_RATE) -1 ;
 
 // Receiver regs
-reg     [15:0]     rx_period ;
-reg     [3:0]      rx_position ;
-reg     [9:0]      rx_byte ;
-reg                rxd_reg, last_rxd ;
-reg		           rx_busy, rx_last_busy ;
+reg     [15:0]     rx_period     =16'd0;
+reg     [3:0]      rx_position   = 4'd0;
+reg     [9:0]      rx_byte       =10'd0;
+reg                rxd_reg       = 1'b0, last_rxd =1'b0 ;
+reg		   rx_busy=1'b0, rx_last_busy=1'b0 ;
 
 // Transmitter regs
 reg     [15:0]     tx_period   = 16'h0 ;
@@ -72,16 +74,16 @@ rx_last_busy <= rx_busy;                  // create a 1 clock delay of the rx_bu
 rx_rdy       <= rx_last_busy && ~rx_busy; // create the rx_rdy out pulse for 1 single clock when the rx_busy flag has gone low signifying that rx_data is ready
 
 
-if ( rx_trigger )	begin                             // if a 'rx_trigger' event has taken place
+if ( rx_trigger )	begin                                        // if a 'rx_trigger' event has taken place
 			rx_period      <= ( RX_PERIOD[15:0] >> 1 ) ; // set the period clock to half way inside a serial bit.  This makes the best time to sample incoming
-			                                       // serial bits as the source baud rate may be slightly slow or fast maintaining a good data capture window all the way until the stop bit
-			rx_busy        <= 1'd1 ;               // set the rx_busy flag to signify operation of the UART serial receiver
-			rx_position    <= 4'h9 ;               // set the serial bit counter to position 9
+			                                             // serial bits as the source baud rate may be slightly slow or fast maintaining a good data capture window all the way until the stop bit
+			rx_busy        <= 1'd1 ;                     // set the rx_busy flag to signify operation of the UART serial receiver
+			rx_position    <= 4'h9 ;                     // set the serial bit counter to position 9
 	end else begin
 	
-	if ( rx_period==0 ) begin					  // if the receiver period counter has reached it's end
-			rx_period	    <=  RX_PERIOD[15:0] ; // reset the period counter
-			rx_sample_pulse <=  rx_busy ;         // *** This is only a test pulse for debugging purposes
+	if ( rx_period==0 ) begin				     // if the receiver period counter has reached it's end
+			rx_period	    <=  RX_PERIOD[15:0] ;    // reset the period counter
+			rx_sample_pulse <=  rx_busy ;                // *** This is only a test pulse for debugging purposes
 		
 				if ( rx_position != 0 ) begin                  // if the receiver's bit position counter hasn't reached it's end
 					rx_position   <= rx_position - 1'd1 ;  // decrement the position counter
@@ -95,7 +97,7 @@ if ( rx_trigger )	begin                             // if a 'rx_trigger' event h
 
 			end else begin                                 // if the receiver period counter has not reached it's end
 					rx_period <= rx_period - 1'b1; // just decrement the receiver period counter
-					rx_sample_pulse <=  1'b0 ;           // *** This is only a test pulse for debugging purposes
+					rx_sample_pulse <=  1'b0 ;     // *** This is only a test pulse for debugging purposes
 					end
 end // ~rx_trigger
 
@@ -111,7 +113,7 @@ end // ~rx_trigger
 //***********************************************************
 
 		if (ena_tx) begin                    // If a transmit request comes in
-			tx_data_reg    <= tx_data ;  // register a copy of the input dara bus
+			tx_data_reg    <= tx_data ;  // register a copy of the input data bus
 			tx_busy        <= 1 ;        // Set the busy flag
 		end
 
@@ -131,14 +133,14 @@ if ( tx_period == (TX_PERIOD[15:0] >> 1) ) begin    // ******* at the center of 
 					tx_byte[9]   <= 1'b1 ;             // Add a stop bit into the shift register's 10th bit
 					tx_byte[0]   <= 1'b0 ;             // Add a start bit into the serial shift register's first bit
 					tx_busy      <= 1'b0 ;             // Turn off the busy flag signifying that another transmit byte may be loaded
-					end									 // into the tx_data_reg
+					end				   // into the tx_data_reg
 
 			end else begin
 
 				tx_byte[8:0] <= tx_byte[9:1] ;   // at any other point than the stop-bit period, shift the serial tx_byte shift register
 				tx_byte[9]   <= 1'b1 ;           // load a default stop bit into bit 10 of the serial shift register
 
-				if ( tx_position == 0 ) tx_run  <= ~txd ;  // during the 'center of a sreial 'START' transmitter bit'
+				if ( tx_position == 0 ) tx_run  <= ~txd ;  // during the 'center of a serial 'START' transmitter bit'
 						                           // if the serial UART TXD output pin has a start bit, turn on the transmitter running flag
 						                           // which signifies the point where it is no longer permit-able to align a transmit word
 						                           // to an incoming RXD byte potentially corrupting a serial transmission.
@@ -148,7 +150,7 @@ end
 
 // ***********************************************************************************************************************
 // This section takes the above prepared registers and sends them out during the transition edge of the tx_period clock
-// and during inactivity, or during the permitted alignment window, it will re-align the transmition period clock to
+// and during inactivity, or during the permitted alignment window, it will re-align the transmission period clock to
 // a potential incoming rx_trigger event.
 // ***********************************************************************************************************************
 
@@ -158,19 +160,21 @@ end
 
 if (  rx_trigger && ~tx_run ) begin			
 
-		tx_period      <= TX_PERIOD[15:0] ;           // reset "SYNCHRONIZE" the transmit period timer to the rx_trigger event
+		tx_period      <= TX_PERIOD[15:0] - 2'h2 ;    // reset "SYNCHRONIZE" the transmit period timer to the rx_trigger event, recognizing that the rx_trigger is
+							      // delayed by 2 clocks, so we shave off 2 additional clock cycles for dead perfect parallel TXD output alignment.
+
 		tx_position    <= 1'b0 ;                      // force set the transmit reference position to the start bit
 		txd            <= tx_byte[0] ;                // immediately set the UART TXD output to the serial out shift register's start bit.  IE see above if(tx_busy)
 
-	end else if ( tx_period==0  )begin                // if the transmitter period counter has reached it's end
+	end else if ( tx_period==0  )begin                    // if the transmitter period counter has reached it's end
 
 		tx_period      <= TX_PERIOD[15:0]  ;          // reset the period counter
-		txd            <= tx_byte[0] ;                // set the UART TXD output to the serial shift register's ooutput.
+		txd            <= tx_byte[0] ;                // set the UART TXD output to the serial shift register's output.
 
 		if ( tx_position == 0 ) tx_position <= 4'h9 ; // if the transmitter reference bit position counter is at the start bit, set it to bit 1.
 		else tx_position  <= tx_position - 1'b1 ;     // otherwise, count down the position counter towards the stop bit
 
-	end else tx_period <= tx_period - 1'b1 ;          // if the transmit period has not reached it's end, it should count down.
+	end else tx_period <= tx_period - 1'b1 ;              // if the transmit period has not reached it's end, it should count down.
 
 end // always
 

@@ -667,8 +667,7 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name OPTIMIZATION_MODE BALANCED
-set_global_assignment -name PRE_MAPPING_RESYNTHESIS ON
+set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
 set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
 set_global_assignment -name ENABLE_SIGNALTAP ON
 set_global_assignment -name USE_SIGNALTAP_FILE jt49_analysis.stp
@@ -949,11 +948,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE sv/line_generator.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sv/LFSR.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sv/FIFO_2word_FWFT.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sv/ellipse_generator.sv
-set_global_assignment -name SYSTEMVERILOG_FILE sv/audio_i2s.sv
-set_global_assignment -name SYSTEMVERILOG_FILE sv/clock_strobe.sv
-set_global_assignment -name VERILOG_FILE sys_pll/sys_pll.v
-set_global_assignment -name VERILOG_FILE I2C_HDMI_Config.v
-set_global_assignment -name VERILOG_FILE I2C_Controller.v
+set_global_assignment -name VERILOG_FILE v/BHG_I2C_init_RS232_debugger.v
 set_global_assignment -name CDF_FILE output_files/Chain1.cdf
 set_global_assignment -name SIGNALTAP_FILE wb_analysis.stp
 set_global_assignment -name SIGNALTAP_FILE sd_analysis.stp

@@ -10,8 +10,6 @@ create_clock -period "10.0 MHz" [get_ports ADC_CLK_10]
 create_clock -period "50.0 MHz" [get_ports MAX10_CLK1_50]
 create_clock -period "50.0 MHz" [get_ports MAX10_CLK2_50]
 
-create_clock -period "1.0 MHz"  [get_nets {I2C_HDMI_Config:u_I2C_HDMI_Config|mI2C_CTRL_CLK}]
-
 #create_clock -period "100 MHz"  [get_nets {SDInterface:SID|SDWriter:SDWriter_inst|SDCmdCtrl:sd_cmd_ctrl_inst|sdclk}]
 
 #**************************************************************
@@ -99,9 +97,6 @@ set_false_path -from [get_clocks {VGA_PLL*}] -to [get_clocks {*DDR3_PLL5*}]
 set_false_path -from [get_clocks {VGA_PLL*}] -to [get_clocks {MAX10_CLK1_50}]
 set_false_path -from [get_clocks {MAX10_CLK1_50}] -to [get_clocks {VGA_PLL*}]
 
-# Separate the fake generated I2C clock output from the CLK_IN 50 MHz source.
-set_false_path -from [get_clocks {*}] -to [get_clocks {u_I2C_HDMI_Config|mI2C_CTRL_CLK|q}]
-set_false_path -from [get_clocks {u_I2C_HDMI_Config|mI2C_CTRL_CLK|q}] -to [get_clocks {*}]
 
 
 # Separate the fake SD Card clock
