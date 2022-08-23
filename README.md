@@ -6,7 +6,7 @@ When completed, the GPU will support text (via a VT100 compatible console) and g
 
 ## Getting Started
 
-This repo contains the Verilog HDL code to create a VGA-, and later maybe HDMI-capable video driver using a compatible FPGA of your choice.  You'll need to have a development board with a suitable FPGA with at least 50 KB of internal RAM for later development versions and the software to read the project - in this case [Quartus II from Intel/Altera](https://www.intel.com/content/www/us/en/programmable/downloads/download-center.html).
+This repo contains the Verilog HDL code to create a VGA- and DVI/HDMI-capable video driver using a compatible FPGA of your choice.  You'll need to have a development board with a suitable FPGA with at least 200 KB of internal RAM for later development versions and the software to read the project - in this case [Quartus II from Intel/Altera](https://www.intel.com/content/www/us/en/programmable/downloads/download-center.html).
 
 During early stages of development (for the text-mode design) however, you can get by on an Intel/Altera Cyclone II EP2C5T144C8 dev board, which can be had for less than £14 via everyone's favourite auction website - do a search for ['Cyclone II minimum development board'](https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=cyclone+II+minimum+development&_sacat=0).
 
