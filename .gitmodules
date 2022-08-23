@@ -7,3 +7,6 @@
 [submodule "BrianHG-DDR3-Controller"]
 	path = BrianHG-DDR3-Controller
 	url = https://github.com/nockieboy/BrianHG-DDR3-Controller.git
+[submodule "GPU_DECA_DDR3_version_16/YM2149_PSG_system"]
+	path = GPU_DECA_DDR3_version_16/YM2149_PSG_system
+	url = https://github.com/nockieboy/YM2149_PSG_system.git
