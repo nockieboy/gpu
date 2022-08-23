@@ -30,8 +30,8 @@ module GPU_DECA_DDR3_top #(
 parameter int        GPU_MEM                 = 524288,           // Defines total video RAM, including 1KB palette
 
 parameter string     ENDIAN                  = "Little",            // Endian for 8bit addressing access.
-parameter bit [3:0]  PDI_LAYERS              = 1,                   // Number of parallel window layers.
-parameter bit [3:0]  SDI_LAYERS              = 1,                   // Number of sequential window layers.
+parameter bit [3:0]  PDI_LAYERS              = 2,                   // Number of parallel window layers.
+parameter bit [3:0]  SDI_LAYERS              = 2,                   // Number of sequential window layers.
 parameter bit        ENABLE_TILE_MODE  [0:7] = '{1,0,0,0,0,0,0,0},  // Enable tile mode for each PDI_LAYER from 0 to 7.
                                                                     // TILES are available to all SDI_LAYERS of an enabled PDI_LAYER.
                                                                     // Each tile enabled PDI_LAYER will use it's own dedicated FPGA blockram.
@@ -670,7 +670,7 @@ assign CMD_read_vector_in  [1] = 0 ;
 assign CMD_priority_boost  [1] = 0 ;
 
 // Wires from Z80 to PSG.
-wire        [  3:0] psg_addr   ;
+wire        [  7:0] psg_addr   ;
 wire        [  7:0] psg_data_i ;
 wire        [  7:0] psg_data_o ;
 wire                psg_wr_en  ;
@@ -953,27 +953,37 @@ localparam CMD_CLK_HZ  = INTERFACE_SPEED[0]=="Q" ? DDR3_CLK_HZ/4 :
 //
 wire            s0_bclk,s0_wclk,s0_data;
 
+logic [7:0] r_psg_addr,r_psg_data_i,r_psg_data_o; // help FMAX routing.
+logic       r_psg_wr_en;                          // help FMAX routing.
+always_ff @(posedge CMD_CLK) {r_psg_wr_en,r_psg_addr,r_psg_data_i,psg_data_o}<={psg_wr_en,psg_addr,psg_data_i,r_psg_data_o}; // help FMAX routing.
+
 YM2149_PSG_system #(
 
-   .CLK_IN_HZ      ( CMD_CLK_HZ ), // Calculated input clock frequency
-   .CLK_PSG_HZ     (    1789000 ), // Desired PSG clock frequency (Hz)
-   .I2S_DAC_HZ     (      48000 ), // Desired I2S clock frequency (Hz)
-   .DAC_BITS       (          8 ), // PSG DAC bit precision, 8 through 14 bits, the higher the bits, the higher the dynamic range.
-   .LPFILTER_DEPTH (          4 )  // 2=flat to 10khz, 4=flat to 5khz, 6=getting muffled, 8=no treble.
+   .CLK_IN_HZ       (      CMD_CLK_HZ ),   // Calculated input clock frequency
+   .CLK_I2S_IN_HZ   (   DDR3_CLK_HZ/2 ),   // Calculated input clock frequency
+   .CLK_PSG_HZ      (         1000000 ),   // Desired PSG clock frequency (Hz)
+   .I2S_DAC_HZ      (           48000 ),   // Desired I2S clock frequency (Hz)
+   .YM2149_DAC_BITS (               9 ),   // PSG DAC bit precision, 8 through 12 bits, the higher the bits, the higher the dynamic range.
+                                           // 10 bits almost perfectly replicates the YM2149 DA converter's Normalized voltage.
+                                           // With 8 bits, the lowest volumes settings will be slightly louder than normal.
+                                           // With 12 bits, the lowest volume settings will be too quiet.
+   .MIXER_DAC_BITS  (              16 )    // The number of DAC bits for the BHG_jt49_filter_mixer core and output.
 
 ) ARYA (
 
-   .clk            (    CMD_CLK ),
-   .reset          (     ~reset ),
-   .addr           (   psg_addr ), // register address
-   .data           ( psg_data_i ), // data IN to PSG
-   .wr_n           ( !psg_wr_en ), // data/addr valid
+   .clk             (      CMD_CLK ),
+   .clk_i2s         (  DDR3_CLK_50 ),
+   .reset_n         (       ~reset ),
+   .addr            (   r_psg_addr ), // register address
+   .data            ( r_psg_data_i ), // data IN to PSG
+   .wr_n            ( !r_psg_wr_en ), // data/addr valid
 
-   .dout           ( psg_data_o ), // PSG data output
-   .i2s_sclk       (    s0_bclk ), // I2S serial bit clock output
-   .i2s_lrclk      (    s0_wclk ), // I2S L/R output
-   .i2s_data       (    s0_data ), // I2S serial audio out
-   .sound          (            )  // parallel   audio out
+   .dout            ( r_psg_data_o ), // PSG data output
+   .i2s_sclk        (      s0_bclk ), // I2S serial bit clock output
+   .i2s_lrclk       (      s0_wclk ), // I2S L/R output
+   .i2s_data        (      s0_data ), // I2S serial audio out
+   .sound           (              ), // parallel  audio out, mono or left channel
+   .sound_right     (              )  // parallel  audio out, right channel
 
 );
 
@@ -985,8 +995,8 @@ YM2149_PSG_system #(
 (*preserve*)    logic s1_bclk,s1_wclk,s1_data; // Force separate reg buffers for the 2 audio I2S ports
 (*preserve*)    logic s2_bclk,s2_wclk,s2_data; // located on different sides of the FPGA.
 
-                always @(posedge CMD_CLK) {s1_bclk,s1_wclk,s1_data} <= {s0_bclk,s0_wclk,s0_data};
-                always @(posedge CMD_CLK) {s2_bclk,s2_wclk,s2_data} <= {s0_bclk,s0_wclk,s0_data};
+                always @(posedge DDR3_CLK_50) {s1_bclk,s1_wclk,s1_data} <= {s0_bclk,s0_wclk,s0_data};
+                always @(posedge DDR3_CLK_50) {s2_bclk,s2_wclk,s2_data} <= {s0_bclk,s0_wclk,s0_data};
 
                  // Wire the DECA's HDMI transmitter's I2S audio port.
                 assign HDMI_SCLK      =  s1_bclk ;

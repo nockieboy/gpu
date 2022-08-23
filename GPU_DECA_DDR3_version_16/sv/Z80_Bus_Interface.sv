@@ -150,7 +150,7 @@ module Z80_Bus_Interface #(
 // ***************************************************************************************************
 // **** YM2149 PSG interface (ARYA)
 // ***************************************************************************************************
-    output logic [  3:0] psg_addr,          // address of selected PSG register
+    output logic [  7:0] psg_addr,          // address of selected PSG register
     output logic [  7:0] psg_data_o,        // data out TO PSG
     output logic         psg_wr_en,         // write enable strobe TO PSG
     input  logic [  7:0] psg_data_i,        // data in FROM PSG
