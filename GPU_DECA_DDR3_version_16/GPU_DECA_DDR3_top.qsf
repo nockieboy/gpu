@@ -677,6 +677,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE GPU_DECA_DDR3_top.sv
 set_global_assignment -name SDC_FILE GPU_DECA_DDR3.sdc
 set_global_assignment -name SYSTEMVERILOG_FILE sv/geometry_processor.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sv/Z80_Bus_Interface.sv
+set_global_assignment -name SYSTEMVERILOG_FILE IO/nockieboy_IO.sv
 set_global_assignment -name SYSTEMVERILOG_FILE SDCard_Interface/SDCmdCtrl.sv
 set_global_assignment -name SYSTEMVERILOG_FILE SDCard_Interface/SDInterface.sv
 set_global_assignment -name SYSTEMVERILOG_FILE SDCard_Interface/SDReader.sv

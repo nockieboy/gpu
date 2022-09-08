@@ -604,7 +604,6 @@ BrianHG_DDR3_CONTROLLER_v16_top #(
 // ***********************************************************************************************************************************************************
 // ***********************************************************************************************************************************************************
 
-wire        send_geo_cmd ;
 wire        rd_px_ctr_rs ;
 wire        wr_px_ctr_rs ;
 wire [15:0] geo_cmd      ;
@@ -670,10 +669,21 @@ assign CMD_read_vector_in  [1] = 0 ;
 assign CMD_priority_boost  [1] = 0 ;
 
 // Wires from Z80 to PSG.
-wire        [  7:0] psg_addr   ;
-wire        [  7:0] psg_data_i ;
-wire        [  7:0] psg_data_o ;
-wire                psg_wr_en  ;
+wire [  7:0] psg_addr   ;
+wire [  7:0] psg_data_i ;
+wire [  7:0] psg_data_o ;
+wire         psg_wr_en  ;
+
+// ***************************************************************************************************************
+// ************************* IO buses to/from the Z80 bridge and peripheral modules ******************************
+// ***************************************************************************************************************
+// These look like they'll take up a lot of interconnect resources, but the compiler will prune them down to only
+// the signals that are actually used, although I'm not sure this applies to IO_RD_DATA if it has a default value
+// applied to each line.
+wire [255:0] IO_WR_STROBE       ;
+wire [  7:0] IO_WR_DATA [0:255] ;
+wire [255:0] IO_RD_STROBE       ;
+wire [  7:0] IO_RD_DATA [0:255] ; //= '{ default: 8'hFF } ;
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -689,55 +699,39 @@ wire                psg_wr_en  ;
 // ***************************************************************************************************************
 Z80_Bus_Interface #(
 
-// ************** Z80 bus timing settings. **************
+   // ************** Z80 bus timing settings. **************
    .READ_PORT_CLK_sPOS    ( 0       ), // Number of Z80_CLK cycles before the bus interface responds to a Read Port command.
    .READ_PORT_CLK_aPOS    ( 2       ), // Number of Z80_CLK cycles before the bus must have valid data in response to a Read Port command.
    .WRITE_PORT_CLK_POS    ( 2       ), // Number of Z80_CLK cycles before the bus interface samples the Write Port command's data.
 
-// 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read before asserting the WAIT during a Read Memory cycle.
-// Use 0 for an instant guaranteed 'WAIT' every read.  (Safest for Read Instruction Opcode cycle.)
-// Use 2 for compatibility with waiting for a BrianHG_DDR3 read cache hit before asserting the 'WAIT'.
+   // 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read before asserting the WAIT during a Read Memory cycle.
+   // Use 0 for an instant guaranteed 'WAIT' every read.  (Safest for Read Instruction Opcode cycle.)
+   // Use 2 for compatibility with waiting for a BrianHG_DDR3 read cache hit before asserting the 'WAIT'.
    .Z80_DELAY_WAIT_RI     ( 3       ), // 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read_ready before asserting the WAIT during a Read Instruction Opcode cycle.
    .Z80_DELAY_WAIT_RM     ( 3       ), // 0 to 7, Number of CMD_CLK cycles to wait for DDR3 read_ready before asserting the WAIT during a Read Memory cycle.
    .Z80_WAIT_QUICK_OFF    ( 1       ), // 0 (Default) = WAIT is turned off only during a low Z80_CLK.  1 = WAIT is turned off as soon as a read_ready is received.
 
-// ************** Direction control for DATA BUS level converter **************
+   // ************** Direction control for DATA BUS level converter **************
    .data_in               ( 1'b0    ), // Direction controls for 74LVC245 buffers - hardware dependent!
    .data_out              ( 1'b1    ), // Direction controls for 74LVC245 buffers - hardware dependent!
 
-// ************** Parameters specific to the uCOM host **************
+   // ************** Parameters specific to the uCOM host **************
    .BANK_ID               ( '{9,3,71,80,85,32,77,65,88,49,48,0,255,255,255,255} ),  // The BANK_ID data to return ('GPU MAX10')
    .BANK_ID_ADDR          ( GPU_MEM-16 ),  // Address to return BANK_ID data from
    .BANK_RESPONSE         ( 1       ), // 1 - respond to reads at BANK_ID_ADDR with BANK_ID data, 0 - ignore reads to that address
    .MEM_SIZE_BYTES        ( GPU_MEM ), // Specifies size of GPU RAM available to host (anything above this returns $FF or $7E)
    .MEMORY_RANGE          ( 3'b010  ), // Z80_addr[21:19] == 3'b010 targets the 512KB 'window' at 0x100000-0x17FFFF (Socket 3 on the uCom)
 
-// ************** Interrupts are not currently used **************
+   // ************** Interrupts are not currently used **************
    .INT_TYP               ( 0       ), // 0 = polled (IO), 1 = interrupt.
    .INT_VEC               ( 48      ), // INTerrupt VECtor to be passed to host in event of an interrupt acknowledge.
 
-// ************** Read IO port addresses range. **************
-// READ_PORT_BEGIN is set so low to catch MMU IO calls (38h-3Ch)
+   // ************** Read IO port addresses range. **************
+   // READ_PORT_BEGIN is set so low to catch MMU IO calls (38h-3Ch)
    .READ_PORT_BEGIN       ( 56      ), // Sets the beginning port number which can be read.
    .READ_PORT_END         ( 251     ), // Sets the ending    port number which can be read.
-
-// ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
-   .PSG_LATCH             ( 238     ), // IO addr: PSG LATCH register R/W - write latches register, read returns data
-   .PSG_WRITE             ( 239     ), // IO addr: PSG WRITE port W-only - write data only
-   //
-   .SD_STATUS             ( 240     ), // IO address for SD interface's STATUS byte.
-   .SD_SECTOR             ( 241     ), // IO address for SD interface's 32-bit Sector Address pipe.
-   .SD_MODE               ( 242     ), // IO address to initiate SD RD/WR.
-   .SD_ARG_PTR            ( 243     ), // IO address to set/read ARG_PTR value.
-   //
-   .VID_EN                ( 244     ), // IO address for BLANK signal to video DAC.
-   .GPU_RNG               ( 245     ), // IO address for random number generator.
-   .GEO_LO                ( 246     ), // IO address for GEOFF LOW byte.
-   .GEO_HI                ( 247     ), // IO address for GEOFF HIGH byte.
-   .FIFO_STAT             ( 248     ), // IO address for GPU FIFO status on bit 0 - remaining bits free for other data.
-   .GPU_ML                ( 250     ), // IO address for the GPU MMU's lower 8-bits of the upper 12-bits of the DDR3 address bus.
-   .GPU_MH                ( 251     )  // IO address for the GPU MMU's upper 4-bits of the upper 12-bits of the DDR3 address bus.
-// ************** Legacy IO port addresses. *********** Move outside Z80 bus interface with the new port bus.
+   .GPU_ML                ( GPU_ML  ),
+   .GPU_MH                ( GPU_MH  )
 
 ) BRIDGETTE (
 
@@ -775,7 +769,6 @@ Z80_Bus_Interface #(
    .Z80_INT_REQ       (                ), // NOT USED, Active HIGH (signal is inverted in the FPGA interface), signals to Z80 an INTerrupt request.
    .Z80_IEO           (                ), // NOT USED, Active LOW, prevents devices further down the daisy chain from requesting INTerrupts.
 
-
    // *** Z80 bidir data bus and bus steering connections. ***
    .Z80_245data_dir   ( GPIO1_D[20]    ), // Controls direction of the Z80 data bus buffer.
    .Z80_245_oe        ( GPIO1_D[19]    ), // Enable/disable signal for Z80 data bus buffer.
@@ -786,7 +779,6 @@ Z80_Bus_Interface #(
                                           // The EA bus direction control should default to Z80 > FPGA direction.
                                           // These controls are present for a future FPGA MMU to replace the hardware MMU on the memory card, or
                                           // for EA bus control by an optional FPGA CPU core.
-   
 
    // *********************************
    // *** Z80 <-> System RAM Access ***
@@ -804,13 +796,11 @@ Z80_Bus_Interface #(
    // *******************************
    // *** Z80 peripheral IO ports ***
    // *******************************
-   .WRITE_PORT_STROBE (               ), // The bit   [port_number] in this 256 bit bus will pulse when the Z80 writes to that port number.
-   .WRITE_PORT_DATA   (               ), // The array [port_number] will hold the last written data to that port number.
-   .READ_PORT_STROBE  (               ), // The bit   [port_number] in this 256 bit bus will pulse when the Z80 reads from that port number.
-
-// until the legacy ports are moved out, this port needs cannot be used.
-//   .READ_PORT_DATA     (               ), // The array [port_number] will be sent to the Z80 during a port read so long as the read port
-                                          // number is within parameter READ_PORT_BEGIN and READ_PORT_END.
+   .WRITE_PORT_STROBE ( IO_WR_STROBE  ), // The bit   [port_number] in this 256 bit bus will pulse when the Z80 writes to that port number.
+   .WRITE_PORT_DATA   ( IO_WR_DATA    ), // The array [port_number] will hold the last written data to that port number.
+   .READ_PORT_STROBE  ( IO_RD_STROBE  ), // The bit   [port_number] in this 256 bit bus will pulse when the Z80 reads from that port number.
+   .READ_PORT_DATA    ( IO_RD_DATA    ), // The array [port_number] will be sent to the Z80 during a port read so long as the read port
+                                         // number is within parameter READ_PORT_BEGIN and READ_PORT_END.
 
 // ***************************************************************************************************
 // **** Wishbone Master Interface ********************************************************************
@@ -826,49 +816,88 @@ Z80_Bus_Interface #(
    .m_wb_ack_i       ( h_ack_i    ), // WISHBONE acknowledge input
 */
 
-// ***************************************************************************************************
-// **** SD Card Interface ****************************************************************************
-// ***************************************************************************************************
-   .SD_sector        ( sd_sector   ), // 32-bit sector address
-   .SD_op_ena        ( sd_op_req   ), // SD transaction request signal
-   .SD_wr_ena        ( sd_wr_ena   ), // read/write signal (LOW - read, HIGH - write)
-   .SD_status        ( sd_RD_sta   ), // 8-bit SD interface status data
-   .SD_busy          ( sdi_busy    ),
-
-
-// ***************************************************************************************************
-// **** PSG Audio Interface **************************************************************************
-// ***************************************************************************************************
-   .psg_addr         ( psg_addr    ), // address of selected PSG register
-   .psg_data_o       ( psg_data_i  ), // data out TO PSG
-   .psg_wr_en        ( psg_wr_en   ), // write enable TO PSG
-   .psg_data_i       ( psg_data_o  ), // data in FROM PSG
-
-// ***************************************************************************************************
-// ***************************************************************************************************
-// ***************************************************************************************************
-// **** Legacy Peripheral IO ports. ******************************************************************
-// ***************************************************************************************************
-// ***************************************************************************************************
-// ***************************************************************************************************
-
-   // *** Enable/Disable video output port.
-   .VIDEO_EN          (               ), // Active HIGH, enables video output.
-
    // 2D accelerated Geometry unit IO access.
-   .GEO_STAT_RD       ( geo_stat_rd   ), // 8-bit data_mux_geo STATUS bus.  bit 0 = scfifo-almost-full flag, other bits free for other data.
-   //.GEO_STAT_WR       ( geo_stat_wr    ), // Bit 0 is used to soft-reset the geometry unit.
-
-   .GEO_WR_HI_STROBE  ( send_geo_cmd  ), // Active HIGH, signals GEOFF that valid 16-bit data is available on geo_cmd bus.
-   .GEO_WR_HI         ( geo_cmd[15:8] ), // MSB in geo_cmd bus.
-   .GEO_WR_LO         ( geo_cmd[7:0]  ), // LSB in geo_cmd bus.
-
    .RD_PX_CTR         ( collision_rd  ), // COPY READ PIXEL collision counter from pixel_writer.
    .WR_PX_CTR         ( collision_wr  ), // WRITE PIXEL     collision counter from pixel_writer.
-   .RD_PX_CTR_STROBE  ( rd_px_ctr_rs  ), // Active HIGH, signals GEOFF to reset READ PIXEL  collision counter.
+   .RD_PX_CTR_STROBE  ( rd_px_ctr_rs  ), // Active HIGH, signals GEOFF to reset READ  PIXEL collision counter.
    .WR_PX_CTR_STROBE  ( wr_px_ctr_rs  )  // Active HIGH, signals GEOFF to reset WRITE PIXEL collision counter.
 
 );
+
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// *** HIPI - Host IO Peripheral Interconnect ********************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+parameter bit [7:0] MMU_A0     = 'h38 ; // IO address for Bank 0 setting
+parameter bit [7:0] MMU_A1     = 'h39 ; // IO address for Bank 1 setting
+parameter bit [7:0] MMU_A2     = 'h3A ; // IO address for Bank 2 setting
+parameter bit [7:0] MMU_A3     = 'h3B ; // IO address for Bank 3 setting
+parameter bit [7:0] MMU_EN     = 'h3C ; // IO address for MMU enable
+parameter bit [7:0] PSG_LATCH  = 'hEE ; // IO address for PSG LATCH register R/W - write latches register, read returns data
+parameter bit [7:0] PSG_WRITE  = 'hEF ; // IO address for PSG WRITE port W-only
+parameter bit [7:0] SD_STATUS  = 'hF0 ; // IO address for SD STATUS register R-only
+parameter bit [7:0] SD_SECTOR  = 'hF1 ; // IO address for SD SECTOR address pipe - R/W (indexed by ARG_PTR)
+parameter bit [7:0] SD_MODE    = 'hF2 ; // IO address for SD operation trigger - W-only
+parameter bit [7:0] SD_ARG_PTR = 'hF3 ; // IO address for SD ARG_PTR - R/W
+parameter bit [7:0] GPU_RNG    = 'hF5 ; // IO address for GPU random number generator
+parameter bit [7:0] GEO_LO     = 'hF6 ; // IO address for GEOFF LOW byte.
+parameter bit [7:0] GEO_HI     = 'hF7 ; // IO address for GEOFF HIGH byte.
+parameter bit [7:0] FIFO_STAT  = 'hF8 ; // IO address for GPU FIFO status on bit 0 - remaining bits free for other data.
+parameter bit [7:0] GPU_ML     = 'hFC ; // IO address for lower 8-bits of the upper 12-bits of the DDR3 address bus
+parameter bit [7:0] GPU_MH     = 'hFD ; // IO address for upper 4-bits of the upper 12-bits of the DDR3 address bus
+
+wire [ 1:0] arg_ptr ;
+
+host_IO #(
+
+   .MMU_A0     ( MMU_A0     ),
+   .MMU_A1     ( MMU_A1     ),
+   .MMU_A2     ( MMU_A2     ),
+   .MMU_A3     ( MMU_A3     ),
+   .MMU_EN     ( MMU_EN     ),
+   .PSG_LATCH  ( PSG_LATCH  ),
+   .PSG_WRITE  ( PSG_WRITE  ),
+   .SD_STATUS  ( SD_STATUS  ),
+   .SD_SECTOR  ( SD_SECTOR  ),
+   .SD_MODE    ( SD_MODE    ),
+   .SD_ARG_PTR ( SD_ARG_PTR ),
+   .GPU_RNG    ( GPU_RNG    ),
+   .GPU_ML     ( GPU_ML     ),
+   .GPU_MH     ( GPU_MH     ) 
+
+) HIPI (
+
+   .clk               ( CMD_CLK                   ),
+   .reset             ( reset                     ),
+   .WRITE_PORT_DATA   ( IO_WR_DATA                ),
+   .WRITE_PORT_STROBE ( IO_WR_STROBE              ),
+
+   .MMU_AREA          ( IO_RD_DATA[MMU_A0:MMU_A3] ),
+   .MMU_ENABLE        ( IO_RD_DATA[MMU_EN]        ),
+   .GPU_MMU_LO        ( IO_RD_DATA[GPU_ML]        ),
+   .GPU_MMU_HI        ( IO_RD_DATA[GPU_MH]        ),
+   .ARG_PTR           ( arg_ptr                   ),
+   .SD_sector         ( sd_sector                 ), // 32-bit sector address
+   .SD_op_ena         ( sd_op_req                 ), // SD transaction request signal
+   .SD_wr_ena         ( sd_wr_ena                 ), // read/write signal (LOW - read, HIGH - write)
+   .SD_busy           ( sdi_busy                  ),
+   .RNG_OUT           ( IO_RD_DATA[GPU_RNG]       )
+
+);
+
+assign IO_RD_DATA[PSG_LATCH] = psg_data_o ;
+
+always_comb begin
+
+   case ( arg_ptr )
+      2'b00 : IO_RD_DATA[SD_SECTOR] = sd_sector[ 7: 0] ;
+      2'b01 : IO_RD_DATA[SD_SECTOR] = sd_sector[15: 8] ;
+      2'b10 : IO_RD_DATA[SD_SECTOR] = sd_sector[23:16] ;
+      2'b11 : IO_RD_DATA[SD_SECTOR] = sd_sector[31:24] ;
+   endcase
+
+end
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -886,7 +915,6 @@ Z80_Bus_Interface #(
 // ***************************************************************************************************************
 wire        sd_op_req   ; // enable request from Bridgette
 wire  [1:0] sd_wr_ena   ; // SD op mode from Bridgette
-wire  [7:0] sd_RD_sta   ; // SD status
 wire [31:0] sd_sector   ;
 wire        sdi_busy    ;
 
@@ -910,7 +938,7 @@ SDInterface #(
    .SECTOR       ( sd_sector ), // sector number to read/write
    //    output to Bridgette
    .BUSY         ( sdi_busy    ), // HIGH when interface is busy read/writing
-   .SD_STATUS    ( sd_RD_sta   ), // aggregated SD status byte
+   .SD_STATUS    ( IO_RD_DATA[SD_STATUS] ), // aggregated SD status byte
    // SD phy connections
    .SD_DATA      ( SD_DAT      ), // data to/from SD card
    .SD_CMD       ( SD_CMD      ), // bidir CMD signal
@@ -951,39 +979,39 @@ localparam DDR3_CLK_HZ = (CLK_KHZ_IN*CLK_IN_MULT/CLK_IN_DIV*1000); // Calculate 
 localparam CMD_CLK_HZ  = INTERFACE_SPEED[0]=="Q" ? DDR3_CLK_HZ/4 :
                          INTERFACE_SPEED[0]=="q" ? DDR3_CLK_HZ/4 : DDR3_CLK_HZ/2 ; // Generate the correct CMD_CLK_HZ.
 //
-wire            s0_bclk,s0_wclk,s0_data;
+wire        s0_bclk,s0_wclk,s0_data ;
+logic [7:0] r_psg_addr,r_psg_data_i,r_psg_data_o ; // help FMAX routing.
+logic       r_psg_wr_en ;                          // help FMAX routing.
 
-logic [7:0] r_psg_addr,r_psg_data_i,r_psg_data_o; // help FMAX routing.
-logic       r_psg_wr_en;                          // help FMAX routing.
-always_ff @(posedge CMD_CLK) {r_psg_wr_en,r_psg_addr,r_psg_data_i,psg_data_o}<={psg_wr_en,psg_addr,psg_data_i,r_psg_data_o}; // help FMAX routing.
+always_ff @(posedge CMD_CLK) {r_psg_wr_en,r_psg_addr,r_psg_data_i,psg_data_o}<={IO_WR_STROBE[PSG_WRITE],IO_WR_DATA[PSG_LATCH],IO_WR_DATA[PSG_WRITE],r_psg_data_o}; // help FMAX routing.
 
 YM2149_PSG_system #(
 
-   .CLK_IN_HZ       (      CMD_CLK_HZ ),   // Calculated input clock frequency
-   .CLK_I2S_IN_HZ   (   DDR3_CLK_HZ/2 ),   // Calculated input clock frequency
-   .CLK_PSG_HZ      (         1000000 ),   // Desired PSG clock frequency (Hz)
-   .I2S_DAC_HZ      (           48000 ),   // Desired I2S clock frequency (Hz)
-   .YM2149_DAC_BITS (               9 ),   // PSG DAC bit precision, 8 through 12 bits, the higher the bits, the higher the dynamic range.
-                                           // 10 bits almost perfectly replicates the YM2149 DA converter's Normalized voltage.
-                                           // With 8 bits, the lowest volumes settings will be slightly louder than normal.
-                                           // With 12 bits, the lowest volume settings will be too quiet.
-   .MIXER_DAC_BITS  (              16 )    // The number of DAC bits for the BHG_jt49_filter_mixer core and output.
+   .CLK_IN_HZ       (    CMD_CLK_HZ ), // Calculated input clock frequency
+   .CLK_I2S_IN_HZ   ( DDR3_CLK_HZ/2 ), // Calculated input clock frequency
+   .CLK_PSG_HZ      (       1000000 ), // Desired PSG clock frequency (Hz)
+   .I2S_DAC_HZ      (         48000 ), // Desired I2S clock frequency (Hz)
+   .YM2149_DAC_BITS (             9 ), // PSG DAC bit precision, 8 through 12 bits, the higher the bits, the higher the dynamic range.
+                                       // 10 bits almost perfectly replicates the YM2149 DA converter's Normalized voltage.
+                                       // With 8 bits, the lowest volumes settings will be slightly louder than normal.
+                                       // With 12 bits, the lowest volume settings will be too quiet.
+   .MIXER_DAC_BITS  (            16 )  // The number of DAC bits for the BHG_jt49_filter_mixer core and output.
 
 ) ARYA (
 
-   .clk             (      CMD_CLK ),
-   .clk_i2s         (  DDR3_CLK_50 ),
-   .reset_n         (       ~reset ),
-   .addr            (   r_psg_addr ), // register address
-   .data            ( r_psg_data_i ), // data IN to PSG
-   .wr_n            ( !r_psg_wr_en ), // data/addr valid
+   .clk             (       CMD_CLK ),
+   .clk_i2s         (   DDR3_CLK_50 ),
+   .reset_n         (        ~reset ),
+   .addr            (    r_psg_addr ), // register address
+   .data            (  r_psg_data_i ), // data IN to PSG
+   .wr_n            (  !r_psg_wr_en ), // data/addr valid
 
-   .dout            ( r_psg_data_o ), // PSG data output
-   .i2s_sclk        (      s0_bclk ), // I2S serial bit clock output
-   .i2s_lrclk       (      s0_wclk ), // I2S L/R output
-   .i2s_data        (      s0_data ), // I2S serial audio out
-   .sound           (              ), // parallel  audio out, mono or left channel
-   .sound_right     (              )  // parallel  audio out, right channel
+   .dout            (  r_psg_data_o ), // PSG data output
+   .i2s_sclk        (       s0_bclk ), // I2S serial bit clock output
+   .i2s_lrclk       (       s0_wclk ), // I2S L/R output
+   .i2s_data        (       s0_data ), // I2S serial audio out
+   .sound           (               ), // parallel  audio out, mono or left channel
+   .sound_right     (               )  // parallel  audio out, right channel
 
 );
 
@@ -992,23 +1020,60 @@ YM2149_PSG_system #(
 // ***********************************************************************************************************************************************
 // Copy audio bus...
 // ***********************************************************************************************************************************************
-(*preserve*)    logic s1_bclk,s1_wclk,s1_data; // Force separate reg buffers for the 2 audio I2S ports
-(*preserve*)    logic s2_bclk,s2_wclk,s2_data; // located on different sides of the FPGA.
+(*preserve*)   logic s1_bclk,s1_wclk,s1_data; // Force separate reg buffers for the 2 audio I2S ports
+(*preserve*)   logic s2_bclk,s2_wclk,s2_data; // located on different sides of the FPGA.
 
-                always @(posedge DDR3_CLK_50) {s1_bclk,s1_wclk,s1_data} <= {s0_bclk,s0_wclk,s0_data};
-                always @(posedge DDR3_CLK_50) {s2_bclk,s2_wclk,s2_data} <= {s0_bclk,s0_wclk,s0_data};
+               always @(posedge DDR3_CLK_50) {s1_bclk,s1_wclk,s1_data} <= {s0_bclk,s0_wclk,s0_data};
+               always @(posedge DDR3_CLK_50) {s2_bclk,s2_wclk,s2_data} <= {s0_bclk,s0_wclk,s0_data};
 
-                 // Wire the DECA's HDMI transmitter's I2S audio port.
-                assign HDMI_SCLK      =  s1_bclk ;
-                assign HDMI_LRCLK     =  s1_wclk ;
-                assign HDMI_I2S[3:0]  = {s1_data,s1_data,s1_data,s1_data};
+               // Wire the DECA's HDMI transmitter's I2S audio port.
+               assign HDMI_SCLK      =  s1_bclk ;
+               assign HDMI_LRCLK     =  s1_wclk ;
+               assign HDMI_I2S[3:0]  = {s1_data,s1_data,s1_data,s1_data};
                 
-                // Wire the DECA's audio codec port.
-                assign AUDIO_BCLK     =  s2_bclk ;
-                assign AUDIO_WCLK     =  s2_wclk ; // Don't forget to edit the I2C registers when using a different MCLK frequency.
-                assign AUDIO_DIN_MFP1 =  s2_data ;
+               // Wire the DECA's audio codec port.
+               assign AUDIO_BCLK     =  s2_bclk ;
+               assign AUDIO_WCLK     =  s2_wclk ; // Don't forget to edit the I2C registers when using a different MCLK frequency.
+               assign AUDIO_DIN_MFP1 =  s2_data ;
 
-                assign AUDIO_MCLK     =  1'b0    ; // TLV320AIC3254 should be programmed to use its PLL to run off of the I2S_BCLK.
+               assign AUDIO_MCLK     =  1'b0    ; // TLV320AIC3254 should be programmed to use its PLL to run off of the I2S_BCLK.
+
+
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// *** COPPER ****************************************************************************************************
+// *** FPU co-processor ******************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+
+// IO_WR_STROBE
+// IO_RD_DATA  
+// IO_WR_DATA  
+// IO_RD_STROBE
+// E0-EB ports in use for FPU
+/*
+nockieboy_ALU #(
+
+) COPPER (
+
+	.clk    ( CMD_CLK   ), // clk
+	.areset ( geo_reset ), // geo_reset is a combined signal of the GPU's RESET button, OR'd with Z80_RST.
+	.en     ( 1'b1      ), // enable - IO_WR_STROBE?
+	.a      ( '{ IO_WR_DATA['hE3], IO_WR_DATA['hE2], IO_WR_DATA['hE1], IO_WR_DATA['hE0] } ), // FACTOR a 32-bit
+	.b      ( '{ IO_WR_DATA['hE7], IO_WR_DATA['hE6], IO_WR_DATA['hE5], IO_WR_DATA['hE4] } ), // FACTOR b 32-bit
+	.q      ( '{ IO_RD_DATA['hEB], IO_RD_DATA['hEA], IO_RD_DATA['hE9], IO_RD_DATA['hE8] } )  // OUTPUT q 32-bit
+
+);
+*/
+
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -1024,47 +1089,50 @@ YM2149_PSG_system #(
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
-assign geo_stat_rd[7:1] = 7'b0000000 ;
+assign IO_RD_DATA[FIFO_STAT][7:1] = 7'b0000000 ;
 wire   CMD_read_ena2 ;
 wire   CMD_VID_hena, CMD_VID_vena    ;
 
-geometry_processor   GEOFF(
+geometry_processor #(
+
+   .FIFO_MARGIN      ( 32 )
+
+) GEOFF (
 
    // ****** INPUTS *******
    .clk              ( CMD_CLK      ), // 125 MHz clock signal from the DDR3_Controller in GPU_DECA_DDR3_top.
    .reset            ( geo_reset    ), // reset is a combined signal of the GPU's RESET button, OR'd with Z80_RST.
-   .fifo_cmd_ready   ( send_geo_cmd ), // Active HIGH from Z80_BRIDGE when geo_cmd bus has valid 16-bit command.
+   .fifo_cmd_ready   ( IO_WR_STROBE[GEO_HI] ), // Active HIGH from Z80_BRIDGE when geo_cmd bus has valid 16-bit command.
    .hse              ( CMD_VID_hena ), // Horizontal sync signal from VIGEN.
    .vse              ( CMD_VID_vena ), // Vertical   sync signal from VIGEN.
    .collision_rd_rst ( rd_px_ctr_rs ), // Active HIGH signal from Z80_BRIDGE to reset READ  PIXEL COLLISION counter.
    .collision_wr_rst ( wr_px_ctr_rs ), // Active HIGH signal from Z80_BRIDGE to reset WRITE PIXEL COLLISION counter.
-   .fifo_cmd_in      ( geo_cmd      ), // 16-bit command bus from Z80_BRIDGE.
+   .fifo_cmd_in      ( { IO_WR_DATA[GEO_HI], IO_WR_DATA[GEO_LO] } ), // 16-bit command bus from Z80_BRIDGE.
    
    // ****** OUTPUTS *******
-   .fifo_cmd_busy    ( geo_stat_rd[0] ), // Active HIGH signal when GEOFF's FIFO is full. Connects to Z80_BRIDGE as part of GEO_STAT_RD bus (bit 0).
+   .fifo_cmd_busy    ( IO_RD_DATA[FIFO_STAT][0] ), // Active HIGH signal when GEOFF's FIFO is full.
    .collision_rd     ( collision_rd   ), // READ  PIXEL COLLISION count output.
    .collision_wr     ( collision_wr   ), // WRITE PIXEL COLLISION count output.
 
 //**********************************************
 // GEO DDR3 Memory access
 //**********************************************
-   .wr_ena           (                    CMD_write_ena  [2]           ), // output to geo_wr_ena on data_mux_geo
-   .ram_addr         (  (PORT_ADDR_SIZE)'(CMD_addr       [2])          ), // output to address_geo on data_mux_geo
-   .ram_wr_data      ( (PORT_CACHE_BITS)'(CMD_wdata      [2])          ), // output to data_in_geo on data_mux_geo
+   .wr_ena           (                    CMD_write_ena  [2]  ), // output to geo_wr_ena on data_mux_geo
+   .ram_addr         (  (PORT_ADDR_SIZE)'(CMD_addr       [2]) ), // output to address_geo on data_mux_geo
+   .ram_wr_data      ( (PORT_CACHE_BITS)'(CMD_wdata      [2]) ), // output to data_in_geo on data_mux_geo
 
-   .rd_req           (                    CMD_read_ena2                ), // GEO read request for the read/modify/write pixel channel.
-   .rd_data_rdy      (                    CMD_read_ready [2]           ), // GEO read data ready for the read/modify/write pixel channel.
-   .rd_data_in       (              (16)'(CMD_read_data  [2])          ), // GEO read data for the read/modify/write pixel channel.
+   .rd_req           (                    CMD_read_ena2       ), // GEO read request for the read/modify/write pixel channel.
+   .rd_data_rdy      (                    CMD_read_ready [2]  ), // GEO read data ready for the read/modify/write pixel channel.
+   .rd_data_in       (              (16)'(CMD_read_data  [2]) ), // GEO read data for the read/modify/write pixel channel.
 
-   .rd_req_C         (                    CMD_ena        [3]           ), // GEO read request for the COPY pixel channel.
-   .ram_addr_C       (  (PORT_ADDR_SIZE)'(CMD_addr       [3])          ), // GEO read address for the COPY pixel channel.
-   .rd_data_rdy_C    (                    CMD_read_ready [3]           ), // GEO read data ready for the COPY pixel channel.
-   .rd_data_in_C     (              (16)'(CMD_read_data  [3])          ), // GEO read data for the COPY pixel channel.
+   .rd_req_C         (                    CMD_ena        [3]  ), // GEO read request for the COPY pixel channel.
+   .ram_addr_C       (  (PORT_ADDR_SIZE)'(CMD_addr       [3]) ), // GEO read address for the COPY pixel channel.
+   .rd_data_rdy_C    (                    CMD_read_ready [3]  ), // GEO read data ready for the COPY pixel channel.
+   .rd_data_in_C     (              (16)'(CMD_read_data  [3]) ), // GEO read data for the COPY pixel channel.
 
-   .ram_mux_busy     ( CMD_busy[2] || CMD_busy[3] )  // || geo_port_full ), // input from geo_port_full
+   .ram_mux_busy     (            CMD_busy[2] || CMD_busy[3]  )  // || geo_port_full ), // input from geo_port_full
 
 );
-   defparam GEOFF.FIFO_MARGIN = 32;
 
 assign CMD_ena             [2] = CMD_write_ena[2] || CMD_read_ena2 ; // Temporary trick for backwards compatibility.
 assign CMD_wmask           [2] = 3 ;                                 // Make sure write enable is there for the first 16 bits.
@@ -1076,7 +1144,6 @@ assign CMD_wdata           [3] = 0;
 assign CMD_wmask           [3] = 0;
 assign CMD_read_vector_in  [3] = 0;
 assign CMD_priority_boost  [3] = 0;
-
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -1216,64 +1283,69 @@ wire  HDMI_RESET  ;
 
 localparam            HDMI_TABLE_len                       = 34 ; // Optional, length of init table.
 localparam bit [16:0] HDMI_TABLE_data [0:HDMI_TABLE_len-1] = '{   // Optional, init LUT data.  17'h {1'function,8'register_address,8'write_data},...
-                                                        // ADV7513 HDMI transmitter setup.
+   // ADV7513 HDMI transmitter setup.
+   17'h1_02FF, // Delay for 255 millisecond.
+   17'h1_0072, // 4 Set ADV7513 HDMI transmitter's device address.
+               // Program ADV7513 HDMI transmitter's registers.
+   17'h0_9803, // Must be set to 0x03 for proper operation
+   17'h0_0100, // Set 'N' value at 6144
+   17'h0_0218, // Set 'N' value at 6144
+   17'h0_0300, // Set 'N' value at 6144
+   17'h0_1470, // Set Ch count in the channel status to 8.
+   17'h0_1520, // Input 444 (RGB or YCrCb) with Separate Syncs, 48kHz fs
+   17'h0_1630, // Output format 444, 24-bit input
+   17'h0_1846, // Disable CSC
+   17'h0_4080, // General control packet enable
+   17'h0_4110, // Power down control
+   17'h0_49A8, // Set dither mode - 12-to-10 bit
+   17'h0_5510, // Set RGB in AVI infoframe
+   17'h0_5608, // Set active format aspect
+   17'h0_96F6, // Set interrup
+   17'h0_7307, // Info frame Ch count to 8
+   17'h0_761f, // Set speaker allocation for 8 channels
+   17'h0_9803, // Must be set to 0x03 for proper operation
+   17'h0_9902, // Must be set to Default Value
+   17'h0_9ae0, // Must be set to 0b1110000
+   17'h0_9c30, // PLL filter R1 value
+   17'h0_9d61, // Set clock divide
+   17'h0_a2a4, // Must be set to 0xA4 for proper operation
+   17'h0_a3a4, // Must be set to 0xA4 for proper operation
+   17'h0_a504, // Must be set to Default Value
+   17'h0_ab40, // Must be set to Default Value
+   17'h0_af16, // Select HDMI mode
+   17'h0_ba60, // No clock delay
+   17'h0_d1ff, // Must be set to Default Value
+   17'h0_de10, // Must be set to Default for proper operation
+   17'h0_e460, // Must be set to Default Value
+   17'h0_fa7d, // Nbr of times to look for good phase
 
-                                                        17'h1_02FF,  //  Delay for 255 millisecond.
-                                                        17'h1_0072,  //  4 Set ADV7513 HDMI transmitter's device address.
-                                                                     //    Program ADV7513 HDMI transmitter's registers.
-                                                        17'h0_9803,  //Must be set to 0x03 for proper operation
-                                                        17'h0_0100,  //Set 'N' value at 6144
-                                                        17'h0_0218,  //Set 'N' value at 6144
-                                                        17'h0_0300,  //Set 'N' value at 6144
-                                                        17'h0_1470,  // Set Ch count in the channel status to 8.
-                                                        17'h0_1520,  //Input 444 (RGB or YCrCb) with Separate Syncs, 48kHz fs
-                                                        17'h0_1630,  //Output format 444, 24-bit input
-                                                        17'h0_1846,  //Disable CSC
-                                                        17'h0_4080,  //General control packet enable
-                                                        17'h0_4110,  //Power down control
-                                                        17'h0_49A8,  //Set dither mode - 12-to-10 bit
-                                                        17'h0_5510,  //Set RGB in AVI infoframe
-                                                        17'h0_5608,  //Set active format aspect
-                                                        17'h0_96F6,  //Set interrup
-                                                        17'h0_7307,  //Info frame Ch count to 8
-                                                        17'h0_761f,  //Set speaker allocation for 8 channels
-                                                        17'h0_9803,  //Must be set to 0x03 for proper operation
-                                                        17'h0_9902,  //Must be set to Default Value
-                                                        17'h0_9ae0,  //Must be set to 0b1110000
-                                                        17'h0_9c30,  //PLL filter R1 value
-                                                        17'h0_9d61,  //Set clock divide
-                                                        17'h0_a2a4,  //Must be set to 0xA4 for proper operation
-                                                        17'h0_a3a4,  //Must be set to 0xA4 for proper operation
-                                                        17'h0_a504,  //Must be set to Default Value
-                                                        17'h0_ab40,  //Must be set to Default Value
-                                                        17'h0_af16,  //Select HDMI mode
-                                                        17'h0_ba60,  //No clock delay
-                                                        17'h0_d1ff,  //Must be set to Default Value
-                                                        17'h0_de10,  //Must be set to Default for proper operation
-                                                        17'h0_e460,  //Must be set to Default Value
-                                                        17'h0_fa7d,  //Nbr of times to look for good phase
-
-                                                        17'h1_0101   //  Allow loop the reprogramming since the ADV7513 monitor HPD doesn't always work.
-                                                        };
+   17'h1_0101  // Allow loop the reprogramming since the ADV7513 monitor HPD doesn't always work.
+};
 
 // ***********************************************************************************************************************************************
 // Instantiate BHG_I2C_init_RS232_debugger.
 // ***********************************************************************************************************************************************
-    BHG_I2C_init_RS232_debugger #(  .CLK_IN_KHZ     ( CMD_CLK_HZ/1000    ),  // Source  clk_in  frequency in KHz, typically at least 8x the desired I2C rate.
-                                    .I2C_KHZ        ( 100                ),  // Desired clk_out frequency in KHz.
-                                    .RS232_BAUD     ( 921600             ),  // Desired RS232 baud rate.
-                                    .TRI_I2C_scl    ( 0                  ),  // 0=I2C_clk & data output is tri-stated when inactive. 1=I2C_clk is always output enabled.
-                                    .TX_TABLE_len   ( HDMI_TABLE_len     ),  // Optional, length of init table.
-                                    .TX_TABLE_data  ( HDMI_TABLE_data    )   // Optional, init LUT data.
-                      ) I2C_HDMI (
-                                    .clk_in         ( CMD_CLK            ),  // System source clock.
-                                    .rst_in         ( RST_OUT || (HDMI_RESET /*&& !HDMI_TX_INT*/)),  // Synchronous reset.
-                                    .rst_out        ( HDMI_RESET         ),  // I2C sequencer generated reset output option.
-                                    .I2C_ack_error  (                    ),  // Goes high when the I2C slave device does not return an ACK.
-                                    .I2C_scl        ( HDMI_I2C_SCL       ),  // I2C clock, bidirectional pin.
-                                    .I2C_sda        ( HDMI_I2C_SDA       ),  // I2C data, bidirectional pin.
-                                    .RS232_rxd      (                    ),  // RS232 input, receive from terminal.
-                                    .RS232_txd      (                    )); // RS232 output, transmit to terminal.
+    BHG_I2C_init_RS232_debugger #(
+
+      .CLK_IN_KHZ     ( CMD_CLK_HZ/1000    ),  // Source  clk_in  frequency in KHz, typically at least 8x the desired I2C rate.
+      .I2C_KHZ        ( 100                ),  // Desired clk_out frequency in KHz.
+      .RS232_BAUD     ( 921600             ),  // Desired RS232 baud rate.
+      .TRI_I2C_scl    ( 0                  ),  // 0=I2C_clk & data output is tri-stated when inactive. 1=I2C_clk is always output enabled.
+      .TX_TABLE_len   ( HDMI_TABLE_len     ),  // Optional, length of init table.
+      .TX_TABLE_data  ( HDMI_TABLE_data    )   // Optional, init LUT data.
+
+   ) I2C_HDMI (
+
+      .clk_in         ( CMD_CLK            ),  // System source clock.
+      .rst_in         ( RST_OUT || (HDMI_RESET /*&& !HDMI_TX_INT*/)),  // Synchronous reset.
+      .rst_out        ( HDMI_RESET         ),  // I2C sequencer generated reset output option.
+      .I2C_ack_error  (                    ),  // Goes high when the I2C slave device does not return an ACK.
+      .I2C_scl        ( HDMI_I2C_SCL       ),  // I2C clock, bidirectional pin.
+      .I2C_sda        ( HDMI_I2C_SDA       ),  // I2C data, bidirectional pin.
+      .RS232_rxd      (                    ),  // RS232 input, receive from terminal.
+      .RS232_txd      (                    )   // RS232 output, transmit to terminal.
+
+   );
 // ***********************************************************************************************************************************************
 // ***********************************************************************************************************************************************
 // ***********************************************************************************************************************************************
@@ -1298,82 +1370,86 @@ localparam bit [16:0] HDMI_TABLE_data [0:HDMI_TABLE_len-1] = '{   // Optional, i
 
 localparam            TLV320A_TABLE_len                          = 36 ; // Optional, length of init table.
 localparam bit [16:0] TLV320A_TABLE_data [0:TLV320A_TABLE_len-1] = '{   // Optional, init LUT data.  17'h {1'function,8'register_address,8'write_data},...
-                                                        // TLV320AIC3254 audio codec setup for headphone playback.
+   // TLV320AIC3254 audio codec setup for headphone playback.
+   17'h1_0100,  //  1 Set rst_out low.
+   17'h1_0101,  //  2 Set rst_out high.
+   17'h1_0202,  //  3 Delay for 2 millisecond. 
 
-                                                        17'h1_0100,  //  1 Set rst_out low.
-                                                        17'h1_0101,  //  2 Set rst_out high.
-                                                        17'h1_0202,  //  3 Delay for 2 millisecond. 
+   17'h1_0030,  //  4 Set TLV320AIC3254 audio codec's device address.
+               //    Program TLV320AIC3254 audio codec's registers.
 
-                                                        17'h1_0030,  //  4 Set TLV320AIC3254 audio codec's device address.
-                                                                     //    Program TLV320AIC3254 audio codec's registers.
+   17'h0_0000,  //   5    Page 0.
+   17'h0_0101,  //   6  # Soft reset.
+   17'h1_0202,  //   7    Delay for 2 millisecond. 
 
-                                                        17'h0_0000,  //   5    Page 0.
-                                                        17'h0_0101,  //   6  # Soft reset.
-                                                        17'h1_0202,  //   7    Delay for 2 millisecond. 
+                  //  PLL Setup
+   17'h0_0407,  //   8    = pll s=bclk, codec_clkin=PLL 
+   17'h0_0594,  //   9    = pll on, pll_p=1 pll_r=4
+   17'h0_0607,  //  10    =pll_j = 7
 
-                                                                      //  PLL Setup
-                                                        17'h0_0407,  //   8    = pll s=bclk, codec_clkin=PLL 
-                                                        17'h0_0594,  //   9    = pll on, pll_p=1 pll_r=4
-                                                        17'h0_0607,  //  10    =pll_j = 7
+   17'h0_0b87,   // 11  # ndac powered up and  = 7
+   17'h0_0c82,   // 12  # mdac powered up = 2.
+   17'h0_0d00,   // 13  # Program the OSR of DAC to 128
+   17'h0_0e80,   // 14  
+   17'h0_1b30,   // 15  # Set the word length of Audio Interface to 32bits PTM_P4
+   17'h0_3c08,   // 16  # Set the DAC Mode to PRB_P8
 
-                                                        17'h0_0b87,   // 11  # ndac powered up and  = 7
-                                                        17'h0_0c82,   // 12  # mdac powered up = 2.
-                                                        17'h0_0d00,   // 13  # Program the OSR of DAC to 128
-                                                        17'h0_0e80,   // 14  
-                                                        17'h0_1b30,   // 15  # Set the word length of Audio Interface to 32bits PTM_P4
-                                                        17'h0_3c08,   // 16  # Set the DAC Mode to PRB_P8
+   17'h0_0001,   // 17  # Select Page 1
 
-                                                        17'h0_0001,   // 17  # Select Page 1
+   17'h0_0100,   // 18 Deca setup - *USE Crude AVdd in presence of external AVdd supply or before powering up internal AVdd LDO
+   17'h0_0221,   // 19  DECA setup - Avdd LDO is on set to 1.77v.
 
-                                                        17'h0_0100,   // 18 Deca setup - *USE Crude AVdd in presence of external AVdd supply or before powering up internal AVdd LDO
-                                                        17'h0_0221,   // 19  DECA setup - Avdd LDO is on set to 1.77v.
+   17'h0_7b01,   // 20  # Set the REF charging time to 40ms
+   17'h0_1425,   // 21  # HP soft stepping settings for optimal pop performance at power up Rpop used is 6k with N = 6 and soft step = 20usec. This should work with 47uF coupling capacitor. Can try N=5,6 or 7 time constants as well. Trade-off delay vs “pop” sound.
+   17'h0_0a00,   // 22  # Set the Input Common Mode to 0.9V and Output Common Mode for Headphone to Input Common Mode
 
-                                                        17'h0_7b01,   // 20  # Set the REF charging time to 40ms
-                                                        17'h0_1425,   // 21  # HP soft stepping settings for optimal pop performance at power up Rpop used is 6k with N = 6 and soft step = 20usec. This should work with 47uF coupling capacitor. Can try N=5,6 or 7 time constants as well. Trade-off delay vs “pop” sound.
-                                                        17'h0_0a00,   // 22  # Set the Input Common Mode to 0.9V and Output Common Mode for Headphone to Input Common Mode
+   17'h0_0c08,   // 23  # Route Left DAC to HPL
+   17'h0_0d08,   // 24  # Route Right DAC to HPR
 
-                                                        17'h0_0c08,   // 23  # Route Left DAC to HPL
-                                                        17'h0_0d08,   // 24  # Route Right DAC to HPR
+   17'h0_0e08,   // 25  # Route Left DAC to LOL
+   17'h0_0f08,   // 26  # Route Right DAC to LOR
 
-                                                        17'h0_0e08,   // 25  # Route Left DAC to LOL
-                                                        17'h0_0f08,   // 26  # Route Right DAC to LOR
+   17'h0_0300,   // 27  # Set the DAC PTM mode to PTM_P3/4
+   17'h0_0400,   // 28  
 
-                                                        17'h0_0300,   // 27  # Set the DAC PTM mode to PTM_P3/4
-                                                        17'h0_0400,   // 28  
+   17'h0_1000,   // 29  # Set the HPL gain to 0dB
+   17'h0_1100,   // 30  # Set the HPR gain to 0dB
 
-                                                        17'h0_1000,   // 29  # Set the HPL gain to 0dB
-                                                        17'h0_1100,   // 30  # Set the HPR gain to 0dB
-
-                                                        17'h0_1200,   // 31  # Set the LOL gain to 0dB
-                                                        17'h0_1300,   // 32  # Set the LOR gain to 0dB
+   17'h0_1200,   // 31  # Set the LOL gain to 0dB
+   17'h0_1300,   // 32  # Set the LOR gain to 0dB
 
 
-                                                        17'h0_093C,   // 33  # Power up HPL,HPR,LOL,LOR drivers   //17'h0_0930,   // 26  # Power up HPL and HPR drivers
+   17'h0_093C,   // 33  # Power up HPL,HPR,LOL,LOR drivers   //17'h0_0930,   // 26  # Power up HPL and HPR drivers
 
-                                                        17'h0_0000,   // 34  # select Page 0, Wait for 2.5 sec for soft stepping to take effect Else read Page 1, Register 63d, D(7:6). When = “11” soft-stepping is complete Select Page 0
-                                                        17'h0_3fd6,   // 35  # Power up the Left and Right DAC Channels with route the Left Audio digital data to Left Channel DAC and Right Audio digital data to Right Channel DAC
-                                                        17'h0_4000    // 36  # Unmute the DAC digital volume control
-                                                        };
+   17'h0_0000,   // 34  # select Page 0, Wait for 2.5 sec for soft stepping to take effect Else read Page 1, Register 63d, D(7:6). When = “11” soft-stepping is complete Select Page 0
+   17'h0_3fd6,   // 35  # Power up the Left and Right DAC Channels with route the Left Audio digital data to Left Channel DAC and Right Audio digital data to Right Channel DAC
+   17'h0_4000    // 36  # Unmute the DAC digital volume control
+};
 
 // ***********************************************************************************************************************************************
 // Instantiate BHG_I2C_init_RS232_debugger.
 // ***********************************************************************************************************************************************
+BHG_I2C_init_RS232_debugger #(
 
-    BHG_I2C_init_RS232_debugger #(  .CLK_IN_KHZ     ( CMD_CLK_HZ/1000    ),  // Source  clk_in  frequency in KHz, typically at least 8x the desired I2C rate.
-                                    .I2C_KHZ        ( 100                ),  // Desired clk_out frequency in KHz.
-                                    .RS232_BAUD     ( 921600             ),  // Desired RS232 baud rate.
-                                    .TRI_I2C_scl    ( 0                  ),  // 0=I2C_clk & data output is tri-stated when inactive. 1=I2C_clk is always output enabled.
-                                    .TX_TABLE_len   ( TLV320A_TABLE_len  ),  // Optional, length of init table.
-                                    .TX_TABLE_data  ( TLV320A_TABLE_data )   // Optional, init LUT data.
-                   ) I2C_TLV320A (
-                                    .clk_in         ( CMD_CLK            ),  // System source clock.
-                                    .rst_in         ( RST_OUT            ),  // Synchronous reset.
-                                    .rst_out        ( AUDIO_RESET_n      ),  // I2C sequencer generated reset output option.
-                                    .I2C_ack_error  (                    ),  // Goes high when the I2C slave device does not return an ACK.
-                                    .I2C_scl        ( AUDIO_SCL_SS_n     ),  // I2C clock, bidirectional pin.
-                                    .I2C_sda        ( AUDIO_SDA_MOSI     ),  // I2C data, bidirectional pin.
-                                    .RS232_rxd      (                    ),  // RS232 input, receive from terminal.
-                                    .RS232_txd      (                    )); // RS232 output, transmit to terminal.
+   .CLK_IN_KHZ     ( CMD_CLK_HZ/1000    ),  // Source  clk_in  frequency in KHz, typically at least 8x the desired I2C rate.
+   .I2C_KHZ        ( 100                ),  // Desired clk_out frequency in KHz.
+   .RS232_BAUD     ( 921600             ),  // Desired RS232 baud rate.
+   .TRI_I2C_scl    ( 0                  ),  // 0=I2C_clk & data output is tri-stated when inactive. 1=I2C_clk is always output enabled.
+   .TX_TABLE_len   ( TLV320A_TABLE_len  ),  // Optional, length of init table.
+   .TX_TABLE_data  ( TLV320A_TABLE_data )   // Optional, init LUT data.
+
+) I2C_TLV320A (
+
+   .clk_in         ( CMD_CLK            ),  // System source clock.
+   .rst_in         ( RST_OUT            ),  // Synchronous reset.
+   .rst_out        ( AUDIO_RESET_n      ),  // I2C sequencer generated reset output option.
+   .I2C_ack_error  (                    ),  // Goes high when the I2C slave device does not return an ACK.
+   .I2C_scl        ( AUDIO_SCL_SS_n     ),  // I2C clock, bidirectional pin.
+   .I2C_sda        ( AUDIO_SDA_MOSI     ),  // I2C data, bidirectional pin.
+   .RS232_rxd      (                    ),  // RS232 input, receive from terminal.
+   .RS232_txd      (                    )   // RS232 output, transmit to terminal.
+
+);
 
 assign AUDIO_SPI_SELECT = 0 ; // make low for I2C.
 
@@ -1502,13 +1578,13 @@ always_ff @(posedge CMD_CLK) begin
 end // @CMD_CLK
 
 
-// Show LEDs and send them to one of the RD232 debugger display ports.
+// Show LEDs and send them to one of the RS232 debugger display ports.
 always_ff @(posedge CMD_CLK) begin    // Make sure the signals driving LED's aren't route optimized for the LED's IO pin location.
 
     DB232_tx0[0]   <= RS232_TXD_LED ;     // RS232 Debugger TXD status LED
     DB232_tx0[1]   <= 1'b0 ;              // Turn off LED.
     DB232_tx0[2]   <= PLL_LOCKED   ;
-    DB232_tx0[3]   <= SEQ_CAL_PASS ;              // Turn off LED.
+    DB232_tx0[3]   <= SEQ_CAL_PASS ;      // Turn off LED.
     DB232_tx0[4]   <= DDR3_READY ;
     DB232_tx0[5]   <= 1'b0 ;
     DB232_tx0[6]   <= 1'b0 ;              // Turn off LED.
