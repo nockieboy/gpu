@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="DIV40_sim/DIV40_memoryC0_uid146_invTables_lutmem.hex"
+   type="HEX" />
+ <file
+   path="DIV40_sim/DIV40_memoryC0_uid147_invTables_lutmem.hex"
+   type="HEX" />
+ <file
+   path="DIV40_sim/DIV40_memoryC0_uid148_invTables_lutmem.hex"
+   type="HEX" />
+ <file
+   path="DIV40_sim/DIV40_memoryC1_uid151_invTables_lutmem.hex"
+   type="HEX" />
+ <file
+   path="DIV40_sim/DIV40_memoryC1_uid152_invTables_lutmem.hex"
+   type="HEX" />
+ <file
+   path="DIV40_sim/DIV40_memoryC2_uid155_invTables_lutmem.hex"
+   type="HEX" />
+ <file
+   path="DIV40_sim/DIV40_memoryC2_uid156_invTables_lutmem.hex"
+   type="HEX" />
+ <file
+   path="DIV40_sim/DIV40_memoryC3_uid159_invTables_lutmem.hex"
+   type="HEX" />
+ <file path="DIV40_sim/DIV40.vo" type="VERILOG" />
+ <topLevel name="DIV40" />
+ <deviceFamily name="max10" />
+</simPackage>

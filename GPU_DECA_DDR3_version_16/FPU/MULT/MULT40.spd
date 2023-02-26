@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file path="MULT40_sim/MULT40.vo" type="VERILOG" />
+ <topLevel name="MULT40" />
+ <deviceFamily name="max10" />
+</simPackage>

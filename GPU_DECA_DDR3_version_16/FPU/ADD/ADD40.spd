@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file path="ADD40_sim/ADD40.vo" type="VERILOG" />
+ <topLevel name="ADD40" />
+ <deviceFamily name="max10" />
+</simPackage>

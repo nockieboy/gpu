@@ -38,20 +38,20 @@ module host_IO (
 );
 
     // Default IO port assignments
-    parameter bit [7:0]  MMU_A0     = 'h38 ; // IO address for Bank 0 setting 
-    parameter bit [7:0]  MMU_A1     = 'h39 ; // IO address for Bank 1 setting 
-    parameter bit [7:0]  MMU_A2     = 'h3A ; // IO address for Bank 2 setting 
-    parameter bit [7:0]  MMU_A3     = 'h3B ; // IO address for Bank 3 setting 
-    parameter bit [7:0]  MMU_EN     = 'h3C ; // IO address for MMU enable 
-    parameter bit [7:0]  PSG_LATCH  = 'hEE ; // IO addr: PSG LATCH register R/W - write latches register, read returns data
-    parameter bit [7:0]  PSG_WRITE  = 'hEF ; // IO addr: PSG WRITE port W-only
-    parameter bit [7:0]  SD_STATUS  = 'hF0 ; // IO address for SD STATUS register R-only
-    parameter bit [7:0]  SD_SECTOR  = 'hF1 ; // IO address for SD SECTOR address pipe - R/W (indexed by ARG_PTR)
-    parameter bit [7:0]  SD_MODE    = 'hF2 ; // IO address for SD operation trigger - W-only
-    parameter bit [7:0]  SD_ARG_PTR = 'hF3 ; // IO address for SD ARG_PTR - R/W
-    parameter bit [7:0]  GPU_RNG    = 'hF5 ; // IO addr: GPU random number generator
-    parameter bit [7:0]  GPU_ML     = 'hFC ; // Lower 8-bits of the upper 12-bits of the DDR3 address bus
-    parameter bit [7:0]  GPU_MH     = 'hFD ; // Upper 4-bits of the upper 12-bits of the DDR3 address bus
+    parameter bit [7:0] MMU_A0     = 'h38 ; // IO address for Bank 0 setting 
+    parameter bit [7:0] MMU_A1     = 'h39 ; // IO address for Bank 1 setting 
+    parameter bit [7:0] MMU_A2     = 'h3A ; // IO address for Bank 2 setting 
+    parameter bit [7:0] MMU_A3     = 'h3B ; // IO address for Bank 3 setting 
+    parameter bit [7:0] MMU_EN     = 'h3C ; // IO address for MMU enable 
+    parameter bit [7:0] PSG_LATCH  = 'hEE ; // IO addr: PSG LATCH register R/W - write latches register, read returns data
+    parameter bit [7:0] PSG_WRITE  = 'hEF ; // IO addr: PSG WRITE port W-only
+    parameter bit [7:0] SD_STATUS  = 'hF0 ; // IO address for SD STATUS register R-only
+    parameter bit [7:0] SD_SECTOR  = 'hF1 ; // IO address for SD SECTOR address pipe - R/W (indexed by ARG_PTR)
+    parameter bit [7:0] SD_MODE    = 'hF2 ; // IO address for SD operation trigger - W-only
+    parameter bit [7:0] SD_ARG_PTR = 'hF3 ; // IO address for SD ARG_PTR - R/W
+    parameter bit [7:0] GPU_RNG    = 'hF5 ; // IO addr: GPU random number generator
+    parameter bit [7:0] GPU_ML     = 'hFC ; // Lower 8-bits of the upper 12-bits of the DDR3 address bus
+    parameter bit [7:0] GPU_MH     = 'hFD ; // Upper 4-bits of the upper 12-bits of the DDR3 address bus
 
     always_ff @(posedge clk) begin
 

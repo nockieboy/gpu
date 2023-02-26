@@ -116,21 +116,21 @@ assign  RD_PX_CTR_STROBE = 0 ; // Default to low to prevent compile warnings abo
 // *****************************************************************
 // **** FPGA Z80 tri-state data IO port.
 // *****************************************************************
-logic        Z80_fpga_data_oe   = 0 ;                                        // Original output enable for FPGA 8bit data bus.
-logic [7:0]  Z80_fpga_data_out  = 0 ;                                        // Original output data from FPGA to Z80.
+logic        Z80_fpga_data_oe   = 0       ; // Original output enable for FPGA 8bit data bus.
+logic [ 7:0] Z80_fpga_data_out  = 0       ; // Original output data from FPGA to Z80.
 assign       Z80_DATA = Z80_fpga_data_oe ? Z80_fpga_data_out : 8'bzzzzzzzz ; // New Bidir IO port on Z80_Bus_Peripheral module.
-reg          Z80_CLKr,Z80_CLKr2     ;
+reg          Z80_CLKr,Z80_CLKr2           ;
 wire         zclk =  Z80_CLKr ^ Z80_CLKr2 ;
-logic [3:0]  Z80_CK_POS = 0         ; // Counter for the Z80 clock position.
+logic [ 3:0] Z80_CK_POS = 0               ; // Counter for the Z80 clock position.
 // register bus control inputs with up to a Z80_CLK_FILTER
-reg          Z80_M1n_r  ,        // Z80 M1 - active LOW
-             Z80_MREQn_r,        // Z80 MREQ - active LOW
-             Z80_WRn_r  ,        // Z80 WR - active LOW
-             Z80_RDn_r  ,        // Z80 RD - active LOW
-             Z80_IORQn_r;        // Z80 IOPORT - active LOW
-             //Z80_IEI_r;
-reg   [21:0] Z80_addr_r ;        // uCom 22-bit address bus
-reg   [7:0]  Z80_wData_r;        // uCom 8 bit data bus input
+reg          Z80_M1n_r   , // Z80 M1 - active LOW
+             Z80_MREQn_r , // Z80 MREQ - active LOW
+             Z80_WRn_r   , // Z80 WR - active LOW
+             Z80_RDn_r   , // Z80 RD - active LOW
+             Z80_IORQn_r ; // Z80 IOPORT - active LOW
+             //Z80_IEI_r ;
+reg   [21:0] Z80_addr_r  ; // uCom 22-bit address bus
+reg   [ 7:0] Z80_wData_r ; // uCom 8 bit data bus input
 // These wires define the Z80 bus operation.
 wire         z80_op_read_opcode  = ~Z80_M1n_r &&  Z80_IORQn_r  && ~Z80_MREQn_r && ~Z80_RDn_r &&  Z80_WRn_r ; // bus controls for read opcode operation
 wire         z80_op_read_memory  =  Z80_M1n_r &&  Z80_IORQn_r  && ~Z80_MREQn_r && ~Z80_RDn_r &&  Z80_WRn_r ; // bus controls for memory RD operation
@@ -348,8 +348,6 @@ always_ff @( posedge CMD_CLK ) begin
                 Z80_245_oe                         <= 1'b0        ; // Enable 245 OE.
                 WRITE_PORT_STROBE[Z80_addr_r[7:0]] <= 1           ; // Generate the access strobe signal on the requested port number.
                 WRITE_PORT_DATA  [Z80_addr_r[7:0]] <= Z80_wData_r ;
-
-                
 
             end else begin
         

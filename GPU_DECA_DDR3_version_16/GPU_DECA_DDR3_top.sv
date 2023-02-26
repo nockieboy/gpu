@@ -30,8 +30,8 @@ module GPU_DECA_DDR3_top #(
 parameter int        GPU_MEM                 = 524288,           // Defines total video RAM, including 1KB palette
 
 parameter string     ENDIAN                  = "Little",            // Endian for 8bit addressing access.
-parameter bit [3:0]  PDI_LAYERS              = 2,                   // Number of parallel window layers.
-parameter bit [3:0]  SDI_LAYERS              = 2,                   // Number of sequential window layers.
+parameter bit [3:0]  PDI_LAYERS              = 4,                   // Number of parallel window layers.
+parameter bit [3:0]  SDI_LAYERS              = 4,                   // Number of sequential window layers.
 parameter bit        ENABLE_TILE_MODE  [0:7] = '{1,0,0,0,0,0,0,0},  // Enable tile mode for each PDI_LAYER from 0 to 7.
                                                                     // TILES are available to all SDI_LAYERS of an enabled PDI_LAYER.
                                                                     // Each tile enabled PDI_LAYER will use it's own dedicated FPGA blockram.
@@ -298,149 +298,149 @@ parameter bit        SMART_BANK         = 0     // 1=ON, 0=OFF, With SMART_BANK 
 // *****************************************************************************************************************
 
     //////////// CLOCK //////////
-    input                           ADC_CLK_10,
-    input                           MAX10_CLK1_50,
-    input                           MAX10_CLK2_50,
+    input                          ADC_CLK_10,
+    input                          MAX10_CLK1_50,
+    input                          MAX10_CLK2_50,
 
     //////////// KEY //////////
-    input              [1:0]        KEY,
+    input              [1:0]       KEY,
 
     //////////// LED //////////
-    output logic       [7:0]        LED,
+    output logic       [7:0]       LED,
 
     //////////// CapSense Button //////////
-    inout                           CAP_SENSE_I2C_SCL,
-    inout                           CAP_SENSE_I2C_SDA,
+    inout                          CAP_SENSE_I2C_SCL,
+    inout                          CAP_SENSE_I2C_SDA,
 
 	//////////// Audio //////////
-                                                  // VCC_AUD_IO -> 6  IOVDD -> 1.5v
-                                                  // VCC_AUD    -> 26 LDOIN -> 3.3v
-                                                  //               29 DVDD  -> Internal LDO + decoupling caps.
-                                                  //               24 AVDD  -> Internal LDO + decoupling caps.
-                                                  //
-                                                  //  LOL   pin 22 and LOR   pin 23 drive the line out jack.
-                                                  //  IN2_L pin 15 and IN2_R pin 16 drive the line in jack.
-                                                  //
-	output		          		AUDIO_MCLK,       //   *** 1 MCLK
-	output		          		AUDIO_BCLK,       //   *** 2 BCLK
-	output		          		AUDIO_WCLK,       //   *** 3 WCLK
-	output		          		AUDIO_DIN_MFP1,   //   *** 4 DIN /MFP1
-	input 		          		AUDIO_DOUT_MFP2,  //   *** 5 DOUT/MFP2
-	output		          		AUDIO_SCLK_MFP3,  //   *** 8 SCLK/MFP3
+   // VCC_AUD_IO -> 6  IOVDD -> 1.5v
+   // VCC_AUD    -> 26 LDOIN -> 3.3v
+   //               29 DVDD  -> Internal LDO + decoupling caps.
+   //               24 AVDD  -> Internal LDO + decoupling caps.
+   //
+   //  LOL   pin 22 and LOR   pin 23 drive the line out jack.
+   //  IN2_L pin 15 and IN2_R pin 16 drive the line in jack.
+   //
+	output		          		     AUDIO_MCLK,       //   *** 1 MCLK
+	output		          		     AUDIO_BCLK,       //   *** 2 BCLK
+	output		          		     AUDIO_WCLK,       //   *** 3 WCLK
+	output		          		     AUDIO_DIN_MFP1,   //   *** 4 DIN /MFP1
+	input 		          		     AUDIO_DOUT_MFP2,  //   *** 5 DOUT/MFP2
+	output		          		     AUDIO_SCLK_MFP3,  //   *** 8 SCLK/MFP3
 
-	inout   	          		AUDIO_SCL_SS_n,   //   *** 9  SCL/SS_n   2k-pullup
-	inout   	          		AUDIO_SDA_MOSI,   //   *** 10 SDA/MOSI   2k-pullup
+	inout   	          		        AUDIO_SCL_SS_n,   //   *** 9  SCL/SS_n   2k-pullup
+	inout   	          		        AUDIO_SDA_MOSI,   //   *** 10 SDA/MOSI   2k-pullup
 
-	input 		          		AUDIO_MISO_MFP4,  //   *** 11 MISO/MFP4
-	output		          		AUDIO_SPI_SELECT, //   *** 12 SPI_SELECT    -> make low for I2C.
-	output 		          		AUDIO_RESET_n,    //   *** 31 RESET_n
-	inout 		          		AUDIO_GPIO_MFP5,  //   *** 32 GPIO_MFP5
+	input 		          		     AUDIO_MISO_MFP4,  //   *** 11 MISO/MFP4
+	output		          		     AUDIO_SPI_SELECT, //   *** 12 SPI_SELECT    -> make low for I2C.
+	output 		          		     AUDIO_RESET_n,    //   *** 31 RESET_n
+	inout 		          		     AUDIO_GPIO_MFP5,  //   *** 32 GPIO_MFP5
 
-    //////////// Flash //////////
-    inout              [3:0]        FLASH_DATA,
-    output                          FLASH_DCLK,
-    output                          FLASH_NCSO,
-    output                          FLASH_RESET_n,
+   //////////// Flash //////////
+   inout              [3:0]        FLASH_DATA,
+   output                          FLASH_DCLK,
+   output                          FLASH_NCSO,
+   output                          FLASH_RESET_n,
 
-    //////////// G-Sensor //////////
-    output                          G_SENSOR_CS_n,
-    input                           G_SENSOR_INT1,
-    input                           G_SENSOR_INT2,
-    inout                           G_SENSOR_SCLK,
-    inout                           G_SENSOR_SDI,
-    inout                           G_SENSOR_SDO,
+   //////////// G-Sensor //////////
+   output                          G_SENSOR_CS_n,
+   input                           G_SENSOR_INT1,
+   input                           G_SENSOR_INT2,
+   inout                           G_SENSOR_SCLK,
+   inout                           G_SENSOR_SDI,
+   inout                           G_SENSOR_SDO,
 
-    //////////// HDMI-TX //////////
-    inout                           HDMI_I2C_SCL,
-    inout                           HDMI_I2C_SDA,
-    inout              [3:0]        HDMI_I2S,
-    inout                           HDMI_LRCLK,
-    inout                           HDMI_MCLK,
-    inout                           HDMI_SCLK,
-    output                          HDMI_TX_CLK,
-    output            [23:0]        HDMI_TX_D,
-    output                          HDMI_TX_DE,
-    output                          HDMI_TX_HS,
-    input                           HDMI_TX_INT,
-    output                          HDMI_TX_VS,
+   //////////// HDMI-TX //////////
+   inout                           HDMI_I2C_SCL,
+   inout                           HDMI_I2C_SDA,
+   inout              [3:0]        HDMI_I2S,
+   inout                           HDMI_LRCLK,
+   inout                           HDMI_MCLK,
+   inout                           HDMI_SCLK,
+   output                          HDMI_TX_CLK,
+   output            [23:0]        HDMI_TX_D,
+   output                          HDMI_TX_DE,
+   output                          HDMI_TX_HS,
+   input                           HDMI_TX_INT,
+   output                          HDMI_TX_VS,
 
-    //////////// Light Sensor //////////
-    output                          LIGHT_I2C_SCL,
-    inout                           LIGHT_I2C_SDA,
-    inout                           LIGHT_INT,
+   //////////// Light Sensor //////////
+   output                          LIGHT_I2C_SCL,
+   inout                           LIGHT_I2C_SDA,
+   inout                           LIGHT_INT,
 
-    //////////// MIPI //////////
-    output                          MIPI_CORE_EN,
-    output                          MIPI_I2C_SCL,
-    inout                           MIPI_I2C_SDA,
-    input                           MIPI_LP_MC_n,
-    input                           MIPI_LP_MC_p,
-    input              [3:0]        MIPI_LP_MD_n,
-    input              [3:0]        MIPI_LP_MD_p,
-    input                           MIPI_MC_p,
-    output                          MIPI_MCLK,
-    input              [3:0]        MIPI_MD_p,
-    output                          MIPI_RESET_n,
-    output                          MIPI_WP,
+   //////////// MIPI //////////
+   output                          MIPI_CORE_EN,
+   output                          MIPI_I2C_SCL,
+   inout                           MIPI_I2C_SDA,
+   input                           MIPI_LP_MC_n,
+   input                           MIPI_LP_MC_p,
+   input              [3:0]        MIPI_LP_MD_n,
+   input              [3:0]        MIPI_LP_MD_p,
+   input                           MIPI_MC_p,
+   output                          MIPI_MCLK,
+   input              [3:0]        MIPI_MD_p,
+   output                          MIPI_RESET_n,
+   output                          MIPI_WP,
 
-    //////////// Ethernet //////////
-    input                           NET_COL,
-    input                           NET_CRS,
-    output                          NET_MDC,
-    inout                           NET_MDIO,
-    output                          NET_PCF_EN,
-    output                          NET_RESET_n,
-    input                           NET_RX_CLK,
-    input                           NET_RX_DV,
-    input                           NET_RX_ER,
-    input              [3:0]        NET_RXD,
-    input                           NET_TX_CLK,
-    output                          NET_TX_EN,
-    output             [3:0]        NET_TXD,
+   //////////// Ethernet //////////
+   input                           NET_COL,
+   input                           NET_CRS,
+   output                          NET_MDC,
+   inout                           NET_MDIO,
+   output                          NET_PCF_EN,
+   output                          NET_RESET_n,
+   input                           NET_RX_CLK,
+   input                           NET_RX_DV,
+   input                           NET_RX_ER,
+   input              [3:0]        NET_RXD,
+   input                           NET_TX_CLK,
+   output                          NET_TX_EN,
+   output             [3:0]        NET_TXD,
 
-    //////////// Power Monitor //////////
-    input                           PMONITOR_ALERT,
-    output                          PMONITOR_I2C_SCL,
-    inout                           PMONITOR_I2C_SDA,
+   //////////// Power Monitor //////////
+   input                           PMONITOR_ALERT,
+   output                          PMONITOR_I2C_SCL,
+   inout                           PMONITOR_I2C_SDA,
 
-    //////////// Humidity and Temperature Sensor //////////
-    input                           RH_TEMP_DRDY_n,
-    output                          RH_TEMP_I2C_SCL,
-    inout                           RH_TEMP_I2C_SDA,
+   //////////// Humidity and Temperature Sensor //////////
+   input                           RH_TEMP_DRDY_n,
+   output                          RH_TEMP_I2C_SCL,
+   inout                           RH_TEMP_I2C_SDA,
 
-    //////////// MicroSD Card //////////
-    output                          SD_CLK,
-    inout                           SD_CMD,
-    output                          SD_CMD_DIR,
-    output                          SD_D0_DIR,
-    output                          SD_D123_DIR,
-    inout              [3:0]        SD_DAT,
-    input                           SD_FB_CLK,
-    output                          SD_SEL,
+   //////////// MicroSD Card //////////
+   output                          SD_CLK,
+   inout                           SD_CMD,
+   output                          SD_CMD_DIR,
+   output                          SD_D0_DIR,
+   output                          SD_D123_DIR,
+   inout              [3:0]        SD_DAT,
+   input                           SD_FB_CLK,
+   output                          SD_SEL,
 
-    //////////// SW //////////
-    input              [1:0]        SW,
+   //////////// SW //////////
+   input              [1:0]        SW,
 
-    //////////// Board Temperature Sensor //////////
-    output                          TEMP_CS_n,
-    output                          TEMP_SC,
-    inout                           TEMP_SIO,
+   //////////// Board Temperature Sensor //////////
+   output                          TEMP_CS_n,
+   output                          TEMP_SC,
+   inout                           TEMP_SIO,
 
-    //////////// USB //////////
-    input                           USB_CLKIN,
-    output                          USB_CS,
-    inout              [7:0]        USB_DATA,
-    input                           USB_DIR,
-    input                           USB_FAULT_n,
-    input                           USB_NXT,
-    output                          USB_RESET_n,
-    output                          USB_STP,
+   //////////// USB //////////
+   input                           USB_CLKIN,
+   output                          USB_CS,
+   inout              [7:0]        USB_DATA,
+   input                           USB_DIR,
+   input                           USB_FAULT_n,
+   input                           USB_NXT,
+   output                          USB_RESET_n,
+   output                          USB_STP,
 
-    //////////// BBB Conector //////////
-    input                           BBB_PWR_BUT,
-    input                           BBB_SYS_RESET_n,
-    inout             [43:0]        GPIO0_D,
-    inout             [22:0]        GPIO1_D,
+   //////////// BBB Conector //////////
+   input                           BBB_PWR_BUT,
+   input                           BBB_SYS_RESET_n,
+   inout             [43:0]        GPIO0_D,
+   inout             [22:0]        GPIO1_D,
 
 
 // *****************************************************************************************************************
@@ -680,10 +680,10 @@ wire         psg_wr_en  ;
 // These look like they'll take up a lot of interconnect resources, but the compiler will prune them down to only
 // the signals that are actually used, although I'm not sure this applies to IO_RD_DATA if it has a default value
 // applied to each line.
-wire [255:0] IO_WR_STROBE       ;
-wire [  7:0] IO_WR_DATA [0:255] ;
-wire [255:0] IO_RD_STROBE       ;
-wire [  7:0] IO_RD_DATA [0:255] ; //= '{ default: 8'hFF } ;
+wire  [255:0] IO_WR_STROBE       /* synthesis keep */;
+wire  [  7:0] IO_WR_DATA [0:255] /* synthesis keep */;
+wire  [255:0] IO_RD_STROBE       ;
+logic [  7:0] IO_RD_DATA [0:255] = '{ default: 8'hFF } ;
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -826,7 +826,7 @@ Z80_Bus_Interface #(
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
-// *** HIPI - Host IO Peripheral Interconnect ********************************************************************
+// *** Host IO Addresses *****************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 parameter bit [7:0] MMU_A0     = 'h38 ; // IO address for Bank 0 setting
@@ -834,6 +834,12 @@ parameter bit [7:0] MMU_A1     = 'h39 ; // IO address for Bank 1 setting
 parameter bit [7:0] MMU_A2     = 'h3A ; // IO address for Bank 2 setting
 parameter bit [7:0] MMU_A3     = 'h3B ; // IO address for Bank 3 setting
 parameter bit [7:0] MMU_EN     = 'h3C ; // IO address for MMU enable
+//
+parameter bit [7:0] FPU_A      = 'hDE ; // IO address for FPU interface - Input  A, low-byte of 32-bit input.
+parameter bit [7:0] FPU_B      = 'hE3 ; // IO address for FPU interface - Input  B, low-byte of 32-bit input.
+parameter bit [7:0] FPU_Q      = 'hE8 ; // IO address for FPU interface - Output Q, low-byte of 32-bit output.
+parameter bit [7:0] FPU_F      = 'hED ; // IO address for FPU interface - FP format switch.
+//
 parameter bit [7:0] PSG_LATCH  = 'hEE ; // IO address for PSG LATCH register R/W - write latches register, read returns data
 parameter bit [7:0] PSG_WRITE  = 'hEF ; // IO address for PSG WRITE port W-only
 parameter bit [7:0] SD_STATUS  = 'hF0 ; // IO address for SD STATUS register R-only
@@ -844,9 +850,16 @@ parameter bit [7:0] GPU_RNG    = 'hF5 ; // IO address for GPU random number gene
 parameter bit [7:0] GEO_LO     = 'hF6 ; // IO address for GEOFF LOW byte.
 parameter bit [7:0] GEO_HI     = 'hF7 ; // IO address for GEOFF HIGH byte.
 parameter bit [7:0] FIFO_STAT  = 'hF8 ; // IO address for GPU FIFO status on bit 0 - remaining bits free for other data.
-parameter bit [7:0] GPU_ML     = 'hFC ; // IO address for lower 8-bits of the upper 12-bits of the DDR3 address bus
-parameter bit [7:0] GPU_MH     = 'hFD ; // IO address for upper 4-bits of the upper 12-bits of the DDR3 address bus
+parameter bit [7:0] GPU_ML     = 'hF9 ; // IO address for lower 8-bits of the upper 12-bits of the DDR3 address bus
+parameter bit [7:0] GPU_MH     = 'hFA ; // IO address for upper 4-bits of the upper 12-bits of the DDR3 address bus
+// 0xFB-FC and 0xFE are available.
+// 0xFD is the hardware port on the uCOM CPU card. 0xFF is CF_EN port, if CompactFlash card is installed in uCOM host.
 
+// ***************************************************************************************************************
+// ***************************************************************************************************************
+// *** HIPI - Host IO Peripheral Interconnect ********************************************************************
+// ***************************************************************************************************************
+// ***************************************************************************************************************
 wire [ 1:0] arg_ptr ;
 
 host_IO #(
@@ -872,7 +885,6 @@ host_IO #(
    .reset             ( reset                     ),
    .WRITE_PORT_DATA   ( IO_WR_DATA                ),
    .WRITE_PORT_STROBE ( IO_WR_STROBE              ),
-
    .MMU_AREA          ( IO_RD_DATA[MMU_A0:MMU_A3] ),
    .MMU_ENABLE        ( IO_RD_DATA[MMU_EN]        ),
    .GPU_MMU_LO        ( IO_RD_DATA[GPU_ML]        ),
@@ -1053,27 +1065,75 @@ YM2149_PSG_system #(
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
+parameter int FPU_WIDTH = 40 ; // bit-width of the FPU
 
-// IO_WR_STROBE
-// IO_RD_DATA  
-// IO_WR_DATA  
-// IO_RD_STROBE
-// E0-EB ports in use for FPU
-/*
+wire [FPU_WIDTH-1:0] ALU_output  ; // FPU output
+wire [FPU_WIDTH-1:0] ALU_input_A ; // FPU input
+wire [FPU_WIDTH-1:0] ALU_input_B ; // FPU input
+
+// FPU_A = DE-E2 (222-235 & 226)
+// FPU_B = E3-E7 (227-230 & 231)
+// FPU_Q = E8-EC (232-235 & 236)
+// FPU_F =    ED (237)
+
 nockieboy_ALU #(
+
+   .SIZE   ( FPU_WIDTH         )
 
 ) COPPER (
 
-	.clk    ( CMD_CLK   ), // clk
-	.areset ( geo_reset ), // geo_reset is a combined signal of the GPU's RESET button, OR'd with Z80_RST.
-	.en     ( 1'b1      ), // enable - IO_WR_STROBE?
-	.a      ( '{ IO_WR_DATA['hE3], IO_WR_DATA['hE2], IO_WR_DATA['hE1], IO_WR_DATA['hE0] } ), // FACTOR a 32-bit
-	.b      ( '{ IO_WR_DATA['hE7], IO_WR_DATA['hE6], IO_WR_DATA['hE5], IO_WR_DATA['hE4] } ), // FACTOR b 32-bit
-	.q      ( '{ IO_RD_DATA['hEB], IO_RD_DATA['hEA], IO_RD_DATA['hE9], IO_RD_DATA['hE8] } )  // OUTPUT q 32-bit
+	.clk    ( CMD_CLK             ), // clock
+	.areset ( reset               ), // reset
+   .en     ( IO_WR_STROBE[FPU_F] ), // enable strobe
+   .format ( IO_RD_DATA[FPU_F]   ), // FPU settings switch
+	.a      ( ALU_input_A         ), // FACTOR a 32-bit
+	.b      ( ALU_input_B         ), // FACTOR b 32-bit
+   .q      ( ALU_output          )  // OUTPUT q 32-bit
 
 );
-*/
 
+// ***************************************************************************************************************
+// Handle COPPER's output to the IO_RD_DATA bus ******************************************************************
+// ***************************************************************************************************************
+always_ff @(posedge CMD_CLK) begin
+
+   if ( IO_WR_STROBE[FPU_A  ] ) IO_RD_DATA[FPU_A  ] <= IO_WR_DATA[FPU_A  ] ;
+   if ( IO_WR_STROBE[FPU_A+1] ) IO_RD_DATA[FPU_A+1] <= IO_WR_DATA[FPU_A+1] ;
+   if ( IO_WR_STROBE[FPU_A+2] ) IO_RD_DATA[FPU_A+2] <= IO_WR_DATA[FPU_A+2] ;
+   if ( IO_WR_STROBE[FPU_A+3] ) IO_RD_DATA[FPU_A+3] <= IO_WR_DATA[FPU_A+3] ;
+   if ( IO_WR_STROBE[FPU_A+4] ) IO_RD_DATA[FPU_A+4] <= IO_WR_DATA[FPU_A+4] ;
+   //
+   if ( IO_WR_STROBE[FPU_B  ] ) IO_RD_DATA[FPU_B  ] <= IO_WR_DATA[FPU_B  ] ;
+   if ( IO_WR_STROBE[FPU_B+1] ) IO_RD_DATA[FPU_B+1] <= IO_WR_DATA[FPU_B+1] ;
+   if ( IO_WR_STROBE[FPU_B+2] ) IO_RD_DATA[FPU_B+2] <= IO_WR_DATA[FPU_B+2] ;
+   if ( IO_WR_STROBE[FPU_B+3] ) IO_RD_DATA[FPU_B+3] <= IO_WR_DATA[FPU_B+3] ;
+   if ( IO_WR_STROBE[FPU_B+4] ) IO_RD_DATA[FPU_B+4] <= IO_WR_DATA[FPU_B+4] ;
+   //
+   if ( IO_WR_STROBE[FPU_F] )   IO_RD_DATA[FPU_F]   <= IO_WR_DATA[FPU_F]   ;
+   //
+   IO_RD_DATA[FPU_Q+4] <= ALU_output[39:32] ; // 40-bit  EC
+   IO_RD_DATA[FPU_Q+3] <= ALU_output[31:24] ; // 32-bit  EB
+   IO_RD_DATA[FPU_Q+2] <= ALU_output[23:16] ; //         EA
+   IO_RD_DATA[FPU_Q+1] <= ALU_output[15: 8] ; //         E9
+   IO_RD_DATA[FPU_Q  ] <= ALU_output[ 7: 0] ; //         E8
+   
+end
+
+always_comb begin
+
+   ALU_input_A[39:32] = IO_WR_DATA[FPU_A+4] ; // 40-bit  E2
+   ALU_input_A[31:24] = IO_WR_DATA[FPU_A+3] ; // 32-bit  E1
+   ALU_input_A[23:16] = IO_WR_DATA[FPU_A+2] ; //         E0
+   ALU_input_A[15: 8] = IO_WR_DATA[FPU_A+1] ; //         DF
+   ALU_input_A[ 7: 0] = IO_WR_DATA[FPU_A  ] ; //         DE
+
+   ALU_input_B[39:32] = IO_WR_DATA[FPU_B+4] ; // 40-bit  E7
+   ALU_input_B[31:24] = IO_WR_DATA[FPU_B+3] ; // 32-bit  E6
+   ALU_input_B[23:16] = IO_WR_DATA[FPU_B+2] ; //         E5
+   ALU_input_B[15: 8] = IO_WR_DATA[FPU_B+1] ; //         E4
+   ALU_input_B[ 7: 0] = IO_WR_DATA[FPU_B  ] ; //         E3
+
+end
 
 // ***************************************************************************************************************
 // ***************************************************************************************************************
@@ -1089,9 +1149,8 @@ nockieboy_ALU #(
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
-assign IO_RD_DATA[FIFO_STAT][7:1] = 7'b0000000 ;
-wire   CMD_read_ena2 ;
-wire   CMD_VID_hena, CMD_VID_vena    ;
+assign IO_RD_DATA[FIFO_STAT][7:1] = 7'b0000000   ;
+wire   CMD_read_ena2, CMD_VID_hena, CMD_VID_vena ;
 
 geometry_processor #(
 
@@ -1163,7 +1222,6 @@ assign CMD_priority_boost  [3] = 0;
 // ***************************************************************************************************************
 // ***************************************************************************************************************
 // ***************************************************************************************************************
-
 wire AUD_CLK54, VID_CLK, VID_CLK_2x ;
 
 BrianHG_GFX_PLL_i50_o297  VGA_PLL (
@@ -1367,7 +1425,6 @@ localparam bit [16:0] HDMI_TABLE_data [0:HDMI_TABLE_len-1] = '{   // Optional, i
 // ***********************************************************************************************************************************************
 // ***********************************************************************************************************************************************
 // ***********************************************************************************************************************************************
-
 localparam            TLV320A_TABLE_len                          = 36 ; // Optional, length of init table.
 localparam bit [16:0] TLV320A_TABLE_data [0:TLV320A_TABLE_len-1] = '{   // Optional, init LUT data.  17'h {1'function,8'register_address,8'write_data},...
    // TLV320AIC3254 audio codec setup for headphone playback.

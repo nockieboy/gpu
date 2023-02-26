@@ -2,7 +2,14 @@
 // BrianHG_GFX_Video_Line_Buffer.sv.
 // IE: Generate a 1/2/4/8/16/32 bpp video line buffer with text-font/tile and palette capabilities.
 //
-// Version 1.6, December 9, 2021.
+// Version 1.6b, December 9, 2021.
+//
+// V1.6b - Generated a Verilog style dual-port dual-clock block ram in place of Altera's 'altsyncram' to allow multiplatform
+//         compatibility, however, Quartus has a bug trying to infer my 'byte-enable' for the write port.  It gets caught in a
+//         loop during analysis and synthesis for over an hour trying to infer 16-64 single ram blocks and makes a design
+//         with over a million logic elements.  Note that the code appears to properly simulate and other vendors like Xilinx
+//         will most likely not have the same compile flaw.  My inferred ram is at the last lines of this source code.
+//
 //
 // Written by Brian Guralnick.
 // For public use.
@@ -518,6 +525,7 @@ wire [LBUF_BITS-1:0]   lbuf_wdata ;
                        end_swap      #(.width(LBUF_BITS)) lbuf_end (.ind(CMD_lbuf_wdata),.outd(lbuf_wdata),.inm(),.outm());
 // ***********************************************************************************************************************
 wire                   LBUF_WENA     = ( CMD_LBID == LB_MODULE_ID ) ;
+/*
 altsyncram #(
 
     .intended_device_family  ( "MAX 10"        ),      .lpm_type                ( "altsyncram"    ),      .operation_mode          ( "DUAL_PORT"     ),
@@ -542,7 +550,24 @@ altsyncram #(
 
     .aclr0     (1'b0),    .aclr1        (1'b0),    .addressstall_a  (1'b0),     .addressstall_b  (1'b0),     .byteena_b (1'b1),     .clocken2 (1'b1),
     .clocken3  (1'b1),    .data_b ({32{1'b1}}),    .eccstatus       (),         .q_a (), .rden_a (1'b1),     .rden_b    (1'b1),     .wren_b   (1'b0)  );
+*/
 
+BHG_VIDEO_DPDC_BRAM #(
+
+    .numwords_a              ( LBUF_WORDS      ),      .widthad_a               ( LBUF_ADW        ),      .width_a                 ( LBUF_BITS       ),
+    .width_byteena_a         ( LBUF_BITS/8     ),
+    
+    .numwords_b              ( LBUF_WORDS_32   ),      .widthad_b             ( LBUF_WORDS_32_adw ),      .width_b                 ( 32              ),
+    .init_file               ("BLANK_LINE")        // Modelsim Debug initialize data, only works with 128bit DDR3 data bus setting.
+
+) LBUF_MEM (
+
+    .clock0     ( CMD_CLK                             ),                            .clocken0   ( 1'b1                                                  ),
+    .wren_a     ( CMD_lbuf_wena && LBUF_WENA          ),                            .address_a  ( CMD_lbuf_waddr                                        ),
+    .data_a     ( lbuf_wdata                          ),                            .byteena_a  ( {(LBUF_BITS/8){1'b1}}                                 ),
+
+    .clock1     ( VID_CLK                             ),                            .clocken1   ( 1'b1                                                  ),
+    .address_b  ( (LBUF_WORDS_32_adw)'(LBUF_RADDR)    ),                            .q_b        ( LBUF_READ_d                                           ));
 
 
 
@@ -824,6 +849,7 @@ wire [TILE_BITS/8-1:0] twm;
 localparam TWW = 1+TILE_ADW+TILE_BITS+(TILE_BITS/8);
 BHG_delay_pipe #(.delay(OPTIMIZE_TW_FMAX),.width(TWW)) dl_twd ( .clk(CMD_CLK), .in({TILE_WENA,(TILE_ADW)'(tile_wadr),tile_wdata,tile_wmask}), .out({twe,twa,twd,twm}) );
 
+/*
 altsyncram #(
 
     .intended_device_family  ( "MAX 10"        ),      .lpm_type                ( "altsyncram"    ),      .operation_mode          ( "DUAL_PORT"     ),
@@ -848,6 +874,25 @@ altsyncram #(
 
     .aclr0     (1'b0),    .aclr1        (1'b0),    .addressstall_a  (1'b0),     .addressstall_b  (1'b0),     .byteena_b (1'b1),     .clocken2 (1'b1),
     .clocken3  (1'b1),    .data_b ({32{1'b1}}),    .eccstatus       (),         .q_a (), .rden_a (1'b1),     .rden_b    (1'b1),     .wren_b   (1'b0));
+*/
+
+BHG_VIDEO_DPDC_BRAM #(
+    
+    .numwords_a              ( TILE_WORDS      ),      .widthad_a               ( TILE_ADW        ),      .width_a                 ( TILE_BITS       ),
+    .width_byteena_a         ( TILE_BITS/8     ),
+    
+    .numwords_b              ( TILE_WORDS_32   ),      .widthad_b             ( TILE_WORDS_32_adw ),      .width_b                 ( 32              ),
+    .init_file               ("VGA_FONT")        // Modelsim Debug initialize data, only works with 128bit DDR3 data bus setting.
+
+
+) TILE_MEM (
+
+    .clock0     ( CMD_CLK                                              ),       .clocken0   ( 1'b1                                                  ),
+    .wren_a     ( twe                                                  ),       .address_a  ( twa                                                   ),
+    .data_a     ( twd                                                  ),       .byteena_a  ( twm                                                   ),
+
+    .clock1     ( VID_CLK                                              ),       .clocken1   ( 1'b1                                                  ),
+    .address_b  ( (TILE_WORDS_32_adw)'(TILE_ADDR)                      ),       .q_b        ( TILE_READ                                             ));
 
 
 // ***************************
@@ -995,6 +1040,7 @@ wire [PAL_BITS/8-1:0] pwm;
 localparam PWW = 1+PAL_ADW+PAL_BITS+(PAL_BITS/8);
 BHG_delay_pipe #(.delay(OPTIMIZE_PW_FMAX),.width(PWW)) dl_pwd ( .clk(CMD_CLK), .in({PAL_WENA,(PAL_ADW)'(pal_wadr),pal_wdata,pal_wmask}), .out({pwe,pwa,pwd,pwm}) );
 
+/*
 altsyncram #(
 
     .intended_device_family  ( "MAX 10"        ),      .lpm_type                ( "altsyncram"    ),      .operation_mode          ( "DUAL_PORT"     ),
@@ -1003,7 +1049,7 @@ altsyncram #(
     .address_reg_b           ( "CLOCK1"        ),      .byte_size               ( 8               ),      .power_up_uninitialized  ( "FALSE"         ),
     
     .numwords_a   ( PAL_WORDS >> PAL_ADR_SHIFT ),      .widthad_a      ( PAL_ADW  - PAL_ADR_SHIFT ),      .width_a       ( PAL_BITS >> PAL_ADR_SHIFT ),
-    .width_byteena_a         ( PAL_BITS/8      ),
+    .width_byteena_a         ( (PAL_BITS >> PAL_ADR_SHIFT)/8 ),
     
     .numwords_b              ( PAL_WORDS_32    ),      .widthad_b              ( PAL_WORDS_32_adw ),      .width_b                 ( 32              ),
     .init_file_layout        ( "PORT_B"        ),      .init_file              ("VGA_PALETTE_RGBA32.mif") // ( PAL_MIF_FILE    )  *******DAMN ALTERA STRING BUG!!!!
@@ -1019,6 +1065,25 @@ altsyncram #(
 
     .aclr0     (1'b0),    .aclr1        (1'b0),    .addressstall_a  (1'b0),     .addressstall_b  (1'b0),     .byteena_b (1'b1),     .clocken2 (1'b1),
     .clocken3  (1'b1),    .data_b ({32{1'b1}}),    .eccstatus       (),         .q_a (), .rden_a (1'b1),     .rden_b    (1'b1),     .wren_b   (1'b0));
+*/
+
+BHG_VIDEO_DPDC_BRAM #(
+    
+    .numwords_a   ( PAL_WORDS >> PAL_ADR_SHIFT ),      .widthad_a      ( PAL_ADW  - PAL_ADR_SHIFT ),      .width_a       ( PAL_BITS >> PAL_ADR_SHIFT ),
+    .width_byteena_a         ( (PAL_BITS >> PAL_ADR_SHIFT)/8 ),
+    
+    .numwords_b              ( PAL_WORDS_32    ),      .widthad_b              ( PAL_WORDS_32_adw ),      .width_b                 ( 32              ),
+    .init_file               ("VGA_PALETTE")        // Modelsim Debug initialize data, only works with 128bit DDR3 data bus setting.
+
+) PAL_MEM (
+
+    .clock0     ( CMD_CLK                                           ),          .clocken0   ( 1'b1                                                  ),
+    .wren_a     ( pwe                                               ),          .address_a  ( (PAL_ADW-PAL_ADR_SHIFT)'(pwa>>PAL_ADR_SHIFT)          ),
+    .data_a     ( (PAL_BITS >> PAL_ADR_SHIFT)'(pwd)                 ),          .byteena_a  ( pwm                                                   ),
+
+    .clock1     ( VID_CLK                                           ),          .clocken1   ( 1'b1                                                  ),
+    .address_b  ( (PAL_WORDS_32_adw)'(PAL_ADDR)                     ),          .q_b        ( PAL_READ                                              ));
+
 
 end
 endgenerate
@@ -1177,3 +1242,137 @@ else begin
             end
 endgenerate
 endmodule
+
+
+// ************************************************************************************************
+// ************************************************************************************************
+// ************************************************************************************************
+// BrianHG's dual port dual clock block RAM to be inferred by the FPGA compiler.
+// ************************************************************************************************
+// ************************************************************************************************
+// ************************************************************************************************
+
+// ************************************************************************************************
+`ifdef ALTERA_RESERVED_QIS
+// ************************************************************************************************
+// *** IFDEF 'QUARTUS' ***  Use this code only when Quartus is the compiler....
+// ************************************************************************************************
+module BHG_VIDEO_DPDC_BRAM #(
+
+    parameter        width_a          = 128           , parameter widthad_a  = 12                           , parameter numwords_a     = 2**widthad_a ,      
+    parameter        width_byteena_a  = width_a/8     ,
+    parameter        width_b          = 32            , parameter widthad_b  = 12 + $clog2(width_a/width_b) , parameter numwords_b     = 2**widthad_b ,
+    parameter string init_file        = "BLANK_LINE"   // Modelsim Debug initialize data, only works with 128bit DDR3 data bus setting.
+
+) (
+
+// Write port_a on clock0.
+    input                  clock0     ,          input                              clocken0            ,
+    input                  wren_a     ,          input        [widthad_a-1:0]       address_a           ,
+    input  [width_a-1:0]   data_a     ,          input        [width_byteena_a-1:0] byteena_a           ,
+
+// Read port_b on clock1.
+    input                  clock1     ,          input                              clocken1            ,
+    input  [widthad_b-1:0] address_b  ,          output       [width_b-1:0]         q_b                  );
+
+
+//generate
+//$info("************************************************************************************");
+//$info("*** BrianHG_GFX_Video_Line_buffer.sv using Quartus's 'altsyncram' megafunction.  ***");
+//$info("************************************************************************************");
+//endgenerate
+
+altsyncram #(
+
+    .intended_device_family  ( "MAX 10"        ),      .lpm_type                ( "altsyncram"    ),      .operation_mode          ( "DUAL_PORT"     ),
+    .address_aclr_b          ( "NONE"          ),      .outdata_aclr_b          ( "NONE"          ),      .outdata_reg_b           ( "CLOCK1"        ),
+    .clock_enable_input_a    ( "NORMAL"        ),      .clock_enable_input_b    ( "NORMAL"        ),      .clock_enable_output_b   ( "NORMAL"        ),
+    .address_reg_b           ( "CLOCK1"        ),      .byte_size               ( 8               ),      .power_up_uninitialized  ( "FALSE"         ),
+    
+    .numwords_a              ( numwords_a      ),      .widthad_a               ( widthad_a       ),      .width_a                 ( width_a         ),
+    .width_byteena_a         ( width_byteena_a ),
+    
+    .numwords_b              ( numwords_b      ),      .widthad_b               ( widthad_b       ),      .width_b                 ( width_b         ),
+    .init_file_layout        ( "PORT_B"        )//,      .init_file              ("VGA_PALETTE_RGBA32.mif") // ( PAL_MIF_FILE    )  *******DAMN ALTERA STRING BUG!!!!
+
+) ALT_DPDC_MEM (
+
+    .clock0     ( clock0     ),          .clocken0   ( clocken0   ),
+    .wren_a     ( wren_a     ),          .address_a  ( address_a  ),
+    .data_a     ( data_a     ),          .byteena_a  ( byteena_a  ),
+
+    .clock1     ( clock1     ),          .clocken1   ( clocken1   ),
+    .address_b  ( address_b  ),          .q_b        ( q_b        ),
+
+    .aclr0     (1'b0),    .aclr1        (1'b0),    .addressstall_a  (1'b0),     .addressstall_b  (1'b0),     .byteena_b (1'b1),     .clocken2 (1'b1),
+    .clocken3  (1'b1),    .data_b ({32{1'b1}}),    .eccstatus       (),         .q_a (), .rden_a (1'b1),     .rden_b    (1'b1),     .wren_b   (1'b0));
+
+
+endmodule
+
+// ************************************************************************************************
+`else
+// ************************************************************************************************
+// *** Use this 'BHG_VIDEO_DPDC_BRAM' if Quartus is not the compiler.
+// ************************************************************************************************
+
+module BHG_VIDEO_DPDC_BRAM #(
+
+    parameter        width_a          = 128           , parameter widthad_a  = 12                           , parameter numwords_a     = 2**widthad_a ,      
+    parameter        width_byteena_a  = width_a/8     ,
+    parameter        width_b          = 32            , parameter widthad_b  = 12 + $clog2(width_a/width_b) , parameter numwords_b     = 2**widthad_b ,
+    parameter string init_file        = "BLANK_LINE"   // Modelsim Debug initialize data, only works with 128bit DDR3 data bus setting.
+
+) (
+
+// Write port_a on clock0.
+    input                  clock0     ,          input                              clocken0            ,
+    input                  wren_a     ,          input        [widthad_a-1:0]       address_a           ,
+    input  [width_a-1:0]   data_a     ,          input        [width_byteena_a-1:0] byteena_a           ,
+
+// Read port_b on clock1.
+    input                  clock1     ,          input                              clocken1            ,
+    input  [widthad_b-1:0] address_b  ,          output logic [width_b-1:0]         q_b = (width_b)'(0) );
+
+
+//generate
+//$info("****************************************************************************");
+//$info("*** BrianHG_GFX_Video_Line_buffer.sv using simple System Verilog array.  ***");
+//$info("****************************************************************************");
+//endgenerate
+
+
+localparam                        rp_extra_bits                  = $clog2(width_a/width_b);
+logic      [width_a-1:0]          dcdp_ram [0:numwords_a-1]      = '{default:0}    ;
+logic      [widthad_b-1:0]        rd_addr                        = (widthad_b)'(0) ;
+
+wire       [widthad_a-1:0]        rd_mem_ptr                     = (widthad_a)'(rd_addr >> rp_extra_bits)   ; // Since the read address is larger than the memory array, prepare a truncated version
+wire       [width_a-1:0]          rd_data                        = dcdp_ram[rd_mem_ptr]       ; // Read the wider width memory array.
+wire       [rp_extra_bits-1:0]    rd_sub_index                   = rd_addr[rp_extra_bits-1:0] ; // Prepare a sub-index for selecting a portion of the wide read data.
+
+// https://www.intel.com/content/www/us/en/docs/programmable/683082/22-1/ram-with-byte-enable-signals.html
+// Write data on clock0, with a clock enable and individual 8-bit byte enable with a bus width at a multiple of the 32bit output.
+// Typically tied to the ram controller's read data bus on the ram controller's user command clock.
+always @(posedge clock0) begin
+    if (clocken0) begin
+            for (int i=0;i<width_byteena_a;i++) begin
+                                                    if (byteena_a[i] && wren_a) dcdp_ram[address_a][i*8+:8] <= data_a[i*8+:8] ;
+                                                end
+
+    end
+end
+
+// Read data on clock1, with a clock enable, latched address and latched read data at a narrower bus width of 32 bits.
+// Typically tied to the video pixel clock.
+always @(posedge clock1) begin
+    if (clocken1) begin
+        rd_addr <= address_b ;
+        q_b     <= rd_data[rd_sub_index*width_b +: width_b];
+    end
+end
+
+endmodule
+
+// ************************************************************************************************
+`endif
+// ************************************************************************************************
